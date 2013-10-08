@@ -1,16 +1,16 @@
-Symfony Documentation
+Symfony Dokumentacija
 =====================
 
-This documentation is rendered online at http://symfony.com/doc/current/
+Ta dokumentacija je prikazana na spletu na http://symfony.com/doc/current/
 
-Contributing
+Prispevanje
 ------------
 
->**Note**
->Unless you're documenting a feature that's new to a specific version of Symfony
->(e.g. Symfony 2.3), all pull requests must be based off of the **2.2** branch, 
->**not** the master or 2.3 branch.
+>**Opomba**
+>Razen če dokumentirate lastnost, ki je nova za specifično verzijo Symfony-ja
+>(npr. Symfony 2.3), morajo biti vsi zahtevki osnovani iz  **2.2** veje,
+>**ne** iz master ali 2.3 veje.
 
-We love contributors! For more information on how you can contribute to the
-Symfony documentation, please read 
+Radi imamo ljudi, ki prispevajo! Za več informacij, kako lahko prispevate
+Symfony dokumentaciji, prosimo preberite
 [Contributing to the Documentation](http://symfony.com/doc/current/contributing/documentation/overview.html) 
