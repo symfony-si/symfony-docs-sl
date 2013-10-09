@@ -1,5 +1,5 @@
-The Quick Tour
-==============
+Hiter pregled
+=============
 
 .. toctree::
    :maxdepth: 1
