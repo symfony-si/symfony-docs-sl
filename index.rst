@@ -1,10 +1,10 @@
-Symfony2 Documentation
+Symfony2 dokumentacija
 ======================
 
-Quick Tour
-----------
+Hiter pregled
+-------------
 
-Get started fast with the Symfony2 :doc:`Quick Tour <quick_tour/index>`:
+Začnite s Symfony2 hitro :doc:`Hiter pregled <quick_tour/index>`:
 
 .. toctree::
     :hidden:
@@ -16,10 +16,10 @@ Get started fast with the Symfony2 :doc:`Quick Tour <quick_tour/index>`:
 * :doc:`quick_tour/the_controller` >
 * :doc:`quick_tour/the_architecture`
 
-Book
-----
+Knjiga
+------
 
-Dive into Symfony2 with the topical guides:
+Poglobite se v Symfony2 s tematskimi vodiči:
 
 .. toctree::
     :hidden:
@@ -28,17 +28,17 @@ Dive into Symfony2 with the topical guides:
 
 .. include:: /book/map.rst.inc
 
-Cookbook
---------
+Knjiga receptov
+---------------
 
 .. toctree::
     :hidden:
 
     cookbook/index
 
-Read the :doc:`Cookbook </cookbook/index>`.
+Preberite :doc:`Recepte </cookbook/index>`.
 
-Components
+Komponente
 ----------
 
 .. toctree::
@@ -46,12 +46,12 @@ Components
 
     components/index
 
-Read the :doc:`Components </components/index>` documentation.
+Preberite dokumentacijo :doc:`Komponente </components/index>`.
 
-Reference Documents
--------------------
+Referenčni dokumenti
+--------------------
 
-Get answers quickly with reference documents:
+Dobite odgovore hitro z referenčnimi dokumenti:
 
 .. toctree::
     :hidden:
@@ -60,10 +60,10 @@ Get answers quickly with reference documents:
 
 .. include:: /reference/map.rst.inc
 
-Bundles
--------
+Paketi
+------
 
-The Symfony Standard Edition comes with some bundles. Learn more about them:
+Symfony standardna izdaja (Symfony Standard Edition) prihaja z nekaj paketi. Preberite več o njih:
 
 .. toctree::
     :hidden:
@@ -75,18 +75,18 @@ The Symfony Standard Edition comes with some bundles. Learn more about them:
 CMF
 ---
 
-The Symfony CMFproject makes it easier for developers to add CMS functionality
-to applications built with the Symfony2 PHP framework.
+Symfony CMF projekt omogoča za razvijalce enostavnejše dodajanje CMS funkcionalnosti
+v aplikacije zgrajene s Symfony2 PHP ogrodjem.
 
 .. toctree::
     :hidden:
 
     cmf/index
 
-Contributing
-------------
+Prispevanje
+-----------
 
-Contribute to Symfony2:
+Prispevajte k Symfony2:
 
 .. toctree::
     :hidden:

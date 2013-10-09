@@ -6,124 +6,121 @@ Glossary
 .. glossary::
    :sorted:
 
-   Distribution
-        A *Distribution* is a package made of the Symfony2 Components, a
-        selection of bundles, a sensible directory structure, a default
-        configuration, and an optional configuration system.
+   Distribucija
+        *Distribucija* je paket izdelan iz Symfony2 komponent,
+        izbire paketov, smiselne strukture direktorijev, privzetih nastavitev
+        in opcijskega nastavitvenega sistema.
 
    Dependency Injection
-        The Dependency Injection is a design pattern highly used in the Symfony2 Framework.
-        It encourages loosely coupled and more maintainable architecture of an application.
-        The main principle of this pattern is that it allows developers to *inject* objects
-        (also known as services) in other objects, generally passing them as parameters.
-        Different levels of coupling between these objects can be established
-        depending on the method used to inject objects together.
-        The Dependency Injection pattern is the more often associated
-        to another specific type of object: the :doc:`/book/service_container`.
+        Dependency Injection je načrtovalski vzorec, veliko uporabljen v Symfony2 ogrodju.
+        Spodbuja ohlapno skupno in bolj trajnostno arhitektur aplikacije.
+        Glavni princip tega vzorca je, da dovoljuje razvijalcem *vbrizganje* objektov
+        (znanih tudi kot storitve) v druge objekte, v splošnem jih podaja kot parametre.
+        Različni nivoji sklapljanja med temi objekti so lahko ustanovljeni
+        v odvisnosti od uporabljene metode za vbrizgavanje objektov skupaj.
+        Dependency Injection vzorec je bolj pogosto povezan k drugemu
+        tipu objekta: :doc:`/book/service_container`.
 
-   Project
-        A *Project* is a directory composed of an Application, a set of
-        bundles, vendor libraries, an autoloader, and web front controller
-        scripts.
+   Projekt
+        *Projekt* je direktorij sestavljen iz aplikacije, skupka paketov
+        knjižnic izdelovalcev, automatskega nalagalnika in skripe prednjega
+        spletnega krmilnika.
 
-   Application
-        An *Application* is a directory containing the *configuration* for a
-        given set of Bundles.
+   Aplikacija
+        *Aplikacija* je direktorij, ki vsebuje *nastavitve* za
+        dani skupek paketov.
 
-   Bundle
-        A *Bundle* is a directory containing a set of files (PHP files,
-        stylesheets, JavaScripts, images, ...) that *implement* a single
-        feature (a blog, a forum, etc). In Symfony2, (*almost*) everything
-        lives inside a bundle. (see :ref:`page-creation-bundles`)
+   Paket (Bundle)
+        *Paket* je direktorij, ki vsebuje skupek datotek (PHP datotek,
+        stilskih datotek, JavaScript, slike, ...), ki *implementirajo* eno
+        lastnost (blog, forum itd.). V Symfony2, se (*skoraj*) vse
+        nahaja znotraj paketa. (see :ref:`page-creating-bundles`)
 
-   Front Controller
-        A *Front Controller* is a short PHP script that lives in the web directory
-        of your project. Typically, *all* requests are handled by executing
-        the same front controller, whose job is to bootstrap the Symfony
-        application.
+   Prednji krmilnik
+        *Prednji krmilnik* je hitra PHP skripa, ki se nahaja v web direktoriju
+        vašega projekta. Običajno so *vse* zahtevki ravnani z izvajanjem
+        istega prednjega krmilnika, katerega naloga je zagon Symfony
+        aplikacije.
 
-   Controller
-        A *controller* is a PHP function that houses all the logic necessary
-        to return a ``Response`` object that represents a particular page.
-        Typically, a route is mapped to a controller, which then uses information
-        from the request to process information, perform actions, and ultimately
-        construct and return a ``Response`` object.
+   Krmilnik
+        *Krmilnik* je PHP funkcija, ki vsebuje vso potrebno logiko za vračanje
+        ``Response`` objekta, ki predstavlja določeno stran. Običajno je pot
+        povezana v krmilnik, ki potem uporablja informacije iz zahtevka za procesiranje
+        informacij, izvaja akcije in ultimativno sestavi in vrne ``Response`` objekt.
 
    Service
-        A *Service* is a generic term for any PHP object that performs a
-        specific task. A service is usually used "globally", such as a database
-        connection object or an object that delivers email messages. In Symfony2,
-        services are often configured and retrieved from the service container.
-        An application that has many decoupled services is said to follow
-        a `service-oriented architecture`_.
+        *Storitev* je generičen termin za katerokoli PHP objekt, ki izvaja določeno
+        opravilo. Storitev je običajno uporabljena "globalno", kot objekt povezave
+        podatkovne baze ali objekt, ki dostavlja e-poštna sporočila. V Symfony2 so
+        storitve pogosto nastavljene in pridobljene iz storitvenega kontejnerja.
+        Aplikacija, ki ima mnoge skupne storitve, pomeni, da sledi
+        `service-oriented architecture`_.
 
    Service Container
-        A *Service Container*, also known as a *Dependency Injection Container*,
-        is a special object that manages the instantiation of services inside
-        an application. Instead of creating services directly, the developer
-        *trains* the service container (via configuration) on how to create
-        the services. The service container takes care of lazily instantiating
-        and injecting dependent services. See :doc:`/book/service_container` 
-        chapter.
+        *Service Container*, znan tudi kot *Depencency Injection Container*
+        je poseben objekt, ki upravlja instantizacijo storitev znotraj
+        aplikacije. Namesto ustvarjanja storitev direktno, razvijalec
+        *nauči* storitveni kontejner (preko nastavitev), kako izdelati
+        storitve. Storitveni kontejner uredi leno instantizacijo in
+        injeciranje odvisnih storitev. Več v :doc:`/book/service_container`
+        poglavju.
 
-   HTTP Specification
-        The *Http Specification* is a document that describes the Hypertext
-        Transfer Protocol - a set of rules laying out the classic client-server
-        request-response communication. The specification defines the format
-        used for a request and response as well as the possible HTTP headers
-        that each may have. For more information, read the `Http Wikipedia`_
-        article or the `HTTP 1.1 RFC`_.
+   HTTP Specifikacija
+        *Http Specifikacija*je dokument, ki opisuje Hypertext Transfer Protocol -
+        skupek pravil, ki določajo klasično klient-strežnik zahtevek-odziv komunikacijo.
+        Specifikacija definira obliko uporabljeno za zahtevek in odziv kot tudi možne
+        HTTP glav, ki jih vsaka lahko vsebuje. Za več informacij, preberite
+        `Http Wikipedia`_ članek ali `HTTP 1.1 RFC`_.
 
-   Environment
-        An environment is a string (e.g. ``prod`` or ``dev``) that corresponds
-        to a specific set of configuration. The same application can be run
-        on the same machine using different configuration by running the application
-        in different environments. This is useful as it allows a single application
-        to have a ``dev`` environment built for debugging and a ``prod`` environment
-        that's optimized for speed.
+   Okolje
+        Okolje je niz (npr. ``prod`` ali ``dev``), ki ustreza določenemu
+        skupku nastavitev. Ista aplikacija se lahko poganja na isti napravi in
+        uporablja različne nastavitve s poganjanjem aplikacije v različnih
+        okoljih. To je uporabno saj omogoča, da ima ena aplikacija ``dev`` okolje
+        zgrajeno za razhroščevanje in ``prod`` okolje, ki je optimizirano za hitrost.
 
-   Vendor
-        A *vendor* is a supplier of PHP libraries and bundles including Symfony2
-        itself. Despite the usual commercial connotations of the word, vendors
-        in Symfony often (even usually) include free software. Any library you
-        add to your Symfony2 project should go in the ``vendor`` directory. See
+   Izdelovalec (Vendor)
+        *Izdelovalec* je ponudnik PHP knjižnic in paketov, kar vključuje tudi sam
+        Symfony2. Razen običajnih komercialnih konotacij besede, izdelovalec v Symfony
+        pogosto (celo običajno) vključuje brezplačno programsko opremo. Katerakoli
+        knjižnica, ki jo dodate v vaš Symfony2 projekt bi morala iti v ``vendor``
+        direktorij. Poglejte si še
         :ref:`The Architecture: Using Vendors <using-vendors>`.
 
    Acme
-        *Acme* is a sample company name used in Symfony demos and documentation.
-        It's used as a namespace where you would normally use your own company's
-        name (e.g. ``Acme\BlogBundle``).
+        *Acme* je vzorčno ime podjetja uporabljenega v Symfony demonstracijah in dokumentaciji.
+        Je uporabljen kot imenski prostor, kjer bi običajno uporabili vaše ime podjetja
+        (npr. ``Acme\BlogBundle``).
 
-   Action
-        An *action* is a PHP function or method that executes, for example,
-        when a given route is matched. The term action is synonymous with
-        *controller*, though a controller may also refer to an entire PHP
-        class that includes several actions. See the :doc:`Controller Chapter </book/controller>`.
+   Akcija
+        *Akcija* je PHP funkcija ali metoda, ki se izvaja na primer, ko je podana pot ujeta.
+        Termin akcija je sinonim za *krmilnik*, čeprav se lahko krmilnik tudi sklicuje na celoten
+        PHP razred, ki vključuje nekaj akcij. Oglejte si več v :doc:`Controller Chapter </book/controller>`.
 
-   Asset
-        An *asset* is any non-executable, static component of a web application,
-        including CSS, JavaScript, images and video. Assets may be placed
-        directly in the project's ``web`` directory, or published from a :term:`Bundle`
-        to the web directory using the ``assets:install`` console task.
+   Sredstvo (Asset)
+        *Sredstvo* je katerakoli neizvedljiva, statična komponenta spletne aplikacije,
+        kar vključuje CSS, JavaScript, slike in video. Sredstva so lahko postavljena
+        direktno v projektni ``web`` direktorij ali objavljena iz :term:`Bundle`
+        v web direktorij z uporabo ``assets:install`` opravila ukazne komande.
 
-   Kernel
-        The *Kernel* is the core of Symfony2. The Kernel object handles HTTP
-        requests using all the bundles and libraries registered to it. See
-        :ref:`The Architecture: The Application Directory <the-app-dir>` and the
-        :doc:`/book/internals` chapter.
+   Jedro (Kernel)
+        *Jedro* je središče Symfony2. Kernel objekt upravlja HTTP
+        zahtevke z uporabo vseh paketov in knjižnic registriranih v njem. Oglejte si
+        :ref:`The Architecture: The Application Directory <the-app-dir>` in
+        :doc:`/book/internals` poglavje.
 
-   Firewall
-        In Symfony2, a *Firewall* doesn't have to do with networking. Instead,
-        it defines the authentication mechanisms (i.e. it handles the process
-        of determining the identity of your users), either for the whole
-        application or for just a part of it. See the
+   Požarni zid
+        V Symfony2, *požarni zid* nima nič opraviti z omrežjem. Namesto tega,
+        definira mehanizme preverjanja pristnosti (t.j. ravnanje s procesom
+        določanja identifikacije vaših uporabnikov), ali za celo aplikacijo,
+        ali samo za del nje. Oglejte si
         :doc:`/book/security` chapters.
 
    Yaml
-        *YAML* is a recursive acronym for "YAML Ain't a Markup Language". It's a
-        lightweight, humane data serialization language used extensively in
-        Symfony2's configuration files.  See the :doc:`/components/yaml/introduction` 
-        chapter.
+        *YAML* je rekurzivna krativa za "YAML Ain't a Markup Language". Gre za
+        lahko, človeku prijazen serializacijski jezik, uporabljen obširno v Symfony2
+        nastavitvenih datotekah. Oglejte si :doc:`/components/yaml/introduction`
+        poglavje.
 
 
 .. _`service-oriented architecture`: http://wikipedia.org/wiki/Service-oriented_architecture
