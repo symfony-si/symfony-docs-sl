@@ -1,43 +1,43 @@
-The Big Picture
-===============
+Velika slika
+============
 
-Start using Symfony2 in 10 minutes! This chapter will walk you through some
-of the most important concepts behind Symfony2 and explain how you can get
-started quickly by showing you a simple project in action.
+Pričnite uporabljati Symfony2 v 10-ih minutah! To poglavje vas bo vodilo skozi
+nekatere najbolj pomembne koncepte za Symfony2 in vam razložilo, kako lahko
+hitro pričnete hitro s prikazon enostavnega projekta v delovanju.
 
-If you've used a web framework before, you should feel right at home with
-Symfony2. If not, welcome to a whole new way of developing web applications!
-
-.. tip::
-
-    Want to learn why and when you need to use a framework? Read the "`Symfony
-    in 5 minutes`_" document.
-
-Downloading Symfony2
---------------------
-
-First, check that you have installed and configured a Web server (such as
-Apache) with PHP 5.3.3 or higher.
+Če ste že uporabljali spletno ogrodje, se boste s Symfony2 počutili kot doma.
+Drugače pa dobrodošli v novem načinu razvoja spletnih aplikacij!
 
 .. tip::
 
-    If you have PHP 5.4, you could use the built-in web server to start trying
-    things out. We'll tell you how to start the built-in web server
-    :ref:`after downloading Symfony<quick-tour-big-picture-built-in-server>`.
+    Se želite naučiti, zakaj in kdaj potrebujete uporabiti ogrodje? Preberite
+    dokument "`Symfony v 5 minutah`_".
 
-Ready? Start by downloading the "`Symfony2 Standard Edition`_": a Symfony
-:term:`distribution` that is preconfigured for the most common use cases and
-also contains some code that demonstrates how to use Symfony2 (get the archive
-with the *vendors* included to get started even faster).
+Prenos Symfony2
+---------------
 
-After unpacking the archive under your web server root directory (if you'll
-use the built-in PHP web server, you can unpack it anywhere), you should
-have a ``Symfony/`` directory that looks like this:
+Najprej preverite, da imate nameščen in nastavljen spletni strežnik (kot je
+Apache) s PHP 5.3.3 ali več.
+
+.. tip::
+
+    Če imate PHP 5.4, lahko uporabite vgrajeni spletni strežnik, da pričnete
+    preizkušati zadeve. Povedali vam bomo, kako zagnati vgrajeni spletni strežnik
+    :ref:`po prenosu Symfony<quick-tour-big-picture-built-in-server>`.
+
+Pripravljeni? Začnite s prenosom "`Symfony2 standardne izdaje`_": Symfony
+:term:`distribution`, ki je prednameščena za najbolj pogoste primere uporabe in
+tudi vsebuje nekaj kode, ki demonstrira, kako uporabite Symfony2 (vključen dobite arhiv
+z *izdelovalci* za še hitrejši začetek).
+
+Po razpakiranju arhiva pod vašim vrhnjim spletnim direktorijem (če boste
+uporabili vgrajeni PHP spletni strežnik, ga lahko razpakirate kjerkoli), bi
+morali imeti ``Symfony/`` direktorij, ki izgleda takole:
 
 .. code-block:: text
 
-    www/ <- your web root directory
-        Symfony/ <- the unpacked archive
+    www/ <- vaš vrhnji spletni direktorij
+        Symfony/ <- razpakiran arhiv
             app/
                 cache/
                 config/
@@ -60,9 +60,9 @@ have a ``Symfony/`` directory that looks like this:
 
 .. note::
 
-    If you are familiar with `Composer`_, you can download Composer and then
-    run the following command instead of downloading the archive (replacing
-    ``2.3.0`` with the latest Symfony release like ``2.3.1``):
+    Če vam je `Composer`_ že poznan, lahko prenesete Composer in nato
+    poženete sledeči ukaz namesto prenosa arhiva (zamenjate
+    ``2.3.0`` z najnovejšo Symfony izdajo, npr. ``2.3.1``):
 
     .. code-block:: bash
 
@@ -70,7 +70,7 @@ have a ``Symfony/`` directory that looks like this:
 
 .. _`quick-tour-big-picture-built-in-server`:
 
-If you have PHP 5.4, you can use the built-in web server:
+Če imate PHP 5.4, lahko uporabite vgrajeni spletni strežnik:
 
 .. code-block:: bash
 
@@ -80,27 +80,27 @@ If you have PHP 5.4, you can use the built-in web server:
     # run the built-in web server
     $ php app/console server:run
 
-Then the URL to your application will be "http://localhost:8000/app_dev.php"
+Nato bo URL do vaše aplikacije "http://localhost:8000/app_dev.php"
 
-The built-in server should be used only for development purpose, but it
-can help you to start your project quickly and easily.
+Vgrajeni spletni strežnik se uporabi samo za namene razvoja, vendar
+vam lahko pomaga za pričetek vašega projekta hitro in enostavno.
 
-If you're using a traditional web server like Apache, your URL depends on
-your configuration. If you've unzipped Symfony under your web root into a
-``Symfony`` directory, then the URL to your application will be:
+Če uporabljate tradicionalni spletni strežnik kot je Apache, je vaš URL odvisen od
+vaših nastavitev. Če se odarhivirali Symfony pod vašim vrhnjim spletnih direktorijem v
+``Symfony`` direktorij, potem bo URL do vaše aplikacije:
 "http://localhost/Symfony/web/app_dev.php".
 
 .. note::
 
-    Read more in our :doc:`/cookbook/configuration/web_server_configuration`
-    section.
+    Preberite več v naši :doc:`/cookbook/configuration/web_server_configuration`
+    sekciji.
 
-Checking the Configuration
---------------------------
+Preverjanje nastavitev
+----------------------
 
-Symfony2 comes with a visual server configuration tester to help avoid some
-headaches that come from Web server or PHP misconfiguration. Use the following
-URL to see the diagnostics for your machine:
+Symfony2 pride z vizualnim testiranjem strežniških nastavitev, da vam pomaga se izogniti
+nekaterim preglavicam, ki izhajajo iz slabih nastavitev spletnega strežnika ali PHP. Uporabite
+sledeči URL, da vidite diagnostiko vaše naprave:
 
 .. code-block:: text
 
@@ -108,46 +108,46 @@ URL to see the diagnostics for your machine:
 
 .. note::
 
-    All of the example URLs assume you've setup your web server to point
-    directly to the ``web/`` directory of your new project, which is different
-    and a bit more advanced than the process shown above. So, the URL on your
-    machine will vary - e.g. ``http://localhost:8000/config.php``
-    or ``http://localhost/Symfony/web/config.php``. See the
-    :ref:`above section<quick-tour-big-picture-built-in-server>` for details
-    on what your URL should be and use it below in all of the examples.
+    Vsi primeri URL-jev predvidevajo, da ste nastavili spletni strežnik, da kaže
+    direktno v ``web/`` direktorij vašega novega projekta, ki je različen
+    in malo bolj napreden kot prikazan proces zgoraj. Torej URL vaše
+    naprave bo spremenljiv - npr. ``http://localhost:8000/config.php``
+    ali ``http://localhost/Symfony/web/config.php``. Oglejte si
+    :ref:`zgornjo sekcijo<quick-tour-big-picture-built-in-server>` za podrobnosti,
+    kakšen bi vaš URL moral biti in ga uporabite spodaj v vseh primerih.
 
-If there are any outstanding issues listed, correct them. You might also tweak
-your configuration by following any given recommendations. When everything is
-fine, click on "*Bypass configuration and go to the Welcome page*" to request
-your first "real" Symfony2 webpage:
+Če so napisane izjemne težave, jih popravite. Lahko tudi spremenite
+vaše nastavitve z upoštevanjem katerega koli priporočila. Ko je vse urejeno,
+kliknite na "*Bypass configuration and go to the Welcome page*" za zahtevek
+vaše prve "prave" Symfony2 spletne strani:
 
 .. code-block:: text
 
     http://localhost/app_dev.php/
 
-Symfony2 should welcome and congratulate you for your hard work so far!
+Symfony2 bi vas moral pozdraviti in vam čestitati za vaše težko delo do sedaj!
 
 .. image:: /images/quick_tour/welcome.png
    :align: center
 
-Understanding the Fundamentals
-------------------------------
+Razumevanje osnov
+-----------------
 
-One of the main goals of a framework is to ensure `Separation of Concerns`_.
-This keeps your code organized and allows your application to evolve easily
-over time by avoiding the mixing of database calls, HTML tags, and business
-logic in the same script. To achieve this goal with Symfony, you'll first
-need to learn a few fundamental concepts and terms.
+Eden glavnih ciljev ogrodja je zagotovitev `Ločitev skrbi`_.
+To ohranja vašo kodo organizirano in dovoljuje vaši aplikaciji, da se razvija
+enostavno skozi čas z izogibanjem mešanja klicev podatkovne baze, HTML značk in
+poslovne logike v isti skripti. Za doseg tega cilja s Symfony-jem, se boste
+najprej morali naučiti nekaj fundamentalnih konceptov in terminov.
 
 .. tip::
 
-    Want proof that using a framework is better than mixing everything
-    in the same script? Read the ":doc:`/book/from_flat_php_to_symfony2`"
-    chapter of the book.
+    Želite dokaz, da je uporaba ogrodja boljša kot mešanje vsega
+    v isti skripti? Preberite ":doc:`/book/from_flat_php_to_symfony2`"
+    poglavje knjige.
 
-The distribution comes with some sample code that you can use to learn more
-about the main Symfony2 concepts. Go to the following URL to be greeted by
-Symfony2 (replace *Fabien* with your first name):
+Distribucija vsebuje nekaj primerov kode, ki jih lahko uporabite, da se naučite več
+o glavnih Symfony2 konceptih. Pojdite na sledeči URL za pozdravno Symfony2 sporočilo
+(zamenjajte *Fabien* z vašim imenom):
 
 .. code-block:: text
 
@@ -156,28 +156,28 @@ Symfony2 (replace *Fabien* with your first name):
 .. image:: /images/quick_tour/hello_fabien.png
    :align: center
 
-What's going on here? Let's dissect the URL:
+Kaj se tu dogaja? Razčlenimo URL:
 
-* ``app_dev.php``: This is a :term:`front controller`. It is the unique entry
-  point of the application and it responds to all user requests;
+* ``app_dev.php``: To je :term:`front controller`. Je unikatna vstopna
+  točka aplikacije in se odziva na vse uporabniške zahtevke;
 
-* ``/demo/hello/Fabien``: This is the *virtual path* to the resource the user
-  wants to access.
+* ``/demo/hello/Fabien``: To je *virtualna pot* do vira, do katerega uporabnik
+  želi dostopati.
 
-Your responsibility as a developer is to write the code that maps the user's
-*request* (``/demo/hello/Fabien``) to the *resource* associated with it
-(the ``Hello Fabien!`` HTML page).
+Vaša odgovornost kot razvijalec je napisati kodo, ki se ujema z uporabnikovim
+*zahtevkom* (``/demo/hello/Fabien``) v *vir* povezan z njim
+(``Hello Fabien!`` HTML stran).
 
-Routing
-~~~~~~~
+Usmerjanje
+~~~~~~~~~~
 
-Symfony2 routes the request to the code that handles it by trying to match the
-requested URL (i.e. the virtual path) against some configured paths. By default,
-these paths (called routes) are defined in the ``app/config/routing.yml`` configuration
-file. When you're in the ``dev`` :ref:`environment<quick-tour-big-picture-environments>` -
-indicated by the app_**dev**.php front controller - the ``app/config/routing_dev.yml``
-configuration file is also loaded. In the Standard Edition, the routes to
-these "demo" pages are imported from this file:
+Symfony2 usmeri zahtevek do kode, ki ga uredi s poskušanjem ujemanja zahtevanega
+URL-ja (t.j. virtualna pot) proti nekaterim nastavljenim potem. Privzeto
+te poti (imenovane routes) so definirane v ``app/config/routing.yml`` nastavitveni
+datoteki. Ko ste v ``dev`` :ref:`okolju<quick-tour-big-picture-environments>` -
+označeno z app_**dev**.php prednjim krmilnikom, ``app/config/routing_dev.yml``
+je naložena tudi nastavitvena datoteka. V standardni izdaji Symfony-ja, so te poti
+"demo" strani uvožene iz te datoteke:
 
 .. code-block:: yaml
 
@@ -188,7 +188,7 @@ these "demo" pages are imported from this file:
     _acme_demo:
         resource: "@AcmeDemoBundle/Resources/config/routing.yml"
 
-This imports a ``routing.yml`` file that lives inside the AcmeDemoBundle:
+To uvozi ``routing.yml`` datoteko, ki stanuje znotraj AcmeDemoBundle:
 
 .. code-block:: yaml
 
@@ -204,29 +204,28 @@ This imports a ``routing.yml`` file that lives inside the AcmeDemoBundle:
 
     # ...
 
-The first three lines (after the comment) define the code that is executed
-when the user requests the "``/``" resource (i.e. the welcome page you saw
-earlier). When requested, the ``AcmeDemoBundle:Welcome:index`` controller
-will be executed. In the next section, you'll learn exactly what that means.
+Prve tri vrstice (za komentarjem) definirajo kodo, ki se izvede, ko uporabnik
+zahteva "``/``" vir (t.j. pozdravno stran, ki ste jo videli prej). Ko je zahtevano,
+bo ``AcmeDemoBundle:Welcome:index`` krmilnik izveden. V naslednji sekciji, se boste
+naučili točno, kaj to pomeni.
 
 .. tip::
 
-    The Symfony2 Standard Edition uses :doc:`YAML</components/yaml/yaml_format>`
-    for its configuration files, but Symfony2 also supports XML, PHP, and
-    annotations natively. The different formats are compatible and may be
-    used interchangeably within an application. Also, the performance of
-    your application does not depend on the configuration format you choose
-    as everything is cached on the very first request.
+    Symfony2 standardna izdaja uporablja :doc:`YAML</components/yaml/yaml_format>`
+    za njegove nastavitvene datoteke, vendar Symfony2 izvorno podpira tudi XML, PHP, in
+    anotacije. Različne oblike so kompatibilne in so lahko uporabljene
+    izmenično znotraj aplikacije. Tudi uspešnost vaše aplikacije ni odvisna od nastavitvene
+    oblike, ki jo izberete, saj je vse predpomnjeno na prvem zahtevku.
 
-Controllers
-~~~~~~~~~~~
+Krmilniki
+~~~~~~~~~
 
-A controller is a fancy name for a PHP function or method that handles incoming
-*requests* and returns *responses* (often HTML code). Instead of using the
-PHP global variables and functions (like ``$_GET`` or ``header()``) to manage
-these HTTP messages, Symfony uses objects: :ref:`Request<component-http-foundation-request>`
-and :ref:`Response<component-http-foundation-response>`. The simplest possible
-controller might create the response by hand, based on the request::
+Krmilnik je lepo ime za PHP funkcijo ali metodo, ki ravna vnodne
+*zahtevke* in vrne *odzive* (pogosto HTML kodo). Namesto uporabe
+PHP globalnih spremenljivk in funkcij (kot sta ``$_GET`` ali ``header()``) za upravljanje
+teh HTTP sporočil, Symfony uporablja objekte: :ref:`Request<component-http-foundation-request>`
+in :ref:`Response<component-http-foundation-response>`. Najenostavnejši možen
+krmilnik lahko ustvari odziv ročno, na osnovi zahtevka::
 
     use Symfony\Component\HttpFoundation\Response;
 
@@ -236,15 +235,14 @@ controller might create the response by hand, based on the request::
 
 .. note::
 
-    Symfony2 embraces the HTTP Specification, which are the rules that govern
-    all communication on the Web. Read the ":doc:`/book/http_fundamentals`"
-    chapter of the book to learn more about this and the added power that
-    this brings.
+    Symfony2 zajema HTTP specifikacijo, kar so pravila, ki urejajo
+    vso komunikacijo na spletu. Preberite več ":doc:`/book/http_fundamentals`"
+    poglavje knjige, da se naučite več o tem in dodani moči, ki jo to prinese.
 
-Symfony2 chooses the controller based on the ``_controller`` value from the
-routing configuration: ``AcmeDemoBundle:Welcome:index``. This string is the
-controller *logical name*, and it references the ``indexAction`` method from
-the ``Acme\DemoBundle\Controller\WelcomeController`` class::
+Symfony2 izbere krmilnik na osnovi ``_controller`` vrednosti iz nastavitev poti:
+``AcmeDemoBundle:Welcome:index``. Ta niz je
+krmilnikovo *logično ime*, in se sklicuje na ``indexAction`` metodo iz
+``Acme\DemoBundle\Controller\WelcomeController`` razreda::
 
     // src/Acme/DemoBundle/Controller/WelcomeController.php
     namespace Acme\DemoBundle\Controller;
@@ -261,17 +259,17 @@ the ``Acme\DemoBundle\Controller\WelcomeController`` class::
 
 .. tip::
 
-    You could have used the full class and method name -
-    ``Acme\DemoBundle\Controller\WelcomeController::indexAction`` - for the
-    ``_controller`` value. But if you follow some simple conventions, the
-    logical name is shorter and allows for more flexibility.
+    Lahko bi uporabili celotno ime razreda in metode -
+    ``Acme\DemoBundle\Controller\WelcomeController::indexAction`` - za
+    ``_controller`` vrednost. Vendar, če sledite nekaterim enostavnim konvencijam,
+    potem je logično ime krajše in omogoča več fleksibilnosti.
 
-The ``WelcomeController`` class extends the built-in ``Controller`` class,
-which provides useful shortcut methods, like the
-:ref:`render()<controller-rendering-templates>` method that loads and renders
-a template (``AcmeDemoBundle:Welcome:index.html.twig``). The returned value
-is a Response object populated with the rendered content. So, if the need
-arises, the Response can be tweaked before it is sent to the browser::
+Razred ``WelcomeController`` širi vgrajeni razred ``Controller``,
+ki ponuja uporabne bližnjice metod, kot je
+:ref:`render()<controller-rendering-templates>` metoda, ki naloži in izpiše
+predlogo (``AcmeDemoBundle:Welcome:index.html.twig``). Vrnjena vrednost
+je Response objekt, sestavljen z izpisano vsebino. Torej, če nastane potreba,
+se lahko Response uredi preden je poslan brskalniku::
 
     public function indexAction()
     {
@@ -281,25 +279,25 @@ arises, the Response can be tweaked before it is sent to the browser::
         return $response;
     }
 
-No matter how you do it, the end goal of your controller is always to return
-the ``Response`` object that should be delivered back to the user. This ``Response``
-object can be populated with HTML code, represent a client redirect, or even
-return the contents of a JPG image with a ``Content-Type`` header of ``image/jpg``.
+Ne glede na to, kako to naredite, končni cilj vašega krmilnika je vedno vrniti
+``Response`` objekt, ki bi moral biti dostavljen nazaj k uporabniku. Ta ``Response``
+objekt je lahko napolnjen s HTML kodo, predstavlja preusmeritev klienta, ali celo
+vrne vsebino JPG slike s ``Content-Type`` glavo iz ``image/jpg``.
 
 .. tip::
 
-    Extending the ``Controller`` base class is optional. As a matter of fact,
-    a controller can be a plain PHP function or even a PHP closure.
-    ":doc:`The Controller</book/controller>`" chapter of the book tells you
-    everything about Symfony2 controllers.
+    Razširitev osnovnega razreda ``Controller`` je opcijska. Pravzaprav je
+    krmilnik lahko preprosta PHP funkcija ali celo PHP zaprtje (closure).
+    Poglavje knjige ":doc:`Krmilnik</book/controller>`" vam pove vse
+    o Symfony2 krmilnikih.
 
-The template name, ``AcmeDemoBundle:Welcome:index.html.twig``, is the template
-*logical name* and it references the ``Resources/views/Welcome/index.html.twig``
-file inside the ``AcmeDemoBundle`` (located at ``src/Acme/DemoBundle``).
-The `Bundles`_ section below will explain why this is useful.
+Ime predloge, ``AcmeDemoBundle:Welcome:index.html.twig``, je
+*logično ime* predloge in se sklicuje na ``Resources/views/Welcome/index.html.twig``
+datoteko znotraj ``AcmeDemoBundle`` (locirana v ``src/Acme/DemoBundle``).
+Sekcija  `Bundles`_ spodaj vam bo razložila zakaj je to uporabno.
 
-Now, take a look at the routing configuration again and find the ``_demo``
-key:
+Sedaj pa ponovno poglejmo nastavitve usmerjanja in najdimo ``_demo``
+ključ:
 
 .. code-block:: yaml
 
@@ -310,11 +308,11 @@ key:
         type:     annotation
         prefix:   /demo
 
-Symfony2 can read/import the routing information from different files written
-in YAML, XML, PHP, or even embedded in PHP annotations. Here, the file's
-*logical name* is ``@AcmeDemoBundle/Controller/DemoController.php`` and refers
-to the ``src/Acme/DemoBundle/Controller/DemoController.php`` file. In this
-file, routes are defined as annotations on action methods::
+Symfony2 lahko prebere/uvozi usmerjevalne informacije iz različnih datotek napisanih
+v YAML, XML, PHP ali celo vgrajene v PHP anotacije. Tu je
+*logično ime* datoteke ``@AcmeDemoBundle/Controller/DemoController.php`` in se sklicuje
+na datoteko ``src/Acme/DemoBundle/Controller/DemoController.php``. V tej datoteki
+so poti definirane kot anotacije na akcijskih metodah::
 
     // src/Acme/DemoBundle/Controller/DemoController.php
     use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -334,36 +332,36 @@ file, routes are defined as annotations on action methods::
         // ...
     }
 
-The ``@Route()`` annotation defines a new route with a path of
-``/hello/{name}`` that executes the ``helloAction`` method when matched. A
-string enclosed in curly brackets like ``{name}`` is called a placeholder. As
-you can see, its value can be retrieved through the ``$name`` method argument.
+Anotacija ``@Route()`` definira novo usmeritev s potjo
+``/hello/{name}``, ki izvede ``helloAction`` metodo, ko se ujame. Priloženi
+niz v zavitih oklepajih kot je ``{name}`` se imenuje označba mesta. Kot
+lahko vidite, je njegova vrednost lahko vrnjena skozi ``$name`` argument metode.
 
 .. note::
 
-    Even if annotations are not natively supported by PHP, you can use them
-    in Symfony2 as a convenient way to configure the framework behavior and
-    keep the configuration next to the code.
+    Tudi če anotacije niso običajno podprte v PHP, jih lahko uporabite
+    v Symfony2 kot priročen način za nastavitev obnašanja ogrodja in
+    imeti nastavitve poleg kode.
 
-If you take a closer look at the controller code, you can see that instead of
-rendering a template and returning a ``Response`` object like before, it
-just returns an array of parameters. The ``@Template()`` annotation tells
-Symfony to render the template for you, passing in each variable of the array
-to the template. The name of the template that's rendered follows the name
-of the controller. So, in this example, the ``AcmeDemoBundle:Demo:hello.html.twig``
-template is rendered (located at ``src/Acme/DemoBundle/Resources/views/Demo/hello.html.twig``).
+Če pogledate podrobneje kodo krmilnika, lahko vidite, da namesto izpisa
+predloge in vrnitve ``Response`` objekta kot prej, vrne samo polje
+parametrov. Anotacija ``@Template()`` pove Symfony-ju
+naj izpiše predlogo za vas preko podajanja vsake spremenljivke v polju predlogi.
+Ime predloge, ki se izpiše sledi imenu krmilnika. Torej v tem primeru
+je izpisana ``AcmeDemoBundle:Demo:hello.html.twig`` predloga (locirana v
+``src/Acme/DemoBundle/Resources/views/Demo/hello.html.twig``).
 
 .. tip::
 
-    The ``@Route()`` and ``@Template()`` annotations are more powerful than
-    the simple examples shown in this tutorial. Learn more about "`annotations in controllers`_"
-    in the official documentation.
+    Anotaciji ``@Route()`` in ``@Template()`` sta močnejši kot pa enostavni primeri prikazani
+    v tem vodiču. Naučite se več o "`annotations in controllers`_" v uradni
+    dokumentaciji.
 
-Templates
-~~~~~~~~~
+Predloge
+~~~~~~~~
 
-The controller renders the ``src/Acme/DemoBundle/Resources/views/Demo/hello.html.twig``
-template (or ``AcmeDemoBundle:Demo:hello.html.twig`` if you use the logical name):
+Krmilnik izpiše ``src/Acme/DemoBundle/Resources/views/Demo/hello.html.twig``
+predlogo (ali ``AcmeDemoBundle:Demo:hello.html.twig`` če uporabljate logično ime):
 
 .. code-block:: jinja
 
@@ -376,64 +374,59 @@ template (or ``AcmeDemoBundle:Demo:hello.html.twig`` if you use the logical name
         <h1>Hello {{ name }}!</h1>
     {% endblock %}
 
-By default, Symfony2 uses `Twig`_ as its template engine but you can also use
-traditional PHP templates if you choose. The next chapter will introduce how
-templates work in Symfony2.
+Privzeto, Symfony2 uporablja `Twig`_ kot svoj motor predlog, vendar lahko uporabite tudi običajne
+PHP predloge, če to izberete. Naslednje poglavje bo predstavilo, kako predloge delujejo v Symfony2.
 
-Bundles
-~~~~~~~
+Paketi
+~~~~~~
 
-You might have wondered why the :term:`Bundle` word is used in many names you
-have seen so far. All the code you write for your application is organized in
-bundles. In Symfony2 speak, a bundle is a structured set of files (PHP files,
-stylesheets, JavaScripts, images, ...) that implements a single feature (a
-blog, a forum, ...) and which can be easily shared with other developers. As
-of now, you have manipulated one bundle, AcmeDemoBundle. You will learn
-more about bundles in the :doc:`last chapter of this tutorial</quick_tour/the_architecture>`.
+Verjetno ste se spraševali, zakaj je beseda paket (:term:`Bundle`) uporabljena v tako veliko
+imenih do sedaj. Vsa koda, ki jo pišete za vašo aplikacijo je organizirana v paketih.
+V Symfony2 primeru je paket strukturiran skupek datotek (PHP datotek, stilov, JavaScript-a,
+slik, ...), ki implementirajo neko lastnost (blog, forum, ...) in ki so lahko enostavno deljene
+z drugimi razvijalci. Do sedaj ste ravnali z enim paketom, AcmeDemoBundle. Naučili se boste več
+o paketih v :doc:`zadnjem poglavju tega vodiča</quick_tour/the_architecture>`.
 
 .. _quick-tour-big-picture-environments:
 
-Working with Environments
--------------------------
+Delo z okolji
+-------------
 
-Now that you have a better understanding of how Symfony2 works, take a closer
-look at the bottom of any Symfony2 rendered page. You should notice a small
-bar with the Symfony2 logo. This is the "Web Debug Toolbar", and it is a
-Symfony2 developer's best friend!
+Sedaj, ko imate boljše razumevanje, kako Symfony2 deluje, si podrobneje poglejte
+na konec katerekoli Symfony2 izpisane strani. Morali bi opaziti majhno vrstico
+s Symfony2 logotipom. To je "Web Debug Toolbar" in je najboljši prijatelj Symfony2
+razvijalca!
 
 .. image:: /images/quick_tour/web_debug_toolbar.png
    :align: center
 
-But what you see initially is only the tip of the iceberg; click on the
-hexadecimal number (the session token) to reveal yet another very useful
-Symfony2 debugging tool: the profiler.
+Vendar na koncu vidite je samo vrh ledene gore; kliknite na šestnajstiško številko
+(žeton seje), da okrijete še eno zelo uporabno Symfony2 razhroščevalno orodje: profiler.
 
 .. image:: /images/quick_tour/profiler.png
    :align: center
 
 .. note::
 
-    You can also get more information quickly by hovering over the items
-    on the Web Debug Toolbar, or clicking them to go to their respective
-    pages in the profiler.
+    Lahko dobite tudi več informacij hitro s pozicijo nad elementi na spletni razhroščevalni
+    vrstici, ali če jih kliknete, da greste do njihovih ustreznih strani v profiler-ju.
 
-When loaded and enabled (by default in the ``dev`` :ref:`environment<quick-tour-big-picture-environments-intro>`),
-the Profiler provides a web interface for a *huge* amount of information recorded
-on each request, including logs, a timeline of the request, GET or POST parameters,
-security details, database queries and more!
+Ko je naložen in omogočen (privzeto v ``dev`` :ref:`okolju<quick-tour-big-picture-environments-intro>`),
+Profiler ponuja spletni vmesnik za *veliko* količino informacij, posnetih
+pri vsakem zahtevku, vključno z dnevniki, časovnico zahtevkov, GET ali POST parametri,
+varnostnimi podrobnostmi, poizvedbami podatkovne baze in več!
  
-Of course, it would be unwise to have these tools enabled when you deploy
-your application, so by default, the profiler is not enabled in the ``prod``
-environment.
+Seveda bi bilo nepametno imeti ta orodja omogočena, ko postavite vašo aplikacijo,
+torej je privzeto profiler onemogočen v ``prod`` okolju.
 
 .. _quick-tour-big-picture-environments-intro:
 
-So what *is* an environment? An :term:`Environment` is a simple string (e.g.
-``dev`` or ``prod``) that represents a group of configuration that's used
-to run your application.
+Torej kaj *je* okolje? Termin :term:`Environment` je enostaven niz (npr.
+``dev`` ali ``prod``) ki predstavlja skupino nastavitev, ki so uporabljene za poganjanje
+vaše aplikacije.
 
-Typically, you put your common configuration in ``config.yml`` and override
-where necessary in the configuration for each environment. For example:
+Običajno postavite vaše skupne nastavitve v ``config.yml`` in jih prepišete
+kjer je potrebno v nastavitvah za vsako okolje. Na primer:
 
 .. code-block:: yaml
 
@@ -445,25 +438,25 @@ where necessary in the configuration for each environment. For example:
         toolbar: true
         intercept_redirects: false
 
-In this example, the ``dev`` environment loads the ``config_dev.yml`` configuration
-file, which itself imports the global ``config.yml`` file and then modifies it by
-enabling the web debug toolbar.
+V tem primeru ``dev`` okolje naloži ``config_dev.yml`` nastavitveno
+datoteko, ki sama uvozi globalno datoteko ``config.yml`` in jih nato modificira z omogočanjem
+spletne razhroščevalne vrstice.
 
-When you visit the ``app_dev.php`` file in your browser, you're executing
-your Symfony application in the ``dev`` environment. To visit your application
-in the ``prod`` environment, visit the ``app.php`` file instead. The demo
-routes in our application are only available in the ``dev`` environment, but
-if those routes were available in the ``prod`` environment, you would be able
-to visit them in the ``prod`` environment by going to:
+Ko obiščete ``app_dev.php`` datoteko v vašem brskalniku, izvajate vašo Symfony aplikacijo
+v ``dev`` okolju. Za obisk vaše aplikacije
+v ``prod`` okolju, namesto tega obiščite ``app.php`` datoteko. Demo usmeritve
+v naši aplikaciji so samo na voljo v ``dev`` okolju, vendar
+če te poti niso na voljo v ``prod`` okolju, bi jih lahko
+obiskalni v ``prod`` okolju z obiskom:
 
 .. code-block:: text
 
     http://localhost/app.php/demo/hello/Fabien
 
-If instead of using php's built-in webserver, you use Apache with ``mod_rewrite``
-enabled and take advantage of the ``.htaccess`` file Symfony2 provides
-in ``web/``, you can even omit the ``app.php`` part of the URL. The default
-``.htaccess`` points all requests to the ``app.php`` front controller:
+Če namesto uporabe php-jevega vgrajenega spletnega strežnika, uporabljate Apache z omogočenim ``mod_rewrite``
+in uporabljate ``.htaccess`` datoteko, ki jo Symfony2 ponuja
+v ``web/``, se lahko celo izognete pisanju ``app.php`` dela v URL-ju. Privzeta datoteka
+``.htaccess`` kaže vse zahtevke v ``app.php`` prednji krmilnik:
 
 .. code-block:: text
 
@@ -471,27 +464,26 @@ in ``web/``, you can even omit the ``app.php`` part of the URL. The default
 
 .. note::
 
-    Note that the two URLs above are provided here only as **examples** of
-    how a URL looks like when the ``prod`` front controller is used. If you
-    actually try them in an out-of-the-box installation of *Symfony Standard Edition*,
-    you will get a 404 error since the *AcmeDemoBundle* is enabled only in
-    the ``dev`` environment and its routes imported from ``app/config/routing_dev.yml``.
+    Opazite, da dva URL-ja zgoraj sta ponujena tu le kot **primera**
+    kako URL izgleda, ko je uporabljen ``prod`` prednji krmilnik. Če jih dejansko
+    preizkusite v delujoči namestitvi *Symfony standardne izdaje*, boste
+    prejeli 404 napako, saj je *AcmeDemoBundle* omogočen samo v
+    ``dev`` okolju in njegove usmeritve so uvožene iz ``app/config/routing_dev.yml``.
 
-For more details on environments, see ":ref:`Environments & Front Controllers<page-creation-environments>`".
+Za več podrobnosti o okoljih, si oglejte ":ref:`Environments & Front Controllers<page-creation-environments>`".
 
-Final Thoughts
---------------
+Zaključne misli
+---------------
 
-Congratulations! You've had your first taste of Symfony2 code. That wasn't so
-hard, was it? There's a lot more to explore, but you should already see how
-Symfony2 makes it really easy to implement web sites better and faster. If you
-are eager to learn more about Symfony2, dive into the next section:
-":doc:`The View<the_view>`".
+Čestitamo! Za pokušino ste dobili vašo prvo Symfony2 kodo. Ni bilo tako težko, kaj?
+Na voljo za odkriti je še več, vendar bi morali že videti, kako naredi Symfony2 res enostavno
+implementacijo spletnih strani boljše in hitrejše. Če ste željni se naučiti več o Symfony2,
+se poglobite v naslednjo sekcijo: ":doc:`Pogled<the_view>`".
 
-.. _Symfony2 Standard Edition:      http://symfony.com/download
-.. _Symfony in 5 minutes:           http://symfony.com/symfony-in-five-minutes
+.. _Symfony2 standardne izdaje:     http://symfony.com/download
+.. _Symfony v 5 minutah:            http://symfony.com/symfony-in-five-minutes
 .. _`Composer`:                     http://getcomposer.org/
-.. _Separation of Concerns:         http://en.wikipedia.org/wiki/Separation_of_concerns
+.. _Ločitev skrbi:                  http://en.wikipedia.org/wiki/Separation_of_concerns
 .. _annotations in controllers:     http://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/index.html#annotations-for-controllers
 .. _Twig:                           http://twig.sensiolabs.org/
 .. _`Symfony Installation Page`:    http://symfony.com/download
