@@ -1,36 +1,36 @@
-The View
-========
+Pogled
+======
 
-After reading the first part of this tutorial, you have decided that Symfony2
-was worth another 10 minutes. Great choice! In this second part, you will
-learn more about the Symfony2 template engine, `Twig`_. Twig is a flexible,
-fast, and secure template engine for PHP. It makes your templates more
-readable and concise; it also makes them more friendly for web designers.
+Po branju prvega dela tega vodiča, ste se odločili, da je Symfony2
+vreden dodatnih 10 minut. Odlična izbira! V drugem delu, se boste naučili
+več o Symfony2 motorju predlog, `Twig`_. Twig je fleksibilen,
+hiter in varen motor predlog za PHP. Vaše predloge naredi bolj bralne in
+jedrnate; naredi jih tudi bolj prijazne za spletne oblikovalce.
 
 .. note::
 
-    Instead of Twig, you can also use :doc:`PHP </cookbook/templating/PHP>`
-    for your templates. Both template engines are supported by Symfony2.
+    Namesto Twig-a lahko uporabite tudi :doc:`PHP </cookbook/templating/PHP>`
+    za vaše predloge. Oba motorja predlog sta podprta v Symfony2
 
-Getting familiar with Twig
---------------------------
+Spozavanje Twig-a
+-----------------
 
 .. tip::
 
-    If you want to learn Twig, it's highly recommended you read its official
-    `documentation`_. This section is just a quick overview of the main
-    concepts.
+    Če se želite naučiti o Twig-u, je zelo priporočljivo, da najprej preberete
+    njegovo uradno `dokumentacijo`_. Ta sekcija je samo hiter pregled glavnih
+    konceptov.
 
-A Twig template is a text file that can generate any type of content (HTML,
-XML, CSV, LaTeX, ...). Twig defines two kinds of delimiters:
+Twig predloga je tekstovna datoteka, ki lahko generira kakršen koli tip vsebine
+(HTML, XML, CSV, LaTeX, ...). Twig definira dve vrsti ločil:
 
-* ``{{ ... }}``: Prints a variable or the result of an expression;
+* ``{{ ... }}``: Izpiše spremenljivko ali rezultat izraza;
 
-* ``{% ... %}``: Controls the logic of the template; it is used to execute
-  ``for`` loops and ``if`` statements, for example.
+* ``{% ... %}``: Krmili logiko predloge; uporabljen je za izvajanje
+  ``for`` zank in ``if`` stavkov, na primer.
 
-Below is a minimal template that illustrates a few basics, using two variables
-``page_title`` and ``navigation``, which would be passed into the template:
+Spodaj je minimalna predloga, ki ilustrira nekaj osnov z uporabo dveh spremenljivk
+``page_title`` in ``navigation``, kateri bi bili poslani v predlogo:
 
 .. code-block:: html+jinja
 
@@ -52,18 +52,18 @@ Below is a minimal template that illustrates a few basics, using two variables
 
 .. tip::
 
-   Comments can be included inside templates using the ``{# ... #}`` delimiter.
+   Komentarji so lahko vključeni znotraj predloge z uporabo ``{# ... #}`` ločila.
 
-To render a template in Symfony, use the ``render`` method from within a controller
-and pass it any variables needed in the template::
+Za izpis predloge v Symfony-ju, uporabite metodo ``render`` znotraj krmilnika
+in mu podajte katerokoli spremenljivko potrebujete v predlogi::
 
     $this->render('AcmeDemoBundle:Demo:hello.html.twig', array(
         'name' => $name,
     ));
 
-Variables passed to a template can be strings, arrays, or even objects. Twig
-abstracts the difference between them and lets you access "attributes" of a
-variable with the dot (``.``) notation:
+Spremenljivke podane predlogi so lahko nizi, polja ali celo objekti. Twig
+povzema razlike med njimi in vam omogoča dostop "atributov" spremenljivke
+z notacijo pike (``.``):
 
 .. code-block:: jinja
 
@@ -89,22 +89,22 @@ variable with the dot (``.``) notation:
 
 .. note::
 
-    It's important to know that the curly braces are not part of the variable
-    but the print statement. If you access variables inside tags don't put the
-    braces around.
+    Pomembno je, da veste, da zaviti oklepaji niso del spremenljivke vendar
+    stavka izpisa. Če dostopate do spremenljivke znotraj značk, ne pustite
+    okrog oklepajev.
 
-Decorating Templates
---------------------
+Dekoracija predlog
+------------------
 
-More often than not, templates in a project share common elements, like the
-well-known header and footer. In Symfony2, you think about this problem
-differently: a template can be decorated by another one. This works exactly
-the same as PHP classes: template inheritance allows you to build a base
-"layout" template that contains all the common elements of your site and
-defines "blocks" that child templates can override.
+Pogosteje, predloge v projektu delijo skupne elemente, kot sta
+dobro znana glava in noga. V Symfony2, razmišljate o problemu drugače:
+predloga je lahko dekorirana s pomočjo druge. To deluje točno tako kot pri
+PHP razredih: dedinjenje predlog vam omogoča gradnjo osnovne predloge "postavitve"
+("layout"), ki vsebuje vse skupne elemente vaše strani in definira bloke, ki jih
+lahko podrejene predloge prepišejo.
 
-The ``hello.html.twig`` template inherits from ``layout.html.twig``, thanks to
-the ``extends`` tag:
+Predloga ``hello.html.twig`` podeduje iz ``layout.html.twig``, zahvaljujoč
+znački ``extends``:
 
 .. code-block:: html+jinja
 
@@ -117,12 +117,12 @@ the ``extends`` tag:
         <h1>Hello {{ name }}!</h1>
     {% endblock %}
 
-The ``AcmeDemoBundle::layout.html.twig`` notation sounds familiar, doesn't it?
-It is the same notation used to reference a regular template. The ``::`` part
-simply means that the controller element is empty, so the corresponding file
-is directly stored under the ``Resources/views/`` directory.
+Notacija ``AcmeDemoBundle::layout.html.twig`` zveni znano, kajne?
+Je enaka notacija uporabljena za sklicevanje običajne predloge. Del ``::``
+enostavno pomeni, da je element krmilnik prazen, torej je ustrezna datoteka
+direktno shranjena pod ``Resources/views/`` direktorijem.
 
-Now, let's have a look at a simplified ``layout.html.twig``:
+Sedaj poglejmo poenostavljen ``layout.html.twig``:
 
 .. code-block:: jinja
 
@@ -132,35 +132,35 @@ Now, let's have a look at a simplified ``layout.html.twig``:
         {% endblock %}
     </div>
 
-The ``{% block %}`` tags define blocks that child templates can fill in. All
-the block tag does is to tell the template engine that a child template may
-override those portions of the template.
+Značka ``{% block %}`` definira bloke, ki jih podrejene predloge lahko izpolnijo.
+Vse kar značke block naredijo je, da povejo motorju predlog, da podrejena predloga
+lahko prepiše te dele predloge.
 
-In this example, the ``hello.html.twig`` template overrides the ``content``
-block, meaning that the "Hello Fabien" text is rendered inside the ``div.symfony-content``
-element.
+V tem primeru predloga ``hello.html.twig`` prepiše ``content``
+block, kar pomeni, da "Hello Fabien" je tekst izpisan znotraj ``div.symfony-content``
+elementa.
 
-Using Tags, Filters, and Functions
-----------------------------------
+Uporaba značk, filtrov in fukcij
+--------------------------------
 
-One of the best feature of Twig is its extensibility via tags, filters, and
-functions. Symfony2 comes bundled with many of these built-in to ease the
-work of the template designer.
+Eden najboljših lastnosti Twig-a je njegova razširljivost preko značk, filtrov in
+funkcij. Symfony2 prihaja zapakiran z mnogo od teh že vgrajenih, da poenostavi
+delo oblikovalcu predloge.
 
-Including other Templates
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Vključevanje drugih predlog
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The best way to share a snippet of code between several distinct templates is
-to create a new template that can then be included from other templates.
+Najboljša pot za deljenje odrezkov kode med večimi različnimi predlogami je,
+da se naredi novo predlogo, ki je lahko potem vključena iz drugih predlog.
 
-Create an ``embedded.html.twig`` template:
+Izdelajte predlogo ``embedded.html.twig``:
 
 .. code-block:: jinja
 
     {# src/Acme/DemoBundle/Resources/views/Demo/embedded.html.twig #}
     Hello {{ name }}
 
-And change the ``index.html.twig`` template to include it:
+In spremenite predlogo ``index.html.twig``, da jo vsebuje:
 
 .. code-block:: jinja
 
@@ -172,26 +172,26 @@ And change the ``index.html.twig`` template to include it:
         {{ include("AcmeDemoBundle:Demo:embedded.html.twig") }}
     {% endblock %}
 
-Embedding other Controllers
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Vključevanje drugih krmilnikov
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-And what if you want to embed the result of another controller in a template?
-That's very useful when working with Ajax, or when the embedded template needs
-some variable not available in the main template.
+In kaj, če želite vključiti rezultat drugega krmilnika v predlogo?
+To je zelo uporabno, ko delate z Ajax-om ali ko vključena predloga potrebuje
+neko spremenljivko, ki ni na voljo v glavni predlogi.
 
-Suppose you've created a ``fancyAction`` controller method, and you want to
-"render" it inside the ``index`` template, which means including the result
-(e.g. ``HTML``) of the controller. To do this, use the ``render`` function:
+Predpostavimo, da ste izdelali ``fancyAction`` metodo krmilnika in jo želite
+"izpisati" znotraj ``index`` predloge, kar pomeni vključevanje rezultata
+(npr. ``HTML``) krmilnika. Da to naredite, uporabite ``render`` funkcijo
 
 .. code-block:: jinja
 
     {# src/Acme/DemoBundle/Resources/views/Demo/index.html.twig #}
     {{ render(controller("AcmeDemoBundle:Demo:fancy", {'name': name, 'color': 'green'})) }}
 
-Here, the ``AcmeDemoBundle:Demo:fancy`` string refers to the ``fancy`` action
-of the ``Demo`` controller. The arguments (``name`` and ``color``) act like
-simulated request variables (as if the ``fancyAction`` were handling a whole
-new request) and are made available to the controller::
+Tu je ``AcmeDemoBundle:Demo:fancy`` niz, ki se sklicuje na ``fancy`` akcijo
+``Demo`` krmilnika. Argumenti (``name`` in ``color``) se obnašajo podobno kot
+simulirane spremenljivke zahtevka (kot če bi ``fancyAction`` upravljala celoten nov
+zahtevek) in so na voljo krmilniku::
 
     // src/Acme/DemoBundle/Controller/DemoController.php
 
@@ -211,22 +211,21 @@ new request) and are made available to the controller::
         // ...
     }
 
-Creating Links between Pages
+Izdelava povezav med stranmi
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Speaking of web applications, creating links between pages is a must. Instead
-of hardcoding URLs in templates, the ``path`` function knows how to generate
-URLs based on the routing configuration. That way, all your URLs can be easily
-updated by just changing the configuration:
+Ko govorimo o spletnih aplikacijah, je izdelava povezav med stranmi obveza. Namesto
+vpisovanja URL-jev v predloge, funkcija ``path`` ve, kako generirati
+URL-je na osnovi routing nastavitev. Na ta način so lahko vsi vaši URL-ji
+posodobljeni s samo spremembo nastavitev:
 
 .. code-block:: html+jinja
 
     <a href="{{ path('_demo_hello', { 'name': 'Thomas' }) }}">Greet Thomas!</a>
 
-The ``path`` function takes the route name and an array of parameters as
-arguments. The route name is the main key under which routes are referenced
-and the parameters are the values of the placeholders defined in the route
-pattern::
+Funkcija ``path`` vzame ime poti in polje parametrov kot argumente. Ime
+poti je glavni ključ pod katerim so navedene poti in parametri so vrednosti
+lokacije definirane v vzorcu poti::
 
     // src/Acme/DemoBundle/Controller/DemoController.php
     use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -248,11 +247,11 @@ pattern::
     The ``url`` function generates *absolute* URLs: ``{{ url('_demo_hello', {
     'name': 'Thomas'}) }}``.
 
-Including Assets: images, JavaScripts, and stylesheets
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Vključevanje sredstev: slike, JavaScripts in stili
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-What would the Internet be without images, JavaScripts, and stylesheets?
-Symfony2 provides the ``asset`` function to deal with them easily:
+Kaj bi bil internet brez slik, JavaScript-a in stilov?
+Symfony2 ponuja funkcijo ``asset``, da ravna z njimi na enostaven način:
 
 .. code-block:: jinja
 
@@ -260,34 +259,32 @@ Symfony2 provides the ``asset`` function to deal with them easily:
 
     <img src="{{ asset('images/logo.png') }}" />
 
-The ``asset`` function's main purpose is to make your application more portable.
-Thanks to this function, you can move the application root directory anywhere
-under your web root directory without changing anything in your template's
-code.
+Glavna naloga funkcije ``asset`` je narediti aplikacijo bolj prenosno.
+Zahvaljujoč tej funkciji, lahko premaknete vrhnji direktorij aplikacije kamorkoli
+pod vašim vrhnjim spletnim direktorijem brez da bi spremenili karkoli v vaši kodi
+predloge.
 
-Escaping Variables
-------------------
+Čiščenje spremenljivk
+---------------------
 
-Twig is configured to automatically escape all output by default. Read Twig
-`documentation`_ to learn more about output escaping and the Escaper
-extension.
+Twig je nastavljen, da privzeto avtomatsko počisti ves izpis. Preberite Twig
+`dokumentacijo`_ da izveste več o čiščenju izpisa in o Escaper razširitvi.
 
-Final Thoughts
---------------
+Zaključne misli
+---------------
 
-Twig is simple yet powerful. Thanks to layouts, blocks, templates and action
-inclusions, it is very easy to organize your templates in a logical and
-extensible way. However, if you're not comfortable with Twig, you can always
-use PHP templates inside Symfony without any issues.
+Twig je enostaven vendar močen. Zahvaljujoč vključenim postavitvam, blokom, predlogam in
+akcijam, je zelo enostavno organizirati vaše predloge na logičen in razširljiv način.
+Čeprav, če se ne počutite udobno s Twig-om, lahko vedno uporabite
+PHP predloge znotraj Symfony-ja brez kakršnih koli težav.
 
-You have only been working with Symfony2 for about 20 minutes, but you can
-already do pretty amazing stuff with it. That's the power of Symfony2. Learning
-the basics is easy, and you will soon learn that this simplicity is hidden
-under a very flexible architecture.
+S Symfony2 ste delali samo približno 20 minut, vendar lahko z njim že delate
+precej neverjetne stvari. To je moč Symfony2. Učenje osnov je enostavno in se boste
+kmalu naučili, da je ta enostavnost skrita pod zelo fleksibilno arhitekturo.
 
-But I'm getting ahead of myself. First, you need to learn more about the controller
-and that's exactly the topic of the :doc:`next part of this tutorial <the_controller>`.
-Ready for another 10 minutes with Symfony2?
+Vendar že malo prehitevam samega sebe. Prvo, se boste morali naučiti o krmilniku
+in ravno to je tema :doc:`naslednjega dela tega vodiča <the_controller>`.
+Pripravljeni na naslednjih 10 minut s Symfony2?
 
 .. _Twig:          http://twig.sensiolabs.org/
-.. _documentation: http://twig.sensiolabs.org/documentation
+.. _dokumentacijo: http://twig.sensiolabs.org/documentation
