@@ -1,17 +1,17 @@
-The Controller
-==============
+Krmilnik
+========
 
-Still here after the first two parts? You are already becoming a Symfony2
-addict! Without further ado, discover what controllers can do for you.
+Še vedno tu po prvih dveh delih? Postajate Symfony2 odvisnik!
+Brez odlašanja, odkrijte kaj krmilnik lahko naredi za vas.
 
-Using Formats
+Uporaba oblik
 -------------
 
-Nowadays, a web application should be able to deliver more than just HTML
-pages. From XML for RSS feeds or Web Services, to JSON for Ajax requests,
-there are plenty of different formats to choose from. Supporting those formats
-in Symfony2 is straightforward. Tweak the route by adding a default value of
-``xml`` for the ``_format`` variable::
+Dandanes bi morale biti spletne aplikacije zmožne dostaviti z več kot
+samo HTML stranmi. Od XML za RSS feeds ali spletne storitve, do JSON za
+Ajax zahtevke, je na izbiro veliko različnih oblik. Podpora teh oblik
+v Symfony2 je enostavna. Uredite pot z dodajanjem privzetih vrednosti za
+``xml`` za ``_format`` spremenljivko::
 
     // src/Acme/DemoBundle/Controller/DemoController.php
     use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -28,8 +28,8 @@ in Symfony2 is straightforward. Tweak the route by adding a default value of
         return array('name' => $name);
     }
 
-By using the request format (as defined by the ``_format`` value), Symfony2
-automatically selects the right template, here ``hello.xml.twig``:
+Z uporabo oblike zahtevka (kot je definiran s ``_format`` vrednostjo), Symfony2
+tu avtomatsko izbere pravo predlogo ``hello.xml.twig``:
 
 .. code-block:: xml+php
 
@@ -38,10 +38,10 @@ automatically selects the right template, here ``hello.xml.twig``:
         <name>{{ name }}</name>
     </hello>
 
-That's all there is to it. For standard formats, Symfony2 will also
-automatically choose the best ``Content-Type`` header for the response. If
-you want to support different formats for a single action, use the ``{_format}``
-placeholder in the route path instead::
+To je vse okrog tega. Za standardne oblike, Symfony2 tudi
+avtomatsko izbere najboljšo ``Content-Type`` glavo za odziv. Če
+želite podpirati različne oblike za eno akcijo, raje uporabite ``{_format}``
+lokacijo v usmerni poti::
 
     // src/Acme/DemoBundle/Controller/DemoController.php
     use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -58,39 +58,37 @@ placeholder in the route path instead::
         return array('name' => $name);
     }
 
-The controller will now be called for URLs like ``/demo/hello/Fabien.xml`` or
+Krmilnik bo sedaj klican za URL-je kot je ``/demo/hello/Fabien.xml`` ali
 ``/demo/hello/Fabien.json``.
 
-The ``requirements`` entry defines regular expressions that placeholders must
-match. In this example, if you try to request the ``/demo/hello/Fabien.js``
-resource, you will get a 404 HTTP error, as it does not match the ``_format``
-requirement.
+Vnos ``requirements`` definira običajne izraze, s katerimi se mora lokacija
+ujemati. V tem primeru, če poskusite zahtevati ``/demo/hello/Fabien.js``
+vir, boste dobili 404 HTTP napako, saj se ne ujema z zahtevo ``_format``.
 
-Redirecting and Forwarding
---------------------------
+Preusmerjanje in posredovanje
+-----------------------------
 
-If you want to redirect the user to another page, use the ``redirect()``
-method::
+Če želite preusmeriti uporabnika na drugo stran, uporabite metodo ``redirect()``::
 
     return $this->redirect($this->generateUrl('_demo_hello', array('name' => 'Lucas')));
 
-The ``generateUrl()`` is the same method as the ``path()`` function used in the
-templates. It takes the route name and an array of parameters as arguments and
-returns the associated friendly URL.
+Metoda ``generateUrl()`` je ista metoda kot je uporabljena funkcija ``path()`` v
+predlogah. Potrebuje ime poti in polje parametrov kot argumente in vrne
+povezan prijazen URL.
 
-You can also easily forward the action to another one with the ``forward()``
-method. Internally, Symfony makes a "sub-request", and returns the ``Response``
-object from that sub-request::
+Lahko tudi enostavno posredujete akcijo k drugi z metodo ``forward()``.
+Interno, Symfony naredi "pod-zahtevek" in vrne objekt ``Response``
+iz tega pod-zahtevka::
 
     $response = $this->forward('AcmeDemoBundle:Hello:fancy', array('name' => $name, 'color' => 'green'));
 
     // ... do something with the response or return it directly
 
-Getting information from the Request
-------------------------------------
+Pridobitev informacij iz zahtevka
+---------------------------------
 
-Besides the values of the routing placeholders, the controller also has access
-to the ``Request`` object::
+Poleg vrednosti poti lokacij, ima krmilnik tudi dostop
+do objekta ``Request``::
 
     $request = $this->getRequest();
 
@@ -102,8 +100,8 @@ to the ``Request`` object::
 
     $request->request->get('page'); // get a $_POST parameter
 
-In a template, you can also access the ``Request`` object via the
-``app.request`` variable:
+V predlogi lahko dostopate do objekta ``Request`` tudi preko
+``app.request`` spremenljivke:
 
 .. code-block:: html+jinja
 
@@ -111,16 +109,16 @@ In a template, you can also access the ``Request`` object via the
 
     {{ app.request.parameter('page') }}
 
-Persisting Data in the Session
-------------------------------
+Pridobitev podatkov v sejo
+--------------------------
 
-Even if the HTTP protocol is stateless, Symfony2 provides a nice session object
-that represents the client (be it a real person using a browser, a bot, or a
-web service). Between two requests, Symfony2 stores the attributes in a cookie
-by using native PHP sessions.
+Tudi če je HTTP protokol brez stanja, Symfony2 ponuja lep objekt za seje,
+ki predstavlja klienta (ali pravega uporabnika z brskalnikom, bot-a ali
+spletni servis). Med dvema zahtevkoma, Symfony2 shranjuje atribute v piškotek
+z uporabo prvotnih PHP sej.
 
-Storing and retrieving information from the session can be easily achieved
-from any controller::
+Shranjevanje in branje informacij iz seje je enostavno dosegljivo iz
+kateregakoli krmilnika::
 
     $session = $this->getRequest()->getSession();
 
@@ -133,8 +131,7 @@ from any controller::
     // use a default value if the key doesn't exist
     $filters = $session->get('filters', array());
 
-You can also store small messages that will only be available for the very
-next request::
+Lahko tudi shranite majhna sporočila, ki bodo na voljo samo za naslednji zahtevek::
 
     // store a message for the very next request (in a controller)
     $session->getFlashBag()->add('notice', 'Congratulations, your action succeeded!');
@@ -145,16 +142,16 @@ next request::
         <div>{{ flashMessage }}</div>
     {% endfor %}
 
-This is useful when you need to set a success message before redirecting
-the user to another page (which will then show the message). Please note that
-when you use has() instead of get(), the flash message will not be cleared and
-thus remains available during the following requests.
+To je uporabno, ko morate nastaviti uspešno sporočilo pred preusmeritvijo
+uporabnika na drugo stran (kar bo potem prikazalo sporočilo). Prosimo, pomnite,
+da ko uporabite has() namesto get(), flash sporočilo ne bo razjasnjeno in
+zato ostane na voljo med naslednjim zahtevkom.
 
-Securing Resources
-------------------
+Varnost virov
+-------------
 
-The Symfony Standard Edition comes with a simple security configuration that
-fits most common needs:
+Symfony standardna izdaja prihaja z enostavno varnostno nastavitvijo, ki
+ustreza najpogostejšim potrebam:
 
 .. code-block:: yaml
 
@@ -192,36 +189,36 @@ fits most common needs:
                     path:   /demo/secured/logout
                     target: /demo/
 
-This configuration requires users to log in for any URL starting with
-``/demo/secured/`` and defines two valid users: ``user`` and ``admin``.
-Moreover, the ``admin`` user has a ``ROLE_ADMIN`` role, which includes the
-``ROLE_USER`` role as well (see the ``role_hierarchy`` setting).
+Ta nastavitev zahteva, da se uporabniki prijavijo za katerikoli URL,
+ki se prične z ``/demo/secured`` in definira dva veljavna uporabnika:
+``user`` in ``admin``. Še več, ``admin`` uporabnik ima vlogo ``ROLE_ADMIN``,
+ki vključuje tudi vlogo ``ROLE_USER`` (glejte ``role_hierarchy`` nastavitev).
 
 .. tip::
 
-    For readability, passwords are stored in clear text in this simple
-    configuration, but you can use any hashing algorithm by tweaking the
-    ``encoders`` section.
+    Za bralnost so gesla shranjena v jasnem tekstu v tej enostavni nastavitvi,
+    vendar lahko uporabite katerikoli zgoščevalni algoritem z urejanjem sekcije
+    ``encoders``.
 
-Going to the ``http://localhost/app_dev.php/demo/secured/hello``
-URL will automatically redirect you to the login form because this resource is
-protected by a ``firewall``.
+Obisk URL-ja ``http://localhost/app_dev.php/demo/secured/hello``
+vas bo avtomatsko preusmeril na prijavni obrazec, ker je ta vir varovan s pomočjo
+``požarnega zidu``.
 
 .. note::
 
-    The Symfony2 security layer is very flexible and comes with many different
-    user providers (like one for the Doctrine ORM) and authentication providers
-    (like HTTP basic, HTTP digest, or X509 certificates). Read the
-    ":doc:`/book/security`" chapter of the book for more information
-    on how to use and configure them.
+    Symfony2 varnostna plast je zelo fleksibilna in pride z mnogimi različnimi
+    uporabniškimi ponudniki (kot je za Doctrine ORM) in ponudniki preverjanja
+    pristnosti (kot so osnovni HTTP, HTTP presnova, ali X509 certifikati). Preberite
+    ":doc:`/book/security`" poglavje knjige za več informacij, kako jih uporabiti
+    in nastaviti.
 
-Caching Resources
+Viri predpomnenja
 -----------------
 
-As soon as your website starts to generate more traffic, you will want to
-avoid generating the same resource again and again. Symfony2 uses HTTP cache
-headers to manage resources cache. For simple caching strategies, use the
-convenient ``@Cache()`` annotation::
+Takoj ko vaša spletna stran prične generirati več prometa, si boste želeli
+izogniti generiranju istega vira znova in znova. Symfony2 uporablja glave HTTP
+predpomnilnika za upravljanje virov predpomnenja. Za enostavne strategije predpomnenja
+uporabite uporabno anotacijo ``@Cache()``::
 
     use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
     use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -237,25 +234,26 @@ convenient ``@Cache()`` annotation::
         return array('name' => $name);
     }
 
-In this example, the resource will be cached for a day. But you can also use
-validation instead of expiration or a combination of both if that fits your
-needs better.
+V tem primeru bo vir predpomnjen za ena dan. Vendar lahko tudi uporabite
+veljavnost namesto poteka ali kombinacijo obeh, če to boljše zadosti vašim
+potrebam.
 
-Resource caching is managed by the Symfony2 built-in reverse proxy. But because
-caching is managed using regular HTTP cache headers, you can replace the
-built-in reverse proxy with Varnish or Squid and easily scale your application.
+Viri predpomnenja so upravljani s Symfony2 vgrajenim povratnim proxy-jem. Vendar
+ker je predpomnenje upravljano z uporabo običajnih glav HTTP predpomnilnika, lahko
+zamenjate vgrajeni proxy z Varnish-em ali Squid-om in enostavno umerite vašo
+aplikacijo.
 
 .. note::
 
-    But what if you cannot cache whole pages? Symfony2 still has the solution
-    via Edge Side Includes (ESI), which are supported natively. Learn more by
-    reading the ":doc:`/book/http_cache`" chapter of the book.
+    Vendar kaj če ne morete predpomniti celotne strani? Symfony2 ima še vedno
+    rešitev preko Edge Side Includes (ESI), ki je izvorno podprt. Naučite se več
+    v ":doc:`/book/http_cache`" poglavju knjige.
 
-Final Thoughts
---------------
+Zaključne misli
+---------------
 
-That's all there is to it, and I'm not even sure you'll have spent the full
-10 minutes. You were briefly introduced to bundles in the first part, and all the
-features you've learned about so far are part of the core framework bundle.
-But thanks to bundles, everything in Symfony2 can be extended or replaced.
-That's the topic of the :doc:`next part of this tutorial<the_architecture>`.
+To je vse, kar se tega tiče in nisem niti prepričan, da ste porabili celotnih
+10 minut. Bili ste na hitro seznanjeni s paketi v prvem delu in vse lastnosti,
+o katerih ste se naučili do sedaj, so del paketov jedra ogrodja.
+Vendar zahvaljujoč paketov, je vse v Symfony2 možno razširiti in zamenjati.
+To je tema :doc:`naslednjega poglavja tega vodiča<the_architecture>`.
