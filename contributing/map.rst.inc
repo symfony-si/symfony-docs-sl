@@ -1,24 +1,24 @@
-* **Code**
+* **Koda**
 
-  * :doc:`Bugs </contributing/code/bugs>`
-  * :doc:`Patches </contributing/code/patches>`
-  * :doc:`Security </contributing/code/security>`
-  * :doc:`Tests </contributing/code/tests>`
-  * :doc:`Coding Standards </contributing/code/standards>`
-  * :doc:`Code Conventions </contributing/code/conventions>`
+  * :doc:`Hrošči </contributing/code/bugs>`
+  * :doc:`Popravki </contributing/code/patches>`
+  * :doc:`Varnost </contributing/code/security>`
+  * :doc:`Testi </contributing/code/tests>`
+  * :doc:`Kodni standardi </contributing/code/standards>`
+  * :doc:`Konvencije kode </contributing/code/conventions>`
   * :doc:`Git </contributing/code/git>`
-  * :doc:`License </contributing/code/license>`
+  * :doc:`Licenca </contributing/code/license>`
 
-* **Documentation**
+* **Dokumentacija**
 
-  * :doc:`Overview </contributing/documentation/overview>`
+  * :doc:`Pregled </contributing/documentation/overview>`
   * :doc:`Format </contributing/documentation/format>`
-  * :doc:`Documentation Standards </contributing/documentation/standards>`
-  * :doc:`Translations </contributing/documentation/translations>`
-  * :doc:`License </contributing/documentation/license>`
+  * :doc:`Standardi dokumentacije </contributing/documentation/standards>`
+  * :doc:`Prevodi </contributing/documentation/translations>`
+  * :doc:`Licenca </contributing/documentation/license>`
 
-* **Community**
+* **Skupnost**
 
-  * :doc:`Release Process </contributing/community/releases>`
-  * :doc:`IRC Meetings </contributing/community/irc>`
-  * :doc:`Other Resources </contributing/community/other>`
+  * :doc:`Proces izdaj </contributing/community/releases>`
+  * :doc:`IRC sestanki </contributing/community/irc>`
+  * :doc:`Ostali viri </contributing/community/other>`

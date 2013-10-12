@@ -1,50 +1,49 @@
-Symfony2 Documentation License
+Symfony2 licenca dokumentacije
 ==============================
 
-The Symfony2 documentation is licensed under a Creative Commons
-Attribution-Share Alike 3.0 Unported `License`_.
+Symfony2 dokumentacija je licencirana pod Creative Commons
+Attribution-Share Alike 3.0 Unported `licenco`_
 
-**You are free:**
+**Prosto lahko:**
 
-* to *Share* — to copy, distribute and transmit the work;
+* *Delite* — kopirate, distribuirate in posredujete delo;
 
-* to *Remix* — to adapt the work.
+* *Predelate* — adaptirate delo.
 
-**Under the following conditions:**
+**Pod sledečimi pogoji:**
 
-* *Attribution* — You must attribute the work in the manner specified by
-  the author or licensor (but not in any way that suggests that they
-  endorse you or your use of the work);
+* *Pripisovanje* — Morate pripisati delo na način specificiran s strani
+  avtorja ali licencodajalca (vendar ne v kateremkoli primeru, ki sugestira
+  vas ali vašo uporabo dela);
 
-* *Share Alike* — If you alter, transform, or build upon this work, you
-  may distribute the resulting work only under the same or similar license
-  to this one.
+* *Enako deljenje* — Če spremenite, preoblikujete ali gradite na tem delu,
+  lahko distribuirate izhajajoče delo samo pod enako ali podobno licenco
+  tej.
 
-**With the understanding that:**
+**Z razumevanjem, da:**
 
-* *Waiver* — Any of the above conditions can be waived if you get
-  permission from the copyright holder;
+* *Opuščenje* — Katerikoli izmed zgornjih pogojev so lahko opuščeni,
+  če dobite dovoljenje od lastnika avtorskih pravic;
 
-* *Public Domain* — Where the work or any of its elements is in the public
-  domain under applicable law, that status is in no way affected by the
-  license;
+* *Javna domena* — Kjer je delo ali katerikoli njegovih elementov v javni
+  domeni pod uporabljenim zakonom, da status ni kakorkoli prizadet s strani
+  licence;
 
-* *Other Rights* — In no way are any of the following rights affected by the
-  license:
+* *Ostale pravice* — V nobenem primeru ni katerokoli sledečih pravic vplivano
+  s strani licence:
 
-    * Your fair dealing or fair use rights, or other applicable copyright
-      exceptions and limitations;
+    * Vaše pošteno ravnanje ali pravična uporaba pravic ali katerekoli uporabljenih
+      izjem in omejitev avtorskih pravic;
 
-    * The author's moral rights;
+    * Avtorjeve moralne pravice;
 
-    * Rights other persons may have either in the work itself or in how
-      the work is used, such as publicity or privacy rights.
+    * Pravice ostalih oseb jih imajo lahko ali v delu samem ali
+      kako je delo uporabljeno, kot je objava ali pravice do zasebnosti.
 
-* *Notice* — For any reuse or distribution, you must make clear to others
-  the license terms of this work. The best way to do this is with a link
-  to this web page.
+* *Opazka* — Za kakršnokoli distribuiranje ali ponovno uporabo, morate ostalim jasno
+  navesti pogoje licence tega dela. Najboljša pot za to je s povezavo na to stran.
 
-This is a human-readable summary of the `Legal Code (the full license)`_.
+To je človeku-bralen povzetek `Kodnega zakonika (celotna licenca)`_.
 
-.. _License: http://creativecommons.org/licenses/by-sa/3.0/
-.. _Legal Code (the full license): http://creativecommons.org/licenses/by-sa/3.0/legalcode
+.. _licenco: http://creativecommons.org/licenses/by-sa/3.0/
+.. _Kodnega zakonika (celotna licenca): http://creativecommons.org/licenses/by-sa/3.0/legalcode

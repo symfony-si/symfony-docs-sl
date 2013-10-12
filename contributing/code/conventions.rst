@@ -1,17 +1,17 @@
-Conventions
-===========
+Konvencije
+==========
 
-The :doc:`standards` document describes the coding standards for the Symfony2
-projects and the internal and third-party bundles. This document describes
-coding standards and conventions used in the core framework to make it more
-consistent and predictable. You are encouraged to follow them in your own
-code, but you don't need to.
+Dokument doc:`standards` opisuje kodne standarde za Symfony2
+projekte in interne in tretje osebne pakete. Ta dokument opisuje
+kodne standarde in konvencije uporabljene v jedru ogrodja, da se ga naredi
+bolj konsistentnega in predvidljivega. Spodbujeni ste, da jim sledite v vaši
+lastni kodi, vendar ni vam pa obvezno.
 
-Method Names
-------------
+Imena metod
+-----------
 
-When an object has a "main" many relation with related "things"
-(objects, parameters, ...), the method names are normalized:
+Ko ima objekt "glavne" mnoge relacije s povezanimi "stvarmi"
+(objekti, parametri, ...), so imena metod normalizirana:
 
   * ``get()``
   * ``set()``
@@ -26,22 +26,22 @@ When an object has a "main" many relation with related "things"
   * ``count()``
   * ``keys()``
 
-The usage of these methods are only allowed when it is clear that there
-is a main relation:
+Uporaba teh metod je samo dovoljena, ko je jasno, da gre za glavno
+relacijo:
 
-* a ``CookieJar`` has many ``Cookie`` objects;
+* ``CookieJar`` ima (has) mnogo  ``Cookie`` objektov;
 
-* a Service ``Container`` has many services and many parameters (as services
-  is the main relation, the naming convention is used for this relation);
+* Service ``Container`` ima mnogo storitev in mnogo parametrov (kot storitve
+  v glavni relaciji, konvencije poimenovanja so uporabljene za to relacijo);
 
-* a Console ``Input`` has many arguments and many options. There is no "main"
-  relation, and so the naming convention does not apply.
+* Console ``Input`` ima mnogo argumentov in mnogo opcij. Ne obstaja "glavne"
+  relacije in konvencije poimenovanja ne veljajo.
 
-For many relations where the convention does not apply, the following methods
-must be used instead (where ``XXX`` is the name of the related thing):
+Za mnogo relacij, kjer konvencije ne veljajo, morajo biti uporabljene
+sledeče metode namesto tega (kjer je ``XXX`` ime povezane stvari):
 
 +----------------+-------------------+
-| Main Relation  | Other Relations   |
+| Glavna relacija| Ostale relacije   |
 +================+===================+
 | ``get()``      | ``getXXX()``      |
 +----------------+-------------------+
@@ -72,36 +72,36 @@ must be used instead (where ``XXX`` is the name of the related thing):
 
 .. note::
 
-    While "setXXX" and "replaceXXX" are very similar, there is one notable
-    difference: "setXXX" may replace, or add new elements to the relation.
-    "replaceXXX", on the other hand, cannot add new elements. If an unrecognized
-    key as passed to "replaceXXX" it must throw an exception.
+    Medtem ko sta "setXXX" in "replaceXXX" zelo podobna, je ena znana
+    razlika: "setXXX" lahko zamenja, ali doda nove elemente relaciji.
+    "replaceXXX" po drugi strani ne more dodati novih elementov. Če je
+    podan "replaceXXX" neznani ključ mora vrniti izjemno (exception).
 
 .. _contributing-code-conventions-deprecations:
 
-Deprecations
-------------
+Opuščanja
+---------
 
-From time to time, some classes and/or methods are deprecated in the
-framework; that happens when a feature implementation cannot be changed
-because of backward compatibility issues, but we still want to propose a
-"better" alternative. In that case, the old implementation can simply be
-**deprecated**.
+Občasno so nekateri razredi in/ali metode v ogrodju opuščene;
+to se zgodi, ko izvedbe lastnosti ni mogoče spremeniti zaradi
+težav združljivosti za nazaj, vendar še vedno hočemo predlagati
+"boljšo" alternativo. V tem primeru je lahko stara izvedba enostavno
+**opuščena**.
 
-A feature is marked as deprecated by adding a ``@deprecated`` phpdoc to
-relevant classes, methods, properties, ...::
+Lastnost je označena kot opuščena z dodajanje ``@deprecated`` phpdoc
+v ustreznih razredih, metodah, lastnostih, ...::
 
     /**
      * @deprecated Deprecated since version 2.X, to be removed in 2.Y. Use XXX instead.
      */
 
-The deprecation message should indicate the version when the class/method was
-deprecated, the version when it will be removed, and whenever possible, how
-the feature was replaced.
+Opuščeno sporočilo bi moralo navajati verzijo, ko je razred/metoda
+opuščena, verzijo ko bo odstranjena in kadarkoli možno, kako je bila
+lastnost zamenjana.
 
-A PHP ``E_USER_DEPRECATED`` error must also be triggered to help people with
-the migration starting one or two minor versions before the version where the
-feature will be removed (depending on the criticality of the removal)::
+PHP ``E_USER_DEPRECATED`` napaka mora biti tudi izvedena, da pomaga uporabnikom
+z migracijo in se pričeti eno ali dve manjši verziji pred verzijo, kjer bo
+lastnost odstranjena (odvisno od kritičnosti odstranitve)::
 
     trigger_error(
         'XXX() is deprecated since version 2.X and will be removed in 2.Y. Use XXX instead.',

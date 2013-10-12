@@ -1,5 +1,5 @@
-Contributing Code
-=================
+Prispevanje kode
+================
 
 .. toctree::
     :maxdepth: 2

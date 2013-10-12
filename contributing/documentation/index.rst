@@ -1,5 +1,5 @@
-Contributing Documentation
-==========================
+Prispevanje dokumentacije
+=========================
 
 .. toctree::
     :maxdepth: 2

@@ -1,41 +1,40 @@
 Git
 ===
 
-This document explains some conventions and specificities in the way we manage
-the Symfony code with Git.
+Ta dokument razlaga nekatere konvencije in specifikacije na način, s katerim
+upravljamo Symfony kodo z Git-om.
 
-Pull Requests
--------------
+Zahtevki potegov
+----------------
 
-Whenever a pull request is merged, all the information contained in the pull
-request (including comments) is saved in the repository.
+Karadkoli je zahtevek potega (pull request) združen, vse informacije, ki so vsebovanje
+v zahtevku (tudi komentarji) so shranjeni v repozitorij.
 
-You can easily spot pull request merges as the commit message always follows
-this pattern:
+Lahko enostavno opazite združitev zahtevka potega, ko poslano sporočilo vedno sledi
+temu vzorcu:
 
 .. code-block:: text
 
     merged branch USER_NAME/BRANCH_NAME (PR #1111)
 
-The PR reference allows you to have a look at the original pull request on
-Github: https://github.com/symfony/symfony/pull/1111. But all the information
-you can get on Github is also available from the repository itself.
+PR referenca vam omogoča ogled originalnega zahtevka poteka na
+Github-u: https://github.com/symfony/symfony/pull/1111. Vendar vse informacije,
+ki jih lahko dobite na GitHub-u so tudi na voljo iz samega repozitorija.
 
-The merge commit message contains the original message from the author of the
-changes. Often, this can help understand what the changes were about and the
-reasoning behind the changes.
+Združitveno sporočilo vsebuje originalno sporočilo od avtorja spremembe.
+Pogosto to lahko pomaga razumeti, za kaj je šlo pri spremembah in razlog
+za spremembami.
 
-Moreover, the full discussion that might have occurred back then is also
-stored as a Git note (before March 22 2013, the discussion was part of the
-main merge commit message). To get access to these notes, add this line to
-your ``.git/config`` file:
+Še več, celotna diskusija, ki se je zgodila zadaj je tudi shranjena kot
+Git opomba (pred 22. marcem 2013 je bila diskusija del glavnega poslanega sporočila).
+Za pridobitev teh opomb, dodajte to vrstico v vašo ``.git/config`` datoteko:
 
 .. code-block:: ini
 
     fetch = +refs/notes/*:refs/notes/*
 
-After a fetch, getting the Github discussion for a commit is then a matter of
-adding ``--show-notes=github-comments`` to the ``git show`` command:
+Po git pridobitvi (fetch) je dobiti GitHub diskusijo za pošiljanje (commit) samo stvar
+dodajanja ``--show-notes=github-comments`` pri ``git show`` ukazu:
 
 .. code-block:: bash
 

@@ -1,37 +1,37 @@
-Reporting a Bug
-===============
+Poročanje hrošča
+================
 
-Whenever you find a bug in Symfony2, we kindly ask you to report it. It helps
-us make a better Symfony2.
+Kadarkoli najdete hrošča v Symfony2, vas prijazno prosimo, če ga prijavite. Pomaga
+nam narediti boljši Symfony2.
 
 .. caution::
 
-    If you think you've found a security issue, please use the special
-    :doc:`procedure <security>` instead.
+    Če mislite, da ste našli varnostno težavo, prosimo uporabite poseben
+    :doc:`postopeke <security>` namesto tega.
 
-Before submitting a bug:
+Pred pošiljanjem hrošča:
 
-* Double-check the official `documentation`_ to see if you're not misusing the
-  framework;
+* Dvakrat preverite uradno `dokumentacijo`_, da vidite, če napačno uporabljate
+  ogrodje;
 
-* Ask for assistance on the `users mailing-list`_, the `forum`_, or on the
-  #symfony `IRC channel`_ if you're not sure if your issue is really a bug.
+* Vprašajte za pomoč na `uporabniškem dopisnem seznamu`_, na `forumu`_, ali na
+  #symfony `IRC kanalu`_, če niste prepričani, da vaša težava ni v resnici hrošč.
 
-If your problem definitely looks like a bug, report it using the official bug
-`tracker`_ and follow some basic rules:
+Če vaš problem zagotovo zgleda kot hrošč, ga sporočite z uporabo uradnega
+`sledilnika`_ hroščev in sledite nekaterim osnovnim pravilom:
 
-* Use the title field to clearly describe the issue;
+* Uporabite polje naslov, da jasno opišete težavo;
 
-* Describe the steps needed to reproduce the bug with short code examples
-  (providing a unit test that illustrates the bug is best);
+* Opišite korake potrebne za reproducirati hrošča s kratkimi primeri kode
+  (nudenje testa enot, ki ilustrira hrošča je najboljše);
 
-* Give as much detail as possible about your environment (OS, PHP version,
-  Symfony version, enabled extensions, ...);
+* Podajte čim več možnih podrobnosti o vašem okolju (OS, PHP verzija,
+  Symfony verzija, omogočene razširitve, ...);
 
-* *(optional)* Attach a :doc:`patch <patches>`.
+* *(opcijsko)* Pripnite :doc:`popravek <patches>`.
 
-.. _documentation: http://symfony.com/doc/current/
-.. _users mailing-list: http://groups.google.com/group/symfony-users
-.. _forum: http://forum.symfony-project.org/
-.. _IRC channel: irc://irc.freenode.net/symfony
-.. _tracker: https://github.com/symfony/symfony/issues
+.. _dokumentacijo: http://symfony.com/doc/current/
+.. _uporabniškem dopisnem seznamu: http://groups.google.com/group/symfony-users
+.. _forumu: http://forum.symfony-project.org/
+.. _IRC kanalu: irc://irc.freenode.net/symfony
+.. _sledilnika: https://github.com/symfony/symfony/issues
