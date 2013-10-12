@@ -1,20 +1,20 @@
-Translations
-============
+Prevajanje
+==========
 
-The Symfony2 documentation is written in English and many people are involved
-in the translation process.
+Symfony2 dokumentacija je napisana v angleščini in mnogi ljudje so vključeni
+v proces prevajanja.
 
-Contributing
-------------
+Prispevanje
+-----------
 
-First, become familiar with the :doc:`markup language <format>` used by the
-documentation.
+Najprej se seznanite z :doc:`označevalnim jezikom <format>` uporabljenim
+za dokumentacijo.
 
-Then, subscribe to the `Symfony docs mailing-list`_, as collaboration happens
-there.
+Nato se prijavite na `dopisni seznam Symfony dokumentacije`_, saj se vso sodelovanje
+dogaja tam.
 
-Finally, find the *master* repository for the language you want to contribute
-for. Here is the list of the official *master* repositories:
+Končno najdite *master* repozitorij za jezik h kateremu želite prispevati.
+Tu je seznam uradnih *master* repozitorijev:
 
 * *English*:  https://github.com/symfony/symfony-docs
 * *French*:   https://github.com/symfony-fr/symfony-docs-fr
@@ -26,62 +26,64 @@ for. Here is the list of the official *master* repositories:
 
 .. note::
 
-    If you want to contribute translations for a new language, read the
-    :ref:`dedicated section <translations-adding-a-new-language>`.
+    Če želite prispevati prevode za novi jezik, preberite
+    :ref:`namensko sekcijo <translations-adding-a-new-language>`.
 
-Joining the Translation Team
-----------------------------
+Pridružitev prevajalski
+-----------------------
 
-If you want to help translating some documents for your language or fix some
-bugs, consider joining us; it's a very easy process:
+Če želite pomagati prevesti nekaj dokumentov za vaš jezik ali popraviti nekaj
+hroščev, premislite o pridružitvi; gre za zelo enostaven proces:
 
-* Introduce yourself on the `Symfony docs mailing-list`_;
-* *(optional)* Ask which documents you can work on;
-* Fork the *master* repository for your language (click the "Fork" button on
-  the GitHub page);
-* Translate some documents;
-* Ask for a pull request (click on the "Pull Request" from your page on
-  GitHub);
-* The team manager accepts your modifications and merges them into the master
-  repository;
-* The documentation website is updated every other night from the master
-  repository.
+* Predstavite se na `dopisnem seznamu Symfony dokumentacije`_;
+* *(opcijsko)* Vprašajte na katerih dokumentih lahko delate;
+* Kopirajte (fork) *master* repozitorij za vaš jezik (kliknite na "Fork" gumb na
+  GitHub strani);
+* Prevedite nekaj dokumentov;
+* Vprašajte za "pull request" (kliknite na "Pull Request" iz vaše strani na
+  GitHub-u);
+* Upravitelj ekipe sprejme vaše spremembe in jih združi v master
+  repozitorij;
+* Spletna stran dokumentacije je posodobljena vsako noč iz master
+  repozitorija.
 
 .. _translations-adding-a-new-language:
 
-Adding a new Language
----------------------
+Dodajanje novega jezika
+-----------------------
 
-This section gives some guidelines for starting the translation of the
-Symfony2 documentation for a new language.
+Ta sekcija vam ponuja nekaj smernic za začetek prevajanja
+Symfony2 dokumentacije za nov jezik.
 
-As starting a translation is a lot of work, talk about your plan on the
-`Symfony docs mailing-list`_ and try to find motivated people willing to help.
+Kot je pričetek prevajanja veliko dela, se pogovorite v vašem načrtu na
+`dopisnem seznamu Symfony dokumentacije`_ in poskusite najti motivirane ljudi,
+ki so vam pripravljeni pomagati.
 
-When the team is ready, nominate a team manager; he will be responsible for
-the *master* repository.
+Ko je ekipa pripravljena, določite upravitelja ekipe; on bo odgovoren za
+*master* repozitorij.
 
-Create the repository and copy the *English* documents.
+Izdelajte repozitorij in kopirajte *angleške* dokumente.
 
-The team can now start the translation process.
+Ekipa lahko sedaj prične s procesom prevajanja.
 
-When the team is confident that the repository is in a consistent and stable
-state (everything is translated, or non-translated documents have been removed
-from the toctrees -- files named ``index.rst`` and ``map.rst.inc``), the team
-manager can ask that the repository is added to the list of official *master*
-repositories by sending an email to Fabien (fabien at symfony.com).
+Ko je ekipa prepričana, da je repozitorij v konsistentnem in stabilnem
+stanju (vse je prevedeno, ali pa so bili ne-prevedeni dokumenti odstranjeni
+iz kazal -- datoteke poimenovane ``index.rst`` in ``map.rst.inc``), upravitelj
+ekipe lahko zaprosi, da je repozitorij dodan na seznam uradnih *master*
+repozitorijev s poslano e-pošto Fabien-u (fabien at symfony.com).
 
-Maintenance
+Vzdrževanje
 -----------
 
-Translation does not end when everything is translated. The documentation is a
-moving target (new documents are added, bugs are fixed, paragraphs are
-reorganized, ...). The translation team need to closely follow the English
-repository and apply changes to the translated documents as soon as possible.
+Prevajanje se ne konča, ko je vse prevedeno. Dokumentacija je premikajoča (
+dodajajo se novi dokumenti, popravljajo se hrošči, odstavki se reorganizirajo, ...).
+Ekipa za prevajanje mora dobro slediti angleškem repozitoriju in dodati
+spremembe prevedenim dokumentom kakor hitro je mogoče.
 
 .. caution::
 
-    Non maintained languages are removed from the official list of
-    repositories as obsolete documentation is dangerous.
+    Nevzdrževani jeziki so odstranjeni iz uradnega seznama repozitorijev
+    saj je zastarela dokumentacija nevarna.
 
-.. _Symfony docs mailing-list: http://groups.google.com/group/symfony-docs
+.. _dopisnem seznamu Symfony dokumentacije: http://groups.google.com/group/symfony-docs
+.. _dopisni seznam Symfony dokumentacije: http://groups.google.com/group/symfony-docs

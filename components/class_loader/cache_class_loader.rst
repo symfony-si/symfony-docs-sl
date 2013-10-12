@@ -5,29 +5,30 @@
     single: Class Loader; XcacheClassLoader
     single: XCache; XcacheClassLoader
     
-Cache a Class Loader
-====================
+Predpomnenje nalagalnika razredov
+=================================
 
-Introduction
-------------
+Uvod
+----
 
-Finding the file for a particular class can be an expensive task. Luckily,
-the Class Loader Component comes with two classes to cache the mapping
-from a class to its containing file. Both the :class:`Symfonfy\\Component\\ClassLoader\\ApcClassLoader`
-and the :class:`Symfony\\Component\\ClassLoader\\XcacheClassLoader` wrap
-around an object which implements a ``findFile()`` method to find the file
-for a class.
+Najti datoteko za določen razred je lahko zahtevno opravilo. Na srečo
+komponenta Class Loader prihaja z dvema razredoma za predpomnenje ujemanja
+iz razreda v njegovo vsebujočo datoteko.
+:class:`Symfonfy\\Component\\ClassLoader\\ApcClassLoader`
+in :class:`Symfony\\Component\\ClassLoader\\XcacheClassLoader` se ovijata
+okrog objekta, ki implementira metodo ``findFile()``, ki najde datoteko za
+razred.
 
 .. note::
 
-  Both the ``ApcClassLoader`` and the ``XcacheClassLoader`` can be used
-  to cache Composer's `autoloader`_.
+  Oba, ``ApcClassLoader`` in ``XcacheClassLoader`` sta lahko uporabljena
+  za predpomnenje Composer-jevega `autoloader-ja`_.
 
 ApcClassLoader
 --------------
 
-``ApcClassLoader`` wraps an existing class loader and caches calls to its
-``findFile()`` method using `APC`_::
+``ApcClassLoader`` ovija obstoječi nalagalnik razredov in predpomni klice k njegovi
+metodi ``findFile()`` z uporabo `APC`_::
 
     require_once '/path/to/src/Symfony/Component/ClassLoader/ApcClassLoader.php';
     
@@ -46,8 +47,8 @@ ApcClassLoader
 XcacheClassLoader
 -----------------
 
-``XcacheClassLoader`` uses `XCache`_ to cache a class loader. Registering
-it is straightforward::
+``XcacheClassLoader`` uporablja `XCache`_ za predpomnenje nalagalnika razredov. Registracija
+je enostavna::
 
     require_once '/path/to/src/Symfony/Component/ClassLoader/XcacheClassLoader.php';
     
@@ -64,5 +65,5 @@ it is straightforward::
     $loader->unregister();
 
 .. _APC:        http://php.net/manual/en/book.apc.php
-.. _autoloader: http://getcomposer.org/doc/01-basic-usage.md#autoloading
+.. _autoloader-ja: http://getcomposer.org/doc/01-basic-usage.md#autoloading
 .. _XCache:     http://xcache.lighttpd.net

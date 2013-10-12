@@ -1,26 +1,27 @@
 .. index::
    single: Config; Caching based on resources
 
-Caching based on resources
-==========================
+Predpomnenje osnovano na virih
+==============================
 
-When all configuration resources are loaded, you may want to process the configuration
-values and combine them all in one file. This file acts like a cache. Its
-contents don’t have to be regenerated every time the application runs – only
-when the configuration resources are modified.
+Ko so vsi viri nastavitev naloženi, morda želite sprocesirati nastavitvene
+vrednosti in jih vse kompinirati v eni datoteki. Ta datoteka se obnaša kot
+predpomnilnik. Njena vsebina ni nujno ponovno generirana vsakič, ko se aplikacija
+zažene - samo ko so viri nastavitev modificirani.
 
-For example, the Symfony Routing component allows you to load all routes,
-and then dump a URL matcher or a URL generator based on these routes. In
-this case, when one of the resources is modified (and you are working in a
-development environment), the generated file should be invalidated and regenerated.
-This can be accomplished by making use of the :class:`Symfony\\Component\\Config\\ConfigCache`
-class.
+Na primer, Symfony komponenta Routing vam omogoča, da naložite vse poti
+in nato izpustite URL ujemalnik ali URL generator na osnovi teh poti. V
+tem primeru, ko je en izmed virov spremenjen (in delate v razvojnem
+okolju) bi generirana datoteka morala biti razveljavljena in ponovno
+generirana. To je doseženo z ustvarjanjem uporabe razreda
+:class:`Symfony\\Component\\Config\\ConfigCache`.
 
-The example below shows you how to collect resources, then generate some code
-based on the resources that were loaded, and write this code to the cache. The
-cache also receives the collection of resources that were used for generating
-the code. By looking at the "last modified" timestamp of these resources,
-the cache can tell if it is still fresh or that its contents should be regenerated::
+Primer spodaj vam prikazuje, kako zbrati vire in nato generirati nekaj kode
+na osnovi virov, ki so naloženi in pisati to kodo predpomnilniku. Predpomnilnik
+tudi sprejme zbirko virov, ki so bili uporabljeni za generacijo kode.
+Če se pogleda "last modified" časovni žig teh virov, lahko predpomnilnik
+pove, če je še vedno sveže ali pa bi morale biti njegove vsebine ponovno
+generirane::
 
     use Symfony\Component\Config\ConfigCache;
     use Symfony\Component\Config\Resource\FileResource;
@@ -52,8 +53,8 @@ the cache can tell if it is still fresh or that its contents should be regenerat
     // you may want to require the cached code:
     require $cachePath;
 
-In debug mode, a ``.meta`` file will be created in the same directory as the
-cache file itself. This ``.meta`` file contains the serialized resources,
-whose timestamps are used to determine if the cache is still fresh. When not
-in debug mode, the cache is considered to be "fresh" as soon as it exists,
-and therefore no ``.meta`` file will be generated.
+V načinu razhroščevanja, ``.meta`` datoteka bo ustvarjena v istem direktoriju
+kot je sama datoteka predpomnenja. Ta ``meta`` datoteka vsebuje serializirane
+vire, katerih časovni žigi so uporabljeni za ugotovitev, če je predpomnilnik še
+vedno svež. Ko niste v načinu razhroščevanja, se predpomnilnik šteje za osveženega
+("fresh") kakor hitro obstaja in zato ``.meta`` datoteka ne bo ustvarjena.

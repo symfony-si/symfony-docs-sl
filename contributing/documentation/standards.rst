@@ -1,22 +1,22 @@
-Documentation Standards
+Standardi dokumentacije
 =======================
 
-In order to help the reader as much as possible and to create code examples that
-look and feel familiar, you should follow these standards.
+Da bi pomagali bralcu, kakor je mogoče in izdelati primere kode, ki
+izgledajo in dajejo občutek znanosti, bi morali slediti tem standardom.
 
 Sphinx
 ------
 
-* The following characters are choosen for different heading levels: level 1
-  is ``=``, level 2 ``-``, level 3 ``~``, level 4 ``.`` and level 5 ``"``;
-* Each line should break approximately after the first word that crosses the
-  72nd character (so most lines end up being 72-78 characters);
-* The ``::`` shorthand is *preferred* over ``.. code-block:: php`` to begin a PHP
-  code block (read `the Sphinx documentation`_ to see when you should use the
-  shorthand);
-* Inline hyperlinks are **not** used. Seperate the link and their target
-  definition, which you add on the bottom of the page;
-* You should use a form of *you* instead of *we*.
+* Sledeči znaki so izbrani za različne nivoje naslovov: nivo 1
+  je ``=``, nivo 2 ``-``, nivo 3 ``~``, nivo 4 ``.`` in nivo 5 ``"``;
+* Vsaka vrstica bi morala bit prelomljena po prvi besedi, ki prekorači
+  72-i znak (torej večina vrstic se konča pri 72-78 znaku);
+* Okrajšava ``::`` je *prednostna* nad ``.. code-block:: php`` za pričetek PHP
+  kodnega bloka (preberite `Sphinx dokumentacijo`_ da pogledate, kdaj bi morali uporabiti
+  okrajšavo);
+* Medvrstične hiperpovezave se **ne** uporablja. Ločena povezava in njena definicija
+  cilja, ki jo dodate na konec strani.
+* Morali bi uporabljati obliko *vi* namesto *mi*.
 
 Example
 ~~~~~~~
@@ -45,39 +45,39 @@ Example
 
     .. _`Symfony Docs`: http://symfony.com/doc/current/contributing/documentation/standards.html
 
-Code Examples
--------------
+Primeri kode
+------------
 
-* The code follows the :doc:`Symfony Coding Standards </contributing/code/standards>`
-  as well as the `Twig Coding Standards`_;
-* To avoid horizontal scrolling on code blocks, we prefer to break a line
-  correctly if it crosses the 85th character;
-* When you fold one or more lines of code, place ``...`` in a comment at the point
-  of the fold. These comments are: ``// ...`` (php), ``# ...`` (yaml/bash), ``{# ... #}``
+* Koda sledi :doc:`Symfony kodmin standardom </contributing/code/standards>`
+  kot tudi `Twig kodnim standardom`_;
+* Da se izognete horizontalnem pomikanju na blokih kode, raje prelomimo vrstico
+  pravilno, če preseže 85 znakov;
+* Ko zložite eno ali več vrstic kode, postavite ``...`` v komentar na točki
+  zlaganja. Te komentarji so: ``// ...`` (php), ``# ...`` (yaml/bash), ``{# ... #}``
   (twig), ``<!-- ... -->`` (xml/html), ``; ...`` (ini), ``...`` (text);
-* When you fold a part of a line, e.g. a variable value, put ``...`` (without comment)
-  at the place of the fold;
-* Description of the folded code: (optional)
-  If you fold several lines: the description of the fold can be placed after the ``...``
-  If you fold only part of a line: the description can be placed before the line;
-* If useful, a ``codeblock`` should begin with a comment containing the filename
-  of the file in the code block. Don't place a blank line after this comment,
-  unless the next line is also a comment;
-* You should put a ``$`` in front of every bash line.
+* Ko zlagate del vrstice, npr. vrednost spremenljivke, dodajte ``...`` (brez komentarja)
+  na mesto zlaganja;
+* Opis zložene kode: (opcijsko)
+  Če zložite nekaj vrstic: opis zlaganja je lahko postavljen za ``...``
+  Če zlagate samo del vrstice: opis je lahko postavljen pred vrstico;
+* Če je uporabno ``codeblock`` bi se moral začeti s komentarjem, ki vključuje ime
+  datoteke v bloku kode. Ne postavljajte prazne vrstice za tem komentarjem,
+  razen če je naslednja vrstica tudi komentar;
+* Morali bi postaviti ``$`` pred vsako konzolno vrstico.
 
-Formats
-~~~~~~~
+Oblike
+~~~~~~
 
-Configuration examples should show all supported formats using
-:ref:`configuration blocks <docs-configuration-blocks>`. The supported formats
-(and their orders) are:
+Primeri nastavitev bi morali prikazati vse podprte oblike z uporabo
+:ref:`nastavitveni bloki <docs-configuration-blocks>`. Podprte oblike
+(in njihov vrstni red) so:
 
-* **Configuration** (including services and routing): Yaml, Xml, Php
-* **Validation**: Yaml, Annotations, Xml, Php
-* **Doctrine Mapping**: Annotations, Yaml, Xml, Php
+* **Configuration** (vključujoč storitve in usmerjanje): Yaml, Xml, Php
+* **Validation**: Yaml, anotacije, Xml, Php
+* **Doctrine Mapping**: anotacije, Yaml, Xml, Php
 
-Example
-~~~~~~~
+Primer
+~~~~~~
 
 .. code-block:: php
 
@@ -101,8 +101,8 @@ Example
 
 .. caution::
 
-    In Yaml you should put a space after ``{`` and before ``}`` (e.g. ``{ _controller: ... }``),
-    but this should not be done in Twig (e.g.  ``{'hello' : 'value'}``).
+    V Yaml bi morali postaviti presledek za ``{`` in pred ``}`` (npr. ``{ _controller: ... }``),
+    vendar to ne bi smelo biti urejeno v Twig-u (npr.  ``{'hello' : 'value'}``).
 
-.. _`the Sphinx documentation`: http://sphinx-doc.org/rest.html#source-code
-.. _`Twig Coding Standards`: http://twig.sensiolabs.org/doc/coding_standards.html
+.. _`Sphinx dokumentacijo`: http://sphinx-doc.org/rest.html#source-code
+.. _`Twig kodnim standardom`: http://twig.sensiolabs.org/doc/coding_standards.html

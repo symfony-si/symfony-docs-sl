@@ -1,7 +1,7 @@
 .. index::
    pair: Twig; Configuration reference
 
-TwigBundle Configuration Reference
+Referenca nastavitev za TwigBundle
 ==================================
 
 .. configuration-block::
@@ -83,8 +83,8 @@ TwigBundle Configuration Reference
              'strict_variables'    => false,
         ));
 
-Configuration
--------------
+Nastavitve
+----------
 
 .. _config-twig-exception-controller:
 
@@ -93,11 +93,11 @@ exception_controller
 
 **type**: ``string`` **default**: ``twig.controller.exception:showAction``
 
-This is the controller that is activated after an exception is thrown anywhere
-in your application. The default controller
+To je krmilnik, ki je aktiviran, ko je vrnjena izjema kjerkoli
+v vaši aplikaiji. Privzeti krmilnik
 (:class:`Symfony\\Bundle\\TwigBundle\\Controller\\ExceptionController`)
-is what's responsible for rendering specific templates under different error
-conditions (see :doc:`/cookbook/controller/error_pages`). Modifying this
-option is advanced. If you need to customize an error page you should use
-the previous link. If you need to perform some behavior on an exception,
-you should add a listener to the ``kernel.exception`` event (see :ref:`dic-tags-kernel-event-listener`).
+je kar je odgovorno za izpisovanje določenih predlog pod različnimi pogoji
+napak (glejte :doc:`/cookbook/controller/error_pages`). Spreminjanje te
+opcije je napredno. Če potrebujete prilagoditi stran z napakami, bi morali
+uporabiti prejšnjo povezavo. Če potrebujete opraviti nekaj obnašanja izjeme,
+bi morali dodati t.i. "listener" v ``kernel.exception`` dogodek (glejte :ref:`dic-tags-kernel-event-listener`).

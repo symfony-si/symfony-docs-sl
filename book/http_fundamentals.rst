@@ -1,62 +1,60 @@
 .. index::
    single: Symfony2 Fundamentals
 
-Symfony2 and HTTP Fundamentals
-==============================
+Symfony2 in HTTP temelji
+========================
 
-Congratulations! By learning about Symfony2, you're well on your way towards
-being a more *productive*, *well-rounded* and *popular* web developer (actually,
-you're on your own for the last part). Symfony2 is built to get back to
-basics: to develop tools that let you develop faster and build more robust
-applications, while staying out of your way. Symfony is built on the best
-ideas from many technologies: the tools and concepts you're about to learn
-represent the efforts of thousands of people, over many years. In other words,
-you're not just learning "Symfony", you're learning the fundamentals of the
-web, development best practices, and how to use many amazing new PHP libraries,
-inside or independently of Symfony2. So, get ready.
+Čestitamo! Z učenjem o Symfony2 ste dobro na vaši poti, da postanete
+bolj *produktivni*, *dobro zastavljeni* in *popularni* spletni razvijalec (pravzaprav,
+ste na svojem za zadnji del). Symfony2 je zgrajen, da se vrnete k osnovam:
+razviti orodja, ki vam pomagajo razvijati hitreje in graditi bolj robustne
+aplikacije, medtem ko vam ni v napoto. Symfony je zgrajen na najboljših idejah
+iz mnogih tehnologij: orodja in koncepti, ki se jih boste naučili, predstavljajo
+prizadevanja tisočih ljudi skozi mnogo let. V drugih besedah, ne učite se samo
+"Symfony", učite se temelje spleta, najboljših razvojnih praks in kako uporabiti
+mnoge odlične PHP knjižnice znotraj ali neodvisno od Symfony2. Torej, pripravite se.
 
-True to the Symfony2 philosophy, this chapter begins by explaining the fundamental
-concept common to web development: HTTP. Regardless of your background or
-preferred programming language, this chapter is a **must-read** for everyone.
+Kot velja za Symfony2 filozofijo, se to poglavje pričenja z razlago temeljnih
+konceptov, ki so skupn spletnemu razvoju: HTTP. Ne glede na vaše ozadje ali prednostni
+programski jezik, to poglavje je **must-read** za vsakogar.
 
-HTTP is Simple
---------------
+HTTP je enostaven
+-----------------
 
-HTTP (Hypertext Transfer Protocol to the geeks) is a text language that allows
-two machines to communicate with each other. That's it! For example, when
-checking for the latest `xkcd`_ comic, the following (approximate) conversation
-takes place:
+HTTP (Hypertext Transfer Protocol za "geek-e") je tekstovni jezik, ki omogoča
+dvema napravama komunicirati druga z drugo. To je vse! Na primer, ko preverjate
+za zadnjim `xkcd`_ stripom, se zgodi sledeči (približen)  pogovor:
 
 .. image:: /images/http-xkcd.png
    :align: center
 
-And while the actual language used is a bit more formal, it's still dead-simple.
-HTTP is the term used to describe this simple text-based language. And no
-matter how you develop on the web, the goal of your server is *always* to
-understand simple text requests, and return simple text responses.
+In medtem ko je uporaba dejanski jezika bolj formalna, je še vedno zelo preprosto.
+HTTP je termin uporabljen za opis tega enostavnega tekstovno osnovanega jezika. In
+ne glede na to, kako gradite na spletu, cilj vašega strežnika je *vedno* razumevanje
+enostavnih tekstovnih zahtevkov in vračati enostavne tekstovne odzive.
 
-Symfony2 is built from the ground-up around that reality. Whether you realize
-it or not, HTTP is something you use everyday. With Symfony2, you'll learn
-how to master it.
+Symfony2 je zgrajen od tal do vrha okrog te realnosti. Ali če zavedate ali ne,
+HTTP je nekaj kar uporabljate vsak dan. S Symfony2, se boste naučili,
+kako ga obvladati.
 
 .. index::
    single: HTTP; Request-response paradigm
 
-Step1: The Client sends a Request
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Korak 1: Klient pošlje zahtevek
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Every conversation on the web starts with a *request*. The request is a text
-message created by a client (e.g. a browser, an iPhone app, etc) in a
-special format known as HTTP. The client sends that request to a server,
-and then waits for the response.
+Vsak pogovor na spletu se začne z *zahtevkom*. Zahtevek je tekstovno
+sporočilo narejeno s strani klienta (npr. brskalnik, iPhone aplikacija itd) v
+posebni obliki znani kot HTTP. Klient pošlje ta zahtevek strežniku in nato
+čaka na odziv.
 
-Take a look at the first part of the interaction (the request) between a
-browser and the xkcd web server:
+Poglejte si prvi del te interakcije (zahtevek) med brskalnikom in xkcd
+spletnim strežnikom:
 
 .. image:: /images/http-xkcd-request.png
    :align: center
 
-In HTTP-speak, this HTTP request would actually look something like this:
+V HTTP govoru, ta HTTP zahtevek bi dejansko izgledal nekako takole:
 
 .. code-block:: text
 
@@ -65,28 +63,28 @@ In HTTP-speak, this HTTP request would actually look something like this:
     Accept: text/html
     User-Agent: Mozilla/5.0 (Macintosh)
 
-This simple message communicates *everything* necessary about exactly which
-resource the client is requesting. The first line of an HTTP request is the
-most important and contains two things: the URI and the HTTP method.
+To enostavno sporočilo skomunicira *vse* potrebno o točem
+viru, ki ga klient zahteva. Prva vrstica HTTP zahtevka je najpomembnejša
+in vsebuje dve stvari: URI in HTTP metodo.
 
-The URI (e.g. ``/``, ``/contact``, etc) is the unique address or location
-that identifies the resource the client wants. The HTTP method (e.g. ``GET``)
-defines what you want to *do* with the resource. The HTTP methods are the
-*verbs* of the request and define the few common ways that you can act upon
-the resource:
+URI (npr. ``/``, ``/contact`` itd.) je unikaten naslov ali lokacija,
+ki identificira vir, ki ga klient želi. HTTP metoda (npr. ``GET``)
+definira, kaj žalite *narediti* z odzivom. HTTP metode so
+*glagoli* zahtevka in definirajo nekaj pogostih načinov, s katerimi lahko
+ravnate z virom:
 
 +----------+---------------------------------------+
-| *GET*    | Retrieve the resource from the server |
+| *GET*    | Pridobivanje vira iz strežnika        |
 +----------+---------------------------------------+
-| *POST*   | Create a resource on the server       |
+| *POST*   | Izdelava vira na strežniku            |
 +----------+---------------------------------------+
-| *PUT*    | Update the resource on the server     |
+| *PUT*    | Posodobitev vira na strežniku         |
 +----------+---------------------------------------+
-| *DELETE* | Delete the resource from the server   |
+| *DELETE* | Izbris vira iz strežnika              |
 +----------+---------------------------------------+
 
-With this in mind, you can imagine what an HTTP request might look like to
-delete a specific blog entry, for example:
+S tem v mislih, si lahko predstavljate, kako HTTP zahtevek lahko izgleda, kot
+je na primer brisanje določenega vnosa bloga:
 
 .. code-block:: text
 
@@ -94,31 +92,29 @@ delete a specific blog entry, for example:
 
 .. note::
 
-    There are actually nine HTTP methods defined by the HTTP specification,
-    but many of them are not widely used or supported. In reality, many modern
-    browsers don't support the ``PUT`` and ``DELETE`` methods.
+    Obstaja v bistvu devet HTTP metod, definiranih v HTTP specifikaciji,
+    vendar mnoge od njih niso širše uporabljene ali podprte. V realnosti
+    mnogi moderni brskalniki ne podpirajo ``PUT`` in ``DELETE`` metod.
 
-In addition to the first line, an HTTP request invariably contains other
-lines of information called request headers. The headers can supply a wide
-range of information such as the requested ``Host``, the response formats
-the client accepts (``Accept``) and the application the client is using to
-make the request (``User-Agent``). Many other headers exist and can be found
-on Wikipedia's `List of HTTP header fields`_ article.
+Kot dodatek prvi vrstici, HTTP zahtevek vedno vsebuje druge vrstice informacij
+imenovane glave zahtevka. Te glave lahko dobavljajo široko območje
+informacij kot je zahtevan ``Host``, oblike odziva, ki jih klient
+sprejema (``Accept``) in aplikacija, ki jo klient uporablja za izdelavo
+zahtevka (``User-Agent``). Obstajajo mnoge ostale glave in so lahko najdene na
+Wikipedi-jevem članku "`List of HTTP header fields`_".
 
-Step 2: The Server returns a Response
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Korak 2: Strežnik vrne odziv
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Once a server has received the request, it knows exactly which resource the
-client needs (via the URI) and what the client wants to do with that resource
-(via the method). For example, in the case of a GET request, the server
-prepares the resource and returns it in an HTTP response. Consider the response
-from the xkcd web server:
+Ko je strežnik prejel zahtevek, ve točno kateri vir klient potrebuje
+(preko URI) in kaj klient želi z njim narediti (preko metode). Na primer
+pri GET zahtevku, strežnik pripravi vir in vrne HTTP odziv. Premislite
+odziv iz xkcd spletnega strežnika:
 
 .. image:: /images/http-xkcd.png
    :align: center
 
-Translated into HTTP, the response sent back to the browser will look something
-like this:
+Prevedeno v HTTP, odziv poslan nazaj brskalniku bo izgledal nekako takole:
 
 .. code-block:: text
 
@@ -131,25 +127,24 @@ like this:
       <!-- ... HTML for the xkcd comic -->
     </html>
 
-The HTTP response contains the requested resource (the HTML content in this
-case), as well as other information about the response. The first line is
-especially important and contains the HTTP response status code (200 in this
-case). The status code communicates the overall outcome of the request back
-to the client. Was the request successful? Was there an error? Different
-status codes exist that indicate success, an error, or that the client needs
-to do something (e.g. redirect to another page). A full list can be found
-on Wikipedia's `List of HTTP status codes`_ article.
+HTTP odziv vsebuje zahtevani vir (HTML vsebino v tem primeru), kot tudi ostale
+informacije o tem odzivu. Prve vrstice so poseben pomembne in vsebujejo kodo HTTP
+odzivnega statusa (200 v tem primeru). Statusna koda skomunicira skupni rezultat
+zahtevka nazaj klientu. Je bil zahtevek uspešen? Je prišlo do napake? Obstajajo
+različne statusne kode, ki navajajo uspeh, napako, ali da klient potrebuje nekaj
+narediti (npr. preusmeriti na drugo stran). Celotni seznam je mogoče najti
+v Wikipedia-jevem članku `List of HTTP status codes`_.
 
-Like the request, an HTTP response contains additional pieces of information
-known as HTTP headers. For example, one important HTTP response header is
-``Content-Type``. The body of the same resource could be returned in multiple
-different formats like HTML, XML, or JSON and the ``Content-Type`` header uses
-Internet Media Types like ``text/html`` to tell the client which format is
-being returned. A list of common media types can be found on Wikipedia's
-`List of common media types`_ article.
+Kot zahtevek, HTTP odziv vsebuje dodatne dele informacij znanih kot
+HTTP glave. Na primer, ena pomembna HTTP odzivna glava je
+``Content-Type``. Telo istega vira se lahko vrne v večih različnih oblikah
+kot HTML, XML ali JSON in ``Content-Type`` glava uporablja
+"Internet Media Types" kot je ``text/html``, da sporoči klientu kateri format je
+bil vrnjen. Seznam pogostih vrst medijev je mogoče najti v Wikipedia-jevem članku
+`List of common media types`_.
 
-Many other headers exist, some of which are very powerful. For example, certain
-headers can be used to create a powerful caching system.
+Obstjajajo mnoge ostale glave, nekatere med njimi so zelo močne, na primer, določene
+glave se lahko uporablja za izdelavo močnih predpomnilnih sistemov.
 
 Requests, Responses and Web Development
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -1,11 +1,11 @@
 .. index::
    single: Configuration reference; WebProfiler
 
-WebProfilerBundle Configuration
+Nastavitve za WebProfilerBundle
 ===============================
 
-Full Default Configuration
---------------------------
+Celotne privzete nastavitve
+---------------------------
 
 .. configuration-block::
 

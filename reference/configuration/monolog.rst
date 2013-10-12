@@ -1,7 +1,7 @@
 .. index::
    pair: Monolog; Configuration reference
 
-Monolog Configuration Reference
+Referenca nastavitev za Monolog
 ===============================
 
 .. configuration-block::
@@ -91,6 +91,6 @@ Monolog Configuration Reference
 
 .. note::
 
-    When the profiler is enabled, a handler is added to store the logs'
-    messages in the profiler. The profiler uses the name "debug" so it
-    is reserved and cannot be used in the configuration.
+    Ko je profiler omogočen, je handler dodan za shranjevanje sporočil
+    dnevnikov v profiler. Profiler uporablja ime "debug", zato je
+    shranjen in ne more biti uporabljen v nastavitvah.

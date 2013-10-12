@@ -1,40 +1,41 @@
 .. index::
     single: Components; Class Loader
 
-The Class Loader Component
-==========================
+Komponenta Class Loader
+=======================
 
-    The Class Loader Component provides tools to autoload your classes and
-    cache their locations for performance.
+    Komponenta Class Loader Component zagotavlja orodja za avtomatsko nalaganje vaših razredov
+    in predpomni njihove lokacije za učinkovitost.
 
-Usage
------
+Uporaba
+-------
 
-Whenever you reference a class that has not been required or included yet,
-PHP uses the `autoloading mechanism`_ to delegate the loading of a file defining
-the class. Symfony2 provides two autoloaders, which are able to load your classes:
+Kadarkoli se sklicujete na razred, ki še ni bil zahtevan ali vključen,
+PHP uporablja `mehanizem avtomatskega nalaganja`_, da prenese nalaganje datoteke,
+ki definira razred. Symfony2 ponuja dva avtomatska nalagalnika, ki sta zmožna
+naložiti vaše razrede:
 
-* :doc:`/components/class_loader/class_loader`: loads classes that follow
-  the `PSR-0` class naming standard;
+* :doc:`/components/class_loader/class_loader`: naloži razrede, ki sledijo
+  `PSR-0` standardom poimenovanja razredov;
 
-* :doc:`/components/class_loader/map_class_loader`: loads classes using
-  a static map from class name to file path.
+* :doc:`/components/class_loader/map_class_loader`: naloži razrede z uporabo
+  statičnega zemljevida iz imena razreda v pot datoteke.
 
-Additionally, the Symfony Class Loader Component ships with a set of wrapper
-classes which can be used to add additional functionality on top of existing
-autoloaders:
+Dodatno, Symfony-jeva komponenta Class Loader prihaja s skupkom ovojnih
+razredov, ki so lahko uporabljeni za dodajanje dodatnih funkcionalnosti na
+vrhu obstoječih avtomatskih nalagalnikov (autoloaders):
 
 * :doc:`/components/class_loader/cache_class_loader`
 * :doc:`/components/class_loader/debug_class_loader`
 
-Installation
-------------
+Namestitev
+----------
 
-You can install the component in 2 different ways:
+Komponento lahko namestite na dva načina:
 
-* Use the official Git repository (https://github.com/symfony/ClassLoader);
-* :doc:`Install it via Composer </components/using_components>` (``symfony/class-loader``
-  on `Packagist`_).
+* Uporabite uradni Git repozitorij (https://github.com/symfony/ClassLoader);
+* :doc:`Namestite jo preko Composer-ja </components/using_components>` (``symfony/class-loader``
+  na `Packagist`_).
 
-.. _`autoloading mechanism`: http://php.net/manual/en/language.oop5.autoload.php
+.. _`mehanizem avtomatskega nalaganja`: http://php.net/manual/en/language.oop5.autoload.php
 .. _Packagist: https://packagist.org/packages/symfony/class-loader

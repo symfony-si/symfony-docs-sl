@@ -2,99 +2,97 @@ Varnostne težave
 ================
 
 Ta dokument razlaga, kako se ravna s Symfony varnostnimi težavami s strani
-jedra ekipe Symfony (Symfony je koda gostovana na glavnem ``symfony/symfony``
+jedra ekipe Symfony (Symfony koda je gostovana na glavnem ``symfony/symfony``
 `Git repozitoriju`_).
 
-Reporting a Security Issue
---------------------------
+Poročanje o varnostni težavi
+----------------------------
 
-If you think that you have found a security issue in Symfony, don't use the
-mailing-list or the bug tracker and don't publish it publicly. Instead, all
-security issues must be sent to **security [at] symfony.com**. Emails sent to
-this address are forwarded to the Symfony core-team private mailing-list.
+Če mislite, da ste našli varnostno težavo v Symfony, ne uporabite
+dopisnega seznama ali sledilnika hroščev in ne objavite tega javno. Namesto tega
+morajo biti vse varnostne težave poslane na **security [at] symfony.com**. E-pošta
+poslana na ta naslov je posredovana na zasebni dopisni seznam jedra ekipe Symfony.
 
-Resolving Process
------------------
+Proces reševanja
+----------------
 
-For each report, we first try to confirm the vulnerability. When it is
-confirmed, the core-team works on a solution following these steps:
+Za vsako poročilo najprej poskušamo potrditi ranljivost. Ko je to
+potrjeno, jedro ekipe dela na rešitvi po sledečih korakih:
 
-1. Send an acknowledgement to the reporter;
-2. Work on a patch;
-3. Get a CVE identifier from mitre.org;
-4. Write a security announcement for the official Symfony `blog`_ about the
-   vulnerability. This post should contain the following information:
+1. Pošlje se priznanje najditelju;
+2. Delo na popravku;
+3. Pridobitev CVE identifikatorja iz mitre.org;
+4. Napiše se varnostna objava za uradni Symfony `blog`_ o
+   ranljivosti. Ta objava bi morala vsebovati sledeče infomracije:
 
-   * a title that always include the "Security release" string;
-   * a description of the vulnerability;
-   * the affected versions;
-   * the possible exploits;
-   * how to patch/upgrade/workaround affected applications;
-   * the CVE identifier;
-   * credits.
-5. Send the patch and the announcement to the reporter for review;
-6. Apply the patch to all maintained versions of Symfony;
-7. Package new versions for all affected versions;
-8. Publish the post on the official Symfony `blog`_ (it must also be added to
-   the "`Security Advisories`_" category);
-9. Update the security advisory list (see below).
-
-.. note::
-
-    Releases that include security issues should not be done on Saturday or
-    Sunday, except if the vulnerability has been publicly posted.
+   * naslov, ki vedno vključuje "Security release" niz;
+   * opis ranljivosti;
+   * prizadete verzije;
+   * možna izkoriščanja;
+   * kako popraviti/nadgraditi/obiti vplivane aplikacije;
+   * CVE identifikator;
+   * zasluge.
+5. Pošlje se popravek in obvestilo najditelju za pregled;
+6. Uporaba popravka v vseh vzdrževanih verzijah Symfony-ja;
+7. Zapakiranje novih verzij za vse prizadete verzije;
+8. Objava obvestila na uradni Symfony `blog`_ strani (dodana mora biti tudi
+   v "`Security Advisories`_" kategorijo);
+9. Posodobitev seznama varnostnih svetovanj (glejte spodaj).
 
 .. note::
 
-    While we are working on a patch, please do not reveal the issue publicly.
+    Izdaje, ki vključujejo varnostne težave ne bi smele biti urejene v soboto ali
+    nedeljo, razen če je ranljivost bila javno objavljena.
 
 .. note::
 
-    The resolution takes anywhere between a couple of days to a month depending
-    on its complexity and the coordination with the downstream projects (see
-    next paragraph).
+    Medtem ko delamo na popravku, prosimo, ne razkrivajte težave javno.
 
-Collaborating with Downstream Open-Source Projects
---------------------------------------------------
+.. note::
 
-As Symfony is used by many large Open-Source projects, we standardized the way
-the Symfony security team collaborates on security issues with downstream
-projects. The process works as follows:
+    Resolucija vzame med nekaj dni do meseca, odvisno od njene kompleksnosti in
+    koordinacije z podrejenimi projekti (glejte naslednji
+    odstavek).
 
-1. After the Symfony security team has acknowledged a security issue, it
-immediately sends an email to the downstream project security teams to inform
-them of the issue;
+Sodelovanje s podrejenimi odprtokodnimi projekti
+------------------------------------------------
 
-2. The Symfony security team creates a private Git repository to ease the
-collaboration on the issue and access to this repository is given to the
-Symfony security team, to the Symfony contributors that are impacted by the
-issue, and to one representative of each downstream projects;
+Kot je Symfony uporabljen s strani veliko odprto kodnih projektov, smo standardizirali
+način, kako Symfony varnostna ekipa sodeluje na varnostnih težavah s podrejenimi
+projekti. Proces deluje sledeče:
 
-3. All people with access to the private repository work on a solution to
-solve the issue via pull requests, code reviews, and comments;
+1. Ko Symfony varnostna ekipa potrdi varnostno težavo, nemudoma
+pošlje e-pošto podrejenim projektnim ekipam, da jih obvesti o težavi;
 
-4. Once the fix is found, all involved projects collaborate to find the best
-date for a joint release (there is no guarantee that all releases will be at
-the same time but we will try hard to make them at about the same time). When
-the issue is not known to be exploited in the wild, a period of two weeks
-seems like a reasonable amount of time.
+2. Symfony varnostna ekipa izdela zasebni Git repozitorij za enostavnejše
+sodelovanje na težavi in dostop do tega repozitorija je dan Symfony varnostni
+ekipi, Symfony uporabnikom, ki prispevajo in so pod vplivom te težave in
+enemu izmed reprezentativnih oseb vsakega podrejenega projekta;
 
-The list of downstream projects participating in this process is kept as small
-as possible in order to better manage the flow of confidential information
-prior to disclosure. As such, projects are included at the sole discretion of
-the Symfony security team.
+3. Vsi ljudje z dostopom do zasebnega repozitorija delajo na reševanju, da
+se težava odpravi preko "pull request-ov", pregleda kode in komentarjev;
 
-As of today, the following projects have validated this process and are part
-of the downstream projects included in this process:
+4. Ko je popravek najden, vsi vključeni projekti sodelujejo, da najdejo
+najboljši datum za skupno izdajo (ni garancije, da bodo vse izdaje na voljo
+istočasno, vendar se trudimo, da so na voljo približno istočasno). Ko
+težava ni znana, da bo izkoriščena v javnosti, obdobje dveh tednov deluje
+kot razumen obseg časa.
 
-* Drupal (releases typically happen on Wednesdays)
+Seznam podrejenih projektov, ki sodelujejo v tem procesu, je skrbovan čimmanjše
+možno, da je možno bolje upravljati proces zaupnih informacij prioritetno glede
+na razkritje. Tako se vključi projekte po lastni presoji Symfony varnostne ekipe.
+
+Od danes, sledeči projekti so potrjeni za ta proces in so del
+podrejenih projektov, vključenih v ta proces:
+
+* Drupal (izdaje se običajno zgodijo ob sredah)
 * eZPublish
 
-Security Advisories
+Varnostna opozorila
 -------------------
 
-This section indexes security vulnerabilities that were fixed in Symfony
-releases, starting from Symfony 1.0.0:
+Ta sekcija indeksira varnostne ranljivosti, ki so bile popravljene v Symfony
+izdajah z začetkom od Symfony 1.0.0:
 
 * August 7, 2013: `Security releases: Symfony 2.0.24, 2.1.12, 2.2.5, and 2.3.3 released <http://symfony.com/blog/security-releases-symfony-2-0-24-2-1-12-2-2-5-and-2-3-3-released>`_ (`CVE-2013-4751 <http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-4751>`_ and `CVE-2013-4752 <http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-4752>`_)
 * January 17, 2013: `Security release: Symfony 2.0.22 and 2.1.7 released <http://symfony.com/blog/security-release-symfony-2-0-22-and-2-1-7-released>`_ (`CVE-2013-1348 <http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1348>`_ and `CVE-2013-1397 <http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1397>`_)

@@ -4,26 +4,26 @@
 MapClassLoader
 ==============
 
-The :class:`Symfony\\Component\\ClassLoader\\MapClassLoader` allows you to
-autoload files via a static map from classes to files. This is useful if you
-use third-party libraries which don't follow the `PSR-0`_ standards and so
-can't use the :doc:`PSR-0 class loader </components/class_loader/class_loader>`.
+Razred :class:`Symfony\\Component\\ClassLoader\\MapClassLoader` vam omogoča
+da avtomatsko nalagate datoteke preko statičnega zemljevida iz razredov v datoteke.
+To je uporabno, če uporabljate tretje-osebne knjižnice, ki ne sledijo `PSR-0` standardom
+in tako ne morejo uporabljati :doc:`PSR-0 nalagalnika razredov </components/class_loader/class_loader>`.
 
-The ``MapClassLoader`` can be used along with the :doc:`PSR-0 class loader </components/class_loader/class_loader>`
-by configuring and calling the ``register()`` method on both.
+``MapClassLoader`` je lahko uporabljen skupaj z :doc:`PSR-0 nalagalnikom razredov </components/class_loader/class_loader>`
+z nastavljanjem in klicanjem ``register()`` metode na obeh.
 
 .. note::
 
-    The default behavior is to append the ``MapClassLoader`` on the autoload
-    stack. If you want to use it as the first autoloader, pass ``true`` when
-    calling the ``register()`` method. Your class loader will then be prepended
-    on the autoload stack.
+    Privzeto obnašanje je pripenjanje ``MapClassLoader`` na autoload
+    skladovnico. Če ga želite uporabiti kot prvi avtomatski nalagalnik, pošljite ``true`` ko
+    kličete metodo ``register()``. Vaš nalagalnik razredov bo potem pripet
+    na autoload sklad.
 
-Usage
------
+Uporaba
+-------
 
-Using it is as easy as passing your mapping to its constructor when creating
-an instance of the ``MapClassLoader`` class::
+Uporaba je tako enostavna kot je pošiljanje vaših povezav njegovim konstruktorjem,
+ko se izdela instanca razreda ``MapClassLoader``::
 
     require_once '/path/to/src/Symfony/Component/ClassLoader/MapClassLoader';
     

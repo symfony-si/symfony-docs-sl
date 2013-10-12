@@ -1,5 +1,5 @@
-Validation Constraints Reference
-================================
+Referenca omejitve potrjevanja
+==============================
 
 .. toctree::
    :maxdepth: 1
@@ -57,14 +57,14 @@ Validation Constraints Reference
    constraints/UserPassword
    constraints/Valid
 
-The Validator is designed to validate objects against *constraints*.
-In real life, a constraint could be: "The cake must not be burned". In
-Symfony2, constraints are similar: They are assertions that a condition is
-true.
+Validator je načrtovan za potrjevanje objektov napram *omejitvam (contraints)*.
+V realnem življenju je omejitev lahko: "Torta ne sme biti zažgana". V
+Symfony2 so omejitve podobne: Gre za trditve, kjer je pogoj
+"true".
 
-Supported Constraints
----------------------
+Podprte omejitve
+----------------
 
-The following constraints are natively available in Symfony2:
+Sledeče omejitve so originalno na voljo v Symfony2:
 
 .. include:: /reference/constraints/map.rst.inc

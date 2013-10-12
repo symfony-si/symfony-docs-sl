@@ -1,8 +1,8 @@
 .. index::
    single: Forms; Types Reference
 
-Form Types Reference
-====================
+Referenca vrste obrazcev
+========================
 
 .. toctree::
    :maxdepth: 1
@@ -40,13 +40,14 @@ Form Types Reference
    types/timezone
    types/url
 
-A form is composed of *fields*, each of which are built with the help of
-a field *type* (e.g. a ``text`` type, ``choice`` type, etc). Symfony2 comes
-standard with a large list of field types that can be used in your application.
+Obrazec je sestavljen iz *polj*, vsak od katerih je zgrajen s pomočjo
+*tipa* polja (npr. tip ``text``, tip ``choice`` itd.). Symfony2 prihaja
+standardno z velikim seznamom vrst polj, ki so lahko uporabljeni v vaši
+aplikaciji.
 
-Supported Field Types
----------------------
+Podprti tipi polj
+-----------------
 
-The following field types are natively available in Symfony2:
+Sledeči tipi polj so originalno na voljo v Symfony2:
 
 .. include:: /reference/forms/types/map.rst.inc

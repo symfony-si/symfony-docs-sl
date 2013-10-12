@@ -1,25 +1,25 @@
 .. index::
    single: Class Loader; PSR-0 Class Loader
 
-The PSR-0 Class Loader
-======================
+PSR-0 Class Loader
+==================
 
-If your classes and third-party libraries follow the `PSR-0`_ standard, you
-can use the :class:`Symfony\\Component\\ClassLoader\\ClassLoader` class to
-load all of your project's classes.
+Če vaši razredi in tretje-osebne knjižnice sledijo standardu `PSR-0`_
+lahko uporabite razred :class:`Symfony\\Component\\ClassLoader\\ClassLoader`,
+da naložite vse vaše projektne razrede.
 
 .. tip::
 
-    You can use both the ``ApcClassLoader`` and the ``XcacheClassLoader`` to
-    :doc:`cache </components/class_loader/cache_class_loader>` a ``ClassLoader``
-    instance or the ``DebugClassLoader`` to :doc:`debug </components/class_loader/debug_class_loader>`
-    it.
+    Lahko uporabite tako ``ApcClassLoader`` in ``XcacheClassLoader``, da
+    :doc:`predpomni </components/class_loader/cache_class_loader>` ``ClassLoader``
+    instanco ali ``DebugClassLoader`` za :doc:`razhroščevanje </components/class_loader/debug_class_loader>`
+    le tega.
 
-Usage
------
+Uporaba
+-------
 
-Registering the :class:`Symfony\\Component\\ClassLoader\\ClassLoader` autoloader
-is straightforward::
+Registracija avtomatskega nalagalnika :class:`Symfony\\Component\\ClassLoader\\ClassLoader`
+je enostavna::
 
     require_once '/path/to/src/Symfony/Component/ClassLoader/ClassLoader.php';
 
@@ -36,12 +36,12 @@ is straightforward::
 
 .. note::
 
-    The autoloader is automatically registered in a Symfony2 application (see
-    ``app/autoload.php``).
+    Avtomatski nalagalnik je avtomatsko registriran v Symfony2 aplikaciji
+    (glejte ``app/autoload.php``).
 
-Use the :method:`Symfony\\Component\\ClassLoader\\ClassLoader::addPrefix` or
-:method:`Symfony\\Component\\ClassLoader\\ClassLoader::addPrefixes` methods to
-register your classes::
+Uporabite :method:`Symfony\\Component\\ClassLoader\\ClassLoader::addPrefix` ali
+:method:`Symfony\\Component\\ClassLoader\\ClassLoader::addPrefixes` metodi za
+registracijo vaših razredov::
 
     // register a single namespaces
     $loader->addPrefix('Symfony', __DIR__.'/vendor/symfony/symfony/src');
@@ -60,9 +60,9 @@ register your classes::
         'Twig_'  => __DIR__.'/vendor/twig/twig/lib',
     ));
 
-Classes from a sub-namespace or a sub-hierarchy of `PEAR`_ classes can be looked
-for in a location list to ease the vendoring of a sub-set of classes for large
-projects::
+Razredi iz pod-imenskega prostora ali pod-hierarhičnih `PEAR`_ razredov se lahko
+najdejo v seznamu lokacij za enostavnejše izdelovanje pod-skupkov razredov za večje
+projekte::
 
     $loader->addPrefixes(array(
         'Doctrine\\Common'           => __DIR__.'/vendor/doctrine/common/lib',
@@ -71,11 +71,11 @@ projects::
         'Doctrine'                   => __DIR__.'/vendor/doctrine/orm/lib',
     ));
 
-In this example, if you try to use a class in the ``Doctrine\Common`` namespace
-or one of its children, the autoloader will first look for the class under the
-``doctrine-common`` directory. If not found, it will then fallback to the default
-``Doctrine`` directory (the last one configured) before giving up. The order
-of the prefix registrations is significant in this case.
+V tem primeru, če poskusite uporabiti razred v imenskem prostoru ``Doctrine\Common``
+ali enem od njegovih otrok, bo avtomatski nalagalnik najprej pogledal za razred pod
+direktorijem ``doctrine-common``. Če ni najdem, bo potem vrnjen na privzeti
+direktorij ``Doctrine`` (zadnji, ki je nastavljen) preden odneha. Vrstni red
+registracije predpon je pomemben v tem primeru.
 
 .. _PEAR:  http://pear.php.net/manual/en/standards.naming.php
 .. _PSR-0: http://symfony.com/PSR0
