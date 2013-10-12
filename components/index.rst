@@ -1,5 +1,5 @@
-The Components
-==============
+Komponente
+==========
 
 .. toctree::
     :hidden:

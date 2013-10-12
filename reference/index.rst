@@ -1,5 +1,5 @@
-Reference Documents
-===================
+Referenčna dokumentacija
+========================
 
 .. toctree::
     :hidden:

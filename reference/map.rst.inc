@@ -1,9 +1,9 @@
-* **Configuration Options**
+* **Opcije nastavitev**
 
-  Ever wondered what configuration options you have available to you in files
-  such as ``app/config/config.yml``? In this section, all the available configuration
-  is broken down by the key (e.g. ``framework``) that defines each possible
-  section of your Symfony2 configuration.
+  Ste se kdaj spraševali, katere opcije nastavitev imate na voljo v datotekah
+  kot je ``app/config/config.yml``? V tej sekciji, so vse nastavitve, ki so na voljo,
+  zazčlenjene po ključih (npr. ``framework``), ki definirajo vsako možno
+  sekcijo vaših Symfony2 nastavitev.
 
   * :doc:`framework </reference/configuration/framework>`
   * :doc:`doctrine </reference/configuration/doctrine>`
@@ -16,15 +16,15 @@
 
 * :doc:`Configuring the Kernel (e.g. AppKernel) </reference/configuration/kernel>`
 
-* **Forms and Validation**
+* **Obrazci in preverjanje**
 
-  * :doc:`Form Field Type Reference </reference/forms/types>`
-  * :doc:`Validation Constraints Reference </reference/constraints>`
-  * :doc:`Twig Template Function and Variable Reference </reference/forms/twig_reference>`
+  * :doc:`Reference tipov polj obrazca </reference/forms/types>`
+  * :doc:`Reference omejitev potrjevanja </reference/constraints>`
+  * :doc:`Reference Twig funkcij predlog in spremenljivk </reference/forms/twig_reference>`
 
-* :doc:`Twig Extensions (forms, filters, tags, etc) Reference </reference/twig_reference>`
+* :doc:`Reference Twig razširitev (obrazci, filtri, značke itd.)  </reference/twig_reference>`
 
-* **Other Areas**
+* **Ostala področja**
 
   * :doc:`/reference/dic_tags`
   * :doc:`/reference/requirements`

@@ -42,11 +42,11 @@
   * :doc:`/cookbook/controller/error_pages`
   * :doc:`/cookbook/controller/service`
 
-* **Debugging**
+* **Razhroščevanje**
 
   * :doc:`/cookbook/debugging`
 
-* **Deployment**
+* **Nalaganje**
 
   * :doc:`/cookbook/deployment-tools`
 

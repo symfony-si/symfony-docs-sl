@@ -1,5 +1,5 @@
-The Cookbook
-============
+Recepti
+=======
 
 .. toctree::
     :hidden:
