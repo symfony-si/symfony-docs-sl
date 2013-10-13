@@ -2,7 +2,7 @@
    single: Doctrine; ORM configuration reference
    single: Configuration reference; Doctrine ORM
 
-Doctrine Configuration Reference
+Referenca nastavitev za Doctrine
 ================================
 
 .. configuration-block::
@@ -226,11 +226,11 @@ Doctrine Configuration Reference
             </doctrine:config>
         </container>
 
-Configuration Overview
-----------------------
+Pregled nastavitev
+------------------
 
-This following configuration example shows all the configuration defaults that
-the ORM resolves to:
+Naslednji primer nastavitev prikazuje vse privzete nastavitve, katere
+ORM nastavlja:
 
 .. code-block:: yaml
 
@@ -246,16 +246,16 @@ the ORM resolves to:
             query_cache_driver: array
             result_cache_driver: array
 
-There are lots of other configuration options that you can use to overwrite
-certain classes, but those are for very advanced use-cases only.
+Na voljo je tudi veliko ostalih nastavitvenih opcij, ki jih lahko uporabite za
+prepis določenih razredov, vendar te so samo za zelo napredne primere uporab.
 
-Caching Drivers
-~~~~~~~~~~~~~~~
+Predpomnenje gonilnikov
+~~~~~~~~~~~~~~~~~~~~~~~
 
-For the caching drivers you can specify the values "array", "apc", "memcache", "memcached", 
-"xcache" or "service".
+Za predpomnenje gonilnikov lahko specificirate vrednosti "array", "apc", "memcache", "memcached"
+"xcache" ali "service".
 
-The following example shows an overview of the caching configurations:
+Sledeči primer kaže pregled nastavitev predpomnenja:
 
 .. code-block:: yaml
 
@@ -272,38 +272,39 @@ The following example shows an overview of the caching configurations:
                 port: 11211
                 instance_class: Memcache
 
-Mapping Configuration
-~~~~~~~~~~~~~~~~~~~~~
+Nastavitve preslikav
+~~~~~~~~~~~~~~~~~~~~
 
-Explicit definition of all the mapped entities is the only necessary
-configuration for the ORM and there are several configuration options that you
-can control. The following configuration options exist for a mapping:
+Eksplicitne definicije vseh preslikanih entitet je edina potrebna
+nastavitev za ORM in na voljo je kar nekaj nastavitvenih opcij, ki jih
+lahko kontrolirate. Sledeče nastavitvene opcije obstajajo za preslikave:
 
-* ``type`` One of ``annotation``, ``xml``, ``yml``, ``php`` or ``staticphp``.
-  This specifies which type of metadata type your mapping uses.
+* ``type`` Ena izmed ``annotation``, ``xml``, ``yml``, ``php`` ali ``staticphp``.
+  To specificira, kateri tip meta podatkov vaša preslikava uporablja.
 
-* ``dir`` Path to the mapping or entity files (depending on the driver). If
-  this path is relative it is assumed to be relative to the bundle root. This
-  only works if the name of your mapping is a bundle name. If you want to use
-  this option to specify absolute paths you should prefix the path with the
-  kernel parameters that exist in the DIC (for example %kernel.root_dir%).
+* ``dir`` Pot do preslikave ali datotek entitet (odvisno od gonilnika). Če
+  je ta pot relativna, se predpostavlja, da je relativna glede na vrh paketa.
+  To deluje samo, če je ime vaše preslikave ime paketa. Če želite uporabiti
+  to opcijo za specifikacijo absolutnih poti, bi morali dodati poti predpono
+  s parametri jedra, ki obstaja v DIC (Dependency Injection Container), npr.
+  %kernel.root_dir%.
 
-* ``prefix`` A common namespace prefix that all entities of this mapping
-  share. This prefix should never conflict with prefixes of other defined
-  mappings otherwise some of your entities cannot be found by Doctrine. This
-  option defaults to the bundle namespace + ``Entity``, for example for an
-  application bundle called ``AcmeHelloBundle`` prefix would be
+* ``prefix`` Pogosti imenski prostor, ki ga vse entitete te preslikave delijo.
+  Ta predpona ne bi smela nikoli biti v konfliktu s predponami drugih definiranih
+  preslikah, drugače nekaterih vaših entitet ni mogoče najti s strani Doctrine. Ta
+  opcija je privzeto imenski prostor paketa + ``Entity``, na primer za
+  aplikacijski paket imenovan ``AcmeHelloBundle`` bi bila predpona
   ``Acme\HelloBundle\Entity``.
 
-* ``alias`` Doctrine offers a way to alias entity namespaces to simpler,
-  shorter names to be used in DQL queries or for Repository access. When using
-  a bundle the alias defaults to the bundle name.
+* ``alias`` Doctrine ponuja način za izdelavo aliasa imenskih prostorov entitet v
+  enostavnejša, krajša imena uporabljena v DQL poizvedbah ali za dostop do Repository
+  razredov. Ko uporabljate paket je alias privzeto ime paketa.
 
-* ``is_bundle`` This option is a derived value from ``dir`` and by default is
-  set to true if dir is relative proved by a ``file_exists()`` check that
-  returns false. It is false if the existence check returns true. In this case
-  an absolute path was specified and the metadata files are most likely in a
-  directory outside of a bundle.
+* ``is_bundle`` Ta opcija izhaja iz vrednosti ``dir`` in privzeto je
+  nastavljena na true, če je dir relativno izkazan s strani ``file_exists()`` preverjanja,
+  ki vrne false. Je false, če preverjanje obstoja vrne true. V tem primeru je
+  bila specificirana absolutna pot in datoteke meta podatkov so najverjetneje v
+  direktoriju izven paketa.
 
 .. index::
     single: Configuration; Doctrine DBAL
@@ -311,13 +312,13 @@ can control. The following configuration options exist for a mapping:
 
 .. _`reference-dbal-configuration`:
 
-Doctrine DBAL Configuration
----------------------------
+Nastavitve Doctrine DBAL
+-------------------------
 
-DoctrineBundle supports all parameters that default Doctrine drivers
-accept, converted to the XML or YAML naming standards that Symfony
-enforces. See the Doctrine `DBAL documentation`_ for more information.
-The following block shows all possible configuration keys:
+DoctrineBundle podpira vse parametre, ki jih privzeti Doctrine gonilniki
+sprejemajo, pretvorjene v XML ali YAML imenske standarde, ki jih Symfony
+uveljavlja. Glejte Doctrine `DBAL dokumentacijo`_ za več informacij.
+Sledeči blok kaže vse možne nastavitvene ključe:
 
 .. configuration-block::
 
@@ -380,8 +381,8 @@ The following block shows all possible configuration keys:
             </doctrine:dbal>
         </doctrine:config>
 
-If you want to configure multiple connections in YAML, put them under the
-``connections`` key and give them a unique name:
+Če želite nastaviti več povezav v YAML, jih dajte pod ključ
+``connections`` in jim dajte unikatno ime:
 
 .. code-block:: yaml
 
@@ -400,11 +401,11 @@ If you want to configure multiple connections in YAML, put them under the
                     password:         null
                     host:             localhost
 
-The ``database_connection`` service always refers to the *default* connection,
-which is the first one defined or the one configured via the
-``default_connection`` parameter.
+Storitev ``database_connection`` se vedno sklicuje na *privzeto* povezavo,
+ki je prva definirana ali tista nastavljena preko
+``default_connection`` parametera.
 
-Each connection is also accessible via the ``doctrine.dbal.[name]_connection``
-service where ``[name]`` if the name of the connection.
+Vsaka povezava je tudi dostopna preko ``doctrine.dbal.[name]_connection``
+storitve, kjer ``[name]`` je ime povezave.
 
-.. _DBAL documentation: http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/configuration.html
+.. _DBAL dokumentacijo: http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/configuration.html

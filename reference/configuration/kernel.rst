@@ -1,15 +1,15 @@
 .. index::
     single: Configuration reference; Kernel class
 
-Configuring in the Kernel (e.g. AppKernel)
-==========================================
+Nastavitve v jedru (Kernel) (npr. AppKernel)
+============================================
 
-Some configuration can be done on the kernel class itself (usually called
-``app/AppKernel.php``). You can do this by overriding specific methods in
-the parent :class:`Symfony\\Component\\HttpKernel\\Kernel` class.
+Nekaj nastavitev je lahko urejenih v samem razredu Kernel (ponavadi imenovan
+``app/AppKernel.php``). To lahko naredite preko prepisovanja določenih metod
+in starševskega razreda :class:`Symfony\\Component\\HttpKernel\\Kernel`.
 
-Configuration
--------------
+Nastavitev
+-----------
 
 * `Charset`_
 * `Kernel Name`_
@@ -22,9 +22,9 @@ Charset
 
 **type**: ``string`` **default**: ``UTF-8``
 
-This returns the charset that is used in the application. To change it, override the
-:method:`Symfony\\Component\\HttpKernel\\Kernel::getCharset` method and return another
-charset, for instance::
+Ta nastavitev vrne nabor znakov, ki je uporabljen v aplikaciji. Za spremembo, prepišite
+metodo :method:`Symfony\\Component\\HttpKernel\\Kernel::getCharset` in vrnite drug
+nabor znakov, na primer::
 
     // app/AppKernel.php
 
@@ -42,26 +42,26 @@ Kernel Name
 
 **type**: ``string`` **default**: ``app`` (i.e. the directory name holding the kernel class)
 
-To change this setting, override the :method:`Symfony\\Component\\HttpKernel\\Kernel::getName`
-method. Alternatively, move your kernel into a different directory. For example,
-if you moved the kernel into a ``foo`` directory (instead of ``app``), the
-kernel name will be ``foo``.
+Za spremembo te nastavitve, prepišite metodo :method:`Symfony\\Component\\HttpKernel\\Kernel::getName`.
+Alternativno premaknite vaše jedro v drug direktorij. Na primer, če
+ste premaknili jedro v ``foo`` direktorij (namesto v ``app``),
+bo ime jedra potem ``foo``.
 
-The name of the kernel isn't usually directly important - it's used in the
-generation of cache files. If you have an application with multiple kernels,
-the easiest way to make each have a unique name is to duplicate the ``app``
-directory and rename it to something else (e.g. ``foo``).
+Ime jedra ni dejansko direktno pomembno - uporabljeno je pri
+generiranju predpomnilniških datotek. Če imate aplikacijo z večimi jedri,
+je najenostavnejša pot narediti, da ima vsako unikatno ime z dupliciranjem
+``app`` direktorija in ga preimenovati v nekaj drugega (npr. ``foo``).
 
 Root Directory
 ~~~~~~~~~~~~~~
 
 **type**: ``string`` **default**: the directory of ``AppKernel``
 
-This returns the root directory of your kernel. If you use the Symfony Standard
-edition, the root directory refers to the ``app`` directory.
+To vrne vrhnji direktorij v vašem jedru. Če uporabljate Symfony standardno
+izdajo, se vrhnji direktorij sklicuje na ``app`` direktorij.
 
-To change this setting, override the
-:method:`Symfony\\Component\\HttpKernel\\Kernel::getRootDir` method::
+Da spremenite to nastavitev, prepišite metodo
+:method:`Symfony\\Component\\HttpKernel\\Kernel::getRootDir`::
 
     // app/AppKernel.php
 
@@ -81,15 +81,15 @@ Cache Directory
 
 **type**: ``string`` **default**: ``$this->rootDir/cache/$this->environment``
 
-This returns the path to the cache directory. To change it, override the
-:method:`Symfony\\Component\\HttpKernel\\Kernel::getCacheDir` method. Read
-":ref:`override-cache-dir`" for more information.
+To vrne pot do predpomnilniškega direktorija. Za spremembo, prepišite
+metodo :method:`Symfony\\Component\\HttpKernel\\Kernel::getCacheDir`. Preberite
+":ref:`override-cache-dir`" za več informacij.
 
 Log Directory
 ~~~~~~~~~~~~~
 
 **type**: ``string`` **default**: ``$this->rootDir/logs``
 
-This returns the path to the log directory. To change it, override the
-:method:`Symfony\\Component\\HttpKernel\\Kernel::getLogDir` method. Read
-":ref:`override-logs-dir`" for more information.
+To vrne pot do direktorija dnevnikov. Da ga spremenite, prepišite
+metodo :method:`Symfony\\Component\\HttpKernel\\Kernel::getLogDir`. Preberite
+":ref:`override-logs-dir`" za več informacij.

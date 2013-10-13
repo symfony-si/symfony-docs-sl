@@ -1,18 +1,18 @@
 .. index::
    single: Configuration reference; Swiftmailer
 
-SwiftmailerBundle Configuration ("swiftmailer")
+Nastavitve za SwiftmailerBundle ("swiftmailer")
 ===============================================
 
-This reference document is a work in progress. It should be accurate, but
-all options are not yet fully covered. For a full list of the default configuration
-options, see `Full Default Configuration`_
+Ta referenčni dokument je delo v teku. Moral bi biti točen, vendar
+vse opcije niso še v celoti pokrite. Za celoten seznam privzetih opcij
+nastavitev, glejte `Celotne privzete nastavitve`_
 
-The ``swiftmailer`` key configures Symfony's integration with Swiftmailer,
-which is responsible for creating and delivering email messages.
+Ključ ``swiftmailer`` nastavlja Symfoyn-jevo integracijo s Swiftmailer,
+ki je odgovorna za izdelavo in dostavo e-pošnih sporočil.
 
-Configuration
--------------
+Nastavitve
+----------
 
 * `transport`_
 * `username`_
@@ -35,91 +35,90 @@ Configuration
 transport
 ~~~~~~~~~
 
-**type**: ``string`` **default**: ``smtp``
+**tip**: ``string`` **privzeto**: ``smtp``
 
-The exact transport method to use to deliver emails. Valid values are:
+Točna transportna metoda za uporabo dostave e-pošte. Veljavne vrednosti so:
 
 * smtp
-* gmail (see :doc:`/cookbook/email/gmail`)
+* gmail (glejte :doc:`/cookbook/email/gmail`)
 * mail
 * sendmail
-* null (same as setting `disable_delivery`_ to ``true``)
+* null (enako kot nastaviti `disable_delivery`_ na ``true``)
 
 username
 ~~~~~~~~
 
-**type**: ``string``
+**tip**: ``string``
 
-The username when using ``smtp`` as the transport.
+Uporabniško ime, ko se uporablja ``smtp`` kot transport.
 
 password
 ~~~~~~~~
 
-**type**: ``string``
+**tip**: ``string``
 
-The password when using ``smtp`` as the transport.
+Geslo, ko se uporablja ``smtp`` kot transport.
 
 host
 ~~~~
 
-**type**: ``string`` **default**: ``localhost``
+**tip**: ``string`` **privzeto**: ``localhost``
 
-The host to connect to when using ``smtp`` as the transport.
+Gostitelj za povezavo, ko se uporablja ``smtp`` kot transport.
 
 port
 ~~~~
 
-**type**: ``string`` **default**: 25 or 465 (depending on `encryption`_)
+**tip**: ``string`` **privzeto**: 25 ali 465 (odvisno od `encryption`_)
 
-The port when using ``smtp`` as the transport. This defaults to 465 if encryption
-is ``ssl`` and 25 otherwise.
+Port, ko se uporablja ``smtp`` kot transport. To je privzeto na 465 če je enkripcija
+``ssl`` ali drugače 25.
 
 encryption
 ~~~~~~~~~~
 
-**type**: ``string``
+**tip**: ``string``
 
-The encryption mode to use when using ``smtp`` as the transport. Valid values
-are ``tls``, ``ssl``, or ``null`` (indicating no encryption).
+Način enkripcije, ko se uporablja ``smtp`` kot transport. Veljavne vrednosti
+so ``tls``, ``ssl``, ali ``null`` (nakazuje, da ni enkripcije).
 
 auth_mode
 ~~~~~~~~~
 
-**type**: ``string``
+**tip**: ``string``
 
-The authentication mode to use when using ``smtp`` as the transport. Valid
-values are ``plain``, ``login``, ``cram-md5``, or ``null``.
+Način preverjanja pristnosti, ko se uporablja ``smtp`` kot transport. Veljavne
+vrednosti so ``plain``, ``login``, ``cram-md5``, ali ``null``.
 
 spool
 ~~~~~
 
-For details on email spooling, see :doc:`/cookbook/email/spool`.
+Za podrobnosti glede e-poštnega spooling-a, glejte :doc:`/cookbook/email/spool`.
 
 type
 ....
 
-**type**: ``string`` **default**: ``file``
+**tip**: ``string`` **privzeto**: ``file``
 
-The method used to store spooled messages. Currently only ``file`` is supported.
-However, a custom spool should be possible by creating a service called
-``swiftmailer.spool.myspool`` and setting this value to ``myspool``.
+Metoda uporabljena za zhranjevanje "spooled" sporočil. Trenutno je samo ``file`` podprt.
+Čeprav je možen spool po meri z izdelavo storitve
+``swiftmailer.spool.myspool`` in nastavitve te vrednosti na ``myspool``.
 
 path
 ....
 
-**type**: ``string`` **default**: ``%kernel.cache_dir%/swiftmailer/spool``
+**tip**: ``string`` **privzeto**: ``%kernel.cache_dir%/swiftmailer/spool``
 
-When using the ``file`` spool, this is the path where the spooled messages
-will be stored.
+Ko se uporablja ``file`` spool, je to pot, kjer so spooled sporočila shranjena.
 
 sender_address
 ~~~~~~~~~~~~~~
 
-**type**: ``string``
+**tip**: ``string``
 
-If set, all messages will be delivered with this address as the "return path"
-address, which is where bounced messages should go. This is handled internally
-by Swiftmailer's ``Swift_Plugins_ImpersonatePlugin`` class.
+Če je nastavljen, bodo vsa sporočila dostavljena s tem naslovom kot "return path"
+naslov, kamor morajo iti odbita (bounced) sporočila. To je ravnano interno
+s Swiftmailer-jevim razredom ``Swift_Plugins_ImpersonatePlugin``.
 
 antiflood
 ~~~~~~~~~
@@ -127,50 +126,50 @@ antiflood
 threshold
 .........
 
-**type**: ``string`` **default**: ``99``
+**tip**: ``string`` **privzeto**: ``99``
 
-Used with ``Swift_Plugins_AntiFloodPlugin``. This is the number of emails
-to send before restarting the transport.
+Uporabljeno s ``Swift_Plugins_AntiFloodPlugin``. To je število sporočil za poslati
+preden se transport ponovno zažene.
 
 sleep
 .....
 
-**type**: ``string`` **default**: ``0``
+**tip**: ``string`` **privzeto**: ``0``
 
-Used with ``Swift_Plugins_AntiFloodPlugin``. This is the number of seconds
-to sleep for during a transport restart.
+Uporabljeno s ``Swift_Plugins_AntiFloodPlugin``. To je število sekund
+za spanje med ponovnim zagonom transporta.
 
 delivery_address
 ~~~~~~~~~~~~~~~~
 
-**type**: ``string``
+**tip**: ``string``
 
-If set, all email messages will be sent to this address instead of being sent
-to their actual recipients. This is often useful when developing. For example,
-by setting this in the ``config_dev.yml`` file, you can guarantee that all
-emails sent during development go to a single account.
+Če je nastavljen, vsa e-poštna sporočila bodo poslana na ta naslov namesto, da
+se pošljejo na njihove dejanske prejemnike. To je pogosto uporabno, ko se razvija.
+Na primer z nastavitvijo tega v datoteki ``config_dev.yml``, lahko garantirate, da
+e-pošta poslana med razvojem gre na en račun.
 
-This uses ``Swift_Plugins_RedirectingPlugin``. Original recipients are available
-on the ``X-Swift-To``, ``X-Swift-Cc`` and ``X-Swift-Bcc`` headers.
+To uporablja ``Swift_Plugins_RedirectingPlugin``. Originalni prejemniki so na voljo
+v ``X-Swift-To``, ``X-Swift-Cc`` in ``X-Swift-Bcc`` glavah.
 
 disable_delivery
 ~~~~~~~~~~~~~~~~
 
-**type**: ``Boolean`` **default**: ``false``
+**tip**: ``Boolean`` **privzeto**: ``false``
 
-If true, the ``transport`` will automatically be set to ``null``, and no
-emails will actually be delivered.
+Če je true, bo ``transport`` avtomatsko nastavljen na ``null`` in nobena e-poštna
+sporočila dejansko ne bodo dostavljena.
 
 logging
 ~~~~~~~
 
-**type**: ``Boolean`` **default**: ``%kernel.debug%``
+**tip**: ``Boolean`` **privzeto**: ``%kernel.debug%``
 
-If true, Symfony's data collector will be activated for Swiftmailer and the
-information will be available in the profiler.
+Če je true, bo Symfony-jev zbirnik podatkov aktiviran za Swiftmailer in
+informacije na voljo v profiler-ju.
 
-Full Default Configuration
---------------------------
+Celotne privzete nastavitve
+---------------------------
 
 .. configuration-block::
 

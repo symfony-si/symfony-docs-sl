@@ -1,19 +1,19 @@
 .. index::
    single: Configuration reference; Framework
 
-FrameworkBundle Configuration ("framework")
-===========================================
+Nastavitve FrameworkBundle ("framework")
+========================================
 
-This reference document is a work in progress. It should be accurate, but
-all options are not yet fully covered.
+Ta referenčni dokument je delo v teku. Moral bi biti točen, vendar
+vse opcije še niso v celoti pokrite.
 
-The ``FrameworkBundle`` contains most of the "base" framework functionality
-and can be configured under the ``framework`` key in your application configuration.
-This includes settings related to sessions, translation, forms, validation,
-routing and more.
+``FrameworkBundle`` vsebuje večino "osnovnih" lastnosti ogrodja
+in se ga lahko nastavi po ključem ``framework`` v vaših nastavitvah aplikacije.
+To vključuje nastavitve, ki se tičejo sej, prevodov, obrazcev, preverjanja,
+usmerjanja in več.
 
-Configuration
--------------
+Nastavitve
+----------
 
 * `secret`_
 * `http_method_override`_
@@ -51,10 +51,10 @@ secret
 
 **type**: ``string`` **required**
 
-This is a string that should be unique to your application. In practice,
-it's used for generating the CSRF tokens, but it could be used in any other
-context where having a unique string is useful. It becomes the service container
-parameter named ``kernel.secret``.
+To je niz, ki bi moral biti unikaten za vašo aplikacijo. V praksi je
+uporabljen za generacijo žetonov CSRF, vendar je lahko uporabljen v kateremkoli
+drugem kontekstu, kjer je uporabno imeti unikaten niz. Postane parameter
+"service container" imenovan ``kernel.secret``.
 
 .. _configuration-framework-http_method_override:
 
@@ -62,15 +62,15 @@ http_method_override
 ~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 2.3
-    The ``http_method_override`` option is new in Symfony 2.3.
+    Opcija ``http_method_override`` je nova v Symfony 2.3.
 
 **type**: ``Boolean`` **default**: ``true``
 
-This determines whether the ``_method`` request parameter is used as the intended
-HTTP method on POST requests. If enabled, the
-:method:`Request::enableHttpMethodParameterOverride <Symfony\\Component\\HttpFoundation\\Request::enableHttpMethodParameterOverride>`
-gets called automatically. It becomes the service container parameter named
-``kernel.http_method_override``. For more information, see
+To določa ali je parameter zahtevka ``method_`` uporabljen kot nameravana
+metoda HTTP na zahtevku POST. Če je omogočen,
+se :method:`Request::enableHttpMethodParameterOverride <Symfony\\Component\\HttpFoundation\\Request::enableHttpMethodParameterOverride>`
+kliče avtomatsko. Postane parameter "service container" imenovan
+``kernel.http_method_override``. Za več informacij, glejte
 :doc:`/cookbook/routing/method_parameters`.
 
 ide
@@ -78,29 +78,29 @@ ide
 
 **type**: ``string`` **default**: ``null``
 
-If you're using an IDE like TextMate or Mac Vim, then Symfony can turn all
-of the file paths in an exception message into a link, which will open that
-file in your IDE.
+Če uporabljate IDE, kot je TextMate ali Mac Vim, potem Symfony lahko vrne vse
+poti datotek v sporočilu izjeme v povezavo, katera bo odprla to
+datoteko v vašem IDE-ju.
 
-If you use TextMate or Mac Vim, you can simply use one of the following built-in
-values:
+Če uporabljate TextMate ali Mac Vim, lahko uporabite enostavno eno izmed sledečih
+vgrajenih vrednosti:
 
 * ``textmate``
 * ``macvim``
 
-You can also specify a custom file link string. If you do this, all percentage
-signs (``%``) must be doubled to escape that character. For example, the
-full TextMate string would look like this:
+Lahko tudi specificirate niz datoteke po meri. Če to naredite, vsi znaki za procente
+(``%``) morajo biti dvojni za čiščenje tega znaka. Na primer,
+celotni niz TextMate bi izgledal takole:
 
 .. code-block:: yaml
 
     framework:
         ide:  "txmt://open?url=file://%%f&line=%%l"
 
-Of course, since every developer uses a different IDE, it's better to set
-this on a system level. This can be done by setting the ``xdebug.file_link_format``
-PHP.ini value to the file link string. If this configuration value is set, then
-the ``ide`` option does not need to be specified.
+Seveda, odkar vsak razvijalec uporablja različen IDE, je bolje nastaviti
+to na sistemskem nivoju. To se lahko naredi z nastavitvijo ``xdebug.file_link_format``
+PHP.ini vrednostjo za niz povezave datoteke. Če ta nastavitvena vrednost ni nastavljena,
+potem ``ide`` opcije ni potrebno specificirati.
 
 .. _reference-framework-test:
 
@@ -109,10 +109,10 @@ test
 
 **type**: ``Boolean``
 
-If this configuration parameter is present (and not ``false``), then the
-services related to testing your application (e.g. ``test.client``) are loaded.
-This setting should be present in your ``test`` environment (usually via
-``app/config/config_test.yml``). For more information, see :doc:`/book/testing`.
+Če ta nastavitveni parameter je prisoten (in ni ``false``), potem
+so naložene storitve, ki se tičejo testiranju vaše aplikacije (npr. ``test.client``).
+Ta nastavitev bi morala biti prisotna v vašem ``test`` okolju (običajno preko
+``app/config/config_test.yml``). Za več informacij glejte :doc:`/book/testing`.
 
 .. _reference-framework-trusted-proxies:
 
@@ -121,12 +121,12 @@ trusted_proxies
 
 **type**: ``array``
 
-Configures the IP addresses that should be trusted as proxies. For more details,
-see :doc:`/components/http_foundation/trusting_proxies`.
+Nastavi IP naslov, ki bi moral biti preverjen kot proxi-ji. Za več podrobnosti,
+glejte :doc:`/components/http_foundation/trusting_proxies`.
 
 .. versionadded:: 2.3
-    CIDR notation support was introduced, so you can whitelist whole
-    subnets (e.g. ``10.0.0.0/8``, ``fc00::/7``).
+    Podpora CIDR notacije je bila predstavljena, tako da lahko dodate na seznam
+    varnih celotne subnet-e (npr. ``10.0.0.0/8``, ``fc00::/7``).
 
 .. configuration-block::
 
@@ -163,87 +163,87 @@ name
 
 **type**: ``string`` **default**: ``null``
 
-This specifies the name of the session cookie. By default it will use the cookie
-name which is defined in the ``php.ini`` with the ``session.name`` directive.
+To specificira ime piškotka seje. Privzeto bo uporabljalo ime piškotka, ki je
+definiran v ``php.ini`` z direktivo ``session.name``.
 
 cookie_lifetime
 ...............
 
 **type**: ``integer`` **default**: ``0``
 
-This determines the lifetime of the session - in seconds. By default it will use
-``0``, which means the cookie is valid for the length of the browser session.
+To določa življensko dobo seje - v sekundah. Privzeto bo uporabilo
+``0``, kar pomeni, da je piškotek veljaven za dolžino seje brskalnika.
 
 cookie_path
 ...........
 
 **type**: ``string`` **default**: ``/``
 
-This determines the path to set in the session cookie. By default it will use ``/``.
+To določa pot, ki je nastavljena v seji piškotka. Privzeto bo uporabil ``/``.
 
 cookie_domain
 .............
 
 **type**: ``string`` **default**: ``''``
 
-This determines the domain to set in the session cookie. By default it's blank,
-meaning the host name of the server which generated the cookie according
-to the cookie specification.
+To določa domeno, nastavljeno v seji piškotka. Prizveto je prazno,
+kar pomeni ime gostitelja strežnika, ki je generiral piškotek po
+specifikaciji piškotkov.
 
 cookie_secure
 .............
 
 **type**: ``Boolean`` **default**: ``false``
 
-This determines whether cookies should only be sent over secure connections.
+To določa, ali bi piškotki morali biti poslani samo preko varnih povezav.
 
 cookie_httponly
 ...............
 
 **type**: ``Boolean`` **default**: ``false``
 
-This determines whether cookies should only accessible through the HTTP protocol.
-This means that the cookie won't be accessible by scripting languages, such
-as JavaScript. This setting can effectively help to reduce identity theft
-through XSS attacks.
+To določa, ali bi morali biti piškotki dostopni preko HTTP protokola.
+To pomeni, da piškotek ne bo dostopen za skriptne jezike, kot je JavaScript.
+Ta nastavitev lahko efektivno pomaga reducirati krajo identifikacije
+preko XSS napadov.
 
 gc_probability
 ..............
 
 **type**: ``integer`` **default**: ``1``
 
-This defines the probability that the garbage collector (GC) process is started
-on every session initialization. The probability is calculated by using
-``gc_probability`` / ``gc_divisor``, e.g. 1/100 means there is a 1% chance
-that the GC process will start on each request.
+To definira verjetnost, da bo garbage collector (GC) proces zagnan
+na vsaki inicializaciji seje. Verjetnost je zračunana z uporabo
+``gc_probability`` / ``gc_divisor``, npr. 1/100 pomeni, da obstaja 1% verjetnost,
+da se bo GC proces začel na vsakem zahtevku.
 
 gc_divisor
 ..........
 
 **type**: ``integer`` **default**: ``100``
 
-See `gc_probability`_.
+Glejte `gc_probability`_.
 
 gc_maxlifetime
 ..............
 
 **type**: ``integer`` **default**: ``1440``
 
-This determines the number of seconds after which data will be seen as "garbage"
-and potentially cleaned up. Garbage collection may occur during session start
-and depends on `gc_divisor`_ and `gc_probability`_.
+To določa število sekund, po katerih bodo podatki videni kot "garbage"
+in potencialno počiščeni. "Garbage collection" se lahko zgodi med vsakim pričetkom seje
+in je odvisen od `gc_divisor`_ in `gc_probability`_.
 
 save_path
 .........
 
 **type**: ``string`` **default**: ``%kernel.cache.dir%/sessions``
 
-This determines the argument to be passed to the save handler. If you choose
-the default file handler, this is the path where the session files are created.
-For more information, see :doc:`/cookbook/session/sessions_directory`.
+To določa argument, ki bo poslan handler-ju shranjevanja. Če izberete
+privzeti datotečni handler, je to pot, kjer bodo ustvarjene datoteke seje.
+Za več informacij, glejte :doc:`/cookbook/session/sessions_directory`.
 
-You can also set this value to the ``save_path`` of your ``php.ini`` by setting
-the value to ``null``:
+Lahko tudi nastavite to vrednost na ``save_path`` vaših ``php.ini`` z nastavitvijo
+vrednosti na ``null``:
 
 .. configuration-block::
 
@@ -282,9 +282,9 @@ enabled
 
 **type**: ``boolean`` **default**: ``false``
 
-Whether to enable the ``serializer`` service or not in the service container.
+Ali omogočiti ``serializer`` storitev ali ne v "service container".
 
-For more details, see :doc:`/cookbook/serializer`.
+Za več podrobnosti, glejte :doc:`/cookbook/serializer`.
 
 templating
 ~~~~~~~~~~
@@ -294,17 +294,17 @@ assets_base_urls
 
 **default**: ``{ http: [], ssl: [] }``
 
-This option allows you to define base URLs to be used for assets referenced
-from ``http`` and ``ssl`` (``https``) pages. A string value may be provided in
-lieu of a single-element array. If multiple base URLs are provided, Symfony2
-will select one from the collection each time it generates an asset's path.
+Ta opcija vam omogoča definirati osnosne URL-je, uporabljene za sredstva, sklicana
+iz ``http`` in ``ssl`` (``https``) strani. Vrednost niza je lahko ponujena na lokaciji
+eno elementnega polja. Če je ponujenih več osnovnih URL-jev, bo Symfony2
+izbral enega v zbirki vsakič, ko generira pot stredstva.
 
-For your convenience, ``assets_base_urls`` can be set directly with a string or
-array of strings, which will be automatically organized into collections of base
-URLs for ``http`` and ``https`` requests. If a URL starts with ``https://`` or
-is `protocol-relative`_ (i.e. starts with `//`) it will be added to both
-collections. URLs starting with ``http://`` will only be added to the
-``http`` collection.
+Za enostavnost je lahko ``assets_base_urls`` nastavljen direktno z nizom ali
+poljem nizov, ki bodo avtomatsko organizirani v zbirke osnovnih URL-jev za
+``http`` in ``https`` zahtevke. Če se URL začne z ``https://`` ali
+je `protocol-relative`_ (to pomeni, da se začne z `//`) bo dodan k obema
+zbirkama. URL-ji, ki se začnejo s ``http://`` bodo dodani samo k zbirki
+``http``.
 
 .. _ref-framework-assets-version:
 
@@ -313,12 +313,12 @@ assets_version
 
 **type**: ``string``
 
-This option is used to *bust* the cache on assets by globally adding a query
-parameter to all rendered asset paths (e.g. ``/images/logo.png?v2``). This
-applies only to assets rendered via the Twig ``asset`` function (or PHP equivalent)
-as well as assets rendered with Assetic.
+Ta opcija je uporabljena, da sprazni predpomnilnik sredstev z globalnim dodajanjem
+poizvedbenega parametra vsem izpisanim potem (npr. ``images/logo?v2``). To
+velja samo za sredstva izpisana preko Twig ``asset`` funkcije (ali PHP ekvivaletne)
+kot tudi za sredstva izpisana s komponento Assetic.
 
-For example, suppose you have the following:
+Na primer, predstavimo, da imate sledeče:
 
 .. configuration-block::
 
@@ -330,8 +330,8 @@ For example, suppose you have the following:
 
         <img src="<?php echo $view['assets']->getUrl('images/logo.png') ?>" alt="Symfony!" />
 
-By default, this will render a path to your image such as ``/images/logo.png``.
-Now, activate the ``assets_version`` option:
+Privzeto bo to izpisalo pot vaše slike kot je ``/images/logo.png``.
+Sedaj, aktivirajte opcijo ``assets_version``:
 
 .. configuration-block::
 
@@ -360,85 +360,85 @@ Now, activate the ``assets_version`` option:
             ),
         ));
 
-Now, the same asset will be rendered as ``/images/logo.png?v2`` If you use
-this feature, you **must** manually increment the ``assets_version`` value
-before each deployment so that the query parameters change.
+Sedaj bo enako sredstvo izpisano kot ``/images/logo.png?v2``. Če uporabite
+to lastnost, **morate** ročno povečati ``assets_version`` vrednost pred
+vsakim nalaganjem, da bodo parametri poizvedbe spremenjeni.
 
-You can also control how the query string works via the `assets_version_format`_
-option.
+Kontrolirate lahko, kako deluje niz poizvedbe preko `assets_version_format`_
+opcije.
 
 assets_version_format
 .....................
 
 **type**: ``string`` **default**: ``%%s?%%s``
 
-This specifies a :phpfunction:`sprintf` pattern that will be used with the `assets_version`_
-option to construct an asset's path. By default, the pattern adds the asset's
-version as a query string. For example, if ``assets_version_format`` is set to
-``%%s?version=%%s`` and ``assets_version`` is set to ``5``, the asset's path
-would be ``/images/logo.png?version=5``.
+To specificira :phpfunction:`sprintf` vzorec, ki bo uporabljen z `assets_version`_
+opcijo za sestavo poti sredstva. Privzeto, vzorec doda verzijo sredstva kot niz
+poizvedbe. Na primer, če je ``assets_version_format`` nastavljen na
+``%%s?version=%%s`` in ``assets_version`` nastavljena na ``5``, potem bo pot sredstva
+``/images/logo.png?version=5``.
 
 .. note::
 
-    All percentage signs (``%``) in the format string must be doubled to escape
-    the character. Without escaping, values might inadvertently be interpreted
-    as :ref:`book-service-container-parameters`.
+    Vsi znaki za procente (``%``) v obliki niza morajo biti dvojni za čiščenje
+    znakov. Brez čiščenja, so lahko vrednosti nehote interpretirane kot
+    :ref:`book-service-container-parameters`.
 
 .. tip::
 
-    Some CDN's do not support cache-busting via query strings, so injecting the
-    version into the actual file path is necessary. Thankfully, ``assets_version_format``
-    is not limited to producing versioned query strings.
+    Nekaj CDN-jev ne podpira praznenja predpomnilnika preko niza poizvedbe, zato je
+    injeciranje verzije v dejansko pot datoteke potrebna. K sreči ``assets_version_format``
+    ni omejen na produciranje verzij nizov poizvedb.
 
-    The pattern receives the asset's original path and version as its first and
-    second parameters, respectively. Since the asset's path is one parameter, you
-    cannot modify it in-place (e.g. ``/images/logo-v5.png``); however, you can
-    prefix the asset's path using a pattern of ``version-%%2$s/%%1$s``, which
-    would result in the path ``version-5/images/logo.png``.
+    Vzorec prejme originalno pot sredstva in verzijo kot svoj prvi in drugi
+    parameter. Ker je pot sredstva en parameter, ga lahko modificirate na mestu
+    (npr. ``/images/logo-v5.png``); čeprav lahko
+    dodate predpono poti sredstva z uporabo vzorca ``version-%%2$s/%%1$s``, kar
+    bo imelo za rezultat v poti ``version-5/images/logo.png``.
 
-    URL rewrite rules could then be used to disregard the version prefix before
-    serving the asset. Alternatively, you could copy assets to the appropriate
-    version path as part of your deployment process and forgo any URL rewriting.
-    The latter option is useful if you would like older asset versions to remain
-    accessible at their original URL.
+    Pravila prepisovanj URL-jev so lahko uporabljena za neupoštevanje predpone verzije
+    preden se pošlje sredstvo. Namesto tega lahko tudi kopirate sredstva v ustrezne
+    poti verzij kot del vašega nalagalnega procesa in pozabite kakršnokoli URL prepisovanje.
+    Ta opcija je uporabna, če bi radi, da starejše verzije sredstev ostanejo
+    dostopne na njihovih originalnih URL-jih.
 
 profiler
 ~~~~~~~~
 
 .. versionadded:: 2.2
-    The ``enabled`` option was added in Symfony 2.2. Previously, the profiler
-    could only be disabled by omitting the ``framework.profiler`` configuration
-    entirely.
+    Opcija ``enabled`` je bila dodana v Symfony 2.2. Pred tem, je profiler
+    lahko bil samo onemogočen z izpustom nastavitve ``framework.profiler``
+    v celoti.
 
 .. _profiler.enabled:
 
 enabled
 .......
 
-**default**: ``true`` in the ``dev`` and ``test`` environments
+**default**: ``true`` v ``dev`` in ``test`` okoljih
 
-The profiler can be disabled by setting this key to ``false``.
+Profiler je lahko onemogočen z nastavitvijo tega ključa na ``false``.
 
 .. versionadded:: 2.3
 
-    The ``collect`` option is new in Symfony 2.3. Previously, when ``profiler.enabled``
-    was false, the profiler *was* actually enabled, but the collectors were
-    disabled. Now the profiler and collectors can be controller independently.
+    Opcija ``collect`` je nova v Symfony 2.3. Pred tem, ko je bil ``profiler.enabled``
+    false, je *bil* profiler dejansko omogočen, vendar zbirniki (collectors) so bili
+    onemogočeni. Sedaj se lahko profiler in collectors kontrolira neodvisno.
 
 collect
 .......
 
 **default**: ``true``
 
-This option configures the way the profiler behaves when it is enabled. If set
-to ``true``, the profiler collects data for all requests. If you want to only
-collect information on-demand, you can set the ``collect`` flag to ``false``
-and activate the data collectors by hand::
+Ta opcija nastavlja način, kako se profiler obnaša, ko je omogočen. Če je nastavljen
+na ``true``, profiler zbere podatke za vse zahtevke. Če želite samo zbrati
+informacije na zahtevo, lahko nastavite ``collect`` zastavico na ``false``
+in aktivirate zbiranje podatkov ročno::
 
     $profiler->enable();
 
-Full Default Configuration
---------------------------
+Celotne privzete nastavitve
+---------------------------
 
 .. configuration-block::
 

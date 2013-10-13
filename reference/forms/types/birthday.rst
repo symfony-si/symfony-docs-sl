@@ -1,30 +1,30 @@
 .. index::
    single: Forms; Fields; birthday
 
-birthday Field Type
-===================
+birthday tip polja
+==================
 
-A :doc:`date </reference/forms/types/date>` field that specializes in handling
-birthdate data.
+Polje :doc:`date </reference/forms/types/date>`, ki je specializirano za ravnanje s
+podatki rojstnih dni.
 
-Can be rendered as a single text box, three text boxes (month, day, and year),
-or three select boxes.
+Lahko se izpiše kot kvadratek za enostaven tekst, trije tekstovni kvadratki (mesec, dan in leto),
+ali trije izbirni kvadratki.
 
-This type is essentially the same as the :doc:`date </reference/forms/types/date>`
-type, but with a more appropriate default for the `years`_ option. The `years`_
-option defaults to 120 years ago to the current year.
+Ta tip je v bistvu enak kot :doc:`datum </reference/forms/types/date>`
+tip, vendar z več ustreznimi privzetimi vrednostmi za opcijo `years`_. Opcija `years`_
+je privzeto nastavljena na 120 let nazaj glede na trenutno leto.
 
 +----------------------+-------------------------------------------------------------------------------+
-| Underlying Data Type | can be ``DateTime``, ``string``, ``timestamp``, or ``array``                  |
-|                      | (see the :ref:`input option <form-reference-date-input>`)                     |
+| Underlying Data Type | lahko je ``DateTime``, ``string``, ``timestamp``, ali ``array``               |
+|                      | (glejte :ref:`input opcijo <form-reference-date-input>`)                      |
 +----------------------+-------------------------------------------------------------------------------+
-| Rendered as          | can be three select boxes or 1 or 3 text boxes, based on the `widget`_ option |
+| Izpisano kot         | lahko so trije izbirni kvadratki ali 1 ali 3 tekstovni kvadratki, na osnovi `widget`_ opcije |
 +----------------------+-------------------------------------------------------------------------------+
-| Overridden Options   | - `years`_                                                                    |
+| Prepisane opcije     | - `years`_                                                                    |
 +----------------------+-------------------------------------------------------------------------------+
-| Inherited Options    | - `widget`_                                                                   |
+| Podedovane opcije    | - `widget`_                                                                   |
 |                      | - `input`_                                                                    |
-|                      | - `empty_value`_                                                              |  
+|                      | - `empty_value`_                                                              |
 |                      | - `months`_                                                                   |
 |                      | - `days`_                                                                     |
 |                      | - `format`_                                                                   |
@@ -37,26 +37,26 @@ option defaults to 120 years ago to the current year.
 |                      | - `mapped`_                                                                   |
 |                      | - `inherit_data`_                                                             |
 +----------------------+-------------------------------------------------------------------------------+
-| Parent type          | :doc:`date </reference/forms/types/date>`                                     |
+| Starševski tip       | :doc:`date </reference/forms/types/date>`                                     |
 +----------------------+-------------------------------------------------------------------------------+
-| Class                | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\BirthdayType`        |
+| Razred               | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\BirthdayType`        |
 +----------------------+-------------------------------------------------------------------------------+
 
-Overridden Options
-------------------
+Prepisane opcije
+----------------
 
 years
 ~~~~~
 
-**type**: ``array`` **default**: 120 years ago to the current year
+**tip**: ``array`` **privzeto**: 120 let nazaj od trenutnega leta
 
-List of years available to the year field type.  This option is only
-relevant when the ``widget`` option is set to ``choice``.
+Seznam let, ki so na voljo za tip polje leto. Ta opcija je relevantna
+samo, ko je ``widget`` opcija nastavljena na ``choice``.
 
-Inherited options
+Podedovane opcije
 -----------------
 
-These options inherit from the :doc:`date </reference/forms/types/date>` type:
+Te opcije dedujejo iz :doc:`date </reference/forms/types/date>` tipa:
 
 .. include:: /reference/forms/types/options/date_widget.rst.inc
     
@@ -74,7 +74,7 @@ These options inherit from the :doc:`date </reference/forms/types/date>` type:
 
 .. include:: /reference/forms/types/options/view_timezone.rst.inc
 
-These options inherit from the :doc:`form </reference/forms/types/form>` type:
+Te opcije dedujejo iz :doc:`form </reference/forms/types/form>` tipa:
 
 .. include:: /reference/forms/types/options/invalid_message.rst.inc
 

@@ -1,17 +1,17 @@
 .. index::
    single: Security; Configuration reference
 
-Security Configuration Reference
+Referenca za nastavitve varnosti
 ================================
 
-The security system is one of the most powerful parts of Symfony2, and can
-largely be controlled via its configuration.
+Varnostni sistem je eden najmočnejših delov Symfony2 in je lahko
+večinoma kontroliran preko njegovih nastavitev.
 
-Full Default Configuration
---------------------------
+Celotne privzete nastavitve
+---------------------------
 
-The following is the full default configuration for the security system.
-Each part will be explained in the next section.
+Spodaj so celotne privzete nastavitve za varnostni sistem.
+Vsak del bo razložen v naslednji sekciji.
 
 .. configuration-block::
 
@@ -224,85 +224,87 @@ Each part will be explained in the next section.
 
 .. _reference-security-firewall-form-login:
 
-Form Login Configuration
-------------------------
+Nastavitve prijavnega obrazca
+-----------------------------
 
-When using the ``form_login`` authentication listener beneath a firewall,
-there are several common options for configuring the "form login" experience.
+Ko se uporablja ``form_login`` "listener" za preverjanje pristnosti pod
+požarnim zidom, je na voljo nekaj pogostih opcij za nastavitev "form login"
+izkušnjo.
 
-For even more details, see :doc:`/cookbook/security/form_login`.
+Za še več podrobnosti, glejte :doc:`/cookbook/security/form_login`.
 
-The Login Form and Process
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Prijavni obrazec in proce
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
-*   ``login_path`` (type: ``string``, default: ``/login``)
-    This is the route or path that the user will be redirected to (unless
-    ``use_forward`` is set to ``true``) when he/she tries to access a
-    protected resource but isn't fully authenticated.
+*   ``login_path`` (tip: ``string``, privzeto: ``/login``)
+    To je smet ali pot, kamor bo uporabnik preusmerjen (razen če je
+    ``use_forward`` nastavljen na ``true``) ko poskuša dostopati do
+    varovanega vira, vendar ni v celoti prijavljen.
 
-    This path **must** be accessible by a normal, un-authenticated user, else
-    you may create a redirect loop. For details, see
-    ":ref:`Avoid Common Pitfalls <book-security-common-pitfalls>`".
+    Ta pot **mora** biti dostopna s strani običajnega, neprijavljenega uporabnika,
+    drugače lahko naredite preusmeritveno zanko. Za podrobnosti, glejte
+    ":ref:`Izognite se pogostim pastem <book-security-common-pitfalls>`".
 
-*   ``check_path`` (type: ``string``, default: ``/login_check``)
-    This is the route or path that your login form must submit to. The
-    firewall will intercept any requests (``POST`` requests only, by default)
-    to this URL and process the submitted login credentials.
+*   ``check_path`` (tip: ``string``, privzeto: ``/login_check``)
+    To je smer ali pot, na katero mora vaš prijavni obrazec poslati podatke. Požarni
+    zid bo prestregel katerekoli zahtevke (samo ``POST`` zahtevki privzeto)
+    za ta URL in procesiral poslane podatke prijavnih poverilnic.
 
-    Be sure that this URL is covered by your main firewall (i.e. don't create
-    a separate firewall just for ``check_path`` URL).
+    Bodite gotovi, da bo ta URL zajet s strani vašega glavnega požarnega zidu (to pomeni,
+    da ne izdelujte ločenega požarnega zidu samo za URL ``check_path``)
 
-*   ``use_forward`` (type: ``Boolean``, default: ``false``)
-    If you'd like the user to be forwarded to the login form instead of being
-    redirected, set this option to ``true``.
+*   ``use_forward`` (tip: ``Boolean``, privzeto: ``false``)
+    Če bi želeli, da je uporabnik posredovan na prijavni obrazec namesto, da je
+    preusmerjen, nastavite to opcijo na ``true``.
 
-*   ``username_parameter`` (type: ``string``, default: ``_username``)
-    This is the field name that you should give to the username field of
-    your login form. When you submit the form to ``check_path``, the security
-    system will look for a POST parameter with this name.
+*   ``username_parameter`` (tip: ``string``, privzeto: ``_username``)
+    To je ime polja, ki bi ga morali podati username polju vašega
+    prijavnega obrazca. Ko pošljete obrazec na ``check_path``, bo
+    varnostni sistem pogledal za parametrom POST s tem imenom.
 
-*   ``password_parameter`` (type: ``string``, default: ``_password``)
-    This is the field name that you should give to the password field of
-    your login form. When you submit the form to ``check_path``, the security
-    system will look for a POST parameter with this name.
+*   ``password_parameter`` (tip: ``string``, privzeto: ``_password``)
+    To je ime polja, ki bi ga morali dati polju geslo vašega prijavnega
+    obrazca. Ko pošiljate obrazec na ``check_path``, bo varnostni
+    sistem pogledal za parametrom POST s tem imenom.
 
-*   ``post_only`` (type: ``Boolean``, default: ``true``)
-    By default, you must submit your login form to the ``check_path`` URL
-    as a POST request. By setting this option to ``false``, you can send a
-    GET request to the ``check_path`` URL.
+*   ``post_only`` (tip: ``Boolean``, privzeto: ``true``)
+    Privzeto bi morali poslati vaše prijavne podatke na ``check_path`` URL
+    kot zahtevek POST. Z nastavitvijo te opcije na ``false``, lahko pošljete
+    GET zahtevek na ``check_path`` URL.
 
-Redirecting after Login
+Preusmeritev po prijavi
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-* ``always_use_default_target_path`` (type: ``Boolean``, default: ``false``)
-* ``default_target_path`` (type: ``string``, default: ``/``)
-* ``target_path_parameter`` (type: ``string``, default: ``_target_path``)
-* ``use_referer`` (type: ``Boolean``, default: ``false``)
+* ``always_use_default_target_path`` (tip: ``Boolean``, privzeto: ``false``)
+* ``default_target_path`` (tip: ``string``, privzeto: ``/``)
+* ``target_path_parameter`` (tip: ``string``, privzeto: ``_target_path``)
+* ``use_referer`` (tip: ``Boolean``, privzeto: ``false``)
 
 .. _reference-security-pbkdf2:
 
-Using the PBKDF2 encoder: Security and Speed
+Uporaba enkoderja PBKDF2: Varnost in hitrost
 --------------------------------------------
 
 .. versionadded:: 2.2
-    The PBKDF2 password encoder was added in Symfony 2.2.
+    Enkoder gesel PBKDF2 je bil dodan v Symfony 2.2.
 
-The `PBKDF2`_ encoder provides a high level of Cryptographic security, as
-recommended by the National Institute of Standards and Technology (NIST).
+Enkoder `PBKDF2`_ ponuja visoko nivojsko kriptografsko varnost, kot je
+priporočeno s strani Nacionalnega inštituta za standarde in tehnologijo -
+National Institute of Standards and Technology (NIST).
 
-You can see an example of the ``pbkdf2`` encoder in the YAML block on this page.
+Lahko pogledate primer enkoderja ``pbkdf2`` v YAML bloku na tej strani.
 
-But using PBKDF2 also warrants a warning: using it (with a high number
-of iterations) slows down the process. Thus, PBKDF2 should be used with
-caution and care.
+Vendar uporaba PBKDF tudi nalaga opozorilo: z njegovo uporabo (z velikim
+število iteracij) upočasni proces. Zato bi PBKDF2 moral biti uporabljen
+s previdnostjo in skrbnostjo.
 
-A good configuration lies around at least 1000 iterations and sha512
-for the hash algorithm.
+Ustrezne nastavitve ležijo okrog vsaj 1000 iteracij in sha512
+za njihov razpršilni algoritem.
 
 .. _reference-security-bcrypt:
 
-Using the BCrypt Password Encoder
----------------------------------
+Uporaba enkoderja gesel BCrypt
+------------------------------
 
 .. caution::
 
@@ -350,43 +352,44 @@ Using the BCrypt Password Encoder
             ),
         ));
 
-The ``cost`` can be in the range of ``4-31`` and determines how long a password
-will be encoded. Each increment of ``cost`` *doubles* the time it takes to
-encode a password.
+Nastavitev ``cost`` je lahko v rangu med ``4-31`` in določa kako dolgo
+bo geslo enkodirano. Vsak inkrement vrednosti ``cost`` *podvoji* čas, ki
+je potreben za enkodiranje gesla.
 
-If you don't provide the ``cost`` option, the default cost of ``13`` is used.
-
-.. note::
-
-    You can change the cost at any time — even if you already have some
-    passwords encoded using a different cost. New passwords will be encoded
-    using the new cost, while the already encoded ones will be validated
-    using a cost that was used back when they were encoded.
-
-A salt for each new password is generated automatically and need not be
-persisted. Since an encoded password contains the salt used to encode it,
-persisting the encoded password alone is enough.
+Če ne ponudite opcije ``cost``, je privzeta uporabljena nastavitev ``13``.
 
 .. note::
 
-    All the encoded passwords are ``60`` characters long, so make sure to
-    allocate enough space for them to be persisted.
+    Lahko spremenite nastavitev cost kadarkoli - tudi, če že imate nekaj
+    gesel enkodiranih z uporabljeno drugačno nastavitvijo cost. Nova gesla
+    bodo enkodirana z uporabo nove nastavitve cost, medtem ko že obstoječa
+    bodo preverjana z uporabo nastavitve cost, ki je bila uporabljena pri
+    enkodiranju.
+
+Za vsako geslo se generira avtomatsko tudi t.i. salt in ne nujno pridobljeno.
+Ker enkodirano geslo vsebuje "salt", ki je bila uporabljena pri njegovem
+enkodiranju, je pridobivanje samega enkodiranega gesla dovolj.
+
+.. note::
+
+    Vsa enkodirana gesla so dolga ``60`` znakov, torej poskrbite, da je na voljo
+    dovolj prostora za njihovo shranjevanje.
 
     .. _reference-security-firewall-context:
 
-Firewall Context
-----------------
+Contekst požarnega zidu
+-----------------------
 
-Most applications will only need one :ref:`firewall <book-security-firewalls>`.
-But if your application *does* use multiple firewalls, you'll notice that
-if you're authenticated in one firewall, you're not automatically authenticated
-in another. In other words, the systems don't share a common "context": each
-firewall acts like a separate security system.
+Večina aplikacij bo samo potrebovala en :ref:`požarni zid <book-security-firewalls>`.
+Vendar če vaša aplikacija uporablja več požarnih zidov, boste opazili,
+da če ste prijavljeni znotraj enega požarnega zidu, niste avtomatsko prijavljetni
+v drugem. Z drugačnimi besedami, sistemi ne delijo skupnega "conteksta": vsak
+požarni zdi se obnaša kot ločen varnostni sistem.
 
-However, each firewall has an optional ``context`` key (which defaults to
-the name of the firewall), which is used when storing and retrieving security
-data to and from the session. If this key were set to the same value across
-multiple firewalls, the "context" could actually be shared:
+Čeprav, vsak požarni zid ima opcijski ključ ``context`` (ki je privzeto nastavljen
+na ime požarnega zidu), ki je uporabljen ko se shranjuje in pridobiva varnostne
+podatke v in iz seje. Če je ta ključ nastavljen na enako vrednost okrog
+večih požarnih zidov, je lahko "context" dejansko deljen:
 
 .. configuration-block::
 
@@ -432,10 +435,10 @@ multiple firewalls, the "context" could actually be shared:
             ),
        ));
 
-HTTP-Digest Authentication
---------------------------
+Preverjanje pristnosti HTTP-Digest
+----------------------------------
 
-To use HTTP-Digest authentication you need to provide a realm and a key:
+Za uporabo preverjanja pristnosti HTTP-Digest boste morali ponuditi t.i. "realm" in ključ:
 
 .. configuration-block::
 
