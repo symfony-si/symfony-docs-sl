@@ -1,89 +1,88 @@
 .. index::
    single: Forms; Fields; money
 
-money Field Type
-================
+money tip polja
+===============
 
-Renders an input text field and specializes in handling submitted "money"
-data.
+Izpiše vnostno tekstovno polje in specializira ravnanje vnešenih denarnih ("money")
+podatkov.
 
-This field type allows you to specify a currency, whose symbol is rendered
-next to the text field. There are also several other options for customizing
-how the input and output of the data is handled.
+To polje vam omogoča, da določite valuto, katere simbol je izpisan poleg
+tekstovnega polja. Na voljo je tudi nekaj ostalih opcij za prilagajanje,
+kako se ravna z vhodom in izhodom podatkov.
 
-+-------------+---------------------------------------------------------------------+
-| Rendered as | ``input`` ``text`` field                                            |
-+-------------+---------------------------------------------------------------------+
-| Options     | - `currency`_                                                       |
-|             | - `divisor`_                                                        |
-|             | - `precision`_                                                      |
-|             | - `grouping`_                                                       |
-+-------------+---------------------------------------------------------------------+
-| Inherited   | - `required`_                                                       |
-| options     | - `label`_                                                          |
-|             | - `read_only`_                                                      |
-|             | - `disabled`_                                                       |
-|             | - `error_bubbling`_                                                 |
-|             | - `error_mapping`_                                                  |
-|             | - `invalid_message`_                                                |
-|             | - `invalid_message_parameters`_                                     |
-|             | - `mapped`_                                                         |
-+-------------+---------------------------------------------------------------------+
-| Parent type | :doc:`form </reference/forms/types/form>`                           |
-+-------------+---------------------------------------------------------------------+
-| Class       | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\MoneyType` |
-+-------------+---------------------------------------------------------------------+
++----------------+---------------------------------------------------------------------+
+| Izpisan kot    | ``input`` ``text`` polje                                            |
++----------------+---------------------------------------------------------------------+
+| Opcije         | - `currency`_                                                       |
+|                | - `divisor`_                                                        |
+|                | - `precision`_                                                      |
+|                | - `grouping`_                                                       |
++----------------+---------------------------------------------------------------------+
+| Podedovane     | - `required`_                                                       |
+| opcije         | - `label`_                                                          |
+|                | - `read_only`_                                                      |
+|                | - `disabled`_                                                       |
+|                | - `error_bubbling`_                                                 |
+|                | - `error_mapping`_                                                  |
+|                | - `invalid_message`_                                                |
+|                | - `invalid_message_parameters`_                                     |
+|                | - `mapped`_                                                         |
++----------------+---------------------------------------------------------------------+
+| Starševski tip | :doc:`form </reference/forms/types/form>`                           |
++----------------+---------------------------------------------------------------------+
+| Razred         | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\MoneyType` |
++----------------+---------------------------------------------------------------------+
 
-Field Options
--------------
+Opcije polja
+------------
 
 currency
 ~~~~~~~~
 
-**type**: ``string`` **default**: ``EUR``
+**tip**: ``string`` **privzeto**: ``EUR``
 
-Specifies the currency that the money is being specified in. This determines
-the currency symbol that should be shown by the text box. Depending on
-the currency - the currency symbol may be shown before or after the input
-text field.
+Določa valuto v kateri je denar določen. To določa
+simbol valute, ki bi moral biti prikazan s tekstovnim kvadratkom. Odvisno od
+valute - simbol valute je lahko prikazan pred ali za vnosnim tekstovnim poljem.
     
-This can be any `3 letter ISO 4217 code`_. You can also set this to false to
-hide the currency symbol.
+To je lahko katerakoli `3 črkovna ISO 4217 koda`_. To lahko tudi nastavite na
+false, da skrijete simbol valute.
 
 divisor
 ~~~~~~~
 
-**type**: ``integer`` **default**: ``1``
+**tip**: ``integer`` **privzeto**: ``1``
 
-If, for some reason, you need to divide your starting value by a number
-before rendering it to the user, you can use the ``divisor`` option.
-For example::
+Če zaradi kakršnega koli razloga potrebujete razdeliti vašo začetno vrednost s
+številom pred izpisom uporabniku, lahko uporabite opcijo ``divisor``.
+Na primer::
 
     $builder->add('price', 'money', array(
         'divisor' => 100,
     ));
 
-In this case, if the ``price`` field is set to ``9900``, then the value
-``99`` will actually be rendered to the user. When the user submits the
-value ``99``, it will be multiplied by ``100`` and ``9900`` will ultimately
-be set back on your object.
+V tem primeru, če je polje ``price`` nastavljeno na ``9900``, potem bo
+vrednost ``99`` dejansko izpisana uporabniku. Ko uporabnik vnese
+vrednost ``99``, bo zmnožena s ``100`` in ``9900`` bo na koncu
+nastavljena v vašem objektu.
 
 precision
 ~~~~~~~~~
 
-**type**: ``integer`` **default**: ``2``
+**tip**: ``integer`` **privzeto**: ``2``
 
-For some reason, if you need some precision other than 2 decimal places,
-you can modify this value. You probably won't need to do this unless,
-for example, you want to round to the nearest dollar (set the precision
-to ``0``).
+Če zaradi kakšnega razloga potrebujete nekaj preciznosti drugačna kot 2
+decimalna mesta, lahko modificirate to vrednost. Verjetno vam tega ne bo treba
+narediti, razen če na primer želite zaokrožiti na najbližji dolar (nastavite
+precision na ``0``).
 
 .. include:: /reference/forms/types/options/grouping.rst.inc
 
-Inherited Options
+Podedovane opcije
 -----------------
 
-These options inherit from the :doc:`form </reference/forms/types/form>` type:
+Te opcije dedujejo iz tipa :doc:`form </reference/forms/types/form>`:
 
 .. include:: /reference/forms/types/options/required.rst.inc
 
@@ -103,4 +102,4 @@ These options inherit from the :doc:`form </reference/forms/types/form>` type:
 
 .. include:: /reference/forms/types/options/mapped.rst.inc
 
-.. _`3 letter ISO 4217 code`: http://en.wikipedia.org/wiki/ISO_4217
+.. _`3 črkovna ISO 4217 koda`: http://en.wikipedia.org/wiki/ISO_4217

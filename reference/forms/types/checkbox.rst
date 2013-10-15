@@ -1,33 +1,33 @@
 .. index::
    single: Forms; Fields; checkbox
 
-checkbox Field Type
-===================
+checkbox tip polja
+==================
 
-Creates a single input checkbox. This should always be used for a field that
-has a Boolean value: if the box is checked, the field will be set to true,
-if the box is unchecked, the value will be set to false.
+Izdela eno vnosno polje za potrditev. Ta bi moral biti vedno uporabljen za polje, ki
+ima logično vrednost (boolean): če je kvadratek označen, bo polje nastavljeno na true,
+če kvadratek ni označen, bo vrednost nastavljena na false.
 
-+-------------+------------------------------------------------------------------------+
-| Rendered as | ``input`` ``checkbox`` field                                           |
-+-------------+------------------------------------------------------------------------+
-| Options     | - `value`_                                                             |
-+-------------+------------------------------------------------------------------------+
-| Inherited   | - `required`_                                                          |
-| options     | - `label`_                                                             |
-|             | - `read_only`_                                                         |
-|             | - `disabled`_                                                          |
-|             | - `error_bubbling`_                                                    |
-|             | - `error_mapping`_                                                     |
-|             | - `mapped`_                                                            |
-+-------------+------------------------------------------------------------------------+
-| Parent type | :doc:`form </reference/forms/types/form>`                              |
-+-------------+------------------------------------------------------------------------+
-| Class       | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\CheckboxType` |
-+-------------+------------------------------------------------------------------------+
++----------------+------------------------------------------------------------------------+
+| Izpisan kot    | ``input`` ``checkbox`` polje                                           |
++----------------+------------------------------------------------------------------------+
+| Opcije         | - `value`_                                                             |
++----------------+------------------------------------------------------------------------+
+| Podedovanje    | - `required`_                                                          |
+| opcije         | - `label`_                                                             |
+|                | - `read_only`_                                                         |
+|                | - `disabled`_                                                          |
+|                | - `error_bubbling`_                                                    |
+|                | - `error_mapping`_                                                     |
+|                | - `mapped`_                                                            |
++----------------+------------------------------------------------------------------------+
+| Starševski tip | :doc:`form </reference/forms/types/form>`                              |
++----------------+------------------------------------------------------------------------+
+| Razred         | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\CheckboxType` |
++----------------+------------------------------------------------------------------------+
 
-Example Usage
--------------
+Primer uporabe
+--------------
 
 .. code-block:: php
 
@@ -36,21 +36,21 @@ Example Usage
         'required'  => false,
     ));
 
-Field Options
--------------
+Opcije polja
+------------
 
-value
-~~~~~
+vrednost
+~~~~~~~~
 
-**type**: ``mixed`` **default**: ``1``
+**tip**: ``mixed`` **privzeto**: ``1``
 
-The value that's actually used as the value for the checkbox. This does
-not affect the value that's set on your object.
+Vrednost, ki je dejansko uporabljena kot vrednost potrditvena polja. To
+ne vpliva na vrednost, ki je nastavljena na vašem objektu.
 
-Inherited options
+Podedovane opcije
 -----------------
 
-These options inherit from the :doc:`form </reference/forms/types/form>` type:
+Te opcije podedujejo iz the tipa :doc:`form </reference/forms/types/form>`:
 
 .. include:: /reference/forms/types/options/required.rst.inc
 

@@ -1,29 +1,29 @@
 .. index::
    single: Forms; Fields; button
 
-button Field Type
-=================
+button tip polja
+================
 
 .. versionadded:: 2.3
-    The ``button`` type was added in Symfony 2.3
+    Tip ``button`` je bil dodan v Symfony 2.3
 
-A simple, non-responsive button.
+Enostaven, ne odziven gumb.
 
 +----------------------+----------------------------------------------------------------------+
-| Rendered as          | ``button`` tag                                                       |
+| Izpisan kot          | ``button`` značka                                                    |
 +----------------------+----------------------------------------------------------------------+
-| Options              | - `attr`_                                                            |
+| Opcije               | - `attr`_                                                            |
 |                      | - `disabled`_                                                        |
 |                      | - `label`_                                                           |
 |                      | - `translation_domain`_                                              |
 +----------------------+----------------------------------------------------------------------+
-| Parent type          | none                                                                 |
+| Starševski tip       | noben                                                                |
 +----------------------+----------------------------------------------------------------------+
-| Class                | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\ButtonType` |
+| Razred               | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\ButtonType` |
 +----------------------+----------------------------------------------------------------------+
 
-Options
--------
+Opcije
+------
 
 .. include:: /reference/forms/types/options/button_attr.rst.inc
 

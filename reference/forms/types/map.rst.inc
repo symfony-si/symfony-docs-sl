@@ -1,5 +1,5 @@
-Text Fields
-~~~~~~~~~~~
+Tekstovna polja
+~~~~~~~~~~~~~~~
 
 * :doc:`text </reference/forms/types/text>`
 * :doc:`textarea </reference/forms/types/textarea>`
@@ -12,7 +12,7 @@ Text Fields
 * :doc:`search </reference/forms/types/search>`
 * :doc:`url </reference/forms/types/url>`
 
-Choice Fields
+Izbirna polja
 ~~~~~~~~~~~~~
 
 * :doc:`choice </reference/forms/types/choice>`
@@ -23,40 +23,40 @@ Choice Fields
 * :doc:`timezone </reference/forms/types/timezone>`
 * :doc:`currency </reference/forms/types/currency>`
 
-Date and Time Fields
-~~~~~~~~~~~~~~~~~~~~
+Datumska in časovna polja
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * :doc:`date </reference/forms/types/date>`
 * :doc:`datetime </reference/forms/types/datetime>`
 * :doc:`time </reference/forms/types/time>`
 * :doc:`birthday </reference/forms/types/birthday>`
 
-Other Fields
+Ostala polja
 ~~~~~~~~~~~~
 
 * :doc:`checkbox </reference/forms/types/checkbox>`
 * :doc:`file </reference/forms/types/file>`
 * :doc:`radio </reference/forms/types/radio>`
 
-Field Groups
+Skupine polj
 ~~~~~~~~~~~~
 
 * :doc:`collection </reference/forms/types/collection>`
 * :doc:`repeated </reference/forms/types/repeated>`
 
-Hidden Fields
-~~~~~~~~~~~~~
+Skrita polja
+~~~~~~~~~~~~
 
 * :doc:`hidden </reference/forms/types/hidden>`
 
-Buttons
-~~~~~~~
+Gumbi
+~~~~~
 
 * :doc:`button</reference/forms/types/button>`
 * :doc:`reset</reference/forms/types/reset>`
 * :doc:`submit</reference/forms/types/submit>`
 
-Base Fields
-~~~~~~~~~~~
+Osnovna polja
+~~~~~~~~~~~~~
 
 * :doc:`form </reference/forms/types/form>`

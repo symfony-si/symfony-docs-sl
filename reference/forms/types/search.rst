@@ -1,36 +1,36 @@
 .. index::
    single: Forms; Fields; search
 
-search Field Type
-=================
+search tip polja
+================
 
-This renders an ``<input type="search" />`` field, which is a text box with
-special functionality supported by some browsers.
+Izpisano je kot ``<input type="search" />`` polje, ki je tekstovni kvadratek s
+posebnimi funkcionalnostmi podprtimi s strani nekaterih brskalnikov.
 
-Read about the input search field at `DiveIntoHTML5.info`_
+Preberite več o vnosnem iskalnem polju na `DiveIntoHTML5.info`_
 
-+-------------+----------------------------------------------------------------------+
-| Rendered as | ``input search`` field                                               |
-+-------------+----------------------------------------------------------------------+
-| Inherited   | - `max_length`_                                                      |
-| options     | - `required`_                                                        |
-|             | - `label`_                                                           |
-|             | - `trim`_                                                            |
-|             | - `read_only`_                                                       |
-|             | - `disabled`_                                                        |
-|             | - `error_bubbling`_                                                  |
-|             | - `error_mapping`_                                                   |
-|             | - `mapped`_                                                          |
-+-------------+----------------------------------------------------------------------+
-| Parent type | :doc:`text </reference/forms/types/text>`                            |
-+-------------+----------------------------------------------------------------------+
-| Class       | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\SearchType` |
-+-------------+----------------------------------------------------------------------+
++----------------+----------------------------------------------------------------------+
+| Izpisan kot    | ``input search`` polje                                               |
++----------------+----------------------------------------------------------------------+
+| Podedovane     | - `max_length`_                                                      |
+| opcije         | - `required`_                                                        |
+|                | - `label`_                                                           |
+|                | - `trim`_                                                            |
+|                | - `read_only`_                                                       |
+|                | - `disabled`_                                                        |
+|                | - `error_bubbling`_                                                  |
+|                | - `error_mapping`_                                                   |
+|                | - `mapped`_                                                          |
++----------------+----------------------------------------------------------------------+
+| Starševski tip | :doc:`text </reference/forms/types/text>`                            |
++----------------+----------------------------------------------------------------------+
+| Razred         | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\SearchType` |
++----------------+----------------------------------------------------------------------+
 
-Inherited Options
+Podedovane opcije
 -----------------
 
-These options inherit from the :doc:`form </reference/forms/types/form>` type:
+Te opcije so podedovane iz tipa :doc:`form </reference/forms/types/form>`:
 
 .. include:: /reference/forms/types/options/max_length.rst.inc
 

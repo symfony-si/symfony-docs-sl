@@ -1,194 +1,195 @@
 .. index::
     single: Symfony2 Twig extensions
 
-Symfony2 Twig Extensions
+Symfony2 Twig razširitve
 ========================
 
-Twig is the default template engine for Symfony2. By itself, it already contains
-a lot of build-in functions, filters, tags and tests (`http://twig.sensiolabs.org/documentation`_
-then scroll to the bottom).
+Twig je privzet motor predlog za Symfony2. Vsebuje že veliko vgrajenih funkcij,
+filtrov, značk in testov (`http://twig.sensiolabs.org/documentation`_
+nato se pomaknite na dno).
 
-Symfony2 adds more custom extension on top of Twig to integrate some components
-into the Twig templates. Below is information about all the custom functions,
-filters, tags and tests that are added when using the Symfony2 Core Framework.
+Symfony2 dodaja več raširitev po meni na Twig za integracijo nekaterih komponent
+v Twig predloge. Spodaj so informacije o vseh funkcijah po meri, filtrih, značkah
+in testih, ki so dodani, ko se uporablja jedro Symfony2 ogrodja.
 
-There may also be tags in bundles you use that aren't listed here.
+Na voljo so lahko tudi značke v paketih, ki jih uporabljate, ki tu niso
+navedene.
 
-Functions
----------
+Funkcije
+--------
 
 .. versionadded:: 2.2
-    The ``render`` and ``controller`` functions are new in Symfony 2.2. Prior,
-    the ``{% render %}`` tag was used and had a different signature.
+    Funkciji ``render`` in ``controller`` sta novi v Symfoyn 2.2. Pred tem
+    je bila uporabljana značka ``{% render %}`` in je imela različen podpis.
 
 +----------------------------------------------------+--------------------------------------------------------------------------------------------+
-| Function Syntax                                    | Usage                                                                                      |
+| Sintaksa funkcij                                   | Uporaba                                                                                    |
 +====================================================+============================================================================================+
-| ``render(uri, options = {})``                      | This will render the fragment for the given controller or URL                              |
-| ``render(controller('B:C:a', {params}))``          | For more information, see :ref:`templating-embedding-controller`.                          |
+| ``render(uri, options = {})``                      | To bo izpisalo fragment za dani krmilnik ali URL                                           |
+| ``render(controller('B:C:a', {params}))``          | Za več informacij, glejte :ref:`templating-embedding-controller`.                          |
 | ``render(path('route', {params}))``                |                                                                                            |
 | ``render(url('route', {params}))``                 |                                                                                            |
 +----------------------------------------------------+--------------------------------------------------------------------------------------------+
-| ``render_esi(controller('B:C:a', {params}))``      | This will generates an ESI tag when possible or fallback to the ``render``                 |
-| ``render_esi(url('route', {params}))``             | behavior otherwise. For more information, see :ref:`templating-embedding-controller`.      |
+| ``render_esi(controller('B:C:a', {params}))``      | To bo generiralo ESI značko, ko je mogoče ali se drugače vrnilo na ``render``              |
+| ``render_esi(url('route', {params}))``             | obnašanje. Za več informacij, glejte :ref:`templating-embedding-controller`.               |
 | ``render_esi(path('route', {params}))``            |                                                                                            |
 +----------------------------------------------------+--------------------------------------------------------------------------------------------+
-| ``render_hinclude(controller(...))``               | This will generates an Hinclude tag for the given controller or URL.                       |
-| ``render_hinclude(url('route', {params}))``        | For more information, see :ref:`templating-embedding-controller`.                          |
+| ``render_hinclude(controller(...))``               | To bo generiralo Hinclude značko za dani krmilnik ali URL.                                 |
+| ``render_hinclude(url('route', {params}))``        | Za več informacij, glejte :ref:`templating-embedding-controller`.                          |
 | ``render_hinclude(path('route', {params}))``       |                                                                                            |
 +----------------------------------------------------+--------------------------------------------------------------------------------------------+
-| ``controller(attributes = {}, query = {})``        | Used along with the ``render`` tag to refer to the controller that you want to render.     |
+| ``controller(attributes = {}, query = {})``        | Uporabljen skupaj z ``render`` značko za sklicevanje na krmilnik, ki ga želite izpisati.   |
 +----------------------------------------------------+--------------------------------------------------------------------------------------------+
-| ``asset(path, packageName = null)``                | Get the public path of the asset, more information in                                      |
+| ``asset(path, packageName = null)``                | Dobite javno pot do sredstva, več informacij v                                             |
 |                                                    | ":ref:`book-templating-assets`".                                                           |
 +----------------------------------------------------+--------------------------------------------------------------------------------------------+
-| ``asset_version(packageName = null)``              | Get the current version of the package, more information in                                |
+| ``asset_version(packageName = null)``              | Dobite trenutno verzijo paketa, več informacij v                                           |
 |                                                    | ":ref:`book-templating-assets`".                                                           |
 +----------------------------------------------------+--------------------------------------------------------------------------------------------+
-| ``form(view, variables = {})``                     | This will render the HTML of a complete form, more information in                          |
-|                                                    | in :ref:`the Twig Form reference<reference-forms-twig-form>`.                              |
+| ``form(view, variables = {})``                     | To bo izpisalo HTML celotnega obrazca, več informacij v                                    |
+|                                                    | :ref:`Referenci Twig obrazcev<reference-forms-twig-form>`.                                 |
 +----------------------------------------------------+--------------------------------------------------------------------------------------------+
-| ``form_start(view, variables = {})``               | This will render the HTML start tag of a form, more information in                         |
-|                                                    | in :ref:`the Twig Form reference<reference-forms-twig-start>`.                             |
+| ``form_start(view, variables = {})``               | To bo izpisalo začetno HTML značko obrazca, več informacij                                 |
+|                                                    | v :ref:`referencu Twig obrazcev<reference-forms-twig-start>`.                              |
 +----------------------------------------------------+--------------------------------------------------------------------------------------------+
-| ``form_end(view, variables = {})``                 | This will render the HTML end tag of a form together with all fields that                  |
-|                                                    | have not been rendered yet, more information                                               |
-|                                                    | in :ref:`the Twig Form reference<reference-forms-twig-end>`.                               |
+| ``form_end(view, variables = {})``                 | To bo izpisalo končno HTML značko obrazca skupaj z vsemi polji, ki                         |
+|                                                    | morda še niso bila izpisana, več informacij                                                |
+|                                                    | v :ref:`referenci Twig obrazcev<reference-forms-twig-end>`.                                |
 +----------------------------------------------------+--------------------------------------------------------------------------------------------+
-| ``form_enctype(view)``                             | This will render the required ``enctype="multipart/form-data"`` attribute                  |
-|                                                    | if the form contains at least one file upload field, more information in                   |
-|                                                    | in :ref:`the Twig Form reference <reference-forms-twig-enctype>`.                          |
+| ``form_enctype(view)``                             | To bo izpisalo zahtevan ``enctype="multipart/form-data"`` atribut,                         |
+|                                                    | če obrazec vsebuje vsaj eno polje za nalaganje datotek, več informacij v                   |
+|                                                    | :ref:`referenci Twig obrazrev <reference-forms-twig-enctype>`.                             |
 +----------------------------------------------------+--------------------------------------------------------------------------------------------+
-| ``form_widget(view, variables = {})``              | This will render a complete form or a specific HTML widget of a field,                     |
-|                                                    | more information in :ref:`the Twig Form reference <reference-forms-twig-widget>`.          |
+| ``form_widget(view, variables = {})``              | To bo izpisalo celoten obrazec ali določen HTML widget polja,                              |
+|                                                    | več informacij v :ref:`referenci Twig obrazcev <reference-forms-twig-widget>`.             |
 +----------------------------------------------------+--------------------------------------------------------------------------------------------+
-| ``form_errors(view)``                              | This will render any errors for the given field or the "global" errors,                    |
-|                                                    | more information in :ref:`the Twig Form reference <reference-forms-twig-errors>`.          |
+| ``form_errors(view)``                              | To bo izpisalo kakršnekoli napake za dano polje ali "globalne" napake,                     |
+|                                                    | več infomracij v :ref:`referenci Twig obrazcev <reference-forms-twig-errors>`.             |
 +----------------------------------------------------+--------------------------------------------------------------------------------------------+
-| ``form_label(view, label = null, variables = {})`` | This will render the label for the given field, more information in                        |
-|                                                    | :ref:`the Twig Form reference <reference-forms-twig-label>`.                               |
+| ``form_label(view, label = null, variables = {})`` | To bo izpisalo oznako danega polja, več informacij v                                       |
+|                                                    | :ref:`referenci Twig obrazcev <reference-forms-twig-label>`.                               |
 +----------------------------------------------------+--------------------------------------------------------------------------------------------+
-| ``form_row(view, variables = {})``                 | This will render the row (the field's label, errors and widget) of the given               |
-|                                                    | field, more information in :ref:`the Twig Form reference <reference-forms-twig-row>`.      |
+| ``form_row(view, variables = {})``                 | To bo izpisalo vrstico (oznake polja, napake in widget-e) danega                           |
+|                                                    | polja, več informacij v :ref:`referenci Twig obrazcev <reference-forms-twig-row>`.         |
 +----------------------------------------------------+--------------------------------------------------------------------------------------------+
-| ``form_rest(view, variables = {})``                | This will render all fields that have not yet been rendered, more                          |
-|                                                    | information in :ref:`the Twig Form reference <reference-forms-twig-rest>`.                 |
+| ``form_rest(view, variables = {})``                | To bo izpisalo vsa polja, ki še morda niso bila izpisana, več                              |
+|                                                    | informacij v :ref:`referenci Twig obrazcev <reference-forms-twig-rest>`.                   |
 +----------------------------------------------------+--------------------------------------------------------------------------------------------+
-| ``csrf_token(intention)``                          | This will render a CSRF token. Use this function if you want CSRF protection without       |
-|                                                    | creating a form                                                                            |
+| ``csrf_token(intention)``                          | To bo izpisalo CSRF žeton. Uporabite to funkcijo, če želite CSRF zaščito brez              |
+|                                                    | izdelave obrazca                                                                           |
 +----------------------------------------------------+--------------------------------------------------------------------------------------------+
-| ``is_granted(role, object = null, field = null)``  | This will return ``true`` if the current user has the required role, more                  |
-|                                                    | information in ":ref:`book-security-template`"                                             |
+| ``is_granted(role, object = null, field = null)``  | To bo vrnilo ``true``, če ima trenutni uporabnik potrebne vloge, več                       |
+|                                                    | informacij v ":ref:`book-security-template`"                                               |
 +----------------------------------------------------+--------------------------------------------------------------------------------------------+
-| ``logout_path(key)``                               | This will generate the relative logout URL for the given firewall                          |
+| ``logout_path(key)``                               | To bo generiralo relativni odjavni URL za dani požarni zid                                 |
 +----------------------------------------------------+--------------------------------------------------------------------------------------------+
-| ``logout_url(key)``                                | Equal to ``logout_path(...)`` but this will generate an absolute url                       |
+| ``logout_url(key)``                                | Enako ``logout_path(...)`` vendar to generira absolutni url                                |
 +----------------------------------------------------+--------------------------------------------------------------------------------------------+
-| ``path(name, parameters = {})``                    | Get a relative url for the given route, more information in                                |
+| ``path(name, parameters = {})``                    | Dobite relativni url za dano smer, več informacij v                                        |
 |                                                    | ":ref:`book-templating-pages`".                                                            |
 +----------------------------------------------------+--------------------------------------------------------------------------------------------+
-| ``url(name, parameters = {})``                     | Equal to ``path(...)`` but it generates an absolute url                                    |
+| ``url(name, parameters = {})``                     | Enako ``path(...)`` vendar to generira absolutni url                                       |
 +----------------------------------------------------+--------------------------------------------------------------------------------------------+
 
-Filters
--------
+Filtri
+------
 
 +---------------------------------------------------------------------------------+-------------------------------------------------------------------+
-| Filter Syntax                                                                   | Usage                                                             |
+| Sintaksa filtra                                                                 | Uporaba                                                           |
 +=================================================================================+===================================================================+
-| ``text|humanize``                                                               | Makes a technical name human readable (replaces underscores by    |
-|                                                                                 | spaces and capitalizes the string)                                |
+| ``text|humanize``                                                               | Naredi tehnično ime človeku bralno (zamenja podčrtaje s           |
+|                                                                                 | presledki in nizu naredi velike črke)                             |
 +---------------------------------------------------------------------------------+-------------------------------------------------------------------+
-| ``text|trans(arguments = {}, domain = 'messages', locale = null)``              | This will translate the text into the current language, more      |
-|                                                                                 | information in .                                                  |
-|                                                                                 | :ref:`Translation Filters <book-translation-filters>`.            |
+| ``text|trans(arguments = {}, domain = 'messages', locale = null)``              | To bo prevedlo tekst v trenutni jezik, več                        |
+|                                                                                 | informacij v                                                      |
+|                                                                                 | :ref:`Filtrih prevodov <book-translation-filters>`.               |
 +---------------------------------------------------------------------------------+-------------------------------------------------------------------+
-| ``text|transchoice(count, arguments = {}, domain = 'messages', locale = null)`` | This will translate the text with pluralization, more information |
-|                                                                                 | in :ref:`Translation Filters <book-translation-filters>`.         |
+| ``text|transchoice(count, arguments = {}, domain = 'messages', locale = null)`` | To bo prevedlo tekst z množino, več informacij                    |
+|                                                                                 | v :ref:`filtrih prevodov <book-translation-filters>`.             |
 +---------------------------------------------------------------------------------+-------------------------------------------------------------------+
-| ``variable|yaml_encode(inline = 0)``                                            | This will transform the variable text into a YAML syntax.         |
+| ``variable|yaml_encode(inline = 0)``                                            | To bo pretvorilo tekst spremenljivke v YAML sintakso.             |
 +---------------------------------------------------------------------------------+-------------------------------------------------------------------+
-| ``variable|yaml_dump``                                                          | This will render a yaml syntax with their type.                   |
+| ``variable|yaml_dump``                                                          | To bo izpisalo yaml sintakso z njenim tipom.                      |
 +---------------------------------------------------------------------------------+-------------------------------------------------------------------+
-| ``classname|abbr_class``                                                        | This will render an ``abbr`` element with the short name of a     |
-|                                                                                 | PHP class.                                                        |
+| ``classname|abbr_class``                                                        | To bo izpisalo ``abbr`` element s kratkim imenom                  |
+|                                                                                 | PHP razreda.                                                      |
 +---------------------------------------------------------------------------------+-------------------------------------------------------------------+
-| ``methodname|abbr_method``                                                      | This will render a PHP method inside a ``abbr`` element           |
-|                                                                                 | (e.g. ``Symfony\Component\HttpFoundation\Response::getContent``   |
+| ``methodname|abbr_method``                                                      | To bo izpisalo PHP metodo znotraj elementa ``abbr``               |
+|                                                                                 | (npr. ``Symfony\Component\HttpFoundation\Response::getContent``   |
 +---------------------------------------------------------------------------------+-------------------------------------------------------------------+
-| ``arguments|format_args``                                                       | This will render a string with the arguments of a function and    |
-|                                                                                 | their types.                                                      |
+| ``arguments|format_args``                                                       | To bo izpisalo niz z argumenti funkcije in njihovimi              |
+|                                                                                 | tipi.                                                             |
 +---------------------------------------------------------------------------------+-------------------------------------------------------------------+
-| ``arguments|format_args_as_text``                                               | Equal to ``[...]|format_args``, but it strips the tags.           |
+| ``arguments|format_args_as_text``                                               | Enako ``[...]|format_args``, vendar počisti značke.               |
 +---------------------------------------------------------------------------------+-------------------------------------------------------------------+
-| ``path|file_excerpt(line)``                                                     | This will render an excerpt of a code file around the given line. |
+| ``path|file_excerpt(line)``                                                     | To bo izpisalo odlomek datoteke kode okrog dane vrstice.          |
 +---------------------------------------------------------------------------------+-------------------------------------------------------------------+
-| ``path|format_file(line, text = null)``                                         | This will render a file path in a link.                           |
+| ``path|format_file(line, text = null)``                                         | To bo izpisalo pot datoteke v povezavi.                           |
 +---------------------------------------------------------------------------------+-------------------------------------------------------------------+
-| ``exceptionMessage|format_file_from_text``                                      | Equal to ``format_file`` except it parsed the default PHP error   |
-|                                                                                 | string into a file path (i.e. 'in foo.php on line 45')            |
+| ``exceptionMessage|format_file_from_text``                                      | Enako ``format_file`` razen, če je izpiše niz privzete PHP napake |
+|                                                                                 | v pot datoteke (t.j. 'in foo.php on line 45')                     |
 +---------------------------------------------------------------------------------+-------------------------------------------------------------------+
 | ``path|file_link(line)``                                                        | This will render a path to the correct file (and line number)     |
 +---------------------------------------------------------------------------------+-------------------------------------------------------------------+
 
-Tags
-----
+Značke
+------
 
 .. versionadded:: 2.4
-    The stopwatch tag was added in Symfony 2.4.
+    Značka stopwatch je bila dodana v Symfony 2.4.
 
 +---------------------------------------------------+--------------------------------------------------------------------+
-| Tag Syntax                                        | Usage                                                              |
+| Sintaksa značke                                   | Uporaba                                                            |
 +===================================================+====================================================================+
-| ``{% form_theme form 'file' %}``                  | This will look inside the given file for overridden form blocks,   |
-|                                                   | more information in :doc:`/cookbook/form/form_customization`.      |
+| ``{% form_theme form 'file' %}``                  | To bo preverilo znotraj dane datoteke za prepisane bloke obrazca,  |
+|                                                   | več informacij v :doc:`/cookbook/form/form_customization`.         |
 +---------------------------------------------------+--------------------------------------------------------------------+
-| ``{% trans with {variables} %}...{% endtrans %}`` | This will translate and render the text, more information in       |
+| ``{% trans with {variables} %}...{% endtrans %}`` | To bo prevedlo in izpisalo tekst, več informacij v                 |
 |                                                   | :ref:`book-translation-tags`                                       |
 +---------------------------------------------------+--------------------------------------------------------------------+
-| ``{% transchoice count with {variables} %}``      | This will translate and render the text with pluralization, more   |
-| ...                                               | information in :ref:`book-translation-tags`                        |
+| ``{% transchoice count with {variables} %}``      | To bo prevedlo in izpisalo tekst z množino, več                    |
+| ...                                               | informacij v :ref:`book-translation-tags`                          |
 | ``{% endtranschoice %}``                          |                                                                    |
 +---------------------------------------------------+--------------------------------------------------------------------+
-| ``{% trans_default_domain language %}``           | This will set the default domain for message catalogues in the     |
-|                                                   | current template                                                   |
+| ``{% trans_default_domain language %}``           | To bo nastavilo privzeto domeno za katalog sporočil v              |
+|                                                   | trenutni predlogi                                                  |
 +---------------------------------------------------+--------------------------------------------------------------------+
-| ``{% stopwatch 'name' %}...{% endstopwatch %}``   | This will time the run time of the code inside it and put that on  |
-|                                                   | the timeline of the WebProfilerBundle.                             |
+| ``{% stopwatch 'name' %}...{% endstopwatch %}``   | To bo zagnalo čas izvajanja kode znotraj nje in dodalo na          |
+|                                                   | časovnico paketa WebProfilerBundle.                                |
 +---------------------------------------------------+--------------------------------------------------------------------+
 
-Tests
+Testi
 -----
 
 +---------------------------------------------------+------------------------------------------------------------------------------+
-| Test Syntax                                       | Usage                                                                        |
+| Sintaksa testa                                    | Uporaba                                                                      |
 +===================================================+==============================================================================+
-| ``selectedchoice(choice, selectedValue)``         | This will return ``true`` if the choice is selected for the given form value |
+| ``selectedchoice(choice, selectedValue)``         | Vrne ``true``, če je izbira izbrana za dano vrednost obrazca                 |
 +---------------------------------------------------+------------------------------------------------------------------------------+
 
-Global Variables
-----------------
+Globalne spremenljivke
+----------------------
 
 +-------------------------------------------------------+------------------------------------------------------------------------------------+
-| Variable                                              | Usage                                                                              |
+| Spremenljivka                                         | Uporaba                                                                            |
 +=======================================================+====================================================================================+
-| ``app`` *Attributes*: ``app.user``, ``app.request``   | The ``app`` variable is available everywhere, and gives you quick                  |
-| ``app.session``, ``app.environment``, ``app.debug``   | access to many commonly needed objects. The ``app`` variable is                    |
-| ``app.security``                                      | instance of :class:`Symfony\\Bundle\\FrameworkBundle\\Templating\\GlobalVariables` |
+| ``app`` *Attributes*: ``app.user``, ``app.request``   | Spremenljivka ``app`` je navoljo kjerkoli in vam da hiter                          |
+| ``app.session``, ``app.environment``, ``app.debug``   | dostop do mnogih pogosto potrebnih objektov. Spremenljivka ``app`` je              |
+| ``app.security``                                      | instanca :class:`Symfony\\Bundle\\FrameworkBundle\\Templating\\GlobalVariables`    |
 +-------------------------------------------------------+------------------------------------------------------------------------------------+
 
-Symfony Standard Edition Extensions
------------------------------------
+Razširitve Symfony standardne izdaje
+------------------------------------
 
-The Symfony Standard Edition adds some bundles to the Symfony2 Core Framework.
-Those bundles can have other Twig extensions:
+Symfony standardna izdaja dodaja nekaj paketov v Symfony2 jedro ogrodja.
+Te paketi imajo ostale Twig razširitve:
 
-* **Twig Extension** includes all extensions that do not belong to the
-  Twig core but can be interesting. You can read more in 
-  `the official Twig Extensions documentation`_
-* **Assetic** adds the ``{% stylesheets %}``, ``{% javascripts %}`` and 
-  ``{% image %}`` tags. You can read more about them in 
-  :doc:`the Assetic Documentation </cookbook/assetic/asset_management>`;
+* **Twig Extension** vključuje vse razširitve, ki ne pripadajo
+  Twig jedru, vendar so lahko zanimive. Lahko preberete več o tem v
+  `uradni dokumentaciji Twig razširitve`_
+* **Assetic** dodaja ``{% stylesheets %}``, ``{% javascripts %}`` in
+  ``{% image %}`` značke. Lahko preberete več o njih v
+  :doc:`dokumentaciji Assetic </cookbook/assetic/asset_management>`;
 
-.. _`the official Twig Extensions documentation`: http://twig.sensiolabs.org/doc/extensions/index.html
+.. _`uradni dokumentaciji Twig razširitve`: http://twig.sensiolabs.org/doc/extensions/index.html
 .. _`http://twig.sensiolabs.org/documentation`: http://twig.sensiolabs.org/documentation

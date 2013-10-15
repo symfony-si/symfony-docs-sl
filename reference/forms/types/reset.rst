@@ -1,28 +1,28 @@
 .. index::
    single: Forms; Fields; reset
 
-reset Field Type
-================
+reset tip polja
+===============
 
 .. versionadded:: 2.3
-    The ``reset`` type was added in Symfony 2.3
+    Tip ``reset`` je bil dodan v Symfony 2.3
 
-A button that resets all fields to their original values.
+Gumb, ki ponastavi vsa polja na njihove prvotne vrednosti.
 
 +----------------------+---------------------------------------------------------------------+
-| Rendered as          | ``input`` ``reset`` tag                                             |
+| Izpisan kot          | ``input`` ``reset`` značka                                          |
 +----------------------+---------------------------------------------------------------------+
-| Inherited            | - `attr`_                                                           |
-| options              | - `disabled`_                                                       |
+| Podedovane           | - `attr`_                                                           |
+| opcije               | - `disabled`_                                                       |
 |                      | - `label`_                                                          |
 |                      | - `translation_domain`_                                             |
 +----------------------+---------------------------------------------------------------------+
-| Parent type          | :doc:`button</reference/forms/types/button>`                        |
+| Starševski tip       | :doc:`button</reference/forms/types/button>`                        |
 +----------------------+---------------------------------------------------------------------+
-| Class                | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\ResetType` |
+| Razred               | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\ResetType` |
 +----------------------+---------------------------------------------------------------------+
 
-Inherited options
+Podedovane opcije
 -----------------
 
 .. include:: /reference/forms/types/options/button_attr.rst.inc

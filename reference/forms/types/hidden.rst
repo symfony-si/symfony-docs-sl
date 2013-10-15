@@ -1,48 +1,48 @@
 .. index::
    single: Forms; Fields; hidden
 
-hidden Field Type
-=================
+hidden tip polja
+================
 
-The hidden type represents a hidden input field.
+Tip hidden predstavlja skrito vnosno polje.
 
-+-------------+----------------------------------------------------------------------+
-| Rendered as | ``input`` ``hidden`` field                                           |
-+-------------+----------------------------------------------------------------------+
-| Overridden  | - `required`_                                                        |
-| Options     | - `error_bubbling`_                                                  |
-+-------------+----------------------------------------------------------------------+
-| Inherited   | - `data`_                                                            |
-| options     | - `property_path`_                                                   |
-|             | - `mapped`_                                                          |
-|             | - `error_mapping`_                                                   |
-+-------------+----------------------------------------------------------------------+
-| Parent type | :doc:`form </reference/forms/types/form>`                            |
-+-------------+----------------------------------------------------------------------+
-| Class       | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\HiddenType` |
-+-------------+----------------------------------------------------------------------+
++----------------+----------------------------------------------------------------------+
+| Izpisan kot    | ``input`` ``hidden`` polje                                           |
++----------------+----------------------------------------------------------------------+
+| Prepisane      | - `required`_                                                        |
+| opcije         | - `error_bubbling`_                                                  |
++----------------+----------------------------------------------------------------------+
+| Inherited      | - `data`_                                                            |
+| options        | - `property_path`_                                                   |
+|                | - `mapped`_                                                          |
+|                | - `error_mapping`_                                                   |
++----------------+----------------------------------------------------------------------+
+| Starševski tip | :doc:`form </reference/forms/types/form>`                            |
++----------------+----------------------------------------------------------------------+
+| Razred         | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\HiddenType` |
++----------------+----------------------------------------------------------------------+
 
-Overridden Options
-------------------
+Prepisane opcije
+----------------
 
 required
 ~~~~~~~~
 
-**default**: ``false``
+**privzeto**: ``false``
 
-Hidden fields cannot have a required attribute.
+Skrita polja ne morejo imeti atributa "required".
 
 error_bubbling
 ~~~~~~~~~~~~~~
 
-**default**: ``true``
+**privzeto**: ``true``
 
-Pass errors to the root form, otherwise they will not be visible.
+Poda napake vrhnjemu obrazcu, drugače ne bodo vidne.
 
-Inherited Options
+Podedovane opcije
 -----------------
 
-These options inherit from the :doc:`form </reference/forms/types/form>` type:
+Te opcije so podedovane iz tipa :doc:`form </reference/forms/types/form>`:
 
 .. include:: /reference/forms/types/options/data.rst.inc
 

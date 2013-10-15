@@ -1,34 +1,34 @@
 .. index::
    single: Forms; Fields; email
 
-email Field Type
-================
+email tip polja
+===============
 
-The ``email`` field is a text field that is rendered using the HTML5
-``<input type="email" />`` tag.
+Polje ``email`` je tekstovno polje, ki je izpisano z uporabo HTML5
+``<input type="email" />`` značke.
 
-+-------------+---------------------------------------------------------------------+
-| Rendered as | ``input`` ``email`` field (a text box)                              |
-+-------------+---------------------------------------------------------------------+
-| Inherited   | - `max_length`_                                                     |
-| options     | - `required`_                                                       |
-|             | - `label`_                                                          |
-|             | - `trim`_                                                           |
-|             | - `read_only`_                                                      |
-|             | - `disabled`_                                                       |
-|             | - `error_bubbling`_                                                 |
-|             | - `error_mapping`_                                                  |
-|             | - `mapped`_                                                         |
-+-------------+---------------------------------------------------------------------+
-| Parent type | :doc:`form </reference/forms/types/form>`                           |
-+-------------+---------------------------------------------------------------------+
-| Class       | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\EmailType` |
-+-------------+---------------------------------------------------------------------+
++----------------+---------------------------------------------------------------------+
+| Izpisan kot    | ``input`` ``email`` polje (tekstovni kvadratek)                     |
++----------------+---------------------------------------------------------------------+
+| Podedovane     | - `max_length`_                                                     |
+| opcije         | - `required`_                                                       |
+|                | - `label`_                                                          |
+|                | - `trim`_                                                           |
+|                | - `read_only`_                                                      |
+|                | - `disabled`_                                                       |
+|                | - `error_bubbling`_                                                 |
+|                | - `error_mapping`_                                                  |
+|                | - `mapped`_                                                         |
++----------------+---------------------------------------------------------------------+
+| Starševski tip | :doc:`form </reference/forms/types/form>`                           |
++----------------+---------------------------------------------------------------------+
+| Razred         | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\EmailType` |
++----------------+---------------------------------------------------------------------+
 
-Inherited Options
+Podedovane opcije
 -----------------
 
-These options inherit from the :doc:`form </reference/forms/types/form>` type:
+Te opcije so podedovane iz tipa :doc:`form </reference/forms/types/form>`:
 
 .. include:: /reference/forms/types/options/max_length.rst.inc
 

@@ -1,48 +1,48 @@
 .. index::
    single: Forms; Fields; choice
 
-choice Field Type
-=================
+choice tip polja
+================
 
-A multi-purpose field used to allow the user to "choose" one or more options.
-It can be rendered as a ``select`` tag, radio buttons, or checkboxes.
+Večnamensko polje uporabljeno za omogočanje uporabniku "izbrati" eno ali več opcij.
+Lahko je izpisan kot ``select`` značka, radio button-i ali checkbox-i.
 
-To use this field, you must specify *either* the ``choice_list`` or ``choices``
-option.
+Za uporabo tega polja, morate specificirati *ali* ``choice_list`` ali ``choices``
+opcijo.
 
-+-------------+------------------------------------------------------------------------------+
-| Rendered as | can be various tags (see below)                                              |
-+-------------+------------------------------------------------------------------------------+
-| Options     | - `choices`_                                                                 |
-|             | - `choice_list`_                                                             |
-|             | - `multiple`_                                                                |
-|             | - `expanded`_                                                                |
-|             | - `preferred_choices`_                                                       |
-|             | - `empty_value`_                                                             |
-+-------------+------------------------------------------------------------------------------+
-| Inherited   | - `required`_                                                                |
-| options     | - `label`_                                                                   |
-|             | - `read_only`_                                                               |
-|             | - `disabled`_                                                                |
-|             | - `error_bubbling`_                                                          |
-|             | - `error_mapping`_                                                           |
-|             | - `mapped`_                                                                  |
-|             | - `inherit_data`_                                                            |
-|             | - `by_reference`_                                                            |
-|             | - `empty_data`_                                                              |
-+-------------+------------------------------------------------------------------------------+
-| Parent type | :doc:`form </reference/forms/types/form>`                                    |
-+-------------+------------------------------------------------------------------------------+
-| Class       | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\ChoiceType`         |
-+-------------+------------------------------------------------------------------------------+
++----------------+------------------------------------------------------------------------------+
+| Izpisan kot    | lahko so različne značke (glejte spodaj)                                     |
++----------------+------------------------------------------------------------------------------+
+| Opcije         | - `choices`_                                                                 |
+|                | - `choice_list`_                                                             |
+|                | - `multiple`_                                                                |
+|                | - `expanded`_                                                                |
+|                | - `preferred_choices`_                                                       |
+|                | - `empty_value`_                                                             |
++----------------+------------------------------------------------------------------------------+
+| Podedovane     | - `required`_                                                                |
+| opcije         | - `label`_                                                                   |
+|                | - `read_only`_                                                               |
+|                | - `disabled`_                                                                |
+|                | - `error_bubbling`_                                                          |
+|                | - `error_mapping`_                                                           |
+|                | - `mapped`_                                                                  |
+|                | - `inherit_data`_                                                            |
+|                | - `by_reference`_                                                            |
+|                | - `empty_data`_                                                              |
++----------------+------------------------------------------------------------------------------+
+| Starševski tip | :doc:`obrazec </reference/forms/types/form>`                                 |
++----------------+------------------------------------------------------------------------------+
+| Razred         | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\ChoiceType`         |
++----------------+------------------------------------------------------------------------------+
 
-Example Usage
--------------
+Primer uporabe
+--------------
 
-The easiest way to use this field is to specify the choices directly via the
-``choices`` option. The key of the array becomes the value that's actually
-set on your underlying object (e.g. ``m``), while the value is what the
-user sees on the form (e.g. ``Male``).
+Najenostavnejši način za uporabo tega polja je določanje izbir direktno preko
+opcije ``choices``. Ključ polja (array) postane vrednost, ki je dejansko
+nastavljena na vašem osnovnem objektu (npr. ``m``), medtem ko je vrednost,
+kar uporabnik vidi v obrazcu (npr. ``Male``).
 
 .. code-block:: php
 
@@ -51,9 +51,9 @@ user sees on the form (e.g. ``Male``).
         'required'  => false,
     ));
 
-By setting ``multiple`` to true, you can allow the user to choose multiple
-values. The widget will be rendered as a multiple ``select`` tag or a series
-of checkboxes depending on the ``expanded`` option:
+Z nastavitvijo ``multiple`` na true, lahko dovoljujete uporabniku izbiro večih
+vrednosti. Widget bo izpisan kot ``multiple`` ``select`` značka ali serija
+potrditvenih polj odvisno od opcije ``expanded``:
 
 .. code-block:: php
 
@@ -66,24 +66,24 @@ of checkboxes depending on the ``expanded`` option:
         'multiple'  => true,
     ));
 
-You can also use the ``choice_list`` option, which takes an object that can
-specify the choices for your widget.
+Lahko tudi uporabite opcijo ``choice_list``, ki vzame objekt, ki lahko
+specificira izbire vašega widget-a.
 
 .. _forms-reference-choice-tags:
 
 .. include:: /reference/forms/types/options/select_how_rendered.rst.inc
 
-Field Options
--------------
+Opcije polja
+------------
 
-choices
-~~~~~~~
+izbire
+~~~~~~
 
-**type**: ``array`` **default**: ``array()``
+**tip**: ``array`` **privzeto**: ``array()``
 
-This is the most basic way to specify the choices that should be used
-by this field. The ``choices`` option is an array, where the array key
-is the item value and the array value is the item's label::
+To je najosnovnejši način za določanje izbir, ki bi morale biti uporabljene
+na tem polju. Opcija ``choices`` je polje, kjer je ključ polja
+element vrednosti in vrednost polja je oznaka elementa::
 
     $builder->add('gender', 'choice', array(
         'choices' => array('m' => 'Male', 'f' => 'Female')
@@ -92,12 +92,12 @@ is the item value and the array value is the item's label::
 choice_list
 ~~~~~~~~~~~
 
-**type**: ``Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceListInterface``
+**tip**: ``Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceListInterface``
 
-This is one way of specifying the options to be used for this field.
-The ``choice_list`` option must be an instance of the ``ChoiceListInterface``.
-For more advanced cases, a custom class that implements the interface
-can be created to supply the choices.
+To je en način določanja uporabljenih opcij za to polje.
+Opcija ``choice_list`` mora biti instanca ``ChoiceListInterface``.
+Za bolj napredne primere, razred po meri, ki implementira vmesnik,
+je lahko izdelan za dobavo izbir.
 
 .. include:: /reference/forms/types/options/multiple.rst.inc
 
@@ -107,10 +107,10 @@ can be created to supply the choices.
 
 .. include:: /reference/forms/types/options/empty_value.rst.inc
 
-Inherited options
+Podedovane opcije
 -----------------
 
-These options inherit from the :doc:`form </reference/forms/types/form>` type:
+Te opcije dedujejo iz tipa :doc:`obrazec </reference/forms/types/form>`:
 
 .. include:: /reference/forms/types/options/required.rst.inc
 

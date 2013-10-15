@@ -2,26 +2,26 @@
    single: Config
    single: Components; Config
 
-The Config Component
-====================
+Komponenta Config
+=================
 
-Introduction
-------------
+Uvod
+----
 
-The Config Component provides several classes to help you find, load, combine,
-autofill and validate configuration values of any kind, whatever their source
-may be (Yaml, XML, INI files, or for instance a database).
+Kompomenta Config ponuja nekaj razredov, ki vam pomagajo najdi, naložiti, kombinirati,
+avtomatsko izpolniti in preveriti nastavitvene vrednosti katerekoli vrste, kakršenkoli je
+njihov vir (Yaml, XML, INI datoteke, ali na primer podatkovna baza).
 
-Installation
-------------
+Namestitev
+----------
 
-You can install the component in 2 different ways:
+Komponento lahko namestite na 2 načina:
 
-* Use the official Git repository (https://github.com/symfony/Config);
-* :doc:`Install it via Composer </components/using_components>` (``symfony/config`` on `Packagist`_).
+* Uporabite uradni Git repozitorij (https://github.com/symfony/Config);
+* :doc:`Namestitev preko Composer-ja </components/using_components>` (``symfony/config`` na `Packagist`_).
 
-Sections
---------
+Sekcije
+-------
 
 * :doc:`/components/config/resources`
 * :doc:`/components/config/caching`

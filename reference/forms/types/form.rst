@@ -1,13 +1,13 @@
 .. index::
    single: Forms; Fields; form
 
-form Field Type
-===============
+form tip polja
+==============
 
-See :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\FormType`.
+Glejte :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\FormType`.
 
-The ``form`` type predefines a couple of options that are then available
-on all fields.
+Tip ``form`` vnaprej določa nekaj opcij, ki so kasneje na voljo
+na vseh poljih.
 
 .. include:: /reference/forms/types/options/data.rst.inc
 
@@ -36,5 +36,5 @@ on all fields.
 inherit_data
 ------------
 
-See :doc:`/cookbook/form/inherit_data_option`.
+Glejte :doc:`/cookbook/form/inherit_data_option`.
 

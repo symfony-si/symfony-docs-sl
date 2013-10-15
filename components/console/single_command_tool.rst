@@ -1,12 +1,12 @@
 .. index::
    single: Console; Single command application
 
-Building a Single Command Application
-=====================================
+Gradnja eno-ukazne aplikacije
+=============================
 
-When building a command line tool, you may not need to provide several commands.
-In such case, having to pass the command name each time is tedious. Fortunately,
-it is possible to remove this need by extending the application::
+Ko gradite orodje za ukazno vrstico, lahko da ne boste potrebovali ponujate nekaj ukazov.
+V takem primeru je pošiljanje imena ukaza vsakič lahko naporno. Na srečo
+je možno odstraniti to potrebo z razširitvijo aplikacije::
 
     namespace Acme\Tool;
 
@@ -58,10 +58,10 @@ it is possible to remove this need by extending the application::
         }
     }
 
-When calling your console script, the command ``MyCommand`` will then always
-be used, without having to pass its name.
+Ko kličete vašo konzolno skripto, ukaz ``MyCommand`` bo potem vedno
+uporabljen, brez da bi morali podajati njegovo ime.
 
-You can also simplify how you execute the application::
+Lahko tudi poenostavite, kako izvajate aplikacijo::
 
     #!/usr/bin/env php
     <?php

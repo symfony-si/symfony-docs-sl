@@ -1,75 +1,75 @@
 .. index::
    single: Forms; Fields; number
 
-number Field Type
-=================
+number tip polja
+================
 
-Renders an input text field and specializes in handling number input. This
-type offers different options for the precision, rounding, and grouping that
-you want to use for your number.
+Izpiše vnosno tekstovno polje in specializira ravnanje s številskimi vnosi. Ta
+tip nudi različne opcije za natančnost, zaokroževanje in grupiranje, ki
+jih želite uporabiti za vašo številko.
 
-+-------------+----------------------------------------------------------------------+
-| Rendered as | ``input`` ``text`` field                                             |
-+-------------+----------------------------------------------------------------------+
-| Options     | - `rounding_mode`_                                                   |
-|             | - `precision`_                                                       |
-|             | - `grouping`_                                                        |
-+-------------+----------------------------------------------------------------------+
-| Inherited   | - `required`_                                                        |
-| options     | - `label`_                                                           |
-|             | - `read_only`_                                                       |
-|             | - `disabled`_                                                        |
-|             | - `error_bubbling`_                                                  |
-|             | - `error_mapping`_                                                   |
-|             | - `invalid_message`_                                                 |
-|             | - `invalid_message_parameters`_                                      |
-|             | - `mapped`_                                                          |
-+-------------+----------------------------------------------------------------------+
-| Parent type | :doc:`form </reference/forms/types/form>`                            |
-+-------------+----------------------------------------------------------------------+
-| Class       | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\NumberType` |
-+-------------+----------------------------------------------------------------------+
++----------------+----------------------------------------------------------------------+
+| Izpisan kot    | ``input`` ``text`` polje                                             |
++----------------+----------------------------------------------------------------------+
+| Opcije         | - `rounding_mode`_                                                   |
+|                | - `precision`_                                                       |
+|                | - `grouping`_                                                        |
++----------------+----------------------------------------------------------------------+
+| Podedovane     | - `required`_                                                        |
+| opcije         | - `label`_                                                           |
+|                | - `read_only`_                                                       |
+|                | - `disabled`_                                                        |
+|                | - `error_bubbling`_                                                  |
+|                | - `error_mapping`_                                                   |
+|                | - `invalid_message`_                                                 |
+|                | - `invalid_message_parameters`_                                      |
+|                | - `mapped`_                                                          |
++----------------+----------------------------------------------------------------------+
+| Starševski tip | :doc:`form </reference/forms/types/form>`                            |
++----------------+----------------------------------------------------------------------+
+| Razred         | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\NumberType` |
++----------------+----------------------------------------------------------------------+
 
-Field Options
--------------
+Opcije polja
+------------
 
 .. include:: /reference/forms/types/options/precision.rst.inc
 
 rounding_mode
 ~~~~~~~~~~~~~
 
-**type**: ``integer`` **default**: ``NumberToLocalizedStringTransformer::ROUND_HALFUP``
+**tip**: ``integer`` **privzeto**: ``NumberToLocalizedStringTransformer::ROUND_HALFUP``
 
-If a submitted number needs to be rounded (based on the ``precision``
-option), you have several configurable options for that rounding. Each
-option is a constant on the :class:`Symfony\\Component\\Form\\Extension\\Core\\DataTransformer\\NumberToLocalizedStringTransformer`:
+Če poslana številka potrebuje biti zaokrožena (na osnovi ``precision``
+opcije), imate nekaj nastavitvenih opcij za to zaokroževanje. Vsaka
+opcija je konstanta v :class:`Symfony\\Component\\Form\\Extension\\Core\\DataTransformer\\NumberToLocalizedStringTransformer`:
     
-* ``NumberToLocalizedStringTransformer::ROUND_DOWN`` Round towards zero.
+* ``NumberToLocalizedStringTransformer::ROUND_DOWN`` Zaokroži proti nič.
 
-* ``NumberToLocalizedStringTransformer::ROUND_FLOOR`` Round towards negative
-  infinity.
+* ``NumberToLocalizedStringTransformer::ROUND_FLOOR`` Zaokroži proti negativni
+  neskončnosti.
 
-* ``NumberToLocalizedStringTransformer::ROUND_UP`` Round away from zero.
+* ``NumberToLocalizedStringTransformer::ROUND_UP`` Zaokroži stran od nič.
 
-* ``NumberToLocalizedStringTransformer::ROUND_CEILING`` Round towards
-  positive infinity.
+* ``NumberToLocalizedStringTransformer::ROUND_CEILING`` Zaokroži proti
+  pozitivni neskončnosti.
 
-* ``NumberToLocalizedStringTransformer::ROUND_HALF_DOWN`` Round towards the
-  "nearest neighbor". If both neighbors are equidistant, round down.
+* ``NumberToLocalizedStringTransformer::ROUND_HALF_DOWN`` Zaokroži proti
+  "najbližjemu sosedu". Če oba soseda sta ekvidistančna, zaokroži navzdol.
 
-* ``NumberToLocalizedStringTransformer::ROUND_HALF_EVEN`` Round towards the
-  "nearest neighbor". If both neighbors are equidistant, round towards the
-  even neighbor.
+* ``NumberToLocalizedStringTransformer::ROUND_HALF_EVEN`` Zaokroži proti
+  "najbližjemu sosedu. Če sta oba soseda ekvidistančna, zaokroži proti
+  celemu sosedu.
 
-* ``NumberToLocalizedStringTransformer::ROUND_HALF_UP`` Round towards the
-  "nearest neighbor". If both neighbors are equidistant, round up.
+* ``NumberToLocalizedStringTransformer::ROUND_HALF_UP`` Zaokroži proti
+  "najbližjemu sosedu". Če sta oba soseda ekvidistančna, zaokroži navzgor.
 
 .. include:: /reference/forms/types/options/grouping.rst.inc
 
-Inherited Options
+Podedovane opcije
 -----------------
 
-These options inherit from the :doc:`form </reference/forms/types/form>` type:
+Te opcije dedujejo iz tipa :doc:`form </reference/forms/types/form>`:
 
 .. include:: /reference/forms/types/options/required.rst.inc
 

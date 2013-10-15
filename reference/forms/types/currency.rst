@@ -1,54 +1,54 @@
 .. index::
     single: Forms; Fields; currency
 
-currency Field Type
-===================
+currency tip polja
+==================
 
-The ``currency`` type is a subset of the
-:doc:`choice type </reference/forms/types/choice>` that allows the user to
-select from a large list of `3-letter ISO 4217`_ currencies.
+Tip ``currency`` je podmnožica
+:doc:`tipa choice </reference/forms/types/choice>`, ki omogoča uporabniku, da
+izbere iz velikega seznama `3-črkovnih ISO 4217`_ valut.
 
-Unlike the ``choice`` type, you don't need to specify a ``choices`` or
-``choice_list`` option as the field type automatically uses a large list of
-currencies. You *can* specify either of these options manually, but then you
-should just use the ``choice`` type directly.
+Za razliko od tipa ``choice`` ne potrebujete določati ``choices`` ali
+``choice_list`` opcij, saj tip polja avtomatsko uporablja velik seznam
+valut. *Lahko* določite katerokoli izmed teh opcij ročno, vendar potem
+bi morali uporabiti samo tip ``choice`` direktno.
 
-+-------------+------------------------------------------------------------------------+
-| Rendered as | can be various tags (see :ref:`forms-reference-choice-tags`)           |
-+-------------+------------------------------------------------------------------------+
-| Overridden  | - `choices`_                                                           |
-| Options     |                                                                        |
-+-------------+------------------------------------------------------------------------+
-| Inherited   | - `multiple`_                                                          |
-| options     | - `expanded`_                                                          |
-|             | - `preferred_choices`_                                                 |
-|             | - `empty_value`_                                                       |
-|             | - `error_bubbling`_                                                    |
-|             | - `required`_                                                          |
-|             | - `label`_                                                             |
-|             | - `read_only`_                                                         |
-|             | - `disabled`_                                                          |
-|             | - `mapped`_                                                            |
-+-------------+------------------------------------------------------------------------+
-| Parent type | :doc:`choice </reference/forms/types/choice>`                          |
-+-------------+------------------------------------------------------------------------+
-| Class       | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\CurrencyType` |
-+-------------+------------------------------------------------------------------------+
++----------------+------------------------------------------------------------------------+
+| Izpisan kot    | lahko so različne značkes (glejte :ref:`forms-reference-choice-tags`)  |
++----------------+------------------------------------------------------------------------+
+| Prepisane      | - `choices`_                                                           |
+| opcije         |                                                                        |
++----------------+------------------------------------------------------------------------+
+| Podedovane     | - `multiple`_                                                          |
+| opcije         | - `expanded`_                                                          |
+|                | - `preferred_choices`_                                                 |
+|                | - `empty_value`_                                                       |
+|                | - `error_bubbling`_                                                    |
+|                | - `required`_                                                          |
+|                | - `label`_                                                             |
+|                | - `read_only`_                                                         |
+|                | - `disabled`_                                                          |
+|                | - `mapped`_                                                            |
++----------------+------------------------------------------------------------------------+
+| Starševski tip | :doc:`choice </reference/forms/types/choice>`                          |
++----------------+------------------------------------------------------------------------+
+| Razred         | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\CurrencyType` |
++----------------+------------------------------------------------------------------------+
 
-Overridden Options
-------------------
+Prepisane opcije
+----------------
 
 choices
 ~~~~~~~
 
-**default**: ``Symfony\Component\Intl\Intl::getCurrencyBundle()->getCurrencyNames()``
+**privzeto**: ``Symfony\Component\Intl\Intl::getCurrencyBundle()->getCurrencyNames()``
 
-The choices option defaults to all currencies.
+Opcija ``choices`` je privzeto nastavljena na vse valute.
 
-Inherited options
+Podedovane opcije
 -----------------
 
-These options inherit from the :doc:`choice</reference/forms/types/choice>` type:
+Te opcije dedujejo iz the tipa :doc:`choice</reference/forms/types/choice>`:
 
 .. include:: /reference/forms/types/options/multiple.rst.inc
 
@@ -60,7 +60,7 @@ These options inherit from the :doc:`choice</reference/forms/types/choice>` type
 
 .. include:: /reference/forms/types/options/error_bubbling.rst.inc
 
-These options inherit from the :doc:`date</reference/forms/types/form>` type:
+Te opcije dedujejoiz tipa :doc:`date</reference/forms/types/form>`:
 
 .. include:: /reference/forms/types/options/required.rst.inc
 
@@ -72,4 +72,4 @@ These options inherit from the :doc:`date</reference/forms/types/form>` type:
 
 .. include:: /reference/forms/types/options/mapped.rst.inc
 
-.. _`3-letter ISO 4217`: http://en.wikipedia.org/wiki/ISO_4217
+.. _`3-črkovnih ISO 4217`: http://en.wikipedia.org/wiki/ISO_4217

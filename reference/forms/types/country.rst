@@ -1,65 +1,64 @@
 .. index::
    single: Forms; Fields; country
 
-country Field Type
-==================
+country tip polja
+=================
 
-The ``country`` type is a subset of the ``ChoiceType`` that displays countries
-of the world. As an added bonus, the country names are displayed in the language
-of the user.
+Tip ``country`` je podmnožica ``ChoiceType``, ki prikaže države
+sveta. Kot dodaten bonus, imena držav so napisana na jeziku
+uporabnika.
 
-The "value" for each country is the two-letter country code.
+Vrednost ("value") za vsako državo je koda države (dve črki).
 
 .. note::
 
-   The locale of your user is guessed using :phpmethod:`Locale::getDefault`
+   Lokalizacija vašega uporabnika je ugotovljena z uporabo :phpmethod:`Locale::getDefault`
 
-Unlike the ``choice`` type, you don't need to specify a ``choices`` or
-``choice_list`` option as the field type automatically uses all of the countries
-of the world. You *can* specify either of these options manually, but then
-you should just use the ``choice`` type directly.
+Drugače kot tip ``choice``, ne potrebujete specificirati ``choices`` ali
+``choice_list`` opcije, saj tip polja avtomatsko uporablja vse od držav sveta.
+*Lahko* specificirate katerokoli od teh opcij ročno, vendar potem
+bi morali uporabiti samo tip ``choice`` direktno.
 
-+-------------+-----------------------------------------------------------------------+
-| Rendered as | can be various tags (see :ref:`forms-reference-choice-tags`)          |
-+-------------+-----------------------------------------------------------------------+
-| Overridden  | - `choices`_                                                          |
-| Options     |                                                                       |
-+-------------+-----------------------------------------------------------------------+
-| Inherited   | - `multiple`_                                                         |
-| options     | - `expanded`_                                                         |
-|             | - `preferred_choices`_                                                |
-|             | - `empty_value`_                                                      |
-|             | - `error_bubbling`_                                                   |
-|             | - `error_mapping`_                                                    |
-|             | - `required`_                                                         |
-|             | - `label`_                                                            |
-|             | - `read_only`_                                                        |
-|             | - `disabled`_                                                         |
-|             | - `mapped`_                                                           |
-+-------------+-----------------------------------------------------------------------+
-| Parent type | :doc:`choice </reference/forms/types/choice>`                         |
-+-------------+-----------------------------------------------------------------------+
-| Class       | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\CountryType` |
-+-------------+-----------------------------------------------------------------------+
++----------------+-----------------------------------------------------------------------+
+| Izpisan kot    | lahko so različne značke (glejte :ref:`forms-reference-choice-tags`)  |
++----------------+-----------------------------------------------------------------------+
+| Prepisane      | - `choices`_                                                          |
+| opcije         |                                                                       |
++----------------+-----------------------------------------------------------------------+
+| Podedovane     | - `multiple`_                                                         |
+| opcije         | - `expanded`_                                                         |
+|                | - `preferred_choices`_                                                |
+|                | - `empty_value`_                                                      |
+|                | - `error_bubbling`_                                                   |
+|                | - `error_mapping`_                                                    |
+|                | - `required`_                                                         |
+|                | - `label`_                                                            |
+|                | - `read_only`_                                                        |
+|                | - `disabled`_                                                         |
+|                | - `mapped`_                                                           |
++----------------+-----------------------------------------------------------------------+
+| Starševski tip | :doc:`choice </reference/forms/types/choice>`                         |
++----------------+-----------------------------------------------------------------------+
+| Razred         | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\CountryType` |
++----------------+-----------------------------------------------------------------------+
 
-Overridden Options
-------------------
+Prepisane opcije
+----------------
 
 choices
 ~~~~~~~
 
-**default**: ``Symfony\Component\Intl\Intl::getRegionBundle()->getCountryNames()``
+**privzeto**: ``Symfony\Component\Intl\Intl::getRegionBundle()->getCountryNames()``
 
-The country type defaults the ``choices`` option to the whole list of countries.
-The locale is used to translate the countries names.
+Tip country ima privzeto ``choice`` opcijo na celoten seznam držav.
+Lokalizacija je uporabljena za prevod imen držav.
 
-Inherited options
+Podedovane opcije
 -----------------
 
-These options inherit from the :doc:`choice </reference/forms/types/choice>` type:
+Te opcije dedujejo iz :doc:`choice </reference/forms/types/choice>` tipa:
 
 .. include:: /reference/forms/types/options/multiple.rst.inc
-
 .. include:: /reference/forms/types/options/expanded.rst.inc
 
 .. include:: /reference/forms/types/options/preferred_choices.rst.inc
@@ -70,7 +69,7 @@ These options inherit from the :doc:`choice </reference/forms/types/choice>` typ
 
 .. include:: /reference/forms/types/options/error_mapping.rst.inc
 
-These options inherit from the :doc:`form </reference/forms/types/form>` type:
+Te opcije dedujejo iz :doc:`form </reference/forms/types/form>` tipa:
 
 .. include:: /reference/forms/types/options/required.rst.inc
 

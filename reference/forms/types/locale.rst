@@ -1,65 +1,65 @@
 .. index::
    single: Forms; Fields; locale
 
-locale Field Type
-=================
+locale tip polja
+================
 
-The ``locale`` type is a subset of the ``ChoiceType`` that allows the user
-to select from a large list of locales (language+country). As an added bonus,
-the locale names are displayed in the language of the user.
+Tip ``locale`` je podmnožica ``ChoiceType``, ki omogoča, da uporabnik
+izbere iz velikega seznama lokalizacij (jezik+država). Kot dodaten bonus
+so imena lokalizacij prikazana v jeziku uporabnika.
 
-The "value" for each locale is either the two letter ISO639-1 *language* code
-(e.g. ``fr``), or the language code followed by an underscore (``_``), then
-the ISO3166 *country* code (e.g. ``fr_FR`` for French/France).
+Vrednost ("value") za vsako lokalizacijo je ali dvo črkovna IS=639-1 *language* koda
+(npr. ``sl``), ali koda jezika, ki ji sledi podčrtaj (``_``) in nato
+ISO3166 *country* koda (npr. ``sl_SI`` za Slovenščino/Slovenijo).
 
 .. note::
 
-   The locale of your user is guessed using :phpmethod:`Locale::getDefault`
+   Lokalizacija vašega uporabnika je ugotovljena z uporabo :phpmethod:`Locale::getDefault`
 
-Unlike the ``choice`` type, you don't need to specify a ``choices`` or
-``choice_list`` option as the field type automatically uses a large list
-of locales. You *can* specify either of these options manually, but then
-you should just use the ``choice`` type directly.
+Z razliko od tipa ``choice`` ne potrebujete specificirati ``choices`` ali
+opcije ``choice_list``, saj tip polja avtomatsko uporablja velik seznam
+lokalizacij. *Lahko* določite katerokoli izmed teh opcij ročno, vendar potem
+bi morali uporabiti samo tip ``choice`` direktno.
 
-+-------------+------------------------------------------------------------------------+
-| Rendered as | can be various tags (see :ref:`forms-reference-choice-tags`)           |
-+-------------+------------------------------------------------------------------------+
-| Overridden  | - `choices`_                                                           |
-| Options     |                                                                        |
-+-------------+------------------------------------------------------------------------+
-| Inherited   | - `multiple`_                                                          |
-| options     | - `expanded`_                                                          |
-|             | - `preferred_choices`_                                                 |
-|             | - `empty_value`_                                                       |
-|             | - `error_bubbling`_                                                    |
-|             | - `error_mapping`_                                                     |
-|             | - `required`_                                                          |
-|             | - `label`_                                                             |
-|             | - `read_only`_                                                         |
-|             | - `disabled`_                                                          |
-|             | - `mapped`_                                                            |
-+-------------+------------------------------------------------------------------------+
-| Parent type | :doc:`choice </reference/forms/types/choice>`                          |
-+-------------+------------------------------------------------------------------------+
-| Class       | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\LanguageType` |
-+-------------+------------------------------------------------------------------------+
++----------------+------------------------------------------------------------------------+
+| Izpisan kot    | lahko so različne značke (glejte :ref:`forms-reference-choice-tags`)   |
++----------------+------------------------------------------------------------------------+
+| Prepisane      | - `choices`_                                                           |
+| opcije         |                                                                        |
++----------------+------------------------------------------------------------------------+
+| Podedovane     | - `multiple`_                                                          |
+| opcije         | - `expanded`_                                                          |
+|                | - `preferred_choices`_                                                 |
+|                | - `empty_value`_                                                       |
+|                | - `error_bubbling`_                                                    |
+|                | - `error_mapping`_                                                     |
+|                | - `required`_                                                          |
+|                | - `label`_                                                             |
+|                | - `read_only`_                                                         |
+|                | - `disabled`_                                                          |
+|                | - `mapped`_                                                            |
++----------------+------------------------------------------------------------------------+
+| Starševski tip | :doc:`choice </reference/forms/types/choice>`                          |
++----------------+------------------------------------------------------------------------+
+| Razred         | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\LanguageType` |
++----------------+------------------------------------------------------------------------+
 
-Overridden Options
-------------------
+Prepisane opcije
+----------------
 
 choices
 ~~~~~~~
 
-**default**: ``Symfony\Component\Intl\Intl::getLocaleBundle()->getLocaleNames()``
+**privzeto**: ``Symfony\Component\Intl\Intl::getLocaleBundle()->getLocaleNames()``
 
-The choices option defaults to all locales. It uses the default locale to
-specify the language.
+Opcija choices je privzeto nastavljena na vse lokalizacije. Uporablja privzeto lokalizacijo
+za določanje jezika.
 
 
-Inherited options
+Podedovane opcije
 -----------------
 
-These options inherit from the :doc:`choice </reference/forms/types/choice>` type:
+Te opcije dedujejo iz tipa :doc:`choice </reference/forms/types/choice>`:
 
 .. include:: /reference/forms/types/options/multiple.rst.inc
 
@@ -73,7 +73,7 @@ These options inherit from the :doc:`choice </reference/forms/types/choice>` typ
 
 .. include:: /reference/forms/types/options/error_mapping.rst.inc
 
-These options inherit from the :doc:`form </reference/forms/types/form>` type:
+Te opcije dedujejo iz tipa :doc:`form </reference/forms/types/form>`:
 
 .. include:: /reference/forms/types/options/required.rst.inc
 
