@@ -1,33 +1,33 @@
 .. index::
    single: Forms; Fields; textarea
 
-textarea Field Type
-===================
+textarea tip polja
+==================
 
-Renders a ``textarea`` HTML element. 
+Izpisano kot ``textarea`` HTML element.
 
-+-------------+------------------------------------------------------------------------+
-| Rendered as | ``textarea`` tag                                                       |
-+-------------+------------------------------------------------------------------------+
-| Inherited   | - `max_length`_                                                        |
-| options     | - `required`_                                                          |
-|             | - `label`_                                                             |
-|             | - `trim`_                                                              |
-|             | - `read_only`_                                                         |
-|             | - `disabled`_                                                          |
-|             | - `error_bubbling`_                                                    |
-|             | - `error_mapping`_                                                     |
-|             | - `mapped`_                                                            |
-+-------------+------------------------------------------------------------------------+
-| Parent type | :doc:`form </reference/forms/types/form>`                              |
-+-------------+------------------------------------------------------------------------+
-| Class       | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\TextareaType` |
-+-------------+------------------------------------------------------------------------+
++----------------+------------------------------------------------------------------------+
+| Izpisan kot    | ``textarea`` značka                                                    |
++----------------+------------------------------------------------------------------------+
+| Podedovane     | - `max_length`_                                                        |
+| opcije         | - `required`_                                                          |
+|                | - `label`_                                                             |
+|                | - `trim`_                                                              |
+|                | - `read_only`_                                                         |
+|                | - `disabled`_                                                          |
+|                | - `error_bubbling`_                                                    |
+|                | - `error_mapping`_                                                     |
+|                | - `mapped`_                                                            |
++----------------+------------------------------------------------------------------------+
+| Starševski tip | :doc:`form </reference/forms/types/form>`                              |
++----------------+------------------------------------------------------------------------+
+| Razred         | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\TextareaType` |
++----------------+------------------------------------------------------------------------+
 
-Inherited Options
+Podedovane opcije
 -----------------
 
-These options inherit from the :doc:`form </reference/forms/types/form>` type:
+Te opcije dedujejo iz tipa :doc:`form </reference/forms/types/form>`:
 
 .. include:: /reference/forms/types/options/max_length.rst.inc
 

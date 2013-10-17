@@ -1,37 +1,37 @@
 .. index::
    single: Forms; Fields; submit
 
-submit Field Type
-=================
+submit tip polja
+================
 
 .. versionadded:: 2.3
-    The ``submit`` type was added in Symfony 2.3
+    Tip ``submit`` je bil dodan v Symfony 2.3
 
-A submit button.
+Gumb za pošiljanje.
 
 +----------------------+----------------------------------------------------------------------+
-| Rendered as          | ``input`` ``submit`` tag                                             |
+| Izpisan kot          | ``input`` ``submit`` značka                                          |
 +----------------------+----------------------------------------------------------------------+
-| Inherited            | - `attr`_                                                            |
-| options              | - `disabled`_                                                        |
+| Podedovane           | - `attr`_                                                            |
+| opcije               | - `disabled`_                                                        |
 |                      | - `label`_                                                           |
 |                      | - `translation_domain`_                                              |
 +----------------------+----------------------------------------------------------------------+
-| Parent type          | :doc:`button</reference/forms/types/button>`                         |
+| Starševski tip       | :doc:`button</reference/forms/types/button>`                         |
 +----------------------+----------------------------------------------------------------------+
-| Class                | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\SubmitType` |
+| Razred               | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\SubmitType` |
 +----------------------+----------------------------------------------------------------------+
 
-The Submit button has an additional method
-:method:`Symfony\\Component\\Form\\ClickableInterface::isClicked` that lets you
-check whether this button was used to submit the form. This is especially
-useful when :ref:`a form has multiple submit buttons <book-form-submitting-multiple-buttons>`::
+Gumb Submit ima dodatne metode
+:method:`Symfony\\Component\\Form\\ClickableInterface::isClicked`, ki vam omogočajo
+preveriti, ali je bil ta gumb uporabljen za pošiljanje obrazca. To je posebno
+uporabno, ko :ref:`ima obrazec več gumbov za pošiljanje <book-form-submitting-multiple-buttons>`::
 
     if ($form->get('save')->isClicked()) {
         // ...
     }
 
-Inherited options
+Podedovane opcije
 -----------------
 
 .. include:: /reference/forms/types/options/button_attr.rst.inc

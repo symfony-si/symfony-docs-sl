@@ -14,33 +14,33 @@ Ta tip je v bistvu enak kot :doc:`datum </reference/forms/types/date>`
 tip, vendar z več ustreznimi privzetimi vrednostmi za opcijo `years`_. Opcija `years`_
 je privzeto nastavljena na 120 let nazaj glede na trenutno leto.
 
-+----------------------+-------------------------------------------------------------------------------+
-| Underlying Data Type | lahko je ``DateTime``, ``string``, ``timestamp``, ali ``array``               |
-|                      | (glejte :ref:`input opcijo <form-reference-date-input>`)                      |
-+----------------------+-------------------------------------------------------------------------------+
++----------------------+----------------------------------------------------------------------------------------------+
+| Osnovni podatkovni   | lahko je ``DateTime``, ``string``, ``timestamp``, ali ``array``                              |
+| tip                  | (glejte :ref:`input opcijo <form-reference-date-input>`)                                     |
++----------------------+----------------------------------------------------------------------------------------------+
 | Izpisano kot         | lahko so trije izbirni kvadratki ali 1 ali 3 tekstovni kvadratki, na osnovi `widget`_ opcije |
-+----------------------+-------------------------------------------------------------------------------+
-| Prepisane opcije     | - `years`_                                                                    |
-+----------------------+-------------------------------------------------------------------------------+
-| Podedovane opcije    | - `widget`_                                                                   |
-|                      | - `input`_                                                                    |
-|                      | - `empty_value`_                                                              |
-|                      | - `months`_                                                                   |
-|                      | - `days`_                                                                     |
-|                      | - `format`_                                                                   |
-|                      | - `model_timezone`_                                                           |
-|                      | - `view_timezone`_                                                            |
-|                      | - `invalid_message`_                                                          |
-|                      | - `invalid_message_parameters`_                                               |
-|                      | - `read_only`_                                                                |
-|                      | - `disabled`_                                                                 |
-|                      | - `mapped`_                                                                   |
-|                      | - `inherit_data`_                                                             |
-+----------------------+-------------------------------------------------------------------------------+
-| Starševski tip       | :doc:`date </reference/forms/types/date>`                                     |
-+----------------------+-------------------------------------------------------------------------------+
-| Razred               | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\BirthdayType`        |
-+----------------------+-------------------------------------------------------------------------------+
++----------------------+----------------------------------------------------------------------------------------------+
+| Prepisane opcije     | - `years`_                                                                                   |
++----------------------+----------------------------------------------------------------------------------------------+
+| Podedovane opcije    | - `widget`_                                                                                  |
+|                      | - `input`_                                                                                   |
+|                      | - `empty_value`_                                                                             |
+|                      | - `months`_                                                                                  |
+|                      | - `days`_                                                                                    |
+|                      | - `format`_                                                                                  |
+|                      | - `model_timezone`_                                                                          |
+|                      | - `view_timezone`_                                                                           |
+|                      | - `invalid_message`_                                                                         |
+|                      | - `invalid_message_parameters`_                                                              |
+|                      | - `read_only`_                                                                               |
+|                      | - `disabled`_                                                                                |
+|                      | - `mapped`_                                                                                  |
+|                      | - `inherit_data`_                                                                            |
++----------------------+----------------------------------------------------------------------------------------------+
+| Starševski tip       | :doc:`date </reference/forms/types/date>`                                                    |
++----------------------+----------------------------------------------------------------------------------------------+
+| Razred               | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\BirthdayType`                       |
++----------------------+----------------------------------------------------------------------------------------------+
 
 Prepisane opcije
 ----------------

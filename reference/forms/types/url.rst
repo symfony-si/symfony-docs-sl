@@ -1,49 +1,49 @@
 .. index::
    single: Forms; Fields; url
 
-url Field Type
-==============
+url tip polja
+=============
 
-The ``url`` field is a text field that prepends the submitted value with
-a given protocol (e.g. ``http://``) if the submitted value doesn't already
-have a protocol.
+Polje ``url`` je tekstovno polje, ki predstavlja poslano vrednost z dodanim
+protokolom (npr. ``http://``), če poslana vrednost še ne vsebuje
+protokola.
 
-+-------------+-------------------------------------------------------------------+
-| Rendered as | ``input url`` field                                               |
-+-------------+-------------------------------------------------------------------+
-| Options     | - `default_protocol`_                                             |
-+-------------+-------------------------------------------------------------------+
-| Inherited   | - `max_length`_                                                   |
-| options     | - `required`_                                                     |
-|             | - `label`_                                                        |
-|             | - `trim`_                                                         |
-|             | - `read_only`_                                                    |
-|             | - `disabled`_                                                     |
-|             | - `error_bubbling`_                                               |
-|             | - `error_mapping`_                                                |
-|             | - `mapped`_                                                       |
-+-------------+-------------------------------------------------------------------+
-| Parent type | :doc:`text </reference/forms/types/text>`                         |
-+-------------+-------------------------------------------------------------------+
-| Class       | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\UrlType` |
-+-------------+-------------------------------------------------------------------+
++----------------+-------------------------------------------------------------------+
+| Izpisan kot    | ``input url`` polje                                               |
++----------------+-------------------------------------------------------------------+
+| Opcije         | - `default_protocol`_                                             |
++----------------+-------------------------------------------------------------------+
+| Podedovane     | - `max_length`_                                                   |
+| opcije         | - `required`_                                                     |
+|                | - `label`_                                                        |
+|                | - `trim`_                                                         |
+|                | - `read_only`_                                                    |
+|                | - `disabled`_                                                     |
+|                | - `error_bubbling`_                                               |
+|                | - `error_mapping`_                                                |
+|                | - `mapped`_                                                       |
++----------------+-------------------------------------------------------------------+
+| Starševski tip | :doc:`text </reference/forms/types/text>`                         |
++----------------+-------------------------------------------------------------------+
+| Razred         | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\UrlType` |
++----------------+-------------------------------------------------------------------+
 
-Field Options
--------------
+Opcije polja
+------------
 
 default_protocol
 ~~~~~~~~~~~~~~~~
 
-**type**: ``string`` **default**: ``http``
+**tip**: ``string`` **privzeto**: ``http``
 
-If a value is submitted that doesn't begin with some protocol (e.g. ``http://``,
-``ftp://``, etc), this protocol will be prepended to the string when
-the data is submitted to the form.
+Če se poslana vrednost ne začne z nekim protokolom (npr. ``http://``,
+``ftp://`` itd.), bo ta protokol pripet nizu, ko se pošlje
+podatke obrazcu.
 
-Inherited Options
+Podedovane opcije
 -----------------
 
-These options inherit from the :doc:`form </reference/forms/types/form>` type:
+Te opcije dedujejo iz tipa :doc:`form </reference/forms/types/form>`:
 
 .. include:: /reference/forms/types/options/max_length.rst.inc
 

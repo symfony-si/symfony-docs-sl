@@ -2,40 +2,40 @@
    single: Controller; Customize error pages
    single: Error pages
 
-How to customize Error Pages
-============================
+Kako prilagoditi strani z napako
+================================
 
-When any exception is thrown in Symfony2, the exception is caught inside the
-``Kernel`` class and eventually forwarded to a special controller,
-``TwigBundle:Exception:show`` for handling. This controller, which lives
-inside the core ``TwigBundle``, determines which error template to display and
-the status code that should be set for the given exception.
+Ko je vržena katerakoli izjema v Symfony2, je izjema ujeta znotraj
+razreda ``Kernel`` in eventuelno posredovana posebnemu krmilniku,
+``TwigBundle:Exception:show`` za ravnanje. Ta krmilnik, ki domuje
+znotraj jedra ``TwigBundle``, ugotovi, katero predlogo napake prikazati in
+statusno kodo, ki bi morala biti nastavljena za dano izjemo.
 
-Error pages can be customized in two different ways, depending on how much
-control you need:
+Strani z napako se lahko naredi po meri na dva načina, odvisno od tega
+koliko kontrole potrebujete:
 
-1. Customize the error templates of the different error pages (explained below);
+1. Naredite po meri predlogo napake za različne strani z napako (razloženo spodaj);
 
-2. Replace the default exception controller ``twig.controller.exception:showAction``
-   with your own controller and handle it however you want (see
-   :ref:`exception_controller in the Twig reference <config-twig-exception-controller>`).
-   The default exception controller is registered as a service - the actual
-   class is ``Symfony\Bundle\TwigBundle\Controller\ExceptionController``.
+2. Zamenjajte privzeti krmilnik izjem ``twig.controller.exception:showAction``
+   z vašim lastnim krmilnikom in z njim ravnajte kakor želite (glejte
+   :ref:`exception_controller v Twig referenci <config-twig-exception-controller>`).
+   Privzeti krmilnik izjem je registriran kot storitev - dejanski razred
+   je ``Symfony\Bundle\TwigBundle\Controller\ExceptionController``.
 
 .. tip::
 
-    The customization of exception handling is actually much more powerful
-    than what's written here. An internal event, ``kernel.exception``, is thrown
-    which allows complete control over exception handling. For more
-    information, see :ref:`kernel-kernel.exception`.
+    Prilagajanje ravnanja izjem je dejansko veliko bolj močnejše, kot
+    je opisano tu. Notranji dogodek ``kernel.exception`` je vržen,
+    kar dovoljuje celotno kontrolo nad ravnanjem izjeme. Za več informacij
+    glejte :ref:`kernel-kernel.exception`.
 
-All of the error templates live inside ``TwigBundle``. To override the
-templates, simply rely on the standard method for overriding templates that
-live inside a bundle. For more information, see
+Vse predloge z napakami domujejo znotraj ``TwigBundle``. Za prepis predlog
+se enostavno zanašajte na standardno metodo za prepis predlog, ki domuje
+znotraj paketa. Za več informacij, glejte
 :ref:`overriding-bundle-templates`.
 
-For example, to override the default error template that's shown to the
-end-user, create a new template located at
+Na primer, za prepis privzete predloge napak, ki je prikazana končnemu
+uporabniku, izdelajte novo predlogo locirano v
 ``app/Resources/TwigBundle/views/Exception/error.html.twig``:
 
 .. code-block:: html+jinja
@@ -54,59 +54,60 @@ end-user, create a new template located at
 
 .. caution::
 
-    You **must not** use ``is_granted`` in your error pages (or layout used
-    by your error pages), because the router runs before the firewall. If
-    the router throws an exception (for instance, when the route does not
-    match), then using ``is_granted`` will throw a further exception. You
-    can use ``is_granted`` safely by saying ``{% if app.user and is_granted('...') %}``.
+    **Ne smete** uporabiti ``is_granted`` v vaših straneh z napakami (ali
+    postavitvi uporabljeni s strani vaši strani z napakami), ker se usmerjevalnik
+    zaganja pred požarnim zidom. Če usmerjevalnik vrže izjemo (na primer, ko se smer
+    ne ujema), potem bo uporaba ``is_granted`` vrgla naslednjo izjemo. Lahko
+    uporabite ``is_granted`` varno z ``{% if app.user and is_granted('...') %}``.
 
 .. tip::
 
-    If you're not familiar with Twig, don't worry. Twig is a simple, powerful
-    and optional templating engine that integrates with ``Symfony2``. For more
-    information about Twig see :doc:`/book/templating`.
+    Če niste seznanjeni s Twig-om, ne skrbite. Twig je enostaven, močan
+    in opcijski motor predlog, ki se integrira s ``Symfony2``. Za več informacij
+    o Twig-u glejte :doc:`/book/templating`.
 
-In addition to the standard HTML error page, Symfony provides a default error
-page for many of the most common response formats, including JSON
-(``error.json.twig``), XML (``error.xml.twig``) and even Javascript
-(``error.js.twig``), to name a few. To override any of these templates, just
-create a new file with the same name in the
-``app/Resources/TwigBundle/views/Exception`` directory. This is the standard
-way of overriding any template that lives inside a bundle.
+Kot dodatek standardnim HTML stranmi z napakami, Symfony ponuja privzeto stran
+z napako za mnoge najbolj pogoste oblike odzivov, vključujoč JSON
+(``error.json.twig``), XML (``error.xml.twig``) in celo JavaScript
+(``error.js.twig``), da jih imenujemo samo nekaj. Za prepis katerekoli od teh predlog, samo
+izdelajte novo datoteko z enakim imenom v
+``app/Resources/TwigBundle/views/Exception`` direktoriju. To je standardni
+način prepisa katerekoli predloge, ki domuje znotraj paketa.
 
 .. _cookbook-error-pages-by-status-code:
 
-Customizing the 404 Page and other Error Pages
-----------------------------------------------
+Prilagoditev 404 strani in ostalih strani z napako
+--------------------------------------------------
 
-You can also customize specific error templates according to the HTTP status
-code. For instance, create a
-``app/Resources/TwigBundle/views/Exception/error404.html.twig`` template to
-display a special page for 404 (page not found) errors.
+Lahko tudi prilagodite določeno predlogo za napake, glede na kodo HTTP statusa.
+Na primer izdelajte
+``app/Resources/TwigBundle/views/Exception/error404.html.twig`` predlogo za
+prikazovanje posebne strani za 404 (stran ni najdena) napake.
 
-Symfony uses the following algorithm to determine which template to use:
+Symfony uporablja sledeče algoritme za ugotovitev, katero predlogo naj uporabi:
 
-* First, it looks for a template for the given format and status code (like
+* Najprej pogleda za predlogo za dani format in statusno kodo (kot je
   ``error404.json.twig``);
 
-* If it does not exist, it looks for a template for the given format (like
+* Če ne obstaja, potem pogleda za predlogo za dani format (kot je
   ``error.json.twig``);
 
-* If it does not exist, it falls back to the HTML template (like
+* Če ne obstaja, se vrne nazaj k HTML predlogi (kot je
   ``error.html.twig``).
 
 .. tip::
 
-    To see the full list of default error templates, see the
-    ``Resources/views/Exception`` directory of the ``TwigBundle``. In a
-    standard Symfony2 installation, the ``TwigBundle`` can be found at
-    ``vendor/symfony/symfony/src/Symfony/Bundle/TwigBundle``. Often, the easiest way
-    to customize an error page is to copy it from the ``TwigBundle`` into
-    ``app/Resources/TwigBundle/views/Exception`` and then modify it.
+    Da vidite celotni seznam privzetih predlog za napake, glejte
+    ``Resources/views/Exception`` direktorij paketa ``TwigBundle``. V
+    standardni Symfony2 namestitvi, se ``TwigBundle`` lahko najde v
+    ``vendor/symfony/symfony/src/Symfony/Bundle/TwigBundle``. Pogosto je
+    najenostavnejši način za prilagoditev strani za napake kopiranje iz
+    ``TwigBundle`` v ``app/Resources/TwigBundle/views/Exception`` in nato
+    njeno spreminjanje.
 
 .. note::
 
-    The debug-friendly exception pages shown to the developer can even be
-    customized in the same way by creating templates such as
-    ``exception.html.twig`` for the standard HTML exception page or
-    ``exception.json.twig`` for the JSON exception page.
+    Razhroščevanju prijazne strani izjem prikazane razvijalcu so tudi lahko
+    prilagojene na enak način z izdelavo predlog kot je
+    ``exception.html.twig`` za standardne HTML strani izjem ali
+    ``exception.json.twig`` za JSON strani izjem.

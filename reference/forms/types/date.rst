@@ -1,18 +1,18 @@
 .. index::
    single: Forms; Fields; date
 
-date Field Type
-===============
+date tip polja
+==============
 
-A field that allows the user to modify date information via a variety of
-different HTML elements.
+Polje, ki omogoča uporabniku spremeniti informacije datuma preko raznovrstnosti
+različnih HTML elementov.
 
-The underlying data used for this field type can be a ``DateTime`` object,
-a string, a timestamp or an array. As long as the `input`_ option is set
-correctly, the field will take care of all of the details.
+Osnovni podatki uporabljeni za ta tip polja so lahko ``DateTime`` objekt,
+niz, časovna znamka ali polje. Dokler je opcija `input`_ nastavljena
+pravilno, bo polje poskrbelo za vse podrobnosti.
 
-The field can be rendered as a single text box, three text boxes (month,
-day, and year) or three select boxes (see the `widget_` option).
+Polje je lahko izpisano kot en tekstovni kvadratek, trije tekstovni kvadratki
+(mesec, dan in leto) ali trije izbirni kvadratki (glejte `widget`_ opcijo).
 
 +----------------------+-----------------------------------------------------------------------------+
 | Underlying Data Type | can be ``DateTime``, string, timestamp, or array (see the ``input`` option) |

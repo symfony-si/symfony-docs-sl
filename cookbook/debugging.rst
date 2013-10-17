@@ -1,32 +1,32 @@
 .. index::
    single: Debugging
 
-How to optimize your development Environment for debugging
-==========================================================
+Kako optimizirati vaše razvojno okolje za razhroščevanje
+========================================================
 
-When you work on a Symfony project on your local machine, you should use the
-``dev`` environment (``app_dev.php`` front controller). This environment
-configuration is optimized for two main purposes:
+Ko delate na Symfony projektu na vaši lokalni napravi, bi morali uporabiti
+``dev`` okolje (``app_dev.php`` prednji krmilnik). Ta nastavitev okolja
+je optimizirana za dva glavna razloga:
 
-* Give the developer accurate feedback whenever something goes wrong (web
-  debug toolbar, nice exception pages, profiler, ...);
+* Razvijalcu da točne povratne informacije, kadarkoli gre kaj narobe (spletna
+  razhroščevalna vrstica, lepe strani napak, profiler, ...);
 
-* Be as similar as possible as the production environment to avoid problems
-  when deploying the project.
+* Je kolikor je le možno podobno produkcijskemu okolju, da se izognete problemom
+  ko postavljate projekt.
 
 .. _cookbook-debugging-disable-bootstrap:
 
-Disabling the Bootstrap File and Class Caching
-----------------------------------------------
+Onemogočanje datoteke za samozagon in razreda predpommnilnika
+-------------------------------------------------------------
 
-And to make the production environment as fast as possible, Symfony creates
-big PHP files in your cache containing the aggregation of PHP classes your
-project needs for every request. However, this behavior can confuse your IDE
-or your debugger. This recipe shows you how you can tweak this caching
-mechanism to make it friendlier when you need to debug code that involves
-Symfony classes.
+Ter da se naredi produkcijsko okolje, kakor hitro je le mogoče, Symfony izdela
+velike PHP datoteke v vašem predpomnilniku, ki vsebuje agregacijo PHP razredov, ki
+jih vaš projekt potrebuje na vsakem zahtevku. Čeprav to obnašanje lahko zmede vaš
+IDE ali vaš razhroščevalnik. Ta recept vam prikazuje, kako lahko optimizirate ta
+predpomnilni mehanizem, da ga naredite prijaznejšega, ko potrebujete razhroščevati
+kodo, ki vključuje Symfony razrede.
 
-The ``app_dev.php`` front controller reads as follows by default::
+Prednji krmilnik ``app_dev.php`` je privzeto sledečit::
 
     // ...
 
@@ -37,9 +37,8 @@ The ``app_dev.php`` front controller reads as follows by default::
     $kernel->loadClassCache();
     $request = Request::createFromGlobals();
 
-To make your debugger happier, disable all PHP class caches by removing the
-call to ``loadClassCache()`` and by replacing the require statements like
-below::
+Da naredite vaš razhroščevalnik srečnejši, onemogočite vse PHP razrede predpomnilnika z odstranitvijo
+klica na ``loadClassCache()`` in z zamenjavo require stavka kot je spodaj::
 
     // ...
 
@@ -55,11 +54,11 @@ below::
 
 .. tip::
 
-    If you disable the PHP caches, don't forget to revert after your debugging
-    session.
+    Če onemogočite PHP predpomnilnike, jih ne pozabite povrniti ko končate razhroščevalno
+    sejo.
 
-Some IDEs do not like the fact that some classes are stored in different
-locations. To avoid problems, you can either tell your IDE to ignore the PHP
-cache files, or you can change the extension used by Symfony for these files::
+Nekateri IDE-ji ne marajo dejstva, da so nekateri razredi shranjeni na različnih lokacijah.
+Da se izognete problemom, lahko ali poveste vašemu IDE-ju, da ignorirate PHP datoteke
+predpomnilnika, ali pa spremenite končnico uporabljeno s strani Symfony-ja za te datoteke::
 
     $kernel->loadClassCache('classes', '.php.cache');

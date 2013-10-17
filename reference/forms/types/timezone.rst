@@ -1,58 +1,58 @@
 .. index::
    single: Forms; Fields; timezone
 
-timezone Field Type
-===================
+timezone tip polja
+==================
 
-The ``timezone`` type is a subset of the ``ChoiceType`` that allows the user
-to select from all possible timezones.
+Tip ``timezone`` je podmnožica ``ChoiceType``, ki dovoljuje uporabniku,
+da izbere iz vseh možnih časovnih con.
 
-The "value" for each timezone is the full timezone name, such as ``America/Chicago``
-or ``Europe/Istanbul``.
+Vrednost ("value") za vsako časovno cono je celotno ime časovne cone, kot je
+``America/Chicago`` ali ``Europe/Istanbul``.
 
-Unlike the ``choice`` type, you don't need to specify a ``choices`` or
-``choice_list`` option as the field type automatically uses a large list
-of locales. You *can* specify either of these options manually, but then
-you should just use the ``choice`` type directly.
+Z razliko od ``choice`` tipa, ne potrebujete specificirati ``choices`` ali
+``choice_list`` opcije, saj polje avtomatsko uporablja velik seznam
+lokalizacij. *Lahko* specificirate katerokoli izmed teh opcij ročno, vendar
+potem bi morali samo uporabiti tip ``choice`` direktno.
 
-+-------------+------------------------------------------------------------------------+
-| Rendered as | can be various tags (see :ref:`forms-reference-choice-tags`)           |
-+-------------+------------------------------------------------------------------------+
-| Overridden  | - `choice_list`_                                                       |
-| Options     |                                                                        |
-+-------------+------------------------------------------------------------------------+
-| Inherited   | - `multiple`_                                                          |
-| options     | - `expanded`_                                                          |
-|             | - `preferred_choices`_                                                 |
-|             | - `empty_value`_                                                       |
-|             | - `required`_                                                          |
-|             | - `label`_                                                             |
-|             | - `read_only`_                                                         |
-|             | - `disabled`_                                                          |
-|             | - `error_bubbling`_                                                    |
-|             | - `error_mapping`_                                                     |
-|             | - `mapped`_                                                            |
-+-------------+------------------------------------------------------------------------+
-| Parent type | :doc:`choice </reference/forms/types/choice>`                          |
-+-------------+------------------------------------------------------------------------+
-| Class       | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\TimezoneType` |
-+-------------+------------------------------------------------------------------------+
++----------------+------------------------------------------------------------------------+
+| Izpisan kot    | lahko so različne značke (see :ref:`forms-reference-choice-tags`)      |
++----------------+------------------------------------------------------------------------+
+| Prepisane      | - `choice_list`_                                                       |
+| opcije         |                                                                        |
++----------------+------------------------------------------------------------------------+
+| Podedovane     | - `multiple`_                                                          |
+| opcije         | - `expanded`_                                                          |
+|                | - `preferred_choices`_                                                 |
+|                | - `empty_value`_                                                       |
+|                | - `required`_                                                          |
+|                | - `label`_                                                             |
+|                | - `read_only`_                                                         |
+|                | - `disabled`_                                                          |
+|                | - `error_bubbling`_                                                    |
+|                | - `error_mapping`_                                                     |
+|                | - `mapped`_                                                            |
++----------------+------------------------------------------------------------------------+
+| Starševski tip | :doc:`choice </reference/forms/types/choice>`                          |
++----------------+------------------------------------------------------------------------+
+| Razred         | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\TimezoneType` |
++----------------+------------------------------------------------------------------------+
 
-Overridden Options
-------------------
+Prepisane opcije
+----------------
 
 choice_list
 ~~~~~~~~~~~
 
-**default**: :class:`Symfony\\Component\\Form\\Extension\\Core\\ChoiceList\\TimezoneChoiceList`
+**privzeto**: :class:`Symfony\\Component\\Form\\Extension\\Core\\ChoiceList\\TimezoneChoiceList`
 
-The Timezone type defaults the choice_list to all timezones returned by
-:phpmethod:`DateTimeZone::listIdentifiers`, broken down by continent.
+Tip timezone je privzeto choice_list za vse časovne cone, vrnjene od
+:phpmethod:`DateTimeZone::listIdentifiers`, razdeljene po kontinentih.
 
-Inherited options
+Podedovane opcije
 -----------------
 
-These options inherit from the :doc:`choice </reference/forms/types/choice>` type:
+Te opcije dedujejo od tipa :doc:`choice </reference/forms/types/choice>`:
 
 .. include:: /reference/forms/types/options/multiple.rst.inc
 
@@ -62,7 +62,7 @@ These options inherit from the :doc:`choice </reference/forms/types/choice>` typ
 
 .. include:: /reference/forms/types/options/empty_value.rst.inc
 
-These options inherit from the :doc:`form </reference/forms/types/form>` type:
+Te opcije dedujejo od tipa :doc:`form </reference/forms/types/form>`:
 
 .. include:: /reference/forms/types/options/required.rst.inc
 
