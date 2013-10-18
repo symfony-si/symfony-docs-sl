@@ -1,8 +1,8 @@
-Basic Constraints
-~~~~~~~~~~~~~~~~~
+Osnovne omejitve
+~~~~~~~~~~~~~~~~
 
-These are the basic constraints: use them to assert very basic things about
-the value of properties or the return value of methods on your object.
+To so osnovne omejitve: uporabite jih za uveljavljanje zelo osnovnih stvari o
+vrednostih lastnosti ali vrnjene vrednosti meto na vašem objektu.
 
 * :doc:`NotBlank </reference/constraints/NotBlank>`
 * :doc:`Blank </reference/constraints/Blank>`
@@ -12,8 +12,8 @@ the value of properties or the return value of methods on your object.
 * :doc:`False </reference/constraints/False>`
 * :doc:`Type </reference/constraints/Type>`
 
-String Constraints
-~~~~~~~~~~~~~~~~~~
+Omejitve nizov
+~~~~~~~~~~~~~~
 
 * :doc:`Email </reference/constraints/Email>`
 * :doc:`Length </reference/constraints/Length>`
@@ -21,13 +21,13 @@ String Constraints
 * :doc:`Regex </reference/constraints/Regex>`
 * :doc:`Ip </reference/constraints/Ip>`
 
-Number Constraints
-~~~~~~~~~~~~~~~~~~
+Omejitve številk
+~~~~~~~~~~~~~~~~
 
 * :doc:`Range </reference/constraints/Range>`
 
-Comparison Constraints
-~~~~~~~~~~~~~~~~~~~~~~
+Primerjalne omejitve
+~~~~~~~~~~~~~~~~~~~~
 
 * :doc:`EqualTo </reference/constraints/EqualTo>`
 * :doc:`NotEqualTo </reference/constraints/NotEqualTo>`
@@ -38,15 +38,15 @@ Comparison Constraints
 * :doc:`GreaterThan </reference/constraints/GreaterThan>`
 * :doc:`GreaterThanOrEqual </reference/constraints/GreaterThanOrEqual>`
 
-Date Constraints
-~~~~~~~~~~~~~~~~
+Omejitve datuma
+~~~~~~~~~~~~~~~
 
 * :doc:`Date </reference/constraints/Date>`
 * :doc:`DateTime </reference/constraints/DateTime>`
 * :doc:`Time </reference/constraints/Time>`
 
-Collection Constraints
-~~~~~~~~~~~~~~~~~~~~~~
+Omejitve zbirk
+~~~~~~~~~~~~~~
 
 * :doc:`Choice </reference/constraints/Choice>`
 * :doc:`Collection </reference/constraints/Collection>`
@@ -56,14 +56,14 @@ Collection Constraints
 * :doc:`Locale </reference/constraints/Locale>`
 * :doc:`Country </reference/constraints/Country>`
 
-File Constraints
+Omejitve datotek
 ~~~~~~~~~~~~~~~~
 
 * :doc:`File </reference/constraints/File>`
 * :doc:`Image </reference/constraints/Image>`
 
-Financial and other Number Constraints
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Omejitve financ in drugih številk
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * :doc:`CardScheme </reference/constraints/CardScheme>`
 * :doc:`Currency </reference/constraints/Currency>`
@@ -72,8 +72,8 @@ Financial and other Number Constraints
 * :doc:`Isbn </reference/constraints/Isbn>`
 * :doc:`Issn </reference/constraints/Issn>`
 
-Other Constraints
-~~~~~~~~~~~~~~~~~
+Ostale omejitve
+~~~~~~~~~~~~~~~
 
 * :doc:`Callback </reference/constraints/Callback>`
 * :doc:`All </reference/constraints/All>`
