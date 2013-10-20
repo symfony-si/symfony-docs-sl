@@ -1,24 +1,24 @@
 All
 ===
 
-When applied to an array (or Traversable object), this constraint allows
-you to apply a collection of constraints to each element of the array.
+Ko je uporabljeno na polju (ali objektu Traversable), vam ta omejitev omogoča
+uporabiti zbirko omejitev na vsakem elementu polja.
 
 +----------------+------------------------------------------------------------------------+
-| Applies to     | :ref:`property or method <validation-property-target>`                 |
+| Nanaša se na   | :ref:`lastnost ali metodo <validation-property-target>`                |
 +----------------+------------------------------------------------------------------------+
-| Options        | - `constraints`_                                                       |
+| Opcije         | - `constraints`_                                                       |
 +----------------+------------------------------------------------------------------------+
-| Class          | :class:`Symfony\\Component\\Validator\\Constraints\\All`               |
+| Razred         | :class:`Symfony\\Component\\Validator\\Constraints\\All`               |
 +----------------+------------------------------------------------------------------------+
 | Validator      | :class:`Symfony\\Component\\Validator\\Constraints\\AllValidator`      |
 +----------------+------------------------------------------------------------------------+
 
-Basic Usage
------------
+Osnovna uporaba
+---------------
 
-Suppose that you have an array of strings, and you want to validate each
-entry in that array:
+Predvidevajmo, da imate polje z nizi in želite preveriti vsak
+vnos v tem polju:
 
 .. configuration-block::
 
@@ -94,16 +94,16 @@ entry in that array:
             }
         }
 
-Now, each entry in the ``favoriteColors`` array will be validated to not
-be blank and to be at least 5 characters long.
+Sedaj bo vsak vnos v ``favoriteColors`` polju preverjen, da ni
+prazen in da je dolg vsaj 5 znakov.
 
-Options
--------
+Opcije
+------
 
 constraints
 ~~~~~~~~~~~
 
-**type**: ``array`` [:ref:`default option <validation-default-option>`]
+**tip**: ``array`` [:ref:`default option <validation-default-option>`]
 
-This required option is the array of validation constraints that you want
-to apply to each element of the underlying array.
+Ta zahtevana opcija je polje omejitev potrjevanj, ki jih želite
+uporabiti na vsakem elementu osnovnega polja.
