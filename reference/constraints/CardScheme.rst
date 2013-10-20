@@ -2,28 +2,28 @@ CardScheme
 ==========
 
 .. versionadded:: 2.2
-    The CardScheme validation is new in Symfony 2.2.
+    Preverjanje CardScheme je novo v Symfony 2.2.
 
-This constraint ensures that a credit card number is valid for a given credit card
-company. It can be used to validate the number before trying to initiate a payment 
-through a payment gateway.
+Ta omejitev zagotavlja, da je številka kreditne kartice veljavna za dano podjetje kreditne
+kartice. Lahko je uporabljena za preverjanje številke preden se poskuša narediti plačilo
+skozi plačilni prehod.
 
 +----------------+--------------------------------------------------------------------------+
-| Applies to     | :ref:`property or method <validation-property-target>`                   |
+| Nanaša se na   | :ref:`lastnost ali metodo <validation-property-target>`                  |
 +----------------+--------------------------------------------------------------------------+
-| Options        | - `schemes`_                                                             |
+| Opcije         | - `schemes`_                                                             |
 |                | - `message`_                                                             |
 +----------------+--------------------------------------------------------------------------+
-| Class          | :class:`Symfony\\Component\\Validator\\Constraints\\CardScheme`          |
+| Razred         | :class:`Symfony\\Component\\Validator\\Constraints\\CardScheme`          |
 +----------------+--------------------------------------------------------------------------+
 | Validator      | :class:`Symfony\\Component\\Validator\\Constraints\\CardSchemeValidator` |
 +----------------+--------------------------------------------------------------------------+
 
-Basic Usage
------------
+Osnovna uporaba
+---------------
 
-To use the ``CardScheme`` validator, simply apply it to a property or method
-on an  object that will contain a credit card number.
+Da uporabite ``CardScheme`` preverjanje, ga enostavno uporabite na lastnosti ali metodi
+objekta, ki bo vseboval številko kreditne kartice.
 
 .. configuration-block::
 
@@ -95,17 +95,17 @@ on an  object that will contain a credit card number.
             }
         }
 
-Available Options
------------------
+Opcije na voljo
+---------------
 
 schemes
 -------
 
-**type**: ``mixed`` [:ref:`default option <validation-default-option>`]
+**tip**: ``mixed`` [:ref:`default option <validation-default-option>`]
 
-This option is required and represents the name of the number scheme used to 
-validate the credit card number, it can either be a string or an array. Valid
-values are:
+Ta opcija je zahtevana in predstavlja ime uporabljene številske sheme za
+preverjanje številke kreditne kartice, lahko je ali niz ali polje. Veljavne
+vrednosti so:
 
 * ``AMEX``
 * ``CHINA_UNIONPAY``
@@ -118,13 +118,13 @@ values are:
 * ``MASTERCARD``
 * ``VISA``
 
-For more information about the used schemes, see `Wikipedia: Issuer identification number (IIN)`_.
+Za več informacij o uporabljenih shemah, glejte `Wikipedia: Issuer identification number (IIN)`_.
 
 message
 ~~~~~~~
 
-**type**: ``string`` **default**: ``Unsupported card type or invalid card number``
+**tip**: ``string`` **privzeto**: ``Unsupported card type or invalid card number``
 
-The message shown when the value does not pass the ``CardScheme`` check.
+Sporočilo prikazano, ko vrednost ne opravi ``CardScheme`` preverjanja.
 
 .. _`Wikipedia: Issuer identification number (IIN)`: http://en.wikipedia.org/wiki/Bank_card_number#Issuer_identification_number_.28IIN.29
