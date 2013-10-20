@@ -1,23 +1,23 @@
 Email
 =====
 
-Validates that a value is a valid email address. The underlying value is
-cast to a string before being validated.
+Preveri, da je vrednost veljavni e-poštni naslov. Osnovna vrednost je
+vezana na niz preden se preverja.
 
 +----------------+---------------------------------------------------------------------+
-| Applies to     | :ref:`property or method <validation-property-target>`              |
+| Nanaša se na   | :ref:`lastnost ali metodo <validation-property-target>`             |
 +----------------+---------------------------------------------------------------------+
-| Options        | - `message`_                                                        |
+| Opcije         | - `message`_                                                        |
 |                | - `checkMX`_                                                        |
 |                | - `checkHost`_                                                      |
 +----------------+---------------------------------------------------------------------+
-| Class          | :class:`Symfony\\Component\\Validator\\Constraints\\Email`          |
+| Razred         | :class:`Symfony\\Component\\Validator\\Constraints\\Email`          |
 +----------------+---------------------------------------------------------------------+
 | Validator      | :class:`Symfony\\Component\\Validator\\Constraints\\EmailValidator` |
 +----------------+---------------------------------------------------------------------+
 
-Basic Usage
------------
+Osnovna uporaba
+---------------
 
 .. configuration-block::
 
@@ -86,29 +86,29 @@ Basic Usage
             }
         }
 
-Options
--------
+Opcije
+------
 
 message
 ~~~~~~~
 
-**type**: ``string`` **default**: ``This value is not a valid email address``
+**tip**: ``string`` **privzeto**: ``This value is not a valid email address``
 
-This message is shown if the underlying data is not a valid email address.
+To sporočilo je prikazano, če osnoven podatek ni veljaven e-poštni naslov.
 
 checkMX
 ~~~~~~~
 
-**type**: ``Boolean`` **default**: ``false``
+**tip**: ``Boolean`` **privzeto**: ``false``
 
-If true, then the :phpfunction:`checkdnsrr` PHP function will be used to
-check the validity of the MX record of the host of the given email.
+Če je true, potem bo uporabljena :phpfunction:`checkdnsrr` PHP funkcija za
+preverjanje veljavnosti MX zapisa gostitelja dane e-pošte.
 
 checkHost
 ~~~~~~~~~
 
-**type**: ``Boolean`` **default**: ``false``
+**tip**: ``Boolean`` **privzeto**: ``false``
 
-If true, then the :phpfunction:`checkdnsrr` PHP function will be used to
-check the validity of the MX *or* the A *or* the AAAA record of the host
-of the given email.
+Če je true, potem bo :phpfunction:`checkdnsrr` PHP funkcija uporabljena za
+preverjanje veljavnosti MX *ali* A *ali* AAAA zapisa gostitelja
+dane e-pošte.
