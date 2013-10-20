@@ -1,38 +1,38 @@
 .. index::
    single: Tests
 
-Testing
-=======
+Testiranje
+==========
 
-Whenever you write a new line of code, you also potentially add new bugs.
-To build better and more reliable applications, you should test your code
-using both functional and unit tests.
+Kadarkoli napišete novo vrstico kode, lahko potencioalno dodate nove hrošče.
+Za boljšo gradnjo in bolj zanesljive aplikacije bi morali testirati vašo kodo
+z uporabo tako funkcijskih testov kot testov enot.
 
-The PHPUnit Testing Framework
------------------------------
+PHPUnit testno ogrodje
+----------------------
 
-Symfony2 integrates with an independent library - called PHPUnit - to give
-you a rich testing framework. This chapter won't cover PHPUnit itself, but
-it has its own excellent `documentation`_.
+Symfony2 je integriran z neodvisno knjižnico - imenovano PHPUnit - da dobi
+bogato testno ogrodje. To poglavje ne bo pokrilo samega PHPUnit-a, vendar
+ima svojo odlično `dokumentacijo`_.
 
 .. note::
 
-    Symfony2 works with PHPUnit 3.5.11 or later, though version 3.6.4 is
-    needed to test the Symfony core code itself.
+    Symfony2 deluje s PHPUnit 3.5.11 ali več, vendar je potrebna verzija 3.6.4
+    za testiranje kode samega Symfony jedra.
 
-Each test - whether it's a unit test or a functional test - is a PHP class
-that should live in the `Tests/` subdirectory of your bundles. If you follow
-this rule, then you can run all of your application's tests with the following
-command:
+Vsak test - bodisi je to test enote ali funkcijski test - gre za PHP razred,
+ki bi moral domovati znotraj `Tests/` poddirektorija vaših paketov. Če sledite
+temu pravilu, potem lahko poženete vse vaše teste aplikacije s sledečim
+ukazom:
 
 .. code-block:: bash
 
     # specify the configuration directory on the command line
     $ phpunit -c app/
 
-The ``-c`` option tells PHPUnit to look in the ``app/`` directory for a configuration
-file. If you're curious about the PHPUnit options, check out the ``app/phpunit.xml.dist``
-file.
+Opcija ``-c`` pove PHPUnit-u, naj pogleda v ``app/`` direktorij za nastavitveno
+datoteko. Če ste radovedni o opcijah PHPUnit-a, preverite datoteko
+``app/phpunit.xml.dist``.
 
 .. tip::
 
@@ -820,4 +820,4 @@ Learn more
 
 .. _`DemoControllerTest`: https://github.com/symfony/symfony-standard/blob/master/src/Acme/DemoBundle/Tests/Controller/DemoControllerTest.php
 .. _`$_SERVER`: http://php.net/manual/en/reserved.variables.server.php
-.. _`documentation`: http://phpunit.de/manual/current/en/
+.. _`dokumentacijo`: http://phpunit.de/manual/current/en/
