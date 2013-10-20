@@ -1,5 +1,5 @@
-Routing
-=======
+Usmerjanje
+==========
 
 .. toctree::
     :maxdepth: 2

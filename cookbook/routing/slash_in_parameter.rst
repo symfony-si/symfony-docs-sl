@@ -1,26 +1,26 @@
 .. index::
    single: Routing; Allow / in route parameter
 
-How to allow a "/" character in a route parameter
-=================================================
+Kako dovoliti znak poševnico "/" v parametru smeri
+==================================================
 
-Sometimes, you need to compose URLs with parameters that can contain a slash
-``/``. For example, take the classic ``/hello/{name}`` route. By default,
-``/hello/Fabien`` will match this route but not ``/hello/Fabien/Kris``. This
-is because Symfony uses this character as separator between route parts.
+Včasih potrebujete sestaviti URL s parametri, ki vsebujejo poševnico
+``/``. Na primer, klasična ``/hello/{name}`` smer. Privzeto
+``/hello/Fabien`` se bo ujela s to smerjo vendar ne pa ``/hello/Fabien/Kris``.
+To je ker Symfony uporablja ta znak kot ločilo med deli smeri.
 
-This guide covers how you can modify a route so that ``/hello/Fabien/Kris``
-matches the ``/hello/{name}`` route, where ``{name}`` equals ``Fabien/Kris``.
+Ta vodič pokriva, kako lahko modificirate smer, da se bo ``/hello/Fabien/Kris``
+ujela s smerjo ``/hello/{name}``, kjer je ``{name}`` enako ``Fabien/Kris``.
 
-Configure the Route
--------------------
+Nastavitve smeri
+----------------
 
-By default, the Symfony routing components requires that the parameters
-match the following regex path: ``[^/]+``. This means that all characters
-are allowed except ``/``.
+Privzeto, Symfony usmerjevalna komponenta zahteva, da se parametri ujemajo
+sledeči regex poti: ``[^/]+``. To pomeni, da so dovoljeni vsi znaki razen
+``/``.
 
-You must explicitly allow ``/`` to be part of your parameter by specifying
-a more permissive regex path.
+Eksplicitno morate dovoliti, da je ``/`` del vašega parametra z določitvijo
+bolj permisivne regex poti.
 
 .. configuration-block::
 
@@ -75,4 +75,4 @@ a more permissive regex path.
             }
         }
 
-That's it! Now, the ``{name}`` parameter can contain the ``/`` character.
+To je vse! Sedaj lahko parameter ``{name}`` vsebuje znak ``/``.
