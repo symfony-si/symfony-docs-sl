@@ -1,26 +1,26 @@
 Blank
 =====
 
-Validates that a value is blank, defined as equal to a blank string or equal
-to ``null``. To force that a value strictly be equal to ``null``, see the
-:doc:`/reference/constraints/Null` constraint. To force that a value is *not*
-blank, see :doc:`/reference/constraints/NotBlank`.
+Preveri, da je vrednost prazna, definirano kot enako praznemu nizi ali enako
+``null``. Da se vsili, da je vrednost striktno enaka ``null``, glejte omejitev
+:doc:`/reference/constraints/Null`. Da se vsili, da vrednost *ni*
+prazna, glejte :doc:`/reference/constraints/NotBlank`.
 
 +----------------+-----------------------------------------------------------------------+
-| Applies to     | :ref:`property or method <validation-property-target>`                |
+| Nanaša se na   | :ref:`lastnost ali metodo <validation-property-target>`               |
 +----------------+-----------------------------------------------------------------------+
-| Options        | - `message`_                                                          |
+| Opcije         | - `message`_                                                          |
 +----------------+-----------------------------------------------------------------------+
-| Class          | :class:`Symfony\\Component\\Validator\\Constraints\\Blank`            |
+| Razred         | :class:`Symfony\\Component\\Validator\\Constraints\\Blank`            |
 +----------------+-----------------------------------------------------------------------+
 | Validator      | :class:`Symfony\\Component\\Validator\\Constraints\\BlankValidator`   |
 +----------------+-----------------------------------------------------------------------+
 
-Basic Usage
------------
+Osnovna uporaba
+---------------
 
-If, for some reason, you wanted to ensure that the ``firstName`` property
-of an ``Author`` class were blank, you could do the following:
+Če zaradi kakšnega razloga želite zagotoviti, da je lastnost ``firstName``
+razreda ``Author`` prazna, lahko naredite sledeče:
 
 .. configuration-block::
 
@@ -78,12 +78,12 @@ of an ``Author`` class were blank, you could do the following:
             }
         }
 
-Options
--------
+Opcije
+------
 
 message
 ~~~~~~~
 
-**type**: ``string`` **default**: ``This value should be blank``
+**tip**: ``string`` **privzeto**: ``This value should be blank``
 
-This is the message that will be shown if the value is not blank.
+To je sporočilo, ki bo prikazano, če vrednost ni prazna.
