@@ -1,22 +1,22 @@
 .. index::
    single: Console; Create commands
 
-How to create a Console Command
-===============================
+Kako izdelati ukaz za konzolo
+=============================
 
-The Console page of the Components section (:doc:`/components/console/introduction`) covers
-how to create a Console command. This cookbook article covers the differences
-when creating Console commands within the Symfony2 framework.
+Stran o konzoli sekcije komponent (:doc:`/components/console/introduction`) pokriva
+kako izdelati ukaz za konzolo. Ta članek receptov pokriva razlike,
+ko izdelujete ukaze za konzolo znotraj Symfony2 ogrodja.
 
-Automatically Registering Commands
-----------------------------------
+Avtomatska registracija ukazov
+------------------------------
 
-To make the console commands available automatically with Symfony2, create a
-``Command`` directory inside your bundle and create a php file suffixed with
-``Command.php`` for each command that you want to provide. For example, if you
-want to extend the ``AcmeDemoBundle`` (available in the Symfony Standard
-Edition) to greet you from the command line, create ``GreetCommand.php`` and
-add the following to it::
+Da naredite konzolne ukaze na voljo avtomatsko v Symfony2, izdelajte
+``Command`` direktorij znotraj vašega paketa in izdelajte php datoteko s predpono
+``Command.php`` za vsak ukaz, ki ga želite ponuditi. Na primer, če želite
+razširiti ``AcmeDemoBundle`` (na voljo v Symfony standardni izdaji), da vas
+pozdravi iz ukazne vrstice, izdelajte ``GreetCommand.php`` in
+dodajte sledeče vanjo::
 
     // src/Acme/DemoBundle/Command/GreetCommand.php
     namespace Acme\DemoBundle\Command;
@@ -56,7 +56,7 @@ add the following to it::
         }
     }
 
-This command will now automatically be available to run:
+Ta ukaz bo sedaj avtomatsko na voljo za pogon:
 
 .. code-block:: bash
 
@@ -64,16 +64,16 @@ This command will now automatically be available to run:
 
 .. _cookbook-console-dic:
 
-Register Commands in the Service Container
-------------------------------------------
+Registracija ukazov v storitvenem kontejnerju
+---------------------------------------------
 
 .. versionadded:: 2.4
-   Support for registering commands in the service container was added in
-   version 2.4.
+   Podpora za registracijo ukazov v storitvenem kontejnerju je bila dodana v
+   verziji 2.4.
 
-Instead of putting your command in the ``Command`` directory and having Symfony
-auto-discover it for you, you can register commands in the service container
-using the ``console.command`` tag:
+Namesto dodajanja ukaza v direktorij ``Command`` in da jih Symfony
+avtomatsko odkriva za vas, lahko registrirate ukaze v storitvenem kontejnerju
+z uporabo ``console.command`` značke:
 
 .. configuration-block::
 
@@ -111,18 +111,18 @@ using the ``console.command`` tag:
 
 .. tip::
 
-    Registering your command as a service gives you more control over its
-    location and the services that are injected into it. But, there are no
-    functional advantages, so you don't need to register your command as a service.
+    Registracija vašega ukaza kot storitve, vam da več kontrole nad njeno
+    lokacijo in storitvami, ki so injicirani v njih. Vendar ni nikakršnih
+    funkcionalnostnih prednosti, tako da ne potrebujete registrirati vaših ukazov kot storitev.
 
-Getting Services from the Service Container
--------------------------------------------
+Pridobitev storitev iz storitvenega kontejnerja
+-----------------------------------------------
 
-By using :class:`Symfony\\Bundle\\FrameworkBundle\\Command\\ContainerAwareCommand`
-as the base class for the command (instead of the more basic
-:class:`Symfony\\Component\\Console\\Command\\Command`), you have access to the
-service container. In other words, you have access to any configured service.
-For example, you could easily extend the task to be translatable::
+Z uporabo :class:`Symfony\\Bundle\\FrameworkBundle\\Command\\ContainerAwareCommand`
+kot osnovnega razreda za ukaz (namesto bolj osnovnega
+:class:`Symfony\\Component\\Console\\Command\\Command`), imate dostop do
+storitvenega kontejnerja. Z drugimi besedami imate dostop do kakršnih koli nastavljenih storitev.
+Na primer, lahko bi enostavno razširili opravilo, da je prevedljivo::
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
@@ -135,12 +135,12 @@ For example, you could easily extend the task to be translatable::
         }
     }
 
-Testing Commands
-----------------
+Testiranje ukazov
+-----------------
 
-When testing commands used as part of the full framework
-:class:`Symfony\\Bundle\\FrameworkBundle\\Console\\Application <Symfony\\Bundle\\FrameworkBundle\\Console\\Application>` should be used
-instead of
+Ko testirate ukaze uporabljenih kot del celotnega ogrodja
+:class:`Symfony\\Bundle\\FrameworkBundle\\Console\\Application <Symfony\\Bundle\\FrameworkBundle\\Console\\Application>` bi moral biti uporabljen
+namesto
 :class:`Symfony\\Component\\Console\\Application <Symfony\\Component\\Console\\Application>`::
 
     use Symfony\Component\Console\Tester\CommandTester;
@@ -173,12 +173,12 @@ instead of
 
 .. note::
 
-    In the specific case above, the ``name`` parameter and the ``--yell`` option
-    are not mandatory for the command to work, but are shown so you can see
-    how to customize them when calling the command.
+    V posebnem primeru zgoraj parameter ``name`` in opcija ``--yell``
+    nista obvezna, da ukaz deluje, vendar sta prikazana, da lahko vidite
+    kako jih prilagoditi, ko kličete ukaz.
 
-To be able to use the fully set up service container for your console tests
-you can extend your test from
+Da lahko uporabite celotno nastavljen storitveni kontejner za vaše konzolne teste,
+lahko razširite vaš test iz
 :class:`Symfony\\Bundle\\FrameworkBundle\\Test\\WebTestCase`::
 
     use Symfony\Component\Console\Tester\CommandTester;
