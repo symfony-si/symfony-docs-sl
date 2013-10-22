@@ -1,30 +1,30 @@
 .. index::
    single: Console; Enabling logging
 
-How to enable logging in Console Commands
-=========================================
+Kako pri konzolnih ukazih omogočiti beleženje
+=============================================
 
-The Console component doesn't provide any logging capabilities out of the box.
-Normally, you run console commands manually and observe the output, which is
-why logging is not provided. However, there are cases when you might need
-logging. For example, if you are running console commands unattended, such
-as from cron jobs or deployment scripts, it may be easier to use Symfony's
-logging capabilities instead of configuring other tools to gather console
-output and process it. This can be especially handful if you already have
-some existing setup for aggregating and analyzing Symfony logs.
+Komponenta za konzolo privzeto ne ponuja nobenih zmožnosti zapisovanja v dnevnik.
+Običajno poženete konzolne ukaze ročno in opazujete izpis, zaradi česar
+beleženje ni zagotovljeno. Vendar so primeri, ko morda potrebujete
+zapisovanje v dnevnik. Na primer, če poženete konzolne ukaze brez nadzora, kot
+je iz t.i. "cron jobs" ali postavitvenih skript. Bolj enostavno je lahko uporabiti
+Symfony-jeve zmožnosti zapisovanja v dnevnik namesto nastaviti druga orodja, da zberete
+izpis konzole ina ga procesirate. To je lahko še poseben priročno, če že imate
+nekaj obstoječih nastavitev za združevanje in analizo Symfony dnevnikov.
 
-There are basically two logging cases you would need:
- * Manually logging some information from your command;
- * Logging uncaught Exceptions.
+V osnovi boste potrebovali dva primera zapisovanja v dnevnik:
+ * Ročno beleženje nekaj informacij iz vašega ukaza;
+ * Beleženje neujetih izjem.
 
-Manually logging from a console Command
----------------------------------------
+Ročno beleženje iz ukazne konzole
+---------------------------------
 
-This one is really simple. When you create a console command within the full
-framework as described in ":doc:`/cookbook/console/console_command`", your command
-extends :class:`Symfony\\Bundle\\FrameworkBundle\\Command\\ContainerAwareCommand`.
-This means that you  can simply access the standard logger service through the
-container and use it to do the logging::
+To je res enostavno. Ko izdelate konzolni ukaz znotraj celotnega
+ogrodja kot je opisano v ":doc:`/cookbook/console/console_command`", vaš ukaz
+razširi :class:`Symfony\\Bundle\\FrameworkBundle\\Command\\ContainerAwareCommand`.
+To pomeni, da lahko enostavno dostopate do standardne storitve beleženja preko
+kontejnerja in ga uporabite za beleženje::
 
     // src/Acme/DemoBundle/Command/GreetCommand.php
     namespace Acme\DemoBundle\Command;
@@ -64,27 +64,27 @@ container and use it to do the logging::
         }
     }
 
-Depending on the environment in which you run your command (and your logging
-setup), you should see the logged entries in ``app/logs/dev.log`` or ``app/logs/prod.log``.
+Odvisno od okolja v katerem poganjate vaš ukaz (in vaše nastavitve beleženja),
+bi morali videti vnose beleženja v ``app/logs/dev.log`` ali ``app/logs/prod.log``.
 
-Enabling automatic Exceptions logging
--------------------------------------
+Omogočanje avtomatskega beleženja izjem
+---------------------------------------
 
-To get your console application to automatically log uncaught exceptions
-for all of your commands, you'll need to do a little bit more work.
+Da omogočite vaši konzolni aplikaciji avtomatsko zapisovanje v dnevnik neujete
+izjeme za vse vaše ukaze, boste morali opraviti nekaj več dela.
 
-First, create a new sub-class of :class:`Symfony\\Bundle\\FrameworkBundle\\Console\\Application`
-and override its :method:`Symfony\\Bundle\\FrameworkBundle\\Console\\Application::run`
-method, where exception handling should happen:
+Najprej izdelajte nov podrazred od :class:`Symfony\\Bundle\\FrameworkBundle\\Console\\Application`
+in prepišite njegovo metodo :method:`Symfony\\Bundle\\FrameworkBundle\\Console\\Application::run`,
+kjer se mora dogajati ravnanje z izjemami:
 
 .. caution::
 
-    Due to the nature of the core :class:`Symfony\\Component\\Console\\Application`
-    class, much of the :method:`run <Symfony\\Bundle\\FrameworkBundle\\Console\\Application::run>`
-    method has to be duplicated and even a private property ``originalAutoExit``
-    re-implemented. This serves as an example of what you *could* do in your
-    code, though there is a high risk that something may break when upgrading
-    to future versions of Symfony.
+    Zaradi narave razreda :class:`Symfony\\Component\\Console\\Application`
+    iz jedra, mora biti večina metode :method:`run <Symfony\\Bundle\\FrameworkBundle\\Console\\Application::run>`
+    duplicirana in celo privatna lastnost ``originalAutoExit``
+    ponovno implementirana. To služi kot primer, kaj *lahko* naredite v vaši
+    kodi, čeprav je veliko tveganje, da se lahko kaj zlomi, ko nadgrajujete na
+    prihodnje verzije Symfony-ja.
 
 .. code-block:: php
 
@@ -183,21 +183,22 @@ method, where exception handling should happen:
 
     }
 
-In the code above, you disable exception catching so the parent ``run`` method
-will throw all exceptions. When an exception is caught, you simple log it by
-accessing the ``logger`` service from the service container and then handle
-the rest of the logic in the same way that the parent ``run`` method does
-(specifically, since the parent :method:`run <Symfony\\Bundle\\FrameworkBundle\\Console\\Application::run>`
-method will not handle exceptions rendering and status code handling when
-``catchExceptions`` is set to false, it has to be done in the overridden
-method).
+V kodi zgoraj, lahko onemogočite lovljenje izjem, da bo starševska metoda ``run``
+vrgla vse izjeme. Ko je izjema ulovljena, jo enostavno zabeležite z dostopanjem
+storitve ``logger`` iz storitvenega kontejnerja in nato upravljate
+ostalo logiko na enak način kot to dela starševska metoda ``run``
+(posebno ker starševska metoda
+:method:`run <Symfony\\Bundle\\FrameworkBundle\\Console\\Application::run>`
+ne bo upravljala z izpisovanjem izjem in upravljanjem statusov kod, ko je
+``catchExceptions`` nastavljeno na false, to mora biti urejeno v prepisani
+metodi).
 
-For the extended Application class to work properly with in console shell mode,
-you have to do a small trick to intercept the ``autoExit`` setter and store the
-setting in a different property, since the parent property is private.
+Da razširjen razred Application ustrezno deluje v načinu konzolne lupine,
+morate narediti manjši trik, da prestrežete ``autoExit`` podajalca in shranite
+nastavitev v različno lastnost, saj je starševska lastnost privatna.
 
-Now to be able to use your extended ``Application`` class you need to adjust
-the ``app/console`` script to use the new class instead of the default::
+Da bo mogoče uporabiti vaš razširjen razred ``Application`` morate prilagoditi
+skripto ``app/console``, da uporabite nov razred namesto privzetega::
 
     // app/console
 
@@ -208,18 +209,18 @@ the ``app/console`` script to use the new class instead of the default::
 
     // ...
 
-That's it! Thanks to autoloader, your class will now be used instead of original
-one.
+To je vse! Zahvaljujoč avtomatskemu nalagalniku bo sedaj uporabljen vaš razred namesto
+originalnega.
 
-Logging non-0 exit statuses
----------------------------
+Beleženje ne-0 izhodnih statusov
+--------------------------------
 
-The logging capabilities of the console can be further extended by logging
-non-0 exit statuses. This way you will know if a command had any errors, even
-if no exceptions were thrown.
+Zmožnosti beleženja konzole so lahko nadaljnje razširjene z beleženjem
+ne-0 izhodnih statusov. Na ta način boste vedeli, če je imel ukaz kakšne napake,
+celo če ni bila vržena nobena izjema.
 
-In order to do that, you'd have to modify the ``run()`` method of your extended
-``Application`` class in the following way::
+Da to naredite, boste morali modificirati metodo ``run()`` vašega razširjenega razreda
+``Application`` na sledeči način::
 
     public function run(InputInterface $input = null, OutputInterface $output = null)
     {
