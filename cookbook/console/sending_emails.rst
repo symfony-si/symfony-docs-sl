@@ -2,34 +2,34 @@
    single: Console; Sending emails
    single: Console; Generating URLs
 
-How to generate URLs and send Emails from the Console
-=====================================================
+Kako generirati URL-je in pošiljati e-pošto iz konzole
+======================================================
 
-Unfortunately, the command line context does not know about your VirtualHost
-or domain name. This means that if you generate absolute URLs within a
-Console Command you'll probably end up with something like ``http://localhost/foo/bar``
-which is not very useful.
+Na žalost kontekst ukazne vrstice ne ve o vašem VirtualHost-u ali imenu
+domene. To pomeni, da če generirate absolutne URL-je znotraj Console Command
+boste najverjetneje končali z nečim kot je ``http://localhost/foo/bar``,
+kar ni preveč uporabno.
 
-To fix this, you need to configure the "request context", which is a fancy
-way of saying that you need to configure your environment so that it knows
-what URL it should use when generating URLs.
+Da to popravite, morate nastaviti kontekst zahtevka, kar je samo lep način,
+da rečete, da potrebujete nastaviti vaše okolje tako, da ve kateri URL
+bi moral biti uporabljen, ko se generira URL-je.
 
-There are two ways of configuring the request context: at the application level
-and per Command.
+Na voljo sta dva načina nastavitve konteksta zahtevka: na nivoju aplikacije
+in glede na ukaz.
 
-Configuring the Request Context globally
-----------------------------------------
+Nastavitve konteksta zahtevka globalno
+--------------------------------------
 
 .. versionadded: 2.2
-    The ``base_url`` parameter is available since Symfony 2.2
+    Parameter ``base_url`` je na voljo od Symfony 2.2
 
-To configure the Request Context - which is used by the URL Generator - you can
-redefine the parameters it uses as default values to change the default host
-(localhost) and scheme (http). Starting with Symfony 2.2 you can also configure
-the base path if Symfony is not running in the root directory.
+Za nastavitev konteksta zahtevka - kar je uporabljeno s strani generatorja URL-jev -
+lahko ponovno definirate parametre, ki jih uporablja kot privzete vrednosti za spremembo
+privzetega gostitelja (localhost) in sheme (http). Od Symfony 2.2 lahko tudi nastavite
+osnovno pot, če se Symfony ne poganja znotraj vrhnjega direktorija.
 
-Note that this does not impact URLs generated via normal web requests, since those
-will override the defaults.
+Upoštevajte, da to ne vpliva na generirane URL-je preko običajnih spletnih zahtevko, saj bodo
+le-te prepisali privzeto.
 
 .. configuration-block::
 
@@ -63,11 +63,11 @@ will override the defaults.
         $container->setParameter('router.request_context.scheme', 'https');
         $container->setParameter('router.request_context.base_url', 'my/path');
 
-Configuring the Request Context per Command
--------------------------------------------
+Nastavitve konteksta zahtevkov glede na ukaz
+--------------------------------------------
 
-To change it only in one command you can simply fetch the Request Context
-service and override its settings::
+Da ga spremenite samo v enem ukazu lahko enostavno ujamete storitev konteksta zahtevka
+in prepišete njegove nastavitve::
 
    // src/Acme/DemoBundle/Command/DemoCommand.php
 
@@ -85,17 +85,16 @@ service and override its settings::
        }
    }
 
-Using Memory Spooling
----------------------
+Uporaba spomina v ozadju
+------------------------
 
-Sending emails in a console command works the same way as described in the
-:doc:`/cookbook/email/email` cookbook except if memory spooling is used.
+Pošiljanje e-pošte v konzolnem ukazu deluje na enak način, kot je opisano v
+:doc:`/cookbook/email/email` receptu, razen če je uporabljen spomin v ozadju.
 
-When using memory spooling (see the :doc:`/cookbook/email/spool` cookbook for more
-information), you must be aware that because of how symfony handles console
-commands, emails are not sent automatically. You must take care of flushing
-the queue yourself. Use the following code to send emails inside your
-console command::
+Ko uporabljate spomin v ozadju (memory spooling) (glejte :doc:`/cookbook/email/spool` recept
+za več informacij), se morate zavedati, da kako Symfony ravna z konzolnimi ukazi,
+e-pošta ni avtomatsko poslana. Sami morate poskrbeti za praznenje čakalne vrste.
+Uporabite sledečo kodo za pošiljanje e-pošte znotraj vašega konzolnega ukaza::
 
     $container = $this->getContainer();
     $mailer = $container->get('mailer');
@@ -104,11 +103,11 @@ console command::
 
     $spool->flushQueue($transport);
 
-Another option is to create an environment which is only used by console
-commands and uses a different spooling method.
+Druga opcija je izdelava okolja, ki je uporabljeno samo s strani konzolnih
+ukazov in uporablja različne metode odvijanja v ozadju.
 
 .. note::
 
-    Taking care of the spooling is only needed when memory spooling is used.
-    If you are using file spooling (or no spooling at all), there is no need
-    to flush the queue manually within the command.
+    Skrb za odvijanje v ozadju je potrebno samo, ko je uporabljen spomin v ozadju
+    Če uporabljate datoteke v ozadju (ali nobenega odvijanja v ozadju), ni potrebe
+    po praznenju čakalne vrste ročno znotraj ukaza.

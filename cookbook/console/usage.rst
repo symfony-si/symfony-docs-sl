@@ -1,65 +1,65 @@
 .. index::
     single: Console; Usage
 
-How to use the Console
-======================
+Kako uporabljati konzolo
+========================
 
-The :doc:`/components/console/usage` page of the components documentation looks
-at the global console options. When you use the console as part of the full
-stack framework, some additional global options are available as well.
+Stran :doc:`/components/console/usage` dokumentacije komponent pogleda
+globalne opcije konzole. Ko uporabljate konzolo kot del celotnega ogrodja,
+je na voljo še nekaj dodatnih globalnih opcij.
 
-By default, console commands run in the ``dev`` environment and you may want
-to change this for some commands. For example, you may want to run some commands
-in the ``prod`` environment for performance reasons. Also, the result of some commands
-will be different depending on the environment. for example, the ``cache:clear``
-command will clear and warm the cache for the specified environment only. To
-clear and warm the ``prod`` cache you need to run:
+Privzeto, konzolni ukazi se poganjajo v ``dev`` okolju in morda boste to želeli
+spremeniti za nek ukaz. Na primer, lahko boste želeli pognati nekaj ukazov
+v ``prod`` okolju za razloge uspešnosti. Tudi rezultati nekaj ukazov
+bodo drugačni odvisno od okolja. Na primer ukaz ``cache:clear`` bo počistilo in
+ogrelo predpomnilnik samo za določeno okolje. Za čiščenje in "gretje" ``prod``
+predpomnilnika morate pognati:
 
 .. code-block:: bash
 
     $ php app/console cache:clear --env=prod
 
-or the equivalent:
+ali ekvivalentno:
 
 .. code-block:: bash
 
     $ php app/console cache:clear -e=prod
 
-In addition to changing the environment, you can also choose to disable debug mode.
-This can be useful where you want to run commands in the ``dev`` environment
-but avoid the performance hit of collecting debug data:
+Poleg spremembe okolja lahko tudi izberete, da onemogočite način razhroščevanja.
+To je lahko uporabno, kjer želite poganjati ukaze v okolju ``dev``, vendar se
+izogniti udaru na uspešnost pri zbiranju podatkov razhroščevanja:
 
 .. code-block:: bash
 
     $ php app/console list --no-debug
 
-There is an interactive shell which allows you to enter commands without having to
-specify ``php app/console`` each time, which is useful if you need to run several
-commands. To enter the shell run:
+Obstaja interaktivna lupina, ki vam omogoča, da vnesete ukaze brez, da bi
+vsakič specificirali ``php app/console``, kar je uporabno, če potrebujete pognati
+nekaj ukazov. Za vstop v lupino poženite:
 
 .. code-block:: bash
 
     $ php app/console --shell
     $ php app/console -s
 
-You can now just run commands with the command name:
+Sedaj lahko poganjate ukate z ukaznim imenom:
 
 .. code-block:: bash
 
     Symfony > list
 
-When using the shell you can choose to run each command in a separate process:
+Ko uporabljate lupino, lahko izberete za pogon vsak ukaz v ločenem procesu:
 
 .. code-block:: bash
 
     $ php app/console --shell --process-isolation
     $ php app/console -s --process-isolation
 
-When you do this, the output will not be colorized and interactivity is not
-supported so you will need to pass all command params explicitly.
+Ko to naredite, izpis ne bo obarvan in interaktivnost ni podprta, tako da boste
+potrebovali poslati vse parametre ukazov eksplicitno.
 
 .. note::
 
-    Unless you are using isolated processes, clearing the cache in the shell
-    will not have an effect on subsequent commands you run. This is because
-    the original cached files are still being used.
+    Razen, če uporabljate izolirane procese, čiščenje predpomnilnika v lupini ne bo
+    imelo učinka na naknadne ukaze, ki jih poženete. To je zato, ker so originalne
+    datoteke predpomnilnika še vedno uporabljene.
