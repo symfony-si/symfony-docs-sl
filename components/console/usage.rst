@@ -1,16 +1,16 @@
 .. index::
     single: Console; Usage
 
-Using Console Commands, Shortcuts and Built-in Commands
-=======================================================
+Uporaba konzolnih ukazov, bližnjic in vgrajenih ukazov
+======================================================
 
-In addition to the options you specify for your commands, there are some
-built-in options as well as a couple of built-in commands for the console component.
+Kot dodatek opcijam, ki jih specificirate za vaše ukaze, je na voljo nekaj
+vgrajenih opcij, kot tudi nekaj vgrajenih ukazov za konzolne komponente.
 
 .. note::
 
-    These examples assume you have added a file ``app/console`` to run at
-    the cli::
+    Te primeri predvidevajo, da ste dodali datoteko ``app/console`` za pogon
+    v vmesniku ukazne vrstice (cli)::
 
         #!/usr/bin/env php
         # app/console
@@ -22,131 +22,130 @@ built-in options as well as a couple of built-in commands for the console compon
         // ...
         $application->run();
 
-Built-in Commands
-~~~~~~~~~~~~~~~~~
+Vgrajeni ukazi
+~~~~~~~~~~~~~~
 
-There is a built-in command ``list`` which outputs all the standard options
-and the registered commands:
+Na voljo je vgrajeni ukaz ``list``, ki izpiše vse standardne opcije
+in registrirane ukaze:
 
 .. code-block:: bash
 
     $ php app/console list
 
-You can get the same output by not running any command as well
+Lahko dobite tudi enak izpis s pogonom brez ukaza:
 
 .. code-block:: bash
 
     $ php app/console
 
-The help command lists the help information for the specified command. For
-example, to get the help for the ``list`` command:
+Ukaz help izpiše informacije pomoči za določen ukaz. Na primer, da dobite
+pomoč za ukaz ``list``:
 
 .. code-block:: bash
 
     $ php app/console help list
 
-Running ``help`` without specifying a command will list the global options:
+Pogon ``help`` brez specificiranja ukaza bo izpisalo globalne opcije:
 
 .. code-block:: bash
 
     $ php app/console help
 
-Global Options
-~~~~~~~~~~~~~~
+globalne opcije
+~~~~~~~~~~~~~~~
 
-You can get help information for any command with the ``--help`` option. To
-get help for the list command:
+Lahko dobite informacije pomoči za katerikoli ukaz z opcijo ``--help``. Da
+dobite pomoč za ukaz list:
 
 .. code-block:: bash
 
     $ php app/console list --help
     $ php app/console list -h
 
-You can suppress output with:
+Lahko tudi zatrete izpis z:
 
 .. code-block:: bash
 
     $ php app/console list --quiet
     $ php app/console list -q
 
-You can get more verbose messages (if this is supported for a command)
-with:
+Lahko dobite bolj opisna sporočila (če je to podprto za ukaz) z:
 
 .. code-block:: bash
 
     $ php app/console list --verbose
     $ php app/console list -v
 
-The verbose flag can optionally take a value between 1 (default) and 3 to
-output even more verbose messages:
+Zastavita verbose lahko opcijsko vzame vrednost med 1 (privzeto) in 3, da
+izpiše še bolj opisna sporočila:
 
     $ php app/console list --verbose=2
     $ php app/console list -vv
     $ php app/console list --verbose=3
     $ php app/console list -vvv
 
-If you set the optional arguments to give your application a name and version::
+Če nastavite opcijske argumente, da date vaši aplikaciji ime in verzijo::
 
     $application = new Application('Acme Console Application', '1.2');
 
-then you can use:
+potem lahko uporabite:
 
 .. code-block:: bash
 
     $ php app/console list --version
     $ php app/console list -V
 
-to get this information output:
+da dobite ta izpis informacij:
 
 .. code-block:: text
 
     Acme Console Application version 1.2
 
-If you do not provide both arguments then it will just output:
+Če ne ponudite obeh argumentov, potem bo samo izpisalo:
 
 .. code-block:: text
 
     console tool
 
-You can force turning on ANSI output coloring with:
+Lahko tudi prisilite vključitev ANSI izpisa barv z:
 
 .. code-block:: bash
 
     $ php app/console list --ansi
 
-or turn it off with:
+ali ga izključite z:
 
 .. code-block:: bash
 
     $ php app/console list --no-ansi
 
-You can suppress any interactive questions from the command you are running with:
+Lahko tudi zatrete katerakoli interaktivna vprašanja iz ukaza, ki ga poganjate z:
 
 .. code-block:: bash
 
     $ php app/console list --no-interaction
     $ php app/console list -n
 
-Shortcut Syntax
-~~~~~~~~~~~~~~~
+Sintaksa bližnjice
+~~~~~~~~~~~~~~~~~~
 
-You do not have to type out the full command names. You can just type the
-shortest unambiguous name to run a command. So if there are non-clashing
-commands, then you can run ``help`` like this:
+Ne potrebujete vpisovati celotnega imena ukaza. Lahko samo vtipkate
+najkrajše nedvoumno ime, da poženete ukaz. Torej, če so na voljo ne-spopadljivi
+ukazi, potem lahko poženete ``help`` takole:
 
 .. code-block:: bash
 
     $ php app/console h
 
-If you have commands using ``:`` to namespace commands then you just have
-to type the shortest unambiguous text for each part. If you have created the
-``demo:greet`` as shown in :doc:`/components/console/introduction` then you
-can run it with:
+Če imate ukaze, ki uporabljajo ``:`` za imenske prostore ukazov, potem morate
+vpisati samo najkrajši nedvoumen tekst za vsak del. Če ste izdelali
+``demo:greet`` kot je prikazano v :doc:`/components/console/introduction` potem ga
+lahko poženete z:
 
 .. code-block:: bash
 
     $ php app/console d:g Fabien
 
-If you enter a short command that's ambiguous (i.e. there are more than one
-command that match), then no command will be run and some suggestions of
-the possible commands to choose from will be output.
+Če vnesete kratek ukaz, ki je dvoumen (to pomeni, da se ujema z več kot enim
+ukazom), potem ne bo noben ukaz poganjan in nekaj predlogov možnih
+ukazov na izbiro bo izpisanih.

@@ -1,15 +1,15 @@
 .. index::
     single: Console; Events
 
-Using Events
-============
+Uporaba dogodkov
+================
 
 .. versionadded:: 2.3
-    Console events were added in Symfony 2.3.
+    Konzolni dogodki so bili dodani v Symfony 2.3.
 
-The Application class of the Console component allows you to optionally hook
-into the lifecycle of a console application via events. Instead of reinventing
-the wheel, it uses the Symfony EventDispatcher component to do the work::
+Razred Application komponente Console vam omogoča, da se opcijsko vežete
+v življenski cikel konzolne aplikacije preko dogodkov. Namesto ponovnega
+izumljanja kolesa, Symfony uporablja komponento EventDispatcher, da opravi delo::
 
     use Symfony\Component\Console\Application;
     use Symfony\Component\EventDispatcher\EventDispatcher;
@@ -20,16 +20,15 @@ the wheel, it uses the Symfony EventDispatcher component to do the work::
     $application->setDispatcher($dispatcher);
     $application->run();
 
-The ``ConsoleEvents::COMMAND`` Event
-------------------------------------
+Dogodek ``ConsoleEvents::COMMAND``
+----------------------------------
 
-**Typical Purposes**: Doing something before any command is run (like logging
-which command is going to be executed), or displaying something about the event
-to be executed.
+**Običajni nameni**: Delati nekaj preden se požene katerakoli ukaz (kot beleženje,
+katerega ukaz se bo izvedel), ali prikaz nečesa o dogodku, ki se bo izvedel.
 
-Just before executing any command, the ``ConsoleEvents::COMMAND`` event is
-dispatched. Listeners receive a
-:class:`Symfony\\Component\\Console\\Event\\ConsoleCommandEvent` event::
+Ravno pred izvajanjem kateregakoli ukaza, je dogodek ``ConsoleEvents::COMMAND``
+odposlan. Poslušalci dobijo dogodek
+:class:`Symfony\\Component\\Console\\Event\\ConsoleCommandEvent`::
 
     use Symfony\Component\Console\Event\ConsoleCommandEvent;
     use Symfony\Component\Console\ConsoleEvents;
@@ -51,20 +50,20 @@ dispatched. Listeners receive a
         $application = $command->getApplication();
     });
 
-The ``ConsoleEvents::TERMINATE`` event
---------------------------------------
+Dogodek ``ConsoleEvents::TERMINATE``
+------------------------------------
 
-**Typical Purposes**: To perform some cleanup actions after the command has
-been executed.
+**Običajni nameni**: Za opravljanje nekaj akcij čiščenja za ukazom, ki
+je bil izveden.
 
-After the command has been executed, the ``ConsoleEvents::TERMINATE`` event is
-dispatched. It can be used to do any actions that need to be executed for all
-commands or to cleanup what you initiated in a ``ConsoleEvents::COMMAND``
-listener (like sending logs, closing a database connection, sending emails,
-...). A listener might also change the exit code.
+Ko je bil ukaz izvršen, se odpošlje dogodek ``ConsoleEvents::TERMINATE``.
+Lahko je uporabljen za katerokole akcije, ki potrebujejo biti izvedene za vse
+ukaze ali za čiščenje, kar ste inicializirali v poslušalcu ``ConsoleEvents::COMMAND``
+(kot je pošiljanje dnevnikov, zapiranje povezave s podatkovno bazo, pošiljanje e-pošte ...).
+Poslušalec lahko tudi spremeni izhodno kodo.
 
-Listeners receive a
-:class:`Symfony\\Component\\Console\\Event\\ConsoleTerminateEvent` event::
+Poslušalci dobijo dogodek
+:class:`Symfony\\Component\\Console\\Event\\ConsoleTerminateEvent`::
 
     use Symfony\Component\Console\Event\ConsoleTerminateEvent;
     use Symfony\Component\Console\ConsoleEvents;
@@ -85,22 +84,21 @@ Listeners receive a
 
 .. tip::
 
-    This event is also dispatched when an exception is thrown by the command.
-    It is then dispatched just before the ``ConsoleEvents::EXCEPTION`` event.
-    The exit code received in this case is the exception code.
+    Ta dogodek je tudi odposlan, ko je vržena izjema s strani ukaza.
+    Nato je odposlan ravno pred dogodkom ``ConsoleEvents::EXCEPTION``.
+    Pridobljena izhodna koda v tem primeru je koda izjeme.
 
-The ``ConsoleEvents::EXCEPTION`` event
---------------------------------------
+Dogodek ``ConsoleEvents::EXCEPTION``
+------------------------------------
 
-**Typical Purposes**: Handle exceptions thrown during the execution of a
-command.
+**Običajni nameni**: Ravna z izjemami vrženimi med izvajanjem ukaza.
 
-Whenever an exception is thrown by a command, the ``ConsoleEvents::EXCEPTION``
-event is dispatched. A listener can wrap or change the exception or do
-anything useful before the exception is thrown by the application.
+Kadarkoli je vržena izjema s strani ukaza, se odpošlje dogodek
+``ConsoleEvents::EXCEPTION``. Poslušalec lahko ovije ali spremeni izjemo
+ali opravi karkoli uporabnega preden aplikacija vrže izjemo.
 
-Listeners receive a
-:class:`Symfony\\Component\\Console\\Event\\ConsoleExceptionEvent` event::
+Poslušalci dobijo
+:class:`Symfony\\Component\\Console\\Event\\ConsoleExceptionEvent` dogodek::
 
     use Symfony\Component\Console\Event\ConsoleExceptionEvent;
     use Symfony\Component\Console\ConsoleEvents;

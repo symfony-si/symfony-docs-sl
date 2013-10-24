@@ -2,38 +2,38 @@
     single: Console; CLI
     single: Components; Console
 
-The Console Component
-=====================
+Komponenta Console
+==================
 
-    The Console component eases the creation of beautiful and testable command
-    line interfaces.
+    Komponenta Console poenostavlja izdelavo lepih in testnih vmesnikov ukazne
+    vrstice.
 
-The Console component allows you to create command-line commands. Your console
-commands can be used for any recurring task, such as cronjobs, imports, or
-other batch jobs.
+Komponenta Console vam omogoča izdelavo ukazov ukazne vrstice. Vaši konzolni
+ukazi so lahko uporabljeni za katerokoli ponavljajoče se opravilo, kot so t.i.
+cronjob-i, uvažanja ali ostala serijska opravila.
 
-Installation
-------------
+Namestitev
+----------
 
-You can install the component in 2 different ways:
+Komponento lahko namestite na 2 različna načina:
 
-* Use the official Git repository (https://github.com/symfony/Console);
-* :doc:`Install it via Composer </components/using_components>` (``symfony/console`` on `Packagist`_).
+* Uporabite uradni Git repozitorij (https://github.com/symfony/Console);
+* :doc:`Namestitev preko Composer-ja </components/using_components>` (``symfony/console`` na `Packagist`_).
 
 .. note::
 
-    Windows does not support ANSI colors by default so the Console Component detects and
-    disables colors where Windows does not have support. However, if Windows is not
-    configured with an ANSI driver and your console commands invoke other scripts which
-    emit ANSI color sequences, they will be shown as raw escape characters.
+    Windows privzeto ne podpira nikakršnih ANSI barv zato komponenta Console odkrije in
+    onemogoči barve, kjer Windows nima podpore. Čeprav, če Windows ni nastavljen
+    z ANSI gonilnikom in se vaši konzolni ukazi sklicujejo na druge skripte, ki
+    oddajajo ANSI barvne sekvence, bodo prikazani kot surovi izmaknjeni znaki.
 
-    To enable ANSI colour support for Windows, please install `ANSICON`_.
+    Da omogočite ANSI barvno podporo za Windows, prosimo namestite `ANSICON`_.
 
-Creating a basic Command
+Izdelava osnovnega ukaza
 ------------------------
 
-To make a console command that greets you from the command line, create ``GreetCommand.php``
-and add the following to it::
+Da naredite konzolni ukaz, ki vas pozdravi iz ukazne vrstice, izdelajte ``GreetCommand.php``
+in dodajte vanj sledeče::
 
     namespace Acme\DemoBundle\Command;
 
@@ -81,8 +81,8 @@ and add the following to it::
         }
     }
 
-You also need to create the file to run at the command line which creates
-an ``Application`` and adds commands to it::
+Potrebujete narediti tudi datoteko za pogon ukazne vrstice, ki izdela
+``Application`` in doda ukaze vanjo::
 
     #!/usr/bin/env php
     <?php
@@ -95,35 +95,35 @@ an ``Application`` and adds commands to it::
     $application->add(new GreetCommand);
     $application->run();
 
-Test the new console command by running the following
+Testirajte novi konzolni ukaz s sledečim pogonom:
 
 .. code-block:: bash
 
     $ app/console demo:greet Fabien
 
-This will print the following to the command line:
+To bo izpisalo sledeče v ukazno vrstico:
 
 .. code-block:: text
 
     Hello Fabien
 
-You can also use the ``--yell`` option to make everything uppercase:
+Lahko tudi uporabite opcijo ``--yell``, da naredite vse z velikimi črkami:
 
 .. code-block:: bash
 
     $ app/console demo:greet Fabien --yell
 
-This prints::
+To izpiše::
 
     HELLO FABIEN
 
 .. _components-console-coloring:
 
-Coloring the Output
-~~~~~~~~~~~~~~~~~~~
+Obarvanje izpisa
+~~~~~~~~~~~~~~~~
 
-Whenever you output text, you can surround the text with tags to color its
-output. For example::
+Kadarkoli izpisujete tekst, ga lahko obdate z značkami, da obarvate njegov
+izpis. Na primer::
 
     // green text
     $output->writeln('<info>foo</info>');
@@ -137,19 +137,19 @@ output. For example::
     // white text on a red background
     $output->writeln('<error>foo</error>');
 
-It is possible to define your own styles using the class
+Je možno definirate vaše lastne stile z uporabo razreda
 :class:`Symfony\\Component\\Console\\Formatter\\OutputFormatterStyle`::
 
     $style = new OutputFormatterStyle('red', 'yellow', array('bold', 'blink'));
     $output->getFormatter()->setStyle('fire', $style);
     $output->writeln('<fire>foo</fire>');
 
-Available foreground and background colors are: ``black``, ``red``, ``green``,
-``yellow``, ``blue``, ``magenta``, ``cyan`` and ``white``.
+Barve ospredja in ozadja, ki so na voljo, so: ``black``, ``red``, ``green``,
+``yellow``, ``blue``, ``magenta``, ``cyan`` in ``white``.
 
-And available options are: ``bold``, ``underscore``, ``blink``, ``reverse`` and ``conceal``.
+In opcije, ki so na voljo so: ``bold``, ``underscore``, ``blink``, ``reverse`` in ``conceal``.
 
-You can also set these colors and options inside the tagname::
+Lahko tudi naredite te barve in opcije znotraj imena značke::
 
     // green text
     $output->writeln('<fg=green>foo</fg=green>');
@@ -160,29 +160,29 @@ You can also set these colors and options inside the tagname::
     // bold text on a yellow background
     $output->writeln('<bg=yellow;options=bold>foo</bg=yellow;options=bold>');
 
-Verbosity Levels
-~~~~~~~~~~~~~~~~
+Nivoji besedičenja
+~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 2.3
-   The ``VERBOSITY_VERY_VERBOSE`` and ``VERBOSITY_DEBUG`` constants were introduced
-   in version 2.3
+   ``VERBOSITY_VERY_VERBOSE`` in ``VERBOSITY_DEBUG`` konstanti sta bili predstavljeni v
+   verziji 2.3
 
-The console has 5 levels of verbosity. These are defined in the
+Konzola ima 5 nivojev besedičenja. Te so definirani v
 :class:`Symfony\\Component\\Console\\Output\\OutputInterface`:
 
 =======================================  ==================================
-Mode                                     Value
+Način                                    Vrednost
 =======================================  ==================================
-OutputInterface::VERBOSITY_QUIET         Do not output any messages
-OutputInterface::VERBOSITY_NORMAL        The default verbosity level
-OutputInterface::VERBOSITY_VERBOSE       Increased verbosity of messages
-OutputInterface::VERBOSITY_VERY_VERBOSE  Informative non essential messages
-OutputInterface::VERBOSITY_DEBUG         Debug messages
+OutputInterface::VERBOSITY_QUIET         Ne izpiše nobenih sporočil
+OutputInterface::VERBOSITY_NORMAL        Privzeti nivo besedičenja
+OutputInterface::VERBOSITY_VERBOSE       Povečano besedičenje sporočil
+OutputInterface::VERBOSITY_VERY_VERBOSE  Informativna neobvezna sporočila
+OutputInterface::VERBOSITY_DEBUG         Razhroščevalna sporočila
 =======================================  ==================================
 
-You can specify the quiet verbosity level with the ``--quiet`` or ``-q``
-option. The ``--verbose`` or ``-v`` option is used when you want an increased
-level of verbosity.
+Lahko specificirate nivo tihega besedičenja z opcijo ``--quiet`` ali ``-q``.
+Opcija ``--verbose`` ali ``-v`` je uporabljena, ko želite povečan nivo
+besedičenja.
 
 .. tip::
 
