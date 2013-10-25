@@ -1,26 +1,26 @@
 .. index::
     single: Console Helpers; Dialog Helper
 
-Dialog Helper
-=============
+Pomočnik Dialog
+===============
 
-The :class:`Symfony\\Component\\Console\\Helper\\DialogHelper` provides
-functions to ask the user for more information. It is included in the default
-helper set, which you can get by calling
+:class:`Symfony\\Component\\Console\\Helper\\DialogHelper` ponuja
+funkcije, ki vprašajo uporabnika za več informacij. Vključen je v privzeti
+skupek pomočnikov (helpers), ki jih lahko dobite s klicom
 :method:`Symfony\\Component\\Console\\Command\\Command::getHelperSet`::
 
     $dialog = $this->getHelperSet()->get('dialog');
 
-All the methods inside the Dialog Helper have an
-:class:`Symfony\\Component\\Console\\Output\\OutputInterface` as first the
-argument, the question as the second argument and the default value as last
+Vse metode znotraj Dialog pomočnika imajo
+:class:`Symfony\\Component\\Console\\Output\\OutputInterface` kot prvega od
+argumentov, vprašanje kot drugi argument in privzeto vrednost kot zadnji
 argument.
 
-Asking the User for confirmation
---------------------------------
+Vprašanje uporabnika za potrditev
+---------------------------------
 
-Suppose you want to confirm an action before actually executing it. Add
-the following to your command::
+Predpostavimo, da želite potrditev akcije pred dejanskim izvajanjem. Dodajte
+sledeče v vaš ukaz::
 
     // ...
     if (!$dialog->askConfirmation(
@@ -31,16 +31,16 @@ the following to your command::
         return;
     }
 
-In this case, the user will be asked "Continue with this action", and will return
-``true`` if the user answers with ``y`` or false in any other case. The third
-argument to ``askConfirmation`` is the default value to return if the user doesn't
-enter any input.
+V tem primeru bo uporabnik vprašan "Continue with this action" in bo vrnilo
+``true``, če uporabnik odgovori z ``y`` ali false v kateremkoli drugem primeru. Tretji
+argument v ``askConfirmation`` je privzeta vrednost, ki se vrne, če uporabnik ne
+vnese nobenega vnosa.
 
-Asking the User for Information
--------------------------------
+Vprašanje uporabnika za informacijo
+-----------------------------------
 
-You can also ask question with more than a simple yes/no answer. For instance,
-if you want to know a bundle name, you can add this to your command::
+Lahko tudi postavite vprašanje z več kot samo enostavnim yes/no odgovorom. Na primer,
+če želite vedeti ime paketa, lahko dodate sledeče v vaš ukaz::
 
     // ...
     $bundle = $dialog->ask(
@@ -49,18 +49,18 @@ if you want to know a bundle name, you can add this to your command::
         'AcmeDemoBundle'
     );
 
-The user will be asked "Please enter the name of the bundle". She can type
-some name which will be returned by the ``ask`` method. If she leaves it empty,
-the default value (``AcmeDemoBundle`` here) is returned.
+Uporabnik bo vprašan "Please enter the name of the bundle". Lahko vpiše
+neko ime, ki bo vrnjeno od metode ``ask``. Če pusti prazno, bo vrnjena
+privzeta vrednost (``AcmeDemoBundle`` tukaj).
 
-Autocompletion
-~~~~~~~~~~~~~~
+Avtomatsko izpolnjevanje
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 2.2
-    Autocompletion for questions was added in Symfony 2.2.
+    Avtomatsko izpolnjevanje za vprašanja je bilo dodano v Symfony 2.2.
 
-You can also specify an array of potential answers for a given question. These
-will be autocompleted as the user types::
+Lahko tudi specificirate polje možnih odgovorov za dano vprašanje. Te
+bodo avtomatsko izpolnjeni, kakor uporabnik vnaša::
 
     $dialog = $this->getHelperSet()->get('dialog');
     $bundleNames = array('AcmeDemoBundle', 'AcmeBlogBundle', 'AcmeStoreBundle');
@@ -71,14 +71,14 @@ will be autocompleted as the user types::
         $bundleNames
     );
 
-Hiding the User's Response
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Skrivanje uporabnikovega odziva
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 2.2
-    The ``askHiddenResponse`` method was added in Symfony 2.2.
+    Metoda ``askHiddenResponse`` je bila dodana v Symfony 2.2.
 
-You can also ask a question and hide the response. This is particularly
-convenient for passwords::
+Lahko tudi postavite vprašanje in skrijete odziv. To je posebno
+priročno za gesla::
 
     $dialog = $this->getHelperSet()->get('dialog');
     $password = $dialog->askHiddenResponse(
@@ -89,20 +89,19 @@ convenient for passwords::
 
 .. caution::
 
-    When you ask for a hidden response, Symfony will use either a binary, change
-    stty mode or use another trick to hide the response. If none is available,
-    it will fallback and allow the response to be visible unless you pass ``false``
-    as the third argument like in the example above. In this case, a RuntimeException
-    would be thrown.
+    Ko vprašate za skrit odziv, bo Symfony uporabil ali binarni, spremenljiv
+    stty način ali uporabil drug trik, da skrije odziv. Če ni noben na voljo,
+    se bo nadomestilo in omogočilo, da bo odziv viden, razen če podate ``false``
+    kot tretji argument kot v primeru zgoraj. V tem primeru, bo vržena izjema
+    RuntimeException.
 
-Validating the Answer
----------------------
+Preverjanje odgovora
+--------------------
 
-You can even validate the answer. For instance, in the last example you asked
-for the bundle name. Following the Symfony2 naming conventions, it should
-be suffixed with ``Bundle``. You can validate that by using the
-:method:`Symfony\\Component\\Console\\Helper\\DialogHelper::askAndValidate`
-method::
+Lahko tudi preverite odgovor. Na primer v zadnjem primeru, ste vprašali
+za ime paketa. Če sledimo Symfony2 konvencijam imen, bi moralo imeti
+na koncu predpono ``Bundle``. To lahko preverite z uporabo metode
+:method:`Symfony\\Component\\Console\\Helper\\DialogHelper::askAndValidate`::
 
     // ...
     $bundle = $dialog->askAndValidate(
@@ -120,7 +119,7 @@ method::
         'AcmeDemoBundle'
     );
 
-This methods has 2 new arguments, the full signature is::
+Ta metoda ima 2 nova argumenta, celotni podpis je::
 
     askAndValidate(
         OutputInterface $output,
@@ -130,24 +129,25 @@ This methods has 2 new arguments, the full signature is::
         string $default = null
     )
 
-The ``$validator`` is a callback which handles the validation. It should
-throw an exception if there is something wrong. The exception message is displayed
-in the console, so it is a good practice to put some useful information in it. The callback
-function should also return the value of the user's input if the validation was successful.
+``$validator`` je vrnjeni klic, ki ravna s preverjanjem. Moral bi
+vreči izjemo, če gre kaj narobe. Sporočilo izjeme je prikazano v konzoli,
+tako da je dobra praksa, da se doda nekaj uporabnik informacij vanjo. Funkcija
+vrnjenega klica bi morala tudi vrniti vrednost uporabnikovega vnosa, če je
+preverjanje uspešno.
 
-You can set the max number of times to ask in the ``$attempts`` argument.
-If you reach this max number it will use the default value, which is given
-in the last argument. Using ``false`` means the amount of attempts is infinite.
-The user will be asked as long as he provides an invalid answer and will only
-be able to proceed if her input is valid.
+Lahko nastavite največje število, kolikokrat vprašati v argumentu ``$attempts``.
+Če dosežete to največje število, bo uporabljena privzeta vrednost, ki je
+dana v zadnjem argumentu. Uporaba ``false`` pomeni, da je število poskusov
+neskončno. Uporabnik bo spraševan, dokler ponuja neveljaven odgovor in bo
+uspel nadaljevati samo, če je njegov vnos veljaven.
 
-Hiding the User's Response
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Skrivanje uporabnikovega odziva
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 2.2
-    The ``askHiddenResponseAndValidate`` method was added in Symfony 2.2.
+    Metoda ``askHiddenResponseAndValidate`` je bila dodana v Symfony 2.2.
 
-You can also ask and validate a hidden response::
+Lahko tudi vprašate in preverite skriti odziv::
 
     $dialog = $this->getHelperSet()->get('dialog');
 
@@ -165,25 +165,25 @@ You can also ask and validate a hidden response::
         false
     );
 
-If you want to allow the response to be visible if it cannot be hidden for
-some reason, pass true as the fifth argument.
+Če želite dovoliti, da je odziv viden, če ne more biti skrit zaradi
+nekega razloga, podajte true kot peti argument.
 
-Let the user choose from a list of Answers
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Omogočite uporabniku, da izbere iz seznama odgovorov
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 2.2
-    The :method:`Symfony\\Component\\Console\\Helper\\DialogHelper::select` method
-    was added in Symfony 2.2.
+    Metoda :method:`Symfony\\Component\\Console\\Helper\\DialogHelper::select`
+    je bila dodana v Symfony 2.2.
 
-If you have a predefined set of answers the user can choose from, you
-could use the ``ask`` method described above or, to make sure the user
-provided a correct answer, the ``askAndValidate`` method. Both have
-the disadvantage that you need to handle incorrect values yourself.
+Če imate vnaprej definiran skupek odgovorov, katere lahko uporabnik izbira,
+lahko uporabite metodo ``ask`` opisano zgoraj ali za zagotovitev, da je uporabnik
+ponudil pravilen odgovor, metodo ``askAndValidate``. Obe imata
+slabost, da morate upravljati nepravilne vrednosti sami.
 
-Instead, you can use the
-:method:`Symfony\\Component\\Console\\Helper\\DialogHelper::select`
-method, which makes sure that the user can only enter a valid string
-from a predefined list::
+Namesto tega lahko uporabite samo metodo
+:method:`Symfony\\Component\\Console\\Helper\\DialogHelper::select`,
+ki zagotavlja, da uporabnik lahko vnese samo veljaven niz iz vnaprej
+definiranega seznama::
 
     $dialog = $app->getHelperSet()->get('dialog');
     $colors = array('red', 'blue', 'yellow');
@@ -198,24 +198,24 @@ from a predefined list::
 
     // ... do something with the color
 
-The option which should be selected by default is provided with the fourth
-argument. The default is ``null``, which means that no option is the default one.
+Opcija, ki bi morala biti privzeto izbrana je ponujena kot četrti
+argument. Privzeto je ``null``, kar pomeni, da nobena opcija ni privzeta.
 
-If the user enters an invalid string, an error message is shown and the user
-is asked to provide the answer another time, until she enters a valid string
-or the maximum attempts is reached (which you can define in the fifth
-argument). The default value for the attempts is ``false``, which means infinite
-attempts. You can define your own error message in the sixth argument.
+Če uporabnik vnese neveljaven niz, je prikazano sporočilo napake in uporabnika
+se vpraša, da ponudi odgovor drugič, dokler vnaša veljaven niz, ali je doseženo
+največje število poskusov (kar lahko definirate v petem argumentu).
+Privzeta vrednost za poskuse je ``false``, kar pomeni neskončno
+poskusov. Lahko definirate vaša lastna sporočila napak v šestem argumentu.
 
 .. versionadded:: 2.3
-    Multiselect support was added in Symfony 2.3.
+    Podpora za več izbir je bila dodana v Symfony 2.3.
 
-Multiple Choices
-................
+Več izbir
+.........
 
-Sometimes, multiple answers can be given. The DialogHelper provides this
-feature using comma separated values. This is disabled by default, to enable
-this set the seventh argument to ``true``::
+Včasih se lahko poda več odgovorov. DialogHelper ponuja to
+lastnost z uporabo vrednosti ločenih z vejico. To je privzeto onemogočeno,
+da to omogočite, nastavite sedmi argument na ``true``::
 
     // ...
 
@@ -235,13 +235,13 @@ this set the seventh argument to ``true``::
 
     $output->writeln('You have just selected: ' . implode(', ', $selectedColors));
 
-Now, when the user enters ``1,2``, the result will be: ``You have just selected: blue, yellow``.
+Sedaj ko uporabnik vnese ``1,2``, bo rezultat: ``You have just selected: blue, yellow``.
 
-Testing a Command which expects input
--------------------------------------
+Testiranje ukaza, ki pričakuje vhod
+-----------------------------------
 
-If you want to write a unit test for a command which expects some kind of input
-from the command line, you need to overwrite the HelperSet used by the command::
+Če želite pisati teste enot za ukaz, ki pričakuje nekakšen vnos
+iz ukazne vrstice, morate prepisati HelperSet uporabljen s strani ukaza::
 
     use Symfony\Component\Console\Helper\DialogHelper;
     use Symfony\Component\Console\Helper\HelperSet;
@@ -271,7 +271,7 @@ from the command line, you need to overwrite the HelperSet used by the command::
         return $stream;
     }
 
-By setting the inputStream of the ``DialogHelper``, you imitate what the
-console would do internally with all user input through the cli. This way
-you can test any user interaction (even complex ones) by passing an appropriate
-input stream.
+Z nastavitvijo inputStream od ``DialogHelper``, oponašate, kar bi
+konzola naredila interno z vsemi uporabnikovimi vnosi preko cli-ja. Na ta način
+lahko testirate katerokoli uporabnikovo interakcijo (celo kompleksne) s podajanjem
+primernih vnosnih streamov.

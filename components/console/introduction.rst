@@ -186,25 +186,25 @@ besedičenja.
 
 .. tip::
 
-    The full exception stacktrace is printed if the ``VERBOSITY_VERBOSE``
-    level or above is used.
+    Celotna izjema sledi skladovnice je izpisana, če je nivo ``VERBOSITY_VERBOSE``
+    ali več uporabljen.
 
-It is possible to print a message in a command for only a specific verbosity
-level. For example::
+Možno je izpisati sporočilo v ukazu za samo določen nivo besedičenja.
+Na primer::
 
     if (OutputInterface::VERBOSITY_VERBOSE <= $output->getVerbosity()) {
         $output->writeln(...);
     }
 
 .. versionadded:: 2.4
-   The :method:`Symfony\\Component\Console\\Output\\Output::isQuiet`,
+   Metode :method:`Symfony\\Component\Console\\Output\\Output::isQuiet`,
    :method:`Symfony\\Component\Console\\Output\\Output::isVerbose`,
-   :method:`Symfony\\Component\Console\\Output\\Output::isVeryVerbose` and
+   :method:`Symfony\\Component\Console\\Output\\Output::isVeryVerbose` in
    :method:`Symfony\\Component\Console\\Output\\Output::isDebug`
-   methods were introduced in version 2.4
+   so bile predstavljene v verziji 2.4
 
-There are also more semantic methods you can use to test for each of the
-verbosity levels::
+Na voljo so tudi bolj semantične metode, ki jih lahko uporabite za testiranje
+vsakega nivoja besedičenja::
 
     if ($output->isQuiet()) {
         // ...
@@ -222,18 +222,18 @@ verbosity levels::
         // ...
     }
 
-When the quiet level is used, all output is suppressed as the default
+Ko je uporabljen quiet nivo, je vec izpis utišan, saj se vrne privzeta metoda
 :method:`Symfony\Component\Console\Output::write <Symfony\\Component\\Console\\Output::write>`
-method returns without actually printing.
+brez dejanskega izpisa.
 
-Using Command Arguments
------------------------
+Uporaba argumentov ukazov
+-------------------------
 
-The most interesting part of the commands are the arguments and options that
-you can make available. Arguments are the strings - separated by spaces - that
-come after the command name itself. They are ordered, and can be optional
-or required. For example, add an optional ``last_name`` argument to the command
-and make the ``name`` argument required::
+Najbolj zanimiv del ukazov so argumenti in opcije, ki
+jih lahko naredite na voljo. Argumenti so nizi - ločeni s presledki - ki
+pridejo za samim imenom ukaza. So naročeni in so lahko opcijski
+ali zahtevani. Na primer dodajte opcijski argument ``last_name`` ukazu
+in naredite argument ``name`` zahtevan::
 
     $this
         // ...
@@ -248,22 +248,22 @@ and make the ``name`` argument required::
             'Your last name?'
         );
 
-You now have access to a ``last_name`` argument in your command::
+Sedaj imate dostop do argumenta ``last_name`` v vašem ukazu::
 
     if ($lastName = $input->getArgument('last_name')) {
         $text .= ' '.$lastName;
     }
 
-The command can now be used in either of the following ways:
+Ukaz je lahko uporabljen na katerikoli izmed sledečin načinov:
 
 .. code-block:: bash
 
     $ app/console demo:greet Fabien
     $ app/console demo:greet Fabien Potencier
 
-It is also possible to let an argument take a list of values (imagine you want
-to greet all your friends). For this it must be specified at the end of the
-argument list::
+Je tudi možno omogočiti, da argument vzame seznam vrednosti (predstavljajte si,
+da želite pozdraviti vse vaše prijatelje). Za to mora biti specificiran na koncu
+seznama argumentov::
 
     $this
         // ...
@@ -273,29 +273,29 @@ argument list::
             'Who do you want to greet (separate multiple names with a space)?'
         );
 
-To use this, just specify as many names as you want:
+Da to uporabite, samo specificirajte kakor veliko imen želite:
 
 .. code-block:: bash
 
     $ app/console demo:greet Fabien Ryan Bernhard
 
-You can access the ``names`` argument as an array::
+Do argumenta ``names`` lahko dostopate kot polje::
 
     if ($names = $input->getArgument('names')) {
         $text .= ' '.implode(', ', $names);
     }
 
-There are 3 argument variants you can use:
+Na voljo so 3 variante argumentov, ki jih lahko uporabite:
 
 ===========================  ===============================================================================================================
-Mode                         Value
+Način                        Vrednost
 ===========================  ===============================================================================================================
-InputArgument::REQUIRED      The argument is required
-InputArgument::OPTIONAL      The argument is optional and therefore can be omitted
-InputArgument::IS_ARRAY      The argument can contain an indefinite number of arguments and must be used at the end of the argument list
+InputArgument::REQUIRED      Argument je zahtevan
+InputArgument::OPTIONAL      Argument je opcijski in zato je lahko izpuščen
+InputArgument::IS_ARRAY      Argument lahko vsebuje neskončno število argumentov in mora biti uporabljen na koncu seznama argumentov
 ===========================  ===============================================================================================================
 
-You can combine ``IS_ARRAY`` with ``REQUIRED`` and ``OPTIONAL`` like this::
+Lahko kombinirate ``IS_ARRAY`` z ``REQUIRED`` in ``OPTIONAL`` takole::
 
     $this
         // ...
@@ -305,24 +305,24 @@ You can combine ``IS_ARRAY`` with ``REQUIRED`` and ``OPTIONAL`` like this::
             'Who do you want to greet (separate multiple names with a space)?'
         );
 
-Using Command Options
----------------------
+Uporaba opcij ukazov
+--------------------
 
-Unlike arguments, options are not ordered (meaning you can specify them in any
-order) and are specified with two dashes (e.g. ``--yell`` - you can also
-declare a one-letter shortcut that you can call with a single dash like
-``-y``). Options are *always* optional, and can be setup to accept a value
-(e.g. ``dir=src``) or simply as a boolean flag without a value (e.g.
+Z razliko argumentov, opcije niso sortirane (kar pomeni, da jih lahko specificirate v
+kateremkoli redu) in so specificirane z dvema pomišljajema (npr. ``yell`` - lahko tudi
+deklarirate eno-črkovno bližnjico, ki jo lahko kličete z enojnim pomišljajem kot npr.
+``-y``). Opcije so *vedno* opcijske in so lahko nastavljene, da sprejmejo vrednost
+(npr. ``dir=src``) ali poenostavljeno kot logična zastavica brez vrednosti (npr.
 ``yell``).
 
 .. tip::
 
-    It is also possible to make an option *optionally* accept a value (so that
-    ``--yell`` or ``yell=loud`` work). Options can also be configured to
-    accept an array of values.
+    Je tudi možno narediti, da opcija *opcijsko* sprejme vrednost (tako da
+    ``--yell`` ali ``yell=loud`` delujeta). Opcije so lahko tudi konfigurirane,
+    da sprejmejo polje vrednosti.
 
-For example, add a new option to the command that can be used to specify
-how many times in a row the message should be printed::
+Na primer, dodajte novo opcijo ukazu, ki je lahko uporabljena za specifikacijo,
+kolikokrat v vrstici bi moralo biti sporočilo izpisano::
 
     $this
         // ...
@@ -334,7 +334,7 @@ how many times in a row the message should be printed::
             1
         );
 
-Next, use this in the command to print the message multiple times:
+Nadalje uporabite to v ukazu, da izpišete sporočilo večkrat:
 
 .. code-block:: php
 
@@ -342,38 +342,38 @@ Next, use this in the command to print the message multiple times:
         $output->writeln($text);
     }
 
-Now, when you run the task, you can optionally specify a ``--iterations``
-flag:
+Sedaj ko poženete opravilo, lahko opcijsko specificirate zastavico
+``--iterations``:
 
 .. code-block:: bash
 
     $ app/console demo:greet Fabien
     $ app/console demo:greet Fabien --iterations=5
 
-The first example will only print once, since ``iterations`` is empty and
-defaults to ``1`` (the last argument of ``addOption``). The second example
-will print five times.
+Prvi primer se bo izpisal samo enkrat, saj je ``iterations`` prazna in
+privzeto ``1`` (zadnji argument ``addOption``). Drugi primer
+se bo izpisal petkrat.
 
-Recall that options don't care about their order. So, either of the following
-will work:
+Spomnite se, da opcij ne zanima o njihovem redu. Tako da karkoli od sledečega
+bo delovalo:
 
 .. code-block:: bash
 
     $ app/console demo:greet Fabien --iterations=5 --yell
     $ app/console demo:greet Fabien --yell --iterations=5
 
-There are 4 option variants you can use:
+Na voljo so 4 opcijske variante, ki jih lahko uporabite:
 
 ===========================  =====================================================================================
-Option                       Value
+Opcija                       Vrednost
 ===========================  =====================================================================================
-InputOption::VALUE_IS_ARRAY  This option accepts multiple values (e.g. ``--dir=/foo --dir=/bar``)
-InputOption::VALUE_NONE      Do not accept input for this option (e.g. ``--yell``)
-InputOption::VALUE_REQUIRED  This value is required (e.g. ``--iterations=5``), the option itself is still optional
-InputOption::VALUE_OPTIONAL  This option may or may not have a value (e.g. ``yell`` or ``yell=loud``)
+InputOption::VALUE_IS_ARRAY  Ta opcija sprejme več vrednosti (npr. ``--dir=/foo --dir=/bar``)
+InputOption::VALUE_NONE      Ne sprejme vnosa za to opcijo (npr. ``--yell``)
+InputOption::VALUE_REQUIRED  Ta vrednost je zahtevana (npr. ``--iterations=5``), sama opcija je še vedno opcijska
+InputOption::VALUE_OPTIONAL  Ta opcija lahko ali pa tudi nima vrednosti (npr. ``yell`` ali ``yell=loud``)
 ===========================  =====================================================================================
 
-You can combine ``VALUE_IS_ARRAY`` with ``VALUE_REQUIRED`` or ``VALUE_OPTIONAL`` like this:
+Lahko kombinirate ``VALUE_IS_ARRAY`` z ``VALUE_REQUIRED`` ali ``VALUE_OPTIONAL`` takole:
 
 .. code-block:: php
 
@@ -387,23 +387,23 @@ You can combine ``VALUE_IS_ARRAY`` with ``VALUE_REQUIRED`` or ``VALUE_OPTIONAL``
             1
         );
 
-Console Helpers
----------------
+Pomočniki konzole
+-----------------
 
-The console component also contains a set of "helpers" - different small
-tools capable of helping you with different tasks:
+Konzolna komponenta lahko vsebuje skupek "helper-jev" - različna majhna
+orodja, zmožna vam pomagati pri različnih opravilih:
 
-* :doc:`/components/console/helpers/dialoghelper`: interactively ask the user for information
-* :doc:`/components/console/helpers/formatterhelper`: customize the output colorization
-* :doc:`/components/console/helpers/progresshelper`: shows a progress bar
+* :doc:`/components/console/helpers/dialoghelper`: interaktivno vprašajte uporabnika za informacijo
+* :doc:`/components/console/helpers/formatterhelper`: prilagodite barve izpisa
+* :doc:`/components/console/helpers/progresshelper`: prikaže vrstico napredka
 
-Testing Commands
-----------------
+Ukazi za testiranje
+-------------------
 
-Symfony2 provides several tools to help you test your commands. The most
-useful one is the :class:`Symfony\\Component\\Console\\Tester\\CommandTester`
-class. It uses special input and output classes to ease testing without a real
-console::
+Symfony2 ponuja nekaj orodij, ki vam pomagajo testirati vaše ukaze. Najbolj
+uporaben je razred :class:`Symfony\\Component\\Console\\Tester\\CommandTester`.
+Uporablja posebne razrede vnosa in izpisa za poenostavitev testiranja brez prave
+konzole::
 
     use Symfony\Component\Console\Application;
     use Symfony\Component\Console\Tester\CommandTester;
@@ -426,13 +426,12 @@ console::
         }
     }
 
-The :method:`Symfony\\Component\\Console\\Tester\\CommandTester::getDisplay`
-method returns what would have been displayed during a normal call from the
-console.
+Metoda :method:`Symfony\\Component\\Console\\Tester\\CommandTester::getDisplay`
+vrne, kar bi bilo prikazano med običajnim klicem iz
+konzole.
 
-You can test sending arguments and options to the command by passing them
-as an array to the :method:`Symfony\\Component\\Console\\Tester\\CommandTester::execute`
-method::
+Lahko testirate pošiljanje argumentov in opcij ukazu z njihovim podajanjem
+kot polja metodi :method:`Symfony\\Component\\Console\\Tester\\CommandTester::execute`::
 
     use Symfony\Component\Console\Application;
     use Symfony\Component\Console\Tester\CommandTester;
@@ -459,20 +458,20 @@ method::
 
 .. tip::
 
-    You can also test a whole console application by using
+    Lahko tudi testirate celotno konzolno aplikacijo z uporabo
     :class:`Symfony\\Component\\Console\\Tester\\ApplicationTester`.
 
-Calling an existing Command
----------------------------
+Klic obstoječega ukaza
+----------------------
 
-If a command depends on another one being run before it, instead of asking the
-user to remember the order of execution, you can call it directly yourself.
-This is also useful if you want to create a "meta" command that just runs a
-bunch of other commands (for instance, all commands that need to be run when
-the project's code has changed on the production servers: clearing the cache,
-generating Doctrine2 proxies, dumping Assetic assets, ...).
+Če je ukaz odvisen od drugega, ki se pred njim poganja, namesto spraševanja
+uporabnika, da si zapomne vrstni red izvajanja, ga lahko kličete direktno sami.
+To je tudi uporabno, če želite izdelati "meta" ukaz, ki samo požene
+skupek drugih ukazov (na primer, vsi ukazi, ki potrebujejo biti pognani, ko
+se koda projekta spremeni na produkcijskih strežnikih: čiščenje predpomnilnika,
+generacija Doctrine2 proksijev, odlaganje Assetic sredstev, ...).
 
-Calling a command from another one is straightforward::
+Klicanje ukaza iz drugega je enostavno::
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
@@ -490,29 +489,29 @@ Calling a command from another one is straightforward::
         // ...
     }
 
-First, you :method:`Symfony\\Component\\Console\\Application::find` the
-command you want to execute by passing the command name.
+Najprej najdete (:method:`Symfony\\Component\\Console\\Application::find`
+ukaz, ki ga želite izvesti s podajanjem imena ukaza.
 
-Then, you need to create a new
-:class:`Symfony\\Component\\Console\\Input\\ArrayInput` with the arguments and
-options you want to pass to the command.
+Potem potrebujete izdelati nov
+:class:`Symfony\\Component\\Console\\Input\\ArrayInput` z argumenti in
+opcijami, ki jih želite podati ukazu.
 
-Eventually, calling the ``run()`` method actually executes the command and
-returns the returned code from the command (return value from command's
-``execute()`` method).
+Na koncu, klicanje metode ``run()`` dejanstko izvede ukaz in
+vrne vrnjeno kodo iz ukaza (vrnjena vrednost iz ukazne metode
+``execute()``).
 
 .. note::
 
-    Most of the time, calling a command from code that is not executed on the
-    command line is not a good idea for several reasons. First, the command's
-    output is optimized for the console. But more important, you can think of
-    a command as being like a controller; it should use the model to do
-    something and display feedback to the user. So, instead of calling a
-    command from the Web, refactor your code and move the logic to a new
-    class.
+    Večino časa, klicanje ukaza iz kode, ki se ne izvaja na
+    ukazni vrstici ni dobra ideja iz večih razlogov. Najprej, izpis ukaza
+    je optimiziran za konzolo. Vendar bolj pomembno, lahko razmišljate
+    o ukazu, da je kot krmilnik; moral bi uporabljati model, da nekaj naredi
+    in prikaže povratne informacije uporabniku. Torej namesto klicanja ukaza
+    iz spletna, ponovno faktorirajte vašo kodo in premaknite logiko v nov
+    razred.
 
-Learn More!
------------
+Načite se več!
+--------------
 
 * :doc:`/components/console/usage`
 * :doc:`/components/console/single_command_tool`
