@@ -1,8 +1,8 @@
 .. index::
     single: Console; Console Helpers
 
-The Console Helpers
-===================
+Konzolni pomočniki
+==================
 
 .. toctree::
     :hidden:
@@ -12,7 +12,7 @@ The Console Helpers
     progresshelper
     tablehelper
 
-The Console Components comes with some useful helpers. These helpers contain
-function to ease some common tasks.
+Komponente Console vsebujejo nekaj uporabnik pomočnikov (helpers). Te pomočniki
+vsebujejo funkcije za poenostavitev nekaterih pogostih opravil.
 
 .. include:: map.rst.inc

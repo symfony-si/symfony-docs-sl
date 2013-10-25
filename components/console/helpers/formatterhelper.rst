@@ -1,37 +1,37 @@
 .. index::
     single: Console Helpers; Formatter Helper
 
-Formatter Helper
-================
+Pomočnik oblike
+===============
 
-The Formatter helpers provides functions to format the output with colors.
-You can do more advanced things with this helper than you can in
+Pomočnik oblike ponuja funkcije za oblikovanje izpisa z barvami.
+S tem pomočnikom lahko naredite bolj napredne stvari, kot v
 :ref:`components-console-coloring`.
 
-The :class:`Symfony\\Component\\Console\\Helper\\FormatterHelper` is included
-in the default helper set, which you can get by calling
+Vključen je :class:`Symfony\\Component\\Console\\Helper\\FormatterHelper`
+v privzetem pomočniškem setu, ki ga lahko dobite s klicom
 :method:`Symfony\\Component\\Console\\Command\\Command::getHelperSet`::
 
     $formatter = $this->getHelperSet()->get('formatter');
 
-The methods return a string, which you'll usually render to the console by
-passing it to the
-:method:`OutputInterface::writeln <Symfony\\Component\\Console\\Output\\OutputInterface::writeln>` method.
+Metode vrnejo niz, ki ga boste običajno izpisali v konzoli s
+podajanjem v metodo
+:method:`OutputInterface::writeln <Symfony\\Component\\Console\\Output\\OutputInterface::writeln>`.
 
-Print Messages in a Section
----------------------------
+Izpis sporočil v sekcijo
+------------------------
 
-Symfony offers a defined style when printing a message that belongs to some
-"section". It prints the section in color and with brackets around it and the
-actual message to the right of this. Minus the color, it looks like this:
+Symfony ponuja definiran stil, ko izpisuje sporočilo, ki pripada neki
+"sekciji". Sekcijo izpiše v barvi in obkroženo z zavitimi oklepaji in
+dejansko sporočilo desno od tega. Brez barve zgleda takole:
 
 .. code-block:: text
 
     [SomeSection] Here is some message related to that section
 
-To reproduce this style, you can use the
+Da ponovno sproducirate ta stil, lahko uporabite
 :method:`Symfony\\Component\\Console\\Helper\\FormatterHelper::formatSection`
-method::
+metodo::
 
     $formattedLine = $formatter->formatSection(
         'SomeSection',
@@ -39,27 +39,27 @@ method::
     );
     $output->writeln($formattedLine);
 
-Print Messages in a Block
--------------------------
+Izpis sporočila v bloku
+-----------------------
 
-Sometimes you want to be able to print a whole block of text with a background
-color. Symfony uses this when printing error messages.
+Včasih boste želeli zmožnost izpisovanja celotenga bloka teksta z barvo
+ozadja. Symfony to uporablja, ko izpisuje sporočila napak.
 
-If you print your error message on more than one line manually, you will
-notice that the background is only as long as each individual line. Use the
+Če izpišete sporočilo napake na več kot eni vrstici ročno, boste
+opazili, da je ozadje samo tako dolgo kot je vsaka individualna vrstica. Uporabite
 :method:`Symfony\\Component\\Console\\Helper\\FormatterHelper::formatBlock`
-to generate a block output::
+za generaranje izpisa bloka::
 
     $errorMessages = array('Error!', 'Something went wrong');
     $formattedBlock = $formatter->formatBlock($errorMessages, 'error');
     $output->writeln($formattedBlock);
 
-As you can see, passing an array of messages to the
+Kot lahko vidite, podajanje polja sporočil v
 :method:`Symfony\\Component\\Console\\Helper\\FormatterHelper::formatBlock`
-method creates the desired output. If you pass ``true`` as third parameter, the
-block will be formatted with more padding (one blank line above and below the
-messages and 2 spaces on the left and right).
+metodo izdela željeni izpis. Če podate ``true`` kot tretji parameter, bo blok
+oblikovan z več zapolnjenosti (padding) (ena prazna vrstica zgoraj in spodaj
+sporočila in 2 presledka na levi in desni).
 
-The exact "style" you use in the block is up to you. In this case, you're using
-the pre-defined ``error`` style, but there are other styles, or you can create
-your own. See :ref:`components-console-coloring`.
+Točen stil, ki ga uporabljate v bloku je odvisno od vas. V tem primeru, uporabljate
+vnaprej definiran stil ``error``, vendar so na voljo tudi drugi stili, ali pa lahko
+izdelate svoje. Glejte :ref:`components-console-coloring`.

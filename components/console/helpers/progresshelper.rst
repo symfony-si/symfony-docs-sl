@@ -1,25 +1,25 @@
 .. index::
     single: Console Helpers; Progress Helper
 
-Progress Helper
-===============
+Pomočnik napredka
+=================
 
 .. versionadded:: 2.2
-    The ``progress`` helper was added in Symfony 2.2.
+    Pomočnik ``progress`` je bil dodan v Symfony 2.2.
 
 .. versionadded:: 2.3
-    The ``setCurrent`` method was added in Symfony 2.3.
+    Metoda ``setCurrent`` je bila dodana v Symfony 2.3.
 
 .. versionadded:: 2.4
-    The ``clear`` method was added in Symfony 2.4.
+    Metoda ``clear`` je bila dodana v Symfony 2.4.
 
-When executing longer-running commands, it may be helpful to show progress
-information, which updates as your command runs:
+Ko izvajate daljše-pogonske ukaze, je lahko v pomoč prikaz informacije
+napredka, ki se posodablja kakor se izvaja vaš ukaz:
 
 .. image:: /images/components/console/progress.png
 
-To display progress details, use the :class:`Symfony\\Component\\Console\\Helper\\ProgressHelper`,
-pass it a total number of units, and advance the progress as your command executes::
+Za prikaz podrobnosti napredka, uporabite :class:`Symfony\\Component\\Console\\Helper\\ProgressHelper`,
+podajte mu celotno število enot in napredujte napredek kot se vaš ukaz izvaja::
 
     $progress = $this->getHelperSet()->get('progress');
 
@@ -36,20 +36,20 @@ pass it a total number of units, and advance the progress as your command execut
 
 .. tip::
 
-    You can also set the current progress by calling the
+    Lahko tudi nastavite trenutni napredek s klicom
     :method:`Symfony\\Component\\Console\\Helper\\ProgressHelper::setCurrent`
-    method.
+    metode.
 
-If you want to output something while the progress bar is running,
-call :method:`Symfony\\Component\\Console\\Helper\\ProgressHelper::clear` first.
-After you're done, call
+Če želite izpisati nekaj, ko se vrstica napredka poganja,
+kličite najprej :method:`Symfony\\Component\\Console\\Helper\\ProgressHelper::clear`.
+Ko opravite, kličite
 :method:`Symfony\\Component\\Console\\Helper\\ProgressHelper::display`
-to show the progress bar again.
+za ponovni prikaz vrstice napredka.
 
-The appearance of the progress output can be customized as well, with a number
-of different levels of verbosity. Each of these displays different possible
-items - like percentage completion, a moving progress bar, or current/total
-information (e.g. 10/50)::
+Izgled izpisa napredka se lahko tudi prilagodi s številnimi različnimi nivoji
+besedičenja. Vsak od teh prikaže različne možne elemente - kot
+je procentualno dokončanje, premikajoča se vrstica napredka, ali trenutne/skupne
+informacije (npr. 10/50)::
 
     $progress->setFormat(ProgressHelper::FORMAT_QUIET);
     $progress->setFormat(ProgressHelper::FORMAT_NORMAL);
@@ -59,8 +59,8 @@ information (e.g. 10/50)::
     $progress->setFormat(ProgressHelper::FORMAT_NORMAL_NOMAX);
     $progress->setFormat(ProgressHelper::FORMAT_VERBOSE_NOMAX);
 
-You can also control the different characters and the width used for the
-progress bar::
+Lahko tudi kontrolirate različne znake in uporabljeno širino za
+vrstico napredka::
 
     // the finished part of the bar
     $progress->setBarCharacter('<comment>=</comment>');
@@ -69,16 +69,16 @@ progress bar::
     $progress->setProgressCharacter('|');
     $progress->setBarWidth(50);
 
-To see other available options, check the API documentation for
+Da vidite ostale opcije, ki so na voljo, preverite API dokumentacijo za
 :class:`Symfony\\Component\\Console\\Helper\\ProgressHelper`.
 
 .. caution::
 
-    For performance reasons, be careful if you set the total number of steps
-    to a high number. For example, if you're iterating over a large number of
-    items, consider setting the redraw frequency to a higher value by calling
+    Zaradi razlogov uspešnosti, bodite previdni, če nastavite skupno število korakov
+    na veliko številko. Na primer, če ponavljate preko velikega števila elementov,
+    premislite nastaviti vračilno frekvenco na višje število s klicom
     :method:`Symfony\\Component\\Console\\Helper\\ProgressHelper::setRedrawFrequency`,
-    so it updates on only some iterations::
+    da se posodobi samo na nekaterih iteracijah::
 
         $progress->start($output, 50000);
 

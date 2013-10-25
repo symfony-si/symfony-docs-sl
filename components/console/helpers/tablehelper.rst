@@ -1,18 +1,18 @@
 .. index::
     single: Console Helpers; Table Helper
 
-Table Helper
-============
+Tabelni pomočnik
+================
 
 .. versionadded:: 2.3
-    The ``table`` helper was added in Symfony 2.3.
+    Pomočnik ``table`` je bil dodan v Symfony 2.3.
 
-When building a console application it may be useful to display tabular data:
+Ko se gradi konzolno aplikacijo, je lahko uporabno prikazati tabularne podatke:
 
 .. image:: /images/components/console/table.png
 
-To display table, use the :class:`Symfony\\Component\\Console\\Helper\\TableHelper`,
-set headers, rows and render::
+Za prikaz tabele, uporabite :class:`Symfony\\Component\\Console\\Helper\\TableHelper`,
+nastavite glave, vrstice in izpis::
 
     $table = $app->getHelperSet()->get('table');
     $table
@@ -26,16 +26,16 @@ set headers, rows and render::
     ;
     $table->render($output);
 
-The table layout can be customized as well. There are two ways to customize
-table rendering: using named layouts or by customizing rendering options.
+Postavitev tabele se lahko tudi prilagodi. Na voljo sta dva načina za prilagoditev
+izpisa tabele: z uporabo poimenovanih postavitev ali s prilagoditvijo opcij izpisa.
 
-Customize Table Layout using Named Layouts
-------------------------------------------
+Prilagoditev postavitve tabele z uporabo poimenovanih postavitev
+----------------------------------------------------------------
 
 .. versionadded:: 2.4
-    The ``TableHelper::LAYOUT_COMPACT`` layout was added in Symfony 2.4.
+    Postavitev ``TableHelper::LAYOUT_COMPACT`` je bila dodana v Symfony 2.4.
 
-The Table helper ships with three preconfigured table layouts:
+Pomočnik tabel vsebuje tri prednastavljene postavitve tabele:
 
 * ``TableHelper::LAYOUT_DEFAULT``
 
@@ -43,12 +43,13 @@ The Table helper ships with three preconfigured table layouts:
 
 * ``TableHelper::LAYOUT_COMPACT``
 
-Layout can be set using :method:`Symfony\\Component\\Console\\Helper\\TableHelper::setLayout` method.
+Postavitev se lahko nastavi z uporabo metode
+:method:`Symfony\\Component\\Console\\Helper\\TableHelper::setLayout`.
 
-Customize Table Layout using Rendering Options
-----------------------------------------------
+Prilagoditev postavitve tabele z uporabo opcij izpisa
+-----------------------------------------------------
 
-You can also control table rendering by setting custom rendering option values:
+Lahko tudi kontrolirate izpis tabele z nastavitvijo vrednosti opcij izpisa po meri:
 
 *  :method:`Symfony\\Component\\Console\\Helper\\TableHelper::setPaddingChar`
 *  :method:`Symfony\\Component\\Console\\Helper\\TableHelper::setHorizontalBorderChar`
