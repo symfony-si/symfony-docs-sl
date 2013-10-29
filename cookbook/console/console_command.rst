@@ -159,7 +159,6 @@ namesto
             $commandTester = new CommandTester($command);
             $commandTester->execute(
                 array(
-                    'command' => $command->getName(),
                     'name'    => 'Fabien',
                     '--yell'  => true,
                 )
@@ -200,7 +199,6 @@ lahko razširite vaš test iz
             $commandTester = new CommandTester($command);
             $commandTester->execute(
                 array(
-                    'command' => $command->getName(),
                     'name'    => 'Fabien',
                     '--yell'  => true,
                 )

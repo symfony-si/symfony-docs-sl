@@ -79,6 +79,8 @@ Lahko dobite bolj opisna sporočila (če je to podprto za ukaz) z:
 Zastavita verbose lahko opcijsko vzame vrednost med 1 (privzeto) in 3, da
 izpiše še bolj opisna sporočila:
 
+.. code-block:: bash
+
     $ php app/console list --verbose=2
     $ php app/console list -vv
     $ php app/console list --verbose=3
