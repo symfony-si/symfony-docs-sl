@@ -673,6 +673,11 @@ their type::
 
 .. tip::
 
+    If you purposefully want to select "invalid" select/radio values, see
+    :ref:`components-dom-crawler-invalid`.
+
+.. tip::
+
     You can get the values that will be submitted by calling the ``getValues()``
     method on the ``Form`` object. The uploaded files are available in a
     separate array returned by ``getFiles()``. The ``getPhpValues()`` and

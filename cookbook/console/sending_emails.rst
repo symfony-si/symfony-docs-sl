@@ -96,8 +96,16 @@ za več informacij), se morate zavedati, da kako Symfony ravna z konzolnimi ukaz
 e-pošta ni avtomatsko poslana. Sami morate poskrbeti za praznenje čakalne vrste.
 Uporabite sledečo kodo za pošiljanje e-pošte znotraj vašega konzolnega ukaza::
 
+    $message = new \Swift_Message();
+    
+    // ... prepare the message
+
     $container = $this->getContainer();
     $mailer = $container->get('mailer');
+
+    $mailer->send($message);
+
+    // now manually flush the queue
     $spool = $mailer->getTransport()->getSpool();
     $transport = $container->get('swiftmailer.transport.real');
 

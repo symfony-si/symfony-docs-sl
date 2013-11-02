@@ -14,7 +14,7 @@ Uvod
 Najti datoteko za določen razred je lahko zahtevno opravilo. Na srečo
 komponenta Class Loader prihaja z dvema razredoma za predpomnenje ujemanja
 iz razreda v njegovo vsebujočo datoteko.
-:class:`Symfonfy\\Component\\ClassLoader\\ApcClassLoader`
+:class:`Symfony\\Component\\ClassLoader\\ApcClassLoader`
 in :class:`Symfony\\Component\\ClassLoader\\XcacheClassLoader` se ovijata
 okrog objekta, ki implementira metodo ``findFile()``, ki najde datoteko za
 razred.
