@@ -20,11 +20,14 @@ Nastavitve
 * `ide`_
 * `test`_
 * `trusted_proxies`_
-* `form`_
-    * enabled
 * `csrf_protection`_
     * enabled
-    * field_name
+    * field_name (deprecated)
+* `form`_
+    * enabled
+    * csrf_protection
+        * enabled
+        * field_name
 * `session`_
     * `name`_
     * `cookie_lifetime`_
@@ -99,7 +102,7 @@ celotni niz TextMate bi izgledal takole:
 
 Seveda, odkar vsak razvijalec uporablja različen IDE, je bolje nastaviti
 to na sistemskem nivoju. To se lahko naredi z nastavitvijo ``xdebug.file_link_format``
-PHP.ini vrednostjo za niz povezave datoteke. Če ta nastavitvena vrednost ni nastavljena,
+``php.ini`` vrednostjo za niz povezave datoteke. Če ta nastavitvena vrednost ni nastavljena,
 potem ``ide`` opcije ni potrebno specificirati.
 
 .. _reference-framework-test:
@@ -452,12 +455,16 @@ Celotne privzete nastavitve
             test:                 ~
             default_locale:       en
 
+            csrf_protection:
+                enabled:              false
+                field_name:           _token # Deprecated since 2.4, to be removed in 3.0. Use form.csrf_protection.field_name instead
+
             # form configuration
             form:
                 enabled:              false
-            csrf_protection:
-                enabled:              false
-                field_name:           _token
+                csrf_protection:
+                    enabled:          true
+                    field_name:       ~
 
             # esi configuration
             esi:

@@ -10,8 +10,8 @@ Komponente
     console/index
     css_selector
     debug
-    dom_crawler
     dependency_injection/index
+    dom_crawler
     event_dispatcher/index
     filesystem
     finder

@@ -31,7 +31,7 @@ sledeče v vaš ukaz::
         return;
     }
 
-V tem primeru bo uporabnik vprašan "Continue with this action" in bo vrnilo
+V tem primeru bo uporabnik vprašan "Continue with this action?" in bo vrnilo
 ``true``, če uporabnik odgovori z ``y`` ali false v kateremkoli drugem primeru. Tretji
 argument v ``askConfirmation`` je privzeta vrednost, ki se vrne, če uporabnik ne
 vnese nobenega vnosa.
@@ -159,7 +159,7 @@ Lahko tudi vprašate in preverite skriti odziv::
 
     $password = $dialog->askHiddenResponseAndValidate(
         $output,
-        'Please enter the name of the widget',
+        'Please enter your password',
         $validator,
         20,
         false

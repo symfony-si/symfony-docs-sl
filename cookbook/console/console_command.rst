@@ -173,7 +173,7 @@ namesto
 .. versionadded:: 2.4
     Od Symfony 2.4, ``CommandTester`` avtomatsko zazna ime
     ukaza za izvajanje. Torej ga ne potrebujete več podajati preko ``command``
-    argumenta.
+    ključa.
 
 .. note::
 

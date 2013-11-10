@@ -231,7 +231,10 @@ krmilnik lahko ustvari odziv ročno, na osnovi zahtevka::
 
     $name = $request->query->get('name');
 
-    return new Response('Hello '.$name, 200, array('Content-Type' => 'text/plain'));
+    return new Response('Hello '.$name, Response::HTTP_OK, array('Content-Type' => 'text/plain'));
+
+.. versionadded:: 2.4
+    Support for HTTP status code constants was added in Symfony 2.4.
 
 .. note::
 
@@ -415,7 +418,7 @@ Ko je naložen in omogočen (privzeto v ``dev`` :ref:`okolju<quick-tour-big-pict
 Profiler ponuja spletni vmesnik za *veliko* količino informacij, posnetih
 pri vsakem zahtevku, vključno z dnevniki, časovnico zahtevkov, GET ali POST parametri,
 varnostnimi podrobnostmi, poizvedbami podatkovne baze in več!
- 
+
 Seveda bi bilo nepametno imeti ta orodja omogočena, ko postavite vašo aplikacijo,
 torej je privzeto profiler onemogočen v ``prod`` okolju.
 

@@ -83,16 +83,19 @@ Funkcije
 +----------------------------------------------------+--------------------------------------------------------------------------------------------+
 | ``logout_path(key)``                               | To bo generiralo relativni odjavni URL za dani požarni zid                                 |
 +----------------------------------------------------+--------------------------------------------------------------------------------------------+
-| ``logout_url(key)``                                | Enako ``logout_path(...)`` vendar to generira absolutni url                                |
+| ``logout_url(key)``                                | Enako ``logout_path(...)`` vendar to generira absolutni URL                                |
 +----------------------------------------------------+--------------------------------------------------------------------------------------------+
-| ``path(name, parameters = {})``                    | Dobite relativni url za dano smer, več informacij v                                        |
+| ``path(name, parameters = {})``                    | Dobite relativni URL za dano smer, več informacij v                                        |
 |                                                    | ":ref:`book-templating-pages`".                                                            |
 +----------------------------------------------------+--------------------------------------------------------------------------------------------+
-| ``url(name, parameters = {})``                     | Enako ``path(...)`` vendar to generira absolutni url                                       |
+| ``url(name, parameters = {})``                     | Enako ``path(...)`` vendar to generira absolutni URL                                       |
 +----------------------------------------------------+--------------------------------------------------------------------------------------------+
 
 Filtri
 ------
+
+.. versionadded:: 2.1
+    The ``humanize`` filter was added in Symfony 2.1
 
 +---------------------------------------------------------------------------------+-------------------------------------------------------------------+
 | Sintaksa filtra                                                                 | Uporaba                                                           |
@@ -173,8 +176,8 @@ Globalne spremenljivke
 +-------------------------------------------------------+------------------------------------------------------------------------------------+
 | Spremenljivka                                         | Uporaba                                                                            |
 +=======================================================+====================================================================================+
-| ``app`` *Attributes*: ``app.user``, ``app.request``   | Spremenljivka ``app`` je navoljo kjerkoli in vam da hiter                          |
-| ``app.session``, ``app.environment``, ``app.debug``   | dostop do mnogih pogosto potrebnih objektov. Spremenljivka ``app`` je              |
+| ``app`` *Attributes*: ``app.user``, ``app.request``,  | Spremenljivka ``app`` je navoljo kjerkoli in vam da hiter                          |
+| ``app.session``, ``app.environment``, ``app.debug``,  | dostop do mnogih pogosto potrebnih objektov. Spremenljivka ``app`` je              |
 | ``app.security``                                      | instanca :class:`Symfony\\Bundle\\FrameworkBundle\\Templating\\GlobalVariables`    |
 +-------------------------------------------------------+------------------------------------------------------------------------------------+
 
@@ -184,12 +187,11 @@ Razširitve Symfony standardne izdaje
 Symfony standardna izdaja dodaja nekaj paketov v Symfony2 jedro ogrodja.
 Te paketi imajo ostale Twig razširitve:
 
-* **Twig Extension** vključuje vse razširitve, ki ne pripadajo
-  Twig jedru, vendar so lahko zanimive. Lahko preberete več o tem v
-  `uradni dokumentaciji Twig razširitve`_
+* **Twig Extensions** vključuje vse razširitve, ki ne pripadajo
+  Twig jedru. Lahko preberete več o tem v `uradni dokumentaciji Twig razširitve`_
 * **Assetic** dodaja ``{% stylesheets %}``, ``{% javascripts %}`` in
   ``{% image %}`` značke. Lahko preberete več o njih v
-  :doc:`dokumentaciji Assetic </cookbook/assetic/asset_management>`;
+  :doc:`dokumentaciji Assetic </cookbook/assetic/asset_management>`.
 
 .. _`uradni dokumentaciji Twig razširitve`: http://twig.sensiolabs.org/doc/extensions/index.html
 .. _`http://twig.sensiolabs.org/documentation`: http://twig.sensiolabs.org/documentation

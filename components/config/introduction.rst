@@ -17,8 +17,8 @@ Namestitev
 
 Komponento lahko namestite na 2 načina:
 
-* Uporabite uradni Git repozitorij (https://github.com/symfony/Config);
-* :doc:`Namestitev preko Composer-ja </components/using_components>` (``symfony/config`` na `Packagist`_).
+* :doc:`Namestitev preko Composer-ja </components/using_components>` (``symfony/config`` na `Packagist`_);
+* Uporabite uradni Git repozitorij (https://github.com/symfony/Config).
 
 Sekcije
 -------

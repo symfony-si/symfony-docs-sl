@@ -1,53 +1,59 @@
 .. index::
    single: Forms; Types Reference
 
-Referenca vrste obrazcev
-========================
+Form Types Reference
+====================
 
 .. toctree::
    :maxdepth: 1
    :hidden:
 
-   types/birthday
-   types/button
-   types/checkbox
-   types/choice
-   types/collection
-   types/country
-   types/currency
-   types/date
-   types/datetime
+   types/text
+   types/textarea
    types/email
-   types/entity
-   types/file
-   types/form
-   types/hidden
    types/integer
-   types/language
-   types/locale
    types/money
    types/number
    types/password
    types/percent
-   types/radio
-   types/repeated
-   types/reset
    types/search
-   types/submit
-   types/text
-   types/textarea
-   types/time
-   types/timezone
    types/url
 
-Obrazec je sestavljen iz *polj*, vsak od katerih je zgrajen s pomočjo
-*tipa* polja (npr. tip ``text``, tip ``choice`` itd.). Symfony2 prihaja
-standardno z velikim seznamom vrst polj, ki so lahko uporabljeni v vaši
-aplikaciji.
+   types/choice
+   types/entity
+   types/country
+   types/language
+   types/locale
+   types/timezone
+   types/currency
 
-Podprti tipi polj
------------------
+   types/date
+   types/datetime
+   types/time
+   types/birthday
 
-Sledeči tipi polj so originalno na voljo v Symfony2:
+   types/checkbox
+   types/file
+   types/radio
+
+   types/collection
+   types/repeated
+
+   types/hidden
+
+   types/button
+   types/reset
+   types/submit
+
+   types/form
+
+A form is composed of *fields*, each of which are built with the help of
+a field *type* (e.g. a ``text`` type, ``choice`` type, etc). Symfony2 comes
+standard with a large list of field types that can be used in your application.
+
+Supported Field Types
+---------------------
+
+The following field types are natively available in Symfony2:
 
 .. include:: /reference/forms/types/map.rst.inc

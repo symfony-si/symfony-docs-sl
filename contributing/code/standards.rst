@@ -58,11 +58,11 @@ ki vsebuje največ lastnosti opisanih spodaj:
         private function transformText($dummy, array $options = array())
         {
             $mergedOptions = array_merge(
-                $options,
                 array(
                     'some_default' => 'values',
                     'another_default' => 'more values',
-                )
+                ),
+                $options
             );
 
             if (true === $dummy) {

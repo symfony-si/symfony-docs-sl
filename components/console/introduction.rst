@@ -17,8 +17,8 @@ Namestitev
 
 Komponento lahko namestite na 2 različna načina:
 
-* Uporabite uradni Git repozitorij (https://github.com/symfony/Console);
-* :doc:`Namestitev preko Composer-ja </components/using_components>` (``symfony/console`` na `Packagist`_).
+* :doc:`Namestitev preko Composer-ja </components/using_components>` (``symfony/console`` na `Packagist`_);
+* Uporabite uradni Git repozitorij (https://github.com/symfony/Console).
 
 .. note::
 
@@ -396,6 +396,7 @@ orodja, zmožna vam pomagati pri različnih opravilih:
 * :doc:`/components/console/helpers/dialoghelper`: interaktivno vprašajte uporabnika za informacijo
 * :doc:`/components/console/helpers/formatterhelper`: prilagodite barve izpisa
 * :doc:`/components/console/helpers/progresshelper`: prikaže vrstico napredka
+* :doc:`/components/console/helpers/tablehelper`: prikaže tabularne podatke kot tabelo
 
 Ukazi za testiranje
 -------------------

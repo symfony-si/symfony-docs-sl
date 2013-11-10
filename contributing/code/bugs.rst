@@ -31,7 +31,7 @@ Pred pošiljanjem hrošča:
 * *(opcijsko)* Pripnite :doc:`popravek <patches>`.
 
 .. _dokumentacijo: http://symfony.com/doc/current/
-.. _uporabniškem dopisnem seznamu: http://groups.google.com/group/symfony-users
+.. _uporabniškem dopisnem seznamu: http://groups.google.com/group/symfony2
 .. _forumu: http://forum.symfony-project.org/
 .. _IRC kanalu: irc://irc.freenode.net/symfony
 .. _sledilnika: https://github.com/symfony/symfony/issues

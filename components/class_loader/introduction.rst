@@ -33,9 +33,9 @@ Namestitev
 
 Komponento lahko namestite na dva načina:
 
-* Uporabite uradni Git repozitorij (https://github.com/symfony/ClassLoader);
 * :doc:`Namestite jo preko Composer-ja </components/using_components>` (``symfony/class-loader``
   na `Packagist`_).
+* Uporabite uradni Git repozitorij (https://github.com/symfony/ClassLoader);
 
 .. _`mehanizem avtomatskega nalaganja`: http://php.net/manual/en/language.oop5.autoload.php
 .. _Packagist: https://packagist.org/packages/symfony/class-loader

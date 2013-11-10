@@ -22,7 +22,7 @@ Zahtevano
 * PHP mora biti minimalne verzije PHP 5.3.3
 * JSON mora biti omogočen
 * ctype mora biti omogočen
-* Vaš PHP.ini mora imeti date.timezone nastavitev
+* Vaš ``php.ini`` mora imeti date.timezone nastavitev
 
 Opcijsko
 --------
@@ -35,7 +35,7 @@ Opcijsko
 * POSIX mora biti omogočen (samo na \*nix)
 * Intl mora biti nameščen z ICU 4+
 * APC 3.0.17+ (ali drug opcode predpomnilnik cache mora biti nameščen)
-* PHP.ini priporočene nastavitve
+* ``php.ini`` priporočene nastavitve
 
   * ``short_open_tag = Off``
   * ``magic_quotes_gpc = Off``
