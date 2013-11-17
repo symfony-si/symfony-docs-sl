@@ -1,8 +1,8 @@
 .. index::
    pair: Monolog; Configuration reference
 
-Referenca nastavitev za Monolog
-===============================
+Nastavitve za Monolog ("monolog")
+=================================
 
 .. configuration-block::
 

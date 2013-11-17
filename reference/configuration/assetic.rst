@@ -1,8 +1,8 @@
 .. index::
    pair: Assetic; Configuration reference
 
-Referenca nastavitev za AsseticBundle
-=====================================
+Nastavitve za AsseticBundle ("assetic")
+=======================================
 
 Celotne privzete nastavitve
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~

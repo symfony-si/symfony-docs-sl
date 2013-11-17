@@ -13,6 +13,7 @@ Komponente
     dependency_injection/index
     dom_crawler
     event_dispatcher/index
+    expression_language/index
     filesystem
     finder
     form/index
@@ -27,6 +28,7 @@ Komponente
     serializer
     stopwatch
     templating/index
+    translation/index
     yaml/index
 
 .. include:: /components/map.rst.inc

@@ -84,6 +84,6 @@ Opcije
 message
 ~~~~~~~
 
-**tip**: ``string`` **privzeto**: ``This value should be blank``
+**tip**: ``string`` **privzeto**: ``This value should be blank.``
 
 To je sporočilo, ki bo prikazano, če vrednost ni prazna.

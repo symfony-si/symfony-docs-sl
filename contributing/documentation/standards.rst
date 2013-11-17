@@ -16,7 +16,7 @@ Sphinx
   okrajšavo);
 * Medvrstične hiperpovezave se **ne** uporablja. Ločena povezava in njena definicija
   cilja, ki jo dodate na konec strani.
-* Morali bi uporabljati obliko *vi* namesto *mi*.
+* Medvrstično označevanje bi moralo biti končano na isti vrstici, kjer je bilo začeto;
 
 Example
 ~~~~~~~
@@ -26,7 +26,7 @@ Example
     Example
     =======
 
-    When you are working on the docs, you should follow the `Symfony Docs`_
+    When you are working on the docs, you should follow the `Symfony Documentation`_
     standards.
 
     Level 2
@@ -43,12 +43,12 @@ Example
 
         echo 'You cannot use the :: shortcut here';
 
-    .. _`Symfony Docs`: http://symfony.com/doc/current/contributing/documentation/standards.html
+    .. _`Symfony Documentation`: http://symfony.com/doc/current/contributing/documentation/standards.html
 
 Primeri kode
 ------------
 
-* Koda sledi :doc:`Symfony kodmin standardom </contributing/code/standards>`
+* Koda sledi :doc:`Symfony kodnim standardom </contributing/code/standards>`
   kot tudi `Twig kodnim standardom`_;
 * Da se izognete horizontalnem pomikanju na blokih kode, raje prelomimo vrstico
   pravilno, če preseže 85 znakov;
@@ -60,6 +60,11 @@ Primeri kode
 * Opis zložene kode: (opcijsko)
   Če zložite nekaj vrstic: opis zlaganja je lahko postavljen za ``...``
   Če zlagate samo del vrstice: opis je lahko postavljen pred vrstico;
+* Če je za bralca uporabno, se bi moral primer PHP kode začeti z deklaracijo imenskega
+  prostora;
+* Pri sklicevanju razredov, poskrbite, da prikažete ``use`` stavke na
+  vrhu vašega bloka kode. Ne potrebujete prikazati *vseh* ``use`` stavkov
+  v vsakem primeru, samo prikažite, kaj se dejansko uporablja v bloku kode;
 * Če je uporabno ``codeblock`` bi se moral začeti s komentarjem, ki vključuje ime
   datoteke v bloku kode. Ne postavljajte prazne vrstice za tem komentarjem,
   razen če je naslednja vrstica tudi komentar;
@@ -82,8 +87,11 @@ Primer
 .. code-block:: php
 
     // src/Foo/Bar.php
+    namespace Foo;
 
+    use Acme\Demo\Cat;
     // ...
+
     class Bar
     {
         // ...
@@ -93,9 +101,11 @@ Primer
             // set foo with a value of bar
             $foo = ...;
 
+            $cat = new Cat($foo);
+
             // ... check if $bar has the correct value
 
-            return $foo->baz($bar, ...);
+            return $cat->baz($bar, ...);
         }
     }
 
@@ -104,5 +114,17 @@ Primer
     V Yaml bi morali postaviti presledek za ``{`` in pred ``}`` (npr. ``{ _controller: ... }``),
     vendar to ne bi smelo biti urejeno v Twig-u (npr.  ``{'hello' : 'value'}``).
 
+Standardi jezika
+----------------
+
+* Za sekcije uporabite sledeča pravila za rabo velikih začetnic:
+  `Raba velikih začetnic prve besede in vseh ostalih besed razen za besede zaprtih razredov`_:
+  The Vitamins are in my Fresh California Raisins
+* Ne uporabite t.i. `serifnih (Oxford) vejic`_;
+* Morali bi uporabiti obliko *vi* namesto *mi* (t.j. izogibanje prve osebe:
+  namesto tega uporabite drugo osebo).
+
 .. _`Sphinx dokumentacijo`: http://sphinx-doc.org/rest.html#source-code
 .. _`Twig kodnim standardom`: http://twig.sensiolabs.org/doc/coding_standards.html
+.. _`Raba velikih začetnic prve besede in vseh ostalih besed razen za besede zaprtih razredov`: http://en.wikipedia.org/wiki/Letter_case#Headings_and_publication_titles
+.. _`serifnih (Oxford) vejic`: http://en.wikipedia.org/wiki/Serial_comma

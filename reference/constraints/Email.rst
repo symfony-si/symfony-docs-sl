@@ -92,7 +92,7 @@ Opcije
 message
 ~~~~~~~
 
-**tip**: ``string`` **privzeto**: ``This value is not a valid email address``
+**tip**: ``string`` **privzeto**: ``This value is not a valid email address.``
 
 To sporočilo je prikazano, če osnoven podatek ni veljaven e-poštni naslov.
 

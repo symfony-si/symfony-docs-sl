@@ -63,7 +63,7 @@ uporabniku, izdelajte novo predlogo locirano v
 .. tip::
 
     Če niste seznanjeni s Twig-om, ne skrbite. Twig je enostaven, močan
-    in opcijski motor predlog, ki se integrira s ``Symfony2``. Za več informacij
+    in opcijski motor predlog, ki se integrira s Symfony2. Za več informacij
     o Twig-u glejte :doc:`/book/templating`.
 
 Kot dodatek standardnim HTML stranmi z napakami, Symfony ponuja privzeto stran

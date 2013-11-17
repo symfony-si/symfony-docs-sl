@@ -1,8 +1,8 @@
 .. index::
    pair: Twig; Configuration reference
 
-Referenca nastavitev za TwigBundle
-==================================
+Nastavitve za TwigBundle ("twig")
+=================================
 
 .. configuration-block::
 

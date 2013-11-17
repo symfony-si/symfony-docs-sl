@@ -123,7 +123,7 @@ Za več informacij o uporabljenih shemah, glejte `Wikipedia: Issuer identificati
 message
 ~~~~~~~
 
-**tip**: ``string`` **privzeto**: ``Unsupported card type or invalid card number``
+**tip**: ``string`` **privzeto**: ``Unsupported card type or invalid card number.``
 
 Sporočilo prikazano, ko vrednost ne opravi ``CardScheme`` preverjanja.
 

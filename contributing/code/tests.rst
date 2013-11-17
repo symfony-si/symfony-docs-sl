@@ -25,7 +25,7 @@ vrhnjim direktorijem (poglejte `autoload.php.dist`).
 Testna oprema potrebuje sledeče tretje-osebne knjižnice:
 
 * Doctrine
-* Swiftmailer
+* Swift Mailer
 * Twig
 * Monolog
 

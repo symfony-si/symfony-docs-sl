@@ -1,7 +1,7 @@
 .. index::
    single: Security; Configuration reference
 
-Referenca za nastavitve varnosti
+Nastavitve varnosti ("security")
 ================================
 
 Varnostni sistem je eden najmočnejših delov Symfony2 in je lahko

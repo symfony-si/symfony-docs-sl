@@ -1,5 +1,5 @@
 .. index::
-   single: Configuration reference; Swiftmailer
+   single: Configuration reference; Swift Mailer
 
 Nastavitve za SwiftmailerBundle ("swiftmailer")
 ===============================================
@@ -8,7 +8,7 @@ Ta referenčni dokument je delo v teku. Moral bi biti točen, vendar
 vse opcije niso še v celoti pokrite. Za celoten seznam privzetih opcij
 nastavitev, glejte `Celotne privzete nastavitve`_
 
-Ključ ``swiftmailer`` nastavlja Symfoyn-jevo integracijo s Swiftmailer,
+Ključ ``swiftmailer`` nastavlja Symfoyn-jevo integracijo s Swift Mailer,
 ki je odgovorna za izdelavo in dostavo e-pošnih sporočil.
 
 Nastavitve
@@ -100,8 +100,8 @@ type
 
 **tip**: ``string`` **privzeto**: ``file``
 
-Metoda uporabljena za zhranjevanje "spooled" sporočil. Trenutno je samo ``file`` podprt.
-Čeprav je možen spool po meri z izdelavo storitve
+Metoda uporabljena za zhranjevanje "spooled" sporočil. Veljavne vrednosti sta ``memory`` in
+``file``. Možen je spool po meri z izdelavo storitve
 ``swiftmailer.spool.myspool`` in nastavitve te vrednosti na ``myspool``.
 
 path
@@ -118,7 +118,7 @@ sender_address
 
 Če je nastavljen, bodo vsa sporočila dostavljena s tem naslovom kot "return path"
 naslov, kamor morajo iti odbita (bounced) sporočila. To je ravnano interno
-s Swiftmailer-jevim razredom ``Swift_Plugins_ImpersonatePlugin``.
+s Swift Mailer-jevim razredom ``Swift_Plugins_ImpersonatePlugin``.
 
 antiflood
 ~~~~~~~~~
@@ -165,7 +165,7 @@ logging
 
 **tip**: ``Boolean`` **privzeto**: ``%kernel.debug%``
 
-Če je true, bo Symfony-jev zbirnik podatkov aktiviran za Swiftmailer in
+Če je true, bo Symfony-jev zbirnik podatkov aktiviran za Swift Mailer in
 informacije na voljo v profiler-ju.
 
 Celotne privzete nastavitve

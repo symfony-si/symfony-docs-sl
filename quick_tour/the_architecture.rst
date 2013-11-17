@@ -182,7 +182,7 @@ PHP. Poglejte si privzete nastavitve:
             auto_generate_proxy_classes: "%kernel.debug%"
             auto_mapping: true
 
-    # Swiftmailer Configuration
+    # Swift Mailer Configuration
     swiftmailer:
         transport: "%mailer_transport%"
         host:      "%mailer_host%"
