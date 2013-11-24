@@ -86,7 +86,7 @@ Loader too. The default loaders are:
 * :class:`Symfony\\Component\\Translation\\Loader\\XliffFileLoader` - to load
   catalogs from Xliff files.
 * :class:`Symfony\\Component\\Translation\\Loader\\YamlFileLoader` - to load
-  catalogs from Yaml files (requires the :doc:`Yaml component</components/yaml>`).
+  catalogs from Yaml files (requires the :doc:`Yaml component</components/yaml/introduction>`).
 
 All file loaders require the :doc:`Config component</components/config/index>`.
 

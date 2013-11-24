@@ -34,7 +34,7 @@ Glossary
         *Paket* je direktorij, ki vsebuje skupek datotek (PHP datotek,
         stilskih datotek, JavaScript, slike, ...), ki *implementirajo* eno
         lastnost (blog, forum itd.). V Symfony2, se (*skoraj*) vse
-        nahaja znotraj paketa. (see :ref:`page-creating-bundles`)
+        nahaja znotraj paketa. (see :ref:`page-creation-bundles`)
 
    Prednji krmilnik
         *Prednji krmilnik* je hitra PHP skripa, ki se nahaja v web direktoriju
@@ -66,7 +66,7 @@ Glossary
         poglavju.
 
    HTTP Specifikacija
-        *Http Specifikacija*je dokument, ki opisuje Hypertext Transfer Protocol -
+        *Http Specifikacija* je dokument, ki opisuje Hypertext Transfer Protocol -
         skupek pravil, ki določajo klasično klient-strežnik zahtevek-odziv komunikacijo.
         Specifikacija definira obliko uporabljeno za zahtevek in odziv kot tudi možne
         HTTP glav, ki jih vsaka lahko vsebuje. Za več informacij, preberite

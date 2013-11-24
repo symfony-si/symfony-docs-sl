@@ -12,7 +12,7 @@ Konzolni pomočniki
     progresshelper
     tablehelper
 
-Komponente Console vsebujejo nekaj uporabnik pomočnikov (helpers). Te pomočniki
+Komponenta Console vsebuje nekaj uporabnih pomočnikov (helpers). Ti pomočniki
 vsebujejo funkcije za poenostavitev nekaterih pogostih opravil.
 
 .. include:: map.rst.inc

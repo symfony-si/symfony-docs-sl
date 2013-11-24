@@ -76,8 +76,8 @@ specificira izbire vašega widget-a.
 Opcije polja
 ------------
 
-izbire
-~~~~~~
+choices
+~~~~~~~
 
 **tip**: ``array`` **privzeto**: ``array()``
 

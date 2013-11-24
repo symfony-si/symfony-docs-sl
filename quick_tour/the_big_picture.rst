@@ -297,7 +297,7 @@ vrne vsebino JPG slike s ``Content-Type`` glavo iz ``image/jpg``.
 Ime predloge, ``AcmeDemoBundle:Welcome:index.html.twig``, je
 *logično ime* predloge in se sklicuje na ``Resources/views/Welcome/index.html.twig``
 datoteko znotraj ``AcmeDemoBundle`` (locirana v ``src/Acme/DemoBundle``).
-Sekcija  `Bundles`_ spodaj vam bo razložila zakaj je to uporabno.
+Sekcija  `Paketi`_ spodaj vam bo razložila zakaj je to uporabno.
 
 Sedaj pa ponovno poglejmo nastavitve usmerjanja in najdimo ``_demo``
 ključ:
