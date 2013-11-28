@@ -1,20 +1,20 @@
 .. index::
    single: Assetic; Image optimization
 
-How to Use Assetic For Image Optimization with Twig Functions
+Kako uporabiti Assetic za optimizacijo slik s Twig funkcijami
 =============================================================
 
-Amongst its many filters, Assetic has four filters which can be used for on-the-fly
-image optimization. This allows you to get the benefits of smaller file sizes
-without having to use an image editor to process each image. The results
-are cached and can be dumped for production so there is no performance hit
-for your end users.
+Med mnogimi filtri ima Assetic štiri, ki so lahko uporabljeni za takojšnjo
+optimizacijo slike. To vam omogoča, da dobite prednosti manjših velikosti datotek
+brez, da bi morali uporabiti urejevalnik slik za procesiranje vsake slike. Rezultati
+so predpomnjeni in so lahko odloženi za produkcijo, tako da ni udara na zmogljivost
+za vaše končne uporabnike.
 
-Using Jpegoptim
----------------
+Uporaba Jpegoptim-a
+-------------------
 
-`Jpegoptim`_ is a utility for optimizing JPEG files. To use it with Assetic,
-add the following to the Assetic config:
+`Jpegoptim`_ je orodje za optimizacijo JPEG datotek. Da ga uporabite z Assetic-om,
+dodajte sledeče v Assetic nastavitve:
 
 .. configuration-block::
 
@@ -48,10 +48,10 @@ add the following to the Assetic config:
 
 .. note::
 
-    Notice that to use jpegoptim, you must have it already installed on your
-    system. The ``bin`` option points to the location of the compiled binary.
+    Bodite pozorni, da za uporabo jpegoptim-a, ga morate že imeti nameščenega na vašem
+    sistemu. Opcija ``bin`` kaže na lokacijo prevedene binarne datoteke.
 
-It can now be used from a template:
+Sedaj je lahko uporabljen iz predloge:
 
 .. configuration-block::
 
@@ -71,12 +71,12 @@ It can now be used from a template:
             <img src="<?php echo $view->escape($url) ?>" alt="Example"/>
         <?php endforeach; ?>
 
-Removing all EXIF Data
-~~~~~~~~~~~~~~~~~~~~~~
+Odstranjevanje vseh EXIF podatkov
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-By default, running this filter only removes some of the meta information
-stored in the file. Any EXIF data and comments are not removed, but you can
-remove these by using the ``strip_all`` option:
+Privzeto poganjanje tega filtra samo odstrani nekatere meta informacije
+shranjene v datoteki. Kakršnikoli EXIF podatki in komentarji niso odstranjeni, vendar jih
+lahko odstranite z uporabo opcije ``strip_all``:
 
 .. configuration-block::
 
@@ -111,13 +111,13 @@ remove these by using the ``strip_all`` option:
             ),
         ));
 
-Lowering Maximum Quality
-~~~~~~~~~~~~~~~~~~~~~~~~
+Zmanjšanje največje kvalitete
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The quality level of the JPEG is not affected by default. You can gain
-further file size reductions by setting the max quality setting lower than
-the current level of the images. This will of course be at the expense of
-image quality:
+Nivo JPEG kvalitete privzeto ni pod vplivom. Lahko pridobite
+nadaljnja zmanjšanja velikosti datoteke z nastavitvijo največje velikosti
+manjše kot je trenutni nivo slik. To seveda bo na račun
+kvalitete slike:
 
 .. configuration-block::
 
@@ -152,12 +152,12 @@ image quality:
             ),
         ));
 
-Shorter syntax: Twig Function
------------------------------
+Krajša sintaksa: Twig funkcija
+------------------------------
 
-If you're using Twig, it's possible to achieve all of this with a shorter
-syntax by enabling and using a special Twig function. Start by adding the
-following config:
+Če uporabljate Twig, je možno doseči vse to s krajšo
+sintakso z omogočenjem in uporabo posebne Twig funkcije. Začnite z dodajanjem
+sledečih nastavitev:
 
 .. configuration-block::
 
@@ -200,13 +200,13 @@ following config:
             ),
         ));
 
-The Twig template can now be changed to the following:
+Twig predloga je sedaj lahko spremenjena na sledeče:
 
 .. code-block:: html+jinja
 
     <img src="{{ jpegoptim('@AcmeFooBundle/Resources/public/images/example.jpg') }}" alt="Example"/>
 
-You can specify the output directory in the config in the following way:
+Lahko določite izhodni direktorij v nastavitvah na sledeči način:
 
 .. configuration-block::
 

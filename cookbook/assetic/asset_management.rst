@@ -1,18 +1,18 @@
 .. index::
    single: Assetic; Introduction
 
-How to Use Assetic for Asset Management
-=======================================
+Kako uporabiti Assetic za upravljanje s sredstvi
+================================================
 
-Assetic combines two major ideas: :ref:`assets <cookbook-assetic-assets>` and
-:ref:`filters <cookbook-assetic-filters>`. The assets are files such as CSS,
-JavaScript and image files. The filters are things that can be applied to
-these files before they are served to the browser. This allows a separation
-between the asset files stored in the application and the files actually presented
-to the user.
+Assetic združuje dve glavni ideji: :ref:`sredstva <cookbook-assetic-assets>` in
+:ref:`filtre <cookbook-assetic-filters>`. Sredstva so datoteke kot so CSS,
+JavaScript in slike. Filtri so stvari, ki jih je mogoče uporabiti na
+teh datotekah preden so poslana brskalniku. To omogoča ločitev
+med datotekami sredstev shranjenimi v aplikaciji in datotekami dejansko predstavljenimi
+uporabniku.
 
-Without Assetic, you just serve the files that are stored in the application
-directly:
+Brez Assetic-a samo pošiljate datoteke shranjene v aplikaciji
+direktno:
 
 .. configuration-block::
 
@@ -24,37 +24,37 @@ directly:
 
         <script src="<?php echo $view['assets']->getUrl('js/script.js') ?>" type="text/javascript"></script>
 
-But *with* Assetic, you can manipulate these assets however you want (or
-load them from anywhere) before serving them. This means you can:
+Vendar *z* Assetic-om lahko upravljate ta sredstva, kakor želite (ali
+jih naložite iz kjerkoli) preden jih pošljete. To pomeni, da lahko:
 
-* Minify and combine all of your CSS and JS files
+* Minimirate ali združite vse vaše CSS in JS datoteke
 
-* Run all (or just some) of your CSS or JS files through some sort of compiler,
-  such as LESS, SASS or CoffeeScript
+* Poženete vse (ali samo nekatere) vaših CSS ali JS datotek skozi neke vrste prevajalnik,
+  kot je LESS, SASS ali CoffeeScript
 
-* Run image optimizations on your images
+* Poženete optimizacije slik na vaših slikah
 
 .. _cookbook-assetic-assets:
 
-Assets
-------
+Sredstva
+--------
 
-Using Assetic provides many advantages over directly serving the files.
-The files do not need to be stored where they are served from and can be
-drawn from various sources such as from within a bundle.
+Uporaba Assetic-a ponuja mnoge prednosti pred direktnim pošiljanjem datotek.
+Datoteke niso nujno shranjene, iz kjer so poslane in so lahko
+potegnjene iz različnih virov kot na primer iz paketa.
 
-You can use Assetic to process both :ref:`CSS stylesheets <cookbook-assetic-including-css>`
-and :ref:`JavaScript files <cookbook-assetic-including-javascript>`. The philosophy
-behind adding either is basically the same, but with a slightly different syntax.
+Lahko uporabite Assetic za procesiranje tako :ref:`CSS stilov <cookbook-assetic-including-css>`
+in :ref:`JavaScript datotek <cookbook-assetic-including-javascript>`. Filozofija
+za dodajanje katerihkoli je v osnovi enaka, vendar z malenkost drugačno sintakso.
 
 .. _cookbook-assetic-including-javascript:
 
-Including JavaScript Files
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Vključevanje JavaScript datotek
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To include JavaScript files, use the ``javascript`` tag in any template.
-This will most commonly live in the ``javascripts`` block, if you're using
-the default block names from the Symfony Standard Distribution:
+Da vključite JavaScript datoteke, uporabite ``javascript`` značko v katerikoli predlogi.
+To se bo najpogosteje nahajalo v ``javascripts`` bloku, če uporabljate
+privzeta imena blokov iz Symfony standardne distribucije:
 
 .. configuration-block::
 
@@ -74,29 +74,29 @@ the default block names from the Symfony Standard Distribution:
 
 .. tip::
 
-    You can also include CSS Stylesheets: see :ref:`cookbook-assetic-including-css`.
+    Lahko tudi vključite CSS stile: glejte :ref:`cookbook-assetic-including-css`.
 
-In this example, all of the files in the ``Resources/public/js/`` directory
-of the ``AcmeFooBundle`` will be loaded and served from a different location.
-The actual rendered tag might simply look like:
+V tem primeru, bodo vse datoteke v ``Resources/public/js/`` direktoriju
+paketa ``AcmeFooBundle`` naložene in poslane iz različne lokacije.
+Dejanska izpisana značka lahko enostavno zgleda kot:
 
 .. code-block:: html
 
     <script src="/app_dev.php/js/abcd123.js"></script>
 
-This is a key point: once you let Assetic handle your assets, the files are
-served from a different location. This *will* cause problems with CSS files
-that reference images by their relative path. See :ref:`cookbook-assetic-cssrewrite`.
+To je ključna točka: enkrat ko dovolite Assetic-u upravljati z vašimi sredstvi, so datoteke
+poslane iz različne lokacije To *bo* povzročilo probleme s CSS datotekami,
+ki se sklicujejo na slike iz njihove relativne poti. Glejte :ref:`cookbook-assetic-cssrewrite`.
 
 .. _cookbook-assetic-including-css:
 
-Including CSS Stylesheets
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Vključevanje CSS stilov
+~~~~~~~~~~~~~~~~~~~~~~~
 
-To bring in CSS stylesheets, you can use the same methodologies seen
-above, except with the ``stylesheets`` tag. If you're using the default
-block names from the Symfony Standard Distribution, this will usually live
-inside a ``stylesheets`` block:
+Da vključite CSS stile, lahko uporabite enako metadologijo prikazano
+zgoraj, razen z značko ``stylesheets``. Če uporabljate privzeta
+imena blokov iz Symfony standardne distribucije, se bo to običajno nahajalo
+v bloku ``stylesheets``.
 
 .. configuration-block::
 
@@ -115,45 +115,45 @@ inside a ``stylesheets`` block:
             <link rel="stylesheet" href="<?php echo $view->escape($url) ?>" />
         <?php endforeach; ?>
 
-But because Assetic changes the paths to your assets, this *will* break any
-background images (or other paths) that uses relative paths, unless you use
-the :ref:`cssrewrite <cookbook-assetic-cssrewrite>` filter.
+Vendar ker Assetic spremeni poti do vaših sredstev, *bo* to pokvarilo kakršnekoli
+slike ozadij (ali druge poti), ki uporabljajo relativne poti, razen, če uporabite
+filter :ref:`cssrewrite <cookbook-assetic-cssrewrite>`.
 
 .. note::
 
-    Notice that in the original example that included JavaScript files, you
-    referred to the files using a path like ``@AcmeFooBundle/Resources/public/file.js``,
-    but that in this example, you referred to the CSS files using their actual,
-    publicly-accessible path: ``bundles/acme_foo/css``. You can use either, except
-    that there is a known issue that causes the ``cssrewrite`` filter to fail
-    when using the ``@AcmeFooBundle`` syntax for CSS Stylesheets.
+    Bodite pozorni, da se v originalnem primeru, ki vključuje JavaScript datoteke,
+    sklicujete na datoteeke z uporabo poti, kot je ``@AcmeFooBundle/Resources/public/file.js``,
+    vendar v tem primeru se sklicujete na CSS datoteke z uporabo njihove dejanske
+    javno dostopne poti: ``bundles/acme_foo/css``. Lahko uporabite katerikoli način, s tem
+    da obstaja znana težava, ki povzroča da filter ``cssrewrite`` ne deluje,
+    ko se uporablja ``@AcmeFooBundle`` sintakso za CSS stile.
 
 .. _cookbook-assetic-cssrewrite:
 
-Fixing CSS Paths with the ``cssrewrite`` Filter
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Popravljanje CSS poti s filtrom ``cssrewrite``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Since Assetic generates new URLs for your assets, any relative paths inside
-your CSS files will break. To fix this, make sure to use the ``cssrewrite``
-filter with your ``stylesheets`` tag. This parses your CSS files and corrects
-the paths internally to reflect the new location.
+Ker Assetic generira nove URL-je za vaša sredstva, se bodo kakršnekoli poti znotraj
+vaših CSS datotek pokvarile. Da to popravite, preverite, da uporabljate filter
+``cssrewrite`` z vašo značko ``stylesheets``. To izpiše vaše CSS datoteke in popravi
+poti interno, da odražajo nove lokacije.
 
-You can see an example in the previous section.
+Lahko preverite primer v prejšnji sekciji.
 
 .. caution::
 
-    When using the ``cssrewrite`` filter, don't refer to your CSS files using
-    the ``@AcmeFooBundle`` syntax. See the note in the above section for details.
+    Ko uporavljate filter ``cssrewrite``, se ne sklicujte na vaše CSS datoteke z uporabo
+    ``@AcmeFooBundle`` sintakse. Za podrobnosti glejte opozorilo v zgornji sekciji.
 
-Combining Assets
-~~~~~~~~~~~~~~~~
+Združevanje sredstev
+~~~~~~~~~~~~~~~~~~~~
 
-One feature of Assetic is that it will combine many files into one. This helps
-to reduce the number of HTTP requests, which is great for front end performance.
-It also allows you to maintain the files more easily by splitting them into
-manageable parts. This can help with re-usability as you can easily split
-project-specific files from those which can be used in other applications,
-but still serve them as a single file:
+Ena lastnost Assetic-a je, da združi mnogo datotek v eno. To pomaga
+zmanjšati število HTTP zahtevkov, kar je odlično za uspešnost ospredja aplikacije.
+Tudi omogoča vam, da vzdržujete datoteke bolj enostavno s cepitvijo njih v
+obvladljive dele. To lahko pomaga s ponovno uporabnostjo, saj lahko enostavno
+razcepite datoteke specifične za projekt iz tistih, ki so lahko uporabljene v drugih aplikacijah,
+vendar jih še vedno pošljete kot eno datoteko:
 
 .. configuration-block::
 
@@ -178,21 +178,21 @@ but still serve them as a single file:
             <script src="<?php echo $view->escape($url) ?>"></script>
         <?php endforeach; ?>
 
-In the ``dev`` environment, each file is still served individually, so that
-you can debug problems more easily. However, in the ``prod`` environment
-(or more specifically, when the ``debug`` flag is ``false``), this will be
-rendered as a single ``script`` tag, which contains the contents of all of
-the JavaScript files.
+V ``dev`` okolju, vsaka datoteka je še vedno poslana individualno, da
+lahko razhroščujete probleme bolj enostavno. Čeprav v ``prod`` okolju
+(ali bolj specifično, ko je zastavica ``debug`` nastavljena na ``false``), bo to
+izpisano kot ena značka ``script``, kar vključuje vsebino vseh
+JavaScript datotek.
 
 .. tip::
 
-    If you're new to Assetic and try to use your application in the ``prod``
-    environment (by using the ``app.php`` controller), you'll likely see
-    that all of your CSS and JS breaks. Don't worry! This is on purpose.
-    For details on using Assetic in the ``prod`` environment, see :ref:`cookbook-assetic-dumping`.
+    Če ste novi v Assetic-u in poskušate uporabiti vašo aplikacijo v ``prod``
+    okolju (z uporabo ``app.php`` krmilnika), boste po vsej verjetnosti videli
+    vse tiste vaše CSS in JS napake. Ne skrbite! To je namenoma.
+    Za podrobnosti, kako uporabljati Assetic v ``prod`` okolju, glejte :ref:`cookbook-assetic-dumping`.
 
-And combining files doesn't only apply to *your* files. You can also use Assetic to
-combine third party assets, such as jQuery, with your own into a single file:
+In združevanje datotek ni samo uporabno za *vaše* datoteke. Assetic lahko uporabite tudi za
+združevanje tretje osebnih sredstev, kot je jQuery z vašimi lastnimi v eno datoteko:
 
 .. configuration-block::
 
@@ -217,29 +217,29 @@ combine third party assets, such as jQuery, with your own into a single file:
 
 .. _cookbook-assetic-filters:
 
-Filters
--------
+Filtri
+------
 
-Once they're managed by Assetic, you can apply filters to your assets before
-they are served. This includes filters that compress the output of your assets
-for smaller file sizes (and better front-end optimization). Other filters
-can compile JavaScript file from CoffeeScript files and process SASS into CSS.
-In fact, Assetic has a long list of available filters.
+Ko so enkrat upravljana z Assetic-om, lahko uporabite filtre na vaših sredstvih, preden
+jih pošljete. To vključuje filtre, ki stisnejo izpis vaših sredstev
+za manjše velikosti datotek (in boljšo optimizacijo ospredja). Ostali filtri
+lahko prevedejo JavaScript datoteko iz CoffeeScript datotek in procesirajo SASS v CSS.
+V bistvu ima Assetic dolg seznam filtrov, ki so na voljo.
 
-Many of the filters do not do the work directly, but use existing third-party
-libraries to do the heavy-lifting. This means that you'll often need to install
-a third-party library to use a filter.  The great advantage of using Assetic
-to invoke these libraries (as opposed to using them directly) is that instead
-of having to run them manually after you work on the files, Assetic will
-take care of this for you and remove this step altogether from your development
-and deployment processes.
+Mnogi filtri ne delujejo direktno, vendar uporabljajo tretje osebne
+knjižnice, da opravijo težko delo. To pomeni, da boste pogosto potrebovali namestiti
+tretje osebno knjižnico za uporabo filtra. Ta odlična prednost uporabe Assetic-a,
+da se sklicuje na te knjižnice (z razliko od direktne uporabe) je, da namesto,
+da jih poganjate ročno, ko delate na datotekah, bo Assetic za to poskrbel
+namesto vas in v celoti odstranil ta korak iz vašega razvojnega in postavitvenega
+procesa.
 
-To use a filter, you first need to specify it in the Assetic configuration.
-Adding a filter here doesn't mean it's being used - it just means that it's
-available to use (you'll use the filter below).
+Za uporabo filtra ga morate najprej določiti v Assetic nastavitvah.
+Dodajanje filtra tu ne pomeni, da je v uporabi, samo pomeni, da je
+na voljo za uporabo (filter boste uporabili spodaj).
 
-For example to use the JavaScript YUI Compressor the following config should
-be added:
+Na primer za uporabo JavaScript YUI Compressor-ja je potrebno dodati
+sledeče nastavitve:
 
 .. configuration-block::
 
@@ -271,8 +271,8 @@ be added:
             ),
         ));
 
-Now, to actually *use* the filter on a group of JavaScript files, add it
-into your template:
+Sedaj za dejansko *uporabo* filtra na skupini JavaScript datotek, ga dodajte
+v vašo predlogo:
 
 .. configuration-block::
 
@@ -291,14 +291,15 @@ into your template:
             <script src="<?php echo $view->escape($url) ?>"></script>
         <?php endforeach; ?>
 
-A more detailed guide about configuring and using Assetic filters as well as
-details of Assetic's debug mode can be found in :doc:`/cookbook/assetic/yuicompressor`.
+Bolj podroben vodič o nastavitvah in uporabi filtrov Assetic-a kot tudi
+podrobnosti o Assetic-ovem razhroščevalnem načinu, je moč najti v
+:doc:`/cookbook/assetic/yuicompressor`.
 
-Controlling the URL used
-------------------------
+Krmiljenje uporabljenega URL-ja
+-------------------------------
 
-If you wish to, you can control the URLs that Assetic produces. This is
-done from the template and is relative to the public document root:
+Če želite, lahko krmilite URL-je, ki jih Assetic proizvede. To je
+narejeno v predlogi in je relativno glede na javni vrhnji dokumentni direktorij:
 
 .. configuration-block::
 
@@ -320,68 +321,68 @@ done from the template and is relative to the public document root:
 
 .. note::
 
-    Symfony also contains a method for cache *busting*, where the final URL
-    generated by Assetic contains a query parameter that can be incremented
-    via configuration on each deployment. For more information, see the
-    :ref:`ref-framework-assets-version` configuration option.
+    Symfony tudi vsebuje metodo za *praznjenje* predpomnilnika, kjer končni URL
+    generiran s strani Assetic-a vsebuje parameter poizvedbe, ki je lahko povečan
+    preko nastavitev pri vsaki postavitvi. Za več informacij glejte
+    :ref:`ref-framework-assets-version` nastavitveno opcijo.
 
 .. _cookbook-assetic-dumping:
 
-Dumping Asset Files
--------------------
+Odlaganje datotek sredstev
+--------------------------
 
-In the ``dev`` environment, Assetic generates paths to CSS and JavaScript
-files that don't physically exist on your computer. But they render nonetheless
-because an internal Symfony controller opens the files and serves back the
-content (after running any filters).
+V ``dev`` okolju, Assetic generira poti do CSS in JavaScript
+datotek, ki fizično ne obstajajo na vašem računalniku. Vendar so kljub temu izpisane,
+ker interni Symfony krmilnik odpre datoteke in ponudi nazaj
+vsebino (po pogoniu katerihkoli filtrov).
 
-This kind of dynamic serving of processed assets is great because it means
-that you can immediately see the new state of any asset files you change.
-It's also bad, because it can be quite slow. If you're using a lot of filters,
-it might be downright frustrating.
+Ta način dinamičnega ponujanja procesiranih sredstev je odličen, ker to pomeni,
+da lahko takoj vidite novo stanje katerekoli datoteke sredstva, ki jo spremenite.
+Je tudi slabo, ker je lahko precej počasno. Če uporabljate veliko filtrov,
+je lahko zelo frustrirajoče.
 
-Fortunately, Assetic provides a way to dump your assets to real files, instead
-of being generated dynamically.
+Na srečo Assetic ponuja način odlaganja vaših sredstev v realne datoteke namesto,
+da so generirane dinamično.
 
-Dumping Asset Files in the ``prod`` environment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Odlaganje datotek sredstev v ``prod`` okolju
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In the ``prod`` environment, your JS and CSS files are represented by a single
-tag each. In other words, instead of seeing each JavaScript file you're including
-in your source, you'll likely just see something like this:
+V ``prod`` okolju so vaše JS in CSS datoteke predstavljene vsaka kot ena
+značka. V drugih besedah namesto, da vidite vsako JavaScript datoteko, ki jo vključujete
+v vaši izvorni kodi, boste verjetneje videli samo nekaj takega:
 
 .. code-block:: html
 
     <script src="/app_dev.php/js/abcd123.js"></script>
 
-Moreover, that file does **not** actually exist, nor is it dynamically rendered
-by Symfony (as the asset files are in the ``dev`` environment). This is on
-purpose - letting Symfony generate these files dynamically in a production
-environment is just too slow.
+Poleg tega ta datoteka **ne** obstaja dejansko, niti ni dinamično izpisana
+od Symfony-ja (kakor so datoteke sredstev v ``dev`` okolju). To je
+namenoma - omogoča Symfony-ju generiranje teh datotek dinamično v produkcijskem
+okolju je samo preveč počasno.
 
 .. _cookbook-asetic-dump-prod:
 
-Instead, each time you use your app in the ``prod`` environment (and therefore,
-each time you deploy), you should run the following task:
+Namesto da vsakič uporabite vašo aplikacijo v ``prod`` okolju (in zato
+vsakič, ko postavljate), bi morali pognati sledeče opravilo:
 
 .. code-block:: bash
 
     $ php app/console assetic:dump --env=prod --no-debug
 
-This will physically generate and write each file that you need (e.g. ``/js/abcd123.js``).
-If you update any of your assets, you'll need to run this again to regenerate
-the file.
+To bo fizično generiralo in zapisalo vsako datoteko, ki jo potrebujete (npr. ``/js/abcd123.js``).
+Če posodobite katerokoli od vaših sredstev, boste potrebovali pognati to ponovno za
+ponovno generariranje datoteke.
 
-Dumping Asset Files in the ``dev`` environment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Odlaganje datotek sredstev v ``dev`` okolju
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-By default, each asset path generated in the ``dev`` environment is handled
-dynamically by Symfony. This has no disadvantage (you can see your changes
-immediately), except that assets can load noticeably slow. If you feel like
-your assets are loading too slowly, follow this guide.
+Privzeto vsaka pot sredstva generirana v ``dev`` okolju je upravljana
+dinamično v Symfony-ju. To nima slabosti (lahko vidite vaše spremembe
+takoj), razen da se sredstva nalagajo očitno počasneje. Če menite,
+da se vaša sredstva nalagajo preveč počasno, sledite temu vodiču.
 
-First, tell Symfony to stop trying to process these files dynamically. Make
-the following change in your ``config_dev.yml`` file:
+Najprej povejte Symfony-ju, da prenega poskušati procesirati te datoteke dinamično. Naredite
+sledeče spremembe v vaši ``config_dev.yml`` datoteki:
 
 .. configuration-block::
 
@@ -403,25 +404,25 @@ the following change in your ``config_dev.yml`` file:
             'use_controller' => false,
         ));
 
-Next, since Symfony is no longer generating these assets for you, you'll
-need to dump them manually. To do so, run the following:
+Nadaljnje, ker Symfony ne generira več teh sredstev za vas, jih boste
+morali odložiti ročno. Da to naredite, poženite sledeče:
 
 .. code-block:: bash
 
     $ php app/console assetic:dump
 
-This physically writes all of the asset files you need for your ``dev``
-environment. The big disadvantage is that you need to run this each time
-you update an asset. Fortunately, by passing the ``--watch`` option, the
-command will automatically regenerate assets *as they change*:
+To fizično zapiše vse datoteke sredstev, ki jih potrebujete za vaše ``dev``
+okolje. Glavna slabost je, da morate poganjati to vsakič,
+ko posodobite sredstvo. Na srečo, s podajanjem opcije ``--watch``, bo
+ukaz avtomatsko ponovno generiral sredstva, *ko se spremenijo*:
 
 .. code-block:: bash
 
     $ php app/console assetic:dump --watch
 
-Since running this command in the ``dev`` environment may generate a bunch
-of files, it's usually a good idea to point your generated assets files to
-some isolated directory (e.g. ``/js/compiled``), to keep things organized:
+Ker poganjanje tega ukaza v ``dev`` okolju lahko generira precej
+datotek, je običajno dobra ideja, da pokažete vaše generirane datoteke sredstev
+v nek izoliran direktorij (npr. ``/js/compiled``), da so stvari organizirane:
 
 .. configuration-block::
 

@@ -1,30 +1,30 @@
 .. index::
    single: Assetic; YUI Compressor
 
-How to Minify JavaScripts and Stylesheets with YUI Compressor
-=============================================================
+Kako zmanjšati datoteke JavaScript in stile z YUI Compressor
+============================================================
 
-Yahoo! provides an excellent utility for minifying JavaScripts and stylesheets
-so they travel over the wire faster, the `YUI Compressor`_. Thanks to Assetic,
-you can take advantage of this tool very easily.
+Yahoo! ponuja odlično orodje za zmanjšanje JavaScript in stilskih datotek,
+da potujejo po žicah hitreje, t.i. `YUI Compressor`_. Zahvaljujoč Assetic-u,
+lahko uporabite prednosti tega orodja zelo enostavno.
 
 .. caution::
 
-    The YUI Compressor is going through a `deprecation process`_. But don't
-    worry! See :doc:`/cookbook/assetic/uglifyjs` for an alternative.
+    YUI Compressor gre skozi t.i. `deprecation process`_. Vendar ne
+    skrbite! Glejte :doc:`/cookbook/assetic/uglifyjs` za alternativo.
 
-Download the YUI Compressor JAR
--------------------------------
+Prenesite YUI Compressor JAR
+----------------------------
 
-The YUI Compressor is written in Java and distributed as a JAR. `Download the JAR`_
-from the Yahoo! site and save it to ``app/Resources/java/yuicompressor.jar``.
+YUI Compressor je napisan v Javi in distribuiran kot JAR. `Prenesite JAR`_
+iz Yahoo! strani in ga shranite v ``app/Resources/java/yuicompressor.jar``.
 
-Configure the YUI Filters
--------------------------
+Nastavite YUI filtre
+--------------------
 
-Now you need to configure two Assetic filters in your application, one for
-minifying JavaScripts with the YUI Compressor and one for minifying
-stylesheets:
+Sedaj lahko nastavite dva Assetic filtra v vaši aplikaciji, enega za
+zmanjšanje JavaScript-a z YUI Compressor-jem in enega za zmanjšanje
+stilov:
 
 .. configuration-block::
 
@@ -68,19 +68,19 @@ stylesheets:
 
 .. note::
 
-    Windows users need to remember to update config to proper java location.
-    In Windows7 x64 bit by default it's ``C:\Program Files (x86)\Java\jre6\bin\java.exe``.
+    Windows uporabniki si morajo posodobiti nastavitve na ustrezno java lokacijo.
+    V Windows7 x64 bit je privzeto ``C:\Program Files (x86)\Java\jre6\bin\java.exe``.
 
-You now have access to two new Assetic filters in your application:
-``yui_css`` and ``yui_js``. These will use the YUI Compressor to minify
-stylesheets and JavaScripts, respectively.
+Sedaj imate dostop do dveh novih Assetic filtrov v vaši aplikaciji:
+``yui_css`` in ``yui_js``. Ta bosta uporabljala YUI Compressor za ustrezno zmanjšanje
+stilov in JavaScript-a.
 
-Minify your Assets
-------------------
+Zmanjšajte vaša sredstva
+------------------------
 
-You have YUI Compressor configured now, but nothing is going to happen until
-you apply one of these filters to an asset. Since your assets are a part of
-the view layer, this work is done in your templates:
+Sedaj imate YUI Compressor nastavljen, vendar nič se ne bo zgodilo dokler
+ne uporabite enega od teh filtrov na sredstvu. Ker so vaša sredstva del
+nivoja pogleda, bo to urejeno v vaših predlogah:
 
 .. configuration-block::
 
@@ -101,14 +101,14 @@ the view layer, this work is done in your templates:
 
 .. note::
 
-    The above example assumes that you have a bundle called ``AcmeFooBundle``
-    and your JavaScript files are in the ``Resources/public/js`` directory under
-    your bundle. This isn't important however - you can include your JavaScript
-    files no matter where they are.
+    Zgornji primer predpostavlja, da imate paket imenovan ``AcmeFooBundle``
+    in vaše JavaScript datoteke so v ``Resources/public/js`` direktoriju pod
+    vašim paketom. To ni pomembno vendar - lahko vključite vaše JavaScript
+    datoteke ne glede na to, kje so.
 
-With the addition of the ``yui_js`` filter to the asset tags above, you should
-now see minified JavaScripts coming over the wire much faster. The same process
-can be repeated to minify your stylesheets.
+Z dodatkom filtra ``yui_js`` na znački sredstva zgoraj, bi morali
+sedaj videti zmanjšani JavaScript prihajajoč po žici veliko hitreje. Enak proces
+se lahko ponovi za zmanjšanje vaših stilov.
 
 .. configuration-block::
 
@@ -127,14 +127,14 @@ can be repeated to minify your stylesheets.
             <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $view->escape($url) ?>" />
         <?php endforeach; ?>
 
-Disable Minification in Debug Mode
-----------------------------------
+Onemogočite zmanjšanje v razhroščevalnem načinu
+-----------------------------------------------
 
-Minified JavaScripts and Stylesheets are very difficult to read, let alone
-debug. Because of this, Assetic lets you disable a certain filter when your
-application is in debug mode. You can do this by prefixing the filter name
-in your template with a question mark: ``?``. This tells Assetic to only
-apply this filter when debug mode is off.
+Zmanjšane JavaScript datoteke in stili se zelo težko bere, kaj šele
+razhroščuje. Zaradi tega vam Assetic omogoča onemogočiti določen filter, ko je
+vaša aplikacija v razhroščevalnem načinu. To lahko storite z dodajanjem predpone
+imenu filtra v vaši predlogi z vprašajem: ``?``. To pove Assetic-u, da naj
+uporabi ta filter samo, ko je razhroščevalni način onemogočen.
 
 .. configuration-block::
 
@@ -155,13 +155,13 @@ apply this filter when debug mode is off.
 
 .. tip::
 
-    Instead of adding the filter to the asset tags, you can also globally
-    enable it by adding the apply-to attribute to the filter configuration, for
-    example in the yui_js filter ``apply_to: "\.js$"``. To only have the filter
-    applied in production, add this to the config_prod file rather than the
-    common config file. For details on applying filters by file extension,
-    see :ref:`cookbook-assetic-apply-to`.
+    Namesto dodajanja filtra k značkam sredstev, ga lahko tudi globalno
+    omogočite z dodatkom t.i. apply-to-attribute v nastavitvah filtra, na primer
+    v filtru yui_js ``apply_to: "\.js$"``. Da imate samo filter
+    uporabljen v produkciji, dodajte to v config_prod datoteko namesto v skupno
+    config datoteko. Za podrobnosti o uporabi filtrov glede na končnico datoteke,
+    glejte :ref:`cookbook-assetic-apply-to`.
 
 .. _`YUI Compressor`: http://developer.yahoo.com/yui/compressor/
-.. _`Download the JAR`: http://yuilibrary.com/projects/yuicompressor/
+.. _`Prenesite JAR`: http://yuilibrary.com/projects/yuicompressor/
 .. _`deprecation process`: http://www.yuiblog.com/blog/2012/10/16/state-of-yui-compressor/

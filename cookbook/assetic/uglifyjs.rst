@@ -1,37 +1,37 @@
 .. index::
    single: Assetic; UglifyJs
 
-How to Minify CSS/JS Files (using UglifyJs and UglifyCss)
-=========================================================
+Kako zmanjšati CSS/JS datoteke (z uporabo UglifyJs in UglifyCss)
+================================================================
 
-`UglifyJs`_ is a JavaScript parser/compressor/beautifier toolkit. It can be used
-to combine and minify JavaScript assets so that they require less HTTP requests
-and make your site load faster. `UglifyCss`_ is a css compressor/beautifier
-that is very similar to UglifyJs.
+`UglifyJs`_ je JavaScript prevajalno/stiskalno/olepševalno orodje. Lahko je uporabljen
+za združevanje in zmanjšanje JavaScript sredstev, da se porablja manj HTTP zahtevkov
+in da se vaša stran naloži hitreje. `UglifyCss`_ je css stiskalnik/olepševalnik,
+ki je zelo podoben UglifyJs.
 
-In this cookbook, the installation, configuration and usage of UglifyJs is
-shown in detail. ``UglifyCss`` works pretty much the same way and is only
-talked about briefly.
+V tem receptu je namestitev, nastavitev in uporaba UglifyJs
+prikazana podrobneje. ``UglifyCss`` deluje na precej podoben način in je
+predstavljen samo na kratko.
 
-Install UglifyJs
-----------------
+Namestitev UglifyJs
+-------------------
 
-UglifyJs is available as an `Node.js`_ npm module and can be installed using
-npm. First, you need to `install node.js`_. Afterwards you can install UglifyJs
-using npm:
+UglifyJs je na voljo kot `Node.js`_ npm modul in se ga lahko namesti z uporabo
+npm. Najprej morate `namestiti node.js`_. Potem lahko namestite UglifyJs
+z uporabo npm:
 
 .. code-block:: bash
 
     $ npm install -g uglify-js
 
-This command will install UglifyJs globally and you may need to run it as
-a root user.
+Ta ukaz bo namestil UglifyJs globalno in lahko da ga boste potrebovali pognati
+kot vrhovni (root) uporabnik.
 
 .. note::
 
-    It's also possible to install UglifyJs inside your project only. To do
-    this, install it without the ``-g`` option and specify the path where
-    to put the module:
+    Možno je tudi namestiti UglifyJs samo znotraj vašega projekta. Da to naredite,
+    ga namestite brez opcije ``-g`` in določite pot, kamor
+    se doda modul:
 
     .. code-block:: bash
 
@@ -39,14 +39,14 @@ a root user.
         $ mkdir app/Resources/node_modules
         $ npm install uglify-js --prefix app/Resources
 
-    It is recommended that you install UglifyJs in your ``app/Resources`` folder
-    and add the ``node_modules`` folder to version control. Alternatively,
-    you can create an npm `package.json`_ file and specify your dependencies
-    there.
+    Priporočljivo je, da namestite UglifyJs v vaš ``app/Resources`` direktorij
+    in dodate ``node_modules`` direktorij v kontrolo verzij. Alternativno
+    lahko ustvarite npm `package.json`_ datoteko in določite vaše odvisnosti
+    tam.
 
-Depending on your installation method, you should either be able to execute
-the ``uglifyjs`` executable globally, or execute the physical file that lives
-in the ``node_modules`` directory:
+Odvisno od vaše namestitvene metode bi morali ali uspeti pognati
+``uglifyjs`` pogonski ukaz globalno, ali pognati fizično datoteko, ki se nahaja
+v ``node_modules`` direktoriju:
 
 .. code-block:: bash
 
@@ -54,11 +54,11 @@ in the ``node_modules`` directory:
 
     $ ./app/Resources/node_modules/.bin/uglifyjs --help
 
-Configure the uglifyjs2 Filter
-------------------------------
+Nastavitev filtra uglifyjs2
+---------------------------
 
-Now we need to configure Symfony2 to use the ``uglifyjs2`` filter when processing
-your javascripts:
+Sedaj potrebujemo nastaviti Symfony2, da bo uporabil ``uglifyjs2`` filter, ko procesira
+vaše JavaScript-e:
 
 .. configuration-block::
 
@@ -93,27 +93,27 @@ your javascripts:
 
 .. note::
 
-    The path where UglifyJs is installed may vary depending on your system.
-    To find out where npm stores the ``bin`` folder, you can use the following
-    command:
+    Pot, kjer je UglifyJs nameščen, se lahko spreminja odvisno od vašega sistema.
+    Da ugotovite, kje npm shranjuje ``bin`` direktorij, lahko uporabite sledeči
+    ukaz:
 
     .. code-block:: bash
 
         $ npm bin -g
 
-    It should output a folder on your system, inside which you should find
-    the UglifyJs executable.
+    Moral bi izpisati direktorij na vašem sistemu, znotraj katerega bi morali najti
+    UglifyJs izvršljivo datoteko.
 
-    If you installed UglifyJs locally, you can find the bin folder inside
-    the ``node_modules`` folder. It's called ``.bin`` in this case.
+    Če ste namestili UglifyJs lokalno, lahko najdete bin direktorij znotraj
+    ``node_modules`` direktorija. V tem primeru je poimenovan ``.bin``.
 
-You now have access to the ``uglifyjs2`` filter in your application.
+Sedaj imate dostop do ``uglifyjs2`` filtra v vaši aplikaciji.
 
-Minify your Assets
-------------------
+Zmanjšajte vaša sredstva
+------------------------
 
-In order to use UglifyJs on your assets, you need to apply it to them. Since
-your assets are a part of the view layer, this work is done in your templates:
+Da uporabite UglifyJs na vaših sredstvih, ga morate uporabiti na njih. Ker
+so vaša sredstva del nivoja pogleda, je to opravljeno v vaših predlogah:
 
 .. configuration-block::
 
@@ -134,22 +134,22 @@ your assets are a part of the view layer, this work is done in your templates:
 
 .. note::
 
-    The above example assumes that you have a bundle called ``AcmeFooBundle``
-    and your JavaScript files are in the ``Resources/public/js`` directory under
-    your bundle. This isn't important however - you can include your JavaScript
-    files no matter where they are.
+    Zgornji primer predpostavlja, da imate paket imenovan ``AcmeFooBundle``
+    in vaše JavaScript datoteke so v ``Resources/public/js`` direktoriju pod
+    vašim paketom. To sicer ni pomembno - lahko vključite vaše JavaScript
+    datoteke ne glede na to, kje so.
 
-With the addition of the ``uglifyjs2`` filter to the asset tags above, you
-should now see minified JavaScripts coming over the wire much faster.
+Z dodajanjem filtra ``uglifyjs2`` značkam sredstev zgoraj, bi morali
+sedaj videti zmanjšane JavaScript-e, ki se pošiljajo preko žice veliko hitreje.
 
-Disable Minification in Debug Mode
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Onemogočite zmanjšanje v razhroščevalnem načinu
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Minified JavaScripts are very difficult to read, let alone debug. Because of
-this, Assetic lets you disable a certain filter when your application is in
-debug (e.g. ``app_dev.php``) mode. You can do this by prefixing the filter name
-in your template with a question mark: ``?``. This tells Assetic to only
-apply this filter when debug mode is off (e.g. ``app.php``):
+Zmanjšani JavaScript-i so zelo težki za branje, kot tudi razhroščevanje. Zato
+vam Assetic omogoča onemogočiti določen filter, ko je vaša aplikacija v
+razhroščevalnem (npr. ``app_dev``) načinu. To lahko storite z dodajanjem predpone
+imenu filtra v vaši predlogi z vprašajem: ``?``. To pove Assetic-u, da
+uporabi filter samo, ko je razhroščevalni način izključen (npr. ``app.php``):
 
 .. configuration-block::
 
@@ -168,30 +168,30 @@ apply this filter when debug mode is off (e.g. ``app.php``):
             <script src="<?php echo $view->escape($url) ?>"></script>
         <?php endforeach; ?>
 
-To try this out, switch to your ``prod`` environment (``app.php``). But before
-you do, don't forget to :ref:`clear your cache <book-page-creation-prod-cache-clear>`
-and :ref:`dump your assetic assets <cookbook-asetic-dump-prod>`.
+Da to preskusite, preklopite v vaše ``prod`` okolje (``app.php``). Vendar preden
+to naredite, ne pozabite :ref:`sprazniti vašega predpomnilnika <book-page-creation-prod-cache-clear>`
+in :ref:`odložiti vaših assetic sredstev <cookbook-asetic-dump-prod>`.
 
 .. tip::
 
-    Instead of adding the filter to the asset tags, you can also globally
-    enable it by adding the apply-to attribute to the filter configuration, for
-    example in the ``uglifyjs2`` filter ``apply_to: "\.js$"``. To only have
-    the filter applied in production, add this to the ``config_prod`` file
-    rather than the common config file. For details on applying filters by
-    file extension, see :ref:`cookbook-assetic-apply-to`.
+    Namesto dodajanja filtra k znački sredstva, ga lahko tudi globalno
+    omogočite z dodajanjem apply-to-attribute k nastavitvam filtra, na primer
+    v ``uglifyjs2`` filtru ``apply_to: "\.js$"``. Da imate
+    filter uporabljen samo v produkciji, dodajte to v ``config_prod`` datoteko
+    namesto v skupno config datoteko. Za podrobnosti glede uporabe filtrov glede na
+    končnico datoteke, glejte :ref:`cookbook-assetic-apply-to`.
 
-Install, configure and use UglifyCss
-------------------------------------
+Namestite, nastavite in uporabite UglifyCss
+-------------------------------------------
 
-The usage of UglifyCss works the same way as UglifyJs. First, make sure
-the node package is installed:
+Uporaba UglifyCss deluje na enak način kot UglifyJs. Najprej zagotovite,
+da je node paket nameščen:
 
 .. code-block:: bash
 
     $ npm install -g uglifycss
 
-Next, add the configuration for this filter:
+Nato dodajte nastavitve za ta filter:
 
 .. configuration-block::
 
@@ -223,8 +223,8 @@ Next, add the configuration for this filter:
             ),
         ));
 
-To use the filter for your css files, add the filter to the Assetic ``stylesheets``
-helper:
+Da uporabite filter za vaše css datoteke, dodajte filter v Assetic ``stylesheets``
+pomočnik:
 
 .. configuration-block::
 
@@ -243,12 +243,12 @@ helper:
             <link rel="stylesheet" href="<?php echo $view->escape($url) ?>" />
         <?php endforeach; ?>
 
-Just like with the ``uglifyjs2`` filter, if you prefix the filter name with
-``?`` (i.e. ``?uglifycss``), the minification will only happen when you're
-not in debug mode.
+Tako kot z ``uglifyjs2`` filtrom, če dodate predpono imenu filtra z
+``?`` (t.j. ``?uglifycss``), se bo zmanjšanje zgodilo, ko niste
+v razhroščevalnem načinu.
 
 .. _`UglifyJs`: https://github.com/mishoo/UglifyJS
 .. _`UglifyCss`: https://github.com/fmarcia/UglifyCSS
 .. _`Node.js`: http://nodejs.org/
-.. _`install node.js`: http://nodejs.org/
+.. _`namestiti node.js`: http://nodejs.org/
 .. _`package.json`: http://package.json.nodejitsu.com/
