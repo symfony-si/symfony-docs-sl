@@ -1,19 +1,19 @@
 .. index::
    single: Config; Defining and processing configuration values
 
-Defining and processing configuration values
-============================================
+Opredelitev in procesiranje vrednosti nastavitev
+================================================
 
-Validating configuration values
--------------------------------
+Potrjevanje vrednosti nastavitev
+--------------------------------
 
-After loading configuration values from all kinds of resources, the values
-and their structure can be validated using the "Definition" part of the Config
-Component. Configuration values are usually expected to show some kind of
-hierarchy. Also, values should be of a certain type, be restricted in number
-or be one of a given set of values. For example, the following configuration
-(in Yaml) shows a clear hierarchy and some validation rules that should be
-applied to it (like: "the value for ``auto_connect`` must be a boolean value"):
+Po nalaganju nastavitvenih vrednosti vseh vrst virov, so vrednosti
+in njihove strukture lahko potrjene z uporabo t.i. "Definition" dela komponente
+Config. Od nastavitvenih vrednosti se običajno pričakuje, da prikažejo neke
+vrste hierarhijo. Tudi vrednosti bi morale biti določenega tipa, biti omejene
+po številu ali biti ena izmed danih skupkov vrednosti. Na primer, sledeče
+nastavitve (v Yaml) prikazujejo jasno hierarhijo in nekaj pravil potrjevanja,
+ki bi morala biti uporabljena na njih (kot npr. "vrednost za ``auto_connect`` mora biti logična vrednost):
 
 .. code-block:: yaml
 
@@ -32,20 +32,20 @@ applied to it (like: "the value for ``auto_connect`` must be a boolean value"):
             username: user
             password: pass
 
-When loading multiple configuration files, it should be possible to merge
-and overwrite some values. Other values should not be merged and stay as
-they are when first encountered. Also, some keys are only available when
-another key has a specific value (in the sample configuration above: the
-``memory`` key only makes sense when the ``driver`` is ``sqlite``).
+Ko se nalaga več nastavitvenih datotek, bi moralo biti mogoče združiti
+in prepisati nekatere vrednosti. Ostale vrednosti ne bi smele biti združene in ostati
+take, kot se nanje prvič naleti. Tudi nekateri ključi so samo na voljo, ko
+ima drug ključ določeno vrednost (v primeru nastavitev zgoraj: ključ
+``memory`` je smiseln, ko je ``driver`` enak ``sqlite``).
 
-Defining a hierarchy of configuration values using the TreeBuilder
-------------------------------------------------------------------
+Definiranje hierarhije vrednosti nastavitev z uporabo TreeBuilder-ja
+--------------------------------------------------------------------
 
-All the rules concerning configuration values can be defined using the
+Vsa pravila, ki se tičejo nastavitvenih vrednosti, so lahko definirana z uporabo
 :class:`Symfony\\Component\\Config\\Definition\\Builder\\TreeBuilder`.
 
-A :class:`Symfony\\Component\\Config\\Definition\\Builder\\TreeBuilder` instance
-should be returned from a custom ``Configuration`` class which implements the
+Instanca :class:`Symfony\\Component\\Config\\Definition\\Builder\\TreeBuilder`
+bi morala biti vrnjena iz po meri narejenega ``Configuration`` razreda, ki implementira
 :class:`Symfony\\Component\\Config\\Definition\\ConfigurationInterface`::
 
     namespace Acme\DatabaseConfiguration;
@@ -66,15 +66,15 @@ should be returned from a custom ``Configuration`` class which implements the
         }
     }
 
-Adding node definitions to the tree
+Dodajanje definicij vozlišč drevesu
 -----------------------------------
 
-Variable nodes
-~~~~~~~~~~~~~~
+Spremenljivke vozlišč
+~~~~~~~~~~~~~~~~~~~~~
 
-A tree contains node definitions which can be laid out in a semantic way.
-This means, using indentation and the fluent notation, it is possible to
-reflect the real structure of the configuration values::
+Drevo vsebuje definicije vozlišč, ki so lahko določena na semantični način.
+To pomeni, da je z uporabo indentacije in tekočih notacij mogoče
+odražati realno strukturo vrednosti nastavitev::
 
     $rootNode
         ->children()
@@ -87,37 +87,37 @@ reflect the real structure of the configuration values::
         ->end()
     ;
 
-The root node itself is an array node, and has children, like the boolean
-node ``auto_connect`` and the scalar node ``default_connection``. In general:
-after defining a node, a call to ``end()`` takes you one step up in the hierarchy.
+Vrhnje vozlišče je samo po sebi vozlišče polje in ima otroke, kot logično
+vozlišče ``auto_connect`` in skalarno vozlišče ``default_connection``. Na splošno:
+po definiranju vozlišča, klic metode ``end()`` vas premakne en korak naprej v hierarhiji.
 
-Node type
-~~~~~~~~~
+Tip vozlišča
+~~~~~~~~~~~~
 
-It is possible to validate the type of a provided value by using the appropriate
-node definition. Node type are available for:
+Možno je potrditi tip podane vrednosti z uporabo ustrezne
+definicije vozlišča. Tipi vozlišč so na voljo za:
 
-* scalar
-* boolean
-* integer (new in 2.2)
-* float
+* skalar
+* logične vrednosti
+* celo število (new in 2.2)
+* število s plavajočo vejico
 * enum
-* array
-* variable (no validation)
+* polje
+* spremenljivko (ni preverjanja)
 
-and are created with ``node($name, $type)`` or their associated shortcut
-``xxxxNode($name)`` method.
+in so ustvarjena z ``node($name, $type)`` ali njihovo povezano bližnjično
+metodo ``xxxxNode($name)``.
 
-Numeric node constraints
-~~~~~~~~~~~~~~~~~~~~~~~~
+Omejitve numeričnih vozlišč
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 2.2
-    The numeric (float and integer) nodes are new in 2.2
+    Numerična (števila s plavajočo vejico in cela števila) vozlišča so nova v 2.2
 
-Numeric nodes (float and integer) provide two extra constraints -
-:method:`Symfony\\Component\\Config\\Definition\\Builder::min` and
+Numerična vozlišča (števila s plavajočo vejico in cela števila) ponujajo dve dodatni omejitvi -
+:method:`Symfony\\Component\\Config\\Definition\\Builder::min` in
 :method:`Symfony\\Component\\Config\\Definition\\Builder::max` -
-allowing to validate the value::
+omogočata potrjevanje vrednosti::
 
     $rootNode
         ->children()
@@ -133,11 +133,11 @@ allowing to validate the value::
         ->end()
     ;
 
-Enum nodes
-~~~~~~~~~~
+Enum vozlišča
+~~~~~~~~~~~~~
 
-Enum nodes provide a constraint to match the given input against a set of
-values::
+Enum vozlišča ponujajo omejitev, ki se ujema z danim vnosom proti skupku
+vrednosti::
 
     $rootNode
         ->children()
@@ -147,13 +147,13 @@ values::
         ->end()
     ;
 
-This will restrict the ``gender`` option to be either ``male`` or ``female``.
+To bo omejilo opcijo ``gender``, da je ali ``male`` ali ``female``.
 
-Array nodes
-~~~~~~~~~~~
+Vozlišča polja
+~~~~~~~~~~~~~~
 
-It is possible to add a deeper level to the hierarchy, by adding an array
-node. The array node itself, may have a pre-defined set of variable nodes::
+Možno je dodati globlji nivo hierarhije z dodajanjem vozlišča
+polja. Vozlišče polje ima samo po sebi lahko vnajprej določen skupek vrednosti vozlišč::
 
     $rootNode
         ->children()
@@ -168,7 +168,7 @@ node. The array node itself, may have a pre-defined set of variable nodes::
         ->end()
     ;
 
-Or you may define a prototype for each node inside an array node::
+Ali pa lahko definirate prototip za vsako vozlišče znotraj vozlišča polja::
 
     $rootNode
         ->children()
@@ -185,25 +185,25 @@ Or you may define a prototype for each node inside an array node::
         ->end()
     ;
 
-A prototype can be used to add a definition which may be repeated many times
-inside the current node. According to the prototype definition in the example
-above, it is possible to have multiple connection arrays (containing a ``driver``,
-``host``, etc.).
+Prototip je lahko uporabljen za dodajanje definicije, ki je lahko ponovoljena mnogokrat
+znotraj trenutnega vozlišča. Glede na definicijo prototipa v primeru zgoraj je
+možno imeti več povezav polj (vsebujejo ``driver``,
+``host`` itd.).
 
-Array node options
-~~~~~~~~~~~~~~~~~~
+Opcije vozlišla polja
+~~~~~~~~~~~~~~~~~~~~~
 
-Before defining the children of an array node, you can provide options like:
+Pred definicijo otrok vozlišča polja lahko podate opcije kot:
 
 ``useAttributeAsKey()``
-    Provide the name of a child node, whose value should be used as the key in the resulting array.
+    Podate ime vozlišča otroka, katerega vrednost bi morala biti uporabljena kot ključ v nastalem polju.
 ``requiresAtLeastOneElement()``
-    There should be at least one element in the array (works only when ``isRequired()`` is also
-    called).
+    Na voljo bi moral biti vsaj en element v polju (deluje samo, ko je ``isRequired()`` tudi
+    klicana).
 ``addDefaultsIfNotSet()``
-    If any child nodes have default values, use them if explicit values haven't been provided.
+    Če katerokoli otrokovo vozlišče ima privzete vrednosti, jih uporabite, če eksplicitne vrednosti niso bile podane.
 
-An example of this::
+Primer tega::
 
     $rootNode
         ->children()
@@ -220,7 +220,7 @@ An example of this::
         ->end()
     ;
 
-In YAML, the configuration might look like this:
+V YAML lahko zgleda nastavitev takole:
 
 .. code-block:: yaml
 
@@ -228,28 +228,28 @@ In YAML, the configuration might look like this:
         parameters:
             param1: { value: param1val }
 
-In XML, each ``parameters`` node would have a ``name`` attribute (along with
-``value``), which would be removed and used as the key for that element in
-the final array. The ``useAttributeAsKey`` is useful for normalizing how
-arrays are specified between different formats like XML and YAML.
+V XML vsako vozlišče ``parameters`` bi imelo ``name`` atribut (skupaj z
+``value``), ki bi bilo preimenovano in uporabljeno kot ključ za ta element v
+končnem polju. ``useAttributeAsKey`` je uporaben za normalizacijo, kako so
+polja določena med različnimi formati, kot sta XML in YAML.
 
-Default and required values
----------------------------
+Privzete in zahtevane vrednosti
+-------------------------------
 
-For all node types, it is possible to define default values and replacement
-values in case a node
-has a certain value:
+Za vse tipe vozlišč je mogoče definirati privzete vrednosti in zamenjati
+vrednosti v primeru, da
+ima vozlišče določeno vrednost:
 
 ``defaultValue()``
-    Set a default value
+    Nastavi privzeto vrednost
 ``isRequired()``
-    Must be defined (but may be empty)
+    Mora biti definiran (vendar je lahko prazen)
 ``cannotBeEmpty()``
-    May not contain an empty value
+    Ne sme vsebovati prazne vrednosti
 ``default*()``
-    (``null``, ``true``, ``false``), shortcut for ``defaultValue()``
+    (``null``, ``true``, ``false``), bližnjica za ``defaultValue()``
 ``treat*Like()``
-    (``null``, ``true``, ``false``), provide a replacement value in case the value is ``*.``
+    (``null``, ``true``, ``false``), podaja nadomestljivo vrednost v primeru, da je vrednost ``*.``
 
 .. code-block:: php
 
@@ -284,16 +284,16 @@ has a certain value:
         ->end()
     ;
 
-Optional Sections
------------------
+Opcijske sekcije
+----------------
 
 .. versionadded:: 2.2
-    The ``canBeEnabled`` and ``canBeDisabled`` methods are new in Symfony 2.2
+    Metodi ``canBeEnabled`` in ``canBeDisabled`` sta novi v Symfony 2.2
 
-If you have entire sections which are optional and can be enabled/disabled,
-you can take advantage of the shortcut
-:method:`Symfony\\Component\\Config\\Definition\\Builder\\ArrayNodeDefinition::canBeEnabled` and
-:method:`Symfony\\Component\\Config\\Definition\\Builder\\ArrayNodeDefinition::canBeDisabled` methods::
+Če imate celotne sekcije, ki so opcijske in so lahko omogočene/onemogočene,
+lahko uporabite prednost bližnjic metod
+:method:`Symfony\\Component\\Config\\Definition\\Builder\\ArrayNodeDefinition::canBeEnabled` in
+:method:`Symfony\\Component\\Config\\Definition\\Builder\\ArrayNodeDefinition::canBeDisabled`::
 
     $arrayNode
         ->canBeEnabled()
@@ -310,30 +310,30 @@ you can take advantage of the shortcut
                 ->defaultFalse()
     ;
 
-The ``canBeDisabled`` method looks about the same except that the section
-would be enabled by default.
+Metoda ``canBeDisabled`` deluje enako razen, da sekcija
+bi bila privzeto omogočena.
 
-Merging options
----------------
-
-Extra options concerning the merge process may be provided. For arrays:
-
-``performNoDeepMerging()``
-    When the value is also defined in a second configuration array, don’t
-    try to merge an array, but overwrite it entirely
-
-For all nodes:
-
-``cannotBeOverwritten()``
-    don’t let other configuration arrays overwrite an existing value for this node
-
-Appending sections
+Opcije združevanja
 ------------------
 
-If you have a complex configuration to validate then the tree can grow to
-be large and you may want to split it up into sections. You can do this by
-making a section a separate node and then appending it into the main tree
-with ``append()``::
+Podane so lahko dodatne opcije, ki se tičejo procesa združevanja. Za polja:
+
+``performNoDeepMerging()``
+    Ko je vrednost tudi definirana v drugem nastavitvenem polju, ne
+    poizkušajte združiti polja, vendar jo v celoti prepišite.
+
+Za vsa vozlišča:
+
+``cannotBeOverwritten()``
+    ne dopušča ostalim nastavitvenim poljem, da prepišejo obstoječe vrednosti za to vozlišče
+
+Sekcije dodajanja
+-----------------
+
+Če imate za potrditi kompleksne nastavitve, potem lahko drevo zraste
+zelo veliko in ga boste morali morda razdeliti v sekcije. To lahko naredite
+z ustvarjanjem sekcije, ki je ločeno vozlišče in je potem dodano v glavno drevo
+z ``append()``::
 
     public function getConfigTreeBuilder()
     {
@@ -384,35 +384,35 @@ with ``append()``::
         return $node;
     }
 
-This is also useful to help you avoid repeating yourself if you have sections
-of the config that are repeated in different places.
+To je tudi uporabno, da vam pomaga se izogniti ponavljanju, če imate sekcije
+nastavitev, ki so predstavljene na različnih mestih.
 
-Normalization
+Normalizacija
 -------------
 
-When the config files are processed they are first normalized, then merged
-and finally the tree is used to validate the resulting array. The normalization
-process is used to remove some of the differences that result from different
-configuration formats, mainly the differences between Yaml and XML.
+Ko so nastavitvene datoteke procesirane, so najprej normalizirane, nato združene
+in na koncu je drevo uporabljeno za potrditev končnega polja. Proces normalizacije
+je uporabljen za odstranitev nekaj razlik, ki se kažejo v različnih
+formatih nastavitev, v glavnem razlike med Yaml in XML.
 
-The separator used in keys is typically ``_`` in Yaml and ``-`` in XML. For
-example, ``auto_connect`` in Yaml and ``auto-connect``. The normalization would
-make both of these ``auto_connect``.
+Ločilo uporabljeno v ključih je običajno ``_`` v Yaml in ``-`` v XML. Za
+primer, ``auto_connect`` v Yaml in ``auto-connect``. Normalizacija bi
+naredila oba od teh kot ``auto_connect``.
 
 .. caution::
 
-    The target key will not be altered if it's mixed like
-    ``foo-bar_moo`` or if it already exists.
+    Ciljni ključ ne bo spremenjen, če je mešan kot
+    ``foo-bar_moo`` ali če že obstaja.
 
-Another difference between Yaml and XML is in the way arrays of values may
-be represented. In Yaml you may have:
+Druga razlika med Yaml in XML je v načinu, kako so lahko polja vrednosti
+predstavljena. V Yaml imate lahko:
 
 .. code-block:: yaml
 
     twig:
         extensions: ['twig.extension.foo', 'twig.extension.bar']
 
-and in XML:
+in v XML:
 
 .. code-block:: xml
 
@@ -421,8 +421,8 @@ and in XML:
         <twig:extension>twig.extension.bar</twig:extension>
     </twig:config>
 
-This difference can be removed in normalization by pluralizing the key used
-in XML. You can specify that you want a key to be pluralized in this way with
+Ta razlika je lahko odstranjena v normalizaciji z množino ključa uporabljenega
+v XML. Lahko določite, da želite ključ v množini na ta način z
 ``fixXmlConfig()``::
 
     $rootNode
@@ -434,8 +434,8 @@ in XML. You can specify that you want a key to be pluralized in this way with
         ->end()
     ;
 
-If it is an irregular pluralization you can specify the plural to use as
-a second argument::
+Če je množina neregularna, lahko določite množino, da je uporabljena kot
+drugi argument::
 
     $rootNode
         ->fixXmlConfig('child', 'children')
@@ -444,28 +444,28 @@ a second argument::
         ->end()
     ;
 
-As well as fixing this, ``fixXmlConfig`` ensures that single xml elements
-are still turned into an array. So you may have:
+Tako kot tudi popravljanje tega, ``fixXmlConfig`` zagotavlja, da so edninski xml elementi
+še vedno spremenjeni v polje. Tako imate lahko:
 
 .. code-block:: xml
 
     <connection>default</connection>
     <connection>extra</connection>
 
-and sometimes only:
+in včasih samo:
 
 .. code-block:: xml
 
     <connection>default</connection>
 
-By default ``connection`` would be an array in the first case and a string
-in the second making it difficult to validate. You can ensure it is always
-an array with ``fixXmlConfig``.
+Privzeto bi ``connection`` bilo polje v prvem primeru in niz
+v drugem, kar oteži potrjevanje. Lahko zagotovite, da je vedno
+polje z ``fixXmlConfig``.
 
-You can further control the normalization process if you need to. For example,
-you may want to allow a string to be set and used as a particular key or several
-keys to be set explicitly. So that, if everything apart from ``name`` is optional
-in this config:
+Nadalje lahko kontrolirate proces normalizacije, če ga potrebujete. Na primer,
+morda boste želeli dovoliti, da je niz skupek in uporabljen kot določen ključ ali
+več ključev, da so nastavljeni eksplicitno. Tako da, če je ločeno od ``name``, je opcijsko
+v tej nastavitvi:
 
 .. code-block:: yaml
 
@@ -476,13 +476,13 @@ in this config:
         username: user
         password: pass
 
-you can allow the following as well:
+lahko dovolite tudi sledeče:
 
 .. code-block:: yaml
 
     connection: my_mysql_connection
 
-By changing a string value into an associative array with ``name`` as the key::
+S spreminjanjem vrednosti niza v asociativno polje z ``name`` kot ključem::
 
     $rootNode
         ->children()
@@ -499,13 +499,13 @@ By changing a string value into an associative array with ``name`` as the key::
         ->end()
     ;
 
-Validation rules
-----------------
+Pravila potrjevanja
+-------------------
 
-More advanced validation rules can be provided using the
-:class:`Symfony\\Component\\Config\\Definition\\Builder\\ExprBuilder`. This
-builder implements a fluent interface for a well-known control structure.
-The builder is used for adding advanced validation rules to node definitions, like::
+Bolj napredna pravila potrjevanja so lahko podana z uporabo
+:class:`Symfony\\Component\\Config\\Definition\\Builder\\ExprBuilder`. Ta
+graditelj implementira tekoči vmesnik za dobro znane kontrolne strukture.
+Graditelj je uporabljen za dodajanje naprednejših pravil potrjevanja k definicijam vozlišča, kot::
 
     $rootNode
         ->children()
@@ -523,8 +523,8 @@ The builder is used for adding advanced validation rules to node definitions, li
         ->end()
     ;
 
-A validation rule always has an "if" part. You can specify this part in the
-following ways:
+Pravilo potrjevanja ima vedno "if" del. Lahko določite ta del na
+sledeče načine:
 
 - ``ifTrue()``
 - ``ifString()``
@@ -534,26 +534,26 @@ following ways:
 - ``ifNotInArray()``
 - ``always()``
 
-A validation rule also requires a "then" part:
+Pravilo potrjevanja tudi zahteva "then" del:
 
 - ``then()``
 - ``thenEmptyArray()``
 - ``thenInvalid()``
 - ``thenUnset()``
 
-Usually, "then" is a closure. Its return value will be used as a new value
-for the node, instead
-of the node's original value.
+Običajno "tehn" je zaprtje. Njegova vrnjena vrednost bo vedno uporabljena kot nova vrednost
+za vozlišče, namesto
+originalne vrednosti vozlišča.
 
-Processing configuration values
--------------------------------
+Procesiranje nastavitvenih vrednosti
+------------------------------------
 
-The :class:`Symfony\\Component\\Config\\Definition\\Processor` uses the tree
-as it was built using the :class:`Symfony\\Component\\Config\\Definition\\Builder\\TreeBuilder`
-to process multiple arrays of configuration values that should be merged.
-If any value is not of the expected type, is mandatory and yet undefined,
-or could not be validated in some other way, an exception will be thrown.
-Otherwise the result is a clean array of configuration values::
+:class:`Symfony\\Component\\Config\\Definition\\Processor` uporablja drevo
+kot je bilo zgrajeno z uporabo :class:`Symfony\\Component\\Config\\Definition\\Builder\\TreeBuilder`
+za procesiranje večih polj nastavitvenih vrednosti, ki bi morale biti združene.
+Če katerakoli vrednost ni pričakovanega tipa, je obvezna in še nedefinirana,
+ali pa če ne more biti potrjena na nek drug način, bo vržena izjema.
+Drugače je rezultat čisto polje vrednosti nastavitev::
 
     use Symfony\Component\Yaml\Yaml;
     use Symfony\Component\Config\Definition\Processor;

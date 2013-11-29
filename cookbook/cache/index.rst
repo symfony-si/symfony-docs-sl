@@ -1,5 +1,5 @@
-Cache
-=====
+Predpomnilnik
+=============
 
 .. toctree::
     :maxdepth: 2

@@ -1,14 +1,14 @@
 .. index::
    single: Config; Loading resources
 
-Loading resources
-=================
+Nalaganje virov
+===============
 
-Locating resources
-------------------
+Lociranje virov
+---------------
 
-Loading the configuration normally starts with a search for resources – in
-most cases: files. This can be done with the :class:`Symfony\\Component\\Config\\FileLocator`::
+Nalaganje nastavitev se običajno začne z iskanjem virov - v
+večini primerov: datotek. To je lahko narejeno s :class:`Symfony\\Component\\Config\\FileLocator`::
 
     use Symfony\Component\Config\FileLocator;
 
@@ -17,20 +17,20 @@ most cases: files. This can be done with the :class:`Symfony\\Component\\Config\
     $locator = new FileLocator($configDirectories);
     $yamlUserFiles = $locator->locate('users.yml', null, false);
 
-The locator receives a collection of locations where it should look for files.
-The first argument of ``locate()`` is the name of the file to look for. The
-second argument may be the current path and when supplied, the locator will
-look in this directory first. The third argument indicates whether or not the
-locator should return the first file it has found, or an array containing
-all matches.
+Locirnik dobi zbirko lokacije, kje naj išče datoteke.
+Prvi argument ``locate()`` je ime datoteke, ki jo išče. Drugi
+argument je lahko trenutna pot in ko je podana, bo locirnik
+iskal najprej v tem direktoriju. Tretji argument označuje ali bi moral ali ne
+locirnik vrniti prvo datoteko, ki jo je našel, ali pa polje, ki vsebuje
+vse zadetke.
 
-Resource loaders
-----------------
+Nalagalniki virov
+-----------------
 
-For each type of resource (Yaml, XML, annotation, etc.) a loader must be defined.
-Each loader should implement :class:`Symfony\\Component\\Config\\Loader\\LoaderInterface`
-or extend the abstract :class:`Symfony\\Component\\Config\\Loader\\FileLoader`
-class, which allows for recursively importing other resources::
+Za vsak tip virov (Yaml, XML, anotacija itd.) mora biti nalagalnik definiran.
+Vsak nalagalnik bi moral implementirati :class:`Symfony\\Component\\Config\\Loader\\LoaderInterface`
+ali razširiti abstrakni :class:`Symfony\\Component\\Config\\Loader\\FileLoader`
+razred, ki omogoča rekurzivno uvažanje ostalih virov::
 
     use Symfony\Component\Config\Loader\FileLoader;
     use Symfony\Component\Yaml\Yaml;
@@ -57,19 +57,19 @@ class, which allows for recursively importing other resources::
         }
     }
 
-Finding the right loader
-------------------------
+Najdenje ustreznega nalagalnika
+-------------------------------
 
-The :class:`Symfony\\Component\\Config\\Loader\\LoaderResolver` receives as
-its first constructor argument a collection of loaders. When a resource (for
-instance an XML file) should be loaded, it loops through this collection
-of loaders and returns the loader which supports this particular resource type.
+Razred :class:`Symfony\\Component\\Config\\Loader\\LoaderResolver` dobi kot
+svoj prvi konstruktorjev argument zbirko nalagalnikov. Ko bi vir (na
+primer XML datoteka) moral biti naložen, gre skozi zanko te zbirke
+nalagalnikov in vrne nalagalnik, ki podpira ta določeni tip vira.
 
-The :class:`Symfony\\Component\\Config\\Loader\\DelegatingLoader` makes use
-of the :class:`Symfony\\Component\\Config\\Loader\\LoaderResolver`. When
-it is asked to load a resource, it delegates this question to the
-:class:`Symfony\\Component\\Config\\Loader\\LoaderResolver`. In case the resolver
-has found a suitable loader, this loader will be asked to load the resource::
+Razred :class:`Symfony\\Component\\Config\\Loader\\DelegatingLoader` uporablja
+razred :class:`Symfony\\Component\\Config\\Loader\\LoaderResolver`. Ko
+je vprašan, da naloži vir, delegira to vprašanje razredu
+:class:`Symfony\\Component\\Config\\Loader\\LoaderResolver`. V tem primeru ko je t.i. resolver
+našel ustrezni nalagalnik, bo ta nalagalnik vprašan, da naloži vir::
 
     use Symfony\Component\Config\Loader\LoaderResolver;
     use Symfony\Component\Config\Loader\DelegatingLoader;

@@ -1,35 +1,35 @@
 .. index::
     single: Cache; Varnish
 
-How to use Varnish to speed up my Website
-=========================================
+Kako uporabiti Varnish za pohitritev moje spletne strani
+========================================================
 
-Because Symfony2's cache uses the standard HTTP cache headers, the
-:ref:`symfony-gateway-cache` can easily be replaced with any other reverse
-proxy. `Varnish`_ is a powerful, open-source, HTTP accelerator capable of serving
-cached content quickly and including support for :ref:`Edge Side Includes <edge-side-includes>`.
+Ker predpomnilnik Symfony2 uporablja standardne glave HTTP predpomnilnika,
+je :ref:`symfony-gateway-cache` lahko enostavno zamenjan s katerimkoli drugim obratnim
+proksijem. `Varnish`_ je močen, odprto kodni HTTP pospeševalnik zmožen streženja
+predpomnjene vsebine hitro in vključuje podporo za t.i. :ref:`Edge Side Includes <edge-side-includes>`.
 
 .. index::
     single: Varnish; configuration
 
-Configuration
--------------
+Nastavitev
+----------
 
-As seen previously, Symfony2 is smart enough to detect whether it talks to a
-reverse proxy that understands ESI or not. It works out of the box when you
-use the Symfony2 reverse proxy, but you need a special configuration to make
-it work with Varnish. Thankfully, Symfony2 relies on yet another standard
-written by Akamaï (`Edge Architecture`_), so the configuration tips in this
-chapter can be useful even if you don't use Symfony2.
+Kot videno prej, je Symfony2 dovolj pameten, da zazna ali govori z obratnim
+proksijem, ki razume ESI ali ne. Deluje takoj, ko
+uporabite Symfony2 obratni proksi, vendar morate določene nastavitve, da
+deluje z Varnish-em. Zahvaljujoče, Symfony2 se zanaša na še drug standard
+napisan s strani Akamaï (`Edge Architecture`_), tako da nastavitveni nasveti v
+tem poglavju so lahko uporabni tudi če ne uporabljate Symfony2.
 
 .. note::
 
-    Varnish only supports the ``src`` attribute for ESI tags (``onerror`` and
-    ``alt`` attributes are ignored).
+    Varnish samo podpira atribut ``src`` za značke ESI (``onerror`` in
+    ``alt`` atributi so prezrti).
 
-First, configure Varnish so that it advertises its ESI support by adding a
-``Surrogate-Capability`` header to requests forwarded to the backend
-application:
+Najprej nastavite Varnish, da oglašuje svojo ESI podporo z dodajanjem
+glave ``Surrogate-Capability`` na zahtevke posredovane ozadju
+aplikacije:
 
 .. code-block:: text
 
@@ -38,9 +38,9 @@ application:
         set req.http.Surrogate-Capability = "abc=ESI/1.0";
     }
 
-Then, optimize Varnish so that it only parses the Response contents when there
-is at least one ESI tag by checking the ``Surrogate-Control`` header that
-Symfony2 adds automatically:
+Nato optimizirajte Varnish, da samo prevede vsebino odziva, ko je
+vsaj ena značka ESI s preverjanjem glave ``Surrogate-Control``, ki
+jo Symfony2 doda avtomatsko:
 
 .. code-block:: text
 
@@ -61,21 +61,21 @@ Symfony2 adds automatically:
 
 .. caution::
 
-    Compression with ESI was not supported in Varnish until version 3.0
-    (read `GZIP and Varnish`_). If you're not using Varnish 3.0, put a web
-    server in front of Varnish to perform the compression.
+    Stiskanje z ESI ni bilo podprto v Varnish-u do verzije 3.0
+    (preberite `GZIP in Varnish`_). Če ne uporabljate Varnish 3.0, dajte spletni
+    strežnik pred Varnish za izvajanje stiskanja.
 
 .. index::
     single: Varnish; Invalidation
 
-Cache Invalidation
-------------------
+Razveljavitev predpomnilnika
+----------------------------
 
-You should never need to invalidate cached data because invalidation is already
-taken into account natively in the HTTP cache models (see :ref:`http-cache-invalidation`).
+Nikoli vam ne bi smelo biti potrebno razveljavljati predpomnjenih podatkov, ker je razveljavitev že
+izvorno upoštevana v modelih HTTP predpomnilnika (glejte :ref:`http-cache-invalidation`).
 
-Still, Varnish can be configured to accept a special HTTP ``PURGE`` method
-that will invalidate the cache for a given resource:
+Vseeno pa je Varnish možno nastaviti, da sprejema posebno HTTP ``PURGE`` metodo,
+ki bo razveljavila predpomnilnik za dani vir:
 
 .. code-block:: text
 
@@ -123,8 +123,8 @@ that will invalidate the cache for a given resource:
 
 .. caution::
 
-    You must protect the ``PURGE`` HTTP method somehow to avoid random people
-    purging your cached data. You can do this by setting up an access list:
+    Nekako morate zaščititi ``PURGE`` HTTP metodo, da se izognete naključnim ljudem,
+    ki splaknejo vaše predpomnjene podatke. To lahko naredite z nastavitvijo dostopnega seznama:
 
     .. code-block:: text
 
@@ -175,20 +175,20 @@ that will invalidate the cache for a given resource:
             }
         }
 
-Routing and X-FORWARDED Headers
+Usmerjanje in X-FORWARDED glave
 -------------------------------
 
-To ensure that the Symfony Router generates URLs correctly with Varnish,
-proper ```X-Forwarded``` headers must be added so that Symfony is aware of
-the original port number of the request. Exactly how this is done depends
-on your setup. As a simple example, Varnish and your web server are on the
-same machine and that Varnish is listening on one port (e.g. 80) and Apache
-on another (e.g. 8080). In this situation, Varnish should add the ``X-Forwarded-Port``
-header so that the Symfony application knows that the original port number
-is 80 and not 8080.
+Za zagotovitev, da Symfony usmerjevalnik generira URL-je pravilno z Varnishem,
+morajo biti dodane ustrezne ```X-Forwarded``` glave, da je Symfony seznanjen z
+originalno številko porta zahtevka. Točno kako se to naredi, zavisi
+na vaših nastavitvah. Kot enostaven primer, Varnish in vaš spletni strežnik sta
+na isti napravi in Varnish posluša na enem portu (npr. 80) in Apache
+na drugem (npr. 8080) V tem primeru bi Varnish moral dodati ``X-Forwarded-Port``
+glavo, da Symfony aplikacija ve, da je originalna številka porta
+80 in ne 8080.
 
-If this header weren't set properly, Symfony may append ``8080`` when generating
-absolute URLs:
+Če ta glava ni nastavljena pravilno, Symfony lahko doda ``8080``, ko generira
+absolutne URL-je:
 
 .. code-block:: text
 
@@ -202,10 +202,10 @@ absolute URLs:
 
 .. note::
 
-    Remember to configure :ref:`framework.trusted_proxies <reference-framework-trusted-proxies>`
-    in the Symfony configuration so that Varnish is seen as a trusted proxy
-    and the ``X-Forwarded-`` headers are used.
+    Ne pozabite nastaviti :ref:`framework.trusted_proxies <reference-framework-trusted-proxies>`
+    v Symfony nastavitvah, da je Varnish viden kot zaupljiv proksi
+    in uporabljene so glave ``X-Forwarded-``.
 
 .. _`Varnish`: https://www.varnish-cache.org
 .. _`Edge Architecture`: http://www.w3.org/TR/edge-arch
-.. _`GZIP and Varnish`: https://www.varnish-cache.org/docs/3.0/phk/gzip.html
+.. _`GZIP in Varnish`: https://www.varnish-cache.org/docs/3.0/phk/gzip.html
