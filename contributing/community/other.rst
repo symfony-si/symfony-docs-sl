@@ -1,15 +1,15 @@
-Other Resources
-===============
+Ostali viri
+===========
 
-In order to follow what is happening in the community you might find helpful
-these additional resources:
+Da se sledi dogajanju v skupnosti, morda najdete v pomoč
+te dodatne vire:
 
-* List of open `pull requests`_
-* List of recent `commits`_
-* List of open `bugs and enhancements`_
-* List of open source `bundles`_
+* Seznam odprih `zahtevko potega`_
+* Seznam nedavnih `commit-ov`_
+* Seznam odprih `hroščev in izboljšav`_
+* Seznam odprto kodnih `paketov`_
 
-.. _pull requests:         https://github.com/symfony/symfony/pulls
-.. _commits:               https://github.com/symfony/symfony/commits/master
-.. _bugs and enhancements: https://github.com/symfony/symfony/issues
-.. _bundles:               http://knpbundles.com/
+.. _zahtevkov potega:      https://github.com/symfony/symfony/pulls
+.. _commit-ov:             https://github.com/symfony/symfony/commits/master
+.. _hroščev in izboljšav:  https://github.com/symfony/symfony/issues
+.. _paketov:               http://knpbundles.com/

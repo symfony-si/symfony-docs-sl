@@ -1,165 +1,165 @@
-The Release Process
-===================
+Proces izdaj
+============
 
-This document explains the Symfony release process (Symfony being the code
-hosted on the main ``symfony/symfony`` `Git repository`_).
+Ta dokument razlaga Symfony proces izdaj (Symfony pomeni kodo
+gostovano na glavnem ``symfony/symfony`` `Git repozitoriju`_).
 
-Symfony manages its releases through a *time-based model*; a new Symfony
-release comes out every *six months*: one in *May* and one in *November*.
+Symfony upravlja svoje izdaje skozi *časovno osnovan model*: nova Symfony
+izdaja pride ven vsakih *šest mesecev*: ena v *maju* in ena v *novembru*.
 
 .. note::
 
-    This release process has been adopted as of Symfony 2.2, and all the
-    "rules" explained in this document must be strictly followed as of Symfony
+    Ta proces izdaj je bil sprejet od Symfony 2.2 in vsa
+    "pravila" razložena v tem dokumentu morajo biti striktno sledena od Symfony
     2.4.
 
 .. _contributing-release-development:
 
-Development
------------
+Razvoj
+------
 
-The six-months period is divided into two phases:
+Šest mesečno obdobje je razdeljeno v dve fazi:
 
-* *Development*: *Four months* to add new features and to enhance existing
-  ones;
+* *Razvoj*: *Štiri mesece* za dodajanje novih lastnosti in izboljšati
+  obstoječe;
 
-* *Stabilisation*: *Two months* to fix bugs, prepare the release, and wait
-  for the whole Symfony ecosystem (third-party libraries, bundles, and
-  projects using Symfony) to catch up.
+* *Stabilizacija*: *Dva meseca* za popravek hroščev, pripravo izdaje in počakati celoten
+  Symfony ekosistem (tretje osebne knjižnice, pakete in
+  projekte, ki uporabljajo Symfony), da dohitijo.
 
-During the development phase, any new feature can be reverted if it won't be
-finished in time or if it won't be stable enough to be included in the current
-final release.
+Med razvojno fazo, je katerakoli nova lastnost lahko vrnjena, če ne bo dokončana
+v času ali če ne bo dovolj stabilna, da bi bila vključena v trenutno
+končno izdajo.
 
 .. _contributing-release-maintenance:
 
-Maintenance
+Vzdrževanje
 -----------
 
-Each Symfony version is maintained for a fixed period of time, depending on
-the type of the release. We have two maintenance periods:
+Vsaka Symfony verzija je vzdrževana za fiksno časovno obdobje, odvisno od
+tipa izdaje. Imamo dve vzdrževalni obdobji:
 
-* *Bug fixes and security fixes*: During this period, all issues can be fixed.
-  The end of this period is referenced as being the *end of maintenance* of a
-  release.
+* *Popravki hroščev in varnostni popravki*: Med tem obdobjem, so vse težave lahko popravljene.
+  Konec tega obdobja je sklicano kot *konec vzdrževanja*
+  izdaje.
 
-* *Security fixes only*: During this period, only security related issues can
-  be fixed. The end of this period is referenced as being the *end of
-  life* of a release.
+* *Samo varnostni popravki*: Med tem obdobjem, so lahko popravljeni samo varnostne
+  težave. Konec tega obdobja je sklican kot *konec življenske dobe*
+  izdaje.
 
-Standard Releases
+Standardne izdaje
 ~~~~~~~~~~~~~~~~~
 
-A standard release is maintained for an *eight month* period for bug fixes,
-and for a *fourteen month* period for security issue fixes.
+Standardna izdaja je vzdrževana v obdobju *osmih mesecev* za popravke hroščev,
+in v obdobju *štirinajst mesecev* za popravke varnostnih težav.
 
-Long Term Support Releases
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Izdaje z dolgoročno podporo
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Every two years, a new Long Term Support Release (aka LTS release) is
-published. Each LTS release is supported for a *three year* period for bug
-fixes, and for a *four year* period for security issue fixes.
+Vsaki dve leti je nova izdaja z dolgoročno podporo (znana tudi kot LTS izdaja)
+objavljena. Vsaka LTS izdaja je podprta v obdobju *treh let*  za popravke hroščev
+in v obdobju *štirih let* za popravke varnostnih težav.
 
 .. note::
 
-    Paid support after the three year support provided by the community can
-    also be bought from `SensioLabs`_.
+    Plačljiva podpora po podpori treh let s strani skupnosti je lahko tudi
+    kupljena s strani `SensioLabs`_.
 
-Schedule
---------
+Urnik
+-----
 
-Below is the schedule for the first few versions that use this release model:
+Spodaj je urnik za prvih nekaj verzij, ki uporabljajo ta model izdaj:
 
 .. image:: /images/release-process.jpg
    :align: center
 
-* **Yellow** represents the Development phase
-* **Blue** represents the Stabilisation phase
-* **Green** represents the Maintenance period
+* **Rumena** predstavlja razvojno fazo
+* **Modra** predstavlja stabilizacijsko fazo
+* **Zelena** predstavlja obdobje vzdrževanja
 
-This results in very predictable dates and maintenance periods:
+To se odraža v zelo predvidljivih datumih in obdobjih vzdrževanja:
 
-+---------+---------+---------------------+-------------+
-| Version | Release | End of Maintenance  | End of Life |
-+=========+=========+=====================+=============+
-| 2.0     | 07/2011 | 03/2013 (20 months) | 09/2013     |
-+---------+---------+---------------------+-------------+
-| 2.1     | 09/2012 | 05/2013 (9 months)  | 11/2013     |
-+---------+---------+---------------------+-------------+
-| 2.2     | 03/2013 | 11/2013 (8 months)  | 05/2014     |
-+---------+---------+---------------------+-------------+
-| **2.3** | 05/2013 | 05/2016 (36 months) | 05/2017     |
-+---------+---------+---------------------+-------------+
-| 2.4     | 11/2013 | 07/2014 (8 months)  | 01/2015     |
-+---------+---------+---------------------+-------------+
-| 2.5     | 05/2014 | 01/2015 (8 months)  | 07/2016     |
-+---------+---------+---------------------+-------------+
-| 2.6     | 11/2014 | 07/2015 (8 months)  | 01/2016     |
-+---------+---------+---------------------+-------------+
-| **2.7** | 05/2015 | 05/2018 (36 months) | 05/2019     |
-+---------+---------+---------------------+-------------+
-| 2.8     | 11/2015 | 07/2016 (8 months)  | 01/2017     |
-+---------+---------+---------------------+-------------+
-| ...     | ...     | ...                 | ...         |
-+---------+---------+---------------------+-------------+
++---------+---------+---------------------+-----------------------+
+| Verzija | Izdaja  | Konec vzdrževanja   | Konec življenske dobe |
++=========+=========+=====================+=======================+
+| 2.0     | 07/2011 | 03/2013 (20 months) | 09/2013               |
++---------+---------+---------------------+-----------------------+
+| 2.1     | 09/2012 | 05/2013 (9 months)  | 11/2013               |
++---------+---------+---------------------+-----------------------+
+| 2.2     | 03/2013 | 11/2013 (8 months)  | 05/2014               |
++---------+---------+---------------------+-----------------------+
+| **2.3** | 05/2013 | 05/2016 (36 months) | 05/2017               |
++---------+---------+---------------------+-----------------------+
+| 2.4     | 11/2013 | 07/2014 (8 months)  | 01/2015               |
++---------+---------+---------------------+-----------------------+
+| 2.5     | 05/2014 | 01/2015 (8 months)  | 07/2016               |
++---------+---------+---------------------+-----------------------+
+| 2.6     | 11/2014 | 07/2015 (8 months)  | 01/2016               |
++---------+---------+---------------------+-----------------------+
+| **2.7** | 05/2015 | 05/2018 (36 months) | 05/2019               |
++---------+---------+---------------------+-----------------------+
+| 2.8     | 11/2015 | 07/2016 (8 months)  | 01/2017               |
++---------+---------+---------------------+-----------------------+
+| ...     | ...     | ...                 | ...                   |
++---------+---------+---------------------+-----------------------+
 
 .. tip::
 
-    If you want to learn more about the timeline of any given Symfony version,
-    use the online `timeline calculator`_. You can also get all data as a JSON
-    string via a URL like `http://symfony.com/roadmap.json?version=2.x`.
+    Če želite izvedeti več o časovnici katerekoli dane verzije Symfony
+    uporabite `časovni kalkulator`_ na spletu. Lahko dobite tudi vse podatke kot JSON
+    niz preko URL-ja kot `http://symfony.com/roadmap.json?version=2.x`.
 
-Backward Compatibility
-----------------------
+Združljivost za nazaj
+---------------------
 
-After the release of Symfony 2.3, backward compatibility will be kept at all
-cost. If it is not possible, the feature, the enhancement, or the bug fix will
-be scheduled for the next major version: Symfony 3.0.
+Po izdaji Symfony 2.3 bo združjivost za nazaj ohranjena ne glede
+na kaj. Če ni možno, bo lastnost, izboljšava ali popravek hrošča
+predviden za naslednjo glavno verzijo: Symfony 3.0.
 
 .. note::
 
-    The work on Symfony 3.0 will start whenever enough major features breaking
-    backward compatibility are waiting on the todo-list.
+    Delo na Symfony 3.0 bo pričeto, kadar bo dovolj glavnih lastnosti, ki pokvarijo
+    združljivost za nazaj, čakalo na todo seznamu.
 
-Deprecations
-------------
+Razvrednotenja
+--------------
 
-When a feature implementation cannot be replaced with a better one without
-breaking backward compatibility, there is still the possibility to deprecate
-the old implementation and add a new preferred one along side. Read the
-:ref:`conventions <contributing-code-conventions-deprecations>` document to
-learn more about how deprecations are handled in Symfony.
+Ko implementacija lastnosti ne more biti zamenjana z boljšo brez
+pokvarjenja zlomljivosti za nazaj, je še vedno možnost razvrednotiti
+staro implementacijo in dodati novo prednostno zraven. Preberite
+dokument :ref:`konvencije <contributing-code-conventions-deprecations>`, da
+izvedete več o tem, kako so razvrednotenja upravljana v Symfony.
 
-Rationale
----------
+Razlog
+-------
 
-This release process was adopted to give more *predictability* and
-*transparency*. It was discussed based on the following goals:
+Ta proces izdaj je bil sprejet, da da več *predvidljivosti* in
+*transparentnosti*. Bilo je razpravljano na osnovi sledečih ciljev:
 
-* Shorten the release cycle (allow developers to benefit from the new
-  features faster);
-* Give more visibility to the developers using the framework and Open-Source
-  projects using Symfony;
-* Improve the experience of Symfony core contributors: everyone knows when a
-  feature might be available in Symfony;
-* Coordinate the Symfony timeline with popular PHP projects that work well
-  with Symfony and with projects using Symfony;
-* Give time to the Symfony ecosystem to catch up with the new versions
-  (bundle authors, documentation writers, translators, ...).
+* Skrajšati cikel izdaj (omogoča razvijalcem, da koristijo iz novih
+  lastnosti hitreje);
+* Dati več vidnosti razvijalcem, ki uporabljajo ogrodje in odprto kodnim
+  projektom, ki uporabljajo Symfony;
+* Izboljšati izkušnjo ljudem, ki prispevajo Symfony jedru: vsi vedo, ko je
+  lastnost na voljo v Symfony;
+* Koordinacija Symfony časovnice s popularnimi PHP projekti, ki dobro delujejo
+  s Symfony in s projekti, ki uporabljajo Symfony;
+* Dati čas Symfony ekosistemu, da dohiti nove verzije
+  (avtorji paketov, pisci dokumentacije, prevajalci, ...)
 
-The six month period was chosen as two releases fit in a year. It also allows
-for plenty of time to work on new features and it allows for non-ready
-features to be postponed to the next version without having to wait too long
-for the next cycle.
+Šest mesečno obdobje je bilo izbrano, saj dve izdaji prideta v leto. Tudi omogoča
+dovolj časa za delo na novih lastnostih in omogoča nepripravljenim
+lastnostim, da so prestavljene v naslednjo izdajo brez, da morajo čakati predolgo
+za naslednji cikel.
 
-The dual maintenance mode was adopted to make every Symfony user happy. Fast
-movers, who want to work with the latest and the greatest, use the standard
-releases: a new version is published every six months, and there is a two
-months period to upgrade. Companies wanting more stability use the LTS
-releases: a new version is published every two years and there is a year to
-upgrade.
+Način dvojnega vzdrževanja je bil sprejet, da naredi vsakega Symfony uporabnika srečnega. Hitri
+uporabniki, ki želijo delati z zadnjim in najboljšim, uporabijo standardne
+izdaje: nova verzija je izdana vsakih šest mesecev in je dvo mesečno časovno
+obdobje za nadgradnje. Podjetja, ki želijo več stabilnosti uporabijo LTS
+izdaje: nova verzija je objavljena vsaki dve leti in na voljo je leto za
+nadgradnje.
 
-.. _Git repository: https://github.com/symfony/symfony
+.. _Git repozitoriju: https://github.com/symfony/symfony
 .. _SensioLabs:     http://sensiolabs.com/
 .. _roadmap:        http://symfony.com/roadmap
-.. _`timeline calculator`: http://symfony.com/roadmap
+.. _`časovni kalkulator`: http://symfony.com/roadmap

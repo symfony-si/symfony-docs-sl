@@ -1,37 +1,37 @@
-Contributing to the Documentation
-=================================
+Prispevanje k dokumentaciji
+===========================
 
-Documentation is as important as code. It follows the exact same principles:
-DRY, tests, ease of maintenance, extensibility, optimization, and refactoring
-just to name a few. And of course, documentation has bugs, typos, hard to read
-tutorials, and more.
+Dokumentacija je tako pomembna kot koda. Sledi točno enakim principom:
+DRY, testi, enostavnost vzdrževanja, razširljivost, optimizacija in t.i. refactoring,
+da jih naštejemo samo nekaj. In seveda dokumentacija ima hrošče, tipkarske napake, branju težke
+vodiče in več.
 
-Contributing
-------------
+Prispevanje
+-----------
 
-Before contributing, you need to become familiar with the :doc:`markup
-language <format>` used by the documentation.
+Preden prispevate, se morate seznaniti z :doc:`označevalnim
+jezikom <format>` uporabljenim v dokumentaciji.
 
-The Symfony2 documentation is hosted on GitHub:
+Symfony2 dokumentacija je gostovana na GitHub-u:
 
 .. code-block:: text
 
     https://github.com/symfony/symfony-docs
 
-If you want to submit a patch, `fork`_ the official repository on GitHub and
-then clone your fork:
+Če želite poslati popravek, `kopirajte`_ uradni repozitorij na GitHub-u in
+nato klonirajte svoj fork:
 
 .. code-block:: bash
 
     $ git clone git://github.com/YOURUSERNAME/symfony-docs.git
 
-Consistent with Symfony's source code, the documentation repository is split into
-multiple branches, corresponding to the different versions of Symfony itself.
-The ``master`` branch holds the documentation for the development branch of the code.
+Konsistentno s Symfony izvozno kodo je repozitorij dokumentacije razdeljen v
+več vej, ki ustrezajo različnim verzijam samega Symfony-ja.
+Veja ``master`` vsebuje dokumentacijo za razvojno vejo kode.
 
-Unless you're documenting a feature that was introduced *after* Symfony 2.2
-(e.g. in Symfony 2.3), your changes should always be based on the 2.2 branch.
-To do this checkout the 2.2 branch before the next step:
+Razen če dokumentirate lastnost, ki je bila predstavljena *po* Symfony 2.2
+(npr. v Symfony 2.3), bi vaše spremembe morale biti osnovane na veji 2.2.
+Da to naredite, povlecite (checkout) vejo 2.2 pred naslednjim korakom:
 
 .. code-block:: bash
 
@@ -39,63 +39,63 @@ To do this checkout the 2.2 branch before the next step:
 
 .. tip::
 
-    Your base branch (e.g. 2.2) will become the "Applies to" in the :ref:`doc-contributing-pr-format`
-    that you'll use later.
+    Vaša osnovna veja (npr. 2.2) bo postala t.i. "Applies to" v :ref:`doc-contributing-pr-format`,
+    ki ga boste uporabili kasneje.
 
-Next, create a dedicated branch for your changes (for organization):
+Naslednje izdelajte namensko vejo za vaše spremembe (za organizacijo):
 
 .. code-block:: bash
 
     $ git checkout -b improving_foo_and_bar
 
-You can now make your changes directly to this branch and commit them. When
-you're done, push this branch to *your* GitHub fork and initiate a pull request.
+Sedaj lahko naredite spremembe direktno na tej veji in jih pošljete (commit). Ko
+ste končali, porinite (push) to vejo v *vaš* GitHub fork in inicializirajte zahtevek potega (pull request).
 
-Creating a Pull Request
-~~~~~~~~~~~~~~~~~~~~~~~
+Izdelava zahtevka potega
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-Following the example, the pull request will default to be between your
-``improving_foo_and_bar`` branch and the ``symfony-docs`` ``master`` branch.
+Če sledite primeru, bo zahtevek potega privzeto med vašo
+``improving_foo_and_bar`` vejo in ``symfony-docs`` ``master`` vejo.
 
-If you have made your changes based on the 2.2 branch then you need to change
-the base branch to be 2.2 on the preview page by clicking the ``edit`` button
-on the top left:
+Če ste naredili spremembe osnovane na veji 2.2, potem morate spremeniti,
+da je osnovna veja 2.2 na strani predogleda s klikom na ``edit`` gumb
+zgoraj levo:
 
 .. image:: /images/docs-pull-request-change-base.png
    :align: center
 
 .. note::
 
-  All changes made to a branch (e.g. 2.2) will be merged up to each "newer"
-  branch (e.g. 2.3, master, etc) for the next release on a weekly basis.
+  Vse spremembe narejene na veji (npr. 2.2) bodo združene v vsako "novo"
+  vejo (npr. 2.3, master, itd.) za naslednjo izdajo na tedenski osnovi.
 
-GitHub covers the topic of `pull requests`_ in detail.
+GitHub pokriva teme o t.i. `pull requests`_ v podrobnosti.
 
 .. note::
 
-    The Symfony2 documentation is licensed under a Creative Commons
-    Attribution-Share Alike 3.0 Unported :doc:`License <license>`.
+    Symfony2 dokumentacija je licencirana pod Creative Commons
+    Attribution-Share Alike 3.0 Unported :doc:`licenco <license>`.
 
-You can also prefix the title of your pull request in a few cases:
+Lahko tudi dodate predpono naslovu vašega zahtevka potega v nekaterih primerih:
 
-* ``[WIP]`` (Work in Progress) is used when you are not yet finished with your
-  pull request, but you would like it to be reviewed. The pull request won't
-  be merged until you say it is ready.
+* ``[WIP]`` (Work in Progress) je uporabljen, ko še niste končali z vašim
+  zahtevkom potega, vendar bi ga radi dali v pregled. Zahtevek potega ne
+  bo združen dokler ne rečete, da ste pripravljeni.
 
-* ``[WCM]`` (Waiting Code Merge) is used when you're documenting a new feature
-  or change that hasn't been accepted yet into the core code. The pull request
-  will not be merged until it is merged in the core code (or closed if the
-  change is rejected).
+* ``[WCM]`` (Waiting Code Merge) je uporabljen, ko dokumentirate novo lastnost
+  ali spremembo, ki še ni bila sprejeta v jedro kode. Zahtevek potega
+  ne bo združen, dokler ni združeno v jedro kode (ali zaprto, če je sprememba
+  zavrnjena).
 
 .. _doc-contributing-pr-format:
 
-Pull Request Format
-~~~~~~~~~~~~~~~~~~~
+Oblika zahtevka potega
+~~~~~~~~~~~~~~~~~~~~~~
 
-Unless you're fixing some minor typos, the pull request description **must**
-include the following checklist to ensure that contributions may be reviewed
-without needless feedback loops and that your contributions can be included
-into the documentation as quickly as possible:
+Razen če popravljate kakšne manjše tipkarske napake, **mora** opis zahtevka potega
+vključevati sledeči seznam, da se zagotovi, da bodo prispevki lahko pregledani
+brez potrebnih zank povratnih informacij in da so lahko vaši prispeki vključeni
+v dokumentacijo kakor hitro je mogoče:
 
 .. code-block:: text
 
@@ -106,7 +106,7 @@ into the documentation as quickly as possible:
     | Applies to    | [Symfony version numbers this applies to]
     | Fixed tickets | [comma separated list of tickets fixed by the PR]
 
-An example submission could now look as follows:
+Primer predložitve sedaj lahko izgleda sledeče:
 
 .. code-block:: text
 
@@ -119,18 +119,18 @@ An example submission could now look as follows:
 
 .. tip::
 
-    Please be patient. It can take from 15 minutes to several days for your changes
-    to appear on the symfony.com website after the documentation team merges your
-    pull request. You can check if your changes have introduced some markup issues
-    by going to the `Documentation Build Errors`_ page (it is updated each French
-    night at 3AM when the server rebuilds the documentation).
+    Prosimo, bodite potrpežljivi. Lahko vzame 15 minut do nekaj dni, da se vaše spremembe
+    pokažejo na symfony.com spletni strani, ko ekipa za dokumentacijo združi vaš
+    zahtevek potega. Lahko preverite, če vaše spremembe predstavljajo kakšne označevalne težave
+    s pregledom strani `Documentation Build Errors`_ (posodobljena je vsako noč ob 3AM po
+    franskoskem času, ko strežnik ponovno zgradi dokumentacijo).
 
-Documenting new Features or Behavior Changes
---------------------------------------------
+Dokumentiranje novih lastnosti ali sprememb obnašanja
+-----------------------------------------------------
 
-If you're documenting a brand new feature or a change that's been made in
-Symfony2, you should precede your description of the change with a ``.. versionadded:: 2.X``
-tag and a short description:
+Če dokumentirate povsem novo lastnost ali spremembo, ki je bila narejena v
+Symfony2, morate dodati pred vaš opis spremembe ``.. versionadded:: 2.X``
+značko in kratek opis:
 
 .. code-block:: text
 
@@ -139,8 +139,8 @@ tag and a short description:
 
     You can also ask a question and hide the response. This is particularly...
 
-If you're documenting a behavior change, it may be helpful to *briefly* describe
-how the behavior has changed.
+Če dokumentirate spremembo obnašanja, je lahko v pomoč *kratek* opis,
+kako se je obnašanje spremenilo.
 
 .. code-block:: text
 
@@ -148,82 +148,81 @@ how the behavior has changed.
         The ``include()`` function is a new Twig feature that's available in
         Symfony 2.3. Prior, the ``{% include %}`` tag was used.
 
-Whenever a new minor version of Symfony2 is released (e.g. 2.4, 2.5, etc),
-a new branch of the documentation is created from the ``master`` branch.
-At this point, all the ``versionadded`` tags for Symfony2 versions that have
-reached end-of-life will be removed. For example, if Symfony 2.5 were released
-today, and 2.2 had recently reached its end-of-life, the 2.2 ``versionadded``
-tags would be removed from the new 2.5 branch.
+Kadarkoli je nova manjša verzija Symfony2 izdaja (npr. 2.4, 2.5 itd.),
+je narejena nova veja dokumentacije iz ``master`` veje.
+Na tej točki vse značke ``versionadded`` za Symfony2 verzije, ki jih imajo
+danes in 2.2 je pred kratkim dosegla konec razvojnega cikla, 2.2 ``versionadded``
+značke bodo odstranjene iz nove 2.5 veje.
 
-Standards
+Standardi
 ---------
 
-All documentation in the Symfony Documentation should follow
-:doc:`the documentation standards <standards>`.
+Vsa dokumentacija v Symfony dokumentaciji bi morala slediti
+:doc:`standardom dokumentacije <standards>`.
 
-Reporting an Issue
-------------------
+Poročanje težave
+----------------
 
-The most easy contribution you can make is reporting issues: a typo, a grammar
-mistake, a bug in a code example, a missing explanation, and so on.
+Najenostavnejše prispevanje, ki ga lahko naredite je poročanje o težavi: tipkarska napaka, slovnična
+napaka, hrošč v primeru kode, manjkajoča razlaga itd.
 
-Steps:
+Koraki:
 
-* Submit a bug in the bug tracker;
+* Pošljite hrošč v sledilniku hroščev;
 
-* *(optional)* Submit a patch.
+* *(opcijsko)* Pošljite popravek.
 
-Translating
------------
+Prevajanje
+----------
 
-Read the dedicated :doc:`document <translations>`.
+Preberite namenski :doc:`dokument <translations>`.
 
-.. _`fork`: https://help.github.com/articles/fork-a-repo
+.. _`kopirajte`: https://help.github.com/articles/fork-a-repo
 .. _`pull requests`: https://help.github.com/articles/using-pull-requests
 .. _`Documentation Build Errors`: http://symfony.com/doc/build_errors
 
-Managing Releases
+Upravljanje izdaj
 -----------------
 
-Symfony has a very standardized release process, which you can read more
-about in the :doc:`/contributing/community/releases` section.
+Symfony ima zelo standardiziran proces izdaj, o katerem lahko več preberete
+v :doc:`/contributing/community/releases` sekciji.
 
-To keep up with the release process, the documentation team makes several
-changes to the documentation at various parts of the lifecycle.
+Da se sledi procesu izdaj, naredi ekipa dokumentacije nekaj
+sprememb na dokumentaciji na različnih delih življenskega cikla.
 
-When a Release reaches "end of maintenance"
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Ko izdaja doseže "konec vzdrževanja"
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Every release will eventually reach its "end of maintenance". For details,
-see :ref:`contributing-release-maintenance`.
+Vsaka izdaja sčasoma doseže svoj "konec vzdrževanja". Za podrobnosti,
+glejte :ref:`contributing-release-maintenance`.
 
-When a release reaches its end of maintenance, the following items are done.
-For this example, suppose version 2.1 has just reached its end of maintenance:
+Ko izdaja doseže svoj konec vzdrževanja, so narejeni sledeči elementi.
+Za ta primer, predpostavimo, da je verzija 2.1 ravnokar dosegla svoj konec vzdrževanja:
 
-* Changes and pull requests are no longer merged into to the branch (2.1),
-  except for security updates, which are merged until the release reaches
-  its "end of life".
+* Spremembe in zahtevki potegov niso več združeni v vejo (2.1),
+  razen za varnostne posodobitve, ki so združene dokler izdaja ne doseže
+  svojega "konca življenske dobe".
 
-* All branches still under maintenance (e.g. 2.2 and higher) are updated
-  to reflect that pull requests should start from the now-oldest maintained
-  version (e.g. 2.2).
+* Vse veje, ki so še vedno po vzdrževanjem (npr. 2.2 in več) so posodobljene,
+  da odražajo, da bi se zahtevki potegov morali začeti iz sedaj-nove vzdrževane
+  verzije (npr. 2.2).
 
-* Remove all ``versionadded`` directives - and any other notes related to features
-  changing or being new - for the version (e.g. 2.1) from the master branch.
-  The result is that the next release (which is the first that comes entirely
-  *after* the end of maintenance of this branch), will have no mentions of
-  the old version (e.g. 2.1).
+* Odstranijo se vse ``versionadded`` direktive - in ostali zapiski povezani z lastnostmi
+  sprememb ali če so novi - za verzijo (npr. 2.1) iz master veje.
+  Rezultat je, da naslednja izdaja (ki je prva, ki prihaja v celoti
+  *po* koncu vzdrževanja te veje), ne bo vsebovala omemb o
+  stari verziji (npr. 2.1).
 
-When a new Branch is created for a Release
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Ko je ustvarjena nova veja za izdajo
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-During the :ref:`stabilization phase <contributing-release-development>`, a
-new branch on the documentation is created. For example, if version 2.3 were
-being stabilized, then a new 2.3 branch would be created for it. When this
-happens, the following items are done:
+Med :ref:`fazo stabilizacije <contributing-release-development>`
+je ustvarjena nova veja na dokumentaciji. Na primer, če je bila verzija 2.3
+stabilizirana, potem bi bila ustvarjena nova 2.3 veja izdelana zanjo. Ko se to
+zgodi, so narejeni sledeči elementi:
 
-* Change all version and master references to the correct version (e.g. 2.3).
-  For example, in installation chapters, we reference the version you should
-  use for installation. As an example, see the changes made in `PR #2688`_.
+* Sprememba vseh verzij in master referenc na pravilne verzijo (npr. 2.3).
+  Na primer v namestitvenih poglavjih, se sklicujemo na verzijo, ki bi jo
+  morali uporabiti za namestitev. Kot primer, glejte spremembe narejene v `PR #2688`_.
 
 .. _`PR #2688`: https://github.com/symfony/symfony-docs/pull/2688

@@ -1,5 +1,5 @@
-Bundles
-=======
+Paketi
+======
 
 .. toctree::
     :maxdepth: 2

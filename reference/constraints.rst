@@ -1,4 +1,4 @@
-Referenca omejitve potrjevanja
+Referenca omejitev potrjevanja
 ==============================
 
 .. toctree::

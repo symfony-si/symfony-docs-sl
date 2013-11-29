@@ -1,37 +1,37 @@
-Documentation Format
+Oblika dokumentacije
 ====================
 
-The Symfony2 documentation uses `reStructuredText`_ as its markup language and
-`Sphinx`_ for building the output (HTML, PDF, ...).
+Symfony2 dokumentacija uporablja `reStructuredText`_ kot njen označevalni jezik in
+`Sphinx`_ za gradnjo izpisa (HTML, PDF, ...).
 
 reStructuredText
 ----------------
 
-reStructuredText "is an easy-to-read, what-you-see-is-what-you-get plaintext
-markup syntax and parser system".
+reStructuredText "je enostavna za branje, what-you-see-is-what-you-get enostavna tekstovna
+označevalna sintaksa in prevajalni sistem".
 
-You can learn more about its syntax by reading existing Symfony2 `documents`_
-or by reading the `reStructuredText Primer`_ on the Sphinx website.
+Več o njegovi sintaksi se lahko naučite z branjem obstoječih Symfony `dokumentov`_
+ali z branjem `reStructuredText Primer`_ na Sphinx spletni strani.
 
-If you are familiar with Markdown, be careful as things are sometimes very
-similar but different:
+Če ste seznanjeni s t.i. Markdown-om, bodite pazljivi, saj so stvari včasih zelo
+podobne vendar drugačne:
 
-* Lists starts at the beginning of a line (no indentation is allowed);
+* Seznami se začnejo na začetku vrstice (indentacija ni dovoljena);
 
-* Inline code blocks use double-ticks (````like this````).
+* Medvrstični bloki kode uporabljajo dvojne črtice (````na primer tako````).
 
 Sphinx
 ------
 
-Sphinx is a build system that adds some nice tools to create documentation
-from reStructuredText documents. As such, it adds new directives and
-interpreted text roles to standard reST `markup`_.
+Sphinx je gradilni sistem, ki doda nekaj lepih orodij za izdelavo dokumentacije
+iz reStructuredText dokumentov. Kot tak, dodaja nove direktive in
+tolmačene tekstovne vloge za standardizacijo reST `označevanja`_.
 
-Syntax Highlighting
-~~~~~~~~~~~~~~~~~~~
+Obarvanje sintakse
+~~~~~~~~~~~~~~~~~~
 
-All code examples uses PHP as the default highlighted language. You can change
-it with the ``code-block`` directive:
+Vsi primeri kode uporabljajo PHP kot privzeti označevalni jezik. To lahko spremenite
+s ``code-block`` direktivo:
 
 .. code-block:: rst
 
@@ -39,8 +39,8 @@ it with the ``code-block`` directive:
 
         { foo: bar, bar: { foo: bar, bar: baz } }
 
-If your PHP code begins with ``<?php``, then you need to use ``html+php`` as
-the highlighted pseudo-language:
+Če se vaša PHP koda začne s ``<?php``, potem potrebujete uporabiti ``html+php`` kot
+označevalni psevdo jezik:
 
 .. code-block:: rst
 
@@ -50,16 +50,16 @@ the highlighted pseudo-language:
 
 .. note::
 
-    A list of supported languages is available on the `Pygments website`_.
+    Seznam podprtih jezikov je na voljo na `Pygments spletni strani`_.
 
 .. _docs-configuration-blocks:
 
-Configuration Blocks
-~~~~~~~~~~~~~~~~~~~~
+Nastavitveni bloki
+~~~~~~~~~~~~~~~~~~
 
-Whenever you show a configuration, you must use the ``configuration-block``
-directive to show the configuration in all supported configuration formats
-(``PHP``, ``YAML``, and ``XML``)
+Kadarkoli prikažete nastavitve, morate uporabiti ``configuration-block``
+direktivo za prikaz nastavitev v vseh podprtih nastavitvenih formatih
+(``PHP``, ``YAML``, in ``XML``)
 
 .. code-block:: rst
 
@@ -77,7 +77,7 @@ directive to show the configuration in all supported configuration formats
 
             // Configuration in PHP
 
-The previous reST snippet renders as follow:
+Prejšnji reST odrezek se izpiše sledeče:
 
 .. configuration-block::
 
@@ -93,7 +93,7 @@ The previous reST snippet renders as follow:
 
         // Configuration in PHP
 
-The current list of supported formats are the following:
+Trenutni seznam podprtih formatov je sledeči:
 
 +-----------------+-------------+
 | Markup format   | Displayed   |
@@ -117,16 +117,16 @@ The current list of supported formats are the following:
 | php-annotations | Annotations |
 +-----------------+-------------+
 
-Adding Links
-~~~~~~~~~~~~
+Dodajanje povezav
+~~~~~~~~~~~~~~~~~
 
-To add links to other pages in the documents use the following syntax:
+Da dodate povezave na druge strani v dokumentih uporabite sledečo sintakso:
 
 .. code-block:: rst
 
     :doc:`/path/to/page`
 
-Using the path and filename of the page without the extension, for example:
+Uporaba poti in imena datoteke strani brez končnice, na primer:
 
 .. code-block:: rst
 
@@ -136,14 +136,14 @@ Using the path and filename of the page without the extension, for example:
 
     :doc:`/cookbook/configuration/environments`
 
-The link text will be the main heading of the document linked to. You can
-also specify alternative text for the link:
+Tekst povezave bo glavni naslov dokumenta, na katerega se povezuje. Lahko
+tudi določite alternativni tekst za povezavo:
 
 .. code-block:: rst
 
     :doc:`Spooling Email </cookbook/email/spool>`
 
-You can also add links to the API documentation:
+Lahko tudi dodate povezave k API dokumentaciji:
 
 .. code-block:: rst
 
@@ -153,7 +153,7 @@ You can also add links to the API documentation:
 
     :method:`Symfony\\Component\\HttpKernel\\Bundle\\Bundle::build`
 
-and to the PHP documentation:
+in k PHP dokumentaciji:
 
 .. code-block:: rst
 
@@ -163,28 +163,28 @@ and to the PHP documentation:
 
     :phpfunction:`iterator_to_array`
 
-Testing Documentation
-~~~~~~~~~~~~~~~~~~~~~
+Testiranje dokumentacije
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-To test documentation before a commit:
+Za testiranje dokumentacije preden pošiljate:
 
-* Install `Sphinx`_;
+* Namestite `Sphinx`_;
 
-* Run the `Sphinx quick setup`_;
+* Poženite `Sphinx hitro nastavitev`_;
 
-* Install the Sphinx extensions (see below);
+* Namestite Sphinx razširitve (glejte spodaj);
 
-* Run ``make html`` and view the generated HTML in the ``build`` directory.
+* Poženite ``make html`` in si oglejte generirani HTML v ``build`` direktoriju.
 
-Installing the Sphinx extensions
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Namestitev Sphinx razširitev
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* Download the extension from the `source`_ repository
+* Prenesite razširitev iz `izvornega`_ repozitorija
 
-* Copy the ``sensio`` directory to the ``_exts`` folder under your source
-  folder (where ``conf.py`` is located)
+* Kopirajte ``sensio`` direktorij v ``_exts`` direktorij pod vašim izvornim
+  direktorijem (kjer je lociran ``conf.py``)
 
-* Add the following to the ``conf.py`` file:
+* Dodajte sledeče v ``conf.py`` datoteko:
 
 .. code-block:: py
 
@@ -213,9 +213,9 @@ Installing the Sphinx extensions
 
 .. _reStructuredText:        http://docutils.sourceforge.net/rst.html
 .. _Sphinx:                  http://sphinx-doc.org/
-.. _documents:               https://github.com/symfony/symfony-docs
+.. _dokumentov:              https://github.com/symfony/symfony-docs
 .. _reStructuredText Primer: http://sphinx-doc.org/rest.html
-.. _markup:                  http://sphinx-doc.org/markup/
-.. _Pygments website:        http://pygments.org/languages/
-.. _source:                  https://github.com/fabpot/sphinx-php
-.. _Sphinx quick setup:      http://sphinx-doc.org/tutorial.html#setting-up-the-documentation-sources
+.. _označevanja:             http://sphinx-doc.org/markup/
+.. _Pygments spletni strani: http://pygments.org/languages/
+.. _izvornega:               https://github.com/fabpot/sphinx-php
+.. _Sphinx hitro nastavitev: http://sphinx-doc.org/tutorial.html#setting-up-the-documentation-sources
