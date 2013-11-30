@@ -2,25 +2,25 @@
    single: Finder
    single: Components; Finder
 
-The Finder Component
-====================
+Komponenta Finder
+=================
 
-   The Finder Component finds files and directories via an intuitive fluent
-   interface.
+   Komponenta Finder najde datoteke in direktorije preko intiutivnega tekočega
+   vmesnika.
 
-Installation
-------------
+Namestitev
+----------
 
-You can install the component in 2 different ways:
+Lahko namestite komponento na 2 različna načina:
 
-* :doc:`Install it via Composer </components/using_components>` (``symfony/finder`` on `Packagist`_);
-* Use the official Git repository (https://github.com/symfony/Finder).
+* :doc:`Namestitev preko Composer-ja </components/using_components>` (``symfony/finder`` na `Packagist`_);
+* Uporabite uradni Git repozitorij (https://github.com/symfony/Finder).
 
-Usage
------
+Uporaba
+-------
 
-The :class:`Symfony\\Component\\Finder\\Finder` class finds files and/or
-directories::
+Razred :class:`Symfony\\Component\\Finder\\Finder` najde datoteke in/ali
+direktorije::
 
     use Symfony\Component\Finder\Finder;
 
@@ -38,78 +38,78 @@ directories::
         print $file->getRelativePathname()."\n";
     }
 
-The ``$file`` is an instance of :class:`Symfony\\Component\\Finder\\SplFileInfo`
-which extends :phpclass:`SplFileInfo` to provide methods to work with relative
-paths.
+``$file`` je instanca :class:`Symfony\\Component\\Finder\\SplFileInfo`,
+ki razširi :phpclass:`SplFileInfo`, da ponudi metode za delo z relativnimi
+potmi.
 
-The above code prints the names of all the files in the current directory
-recursively. The Finder class uses a fluent interface, so all methods return
-the Finder instance.
+Zgornja koda izpiše imena vseh datotek v trenutnem direktoriju
+rekurzivno. Finder razred uporablja tekoči vmesnik, da vse metode vrnejo
+intanco Finder-ja.
 
 .. tip::
 
-    A Finder instance is a PHP :phpclass:`Iterator`. So, instead of iterating over the
-    Finder with ``foreach``, you can also convert it to an array with the
-    :phpfunction:`iterator_to_array` method, or get the number of items with
+    Finder instanca je PHP :phpclass:`Iterator`. Torej namesto iteracije skozi
+    Finder s ``foreach``, ga lahko tudi pretvorite v polje z metodo
+    :phpfunction:`iterator_to_array`, ali dobite število elementov z
     :phpfunction:`iterator_count`.
 
 .. caution::
 
-    When searching through multiple locations passed to the
-    :method:`Symfony\\Component\\Finder\\Finder::in` method, a separate iterator
-    is created internally for every location. This means we have multiple result
-    sets aggregated into one.
-    Since :phpfunction:`iterator_to_array` uses keys of result sets by default,
-    when converting to an array, some keys might be duplicated and their values
-    overwritten. This can be avoided by passing ``false`` as a second parameter
-    to :phpfunction:`iterator_to_array`.
+    Ko iščete skozi več lokacij podanih metodi
+    :method:`Symfony\\Component\\Finder\\Finder::in`, je ustvarjen ločen iterator
+    interno za vsako lokacijo. To pomeni, da imamo več skupkov rezultatov
+    združenih v enega.
+    Ker :phpfunction:`iterator_to_array` privzeto uporablja ključe skupkov rezultatov,
+    ko pretvarjamo v polje, so lahko nekateri ključi podvojeni in njihove vrednosti
+    prepisane. Temu se lahko izognemo s podajanjem ``false`` kot drugi parameter
+    :phpfunction:`iterator_to_array`.
 
-Criteria
---------
+Kriteriji
+---------
 
-There are lots of ways to filter and sort your results.
+Na voljo je veliko načinov za filtriranje in urejanje vaših rezultatov.
 
-Location
+Lokacija
 ~~~~~~~~
 
-The location is the only mandatory criteria. It tells the finder which
-directory to use for the search::
+Lokacija je edini obvezni kriterij. Finder-ju pove, kateri
+direktorij uporabiti za iskanje::
 
     $finder->in(__DIR__);
 
-Search in several locations by chaining calls to
+Iščite v večih lokacijah z veriženjem klicev metode
 :method:`Symfony\\Component\\Finder\\Finder::in`::
 
     $finder->files()->in(__DIR__)->in('/elsewhere');
 
 .. versionadded:: 2.2
-   Wildcard support was added in version 2.2.
+   Podpora za nadomestne znake je bila dodana v verziji 2.2.
 
-Use wildcard characters to search in the directories matching a pattern::
+Uporabite nadomestne znake za iskanje v direktorijih, ki se ujemao vzorcu::
 
     $finder->in('src/Symfony/*/*/Resources');
 
-Each pattern has to resolve to at least one directory path.
+Vsak vzorec mora biti razrešen na vsaj eno pot direktorija.
 
-Exclude directories from matching with the
-:method:`Symfony\\Component\\Finder\\Finder::exclude` method::
+Izključite direktorije iz ujemanja z metodo
+:method:`Symfony\\Component\\Finder\\Finder::exclude`::
 
     $finder->in(__DIR__)->exclude('ruby');
 
 .. versionadded:: 2.3
-   The :method:`Symfony\\Component\\Finder\\Finder::ignoreUnreadableDirs`
-   method was added in Symfony 2.3.
+   Metoda :method:`Symfony\\Component\\Finder\\Finder::ignoreUnreadableDirs`
+   je bila dodana v Symfony 2.3.
 
-It's also possible to ignore directories that you don't have permission to read::
+Je tudi možno ignorirati direktorije, za katere nimate pravic za branje::
 
     $finder->ignoreUnreadableDirs()->in(__DIR__);
 
-As the Finder uses PHP iterators, you can pass any URL with a supported
-`protocol`_::
+Ker Finder uporablja PHP iteratorje, lahko podate katerikoli URL s podprtim
+`protokolom`_::
 
     $finder->in('ftp://example.com/pub/');
 
-And it also works with user-defined streams::
+In tudi deluje z uporabniško definiranimi tokovi::
 
     use Symfony\Component\Finder\Finder;
 
@@ -126,32 +126,32 @@ And it also works with user-defined streams::
 
 .. note::
 
-    Read the `Streams`_ documentation to learn how to create your own streams.
+    Preberite `Streams`_ dokumentacijo, da izvedete več, kako narediti vaše lastne tokove.
 
-Files or Directories
-~~~~~~~~~~~~~~~~~~~~
+Datoteke in direktoriji
+~~~~~~~~~~~~~~~~~~~~~~~
 
-By default, the Finder returns files and directories; but the
-:method:`Symfony\\Component\\Finder\\Finder::files` and
-:method:`Symfony\\Component\\Finder\\Finder::directories` methods control that::
+Privzeto Finder vrne datoteke in direktorije; vendar
+:method:`Symfony\\Component\\Finder\\Finder::files` in
+:method:`Symfony\\Component\\Finder\\Finder::directories` metodi to krmilita::
 
     $finder->files();
 
     $finder->directories();
 
-If you want to follow links, use the ``followLinks()`` method::
+Če želite slediti povezavam, uporabite ``followLinks()`` metodo::
 
     $finder->files()->followLinks();
 
-By default, the iterator ignores popular VCS files. This can be changed with
-the ``ignoreVCS()`` method::
+Privzeto iterator ignorira popularne VCS datoteke. To se lahko spremeni z
+metodo ``ignoreVCS()``::
 
     $finder->ignoreVCS(false);
 
-Sorting
-~~~~~~~
+Urejanje
+~~~~~~~~
 
-Sort the result by name or by type (directories first, then files)::
+Uredite rezultat po imenu ali tipu (najprej direktoriji nato datoteke)::
 
     $finder->sortByName();
 
@@ -159,10 +159,10 @@ Sort the result by name or by type (directories first, then files)::
 
 .. note::
 
-    Notice that the ``sort*`` methods need to get all matching elements to do
-    their jobs. For large iterators, it is slow.
+    Bodite pozorni, ker ``sort*`` metode potrebujejo dobiti vse elemente, ki se ujemajo, da
+    opravijo svojo nalogo. Za velike iteratorje je počasno.
 
-You can also define your own sorting algorithm with ``sort()`` method::
+Lahko tudi definirate vaš lastni urejevalni algoritem z metodo ``sort()``::
 
     $sort = function (\SplFileInfo $a, \SplFileInfo $b)
     {
@@ -171,114 +171,114 @@ You can also define your own sorting algorithm with ``sort()`` method::
 
     $finder->sort($sort);
 
-File Name
-~~~~~~~~~
+Ime datoteke
+~~~~~~~~~~~~
 
-Restrict files by name with the
-:method:`Symfony\\Component\\Finder\\Finder::name` method::
+Omejite datoteke po imenu z metodo
+:method:`Symfony\\Component\\Finder\\Finder::name`::
 
     $finder->files()->name('*.php');
 
-The ``name()`` method accepts globs, strings, or regexes::
+Metoda ``name()`` sprejema t.i. glob-e, nize ali regularne izraze::
 
     $finder->files()->name('/\.php$/');
 
-The ``notName()`` method excludes files matching a pattern::
+Metoda ``notName()`` izključuje datoteke, ki se ujemajo vzorcu::
 
     $finder->files()->notName('*.rb');
 
-File Contents
-~~~~~~~~~~~~~
+Vsebina datoteke
+~~~~~~~~~~~~~~~~
 
-Restrict files by contents with the
-:method:`Symfony\\Component\\Finder\\Finder::contains` method::
+Omejite datoteke po vsebini z metodo
+:method:`Symfony\\Component\\Finder\\Finder::contains`::
 
     $finder->files()->contains('lorem ipsum');
 
-The ``contains()`` method accepts strings or regexes::
+Metoda ``contains()`` sprejema nize ali regularne izraze::
 
     $finder->files()->contains('/lorem\s+ipsum$/i');
 
-The ``notContains()`` method excludes files containing given pattern::
+Metoda ``notContains()`` izključuje datoteke, ki vsebujejo dani vzorec::
 
     $finder->files()->notContains('dolor sit amet');
 
-Path
-~~~~
+Pot
+~~~
 
 .. versionadded:: 2.2
-   The ``path()`` and ``notPath()`` methods were added in version 2.2.
+   Metodi ``path()`` in ``notPath()`` sta bili dodani v verziji 2.2.
 
-Restrict files and directories by path with the
-:method:`Symfony\\Component\\Finder\\Finder::path` method::
+Omejite datoteke in direktorije glede na pot z metodo
+:method:`Symfony\\Component\\Finder\\Finder::path`::
 
     $finder->path('some/special/dir');
 
-On all platforms slash (i.e. ``/``) should be used as the directory separator.
+Na vseh platformah bi moral biti uporabljena poševnica (t.j. ``/``) kot ločilo direktorijev.
 
-The ``path()`` method accepts a string or a regular expression::
+Metoda ``path()`` sprejema niz ali regularni izraz::
 
     $finder->path('foo/bar');
     $finder->path('/^foo\/bar/');
 
-Internally, strings are converted into regular expressions by escaping slashes
-and adding delimiters:
+Interno so nizi spremenjeni v regularne izraze z zatekanjem poševnic
+in dodajanjem ločil:
 
 .. code-block:: text
 
     dirname    ===>    /dirname/
     a/b/c      ===>    /a\/b\/c/
 
-The :method:`Symfony\\Component\\Finder\\Finder::notPath` method excludes files by path::
+Metoda :method:`Symfony\\Component\\Finder\\Finder::notPath` izključuje datoteke glede na pot::
 
     $finder->notPath('other/dir');
 
-File Size
-~~~~~~~~~
+Velikost datoteke
+~~~~~~~~~~~~~~~~~
 
-Restrict files by size with the
-:method:`Symfony\\Component\\Finder\\Finder::size` method::
+Omejite datoteke glede na velikost z metodo
+:method:`Symfony\\Component\\Finder\\Finder::size`::
 
     $finder->files()->size('< 1.5K');
 
-Restrict by a size range by chaining calls::
+Omejite glede na območje velikosti z veriženjem klicov::
 
     $finder->files()->size('>= 1K')->size('<= 2K');
 
-The comparison operator can be any of the following: ``>``, ``>=``, ``<``, ``<=``,
+Primerjalni operator je lahko katerikoli izmed: ``>``, ``>=``, ``<``, ``<=``,
 ``==``, ``!=``.
 
-The target value may use magnitudes of kilobytes (``k``, ``ki``), megabytes
-(``m``, ``mi``), or gigabytes (``g``, ``gi``). Those suffixed with an ``i`` use
-the appropriate ``2**n`` version in accordance with the `IEC standard`_.
+Ciljna vrednost lahko uporablja obsege kilobajtov (``k``, ``ki``), megabajtov
+(``m``, ``mi``), ali gigabajtov (``g``, ``gi``). Tisti, ki imajo predpono ``i``, uporabljajo
+ustrezne ``2**n`` verzije glede na `IEC standard`_.
 
-File Date
-~~~~~~~~~
+Datum datoteke
+~~~~~~~~~~~~~~
 
-Restrict files by last modified dates with the
-:method:`Symfony\\Component\\Finder\\Finder::date` method::
+Omejite datoteke glede na zadnje spremenjene datume z metodo
+:method:`Symfony\\Component\\Finder\\Finder::date`::
 
     $finder->date('since yesterday');
 
-The comparison operator can be any of the following: ``>``, ``>=``, ``<``, '<=',
-'=='. You can also use ``since`` or ``after`` as an alias for ``>``, and
-``until`` or ``before`` as an alias for ``<``.
+Primerjalni operator je lahko katerikoli izmed sledečih: ``>``, ``>=``, ``<``, '<=',
+'=='. Lahko tudi uporabite ``since`` ali ``after`` kot alias za ``>`` in
+``until`` ali ``before`` kot alias za ``<``.
 
-The target value can be any date supported by the `strtotime`_ function.
+Ta ciljna vrednost je lahko katerikoli datum podprt od funkcije `strtotime`_.
 
-Directory Depth
-~~~~~~~~~~~~~~~
+Globina direktorija
+~~~~~~~~~~~~~~~~~~~
 
-By default, the Finder recursively traverse directories. Restrict the depth of
-traversing with :method:`Symfony\\Component\\Finder\\Finder::depth`::
+Privzeto Finder rekurzivno prečka direktorije. Omejite globino
+prečkanja z metodo :method:`Symfony\\Component\\Finder\\Finder::depth`::
 
     $finder->depth('== 0');
     $finder->depth('< 3');
 
-Custom Filtering
-~~~~~~~~~~~~~~~~
+Filtriranje po meri
+~~~~~~~~~~~~~~~~~~~
 
-To restrict the matching file with your own strategy, use
+Da omejite ujemanje datoteke z vašo lastno strategijo, uporabite
 :method:`Symfony\\Component\\Finder\\Finder::filter`::
 
     $filter = function (\SplFileInfo $file)
@@ -290,15 +290,15 @@ To restrict the matching file with your own strategy, use
 
     $finder->files()->filter($filter);
 
-The ``filter()`` method takes a Closure as an argument. For each matching file,
-it is called with the file as a :class:`Symfony\\Component\\Finder\\SplFileInfo`
-instance. The file is excluded from the result set if the Closure returns
+Metoda ``filter()`` sprejema zaprtje (Closure) kot argument. Za vsako datoteko, ki se ujema,
+je klicana z datoteko kot :class:`Symfony\\Component\\Finder\\SplFileInfo`
+instanca. Datoteka je izključena iz skupka rezultatov, če zaprtje vrne
 ``false``.
 
-Reading contents of returned files
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Branje vsebine vrnjenih datotek
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The contents of returned files can be read with
+Vsebine vrnjenih datotek se lahko prebere z
 :method:`Symfony\\Component\\Finder\\SplFileInfo::getContents`::
 
     use Symfony\Component\Finder\Finder;
@@ -312,7 +312,7 @@ The contents of returned files can be read with
     }
 
 .. _strtotime:    http://www.php.net/manual/en/datetime.formats.php
-.. _protocol:     http://www.php.net/manual/en/wrappers.php
+.. _protokolom:   http://www.php.net/manual/en/wrappers.php
 .. _Streams:      http://www.php.net/streams
 .. _IEC standard: http://physics.nist.gov/cuu/Units/binary.html
 .. _Packagist:    https://packagist.org/packages/symfony/finder
