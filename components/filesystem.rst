@@ -1,24 +1,24 @@
 .. index::
    single: Filesystem
 
-The Filesystem Component
-========================
+Komponenta Filesystem
+=====================
 
-    The Filesystem components provides basic utilities for the filesystem.
+    Komponenta Filesystem ponuja osnovna orodja za datotečni sistem.
 
-Installation
-------------
+Namestitev
+----------
 
-You can install the component in 2 different ways:
+Komponento lahko namestite na 2 različna načina:
 
-* :doc:`Install it via Composer </components/using_components>` (``symfony/filesystem`` on `Packagist`_);
-* Use the official Git repository (https://github.com/symfony/Filesystem).
+* :doc:`Namestitev preko Composer-ja </components/using_components>` (``symfony/filesystem`` na `Packagist`_);
+* Uporabite uradni repozitorij (https://github.com/symfony/Filesystem).
 
-Usage
------
+Uporaba
+-------
 
-The :class:`Symfony\\Component\\Filesystem\\Filesystem` class is the unique
-endpoint for filesystem operations::
+Razred :class:`Symfony\\Component\\Filesystem\\Filesystem` je unikatna
+končna točka za operacije datotečnega sistema::
 
     use Symfony\Component\Filesystem\Filesystem;
     use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
@@ -32,40 +32,40 @@ endpoint for filesystem operations::
     }
 
 .. versionadded:: 2.4
-    The ``IOExceptionInterface`` and its ``getPath`` method are new in Symfony
-    2.4. Prior to 2.4, you would catch the ``IOException`` class.
+    ``IOExceptionInterface`` in njegova ``getPath`` metoda sta novi v Symfony
+    2.4. Pred 2.4, bi ujeli razred ``IOException``.
 
 .. note::
 
-    Methods :method:`Symfony\\Component\\Filesystem\\Filesystem::mkdir`,
+    Metode :method:`Symfony\\Component\\Filesystem\\Filesystem::mkdir`,
     :method:`Symfony\\Component\\Filesystem\\Filesystem::exists`,
     :method:`Symfony\\Component\\Filesystem\\Filesystem::touch`,
     :method:`Symfony\\Component\\Filesystem\\Filesystem::remove`,
     :method:`Symfony\\Component\\Filesystem\\Filesystem::chmod`,
-    :method:`Symfony\\Component\\Filesystem\\Filesystem::chown` and
-    :method:`Symfony\\Component\\Filesystem\\Filesystem::chgrp` can receive a
-    string, an array or any object implementing :phpclass:`Traversable` as
-    the target argument.
+    :method:`Symfony\\Component\\Filesystem\\Filesystem::chown` in
+    :method:`Symfony\\Component\\Filesystem\\Filesystem::chgrp` lahko dobijo
+    niz, polje ali katerikoli objekt, ki implementira :phpclass:`Traversable` kot
+    ciljni argument.
 
 Mkdir
 ~~~~~
 
-:method:`Symfony\\Component\\Filesystem\\Filesystem::mkdir` creates a directory.
-On posix filesystems, directories are created with a default mode value
-`0777`. You can use the second argument to set your own mode::
+:method:`Symfony\\Component\\Filesystem\\Filesystem::mkdir` ustvari direktorij.
+Na posix datotečnih sistemih, so direktoriji ustvarjeni s privzeto vrednostjo načina
+`0777`. Lahko uporabite drugi argument, da nastavite vaš način::
 
     $fs->mkdir('/tmp/photos', 0700);
 
 .. note::
 
-    You can pass an array or any :phpclass:`Traversable` object as the first
+    Lahko podate polje ali katerikoli :phpclass:`Traversable` objekt kot prvi
     argument.
 
 Exists
 ~~~~~~
 
-:method:`Symfony\\Component\\Filesystem\\Filesystem::exists` checks for the
-presence of all files or directories and returns false if a file is missing::
+:method:`Symfony\\Component\\Filesystem\\Filesystem::exists` preveri
+prisotnost vseh datotek ali direktorijev in vrne false, če datoteka manjka::
 
     // this directory exists, return true
     $fs->exists('/tmp/photos');
@@ -75,16 +75,16 @@ presence of all files or directories and returns false if a file is missing::
 
 .. note::
 
-    You can pass an array or any :phpclass:`Traversable` object as the first
+    Lahko podate polje ali katerikoli :phpclass:`Traversable` objekt kot prvi
     argument.
 
 Copy
 ~~~~
 
-:method:`Symfony\\Component\\Filesystem\\Filesystem::copy` is used to copy
-files. If the target already exists, the file is copied only if the source
-modification date is later than the target. This behavior can be overridden by
-the third boolean argument::
+:method:`Symfony\\Component\\Filesystem\\Filesystem::copy` je uporabljena za kopiranje
+datotek. Če cilj že obstaja, je datoteka kopirana samo, če je izvorni
+datum spremembe kasnejši kot ciljni. To obnašanje je lahko prepisano s
+tretjim logičnim argumentom::
 
     // works only if image-ICC has been modified after image.jpg
     $fs->copy('image-ICC.jpg', 'image.jpg');
@@ -95,9 +95,9 @@ the third boolean argument::
 Touch
 ~~~~~
 
-:method:`Symfony\\Component\\Filesystem\\Filesystem::touch` sets access and
-modification time for a file. The current time is used by default. You can set
-your own with the second argument. The third argument is the access time::
+:method:`Symfony\\Component\\Filesystem\\Filesystem::touch` nastavi dostop in
+čas spremembe za datoteko. Privzeto je uporabljen trenutni čas. Lahko nastavite
+svojega z drugim argumentom. Tretji argument je dostopni čas::
 
     // set modification time to the current timestamp
     $fs->touch('file.txt');
@@ -108,14 +108,14 @@ your own with the second argument. The third argument is the access time::
 
 .. note::
 
-    You can pass an array or any :phpclass:`Traversable` object as the first
+    Lahko podate polje ali katerikoli :phpclass:`Traversable` objekt kot prvi
     argument.
 
 Chown
 ~~~~~
 
-:method:`Symfony\\Component\\Filesystem\\Filesystem::chown` is used to change
-the owner of a file. The third argument is a boolean recursive option::
+:method:`Symfony\\Component\\Filesystem\\Filesystem::chown` je uporabljena za spremembo
+lastnika datoteke. Tretji argument je logična rekurzivna opcija::
 
     // set the owner of the lolcat video to www-data
     $fs->chown('lolcat.mp4', 'www-data');
@@ -124,14 +124,14 @@ the owner of a file. The third argument is a boolean recursive option::
 
 .. note::
 
-    You can pass an array or any :phpclass:`Traversable` object as the first
+    Lahko podate polje ali katerikoli :phpclass:`Traversable` objekt kot prvi
     argument.
 
 Chgrp
 ~~~~~
 
-:method:`Symfony\\Component\\Filesystem\\Filesystem::chgrp` is used to change
-the group of a file. The third argument is a boolean recursive option::
+:method:`Symfony\\Component\\Filesystem\\Filesystem::chgrp` je uporabljen za spremembo
+skupine datoteke. Tretji argument je logična rekurzivna opcija::
 
     // set the group of the lolcat video to nginx
     $fs->chgrp('lolcat.mp4', 'nginx');
@@ -140,14 +140,14 @@ the group of a file. The third argument is a boolean recursive option::
 
 .. note::
 
-    You can pass an array or any :phpclass:`Traversable` object as the first
+    Lahko podate polje ali katerikoli :phpclass:`Traversable` objekt kot prvi
     argument.
 
 Chmod
 ~~~~~
 
-:method:`Symfony\\Component\\Filesystem\\Filesystem::chmod` is used to change
-the mode of a file. The fourth argument is a boolean recursive option::
+:method:`Symfony\\Component\\Filesystem\\Filesystem::chmod` je uporabljena za spremembo
+načina datoteke. Četrti argument je logična rekurzivna opcija::
 
     // set the mode of the video to 0600
     $fs->chmod('video.ogg', 0600);
@@ -156,27 +156,27 @@ the mode of a file. The fourth argument is a boolean recursive option::
 
 .. note::
 
-    You can pass an array or any :phpclass:`Traversable` object as the first
+    Lahko podate polje ali katerikoli :phpclass:`Traversable` objekt kot prvi
     argument.
 
 Remove
 ~~~~~~
 
-:method:`Symfony\\Component\\Filesystem\\Filesystem::remove` let's you remove
-files, symlink, directories easily::
+:method:`Symfony\\Component\\Filesystem\\Filesystem::remove` vam omogoča enostavno odstranitev
+datotek, simbolnih povezav, direktorijev::
 
     $fs->remove(array('symlink', '/path/to/directory', 'activity.log'));
 
 .. note::
 
-    You can pass an array or any :phpclass:`Traversable` object as the first
+    Lahko podate polje ali katerikoli :phpclass:`Traversable` objekt kot prvi
     argument.
 
 Rename
 ~~~~~~
 
-:method:`Symfony\\Component\\Filesystem\\Filesystem::rename` is used to rename
-files and directories::
+:method:`Symfony\\Component\\Filesystem\\Filesystem::rename` je uporabljen za preimenovanje
+datotek in direktorijev::
 
     // rename a file
     $fs->rename('/tmp/processed_video.ogg', '/path/to/store/video_647.ogg');
@@ -186,9 +186,9 @@ files and directories::
 symlink
 ~~~~~~~
 
-:method:`Symfony\\Component\\Filesystem\\Filesystem::symlink` creates a
-symbolic link from the target to the destination. If the filesystem does not
-support symbolic links, a third boolean argument is available::
+:method:`Symfony\\Component\\Filesystem\\Filesystem::symlink` ustvari
+simbolno povezavo iz cilja na destinacijo. Če datotečni sistem ne
+podpira simbolnih povezav, je na voljo tretji argument::
 
     // create a symbolic link
     $fs->symlink('/path/to/source', '/path/to/destination');
@@ -199,8 +199,8 @@ support symbolic links, a third boolean argument is available::
 makePathRelative
 ~~~~~~~~~~~~~~~~
 
-:method:`Symfony\\Component\\Filesystem\\Filesystem::makePathRelative` returns
-the relative path of a directory given another one::
+:method:`Symfony\\Component\\Filesystem\\Filesystem::makePathRelative` vrne
+relativno pot direktorija glede na drugega::
 
     // returns '../'
     $fs->makePathRelative(
@@ -213,16 +213,16 @@ the relative path of a directory given another one::
 mirror
 ~~~~~~
 
-:method:`Symfony\\Component\\Filesystem\\Filesystem::mirror` mirrors a
-directory::
+:method:`Symfony\\Component\\Filesystem\\Filesystem::mirror` prezrcali
+direktorij::
 
     $fs->mirror('/path/to/source', '/path/to/target');
 
 isAbsolutePath
 ~~~~~~~~~~~~~~
 
-:method:`Symfony\\Component\\Filesystem\\Filesystem::isAbsolutePath` returns
-``true`` if the given path is absolute, false otherwise::
+:method:`Symfony\\Component\\Filesystem\\Filesystem::isAbsolutePath` vrne
+``true``, če je dana pot absolutna, drugače ``false``::
 
     // return true
     $fs->isAbsolutePath('/tmp');
@@ -239,28 +239,28 @@ dumpFile
 .. versionadded:: 2.3
     ``dumpFile`` is new in Symfony 2.3.
 
-:method:`Symfony\\Component\\Filesystem\\Filesystem::dumpFile` allows you to
-dump contents to a file. It does this in an atomic manner: it writes a temporary
-file first and then moves it to the new file location when it's finished.
-This means that the user will always see either the complete old file or
-complete new file (but never a partially-written file)::
+:method:`Symfony\\Component\\Filesystem\\Filesystem::dumpFile` vam omogoča
+odložitev vsebine v datoteko. To naredi na atomičen način: najprej zapiše
+začasno datoteko in jo nato premakne v novo lokacijo datoteke, ko konča.
+To pomeni, da bo uporabnik vedno videl ali celotno staro datoteko ali
+celotno novo datoteko (vendar nikoli delno zapisane datoteke)::
 
     $fs->dumpFile('file.txt', 'Hello World');
 
-The ``file.txt`` file contains ``Hello World`` now.
+Datoteka ``file.txt`` sedaj vsebuje ``Hello World``.
 
-A desired file mode can be passed as the third argument.
+Željeni datotečni način se lahko poda kot tretji argument.
 
-Error Handling
---------------
+Upravljanje z napakami
+----------------------
 
-Whenever something wrong happens, an exception implementing
-:class:`Symfony\\Component\\Filesystem\\Exception\\ExceptionInterface` or
-:class:`Symfony\\Component\\Filesystem\\Exception\\IOExceptionInterface` is thrown.
+Kadarkoli gre kaj narobe, je vržena izjema, ki implementira
+:class:`Symfony\\Component\\Filesystem\\Exception\\ExceptionInterface` ali
+:class:`Symfony\\Component\\Filesystem\\Exception\\IOExceptionInterface`.
 
 .. note::
 
-    An :class:`Symfony\\Component\\Filesystem\\Exception\\IOException` is
-    thrown if directory creation fails.
+    :class:`Symfony\\Component\\Filesystem\\Exception\\IOException` je
+    vržena, če ustvarjanje direktorija ne uspe.
 
 .. _`Packagist`: https://packagist.org/packages/symfony/filesystem
