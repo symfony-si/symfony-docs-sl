@@ -1,77 +1,77 @@
 .. index::
    single: Tests
 
-Performance
-===========
+Uspešnost
+=========
 
-Symfony2 is fast, right out of the box. Of course, if you really need speed,
-there are many ways that you can make Symfony even faster. In this chapter,
-you'll explore many of the most common and powerful ways to make your Symfony
-application even faster.
+Symfony2 je hiter že takoj, ko ga odprete. Seveda, če res potrebujete hitrost,
+je na voljo mnogo načinov, da lahko naredite Symfony še hitrejšega. V tem poglavju,
+boste raziskali mnoge teh najpogostejših in močnih načinov, da naredite vašo Symfony
+aplikacijo še hitrejšo.
 
 .. index::
    single: Performance; Byte code cache
 
-Use a Byte Code Cache (e.g. APC)
---------------------------------
+Uporabite Byte Code predpomnilnik (npr. APC)
+--------------------------------------------
 
-One of the best (and easiest) things that you should do to improve your performance
-is to use a "byte code cache". The idea of a byte code cache is to remove
-the need to constantly recompile the PHP source code. There are a number of
-`byte code caches`_ available, some of which are open source. The most widely
-used byte code cache is probably `APC`_
+Eden najboljših (in enostavnejših) stvari, ki bi jih morali narediti za izboljšanje vaše učinkovitosti,
+je, da uporabite t.i. "byte code predpomnilnik". Ideja byte code predpomnilnika je odstraniti
+potrebo po nenehnem ponovnem prevajanju PHP izvorne kode. Na voljo je mnogo
+`byte code predpomnilnikov`_, nekateri izmed njih so odprto kodni. Najbolj pogosto
+uporabljani byte code predpomnilnik je verjetno `APC`_
 
-Using a byte code cache really has no downside, and Symfony2 has been architected
-to perform really well in this type of environment.
+Uporaba byte code predpomnilnika resnično nima slabosti in Symfoyn2 je bil načrtovan,
+za res dobro opravljanje v tem tipu okolja.
 
-Further Optimizations
-~~~~~~~~~~~~~~~~~~~~~
+Nadaljnje optimizacije
+~~~~~~~~~~~~~~~~~~~~~~
 
-Byte code caches usually monitor the source files for changes. This ensures
-that if the source of a file changes, the byte code is recompiled automatically.
-This is really convenient, but obviously adds overhead.
+Byte code predpomnilniki običajno spremljajo izvorne datoteke za spremembami. To zagotavlja,
+da če se izvorna datoteka spremeni, je bajtna koda ponovno prevedena avtomatsko.
+To je res priročno, vendar očitno doda stroške.
 
-For this reason, some byte code caches offer an option to disable these checks.
-Obviously, when disabling these checks, it will be up to the server admin
-to ensure that the cache is cleared whenever any source files change. Otherwise,
-the updates you've made won't be seen.
+Zaradi tega razloga nekateri byte code predpomnilniki ponujajo opcijo onemogočiti ta preverjanja.
+Očitno ko se onemogoča ta preverjanja, bo odvisno od administratorja strežnika,
+da zagotovi, da je predpomnilnik spraznjen kadarkoli se katerakoli izvorna datoteka spremeni. Drugače
+posodobitve, ki jih naredite, ne bodo vidne.
 
-For example, to disable these checks in APC, simply add ``apc.stat=0`` to
-your ``php.ini`` configuration.
+Na primer onemogočiti ta preverjanja v APC-ju, enostavno dodajte ``apc.stat=0`` k
+vašim nastavitvam ``php.ini``.
 
 .. index::
    single: Performance; Autoloader
 
-Use Composer's Class Map Functionality
---------------------------------------
+Uporabite Composer-jevo Class Map funkcionalnost
+------------------------------------------------
 
-By default, the Symfony2 standard edition uses Composer's autoloader
-in the `autoload.php`_ file. This autoloader is easy to use, as it will
-automatically find any new classes that you've placed in the registered
-directories.
+Privzeto Symfony2 standardna izdaja uporablja Composerjev avtomatski nalagalnik
+v datoteki `autoload.php`_. Ta avtomatski nalagalnik je enostaven za uporabo, saj bo
+avtomatsko našel katere koli nove razrede, ki ste jih dali v registrirane
+direktorije.
 
-Unfortunately, this comes at a cost, as the loader iterates over all configured
-namespaces to find a particular file, making ``file_exists`` calls until it
-finally finds the file it's looking for.
+Na žalost ima to svojo ceno, saj nalagalnik izvaja iteracije skozi vse nastavljene
+imenske prostore, da najde določeno datoteko in naredi ``file_exists`` klice dokler
+končno ne najde datoteke, ki jo išče.
 
-The simplest solution is to tell Composer to build a "class map" (i.e. a
-big array of the locations of all the classes). This can be done from the
-command line, and might become part of your deploy process:
+Najenostavnejša rešitev je povedati Composer-ju, da zgradi "class map" (t.j.
+veliko polje lokacij vseh razredov). To se lahko naredi iz
+ukazne vrstice in lahko postane del vašega postavitvenega procesa:
 
 .. code-block:: bash
 
     php composer.phar dump-autoload --optimize
 
-Internally, this builds the big class map array in ``vendor/composer/autoload_classmap.php``.
+Notranje to zgradi veliko polje zemljevida razredov v ``vendor/composer/autoload_classmap.php``.
 
-Caching the Autoloader with APC
--------------------------------
+Predpomnenje avtomatskega nalagalnika z APC
+-------------------------------------------
 
-Another solution is to cache the location of each class after it's located
-the first time. Symfony comes with a class - :class:`Symfony\\Component\\ClassLoader\\ApcClassLoader` -
-that does exactly this. To use it, just adapt your front controller file.
-If you're using the Standard Distribution, this code should already be available
-as comments in this file::
+Druga rešitev je predpomnenje lokacije vsakega razreda potem, ko je prvič
+lociran. Symfony prihaja z razredom - :class:`Symfony\\Component\\ClassLoader\\ApcClassLoader` -
+ki naredi točno to. Da ga uporabite, samo prilagodite vašo datoteko prednjega krmilnika.
+Če uporabljate standardno distribucijo, bi ta koda že morala biti na voljo
+kot komentarji v tej datoteki::
 
     // app.php
     // ...
@@ -88,58 +88,58 @@ as comments in this file::
 
     // ...
 
-For more details, see :doc:`/components/class_loader/cache_class_loader`.
+Za več podrobnosti, glejte :doc:`/components/class_loader/cache_class_loader`.
 
 .. note::
 
-    When using the APC autoloader, if you add new classes, they will be found
-    automatically and everything will work the same as before (i.e. no
-    reason to "clear" the cache). However, if you change the location of a
-    particular namespace or prefix, you'll need to flush your APC cache. Otherwise,
-    the autoloader will still be looking at the old location for all classes
-    inside that namespace.
+    Ko uporabljate APC avtomatski nalagalnik in če dodate nove razrede, bodo najdeni
+    avtomatsko in vse bo delovalo kot prej (t.j. nobenega
+    razloga za "praznenje" predpomnilnika). Vendar če spremenite lokacijo
+    določenega imenskega prostora ali predpono, boste morali sprazniti vaš APC predpomnilnik. Drugače
+    bo avtomatski nalagalnik še vedno iskal staro lokacijo za vse razrede
+    znotraj tega imenskega prostora.
 
 .. index::
    single: Performance; Bootstrap files
 
-Use Bootstrap Files
--------------------
+Uporabite zagonske (bootstrap) datoteke
+---------------------------------------
 
-To ensure optimal flexibility and code reuse, Symfony2 applications leverage
-a variety of classes and 3rd party components. But loading all of these classes
-from separate files on each request can result in some overhead. To reduce
-this overhead, the Symfony2 Standard Edition provides a script to generate
-a so-called `bootstrap file`_, consisting of multiple classes definitions
-in a single file. By including this file (which contains a copy of many of
-the core classes), Symfony no longer needs to include any of the source files
-containing those classes. This will reduce disc IO quite a bit.
+Za zagotovitev optimalne fleksibilnosti in ponovne uporabe kode, Symfony2 aplikacije dajejo vzvod
+različnim razredom in tretje osebnim komponentam. Vendar nalaganje vseh teh razredov
+iz različnih datotek na vsakem zahtevku imajo lahko za posledico nekaj stroškov. Za zmanjšanje
+teh stroškov Symfony2 standardna izdaja ponuja skripto za generiranje
+t.i. `bootstrap datoteke`_, ki je sestavljena iz večih definicij razredov
+v eni datoteki. Z vključitvijo te datoteke (ki vsebuje kopije mnogih razredov
+jedra), Symfony ne potrebuje več vključevati katerihkoli od teg izvornih datotek,
+ki vsebujejo te razrede. To bo precej zmanjšalo vhod in izhod na disku.
 
-If you're using the Symfony2 Standard Edition, then you're probably already
-using the bootstrap file. To be sure, open your front controller (usually
-``app.php``) and check to make sure that the following line exists::
+Če uporabljate Symfony2 standardno izdajo, potem verjetno že
+uporabljate bootstrap datoteko. Da ste prepričani, odprite vaš prednji krmilnik (običajno
+``app.php``) in preverite, da sledeča vrstica obstaja::
 
     require_once __DIR__.'/../app/bootstrap.php.cache';
 
-Note that there are two disadvantages when using a bootstrap file:
+Bodite pozorni na dve slabosti, ko uporabljate bootstrap datoteko:
 
-* the file needs to be regenerated whenever any of the original sources change
-  (i.e. when you update the Symfony2 source or vendor libraries);
+* datoteka mora biti ponovno generirana kadarkoli se katerikoli originalnih izvorov spremeni
+  (t.j. ko posodabljate Symfony2 izvor ali knjižnice izdelovalcev - vendor);
 
-* when debugging, one will need to place break points inside the bootstrap file.
+* ko razhroščujete, bo potrebno dati prelomne točke znotraj bootstrap datoteke.
 
-If you're using Symfony2 Standard Edition, the bootstrap file is automatically
-rebuilt after updating the vendor libraries via the ``php composer.phar install``
-command.
+Če uporabljate Symfony2 standardno izdajo, je bootstrap datoteka avtomatsko
+ponovno zgrajena po posodobitvi vendor knjižnic preko ``php composer.phar install``
+ukaza.
 
-Bootstrap Files and Byte Code Caches
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Bootstrap datoteke in Byte Code predpomnilniki
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Even when using a byte code cache, performance will improve when using a bootstrap
-file since there will be fewer files to monitor for changes. Of course if this
-feature is disabled in the byte code cache (e.g. ``apc.stat=0`` in APC), there
-is no longer a reason to use a bootstrap file.
+Celo ko uporabljate byte code predpomnilnik, bo uspešnost izboljšana, ko uporabljate bootstrap
+datoteko, saj bo manj datotek za opazovanje za spremembami. Seveda če je ta lastnost
+onemogočena v byte code predpomnilniku (npr. ``apc.stat=0`` v APC), ni
+več razloga, da uporabite bootstrap datoteko.
 
-.. _`byte code caches`: http://en.wikipedia.org/wiki/List_of_PHP_accelerators
+.. _`byte code predpomnilnikov`: http://en.wikipedia.org/wiki/List_of_PHP_accelerators
 .. _`APC`: http://php.net/manual/en/book.apc.php
 .. _`autoload.php`: https://github.com/symfony/symfony-standard/blob/master/app/autoload.php
-.. _`bootstrap file`: https://github.com/sensio/SensioDistributionBundle/blob/master/Composer/ScriptHandler.php
+.. _`bootstrap datoteke`: https://github.com/sensio/SensioDistributionBundle/blob/master/Composer/ScriptHandler.php

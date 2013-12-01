@@ -1,41 +1,41 @@
 .. index::
    single: Security
 
-Security
-========
+Varnost
+=======
 
-Security is a two-step process whose goal is to prevent a user from accessing
-a resource that he/she should not have access to.
+Varnost je proces v dveh korakih, katerega cilj je preprečiti uporabniku dostop
+do vira, ki ga ne smel/a imeti.
 
-In the first step of the process, the security system identifies who the user
-is by requiring the user to submit some sort of identification. This is called
-**authentication**, and it means that the system is trying to find out who
-you are.
+V prvem koraku procesa varnostni sistem identificira, kdo uporabnik
+je z zahtevkov, da uporabnik pošlje neke vrste identifikacijo. To se imenuje
+**preverjanje pristnosti** in pomeni, da sistem poskuša ugotoviti, kdo
+ste.
 
-Once the system knows who you are, the next step is to determine if you should
-have access to a given resource. This part of the process is called **authorization**,
-and it means that the system is checking to see if you have privileges to
-perform a certain action.
+Enkrat ko sistem ve, kdo ste, je naslednji korak določitev, če bi
+morali imeti dostop do danega vira. Ta del procesa se imenuje **avtorizacija**
+in pomeni, da sistem preverja, da vidi, če imate privilegije za
+izvedbo določene akcije.
 
 .. image:: /images/book/security_authentication_authorization.png
    :align: center
 
-Since the best way to learn is to see an example, start by securing your
-application with HTTP Basic authentication.
+Najboljši način učenja je, da videte primer, začnite z zavarovanjem vaše
+aplikacije s HTTP osnovninm preverjanjem pristnosti.
 
 .. note::
 
-    :doc:`Symfony's security component </components/security/introduction>` is
-    available as a standalone PHP library for use inside any PHP project.
+    :doc:`Symfony-jeva varnostna komponenta </components/security/introduction>` je
+    na voljo kot samostoječa PHP knjižnica za uporabo znotraj katerega koli PHP projekta.
 
-Basic Example: HTTP Authentication
-----------------------------------
+Osnovni primer: HTTP preverjanje pristnosti
+-------------------------------------------
 
-The security component can be configured via your application configuration.
-In fact, most standard security setups are just a matter of using the right
-configuration. The following configuration tells Symfony to secure any URL
-matching ``/admin/*`` and to ask the user for credentials using basic HTTP
-authentication (i.e. the old-school username/password box):
+Varnostno komponento se lahko nastavi preko nastavitev vaše aplikacije.
+V bistvu najbolj standardne varnostne nastavitve so samo vprašanje uporabe pravih
+nastavitev. Sledeče nastavitve povejo Symfony-ju, da zavaruje katerikoli ULR,
+ki se ujema z ``/admin/*`` in vpraša uporabnika za prijavne podatke z uporabo osnovnega HTTP
+preverjanja pristnosti (t.j. staro šolski kvadratek z uporabniškim imenom in geslom):
 
 .. configuration-block::
 
@@ -133,164 +133,163 @@ authentication (i.e. the old-school username/password box):
 
 .. tip::
 
-    A standard Symfony distribution separates the security configuration
-    into a separate file (e.g. ``app/config/security.yml``). If you don't
-    have a separate security file, you can put the configuration directly
-    into your main config file (e.g. ``app/config/config.yml``).
+    Standardna Symfony distribucija ločuje varnostne nastavitve
+    v ločeno datoteko (npr. ``app/config/security.yml``). Če nimate
+    ločene varnostne datoteke, lahko date nastavitve direktno
+    v vašo glavno nastavitveno datoteko (npr. ``app/config/config.yml``).
 
-The end result of this configuration is a fully-functional security system
-that looks like the following:
+Končni rezultat teh nastavitev je polno funkcionalni varnosti sistem,
+ki izgleda nekako sledeče:
 
-* There are two users in the system (``ryan`` and ``admin``);
-* Users authenticate themselves via the basic HTTP authentication prompt;
-* Any URL matching ``/admin/*`` is secured, and only the ``admin`` user
-  can access it;
-* All URLs *not* matching ``/admin/*`` are accessible by all users (and the
-  user is never prompted to log in).
+* Na voljo sta dva uporabnika v sistemu (``ryan`` in ``admin``);
+* Uporabniki izvedejo preverjanje pristnosti sami preko osnovnega HTTP pozivnika za preverjanje pristnosti
+* Katerikoli URL, ki se ujema z ``/admin/*`` je zavarovan in samo ``admin`` uporabnik
+  lahko do njega dostopa;
+* Vsi URL-ji, ki se *ne* ujemajo z ``/admin/*``, so dostopni za vse uporabnike (in
+  uporabnik ni nikoli pozvan k prijavi).
 
-Let's look briefly at how security works and how each part of the configuration
-comes into play.
+Poglejmo na kratko, kako varnost deluje in kako vsak del nastavitev
+pride v igro.
 
-How Security Works: Authentication and Authorization
-----------------------------------------------------
+Kako varnost deluje: Preverjanje pristnosti in avtorizacija
+-----------------------------------------------------------
 
-Symfony's security system works by determining who a user is (i.e. authentication)
-and then checking to see if that user should have access to a specific resource
-or URL.
+Symfony-jev varnostni sistem deluje z določitvijo, kdo je uporabnik (t.j. preverjanje pristnosti)
+in nato preveri pogledati, če bi ta uporabnik moral imeti dostop do določenega vira
+ali URL-ja.
 
 .. _book-security-firewalls:
 
-Firewalls (Authentication)
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Požarni zidovi (preverjanje pristnosti)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-When a user makes a request to a URL that's protected by a firewall, the
-security system is activated. The job of the firewall is to determine whether
-or not the user needs to be authenticated, and if he does, to send a response
-back to the user initiating the authentication process.
+Ko uporabnik naredi zahtevek do URL-ja, ki je zavarovan s požarnim zidom,
+je aktiviran varnostni sistem. Naloga požarnega zidu je določitev, ali
+uporabnik potrebuje biti ali ne pristno preverjen in če mora biti, pošiljanje odziva
+nazaj k uporabniku in sproženje procesa preverjanja pristnosti.
 
-A firewall is activated when the URL of an incoming request matches the configured
-firewall's regular expression ``pattern`` config value. In this example, the
-``pattern`` (``^/``) will match *every* incoming request. The fact that the
-firewall is activated does *not* mean, however, that the HTTP authentication
-username and password box is displayed for every URL. For example, any user
-can access ``/foo`` without being prompted to authenticate.
+Požarni zdi je aktiviran, ko se URL prihajajočega zahtevka ujema z nastavljenim
+nastavitveno vrednostjo regularnega izraza požarnega zidu ``pattern``. V tem primeru
+se bo ``pattern`` (``^/``) ujemal z *vsakim* prihajajočim zahtevkom. Dejstvo,
+da je požarni zid aktiviran, *ne* pomeni, da je okno z uporabniškim imenom in geslom za
+HTTP preverjanje pristnosti prikazano za vsak URL. Na primer, katerikoli uporabnik
+lahko dostopa do ``/foo`` brez da je pozvan k preverjanju pristnosti.
 
 .. image:: /images/book/security_anonymous_user_access.png
    :align: center
 
-This works first because the firewall allows *anonymous users* via the ``anonymous``
-configuration parameter. In other words, the firewall doesn't require the
-user to fully authenticate immediately. And because no special ``role`` is
-needed to access ``/foo`` (under the ``access_control`` section), the request
-can be fulfilled without ever asking the user to authenticate.
+To najprej deluje, ker požarni zid omogoča *anonimnim uporabnikom* preko ``anonymous``
+nastavitvenega parametra. Z drugimi besedami, požarni zid ne zahteva, od
+uporabnika preveranja pristnosti takoj v celoti. In ker nobena posebna vloga (``role``)
+ni potrebna za dostop do ``/foo`` (pod ``access_control`` sekcijo), je lahko zahtevek
+izpolnjen brez da se kadarkoli sprašuje uporabnika, da izvede preverjanje pristnosti.
 
-If you remove the ``anonymous`` key, the firewall will *always* make a user
-fully authenticate immediately.
+Če odstranite ključ ``anonymous``, bo požarni zid *vedno* naredil uporabnika
+v celoti takoj pristno preverjenega.
 
-Access Controls (Authorization)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Dostopne kontrole (avtorizacija)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If a user requests ``/admin/foo``, however, the process behaves differently.
-This is because of the ``access_control`` configuration section that says
-that any URL matching the regular expression pattern ``^/admin`` (i.e. ``/admin``
-or anything matching ``/admin/*``) requires the ``ROLE_ADMIN`` role. Roles
-are the basis for most authorization: a user can access ``/admin/foo`` only
-if it has the ``ROLE_ADMIN`` role.
+Če uporabnik vseeno zahteva ``/admin/foo``, se proces obnaša drugače.
+To je zaradi nastavitvene sekcije ``access_control``, ki pravi
+da vsak URL, ki se ujema z vzorcem regularnega izraza ``^/admin`` (t.j. ``/admin``
+ali karkoli kar se ujema z ``/admin/*``) zahteva vlogo ``ROLE_ADMIN``. Vloge
+so osnova za večino avtorizacije: uporabnik lahko dostopa do ``/admin/foo`` samo,
+če ima vlogo ``ROLE_ADMIN``.
 
 .. image:: /images/book/security_anonymous_user_denied_authorization.png
    :align: center
 
-Like before, when the user originally makes the request, the firewall doesn't
-ask for any identification. However, as soon as the access control layer
-denies the user access (because the anonymous user doesn't have the ``ROLE_ADMIN``
-role), the firewall jumps into action and initiates the authentication process.
-The authentication process depends on the authentication mechanism you're
-using. For example, if you're using the form login authentication method,
-the user will be redirected to the login page. If you're using HTTP authentication,
-the user will be sent an HTTP 401 response so that the user sees the username
-and password box.
+Kot prej, ko je uporabnik originalno naredil zahtevek, požarni zdi ne
+sprašuje za kakršnokoli identifikacijo. Vendar kako hitro nivo dostopne kontrole
+zanika uporabnikov dostop (ker anonimni uporabnik nima vloge ``ROLE_ADMIN``),
+požarni zid skoči v akcijo in sproži proces proces preverjanja pristnosti.
+Proces preverjanja pristnosti zavisi na mehanizmu preverjanja pristnosti, ki
+ga uporabljate. Na primer, če uporabljate metodo preverjanja pristnosti prijavnega obrazca,
+bo uporabnik preusmerjen na prijavno stran. Če uporabljate HTTP preverjanje pristnosti,
+bo uporabnik poslan na HTTP 401 odziv, tako da uporabnik vidi okence z uporabniškim
+imenom in geslom.
 
-The user now has the opportunity to submit its credentials back to the application.
-If the credentials are valid, the original request can be re-tried.
+Uporabnik ima sedaj priložnost poslati svoje prijavne podatke nazaj aplikaciji.
+Če so prijavni podatki veljavni, je lahko originalni zahtevek ponovno poskušan.
 
 .. image:: /images/book/security_ryan_no_role_admin_access.png
    :align: center
 
-In this example, the user ``ryan`` successfully authenticates with the firewall.
-But since ``ryan`` doesn't have the ``ROLE_ADMIN`` role, he's still denied
-access to ``/admin/foo``. Ultimately, this means that the user will see some
-sort of message indicating that access has been denied.
+V tem primeru, uporabnik ``ryan`` je uspešno pristno preverjen s požarnim zidom.
+Vendar ker ``ryan`` nima vloge ``ROLE_ADMIN``, ima še vedno zavrnjen
+dostop do ``/admin/foo``. Na koncu to pomeni, da bo uporabnik videl neke vrste
+sporočilo, ki označuje, da je dostop zavrnjen.
 
 .. tip::
 
-    When Symfony denies the user access, the user sees an error screen and
-    receives a 403 HTTP status code (``Forbidden``). You can customize the
-    access denied error screen by following the directions in the
-    :ref:`Error Pages <cookbook-error-pages-by-status-code>` cookbook entry
-    to customize the 403 error page.
+    Ko Symfony zavrne uporabniški dostop, uporabnik vidi ekran z napako in
+    prejme 403 HTTP statusno kodo (``Forbidden``). Lahko prilagodite
+    ekran z napako dostopa s sledečimi direkcijami v receptu
+    :ref:`Strani z napakami <cookbook-error-pages-by-status-code>`
+    za prilagoditev strani s 403 napako.
 
-Finally, if the ``admin`` user requests ``/admin/foo``, a similar process
-takes place, except now, after being authenticated, the access control layer
-will let the request pass through:
+Na koncu če uporabnik ``admin`` zahteva ``/admin/foo``, se zgodi podoben
+proces, razen sedaj po preverjanju pristnosti, bo nivo kontrole dostopa
+omogočil zahtevek spustiti skozi:
 
 .. image:: /images/book/security_admin_role_access.png
    :align: center
 
-The request flow when a user requests a protected resource is straightforward,
-but incredibly flexible. As you'll see later, authentication can be handled
-in any number of ways, including via a form login, X.509 certificate, or by
-authenticating the user via Twitter. Regardless of the authentication method,
-the request flow is always the same:
+Tok zahtevka, ko uporabnik zahteva zaščitev vir je enostaven,
+vendar izjemno fleksibilen. Kot boste kasneje videli, bo preverjanje pristnosti
+upravljan na poljubne načine, vključno preko prijavnega obrazca, X.509 certifikata ali
+s preverjanjem pristnosti uporabnika preko Twitter-ja. Ne glede na metodo preverjanja pristnosti
+je tok zahtevka vedno enak:
 
-#. A user accesses a protected resource;
-#. The application redirects the user to the login form;
-#. The user submits its credentials (e.g. username/password);
-#. The firewall authenticates the user;
-#. The authenticated user re-tries the original request.
+#. Uporabnik dostopa do zavarovanega vira;
+#. Aplikacija preusmeri uporabnika do prijavnega obrazca;
+#. Uporabnik pošlje svoje prijavne podatke (npr. uporabniško ime/geslo);
+#. Požarni zid izvede preverjanje pristnosti uporabnika;
+#. Pristno preverjen uporabnik ponovno poskuša originalni zahtevek.
 
 .. note::
 
-    The *exact* process actually depends a little bit on which authentication
-    mechanism you're using. For example, when using form login, the user
-    submits its credentials to one URL that processes the form (e.g. ``/login_check``)
-    and then is redirected back to the originally requested URL (e.g. ``/admin/foo``).
-    But with HTTP authentication, the user submits its credentials directly
-    to the original URL (e.g. ``/admin/foo``) and then the page is returned
-    to the user in that same request (i.e. no redirect).
+    *Točni* proces dejansko zavisi malenkost od katerega mehanizma preverjanja pristnosti
+    uporablajte. Na primer, ko uporabljate prijavni obrazec, uporabnik pošlje
+    svoje prijavne podatke na en URL, ki procesira obrazec (npr. ``/login_check``)
+    in nato preusmeri nazaj k originalnem zahtevanem URL-ju (npr. ``/admin/foo``).
+    Vendar s HTTP preverjanjem pristnosti uporabnik pošlje svoje prijavne podatke direktno
+    originalnem URL-ju (npr. ``/admin/foo``) in nato je stran vrnjena
+    uporabniku v enakem zahtevku (t.j. brez preusmerjanja).
 
-    These types of idiosyncrasies shouldn't cause you any problems, but they're
-    good to keep in mind.
+    Te čudaški tipi ne bi smeli povzročati kakršnih koli problemov, vendar
+    jih je dobro imeti v mislih.
 
 .. tip::
 
-    You'll also learn later how *anything* can be secured in Symfony2, including
-    specific controllers, objects, or even PHP methods.
+    Naučili se boste tudi, kako je lahko *karkoli* zavarovano v Symfony2, vključno
+    z določenimi kontrolerji, objekti ali celo PHP metodami.
 
 .. _book-security-form-login:
 
-Using a Traditional Login Form
-------------------------------
+Uporaba tradicionalnega prijavnega obrazca
+------------------------------------------
 
 .. tip::
 
-    In this section, you'll learn how to create a basic login form that continues
-    to use the hard-coded users that are defined in the ``security.yml`` file.
+    V tej sekciji boste izvedeli, kako izdelati osnovni prijavni obrazec, ki nadaljuje
+    z uporabo vkodiranih uporabnikov, ki so definirani v datoteki ``security.yml``.
 
-    To load users from the database, please read :doc:`/cookbook/security/entity_provider`.
-    By reading that article and this section, you can create a full login form
-    system that loads users from the database.
+    Da naložite uporabnike iz podatkovne baze, prosimo preberite :doc:`/cookbook/security/entity_provider`.
+    Z branjem tega članka in te sekcije lahko naredite celotni sistem prijavnega
+    obrazca, ki naloži uporabnike iz podatkovne baze.
 
-So far, you've seen how to blanket your application beneath a firewall and
-then protect access to certain areas with roles. By using HTTP Authentication,
-you can effortlessly tap into the native username/password box offered by
-all browsers. However, Symfony supports many authentication mechanisms out
-of the box. For details on all of them, see the
-:doc:`Security Configuration Reference </reference/configuration/security>`.
+Do sedaj ste videli, kako oviti vašo aplikacijo pod požarnim zidom in
+nato zaščititi dostop do določenih območij z vlogami. Z uporabo HTTP preverjanja pristnosti
+lahko brez truda vskočite v osnovno okence z uporabniškimi imenom/geslom ponujenim
+od vseh brskalnikov Za podrobnosti o vseh njih, glejte
+:doc:`Referenca varnostnih nastavitev </reference/configuration/security>`.
 
-In this section, you'll enhance this process by allowing the user to authenticate
-via a traditional HTML login form.
+V tej sekciji boste okrepili ta proces z omogočanjem uporabnika, da se pristno preveri
+preko tradicionalnega HTML prijavnega obrazca.
 
-First, enable form login under your firewall:
+Najprej omogočite prijavni obrazec v vašem požarnem zidu:
 
 .. configuration-block::
 
@@ -342,9 +341,9 @@ First, enable form login under your firewall:
 
 .. tip::
 
-    If you don't need to customize your ``login_path`` or ``check_path``
-    values (the values used here are the default values), you can shorten
-    your configuration:
+    Če ne potrebujete prilagodit vaših vrednosti ``login_path`` ali ``check_path``
+    (vrednosti uporabljene tu so privzete vrednosti), lahko skrajšate
+    vaše nastavitve:
 
     .. configuration-block::
 
@@ -360,12 +359,12 @@ First, enable form login under your firewall:
 
             'form_login' => array(),
 
-Now, when the security system initiates the authentication process, it will
-redirect the user to the login form (``/login`` by default). Implementing this
-login form visually is your job. First, create the two routes you used in the
-security configuration: the ``login`` route will display the login form (i.e.
-``/login``) and the ``login_check`` route will handle the login form
-submission (i.e.  ``/login_check``):
+Sedaj ko varnostni sistem sproži proces preverjanja pristnosti, bo
+preusmeril uporabnika na prijavni obrazec (``/login`` privzeto). Implementacija
+tega prijavnega obrazca vizualno je vaša naloga. Najprej izdelajte dve poti, ki ste jih uporabili v
+varnostnih nastavitvah: pot ``login`` bo prikazala prijavni obrazec (t.j.
+``/login``) in ``login_check`` pot bo upravljala pošiljanje prijavnega obrazca
+(t.j. ``/login_check``):
 
 .. configuration-block::
 
@@ -410,16 +409,16 @@ submission (i.e.  ``/login_check``):
 
 .. note::
 
-    You will *not* need to implement a controller for the ``/login_check``
-    URL as the firewall will automatically catch and process any form submitted
-    to this URL. However, you *must* have a route (as shown here) for this
-    URL, as well as one for your logout path (see :ref:`book-security-logging-out`).
+    *Ne* boste potrebovali implementirati krmilnika za ``/login_check``
+    URL, saj bo požarni zid avtomatsko ujel in sprocesiral katerikoli obrazec poslan
+    na ta URL. Vendar *morate* imeti pot (kot prikazano tu) za ta
+    URL, kot tudi enega za vašo odjavno pot (glejte :ref:`book-security-logging-out`).
 
-Notice that the name of the ``login`` route matches the ``login_path`` config
-value, as that's where the security system will redirect users that need
-to login.
+Bodite pozorni, da se ime poti ``login`` ujema z ``login_path`` nastavitveno
+vrednostjo, saj tu bo varnostni sistem preusmeril uporabnike, ki se potrebujejo
+prijaviti.
 
-Next, create the controller that will display the login form::
+Naslednje izdelajte krmilnik, ki bo prikazal prijavni obrazec::
 
     // src/Acme/SecurityBundle/Controller/SecurityController.php;
     namespace Acme\SecurityBundle\Controller;
@@ -455,17 +454,17 @@ Next, create the controller that will display the login form::
         }
     }
 
-Don't let this controller confuse you. As you'll see in a moment, when the
-user submits the form, the security system automatically handles the form
-submission for you. If the user had submitted an invalid username or password,
-this controller reads the form submission error from the security system so
-that it can be displayed back to the user.
+Ne pustite temu krmilniku, da vas zavede. Kot boste videli v momentu, ko
+uporabnik pošlje obrazec, varnostni sistem avtomatsko upravlja pošiljanje
+obrazca za vas. Če je uporabnik poslal napačno uporabniško ime ali geslo,
+ta krmilnik prebere napako poslanega obrazca iz varnostnega sistema, da
+je lahko prikazan uporabniku.
 
-In other words, your job is to display the login form and any login errors
-that may have occurred, but the security system itself takes care of checking
-the submitted username and password and authenticating the user.
+Z drugimi besedami, vaša naloga je prikazati prijavni obrazec in kakršnekoli napake,
+ki se lahko zgodijo, vendar sam varnostni sistem poskrbi za preverjanje
+poslanega uporabniškega imena in gesla in preverjanje pristnosti uporabnika.
 
-Finally, create the corresponding template:
+Na koncu izdelajte ustrezno predlogo:
 
 .. configuration-block::
 
@@ -517,47 +516,47 @@ Finally, create the corresponding template:
 
 .. tip::
 
-    The ``error`` variable passed into the template is an instance of
+    Spremenljivska ``error`` poslana v predlogo je instanca
     :class:`Symfony\\Component\\Security\\Core\\Exception\\AuthenticationException`.
-    It may contain more information - or even sensitive information - about
-    the authentication failure, so use it wisely!
+    Lahko vključuje več informacij - ali celo občutljive podatke - o
+    neuspešnosti preverjanja pristnosti, torej uporabite jo pametno!
 
-The form has very few requirements. First, by submitting the form to ``/login_check``
-(via the ``login_check`` route), the security system will intercept the form
-submission and process the form for you automatically. Second, the security
-system expects the submitted fields to be called ``_username`` and ``_password``
-(these field names can be :ref:`configured <reference-security-firewall-form-login>`).
+Obrazec ima zelo malo zahtev. Naprej s pošiljanjem obrazca na ``/login_check``
+(preko ``login_check`` poti), varnostni sistem bo prestregel pošiljanje
+obrazca in procesiral obrazec za vas avtomatsko. Nato varnosti sistem
+pričakuje, da se poslana polja imenuje ``_username`` in ``_password``
+(ta imena polj so lahko :ref:`nastavljiva <reference-security-firewall-form-login>`).
 
-And that's it! When you submit the form, the security system will automatically
-check the user's credentials and either authenticate the user or send the
-user back to the login form where the error can be displayed.
+In to je vse! Ko pošljete obrazec, bo varnostni sistem avtomatsko
+preveril uporabnikove prijavne podatke in bodisi pristno preveril uporabnika ali poslal
+uporabnika nazaj k prijavnem obrazcu, kjer je prikazana napaka.
 
-Let's review the whole process:
+Preglejmo celotni proces:
 
-#. The user tries to access a resource that is protected;
-#. The firewall initiates the authentication process by redirecting the
-   user to the login form (``/login``);
-#. The ``/login`` page renders login form via the route and controller created
-   in this example;
-#. The user submits the login form to ``/login_check``;
-#. The security system intercepts the request, checks the user's submitted
-   credentials, authenticates the user if they are correct, and sends the
-   user back to the login form if they are not.
+#. Uporabnik poskuša dostopati do vira, ki je zaščiten;
+#. Požarni zid sproži proces preverjanja pristnosti s preusmerjanjem
+   uporabnika k prijavnem obrazcu (``/login``);
+#. Stran ``/login`` izpiše prijavni obrazec preko usmeritve in krmilnika ustvarjenega
+   v tem primeru;
+#. Uporabnik pošlje prijavni obrazec na ``/login_check``;
+#. Varnostni sistem prestreže zahtevek, preveri, poslane uporabnikove
+   prijavne podatke, pristno preveri uporabnika, če je pravilen in pošlje
+   uporabnika nazaj k prijavnem obrazcu, če ni.
 
-By default, if the submitted credentials are correct, the user will be redirected
-to the original page that was requested (e.g. ``/admin/foo``). If the user
-originally went straight to the login page, he'll be redirected to the homepage.
-This can be highly customized, allowing you to, for example, redirect the
-user to a specific URL.
+Privzeto, če so poslani prijavni podatki pravilni, bo uporabnik preusmerjen
+na originalno stran, ki je bila zahtevana (npr. ``/admin/foo``). Če je uporabnik
+originalno šel naravnost na prijavno stran, bo preusmerjen na domačo stran.
+To se lahko zelo prilagodi in vam omogoča na primer preusmerjanje
+uporabnika na določeni URL.
 
-For more details on this and how to customize the form login process in general,
-see :doc:`/cookbook/security/form_login`.
+Za več podrobnosti o tem in kako prilagoditi proces prijavnega obrazca v splošnem,
+glejte :doc:`/cookbook/security/form_login`.
 
 .. _book-security-common-pitfalls:
 
 .. sidebar:: Avoid Common Pitfalls
 
-    When setting up your login form, watch out for a few common pitfalls.
+    Ko nastavljate vaš prijavni obrazec, pazite na nekaj pogostih napak.
 
     **1. Create the correct routes**
 

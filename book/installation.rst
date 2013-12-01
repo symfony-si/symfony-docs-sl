@@ -1,46 +1,46 @@
 .. index::
    single: Installation
 
-Installing and Configuring Symfony
-==================================
+Namestitev in nastavitev Symfony
+================================
 
-The goal of this chapter is to get you up and running with a working application
-built on top of Symfony. Fortunately, Symfony offers "distributions", which
-are functional Symfony "starter" projects that you can download and begin
-developing in immediately.
-
-.. tip::
-
-    If you're looking for instructions on how best to create a new project
-    and store it via source control, see `Using Source Control`_.
-
-Installing a Symfony2 Distribution
-----------------------------------
+Cilj tega poglavja je postavitev delujoče aplikacije
+zgrajene na Symfony. Na srečo Symfony ponuja "distribucije", ki
+so funkcionalni Symfony "začetni" projekti, ki jih lahko prenesete in pričnete
+takoj razvijati.
 
 .. tip::
 
-    First, check that you have installed and configured a Web server (such
-    as Apache) with PHP 5.3.8 or higher. For more information on Symfony2
-    requirements, see the :doc:`requirements reference </reference/requirements>`.
+    Če iščete navodila, kako najboljše ustvariti nov projekt
+    in ga shraniti preko kontrole izvorne kode, glejte `Uporaba kontrole izvorne kode`_.
 
-Symfony2 packages "distributions", which are fully-functional applications
-that include the Symfony2 core libraries, a selection of useful bundles, a
-sensible directory structure and some default configuration. When you download
-a Symfony2 distribution, you're downloading a functional application skeleton
-that can be used immediately to begin developing your application.
+Namestitev Symfony2 distribucije
+--------------------------------
 
-Start by visiting the Symfony2 download page at `http://symfony.com/download`_.
-On this page, you'll see the *Symfony Standard Edition*, which is the main
-Symfony2 distribution. There are 2 ways to get your project started:
+.. tip::
 
-Option 1) Composer
+    Najprej preverite, da imate nameščen in nastavljen spletni strežnik (kot
+    je Apache) s PHP 5.3.8 ali več. Za več informacij o Symfony2
+    zahtevah, glejte :doc:`referenca zahtev </reference/requirements>`.
+
+Symfony2 ima zapakirane "distribucije", ki so polno funkcionalne aplikacije,
+ki vključujejo Symfony2 knjižnice jedra, izbiro uporabnih paketov,
+smiselno datotečno strukturo in nekaj privzetih nastavitev. Ko prenašate
+Symfoyn2 distribucijo, prenašate funkcionalno skeletno aplikacijo,
+ki se jo lahko nemudoma uporabi za začetek razvijanja vaše aplikacije.
+
+Začnite z obiskom Symfony2 prenosne strani na `http://symfony.com/download`_.
+Na tej strani boste videli *Symfony standardno izdajo*, ki je glavna
+Symfony2 distribucija. Na voljo sta 2 načina, da začnete z vašim projektom:
+
+Opcija 1) Composer
 ~~~~~~~~~~~~~~~~~~
 
-`Composer`_ is a dependency management library for PHP, which you can use
-to download the Symfony2 Standard Edition.
+`Composer`_ je knjižnica upravljalnika odvisnosti za PHP, s katerim lahko
+prenesete Symfony2 standardno izdajo.
 
-Start by `downloading Composer`_ anywhere onto your local computer. If you
-have curl installed, it's as easy as:
+Pričnite s `prenosom Composer-ja`_ kjerkoli na vašem lokalnem računalniku. Če
+imate nameščen curl, je enostavno kot:
 
 .. code-block:: bash
 
@@ -48,12 +48,12 @@ have curl installed, it's as easy as:
 
 .. note::
 
-    If your computer is not ready to use Composer, you'll see some recommendations
-    when running this command. Follow those recommendations to get Composer
-    working properly.
+    Če vaš računalnik ni pripravljen za uporabo Composer-ja, boste videli nekaj priporočil,
+    ko poženete ta ukaz. Sledite tem priporočilom, da naredite Composer
+    ustrezno delujoč.
 
-Composer is an executable PHAR file, which you can use to download the Standard
-Distribution:
+Composer je izvršilna PHAR datoteka, ki jo lahko uporabite za prenos standardne
+distribucije:
 
 .. code-block:: bash
 
@@ -61,17 +61,17 @@ Distribution:
 
 .. tip::
 
-    For an exact version, replace "2.3.0" with the latest Symfony version.
-    For details, see the `Symfony Installation Page`_
+    Za točno verzijo, zamenjajte "2.3.0" z zadnjo Symfony verzijo.
+    Za podrobnosti, glejte `Symfony namestitveno stran`_
 
 .. tip::
 
-    To download the vendor files faster, add the ``--prefer-dist`` option at
-    the end of any Composer command.
+    Za prenos vendor datotek hitreje, dodajte opcijo ``--prefer-dist`` na
+    konec kateregakoli Composer ukaza.
 
-This command may take several minutes to run as Composer downloads the Standard
-Distribution along with all of the vendor libraries that it needs. When it finishes,
-you should have a directory that looks something like this:
+Ta ukaz lahko traja nekaj minut, da se požene, saj Composer prenaša standardno
+distribucijo skupaj z vsemi vendor knjižnicami, ki jih potrebuje. Ko konča,
+bi morali imeti direktorij, ki izgleda nekako takole:
 
 .. code-block:: text
 
@@ -89,22 +89,22 @@ you should have a directory that looks something like this:
                 app.php
                 ...
 
-Option 2) Download an Archive
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Opcija 2) Prenos arhiva
+~~~~~~~~~~~~~~~~~~~~~~~
 
-You can also download an archive of the Standard Edition. Here, you'll
-need to make two choices:
+Lahko tudi prenesete arhiv standardne izdaje. Tu boste
+potrebovali narediti dve izbiri:
 
-* Download either a ``.tgz`` or ``.zip`` archive - both are equivalent, download
-  whatever you're more comfortable using;
+* Prenesite ali ``.tgz`` ali ``.zip`` arhiv - oba sta ekvivalentna, prenesite
+  kateregakoli, s katerim ste bolj domači pri uporabi;
 
-* Download the distribution with or without vendors. If you're planning on
-  using more third-party libraries or bundles and managing them via Composer,
-  you should probably download "without vendors".
+* Prenesite distribucijo z ali brez izdelovalcev (vendors). Če načrtujete
+  uporabljati več tretje osebnih knjižnic ali paketov in jih upravljati preko Composer-ja,
+  bi morali verjetno prenesti brez izdelovalcev - "without vendors".
 
-Download one of the archives somewhere under your local web server's root
-directory and unpack it. From a UNIX command line, this can be done with
-one of the following commands (replacing ``###`` with your actual filename):
+Prenesite enega izmed arhivov nekam pod vaš vrhnji direktorij lokalnega spletnega
+strežnika in ga razpakirajte. Iz UNIX ukazne vrstice je to mogoče narediti z
+enim izmed sledečih ukazov (zamenjajte ``###`` z vašim dejanskim imenom datoteke):
 
 .. code-block:: bash
 
@@ -114,63 +114,63 @@ one of the following commands (replacing ``###`` with your actual filename):
     # for a .zip file
     $ unzip Symfony_Standard_Vendors_2.3.###.zip
 
-If you've downloaded "without vendors", you'll definitely need to read the
-next section.
+Če ste prenesli "without vendors", boste zagotovo potrebovali prebrati
+naslednjo sekcijo.
 
 .. note::
 
-    You can easily override the default directory structure. See
-    :doc:`/cookbook/configuration/override_dir_structure` for more
-    information.
+    Lahko enostavno prepišete privzeto strukturo direktorijev. Glejte
+    :doc:`/cookbook/configuration/override_dir_structure` za več
+    informacij.
 
-All public files and the front controller that handles incoming requests in
-a Symfony2 application live in the ``Symfony/web/`` directory. So, assuming
-you unpacked the archive into your web server's or virtual host's document root,
-your application's URLs will start with ``http://localhost/Symfony/web/``.
+Vse javne datoteke in prednji krmilnik, ki upravljajo prihajajoče zahtevke v
+Symfony2 aplikaciji obstojajo v ``Symfony/web`` direktoriju. Torej ob predpostavki,
+date ste razpakirali arhiv v vaš vrhnji dokumentni direktorij spletnega strežnika ali virtualnega gostitelja,
+se bodo URL-ji vaše aplikacije začeli z ``http://localhost/Symfony/web``.
 
 .. note::
 
-    The following examples assume you don't touch the document root settings
-    so all URLs start with ``http://localhost/Symfony/web/``
+    Sledeči primeri predpostavljajo, da se ne dotikate nastavitev vrhnjega direktorija,
+    da se vsi URL-ji začnejo z ``http://localhost/Symfony/web/``
 
 .. _installation-updating-vendors:
 
-Updating Vendors
-~~~~~~~~~~~~~~~~
+Posodobitev izdelovalcev
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-At this point, you've downloaded a fully-functional Symfony project in which
-you'll start to develop your own application. A Symfony project depends on
-a number of external libraries. These are downloaded into the `vendor/` directory
-of your project via a library called `Composer`_.
+Na tej točki ste prenesli celotno funkcionalni Symfony projekt v katerem
+boste pričeli razvijati vašo lastno aplikacijo. Symfony projekt je odvisen od
+številnih zunanjih knjižnic. Te so prenesene v `vendor/` direktorij
+vašega projekta preko knjižnice imenovane `Composer`_.
 
-Depending on how you downloaded Symfony, you may or may not need to update
-your vendors right now. But, updating your vendors is always safe, and guarantees
-that you have all the vendor libraries you need.
+Odvisno od tega, kako ste prenesli Symfony, boste morali ali po ne posodobiti
+vaše izdelovalce takoj. Vendar posodabljanje vaših izdelovalcev je vedno varno in garantira,
+da imate vse vendor knjižnice, ki jih potrebujete.
 
-Step 1: Get `Composer`_ (The great new PHP packaging system)
+Korak 1: Dobite `Composer`_ (Odlični novi PHP pakirni sistem)
 
 .. code-block:: bash
 
     curl -s http://getcomposer.org/installer | php
 
-Make sure you download ``composer.phar`` in the same folder where
-the ``composer.json`` file is located (this is your Symfony project
-root by default).
+Zagotovite, da ste prenesli ``composer.phar`` v isti direktorij, kjer
+je locirana ``composer.json`` datoteka (to je privzeto vrh vašega Symfony
+projekta).
 
-Step 2: Install vendors
+Korak 2: Namestitev izdelovalcev
 
 .. code-block:: bash
 
     $ php composer.phar install
 
-This command downloads all of the necessary vendor libraries - including
-Symfony itself - into the ``vendor/`` directory.
+Ta ukaz prenese vse potrebne vendor knjižnice - vključno
+sam Symfony - v direktorij ``vendor/``.
 
 .. note::
 
-    If you don't have ``curl`` installed, you can also just download the ``installer``
-    file manually at http://getcomposer.org/installer. Place this file into your
-    project and then run:
+    Če nimate nameščenega ``curl``, lahko tudi samo prenesete ``installer``
+    datoteko ročno iz http://getcomposer.org/installer. Dajte to datoteko v vaš
+    projekt in nato poženite:
 
     .. code-block:: bash
 
@@ -179,15 +179,15 @@ Symfony itself - into the ``vendor/`` directory.
 
 .. tip::
 
-    When running ``php composer.phar install`` or ``php composer.phar update``,
-    composer will execute post install/update commands to clear the cache
-    and install assets. By default, the assets will be copied into your ``web``
-    directory.
+    Ko poganjate ``php composer.phar install`` ali ``php composer.phar update``,
+    bo composer izvedel post install/update ukaza za spraznenje predpomnilnika
+    in namestitev sredstev. Privzeto bodo sredstva kopirana v vaš ``web``
+    direktorij.
 
-    Instead of copying your Symfony assets, you can create symlinks if
-    your operating system supports it. To create symlinks, add an entry
-    in the ``extra`` node of your composer.json file with the key
-    ``symfony-assets-install`` and the value ``symlink``:
+    Namesto kopiranja Symfony sredstev, lahko izdelate simbolične povezave, če
+    vaš operacijski sistem to podpira. To naredi simbolične povezave in doda vnos
+    v ``extra`` vozlišče vaše composer.json datoteke s ključem
+    ``symfony-assetics-install`` in vrednostjo ``symlink``:
 
     .. code-block:: json
 
@@ -197,39 +197,39 @@ Symfony itself - into the ``vendor/`` directory.
             "symfony-assets-install": "symlink"
         }
 
-    When passing ``relative`` instead of ``symlink`` to symfony-assets-install,
-    the command will generate relative symlinks.
+    Ko podajate ``relative`` namesto ``symlink`` k symfony-assets-install,
+    bo ukaz generiral relativne simbolične povezave.
 
-Configuration and Setup
-~~~~~~~~~~~~~~~~~~~~~~~
+Konfiguratija in namestitev
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-At this point, all of the needed third-party libraries now live in the ``vendor/``
-directory. You also have a default application setup in ``app/`` and some
-sample code inside the ``src/`` directory.
+Na tej točki sedaj vse potrebne tretje osebne knjižnice domujejo v ``vendor/``
+direktoriju. Imate tudi privzeto namestitev aplikacije v ``app/`` in nekaj
+vzorčne kode v ``src/`` direktoriju.
 
-Symfony2 comes with a visual server configuration tester to help make sure
-your Web server and PHP are configured to use Symfony. Use the following URL
-to check your configuration:
+Symfony2 prihaja z vizualnim strežnikom konfiguracijskega testerja, da pomaga zagotoviti,
+da sta vaš spletni strežnik in PHP nastavljena za uporabo Symfony. Uporabite sledeči URL,
+da preverite vaše nastavitve:
 
 .. code-block:: text
 
     http://localhost/config.php
 
-If there are any issues, correct them now before moving on.
+Če so težave, jih popravite sedaj preden greste naprej.
 
-.. sidebar:: Setting up Permissions
+.. sidebar:: Nastavitev dovoljenj
 
-    One common issue is that the ``app/cache`` and ``app/logs`` directories
-    must be writable both by the web server and the command line user. On
-    a UNIX system, if your web server user is different from your command
-    line user, you can run the following commands just once in your project
-    to ensure that permissions will be setup properly.
+    Ena pogostejših napak je, da ``app/cache`` in ``app/logs`` direktorija
+    morata biti zapisljiva tako za uporabnika spletnega strežnika kot tudi za uporabnika ukazne vrstice. Na
+    UNIX sistemih, če je vaš uporabnik spletnega strežnika drugačen od vašega uporabnika
+    ukazne vrstice, lahko poženete sledeče ukaze samo enkrat v vašem projektu,
+    da zagotovite, da bodo dovoljenja ustrezno nastavljena.
 
-    **1. Using ACL on a system that supports chmod +a**
+    **1. Uporaba ACL na sistemu, ki podpira chmod +a**
 
-    Many systems allow you to use the ``chmod +a`` command. Try this first,
-    and if you get an error - try the next method. This uses a command to
-    try to determine your web server user and set it as ``APACHEUSER``:
+    Mnogo sistemov vam omogoča uporabo ``chmod +a`` ukaza. Najprej poskusite to
+    in če dobite napako - poskusite naslednjo metodo. To uporablja ukaz za
+    poskus ugotovitve vašega uporabnika spletnega strežnika in ga nastavi kot ``APACHEUSER``:
 
     .. code-block:: bash
 
@@ -241,13 +241,13 @@ If there are any issues, correct them now before moving on.
         $ sudo chmod +a "`whoami` allow delete,write,append,file_inherit,directory_inherit" app/cache app/logs
 
 
-    **2. Using ACL on a system that does not support chmod +a**
+    **2. Uporaba ACL na sistemu, ki ne podpira chmod +a**
 
-    Some systems don't support ``chmod +a``, but do support another utility
-    called ``setfacl``. You may need to `enable ACL support`_ on your partition
-    and install setfacl before using it (as is the case with Ubuntu). This
-    uses a command to try to determine your web server user and set it as
-    ``APACHEUSER``:
+    Nekateri sistemi ne podpirajo ``chmod +a``, vendar podpirajo drugo orodje
+    imenovano ``setfacl``. Lahko boste morali `omogočiti ACL podporo`_ na vaši particiji
+    in namestiti setfacl preden ga uporabljate (kot je primer na Ubuntu). To
+    uporablja ukaz za poskus ugotovitve vašega uporabnika spletnega strežnika in ga nastavi kot
+    ``APACHEUSER``.
 
     .. code-block:: bash
 
@@ -255,14 +255,14 @@ If there are any issues, correct them now before moving on.
 		$ sudo setfacl -R -m u:$APACHEUSER:rwX -m u:`whoami`:rwX app/cache app/logs
 		$ sudo setfacl -dR -m u:$APACHEUSER:rwX -m u:`whoami`:rwX app/cache app/logs
 		
-    **3. Without using ACL**
+    **3. Brez uporabe ACL**
 
-    If you don't have access to changing the ACL of the directories, you will
-    need to change the umask so that the cache and log directories will
-    be group-writable or world-writable (depending if the web server user
-    and the command line user are in the same group or not). To achieve
-    this, put the following line at the beginning of the ``app/console``,
-    ``web/app.php`` and ``web/app_dev.php`` files::
+    Če nimate dostopa do spreminjanja ACL direktorijev, boste
+    morali spremeniti umask, da bosta cache in log direktorija
+    skupinsko-zapisljiva ali world-zapisljiva (odvisno če sta uporabnik spletnega strežnika
+    in uporabnik ukazne vrstice v isti skupini ali ne). Da to dosežete,
+    dodajte sledečo vrstico na začetek ``app/console``,
+    ``web/app.php`` in ``web/app_dev.php`` datotek::
 
         umask(0002); // This will let the permissions be 0775
 
@@ -270,17 +270,17 @@ If there are any issues, correct them now before moving on.
 
         umask(0000); // This will let the permissions be 0777
 
-    Note that using the ACL is recommended when you have access to them
-    on your server because changing the umask is not thread-safe.
+    Bodite pozorni, da uporaba ACL je priporočljiva, ko imate dostop do njih
+    na vašem strežniku, ker sprememba umask ni varna za niti.
 
-When everything is fine, click on "Go to the Welcome page" to request your
-first "real" Symfony2 webpage:
+Ko je vse v redu, kliknite na "Go to the Welcome page", da zahtevate vašo
+prvo "pravo" Symfony2 spletno stran:
 
 .. code-block:: text
 
     http://localhost/app_dev.php/
 
-Symfony2 should welcome and congratulate you for your hard work so far!
+Symfony2 bi vas moral pozdraviti in čestitati za težko delo do sedaj!
 
 .. image:: /images/quick_tour/welcome.png
 
@@ -316,8 +316,8 @@ a wide variety of articles about solving specific problems with Symfony.
     If you want to remove the sample code from your distribution, take a look
     at this cookbook article: ":doc:`/cookbook/bundles/remove`"
 
-Using Source Control
---------------------
+Uporaba kontrole izvorne kode
+-----------------------------
 
 If you're using a version control system like ``Git`` or ``Subversion``, you
 can setup your version control system and begin committing your project to
@@ -344,12 +344,12 @@ Now, the vendor directory won't be committed to source control. This is fine
 project, he/she can simply run the ``php composer.phar install`` script to
 install all the necessary project dependencies.
 
-.. _`enable ACL support`: https://help.ubuntu.com/community/FilePermissionsACLs
+.. _`omogočiti ACL podporo`: https://help.ubuntu.com/community/FilePermissionsACLs
 .. _`http://symfony.com/download`: http://symfony.com/download
 .. _`Git`: http://git-scm.com/
 .. _`GitHub Bootcamp`: http://help.github.com/set-up-git-redirect
 .. _`Composer`: http://getcomposer.org/
-.. _`downloading Composer`: http://getcomposer.org/download/
+.. _`prenosom Composer-ja`: http://getcomposer.org/download/
 .. _`Apache`: http://httpd.apache.org/docs/current/mod/core.html#documentroot
 .. _`Nginx`: http://wiki.nginx.org/Symfony
-.. _`Symfony Installation Page`:    http://symfony.com/download
+.. _`Symfony namestitveno stran`:    http://symfony.com/download

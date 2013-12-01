@@ -1,29 +1,29 @@
 .. index::
    single: Stable API
 
-The Symfony2 Stable API
-=======================
+Symfony2 stabilni API
+=====================
 
-The Symfony2 stable API is a subset of all Symfony2 published public methods
-(components and core bundles) that share the following properties:
+Symfony2 stabilni API je podskupek vseh Symfony2 objavljenih javnih metod
+(komponent in paket jedra), ki imajo skupne sledeče lastnosti:
 
-* The namespace and class name won't change;
-* The method name won't change;
-* The method signature (arguments and return value type) won't change;
-* The semantic of what the method does won't change.
+* Imenski prostor in ime razreda se ne bosta spremenila;
+* Ime metode se ne bo spremenilo;
+* Podpis metode (argumenti in tip vrnjenene vrednosti) se ne bodo spremenili;
+* Semantika kaj metoda naredi se ne bo spremenila.
 
-The implementation itself can change though. The only valid case for a change
-in the stable API is in order to fix a security issue.
+Čeprav sama implementacija se lahko spremeni. Edini veljaven primer za spremembo
+v stabilnem API-ju je vrstni red za popravek varnostne težave.
 
-The stable API is based on a whitelist, tagged with `@api`. Therefore,
-everything not tagged explicitly is not part of the stable API.
+Stabilni API je osnovan na ustreznem seznamu, označenem z `@api`. Zato
+vse, kar ni označeno eksplicitno ni del stabilnega API-ja.
 
 .. tip::
 
-    Any third party bundle should also publish its own stable API.
+    Katerekoli tretje osebni paketi bi tudi morali objaviti svoj lastni stabilni API.
 
-As of the latest stable release of Symfony, the following components have
-a public tagged API:
+Od zadnje stabilne izdaje Symfony imajo sledeče komponente
+javno označen API:
 
 * BrowserKit
 * ClassLoader
