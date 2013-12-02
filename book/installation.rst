@@ -286,63 +286,63 @@ Symfony2 bi vas moral pozdraviti in čestitati za težko delo do sedaj!
 
 .. tip::
 
-    To get nice and short urls you should point the document root of your
-    webserver or virtual host to the ``Symfony/web/`` directory. Though
-    this is not required for development it is recommended at the time your
-    application goes into production as all system and configuration files
-    become inaccessible to clients then. For information on configuring
-    your specific web server document root, read
+    Da dobite lepe in kratke url-je, bi morali pokazati vaš vrhnji direktorij vašega
+    spletnega strežnika ali virtualnega gostitelja v ``Symfony/web`` direktorij. Vendar
+    to ni zahtevano za razvoj, priporočljivo je takrat, ko gre vaša
+    aplikacija v produkcijo saj vse sistemske in nastavitvene datoteke
+    postanejo nedostopne klientom. Za informacije o nastavitvah
+    vašega specifičnega vrhnjega direktorija spletnega strežnika preberite
     :doc:`/cookbook/configuration/web_server_configuration`
-    or consult the official documentation of your webserver:
+    ali se posvetujte pri uradni dokumentaciji vašega spletnega strežnika:
     `Apache`_ | `Nginx`_ .
 
-Beginning Development
----------------------
+Pričetek razvoja
+----------------
 
-Now that you have a fully-functional Symfony2 application, you can begin
-development! Your distribution may contain some sample code - check the
-``README.md`` file included with the distribution (open it as a text file)
-to learn about what sample code was included with your distribution.
+Sedaj, ko imate polno funkcionalno Symfony2 aplikacijo, lahko pričnete
+razvijati! Vaša distribucija lahko vsebuje nekaj vzorčne kode - preverite
+``README.md`` datoteko vključeno v distribuciji (odprite jo kot tekstovno datoteko),
+da izvedete o tem, katera vzorčna koda je vključena v vašo distribucijo.
 
-If you're new to Symfony, check out ":doc:`page_creation`", where you'll
-learn how to create pages, change configuration, and do everything else you'll
-need in your new application.
+Če ste novi v Symfony, preverite ":doc:`page_creation`", kjer boste
+izvedeli, kako ustvariti strani, spremeniti nastavitve in narediti vse ostalo, kar
+potrebujete v vaši novi aplikaciji.
 
-Be sure to also check out the :doc:`Cookbook </cookbook/index>`, which contains
-a wide variety of articles about solving specific problems with Symfony.
+Bodite prepričani, da tudi preverite :doc:`Recepte </cookbook/index>`, ki vsebujejo
+široko raznolikost člankov o reševanju specifičnih problemov v Symfony.
 
 .. note::
 
-    If you want to remove the sample code from your distribution, take a look
-    at this cookbook article: ":doc:`/cookbook/bundles/remove`"
+    Če želite odstraniti vzorčno kodo iz vaše distribucije, poglejte
+    ta članek: ":doc:`/cookbook/bundles/remove`"
 
 Uporaba kontrole izvorne kode
 -----------------------------
 
-If you're using a version control system like ``Git`` or ``Subversion``, you
-can setup your version control system and begin committing your project to
-it as normal. The Symfony Standard edition *is* the starting point for your
-new project.
+Če uporabljate sistem kontrole izvorne kode, kot sta ``Git`` ali ``Subversion``,
+lahko nastavite vaš sistem kontrole izvorne kode in pričnete dodajati vaš projekt
+vanj kot običajno. Symfony standardna izdaja *je* začetna točka za vaš
+novi projekt.
 
-For specific instructions on how best to setup your project to be stored
-in git, see :doc:`/cookbook/workflow/new_project_git`.
+Za specifična navodila kako najboljše nastaviti vaš projekt, da bo shranjen
+v git-u, glejte: :doc:`/cookbook/workflow/new_project_git`.
 
-Ignoring the ``vendor/`` Directory
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Ignoriranje ``vendor/`` direktorija
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If you've downloaded the archive *without vendors*, you can safely ignore
-the entire ``vendor/`` directory and not commit it to source control. With
-``Git``, this is done by creating and adding the following to a ``.gitignore``
-file:
+Če ste prenesli arhiv *without vendors*, lahko varno ignorirate
+celotni ``vendor/`` direktorij in ga ne dodate v kontrolo izvorne kode. Z
+``Git-om`` je to narejeno z ustvarjanjem in dodajanjem sledečega v ``.gitignore``
+datoteko:
 
 .. code-block:: text
 
     /vendor/
 
-Now, the vendor directory won't be committed to source control. This is fine
-(actually, it's great!) because when someone else clones or checks out the
-project, he/she can simply run the ``php composer.phar install`` script to
-install all the necessary project dependencies.
+Sedaj vendor direktorij ne bo dodan kontroli izvorne kode. To je v redu
+(v bistvu je odlično!), ker ko nekdo drug klonira ali preveri
+projekt, lahko enostavno požene ``php composer.phar install`` skripto
+za namestitev vseh potrebnih projektnih odvisnosti.
 
 .. _`omogočiti ACL podporo`: https://help.ubuntu.com/community/FilePermissionsACLs
 .. _`http://symfony.com/download`: http://symfony.com/download
