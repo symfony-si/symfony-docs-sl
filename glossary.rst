@@ -117,7 +117,7 @@ Glossary
         :doc:`/book/security` chapters.
 
    Yaml
-        *YAML* je rekurzivna krativa za "YAML Ain't a Markup Language". Gre za
+        *YAML* je rekurzivna kratica za "YAML Ain't a Markup Language". Gre za
         lahko, človeku prijazen serializacijski jezik, uporabljen obširno v Symfony2
         nastavitvenih datotekah. Oglejte si :doc:`/components/yaml/introduction`
         poglavje.

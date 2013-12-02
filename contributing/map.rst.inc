@@ -20,5 +20,4 @@
 * **Skupnost**
 
   * :doc:`Proces izdaj </contributing/community/releases>`
-  * :doc:`IRC sestanki </contributing/community/irc>`
   * :doc:`Ostali viri </contributing/community/other>`
