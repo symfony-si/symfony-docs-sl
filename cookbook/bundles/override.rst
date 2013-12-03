@@ -1,51 +1,51 @@
 .. index::
    single: Bundle; Inheritance
 
-How to Override any Part of a Bundle
-====================================
+Kako povoziti katerikoli del paketa
+===================================
 
-This document is a quick reference for how to override different parts of
-third-party bundles.
+Ta dokument je hitra referenca, kako povoziti različne dele
+tretje osebnih paketov.
 
-Templates
----------
+Predloge
+--------
 
-For information on overriding templates, see
+Za informacije kako povoziti predloge, glejte
 
 * :ref:`overriding-bundle-templates`.
 * :doc:`/cookbook/bundles/inheritance`
 
-Routing
--------
+Usmerjanje
+----------
 
-Routing is never automatically imported in Symfony2. If you want to include
-the routes from any bundle, then they must be manually imported from somewhere
-in your application (e.g. ``app/config/routing.yml``).
+Usmerjanje ni nikoli avtomatsko uvoženo v Symfony2. Če želite vključiti
+usmeritve iz kateregakoli paketa, potem morajo biti ročno uvožene nekje iz
+v vaši aplikaciji (npr. ``app/config/routing.yml``).
 
-The easiest way to "override" a bundle's routing is to never import it at
-all. Instead of importing a third-party bundle's routing, simply copying
-that routing file into your application, modify it, and import it instead.
+Najenostavnejši način, da "povozite" usmerjanje paketa je, da ga nikoli ne uvozite
+sploh. Namesto uvoza usmerjanja tretje osebnega paketa enostavno kopirajte
+datoteko usmerjanja v vašo aplikacijo, jo spremenite in jo uvozite.
 
-Controllers
------------
+Krmilniki
+---------
 
-Assuming the third-party bundle involved uses non-service controllers (which
-is almost always the case), you can easily override controllers via bundle
-inheritance. For more information, see :doc:`/cookbook/bundles/inheritance`.
-If the controller is a service, see the next section on how to override it.
+Ob predpostavki, da vključeni tretje osebni paket uporablja krmilnike nepovezane s storitvami (kar
+je skoraj vedno primer), lahko enostavno povozite krmilnike preko dedovanja
+paketa. Za več infomracij, glejte :doc:`/cookbook/bundles/inheritance`.
+Če je krmilnik storitev, glejte naslednjo sekcijo, kako ga povoziti.
 
-Services & Configuration
+Storitve & konfiguracija
 ------------------------
 
-In order to override/extend a service, there are two options. First, you can
-set the parameter holding the service's class name to your own class by setting
-it in ``app/config/config.yml``. This of course is only possible if the class name is
-defined as a parameter in the service config of the bundle containing the
-service. For example, to override the class used for Symfony's ``translator``
-service, you would override the ``translator.class`` parameter. Knowing exactly
-which parameter to override may take some research. For the translator, the
-parameter is defined and used in the ``Resources/config/translation.xml`` file
-in the core FrameworkBundle:
+Da povozite/razširite storitev, sta na voljo dve opciji. Najprej lahko
+nastavite parameter, ki drži ime razreda storitve v vaš lastni razred z njegovo
+nastavitvijo v ``app/config/config/.yml``. To je seveda možno samo, če je ime razreda
+definirano kot parameter v nastavitvah storitve paketa, ki vključuje
+storitev. Na primer, da prepišete uporabljeni razred za Symfony-jevo storitev
+``translator``, bi morali povoziti parameter ``translator.class``. Vedenje točnega
+parametra za povoziti lahko vzame nekaj raziskovanja. Za translator je
+parameter definiran in uporabljen v ``Resources/config/translation.xml`` datoteki
+v jedru FrameworkBundle paketa:
 
 .. configuration-block::
 
@@ -67,9 +67,9 @@ in the core FrameworkBundle:
         // app/config/config.php
         $container->setParameter('translator.class', 'Acme\HelloBundle\Translation\Translator');
 
-Secondly, if the class is not available as a parameter, you want to make sure the
-class is always overridden when your bundle is used, or you need to modify
-something beyond just the class name, you should use a compiler pass::
+Naslednje, če razred ni na voljo kot parameter, boste želeli zagotoviti, da
+je razred vedno prepisan, ko je vaš paket uporabljen, ali pa morate spremeniti
+nekaj, kar presega samo ime razreda, bi morali uporabiti t.i. compiler pass::
 
     // src/Acme/DemoBundle/DependencyInjection/Compiler/OverrideServiceCompilerPass.php
     namespace Acme\DemoBundle\DependencyInjection\Compiler;
@@ -86,50 +86,50 @@ something beyond just the class name, you should use a compiler pass::
         }
     }
 
-In this example you fetch the service definition of the original service, and set
-its class name to your own class.
+V tem primeru lovite definicijo storitve originalne storitve in nastavljate
+njegovo ime razreda na vaš lastni razred.
 
-See :doc:`/cookbook/service_container/compiler_passes` for information on how to use
-compiler passes. If you want to do something beyond just overriding the class -
-like adding a method call - you can only use the compiler pass method.
+Glejte :doc:`/cookbook/service_container/compiler_passes` za informacije kako uporabiti
+compiler pass-e. Če želite narediti nekaj, kar presega samo povoziti razred -
+kot je dodajanje klica metode - lahko samo uporabite compiler pass metodo.
 
-Entities & Entity mapping
--------------------------
+Entitete in preslikanje entitet
+-------------------------------
 
-Due to the way Doctrine works, it is not possible to override entity mapping
-of a bundle. However, if a bundle provides a mapped superclass (such as the
-``User`` entity in the FOSUserBundle) one can override attributes and
-associations. Learn more about this feature and its limitations in
-`the Doctrine documentation`_.
+Zaradi načina, kako Doctrine deluje, ni možno prepisati preslikanja entitete
+paketa. Vendar, če paket ponuja super razred preslikav (kot je
+``User`` entiteta v FOSUserBundle), lahko povozite atribute in
+asociacije. Izvedite več o tej lastnosti in njenih pomankljivostih v
+`dokumentaciji Doctrine`_.
 
-Forms
------
+Obrazci
+-------
 
-In order to override a form type, it has to be registered as a service (meaning
-it is tagged as "form.type"). You can then override it as you would override any
-service as explained in `Services & Configuration`_. This, of course, will only
-work if the type is referred to by its alias rather than being instantiated,
-e.g.::
+Da povozite tip obrazca, mora biti registriran kot storitev (kar pomeni
+da je označen kot "form.type"). Nato ga lahko povozite, kakor bi povozili katerokoli
+storitev, kot je razloženo v poglavju `Storitve & konfiguracija`_. To bo seveda
+delovalo samo, če je tip sklican po svojem aliasu namesto, da je instantiziran,
+npr.::
 
     $builder->add('name', 'custom_type');
 
-rather than::
+namesto tega::
 
     $builder->add('name', new CustomType());
 
 .. _override-validation:
 
-Validation metadata
--------------------
+Potrjevanje meta podatkov
+-------------------------
 
-Symfony loads all validation configuration files from every bundle and
-combines them into one validation metadata tree. This means you are able to
-add new constraints to a property, but you cannot override them.
+Symfony naloži vse nastavitvene datoteke potrjevanja iz vsakega paketa in
+jih kombinira v eno potrditveno metadata drevo. To pomeni, da lahko
+dodate nove omejitve lastnosti, vendar jih ne morete povoziti.
 
-To override this, the 3rd party bundle needs to have configuration for
-:ref:`validation groups <book-validation-validation-groups>`. For instance,
-the FOSUserBundle has this configuration. To create your own validation, add
-the constraints to a new validation group:
+Da to povozite, mora imeti tretje osebni paket nastavitev za
+:ref:`potrjevalne skupine <book-validation-validation-groups>`. Na primer
+FOSUserBundle ima te nastavitve. Da izdelate svojo lastno potrjevanje, dodajte
+omejitve v novo potrjevalno skupino:
 
 .. configuration-block::
 
@@ -167,25 +167,25 @@ the constraints to a new validation group:
             </class>
         </constraint-mapping>
 
-Now, update the FosUserBundle configuration, so it uses your validation groups
-instead of the original ones.
+Sedaj, posodobite FOSUserBundle nastavitve, da uporablja vaše potrjevalne skupine
+namesto originalnih.
 
 .. _override-translations:
 
-Translations
-------------
+Prevodi
+-------
 
-Translations are not related to bundles, but to domains. That means that you
-can override the translations from any translation file, as long as it is in
-:ref:`the correct domain <using-message-domains>`.
+Prevodi se ne tičejo paketov, vendar domen. To pomeni, da
+lahko povozite prevode iz katerekoli datoteke prevodov, dokler je v
+:ref:`pravilni domeni <using-message-domains>`.
 
 .. caution::
 
-    The last translation file always wins. That mean that you need to make
-    sure that the bundle containing *your* translations is loaded after any
-    bundle whose translations you're overriding. This is done in ``AppKernel``.
+    Zadnji prevod vedno zmaga. To pomeni, da potrebujete zagotoviti,
+    da paket, ki vsebuje *vaše* prevode, je naložen za katerimkoli
+    paketom, katerega prevode povozite. To je narejeno v ``AppKernel``.
 
-    The file that always wins is the one that is placed in
-    ``app/Resources/translations``, as those files are always loaded last.
+    Datoteka, ki vedno zmaga, je tista, ki je dana v
+    ``app/Resources/translations``, saj se te datoteke vedno naložijo zadnje.
 
-.. _`the Doctrine documentation`: http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/inheritance-mapping.html#overrides
+.. _`dokumentaciji Doctrine`: http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/inheritance-mapping.html#overrides
