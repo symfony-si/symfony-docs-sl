@@ -558,20 +558,21 @@ glejte :doc:`/cookbook/security/form_login`.
 
     Ko nastavljate vaš prijavni obrazec, pazite na nekaj pogostih napak.
 
-    **1. Create the correct routes**
+    **1. Ustvarite ustrezne usmeritve**
 
-    First, be sure that you've defined the ``login`` and ``login_check``
-    routes correctly and that they correspond to the ``login_path`` and
-    ``check_path`` config values. A misconfiguration here can mean that you're
-    redirected to a 404 page instead of the login page, or that submitting
-    the login form does nothing (you just see the login form over and over
-    again).
+    Najprej bodite gotovi, da definirate ``login`` in ``login_check``
+    usmeritve ustrezno in da kažejo na ``login_path`` in
+    ``check_path`` nastavitvene vrednosti. Napačna konfiguracija tu lahko pomeni, da ste
+    preusmerjeni na 404 stran namesto prijavne strani ali da pošiljanje
+    prijavnega obrazca ne naredi ničesar (samo vedno znova in znova vidite prijavni
+    obrazec).
 
-    **2. Be sure the login page isn't secure**
+    **2. Bodite prepričani, da prijavna stran ni zavarovana**
 
-    Also, be sure that the login page does *not* require any roles to be
-    viewed. For example, the following configuration - which requires the
-    ``ROLE_ADMIN`` role for all URLs (including the ``/login`` URL), will
+    Tudi bodite prepričani, da prijavna stran *ne* zahteva kakršnih koli vlog, da
+    je lahko ogledana. Na primer, sledeče nastavitve - ki zahtevajo
+    ``ROLE_ADMIN`` vlogo za vse URL-je (vključno z ``/login`` URL-jem), bodo
+    povzročile zanko preusmerjanja:
     cause a redirect loop:
 
     .. configuration-block::
@@ -593,7 +594,7 @@ glejte :doc:`/cookbook/security/form_login`.
                 array('path' => '^/', 'role' => 'ROLE_ADMIN'),
             ),
 
-    Removing the access control on the ``/login`` URL fixes the problem:
+    Odstranitev dostopne kontrole na ``/login`` URL-ju popravi problem:
 
     .. configuration-block::
 
@@ -617,9 +618,9 @@ glejte :doc:`/cookbook/security/form_login`.
                 array('path' => '^/', 'role' => 'ROLE_ADMIN'),
             ),
 
-    Also, if your firewall does *not* allow for anonymous users, you'll need
-    to create a special firewall that allows anonymous users for the login
-    page:
+    Tudi, če vaš požarni zdi *ne* dovoljuje anonimnih uporabnikov, boste potrebovali
+    izdelati posebni požarni zid, ki omogoča anonimnim uporabnikom za prijavno
+    stran:
 
     .. configuration-block::
 
@@ -655,50 +656,50 @@ glejte :doc:`/cookbook/security/form_login`.
                 ),
             ),
 
-    **3. Be sure ``/login_check`` is behind a firewall**
+    **3. Bodite prepričani, da je ``/login_check`` za požarnim zidom**
 
-    Next, make sure that your ``check_path`` URL (e.g. ``/login_check``)
-    is behind the firewall you're using for your form login (in this example,
-    the single firewall matches *all* URLs, including ``/login_check``). If
-    ``/login_check`` doesn't match any firewall, you'll receive a ``Unable
-    to find the controller for path "/login_check"`` exception.
+    Naslednje zagotovite, da je vaš ``check_path`` URL (npr. ``/login_check``)
+    za požarnim zidom, ki ga uporabljate za vaš prijavni obrazec (v tem primeru,
+    se en požarni zid ujema z *vsemi* URL-ji, vključno z ``/login_check``). Če
+    se ``/login_check`` ne ujema z nobenim požarnim zidom, boste prejeli ``Unable
+    to find the controller for patch "/login_check"`` izjemo.
 
-    **4. Multiple firewalls don't share security context**
+    **4. Več požarnih zidov si ne deli varnostnega konteksta**
 
-    If you're using multiple firewalls and you authenticate against one firewall,
-    you will *not* be authenticated against any other firewalls automatically.
-    Different firewalls are like different security systems. To do this you have
-    to explicitly specify the same :ref:`reference-security-firewall-context`
-    for different firewalls. But usually for most applications, having one
-    main firewall is enough.
+    Če uporabljate več požarnih zidov in izvedete pristno preverjanje proti enem izmed njih
+    *ne* boste pristno preverjeni proti kateremkoli drugem požarnem zidu avtomatsko.
+    Različni požarni zidovi so kot različni požarni sistemi. Da to naredite, morate
+    eksplicitno določiti isto :ref:`reference-security-firewall-context`
+    za različne požarne zidove. Vendar običajno za večino aplikacij, je imeti
+    glavni požarni zid dovolj.
 
-Authorization
--------------
+Avtorizacija
+------------
 
-The first step in security is always authentication. Once the user has been
-authenticated, authorization begins. Authorization provides a standard and
-powerful way to decide if a user can access any resource (a URL, a model
-object, a method call, ...). This works by assigning specific roles to each
-user, and then requiring different roles for different resources.
+Prvi korak k varnosti je vedno preverjanje pristnosti. Ko je enkrat uporabnik
+pristno preverjen, se prične avtorizacija. Avtorizacija ponuja standardni in
+močan način, da določi, če uporabnik lahko dostopa do kateregakoli vira (URL, model,
+objekt, klic metode, ...). To deluje z dodelitvijo določenih vlog vsakemu
+uporabniku in nato zahtevanje različnih vlog za različne vire.
 
-The process of authorization has two different sides:
+Ta proces avtorizacije ima dve različni strani:
 
-#. The user has a specific set of roles;
-#. A resource requires a specific role in order to be accessed.
+#. Uporabnik ima določen skupek vlog;
+#. Vir zahteva določeno vlogo, da je dostopan.
 
-In this section, you'll focus on how to secure different resources (e.g. URLs,
-method calls, etc) with different roles. Later, you'll learn more about how
-roles are created and assigned to users.
+V tej sekciji, se boste osredočili na to, kako zavarovati različne vire (npr. URL-je,
+klice metod itd.) z različnimi vlogami. Kasneje se boste naučili več o tem, kako
+se vloge izdela in jih dodeli uporabnikom.
 
-Securing Specific URL Patterns
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Zavarovanje specifičnih URL vzorcev
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The most basic way to secure part of your application is to secure an entire
-URL pattern. You've seen this already in the first example of this chapter,
-where anything matching the regular expression pattern ``^/admin`` requires
-the ``ROLE_ADMIN`` role.
+Najosnovnejši način zavarovanja dela vaše aplikacije je zavarovanje celotnega
+URL vzorca. To ste že videli v prvem primeru tega poglavja,
+kjer karkoli, kar se ujema z regularnim izrazom vzorca ``^/admin`` zahteva
+vlogo ``ROLE_ADMIN``.
 
-You can define as many URL patterns as you need - each is a regular expression.
+Lahko definirate toliko URL vzorcev, kot jih potrebujete - vsak je regularni izraz.
 
 .. configuration-block::
 
@@ -733,23 +734,23 @@ You can define as many URL patterns as you need - each is a regular expression.
 
 .. tip::
 
-    Prepending the path with ``^`` ensures that only URLs *beginning* with
-    the pattern are matched. For example, a path of simply ``/admin`` (without
-    the ``^``) would correctly match ``/admin/foo`` but would also match URLs
-    like ``/foo/admin``.
+    Dodajanje predpone poti z ``^`` zagotavlja, da se ujemajo samo URL-ji, ki se *začnejo* z
+    vzorcem. Na primer enostavna pot ``/admin`` (brez
+    ``^``) bi se ustrezno ujela z ``/admin/foo``, vendar bi bila tudi ujeta z URL-ji
+    kot so ``/foo/admin``.
 
 .. _security-book-access-control-explanation:
 
-Understanding how ``access_control`` works
+Razumevanje kako deluje ``access_control``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-For each incoming request, Symfony2 checks each ``access_control`` entry
-to find *one* that matches the current request. As soon as it finds a matching
-``access_control`` entry, it stops - only the **first** matching ``access_control``
-is used to enforce access.
+Za vsak prihajajoč zahtevek, Symfony2 preveri vsak ``access_control`` vnos,
+da najde *enega*, ki se ujema s trenutnim zahtevkom. Kakor hitro najde ujemanje z
+``acceess_controle`` vnos, se ustavi - samo **prvo** ujemanje z ``access_control``
+je uporabljeno, da vsili dostop.
 
-Each ``access_control`` has several options that configure two different
-things:
+Vsak ``access_control`` ima nekaj opcij, ki nastavijo dve različni
+stvari:
 
 * (a) :ref:`should the incoming request match this access control entry <security-book-access-control-matching-options>`
 * (b) :ref:`once it matches, should some sort of access restriction be enforced <security-book-access-control-enforcement-options>`:
