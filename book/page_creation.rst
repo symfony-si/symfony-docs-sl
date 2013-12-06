@@ -1,113 +1,113 @@
 .. index::
    single: Page creation
 
-Creating Pages in Symfony2
+Izdelava strani v Symfony2
 ==========================
 
-Creating a new page in Symfony2 is a simple two-step process:
+Izdelava nove strani v Symfony2 je enostaven proces v dveh korakih:
 
-* *Create a route*: A route defines the URL (e.g. ``/about``) to your page
-  and specifies a controller (which is a PHP function) that Symfony2 should
-  execute when the URL of an incoming request matches the route path;
+* *Izdelajte usmeritev*: Usmeritev definira URL (npr. ``/about``) na vašo stran
+  in določa krmilnik (ki je PHP funkcija), ki bi jo moral Symfony2
+  izvršiti, ko se URL prihajajočega zahtevka ujema s potjo usmeritve;
 
-* *Create a controller*: A controller is a PHP function that takes the incoming
-  request and transforms it into the Symfony2 ``Response`` object that's
-  returned to the user.
+* *Izdelajte krmilnik*: Krmilnik je PHP funkcija, ki sprejme prihajajoči
+  zahtevek in ga pretvori v Symfony2 ``Response`` objekt, ki je
+  vrnjen uporabniku.
 
-This simple approach is beautiful because it matches the way that the Web works.
-Every interaction on the Web is initiated by an HTTP request. The job of
-your application is simply to interpret the request and return the appropriate
-HTTP response.
+Ta pristop je lep, ker se ujema z načinom, kako splet deluje.
+Vsaka interakcija na spletu je izvedena s HTTP zahtevkom. Naloga
+vaše aplikacije je enostavno interpretacija zahtevka in vračanje ustreznega
+HTTP odziva.
 
-Symfony2 follows this philosophy and provides you with tools and conventions
-to keep your application organized as it grows in users and complexity.
+Symfony2 sledi tej filozofiji in vam ponuja orodja in konvencije,
+da obdržite vašo aplikacijo organizirano, kot raste v uporabnikih in kompleksnosti.
 
 .. index::
    single: Page creation; Environments & Front Controllers
 
 .. _page-creation-environments:
 
-Environments & Front Controllers
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Okolja & prednji krmilniki
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Every Symfony application runs within an :term:`environment`. An environment
-is a specific set of configuration and loaded bundles, represented by a string.
-The same application can be run with different configurations by running the
-application in different environments. Symfony2 comes with three environments
-defined — ``dev``, ``test`` and ``prod`` — but you can create your own as well.
+Vsaka Symfony aplikacija se poganja znotraj :term:`okolja`. Okolje
+je določen skupek nastavitev in naloženih paketov, predstavljenih z nizom.
+Enaka aplikacija je lahko pognana z različnimi nastavitvami s poganjanjem
+aplikacije v različnih okoljih. Symfony2 prihaja s tremi definiranimi
+okolji - ``dev``, ``test`` in ``prod`` - vendar lahko ustvarite tudi vaše lastno.
 
-Environments are useful by allowing a single application to have a dev environment
-built for debugging and a production environment optimized for speed. You might
-also load specific bundles based on the selected environment. For example,
-Symfony2 comes with the WebProfilerBundle (described below), enabled only
-in the ``dev`` and ``test`` environments.
+Okolja so uporabna, ker omogočajo eni aplikaciji, da ima dev okolje
+zgrajeno za razhroščevanje in produkcijsko okolje optimizirano za hitrost. Lahko
+tudi naložite določene pakete na osnovi izbranega okolja. Na primer
+Symfoyn2 prihaja z WebProfileBundle (opisan spodaj), omogočen samo
+v ``dev`` in ``test`` okoljih.
 
-Symfony2 comes with two web-accessible front controllers: ``app_dev.php`` 
-provides the ``dev`` environment, and ``app.php`` provides the ``prod`` environment.
-All web accesses to Symfony2 normally go through one of these front controllers.
-(The ``test`` environment is normally only used when running unit tests, and so 
-doesn't have a dedicated front controller. The console tool also provides a
-front controller that can be used with any environment.)
+Symfony2 prihaja z dvema spletno dostopnima prednjima krmilnikoma: ``app_dev.php``
+ponuja ``dev`` okolje in ``app.php`` ponuja ``prod`` okolje.
+Vsi spletni dostopi v Symfony2 gredo običajno skozi enega od teh prednjih krmilnikov.
+(Okolje ``test`` je običajno uporabljeno samo, ko poganjate teste enot in tako
+nima namenskega prednjega krmilnika. Orodje konzole tudi ponuja
+prednji krmilnik, ki je lahko uporabljen v kateremkoli okolju.)
 
-When the front controller initializes the kernel, it provides two parameters:
-the environment, and also whether the kernel should run in debug mode.
-To make your application respond faster, Symfony2 maintains a cache under the
-``app/cache/`` directory. When debug mode is enabled (such as ``app_dev.php``
-does by default), this cache is flushed automatically whenever you make changes
-to any code or configuration. When running in debug mode, Symfony2 runs
-slower, but your changes are reflected without having to manually clear the
-cache.
+Ko prednji krmilnik inicializira jedro, tudi ponuja dva parametra:
+okolje in tudi ali naj bo jedro pognano v razhroščevalnem načinu.
+Da naredite vašo aplikacijo hitreje odzivno, Symfony2 vzdržuje predpomnilnik pod
+direktorijem ``app/cache``. Ko je omogočen način rahroščevanja (kot ga ima ``app_dev.php``
+privzeto), je ta predpomnilnik avtomatsko spraznjen, kadarkoli naredite spremembe
+v katerikoli kodi ali nastavitvi. Ko poganjate v razhroščevalnem načinu, se Symfony2 poganja
+počasneje, vendar vaše spremembe so odražane brez, da morate ročno počistiti
+predpomnilnik.
 
 .. index::
    single: Page creation; Example
 
-The "Hello Symfony!" Page
--------------------------
+Stran "Hello Symfony!"
+----------------------
 
-Start by building a spin-off of the classic "Hello World!" application. When
-you're finished, the user will be able to get a personal greeting (e.g. "Hello Symfony")
-by going to the following URL:
+Pričnite z gradnjo začetka klasične "Hello World!" aplikacije. Ko
+ste končali, bo uporabnik zmožen dobiti osebni pozdrav (npr. "Hello Symfony"),
+da obišče sledeči URL:
 
 .. code-block:: text
 
     http://localhost/app_dev.php/hello/Symfony
 
-Actually, you'll be able to replace ``Symfony`` with any other name to be
-greeted. To create the page, follow the simple two-step process.
+Dejansko boste sposobni zamenjati ``Symfony`` s katerimkoli drugim imenom,
+da vas pozdravi. Da naredite stran, sledite enostavnemu procesu dveh korakov.
 
 .. note::
 
-    The tutorial assumes that you've already downloaded Symfony2 and configured
-    your webserver. The above URL assumes that ``localhost`` points to the
-    ``web`` directory of your new Symfony2 project. For detailed information
-    on this process, see the documentation on the web server you are using.
-    Here's the relevant documentation page for some web server you might be using:
+    Vodič predvideva, da ste že prenesli Symfony2 in nastavili
+    vaš spletni strežnik. Zgornji URL predpostavlja, da ``localhost`` kaže
+    v ``web`` direktorij vašega novega Symfony2 projekta. Za podrobne informacije
+    na tem procesu, glejte dokumentacijo na spletnem strežniku, ki ga uporabljate.
+    Tu je relevantna stran dokumentacije za nek spletni strežnik, ki ga morda uporabljate:
 
-    * For Apache HTTP Server, refer to `Apache's DirectoryIndex documentation`_
-    * For Nginx, refer to `Nginx HttpCoreModule location documentation`_
+    * Za Apache HTTP strežnik, se sklicujte na `Apache DirectoryIndex dokumentacijo`_
+    * Za Nginx se sklicujte na `Nginx HttpCoreModule lokacijo dokumentacije`_
 
-Before you begin: Create the Bundle
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Preden pričnete: Ustvarite paket
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Before you begin, you'll need to create a *bundle*. In Symfony2, a :term:`bundle`
-is like a plugin, except that all of the code in your application will live
-inside a bundle.
+Preden pričnete, boste morali ustvariti *paket*. V Symfoyn2 je :term:`paket`
+kot vtičnik, razen da se bo vsa koda v vaši aplikacijii nahajala
+znotraj paketa.
 
-A bundle is nothing more than a directory that houses everything related
-to a specific feature, including PHP classes, configuration, and even stylesheets
-and JavaScript files (see :ref:`page-creation-bundles`).
+Paket ni nič več kot direktorij, ki vsebuje vse povezano
+z določeno lastnostjo, vključno s PHP razredi, nastavitvami in celo stili
+in JavaScript datotekami (glejte :ref:`page-creation-bundles`).
 
-To create a bundle called ``AcmeHelloBundle`` (a play bundle that you'll
-build in this chapter), run the following command and follow the on-screen
-instructions (use all of the default options):
+Da ustvarite paket imenovan ``AcmeHelloBundle`` (paket za igranje, ki ga boste
+zgradili v tem poglavju) poženite sledeči ukaz in sledite navodilom
+na zaslonu (uporabite vse privzete opcije):
 
 .. code-block:: bash
 
     $ php app/console generate:bundle --namespace=Acme/HelloBundle --format=yml
 
-Behind the scenes, a directory is created for the bundle at ``src/Acme/HelloBundle``.
-A line is also automatically added to the ``app/AppKernel.php`` file so that
-the bundle is registered with the kernel::
+V zakulisju je ustvarjen direktorij za paket v ``src/Acme/HelloBundle``.
+Vrstica je tudi avtomatsko dodana v ``app/AppKernel.php`` datoteko, da
+je paket registriran z jedrom::
 
     // app/AppKernel.php
     public function registerBundles()
@@ -121,18 +121,18 @@ the bundle is registered with the kernel::
         return $bundles;
     }
 
-Now that you have a bundle setup, you can begin building your application
-inside the bundle.
+Sedaj ko imate nastavitev paketa, lahko pričnete graditi vašo aplikacijo
+znotraj paketa.
 
-Step 1: Create the Route
-~~~~~~~~~~~~~~~~~~~~~~~~
+Korak 1: Izdelajte usmeritev
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-By default, the routing configuration file in a Symfony2 application is
-located at ``app/config/routing.yml``. Like all configuration in Symfony2,
-you can also choose to use XML or PHP out of the box to configure routes.
+Privzeto datoteka nastavitev usmerjanja v Symfony2 aplikaciji je
+locirana v ``app/config/routing.yml``. Kot vse nastavitve v Symfony2,
+lahko tudi izberete uporabo XML ali PHP privzeto, da nastavite usmeritve.
 
-If you look at the main routing file, you'll see that Symfony already added
-an entry when you generated the ``AcmeHelloBundle``:
+Če pogledate glavno usmerjevalno datoteko, boste videli, da je Symfony že dodal
+vnos, ko ste generirali ``AcmeHelloBundle``:
 
 .. configuration-block::
 
@@ -170,13 +170,13 @@ an entry when you generated the ``AcmeHelloBundle``:
 
         return $collection;
 
-This entry is pretty basic: it tells Symfony to load routing configuration
-from the ``Resources/config/routing.yml`` file that lives inside the ``AcmeHelloBundle``.
-This means that you place routing configuration directly in ``app/config/routing.yml``
-or organize your routes throughout your application, and import them from here.
+Ta vnos je precej enostave: Symfony-ju pove, naj naloži nastavitve usmerjanja
+iz ``Resources/config/routing.yml`` datoteke, ki živi znotraj ``AcmeHelloBundle``.
+To pomeni, da ste dali nastavitve usmerjanja direktno v ``app/config/routing.yml``
+ali organizirali vaše usmeritve preko vaše aplikacije in jih uvozili iz tam.
 
-Now that the ``routing.yml`` file from the bundle is being imported, add
-the new route that defines the URL of the page that you're about to create:
+Sedaj, ko je ``routing.yml`` datoteka iz paketa uvožena, dodajte
+novo usmeritev, ki definira URL strani, ki jo boste naredili:
 
 .. configuration-block::
 
@@ -214,32 +214,32 @@ the new route that defines the URL of the page that you're about to create:
 
         return $collection;
 
-The routing consists of two basic pieces: the ``path``, which is the URL
-that this route will match, and a ``defaults`` array, which specifies the
-controller that should be executed. The placeholder syntax in the path
-(``{name}``) is a wildcard. It means that ``/hello/Ryan``, ``/hello/Fabien``
-or any other similar URL will match this route. The ``{name}`` placeholder
-parameter will also be passed to the controller so that you can use its value
-to personally greet the user.
+Usmerjanje sestoji iz dveh osnovnih delov: ``path``, ki je URL, s katerim
+se bo ta usmeritev ujemala in polja ``defaults``, ki določa
+krmilnik, ki bi moral biti izvršen. Sintaksa označbe mesta je pot
+(``name``), ki je nadomestni znak. To pomeni, da se bo ``/hello/Ryan``, ``/hello/Fabien``
+ali katerikoli podobni URL ujemal s to potjo. Označba mesta parametra ``{name}``
+bo tudi poslana krmilniku, da lahko uporabite njegovo vrednost
+za osebni pozdrav uporabnika.
 
 .. note::
 
-  The routing system has many more great features for creating flexible
-  and powerful URL structures in your application. For more details, see
-  the chapter all about :doc:`Routing </book/routing>`.
+  Sistem usmerjanja ima mnoge odlične lastnosti za izdelavo fleksibilnih
+  in močnih URL struktur v vaši aplikaciji. Za več podrobnosti, glejte
+  poglavje vse o :doc:`Usmerjanju </book/routing>`.
 
-Step 2: Create the Controller
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Step 2: Izdelajte krmilnik
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-When a URL such as ``/hello/Ryan`` is handled by the application, the ``hello``
-route is matched and the ``AcmeHelloBundle:Hello:index`` controller is executed
-by the framework. The second step of the page-creation process is to create
-that controller.
+Ko je URL, kot je ``/hello/Ryan`` upravljan s strani aplikacije, se ``hello``
+usmeritev ujema in krmilnik ``AcmeHelloBundle:Hello:index`` je izvršen
+s strani ogrodja. Drugi korak procesa izdelave strnai je izdelava
+tega krmilnika.
 
-The controller - ``AcmeHelloBundle:Hello:index`` is the *logical* name of
-the controller, and it maps to the ``indexAction`` method of a PHP class
-called ``Acme\HelloBundle\Controller\HelloController``. Start by creating this file
-inside your ``AcmeHelloBundle``::
+Krmilnik - ``AcmeHelloBundle:Hello:index`` je *logično* ime
+krmilnika in ga preslika v ``indexAction`` metodo PHP razreda
+imenovanega ``Acme\HelloBundle\Controller\HelloController``. Začnite z izdelavo te datoteke
+znotraj vašega ``AcmeHelloBundle``::
 
     // src/Acme/HelloBundle/Controller/HelloController.php
     namespace Acme\HelloBundle\Controller;
@@ -248,14 +248,14 @@ inside your ``AcmeHelloBundle``::
     {
     }
 
-In reality, the controller is nothing more than a PHP method that you create
-and Symfony executes. This is where your code uses information from the request
-to build and prepare the resource being requested. Except in some advanced
-cases, the end product of a controller is always the same: a Symfony2 ``Response``
-object.
+V realnosti ni krmilnik nič več kot PHP metoda, ki jo izdelate
+in Symfony izvrši. Tu vaša koda uporabi informacije iz zahtevka
+za gradnjo in pripravo vira, ki se zahteva. Razen v nekih naprednih
+primerih, končni produkt krmilnika je vedno enak: Symfony2 ``Response``
+objekt.
 
-Create the ``indexAction`` method that Symfony will execute when the ``hello``
-route is matched::
+Izdelajte metodo ``indexAction``, ki jo bo Symfony izvršil, ko se ``hello``
+usmeritev ujema::
 
     // src/Acme/HelloBundle/Controller/HelloController.php
     namespace Acme\HelloBundle\Controller;
@@ -270,13 +270,13 @@ route is matched::
         }
     }
 
-The controller is simple: it creates a new ``Response`` object, whose first
-argument is the content that should be used in the response (a small HTML
-page in this example).
+Krmilnik je enostaven: izdela nov ``Response`` objekt, katerega prvi
+argument je vsebina, ki bi morala biti uporabljena v odzivu (majhna HTML
+stran v tem poglavju).
 
-Congratulations! After creating only a route and a controller, you already
-have a fully-functional page! If you've setup everything correctly, your
-application should greet you:
+Čestitamo! Po izdelavi samo usmeritve in krmilnika že
+imate polno funkcionalno stran! Če ste vse pravilno nastavili, bi vas
+vaša aplikacija moral pozdraviti:
 
 .. code-block:: text
 
@@ -286,34 +286,34 @@ application should greet you:
 
 .. tip::
 
-    You can also view your app in the "prod" :ref:`environment <environments-summary>`
-    by visiting:
+    Lahko tudi pogledate vašo aplikacijo v "prod" :ref:`okolju <environments-summary>`
+    z obiskom:
 
     .. code-block:: text
 
         http://localhost/app.php/hello/Ryan
 
-    If you get an error, it's likely because you need to clear your cache
-    by running:
+    Če dobite napako, je to verjetno, ker morate počistiti vaš predpomnilnik
+    s pogonom:
 
     .. code-block:: bash
 
         $ php app/console cache:clear --env=prod --no-debug
 
-An optional, but common, third step in the process is to create a template.
+Opcijski vendar pogosti tretji korak v procesu je izdelava predloge.
 
 .. note::
 
-   Controllers are the main entry point for your code and a key ingredient
-   when creating pages. Much more information can be found in the
-   :doc:`Controller Chapter </book/controller>`.
+   Krmilniki so glavna vstopna točka za vašo kodo in ključna sestavina,
+   ko izdelujete strani. Veliko več informacij se lahko najde v
+   :doc:`poglavju krmilnika </book/controller>`.
 
-Optional Step 3: Create the Template
+Opcijski korak 3: Izdelajte predlogo
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Templates allow you to move all of the presentation (e.g. HTML code) into
-a separate file and reuse different portions of the page layout. Instead
-of writing the HTML inside the controller, render a template instead:
+Predloge vam omogočajo, da premaknete vso predstavitev (npr. HTML kodo) v
+ločeno datoteko in ponovno uporabite različne dele postavitve strani. Namesto
+pisanja HTML znotraj krmilnika, namesto tega izpišite predlogo:
 
 .. code-block:: php
     :linenos:
@@ -342,34 +342,34 @@ of writing the HTML inside the controller, render a template instead:
 
 .. note::
 
-   In order to use the :method:`Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller::render`
-   method, your controller must extend the
-   :class:`Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller` class,
-   which adds shortcuts for tasks that are common inside controllers. This
-   is done in the above example by adding the ``use`` statement on line 4
-   and then extending ``Controller`` on line 6.
+   Da uporabite :method:`Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller::render`
+   metodo, mora vaš krmilnik razširiti
+   :class:`Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller` razred,
+   ki doda bližnjice za opravila, ki so pogosta znotraj krmilnikov. To
+   je narejeno v zgornjem primeru z dodajanjem ``use`` stavka v vrstico 4
+   in nato razširitvijo ``Controller`` v vrstici 6.
 
-The ``render()`` method creates a ``Response`` object filled with the content
-of the given, rendered template. Like any other controller, you will ultimately
-return that ``Response`` object.
+Metoda ``render()`` izdela ``Response`` objekt napolnjen z vsebino
+dane izpisane predloge. Kot katerikoli drugi objekt, boste navsezadnje
+vrnili ta ``Response`` objekt.
 
-Notice that there are two different examples for rendering the template.
-By default, Symfony2 supports two different templating languages: classic
-PHP templates and the succinct but powerful `Twig`_ templates. Don't be
-alarmed - you're free to choose either or even both in the same project.
+Bodite pozorni, ker sta dva različna primera za izpis predloge.
+Privzeto Symfony2 podpira dva različna jezika predlog: klasične
+PHP predloge in jedrnate vendar močne `Twig`_ predloge. Ne bodite
+zaskrbljeni - lahko prosto izberete kateregakoli ali celo oba v istem projektu.
 
-The controller renders the ``AcmeHelloBundle:Hello:index.html.twig`` template,
-which uses the following naming convention:
+Krmilnik izpiše predlogo ``AcmeHelloBundle:Hello:index.html.twig``,
+ki uporablja sledečo konvencijo poimenovanja:
 
     **BundleName**:**ControllerName**:**TemplateName**
 
-This is the *logical* name of the template, which is mapped to a physical
-location using the following convention.
+To je *logično* ime predloge, ki je preslikana v fizično
+lokacijo z uporabo sledeče konvencije.
 
     **/path/to/BundleName**/Resources/views/**ControllerName**/**TemplateName**
 
-In this case, ``AcmeHelloBundle`` is the bundle name, ``Hello`` is the
-controller, and ``index.html.twig`` the template:
+V tem primeru, je ``AcmeHelloBundle`` ime paketa, ``Hello`` je
+krmilnik in ``index.html.twig`` je predloga:
 
 .. configuration-block::
 
@@ -390,20 +390,20 @@ controller, and ``index.html.twig`` the template:
 
         Hello <?php echo $view->escape($name) ?>!
 
-Step through the Twig template line-by-line:
+Pojdite skozi Twig predlogo vrstico za vrstico:
 
-* *line 2*: The ``extends`` token defines a parent template. The template
-  explicitly defines a layout file inside of which it will be placed.
+* *vrstica 2*: Žeton ``extends`` definira starševsko predlogo. Predloga
+  eksplicitno definira postavitveno datoteko znotraj katere bo postavljena.
 
-* *line 4*: The ``block`` token says that everything inside should be placed
-  inside a block called ``body``. As you'll see, it's the responsibility
-  of the parent template (``base.html.twig``) to ultimately render the
-  block called ``body``.
+* *vrstica 4*: Žeton ``block`` pove, da vse znotraj tega mora biti postavljeno
+  znotraj bloka imenovanega ``body``. Kot boste videli, je odgovornost
+  starševske predloge (``base.html.twig``) konec koncev izpis
+  bloka imenovanega ``body``.
 
-The parent template, ``::base.html.twig``, is missing both the **BundleName**
-and **ControllerName** portions of its name (hence the double colon (``::``)
-at the beginning). This means that the template lives outside of the bundles
-and in the ``app`` directory:
+Starševska predloga ``::base.html.twig`` nima tako dela **BundleName**, kot tudi
+dela **ControllerName** svojega imena (namesto tega ima dvojno podpičje (``::``)
+na začetku). To pomeni, da je predloga locirana izven paketa
+v direktoriju ``app``:
 
 .. configuration-block::
 
@@ -441,51 +441,51 @@ and in the ``app`` directory:
             </body>
         </html>
 
-The base template file defines the HTML layout and renders the ``body`` block
-that you defined in the ``index.html.twig`` template. It also renders a ``title``
-block, which you could choose to define in the ``index.html.twig`` template.
-Since you did not define the ``title`` block in the child template, it defaults
-to "Welcome!".
+Osnovna datoteka predloge, definira HTML postavitev in izpisuje ``body`` blok,
+ki ga definirate v ``index.html.twig`` predlogi. Tudi izpisuje ``title``
+blok, ki ga lahko izberete za definicijo v ``index.html.twig`` predlogi.
+Ker niste definirali bloka ``title`` v otrokovi predlogi, je privzeto
+"Welcome!".
 
-Templates are a powerful way to render and organize the content for your
-page. A template can render anything, from HTML markup, to CSS code, or anything
-else that the controller may need to return.
+Predloge so močan način za izpis in organizacijo vsebine za vašo
+stran. Predloga lahko izpiše karkoli od HTML označevanja, do CSS kode ali česarkoli
+drugega, kar mora krmilnik lahko vrniti.
 
-In the lifecycle of handling a request, the templating engine is simply
-an optional tool. Recall that the goal of each controller is to return a
-``Response`` object. Templates are a powerful, but optional, tool for creating
-the content for that ``Response`` object.
+V življenskem ciklu upravljanja zahtevka je motor predlo enostavno
+opcijsko orodje. Spomnite se, da je cilj vsakega krmilnika vrniti
+``Response`` objekt. Predloge so močna, vendar opcijska orodja za izdelavo
+vsebine za ta ``Response`` objekt.
 
 .. index::
    single: Directory Structure
 
-The Directory Structure
------------------------
+Struktura direktorijev
+----------------------
 
-After just a few short sections, you already understand the philosophy behind
-creating and rendering pages in Symfony2. You've also already begun to see
-how Symfony2 projects are structured and organized. By the end of this section,
-you'll know where to find and put different types of files and why.
+Po samo nekaj kratkih sekcijah, že razumete filozofijo za
+izdelavo in izpisom strani v Symfony2. Tudi ste že pričeli videti,
+kako so Symfony2 projekti strukturirani in organizirani. Na koncu te sekcije
+boste vedeli, kje najti in kam dati različne tipe datotek in zakaj.
 
-Though entirely flexible, by default, each Symfony :term:`application` has
-the same basic and recommended directory structure:
+Čeprav v celoti fleksibilno privzeto, vsaka Symfony :term:`aplikacija` ima
+enako osnovno in priporočeno strukturo direktorijev:
 
-* ``app/``: This directory contains the application configuration;
+* ``app/``: Ta direktorij vsebuje nastavitve aplikacije;
 
-* ``src/``: All the project PHP code is stored under this directory;
+* ``src/``: Vsa PHP koda projekta je shranjena pod tem direktorijem;
 
-* ``vendor/``: Any vendor libraries are placed here by convention;
+* ``vendor/``: Katerekoli vendor knjižnice so konvencionalno shranjene tu;
 
-* ``web/``: This is the web root directory and contains any publicly accessible files;
+* ``web/``: To je vrhnji spletni direktorij in vsebuje kakršnekoli javno dostopne datoteke;
 
 .. _the-web-directory:
 
-The Web Directory
-~~~~~~~~~~~~~~~~~
+Spletni direktorij
+~~~~~~~~~~~~~~~~~~
 
-The web root directory is the home of all public and static files including
-images, stylesheets, and JavaScript files. It is also where each
-:term:`front controller` lives::
+Vrhnji spletni direktorij je dom vseh javnih in statičnih datotek, vključno
+s slikami, stili in JavaScript datotekami. To je tudi, kjer domuje
+vsak :term:`prednji krmilnik`::
 
     // web/app.php
     require_once __DIR__.'/../app/bootstrap.php.cache';
@@ -497,75 +497,75 @@ images, stylesheets, and JavaScript files. It is also where each
     $kernel->loadClassCache();
     $kernel->handle(Request::createFromGlobals())->send();
 
-The front controller file (``app.php`` in this example) is the actual PHP
-file that's executed when using a Symfony2 application and its job is to
-use a Kernel class, ``AppKernel``, to bootstrap the application.
+Datoteka prednjega krmilnika (``app.php`` v tem primeru) je dejanska PHP
+datoteka, ki je izvršena, ko se uporablja Symfony2 aplikacijo in njena naloga je
+uporaba razreda Kernel ``AppKernel`` za zagon aplikacije.
 
 .. tip::
 
-    Having a front controller means different and more flexible URLs than
-    are used in a typical flat PHP application. When using a front controller,
-    URLs are formatted in the following way:
+    Imeti prednji krmilnik pomeni različne in bolj fleksibilne URL-je, ki
+    so uporabljeni v običajni samo PHP aplikaciji. Ko uporabljate prednji krmilnik,
+    so URL-ji oblikovani na sledeči način:
 
     .. code-block:: text
 
         http://localhost/app.php/hello/Ryan
 
-    The front controller, ``app.php``, is executed and the "internal:" URL
-    ``/hello/Ryan`` is routed internally using the routing configuration.
-    By using Apache ``mod_rewrite`` rules, you can force the ``app.php`` file
-    to be executed without needing to specify it in the URL:
+    Prednji krmilnik ``app.php`` je izvršen in "interni:" URL
+    ``/hello/Ryan`` je usmerjen interno z uporabo nastavitev usmerjanja.
+    Z uporabo Apache-jevih ``mod_rewrite`` pravil lahko prisilite datoteko ``app.php``,
+    da je izvršena brez potrebe po njenem določanju v URL-ju:
 
     .. code-block:: text
 
         http://localhost/hello/Ryan
 
-Though front controllers are essential in handling every request, you'll
-rarely need to modify or even think about them. They'll be mentioned again
-briefly in the `Environments`_ section.
+Čeprav so prednji krmilniki bistveni v upravljanju vsakega zahtevka, boste
+redkokdaj morali spremeniti ali celo razmišljati o njih. Omenjeni bodo ponovno
+na kratko v sekciji `Okolja`_
 
-The Application (``app``) Directory
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Direktorij aplikacije (``app``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-As you saw in the front controller, the ``AppKernel`` class is the main entry
-point of the application and is responsible for all configuration. As such,
-it is stored in the ``app/`` directory.
+Kot ste videli v prednjem krmilniku, je razred ``AppKernel`` glavna vstopna
+točka aplikacije in je odgovorna za vse nastavitve. Kot taka
+je shranjena v direktoriju ``app/``
 
-This class must implement two methods that define everything that Symfony
-needs to know about your application. You don't even need to worry about
-these methods when starting - Symfony fills them in for you with sensible
-defaults.
+Ta razred mora implementirati dve metodi, ki definirata vse, kar mora
+Symfony vedeti o vaši aplikaciji. Niti ne potrebujete skrbeti o
+teh metodah, ko začenjate - Symfony jih izpolni za vas s smiselnimi
+privzetimi vnosi.
 
-* ``registerBundles()``: Returns an array of all bundles needed to run the
-  application (see :ref:`page-creation-bundles`);
+* ``registerBundles()``: Vrne polje vseh paketov, ki so potrebni za pogon
+  aplikacije (glejte :ref:`page-creation-bundles`);
 
-* ``registerContainerConfiguration()``: Loads the main application configuration
-  resource file (see the `Application Configuration`_ section).
+* ``registerContainerConfiguration()``: Naloži datoteko vira glavnih nastavitev
+  aplikacije (glejte sekcijo `Nastavitve aplikacije`_).
 
-In day-to-day development, you'll mostly use the ``app/`` directory to modify
-configuration and routing files in the ``app/config/`` directory (see
-`Application Configuration`_). It also contains the application cache
-directory (``app/cache``), a log directory (``app/logs``) and a directory
-for application-level resource files, such as templates (``app/Resources``).
-You'll learn more about each of these directories in later chapters.
+V vsakodnevnem razvoju, boste najverjetneje uporabili ``app/`` direktorij za spremembo
+datotek nastavitev in usmerjanja v ``app/config/`` direktoriju (glejte
+`Nastavitve aplikacije`_). Vsebuje tudi direktorij predpomnilnika
+aplikacije (``app/cache``), direktorij dnevnikov (``app/logs``) in direktorij
+za datoteke virov aplikacijskih nivojev, kot so predloge (``app/Resources``).
+Več o vsakem od teh direktorijev se boste naučili v kasnejših poglavjih.
 
 .. _autoloading-introduction-sidebar:
 
-.. sidebar:: Autoloading
+.. sidebar:: Avtomatsko nalaganje
 
-    When Symfony is loading, a special file - ``vendor/autoload.php`` - is
-    included. This file is created by Composer and will autoload all
-    application files living in the `src/` folder as well as all
-    third-party libraries mentioned in the ``composer.json`` file.
+    Ko se Symfony nalaga, je vključena posebna datoteka - ``vendor/autoload.php``.
+    To datoteko ustvari Composer in bo avtomatsko naložila vse
+    aplikacijske datoteke, ki domujejo v ``src/`` direktoriju kot tudi vse
+    tretje osebne knjižnice omenjene v ``composer.json`` datoteki.
 
-    Because of the autoloader, you never need to worry about using ``include``
-    or ``require`` statements. Instead, Composer uses the namespace of a class
-    to determine its location and automatically includes the file on your
-    behalf the instant you need a class.
+    Zaradi avtomatskega nalagalnika, vam nikoli ni treba skrbeti o uporabi ``include``
+    ali ``require`` stavkov. Namesto tega Composer uporablja imenski prostor razreda
+    za določanje njegove lokacije in avtomatsko vključi datoteko namesto
+    vas takoj, ko razred potrebujete.
 
-    The autoloader is already configured to look in the ``src/`` directory
-    for any of your PHP classes. For autoloading to work, the class name and
-    path to the file have to follow the same pattern:
+    Avtomatski nalagalnik je že nastavljen, da pogleda v ``src/`` direktorij
+    za kateregakoli izmed vaših PHP razredov. Da avtomatsko nalaganje deluje, morata ime razreda
+    in pot do datoteke slediti enakemu zvorcu:
 
     .. code-block:: text
 
@@ -574,44 +574,44 @@ You'll learn more about each of these directories in later chapters.
         Path:
             src/Acme/HelloBundle/Controller/HelloController.php
 
-The Source (``src``) Directory
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Izvorni direktorij (``src``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Put simply, the ``src/`` directory contains all of the actual code (PHP code,
-templates, configuration files, stylesheets, etc) that drives *your* application.
-When developing, the vast majority of your work will be done inside one or
-more bundles that you create in this directory.
+Povedano enostavno, ``src/`` direktorij vsebuje vso dejansko kodo (PHP koda,
+predloge, nastavitvene datoteke, stile itd.), ki poganjajo *vašo* aplikacijo.
+Ko razvijate, bo glavnina vašega dela narejenega znotraj enega ali
+več paketov, ki jih ustvarite v tem direktoriju.
 
-But what exactly is a :term:`bundle`?
+Vendar kaj točno je :term:`paket`?
 
 .. _page-creation-bundles:
 
-The Bundle System
------------------
+Sistem paketov
+--------------
 
-A bundle is similar to a plugin in other software, but even better. The key
-difference is that *everything* is a bundle in Symfony2, including both the
-core framework functionality and the code written for your application.
-Bundles are first-class citizens in Symfony2. This gives you the flexibility
-to use pre-built features packaged in `third-party bundles`_ or to distribute
-your own bundles. It makes it easy to pick and choose which features to enable
-in your application and to optimize them the way you want.
+Paket je podoben vtičniku v drugih programskih opremah, vendar še boljše. Ključna
+razlika je, da je *vse* paket v Symfony2, vključno z
+funkcionalnostjo jedra ogrodja in kodo napisano za vašo aplikacijo.
+Paketi so prvo razredni občani v Symfony2. To vam da fleksibilnost,
+da uporabite vnaprej zgrajene lastnosti zapakirane v `tretje osebnih paketih`_ ali distribuiranje
+vaših lastnih paketov. To naredi enostavno za izbrati, katere lastnosti omogočiti
+v vaši aplikaciji in jih optimizirati, kakor želite.
 
 .. note::
 
-   While you'll learn the basics here, an entire cookbook entry is devoted
-   to the organization and best practices of :doc:`bundles </cookbook/bundles/best_practices>`.
+   Ko se boste tu naučili osnove, je celotna knjiga receptov posvečena
+   organizaciji in najboljšim praksam :doc:`paketov </cookbook/bundles/best_practices>`.
 
-A bundle is simply a structured set of files within a directory that implement
-a single feature. You might create a ``BlogBundle``, a ``ForumBundle`` or
-a bundle for user management (many of these exist already as open source
-bundles). Each directory contains everything related to that feature, including
-PHP files, templates, stylesheets, JavaScripts, tests and anything else.
-Every aspect of a feature exists in a bundle and every feature lives in a
-bundle.
+Paket je enostavno strukturiran skupek datotek znotraj direktorija, ki implementira
+posamezno lastnost. Lahko izdelate ``BlogBundle``, ``ForumBundle`` ali
+paket za upravljanje uporabnikov (mnogo paketov že obstaja kot odprto kodni
+paketi). Vsak direktorij vsebuje vse povezano s to lastnostjo, vključuje
+PHP datoteke, predloge, stile, JavaScript, teste in vse ostalo.
+Vsak vidik lastnosti obstaja v paketu in vsaka lastnost živi v
+paketu.
 
-An application is made up of bundles as defined in the ``registerBundles()``
-method of the ``AppKernel`` class::
+Aplikacija je narejena iz paketov, kot definirano v ``registerBundles()``
+metodi ``AppKernel`` razreda::
 
     // app/AppKernel.php
     public function registerBundles()
@@ -637,31 +637,31 @@ method of the ``AppKernel`` class::
         return $bundles;
     }
 
-With the ``registerBundles()`` method, you have total control over which bundles
-are used by your application (including the core Symfony bundles).
+Z ``registerBundles()`` metodo, imate celotno kontrolo nad tem, kateri paketi
+so uporabljeni v vaši aplikaciji (vključno s Symfony paketi jedra).
 
 .. tip::
 
-   A bundle can live *anywhere* as long as it can be autoloaded (via the
-   autoloader configured at ``app/autoload.php``).
+   Paket lahko domuje *kjerkoli* dokler je lahko avtomatsko naložen (preko
+   avtomatskega nalagalnika nastavljenega v ``app/autoload.php``).
 
-Creating a Bundle
-~~~~~~~~~~~~~~~~~
+Izdelava paketa
+~~~~~~~~~~~~~~~
 
-The Symfony Standard Edition comes with a handy task that creates a fully-functional
-bundle for you. Of course, creating a bundle by hand is pretty easy as well.
+Symfoyn standardna izdaja prihaja s priročno nalogo, ki izdela polno funkcionalni
+paket za vas. Seveda izdelava paketa ročno je tudi precej enostavno.
 
-To show you how simple the bundle system is, create a new bundle called
-``AcmeTestBundle`` and enable it.
+Da vam pokažemo, kako enostaven je sistem paketov, izdelajmo nov paket imenovan
+``AcmeTestBundle`` in ga omogočite.
 
 .. tip::
 
-    The ``Acme`` portion is just a dummy name that should be replaced by
-    some "vendor" name that represents you or your organization (e.g. ``ABCTestBundle``
-    for some company named ``ABC``).
+    Del ``Acme`` je samo dummy ime, ki ga bi morali zamenjati z
+    nekim "vendor" imenom, ki predstavlja vas ali vašo organizacijo (npr. ``ABCTestBundle``
+    za neko podjetje imenovano ``ABC``).
 
-Start by creating a ``src/Acme/TestBundle/`` directory and adding a new file
-called ``AcmeTestBundle.php``::
+Pričnite izdelovati ``src/Acme/TestBundle/`` direktorij in dodajte novo datoteko
+imenovano ``AcmeTestBundle.php``::
 
     // src/Acme/TestBundle/AcmeTestBundle.php
     namespace Acme\TestBundle;
@@ -674,15 +674,15 @@ called ``AcmeTestBundle.php``::
 
 .. tip::
 
-   The name ``AcmeTestBundle`` follows the standard :ref:`Bundle naming conventions <bundles-naming-conventions>`.
-   You could also choose to shorten the name of the bundle to simply ``TestBundle``
-   by naming this class ``TestBundle`` (and naming the file ``TestBundle.php``).
+   Ime ``AcmeTestBundle`` sledi standardnim :ref:`konvencijam poimenovanja paketov <bundles-naming-conventions>`.
+   Lahko tudi izberete skrajšanje imena paketa na enostavno ``TestBundle``
+   s poimenovanjem tega razreda ``TestBundle`` (in poimenovanjem datoteke ``TestBundle.php``).
 
-This empty class is the only piece you need to create the new bundle. Though
-commonly empty, this class is powerful and can be used to customize the behavior
-of the bundle.
+Ta prazen razred je edini del, ki ga potrebujete za izdelavo novega paketa. Čeprav
+pogosto prazno, je ta razred močan in lahko uporaben za prilagoditev obnašanja
+paketa.
 
-Now that you've created the bundle, enable it via the ``AppKernel`` class::
+Sedaj ko ste izdelali paket, ga omogočite preko razreda ``AppKernel``::
 
     // app/AppKernel.php
     public function registerBundles()
@@ -697,69 +697,69 @@ Now that you've created the bundle, enable it via the ``AppKernel`` class::
         return $bundles;
     }
 
-And while it doesn't do anything yet, ``AcmeTestBundle`` is now ready to
-be used.
+In medtem ko ne naredi nič več, je sedaj ``AcmeTestBundle`` sedaj pripravljen,
+da je uporabljen.
 
-And as easy as this is, Symfony also provides a command-line interface for
-generating a basic bundle skeleton:
+In kakor je enostavno, Symfony tudi ponuja vmesnik ukazne vrstice za
+generiranje osnovnega skeletona paketa:
 
 .. code-block:: bash
 
     $ php app/console generate:bundle --namespace=Acme/TestBundle
 
-The bundle skeleton generates with a basic controller, template and routing
-resource that can be customized. You'll learn more about Symfony2's command-line
-tools later.
+Skelet paketa je generiran z osnovnim krmilnikom, predlogo in virom
+usmerjanja, ki je lahko prilagojen. Izvedeli boste več o orodju Symfony2 ukazne
+vrstice kasneje.
 
 .. tip::
 
-   Whenever creating a new bundle or using a third-party bundle, always make
-   sure the bundle has been enabled in ``registerBundles()``. When using
-   the ``generate:bundle`` command, this is done for you.
+   Kadarkoli izdelujete nov paket ali uporabljate tretje osebni paket, vedno zagotovite,
+   da je paket omogočen v ``registerBundles()``. Ko uporabljate
+   ukaz ``generate:bundle``, je to narejeno za vas.
 
-Bundle Directory Structure
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Struktura direktorijev paketa
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The directory structure of a bundle is simple and flexible. By default, the
-bundle system follows a set of conventions that help to keep code consistent
-between all Symfony2 bundles. Take a look at ``AcmeHelloBundle``, as it contains
-some of the most common elements of a bundle:
+Struktura direktorijev paketa je enostavna in fleksibilna. Privzeto
+sistem paketa sledi skupku konvencij, ki pomagajo obdržati kodo konsistentno
+med vsemi Symfony2 paketi. Vzamite za primer ``AcmeHelloBundle``, saj vključuje
+nekaj najpogostejših elementov paketa:
 
-* ``Controller/`` contains the controllers of the bundle (e.g. ``HelloController.php``);
+* ``Controller/`` vsebuje krmilnike paketa (npr. ``HelloController.php``);
 
-* ``DependencyInjection/`` holds certain dependency injection extension classes,
-  which may import service configuration, register compiler passes or more
-  (this directory is not necessary);
+* ``DependencyInjection/`` drži določene razrede razširitve injiciranja odvisnosti,
+  ki lahko uvažajo nastavitve storitev, registrirajo prehode prevajalnika in več
+  (ta direktorij ni potreben);
 
-* ``Resources/config/`` houses configuration, including routing configuration
-  (e.g. ``routing.yml``);
+* ``Resources/config/`` združuje nastavitve, vključuje nastavitve usmerjanja
+  (npr. ``routing.yml``);
 
-* ``Resources/views/`` holds templates organized by controller name (e.g.
+* ``Resources/views/`` vsebuje predloge organizirane z imenom krmilnika (npr.
   ``Hello/index.html.twig``);
 
-* ``Resources/public/`` contains web assets (images, stylesheets, etc) and is
-  copied or symbolically linked into the project ``web/`` directory via
-  the ``assets:install`` console command;
+* ``Resources/public/`` vsebuje spletna sredstva (slike, stile itd.) in je
+  kopiran ali simbolično povezan v ``web/`` direktorij projekta preko
+  ``assets:install`` konzolnega ukaza;
 
-* ``Tests/`` holds all tests for the bundle.
+* ``Tests/`` vsebuje vse teste za paket.
 
-A bundle can be as small or large as the feature it implements. It contains
-only the files you need and nothing else.
+Paket je lahko tako majhen ali velik, kolikor lastnosti implementira. Vsebuje
+samo datoteke, ki jih potrebujete in nič več.
 
-As you move through the book, you'll learn how to persist objects to a database,
-create and validate forms, create translations for your application, write
-tests and much more. Each of these has their own place and role within the
-bundle.
+Kakor se premikate skozi knjigo, boste izvedeli, kako poslati objekte v podatkovno bazo,
+izdelati in potrditi obrazce, izdelati prevode za vašo aplikacijo, napisati
+teste in veliko več. Vsak od teh ima svoj lastni prostor in vlogo znotraj
+paketa.
 
-Application Configuration
--------------------------
+Nastavitve aplikacije
+---------------------
 
-An application consists of a collection of bundles representing all of the
-features and capabilities of your application. Each bundle can be customized
-via configuration files written in YAML, XML or PHP. By default, the main
-configuration file lives in the ``app/config/`` directory and is called
-either ``config.yml``, ``config.xml`` or ``config.php`` depending on which
-format you prefer:
+Aplikacija sestoji iz zbirke paketov, ki predstavljajo vse
+lastnosti in zmožnosti vaše aplikacije. Vsak paket se lahko prilagodi
+preko nastavitvenih datotek napisanih v YAML, XML ali PHP. Privzeto je glavna
+nastavitvena datoteka locirana v ``app/config/`` direktoriju in je imenovana
+ali ``config.yml``, ``config.xml`` ali ``config.php`` odvisno od
+formata, ki ga imate raje:
 
 .. configuration-block::
 
@@ -834,44 +834,44 @@ format you prefer:
 
 .. note::
 
-   You'll learn exactly how to load each file/format in the next section
-   `Environments`_.
+   Izvedeli boste točno, kako naložiti vsako datoteko/format v naslednji sekciji
+   `Okolja`_.
 
-Each top-level entry like ``framework`` or ``twig`` defines the configuration
-for a particular bundle. For example, the ``framework`` key defines the configuration
-for the core Symfony ``FrameworkBundle`` and includes configuration for the
-routing, templating, and other core systems.
+Vsak vrhnji vnos kot sta ``framework`` ali ``twig`` definirata nastavitve
+za določen paket. Na primer ključ ``framework`` definira nastavitve
+za Symfony paket jedra ``FrameworkBundle`` in vključuje nastavitve za
+usmerjanje, predloge in ostale sisteme jedra.
 
-For now, don't worry about the specific configuration options in each section.
-The configuration file ships with sensible defaults. As you read more and
-explore each part of Symfony2, you'll learn about the specific configuration
-options of each feature.
+Za sedaj ne skrbite o specifičnih nastavitvenih opcijah v vsaki sekciji.
+Nastavitvena datoteka prihaja s smiselnimi privzetimi vrednostmi. Kot boste prebrali več in
+raziskali vsak del Symfony2, se boste naučili o določenih nastavitvenih
+opcijah za vsako lastnost.
 
-.. sidebar:: Configuration Formats
+.. sidebar:: Formati nastavitev
 
-    Throughout the chapters, all configuration examples will be shown in all
-    three formats (YAML, XML and PHP). Each has its own advantages and
-    disadvantages. The choice of which to use is up to you:
+    Skozi poglavja, vsi primeri nastavitev bodo prikazani v vseh
+    treh formatih (YAML, XML in PHP). Vsak ima svoje prednosti in
+    slabosti. Izbira katerega uporabiti je na vas:
 
-    * *YAML*: Simple, clean and readable (learn more about yaml in
+    * *YAML*: Enostaven, jasen in bralen (izvedite več o yaml v
       ":doc:`/components/yaml/yaml_format`");
 
-    * *XML*: More powerful than YAML at times and supports IDE autocompletion;
+    * *XML*: Bolj močan kot YAML na trenutke in podpira IDE avtomatsko zaključevanje;
 
-    * *PHP*: Very powerful but less readable than standard configuration formats.
+    * *PHP*: Zelo močna vendar manj bralna kot standardni nastavitveni formati.
 
-Default Configuration Dump
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Odložitev privzetih nastavitev
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can dump the default configuration for a bundle in yaml to the console using
-the ``config:dump-reference`` command.  Here is an example of dumping the default
-FrameworkBundle configuration:
+Lahko odložite privzete nastavitve za paket v yaml v konzolo z uporabo
+ukaza ``config:dump-reference``.  Tu je primer odložitve privzetih nastavitev
+FrameworkBundle:
 
 .. code-block:: text
 
     app/console config:dump-reference FrameworkBundle
 
-The extension alias (configuration key) can also be used:
+Razširitveni alias (nastavitveni ključ) je lahko tudi uporabljen:
 
 .. code-block:: text
 
@@ -879,47 +879,47 @@ The extension alias (configuration key) can also be used:
 
 .. note::
 
-    See the cookbook article:
-    :doc:`How to expose a Semantic Configuration for a Bundle </cookbook/bundles/extension>`
-    for information on adding configuration for your own bundle.
+    Glejte članek receptov:
+    :doc:`Kako izpostaviti semantične nastavitve za paket </cookbook/bundles/extension>`
+    za informacije o dodajanju nastavitev za vaš lastni paket.
 
 .. index::
    single: Environments; Introduction
 
 .. _environments-summary:
 
-Environments
-------------
+Okolja
+------
 
-An application can run in various environments. The different environments
-share the same PHP code (apart from the front controller), but use different
-configuration. For instance, a ``dev`` environment will log warnings and
-errors, while a ``prod`` environment will only log errors. Some files are
-rebuilt on each request in the ``dev`` environment (for the developer's convenience),
-but cached in the ``prod`` environment. All environments live together on
-the same machine and execute the same application.
+Aplikacija se lahko poganja v različnihokoljih. Različna okolja
+delijo enako PHP kodo (razen prednjega krmilnika), vendar uporaba različnih
+nastavitev. Na primer ``dev`` okolje bo beležilo opozorila in
+napake, medtem ko ``prod`` okolje bo beležilo samo napake. Nekatere datoteke so
+ponovno zgrajene pri vsakem zahtevku v ``dev`` okolju (za priročnost razvijalca),
+vendar predpomnjene v ``prod`` okolju. Vsa okolja obstojajo skupaj na
+isti napravi in izvršujejo isto aplikacijo.
 
-A Symfony2 project generally begins with three environments (``dev``, ``test``
-and ``prod``), though creating new environments is easy. You can view your
-application in different environments simply by changing the front controller
-in your browser. To see the application in the ``dev`` environment, access
-the application via the development front controller:
+Symfony2 projekt se splošno začne s tremi okolji (``dev``, ``test``
+in ``prod``), čeprav je izdelava novih okolij enostavna. Lahko pogledate vašo
+aplikacijo v različnih okoljih enostavno s spremembo prednjega krmilnika
+v vašem brskalniku. Da pogledate aplikacijo v ``dev`` okolju, dostopajte
+do aplikacije preko razvojnega prednjega krmilnika:
 
 .. code-block:: text
 
     http://localhost/app_dev.php/hello/Ryan
 
-If you'd like to see how your application will behave in the production environment,
-call the ``prod`` front controller instead:
+Če bi želeli videti kako se bo vaša aplikacija obnašala v produkcijskem okolju,
+namesto tega pokličite ``prod`` prednji krmilnik:
 
 .. code-block:: text
 
     http://localhost/app.php/hello/Ryan
 
-Since the ``prod`` environment is optimized for speed; the configuration,
-routing and Twig templates are compiled into flat PHP classes and cached.
-When viewing changes in the ``prod`` environment, you'll need to clear these
-cached files and allow them to rebuild:
+Ker je ``prod`` okolje optimizirano za hitrost; nastavitve,
+usmerjanje in Twig predloge so prevedene v samo PHP razrede in predpomnjeni.
+Ko gledate spremembe v ``prod`` okolju, boste morali počistiti te
+predpomnjene datoteke in jih omogočiti za ponovno gradnjo:
 
 .. code-block:: bash
 
@@ -927,28 +927,28 @@ cached files and allow them to rebuild:
 
 .. note::
 
-   If you open the ``web/app.php`` file, you'll find that it's configured explicitly
-   to use the ``prod`` environment::
+   Če odprete datoteko ``web/app.php``, boste ugotovili, da je nastavljena eksplicitno
+   za uporabo ``prod`` okolja::
 
        $kernel = new AppKernel('prod', false);
 
-   You can create a new front controller for a new environment by copying
-   this file and changing ``prod`` to some other value.
+   Lahko izdelate nov prednji krmilnik za novo okolje s kopiranjem
+   te datoteke in spremembo ``prod`` v neko drugo vrednost.
 
 .. note::
 
-    The ``test`` environment is used when running automated tests and cannot
-    be accessed directly through the browser. See the :doc:`testing chapter </book/testing>`
-    for more details.
+    Okolje ``test`` je uporabljeno, ko se poganja avtomatizirane teste in ne
+    more biti dostopano direktno preko brskalnika. Glejte :doc:`poglavje testiranje </book/testing>`
+    za več podrobnosti.
 
 .. index::
    single: Environments; Configuration
 
-Environment Configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Nstavitve okolja
+~~~~~~~~~~~~~~~~
 
-The ``AppKernel`` class is responsible for actually loading the configuration
-file of your choice::
+Razred ``AppKernel`` je odgovoren za dejansko nalaganje nastavitvene
+datoteke vaše izbire::
 
     // app/AppKernel.php
     public function registerContainerConfiguration(LoaderInterface $loader)
@@ -958,10 +958,10 @@ file of your choice::
         );
     }
 
-You already know that the ``.yml`` extension can be changed to ``.xml`` or
-``.php`` if you prefer to use either XML or PHP to write your configuration.
-Notice also that each environment loads its own configuration file. Consider
-the configuration file for the ``dev`` environment.
+Sedaj že veste, da se ``.yml`` končnico lahko spremeni v ``.xml`` ali
+``.php`` če raje uporabljate ali XML ali PHP za pisanje vaših nastavitev.
+Bodite pozorni, da vsako okolje naloži svojo lastno nastavitveno datoteko. Premislite
+o nastavitveni datoteki za ``dev`` okolje.
 
 .. configuration-block::
 
@@ -1014,52 +1014,52 @@ the configuration file for the ``dev`` environment.
 
         // ...
 
-The ``imports`` key is similar to a PHP ``include`` statement and guarantees
-that the main configuration file (``config.yml``) is loaded first. The rest
-of the file tweaks the default configuration for increased logging and other
-settings conducive to a development environment.
+Ključ ``imports`` je podoben PHP stavku ``include`` in garantira,
+da je glavna nastavitvena datoteka (``config.yml``) naložena prva. Ostala
+datoteka nastavi privzete nastavitve za izboljšano beleženje in ostale
+nastavitve, ki prispevajo razvojnemu okolju.
 
-Both the ``prod`` and ``test`` environments follow the same model: each environment
-imports the base configuration file and then modifies its configuration values
-to fit the needs of the specific environment. This is just a convention,
-but one that allows you to reuse most of your configuration and customize
-just pieces of it between environments.
+Tako ``prod`` in ``test`` okolja sledijo enakemu modelu: vsako okolje
+uvaža osnovno nastavitveno datoteko in nato spremeni njegove nastavitvene vrednosti,
+da se ujemajo potrebam določenega okolja. To je samo konvencija,
+vendar taka, ki vam omogoča ponovno uporabo večine vaših nastavitev in prilagoditev
+samo njenih delov med okolji.
 
-Summary
--------
+Povzetek
+--------
 
-Congratulations! You've now seen every fundamental aspect of Symfony2 and have
-hopefully discovered how easy and flexible it can be. And while there are
-*a lot* of features still to come, be sure to keep the following basic points
-in mind:
+Čestitke! Sedaj ste videli vsak temeljni vidik Symfony2 in ste,
+upajmo, odkrili kako enostaven in fleksibilen je lahko. Medtem ko je
+*veliko* lastnosti, ki še pridejo, se prepričajte, da sledite osnovnim točkam
+v mislih:
 
-* Creating a page is a three-step process involving a **route**, a **controller**
-  and (optionally) a **template**;
+* Izdelava strani je proces v treh korakih, ki vključuje **usmeritev**, **krmilnik**
+  in (opcijsko) **predlogo**;
 
-* Each project contains just a few main directories: ``web/`` (web assets and
-  the front controllers), ``app/`` (configuration), ``src/`` (your bundles),
-  and ``vendor/`` (third-party code) (there's also a ``bin/`` directory that's
-  used to help updated vendor libraries);
+* Vsak projekt vsebuje samo nekaj glavnih direktorijev: ``web/`` (spletna sredstva in
+  prednje krmilnike), ``app/`` (nastavitve), ``src/`` (vaše pakete)
+  in ``vendor/`` (tretje osebno kodo) (na voljo je tudi ``bin/`` direktorij, ki
+  je uporabljen, da pomaga posobiti izdelovalčeve knjižnice);
 
-* Each feature in Symfony2 (including the Symfony2 framework core) is organized
-  into a *bundle*, which is a structured set of files for that feature;
+* Vsaka lastnost v Symfony2 (vključno jedro Symfony2 ogrodja) je organizirano
+  v *paket*, ki je strukturiran skupek datotek za to lastnost;
 
-* The **configuration** for each bundle lives in the ``Resources/config``
-  directory of the bundle and can be specified in YAML, XML or PHP;
+* **Nastavitev** za vsak paket živi v ``Resources/config``
+  direktoriju paketa in je lahko določen v YAML, XML ali PHP;
 
-* The global **application configuration** lives in the ``app/config``
-  directory;
+* Globalne **nastaviteve aplikacije** se nahajajo v ``app/config``
+  direktoriju;
 
-* Each **environment** is accessible via a different front controller (e.g.
-  ``app.php`` and ``app_dev.php``) and loads a different configuration file.
+* Vsako **okolje** je dostopno preko različnega prednjega krmilnika (npr.
+  ``app.php`` in ``app_dev.php`` in naloži različno nastavitveno datoteko.
 
-From here, each chapter will introduce you to more and more powerful tools
-and advanced concepts. The more you know about Symfony2, the more you'll
-appreciate the flexibility of its architecture and the power it gives you
-to rapidly develop applications.
+Od tu vam bo vsako poglavje predstavilo več in bolj močna orodja
+in naprednje koncepte. Več ko veste o Symfony2, več boste
+cenili fleksibilnost njegove arhitekture in moč, ki vam jo da
+za hitro gradnjo aplikacij.
 
 .. _`Twig`: http://twig.sensiolabs.org
-.. _`third-party bundles`: http://knpbundles.com
+.. _`tretje osebnih paketih`: http://knpbundles.com
 .. _`Symfony Standard Edition`: http://symfony.com/download
-.. _`Apache's DirectoryIndex documentation`: http://httpd.apache.org/docs/2.0/mod/mod_dir.html
-.. _`Nginx HttpCoreModule location documentation`: http://wiki.nginx.org/HttpCoreModule#location
+.. _`Apache DirectoryIndex dokumentacijo`: http://httpd.apache.org/docs/2.0/mod/mod_dir.html
+.. _`Nginx HttpCoreModule lokacijo dokumentacije`: http://wiki.nginx.org/HttpCoreModule#location
