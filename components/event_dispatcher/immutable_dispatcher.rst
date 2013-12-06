@@ -1,20 +1,20 @@
 .. index::
     single: Event Dispatcher; Immutable
 
-The Immutable Event Dispatcher
-==============================
+Nespremenljiv razpošiljatelj dogodkov
+=====================================
 
-The :class:`Symfony\\Component\\EventDispatcher\\ImmutableEventDispatcher` is
-a locked or frozen event dispatcher. The dispatcher cannot register new
-listeners or subscribers.
+:class:`Symfony\\Component\\EventDispatcher\\ImmutableEventDispatcher` je
+zaklenjen ali zmrznjen razpošiljatelj dogodkov. Razpošiljatelj ne more registrirati novih
+poslušalcev ali naročnikov.
 
-The ``ImmutableEventDispatcher`` takes another event dispatcher with all the
-listeners and subscribers. The immutable dispatcher is just a proxy of this
-original dispatcher.
+``ImmutableEventDispatcher`` vzame drug razpošiljatelj dogodkov z vsemi
+poslušalci in naročniki. Nespremenljivi razpošiljatelj je samo proksi tega
+originalnega razpošiljatelja.
 
-To use it, first create a normal dispatcher (``EventDispatcher`` or
-``ContainerAwareEventDispatcher``) and register some listeners or
-subscribers::
+Da ga uporabite najprej izdelajte običajnega razpošiljatelja (``EventDispatcher`` ali
+``ContainerAwareEventDispatcher``) in registrirajte nekaj poslušalcev ali
+naročnikov::
 
     use Symfony\Component\EventDispatcher\EventDispatcher;
 
@@ -25,14 +25,14 @@ subscribers::
 
     // ...
 
-Now, inject that into an ``ImmutableEventDispatcher``::
+Sedaj injicirajte to v ``ImmutableEventDispatcher``::
 
     use Symfony\Component\EventDispatcher\ImmutableEventDispatcher;
     // ...
 
     $immutableDispatcher = new ImmutableEventDispatcher($dispatcher);
 
-You'll need to use this new dispatcher in your project.
+Morali boste uporabiti ta nov razpošiljatelj v vaš projekt.
 
-If you are trying to execute one of the methods which modifies the dispatcher
-(e.g. ``addListener``), a ``BadMethodCallException`` is thrown.
+Če poskušate izvršiti eno izmed metod, ki modificira razpošiljatelja
+(npr. ``addListener``), je vržena ``BadMethodCallException``.

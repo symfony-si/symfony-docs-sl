@@ -1,53 +1,53 @@
 .. index::
    single: Event Dispatcher
 
-The Generic Event Object
-========================
+Generični Event objekt
+======================
 
-The base :class:`Symfony\\Component\\EventDispatcher\\Event` class provided by the
-Event Dispatcher component is deliberately sparse to allow the creation of
-API specific event objects by inheritance using OOP. This allows for elegant and
-readable code in complex applications.
+Osnovni razred :class:`Symfony\\Component\\EventDispatcher\\Event` ponujen iz
+komponente Event Dispatcher namerno redko omogoča izdelavo
+API specifičnih objektov z dedovanjem, ki uporablja OOP. To omogoča elegantno in
+bralno kodo v kompleksnih aplikacijah.
 
-The :class:`Symfony\\Component\\EventDispatcher\\GenericEvent` is available
-for convenience for those who wish to use just one event object throughout their
-application. It is suitable for most purposes straight out of the box, because
-it follows the standard observer pattern where the event object
-encapsulates an event 'subject', but has the addition of optional extra
-arguments.
+Razred :class:`Symfony\\Component\\EventDispatcher\\GenericEvent` je na voljo
+za udobje tistih, ki želite uporabljati samo en objekt dogodka skozi svojo
+aplikacijo. Primeren je za večino namenov naravnost iz škatle, ker
+sledi standardnemu opazovalnemu vzorcu, kjer objekt dogodka
+povzema 'subjekt' dogodka, vendar ima dodatek opcijske ekstra
+argumente.
 
-:class:`Symfony\\Component\\EventDispatcher\\GenericEvent` has a simple API in
-addition to the base class :class:`Symfony\\Component\\EventDispatcher\\Event`
+Razred :class:`Symfony\\Component\\EventDispatcher\\GenericEvent` ima enostaven API kot
+dodatek k osnovnemu razredu :class:`Symfony\\Component\\EventDispatcher\\Event`
 
 * :method:`Symfony\\Component\\EventDispatcher\\GenericEvent::__construct`:
-  Constructor takes the event subject and any arguments;
+  konstruktor vzame subjekt dogodka in katerekoli argumente;
 
 * :method:`Symfony\\Component\\EventDispatcher\\GenericEvent::getSubject`:
-  Get the subject;
+  Dobi subjekt;
 
 * :method:`Symfony\\Component\\EventDispatcher\\GenericEvent::setArgument`:
-  Sets an argument by key;
+  Nastavi arugment glede na ključ;
 
 * :method:`Symfony\\Component\\EventDispatcher\\GenericEvent::setArguments`:
-  Sets arguments array;
+  Nastavi polje argumentov;
 
 * :method:`Symfony\\Component\\EventDispatcher\\GenericEvent::getArgument`:
-  Gets an argument by key;
+  Dobi argument glede na ključ;
 
 * :method:`Symfony\\Component\\EventDispatcher\\GenericEvent::getArguments`:
-  Getter for all arguments;
+  dobi vse argumente;
 
 * :method:`Symfony\\Component\\EventDispatcher\\GenericEvent::hasArgument`:
-  Returns true if the argument key exists;
+  Vrne true, če ključ argumenta obstaja;
 
-The ``GenericEvent`` also implements :phpclass:`ArrayAccess` on the event
-arguments which makes it very convenient to pass extra arguments regarding the
-event subject.
+``GenericEvent`` tudi implementira :phpclass:`ArrayAccess` na dogodku
+argumentov, kar naredi zelo priročno podajanje dodatnih argumentov glede na
+dogodek subjekta.
 
-The following examples show use-cases to give a general idea of the flexibility.
-The examples assume event listeners have been added to the dispatcher.
+Sledeči primeri prikazujejo primere uporabe, da dajo splošno predstavo o fleksibilnosti.
+Primeri predpostavljajo, da so bili poslušalci dogodkov dodani razpošiljatelju.
 
-Simply passing a subject::
+Enostavno podajte subjekt::
 
     use Symfony\Component\EventDispatcher\GenericEvent;
 
@@ -64,8 +64,8 @@ Simply passing a subject::
         }
     }
 
-Passing and processing arguments using the :phpclass:`ArrayAccess` API to access
-the event arguments::
+Podajanje in procesiranje argumentov z uporabo :phpclass:`ArrayAccess` API-ja za dostopanje
+argumentov dogodka::
 
     use Symfony\Component\EventDispatcher\GenericEvent;
 
@@ -89,7 +89,7 @@ the event arguments::
         }
     }
 
-Filtering data::
+Filtriranje podatkov::
 
     use Symfony\Component\EventDispatcher\GenericEvent;
 
