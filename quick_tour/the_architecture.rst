@@ -10,13 +10,12 @@ Razumevanje strukture direktorijev
 ----------------------------------
 
 Struktura direktorijev Symfony2 :term:`application` je nekoliko fleksibilna,
-vendar struktura direktorijev distribucija *standardne izdaje* odraža
-tipično in priporočeno strukturo Symfony2 aplikacije:
+vendar priporočena struktura je sledeča:
 
-* ``app/``:    Nastavitve aplikacije;
+* ``app/``:    nastavitve aplikacije;
 * ``src/``:    PHP koda projekta;
-* ``vendor/``: Odvisnosti tretjih oseb;
-* ``web/``:    Vrhovni spletni direktorij.
+* ``vendor/``: odvisnosti tretjih oseb;
+* ``web/``:    vrhovni spletni direktorij.
 
 Direktorij ``web/``
 ~~~~~~~~~~~~~~~~~~~
@@ -35,11 +34,10 @@ term:`front controller`::
     $kernel->loadClassCache();
     $kernel->handle(Request::createFromGlobals())->send();
 
-Jedro (Kernel) najprej zahteva ``bootstrap.php.cache`` datoteko, ki začetno naloži
-ogrodje in registrira avtomatski nalagalnik (glejte spodaj).
-
-Kot vsak prednji krmilnik, ``app.php`` uporablja Kernel razred, ``AppKernel``, da
-samozažene aplikacijo.
+Krmilnik najprej naloži aplikacijo z uporabo razreda jedra (kernel) (``AppKernel``
+v tem primeru). Nato ustvari objekt ``Request`` z uporabo PHP globalnih
+spremenljivk in jih poda jedru. Zadnji korak je pošiljanje vsebine
+odziva, ki ga vrne jedro nazaj uporabniku.
 
 .. _the-app-dir:
 
@@ -63,11 +61,6 @@ več fleksibilnosti, lahko razširite avtomatski nalagalnik v ``app/autoload.php
 Vse odvistnosti so shranjene pod direktorijem ``vendor/``, vendar to je samo konvencija.
 Lahko jih shranite kamorkoli želite, globalno na vaš strežnik ali lokalno v vaše projekte.
 
-.. note::
-
-    Če se želite naučiti več o Composer-jevem avtomatskem nalagalniku, preberite `Composer-Autoloader`_.
-    Symfony ima tudi avtomatsko nalagalno komponento - preberite ":doc:`/components/class_loader/class_loader`".
-
 Razumevanje sistema paketov
 ---------------------------
 
@@ -77,13 +70,13 @@ sistem :term:`bundle`-ov.
 
 Paket (bundle) je neke vrste vtičnik v drugo programsko opremo. Torej zakaj
 se imenuje *paket* in ne *vtičnik*? To je zato, ker je *vse* paket v Symfony2,
-od lastnosti jedra ogrodja do kode, ki jo pišete za vašo aplikacijo. Paketi so
-prvorazredni elementi v Symfony2. To vam ponuja fleksibilnost, da uporabite
-vnaprej zgrajene lastnosti zapakirane v tretje osebne pakete ali za distribuiranje
-vaših lastnih paketov. Omogoča vam, da enostavno uporabite in izberete katere
-lastnosti bodo omogočene v vaši aplikaciji in jih optimizirati, kot želite.
-Na koncu dneva, je koda vaše aplikacije prav tako *pomembna* kot je samo jedro
-ogrodja.
+od lastnosti jedra ogrodja do kode, ki jo pišete za vašo aplikacijo.
+
+Paketi so prvorazredni elementi v Symfony2. To vam ponuja fleksibilnost,
+da uporabite vnaprej zgrajene lastnosti zapakirane v tretje osebne pakete ali za distribuiranje
+vaših lastnih paketov. Omogoča vam, da enostavno uporabite in izberete katere lastnosti bodo omogočene
+v vaši aplikaciji in jih optimizirati, kot želite. Na koncu dneva,
+je koda vaše aplikacije prav tako *pomembna* kot je samo jedro ogrodja.
 
 Registracija paketa
 ~~~~~~~~~~~~~~~~~~~
@@ -116,16 +109,16 @@ metodi razreda ``AppKernel``. Vsak paket je direktorij, ki vsebuje en razred
         return $bundles;
     }
 
-Kot dodatek za ``AcmeDemoBundle``, o katerem je bilo že govora, bodite pozorni,
-da jedro tudi omogoči ostale pakete kot so ``FrameworkBundle``,
-``DoctrineBundle``, ``SwiftmailerBundle``, in ``AsseticBundle`` paket.
-Vsi so del jedra ogrodja.
+Kot dodatek za AcmeDemoBundle, o katerem je bilo že govora, bodite pozorni,
+da jedro tudi omogoči ostale pakete kot so FrameworkBundle,
+DoctrineBundle, SwiftmailerBundle, in AsseticBundle paket. Vsi so del
+jedra ogrodja.
 
 Nastavitev paketa
 ~~~~~~~~~~~~~~~~~
 
 Vsak paket je možno prilagoditi preko nastavitvenih datotek napisanih v YAML, XML ali
-PHP. Poglejte si privzete nastavitve:
+PHP. Poglejte si privzete nastavitve Symfony:
 
 .. code-block:: yaml
 
@@ -190,9 +183,9 @@ PHP. Poglejte si privzete nastavitve:
         password:  "%mailer_password%"
         spool:     { type: memory }
 
-Vsak vnos kot ``framework`` definira nastavitev za določen paket.
-Na primer, ``framework`` nastavi ``FrameworkBundle`` med tem ko ``swiftmailer``
-nastavi ``SwiftmailerBundle``.
+Vsak prvo nivojski vnos kot so ``framework``, ``twig``, ``doctrine`` definira
+nastavitev za določen paket. Na primer, ``framework`` nastavi
+FrameworkBundle med tem ko ``swiftmailer`` nastavi SwiftmailerBundle.
 
 Vsaka nastavitev :term:`environment` lahko prepiše privzete nastavitve z zagotovitvijo
 določene nastavitvene datoteke. Na primer, ``dev`` okolje naloži
@@ -243,7 +236,8 @@ Ko želite referenco datoteke iz paketa, uporabite ta zapis:
 v pravo pot do paketa. Na primer, logična pot
 ``@AcmeDemoBundle/Controller/DemoController.php`` bi bila pretvorjena v
 ``src/Acme/DemoBundle/Controller/DemoController.php``, ker Symfony ve
-lokacijo ``AcmeDemoBundle``.
+lokacijo AcmeDemoBundle.
+
 
 Logična imena krmilnikov
 ........................
@@ -266,10 +260,10 @@ Razširitev paketov
 
 Če sledite tem konvencijam, potem lahko uporabite :doc:`dedinjenje paketov</cookbook/bundles/inheritance>`
 za "prepis" datotek, krmilnikov ali predlog. Na primer, lahko naredite
-paket - ``AcmeNewBundle`` - in določite, da prepiše ``AcmeDemoBundle``.
+paket - AcmeNewBundle - in določite, da prepiše AcmeDemoBundle.
 Ko Symfony naloži ``AcmeDemoBundle:Welcome:index`` krmilnik, bo
-najprej pogledal za ``WelcomeController`` razred v ``AcmeNewBundle`` in če
-ne obstaja, potem pogleda znotraj ``AcmeDemoBundle``. To pomeni, da en paket
+najprej pogledal za ``WelcomeController`` razred v AcmeNewBundle in če
+ne obstaja, potem pogleda znotraj AcmeDemoBundle. To pomeni, da en paket
 lahko prepiše skoraj katerikoli del drugega paketa!
 
 Sedaj razumete zakaj je Symfony2 tako fleksibilen? Delite vaše pakete med aplikacijami,
@@ -294,7 +288,7 @@ za vsak zahtevek? Hitros je delno zaradi njegovega sistema predpomnilnika. Aplik
 nastavitve so samo razčlenjene za prvi zahtevek in potem prevedene v enostavno
 PHP kodo shranjeno v ``app/cache`` direktoriju. V razvojnem okolju je Symfony2 dovolj
 pameten, da sprazni predpomnilnik, ko spremenite datoteko. Vendar v produkcijskem okolju,
-je vaša dolžnost, da počistite predpomnilnik, ko posodobite vašo kodo ali spremenite njene
+za pohitritev stvari, je vaša dolžnost, da počistite predpomnilnik, ko posodobite vašo kodo ali spremenite njene
 nastavitve.
 
 Ko razvijate spletno aplikacijo, gredo stvari lahko narobe v mmnogih pogledih. Dnevniške
@@ -333,7 +327,4 @@ naučiti veliko, da postanete Symfony2 mojster. Pripravljeni, da se zakopljete v
 zdaj? Ne glejte več - pojdite na uradno :doc:`/book/index` in izberite katerokoi
 temo želite.
 
-.. _standards:  http://symfony.com/PSR0
-.. _convention: http://pear.php.net/
 .. _Composer:   http://getcomposer.org
-.. _`Composer-Autoloader`: http://getcomposer.org/doc/01-basic-usage.md#autoloading
