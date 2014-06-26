@@ -113,8 +113,9 @@ Next, to actually validate an ``Author`` object, use the ``validate`` method
 on the ``validator`` service (class :class:`Symfony\\Component\\Validator\\Validator`).
 The job of the ``validator`` is easy: to read the constraints (i.e. rules)
 of a class and verify whether or not the data on the object satisfies those
-constraints. If validation fails, an array of errors is returned. Take this
-simple example from inside a controller::
+constraints. If validation fails, a non-empty list of errors
+(class :class:`Symfony\\Component\\Validator\\ConstraintViolationList`) is
+returned. Take this simple example from inside a controller::
 
     // ...
     use Symfony\Component\HttpFoundation\Response;
@@ -129,7 +130,14 @@ simple example from inside a controller::
         $errors = $validator->validate($author);
 
         if (count($errors) > 0) {
-            return new Response(print_r($errors, true));
+            /*
+             * Uses a __toString method on the $errors variable which is a
+             * ConstraintViolationList object. This gives us a nice string
+             * for debugging
+             */
+            $errorsString = (string) $errors;
+
+            return new Response($errorsString);
         }
 
         return new Response('The author is valid! Yes!');
@@ -161,7 +169,7 @@ You could also pass the collection of errors into a template.
         return $this->render('AcmeBlogBundle:Author:validate.html.twig', array(
             'errors' => $errors,
         ));
-    } 
+    }
 
 Inside the template, you can output the list of errors exactly as needed:
 
@@ -575,8 +583,11 @@ Getters
 
 Constraints can also be applied to the return value of a method. Symfony2
 allows you to add a constraint to any public method whose name starts with
-"get" or "is". In this guide, both of these types of methods are referred
-to as "getters".
+"get", "is" or "has". In this guide, these types of methods are referred to
+as "getters".
+
+.. versionadded:: 2.5
+    Support for methods starting with ``has`` was introduced in Symfony 2.5.
 
 The benefit of this technique is that it allows you to validate your object
 dynamically. For example, suppose you want to make sure that a password field
@@ -657,9 +668,9 @@ Now, create the ``isPasswordLegal()`` method, and include the logic you need::
 .. note::
 
     The keen-eyed among you will have noticed that the prefix of the getter
-    ("get" or "is") is omitted in the mapping. This allows you to move the
-    constraint to a property with the same name later (or vice versa) without
-    changing your validation logic.
+    ("get", "is" or "has") is omitted in the mapping. This allows you to move
+    the constraint to a property with the same name later (or vice versa)
+    without changing your validation logic.
 
 .. _validation-class-target:
 
@@ -685,7 +696,7 @@ on that class. To do this, you can organize each constraint into one or more
 constraints.
 
 For example, suppose you have a ``User`` class, which is used both when a
-user registers and when a user updates his/her contact information later:
+user registers and when a user updates their contact information later:
 
 .. configuration-block::
 
@@ -799,11 +810,13 @@ user registers and when a user updates his/her contact information later:
             }
         }
 
-With this configuration, there are two validation groups:
+With this configuration, there are three validation groups:
 
-* ``User`` - contains the constraints that belong to no other group,
-  and is considered the ``Default`` group. (This group is useful for
-  :ref:`book-validation-group-sequence`);
+* ``Default`` - contains the constraints in the current class and all
+  referenced classes that belong to no other group;
+
+* ``User`` - equivalent to all constraints of the ``User`` object in the
+  ``Default`` group;
 
 * ``registration`` - contains the constraints on the ``email`` and ``password``
   fields only.
@@ -829,13 +842,8 @@ Group Sequence
 --------------
 
 In some cases, you want to validate your groups by steps. To do this, you can
-use the ``GroupSequence`` feature. In the case, an object defines a group sequence,
-and then the groups in the group sequence are validated in order.
-
-.. tip::
-
-    Group sequences cannot contain the group ``Default``, as this would create
-    a loop. Instead, use the group ``{ClassName}`` (e.g. ``User``).
+use the ``GroupSequence`` feature. In this case, an object defines a group
+sequence, which determines the order groups should be validated.
 
 For example, suppose you have a ``User`` class and want to validate that the
 username and the password are different only if all other validation passes
@@ -960,6 +968,20 @@ In this example, it will first validate all constraints in the group ``User``
 (which is the same as the ``Default`` group). Only if all constraints in
 that group are valid, the second group, ``Strict``, will be validated.
 
+.. caution::
+
+    As you have already seen in the previous section, the ``Default`` group
+    and the group containing the class name (e.g. ``User``) were identical.
+    However, when using Group Sequences, they are no longer identical. The
+    ``Default`` group will now reference the group sequence, instead of all
+    constraints that do not belong to any group.
+
+    This means that you have to use the ``{ClassName}`` (e.g. ``User``) group
+    when specifying a group sequence. When using ``Default``, you get an
+    infinite recursion (as the ``Default`` group references the group
+    sequence, which will contain the ``Default`` group which references the
+    same group sequence, ...).
+
 Group Sequence Providers
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -977,9 +999,9 @@ entity and a new constraint group called ``Premium``:
         Acme\DemoBundle\Entity\User:
             properties:
                 name:
-                    - NotBlank
+                    - NotBlank: ~
                 creditCard:
-                    - CardScheme
+                    - CardScheme:
                         schemes: [VISA]
                         groups: [Premium]
 
@@ -1063,10 +1085,7 @@ Now, change the ``User`` class to implement
 :class:`Symfony\\Component\\Validator\\GroupSequenceProviderInterface` and
 add the
 :method:`Symfony\\Component\\Validator\\GroupSequenceProviderInterface::getGroupSequence`,
-which should return an array of groups to use. Also, add the
-``@Assert\GroupSequenceProvider`` annotation to the class. If you imagine
-that a method called ``isPremium`` returns true if the user is a premium member,
-then your code might look like this::
+which should return an array of groups to use::
 
     // src/Acme/DemoBundle/Entity/User.php
     namespace Acme\DemoBundle\Entity;
@@ -1074,10 +1093,6 @@ then your code might look like this::
     // ...
     use Symfony\Component\Validator\GroupSequenceProviderInterface;
 
-    /**
-     * @Assert\GroupSequenceProvider
-     * ...
-     */
     class User implements GroupSequenceProviderInterface
     {
         // ...
@@ -1093,6 +1108,66 @@ then your code might look like this::
             return $groups;
         }
     }
+
+At last, you have to notify the Validator component that your ``User`` class
+provides a sequence of groups to be validated:
+
+.. configuration-block::
+
+    .. code-block:: yaml
+
+        # src/Acme/DemoBundle/Resources/config/validation.yml
+        Acme\DemoBundle\Entity\User:
+            group_sequence_provider: ~
+
+    .. code-block:: php-annotations
+
+        // src/Acme/DemoBundle/Entity/User.php
+        namespace Acme\DemoBundle\Entity;
+
+        // ...
+
+        /**
+         * @Assert\GroupSequenceProvider
+         */
+        class User implements GroupSequenceProviderInterface
+        {
+            // ...
+        }
+
+    .. code-block:: xml
+
+        <!-- src/Acme/DemoBundle/Resources/config/validation.xml -->
+        <?xml version="1.0" encoding="UTF-8" ?>
+        <constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
+                http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd"
+        >
+            <class name="Acme\DemoBundle\Entity\User">
+                <group-sequence-provider />
+                <!-- ... -->
+            </class>
+        </constraint-mapping>
+
+    .. code-block:: php
+
+        // src/Acme/DemoBundle/Entity/User.php
+        namespace Acme\DemoBundle\Entity;
+
+        // ...
+        use Symfony\Component\Validator\Mapping\ClassMetadata;
+
+        class User implements GroupSequenceProviderInterface
+        {
+            // ...
+
+            public static function loadValidatorMetadata(ClassMetadata $metadata)
+            {
+                $metadata->setGroupSequenceProvider(true);
+                // ...
+            }
+        }
 
 .. _book-validation-raw-values:
 
@@ -1140,7 +1215,7 @@ section .
 The ``validateValue`` method returns a :class:`Symfony\\Component\\Validator\\ConstraintViolationList`
 object, which acts just like an array of errors. Each error in the collection
 is a :class:`Symfony\\Component\\Validator\\ConstraintViolation` object,
-which holds the error message on its `getMessage` method.
+which holds the error message on its ``getMessage`` method.
 
 Final Thoughts
 --------------

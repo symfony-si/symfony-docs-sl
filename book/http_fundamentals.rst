@@ -241,7 +241,7 @@ vse informacije zahtevka na dosegu dlani::
 Kot bonus razred ``Request`` ne naredi veliko dela v ozadju, da
 vam nikoli ne bo treba skrbeti o tem. Na primer metoda ``isSecure()``
 preveri *tri* različne vrednosti v PHP, ki nakazujejo ali se ali ne
-uporabnik povezuje preko varne povezave (t.j. ``https``).
+uporabnik povezuje preko varne povezave (t.j. HTTPS).
 
 .. sidebar:: ParameterBags and Request attributes
 
@@ -286,12 +286,12 @@ v mislih, da je cilj vaše aplikacije vedno *interpretacija zahtevka
 in izdelava ustreznega odziva glede na vašo logiko aplikacije*.
 
 .. versionadded:: 2.4
-    Podpora za konstante HTTP statusnih kod je bila dodana v Symfony 2.4.
+    Podpora za konstante HTTP statusnih kod je bila predstavljena v Symfony 2.4.
 
 .. tip::
 
     Razreda ``Request`` in ``Response`` sta del samostoječe komponente
-    vključene v Symfony imenovane ``HttpFoundation``. Ta komponenta je
+    vključene v Symfony imenovane HttpFoundation. Ta komponenta je
     lahko v celoti neodvisna od Symfony in tudi ponuja razrede za upravljanje
     sej in nalaganja datotek.
 

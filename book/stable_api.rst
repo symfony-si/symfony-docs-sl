@@ -20,6 +20,10 @@ vse, kar ni označeno eksplicitno ni del stabilnega API-ja.
 
 .. tip::
 
+   Read more about the stable API in :doc:`/contributing/code/bc`.
+
+.. tip::
+
     Katerekoli tretje osebni paketi bi tudi morali objaviti svoj lastni stabilni API.
 
 Od zadnje stabilne izdaje Symfony imajo sledeče komponente
@@ -36,7 +40,6 @@ javno označen API:
 * Finder
 * HttpFoundation
 * HttpKernel
-* Locale
 * Process
 * Routing
 * Templating

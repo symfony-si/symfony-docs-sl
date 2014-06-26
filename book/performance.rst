@@ -60,7 +60,7 @@ ukazne vrstice in lahko postane del vašega postavitvenega procesa:
 
 .. code-block:: bash
 
-    php composer.phar dump-autoload --optimize
+    $ php composer.phar dump-autoload --optimize
 
 Notranje to zgradi veliko polje zemljevida razredov v ``vendor/composer/autoload_classmap.php``.
 

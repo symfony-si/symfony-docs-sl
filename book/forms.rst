@@ -11,9 +11,9 @@ learning the most important features of the form library along the way.
 
 .. note::
 
-   The Symfony form component is a standalone library that can be used outside
-   of Symfony2 projects. For more information, see the `Symfony2 Form Component`_
-   on Github.
+   The Symfony Form component is a standalone library that can be used outside
+   of Symfony2 projects. For more information, see the `Symfony2 Form component`_
+   on GitHub.
 
 .. index::
    single: Forms; Create a simple form
@@ -39,6 +39,7 @@ going to need to build a form. But before you begin, first focus on the generic
         {
             return $this->task;
         }
+
         public function setTask($task)
         {
             $this->task = $task;
@@ -48,6 +49,7 @@ going to need to build a form. But before you begin, first focus on the generic
         {
             return $this->dueDate;
         }
+
         public function setDueDate(\DateTime $dueDate = null)
         {
             $this->dueDate = $dueDate;
@@ -129,7 +131,7 @@ other things, determines which HTML form tag(s) is rendered for that field.
 Finally, you added a submit button for submitting the form to the server.
 
 .. versionadded:: 2.3
-    Support for submit buttons was added in Symfony 2.3. Before that, you had
+    Support for submit buttons was introduced in Symfony 2.3. Before that, you had
     to add buttons to the form's HTML manually.
 
 Symfony2 comes with many built-in types that will be discussed shortly
@@ -171,7 +173,7 @@ helper functions:
 
 That's it! By printing ``form(form)``, each field in the form is rendered, along
 with a label and error message (if there is one). The ``form`` function also
-surrounds everything in the necessary HTML ``form`` tag. As easy as this is,
+surrounds everything in the necessary HTML ``<form>`` tag. As easy as this is,
 it's not very flexible (yet). Usually, you'll want to render each form field
 individually so you can control how the form looks. You'll learn how to do
 that in the ":ref:`form-rendering-template`" section.
@@ -186,7 +188,7 @@ it into a format that's suitable for being rendered in an HTML form.
    The form system is smart enough to access the value of the protected
    ``task`` property via the ``getTask()`` and ``setTask()`` methods on the
    ``Task`` class. Unless a property is public, it *must* have a "getter" and
-   "setter" method so that the form component can get and put data onto the
+   "setter" method so that the Form component can get and put data onto the
    property. For a Boolean property, you can use an "isser" or "hasser" method
    (e.g. ``isPublished()`` or ``hasReminder()``) instead of a getter (e.g.
    ``getPublished()`` or ``getReminder()``).
@@ -230,10 +232,10 @@ controller::
     }
 
 .. versionadded:: 2.3
-    The :method:`Symfony\\Component\\Form\\FormInterface::handleRequest` method was
-    added in Symfony 2.3. Previously, the ``$request`` was passed to the
-    ``submit`` method - a strategy which is deprecated and will be removed
-    in Symfony 3.0. For details on that method, see :ref:`cookbook-form-submit-request`.
+    The :method:`Symfony\\Component\\Form\\FormInterface::handleRequest` method
+    was introduced in Symfony 2.3. Previously, the ``$request`` was passed
+    to the ``submit`` method - a strategy which is deprecated and will be
+    removed in Symfony 3.0. For details on that method, see :ref:`cookbook-form-submit-request`.
 
 This controller follows a common pattern for handling forms, and has three
 possible paths:
@@ -266,7 +268,8 @@ possible paths:
    .. note::
 
       Redirecting a user after a successful form submission prevents the user
-      from being able to hit "refresh" and re-post the data.
+      from being able to hit the "Refresh" button of their browser and re-post
+      the data.
 
 .. index::
    single: Forms; Multiple Submit Buttons
@@ -277,11 +280,11 @@ Submitting Forms with Multiple Buttons
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 2.3
-    Support for buttons in forms was added in Symfony 2.3.
+    Support for buttons in forms was introduced in Symfony 2.3.
 
 When your form contains more than one submit button, you will want to check
 which of the buttons was clicked to adapt the program flow in your controller.
-Let's add a second button with the caption "Save and add" to our form::
+To do this, add a second button with the caption "Save and add" to your form::
 
     $form = $this->createFormBuilder($task)
         ->add('task', 'text')
@@ -477,14 +480,10 @@ Disabling Validation
 ~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 2.3
-    The ability to set ``validation_groups`` to false was added in Symfony 2.3,
-    although setting it to an empty array achieved the same result in previous
-    versions.
+    The ability to set ``validation_groups`` to false was introduced in Symfony 2.3.
 
 Sometimes it is useful to suppress the validation of a form altogether. For
-these cases, you can skip the call to :method:`Symfony\\Component\\Form\\FormInterface::isValid`
-in your controller. If this is not possible, you can alternatively set the
-``validation_groups`` option to ``false`` or an empty array::
+these cases you can set the ``validation_groups`` option to ``false``::
 
     use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -497,9 +496,8 @@ in your controller. If this is not possible, you can alternatively set the
 
 Note that when you do that, the form will still run basic integrity checks,
 for example whether an uploaded file was too large or whether non-existing
-fields were submitted. If you want to suppress validation completely, remove
-the :method:`Symfony\\Component\\Form\\FormInterface::isValid` call from your
-controller.
+fields were submitted. If you want to suppress validation, you can use the
+:ref:`POST_SUBMIT event <cookbook-dynamic-form-modification-suppressing-form-validation>`.
 
 .. index::
    single: Forms; Validation groups based on submitted data
@@ -552,13 +550,13 @@ Groups based on the Clicked Button
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 2.3
-    Support for buttons in forms was added in Symfony 2.3.
+    Support for buttons in forms was introduced in Symfony 2.3.
 
 When your form contains multiple submit buttons, you can change the validation
 group depending on which button is used to submit the form. For example,
 consider a form in a wizard that lets you advance to the next step or go back
-to the previous step. Let's assume also that when returning to the previous
-step, the data of the form should be saved, but not validated.
+to the previous step. Also assume that when returning to the previous step,
+the data of the form should be saved, but not validated.
 
 First, we need to add the two buttons to the form::
 
@@ -570,7 +568,7 @@ First, we need to add the two buttons to the form::
 
 Then, we configure the button for returning to the previous step to run
 specific validation groups. In this example, we want it to suppress validation,
-so we set its ``validation_groups`` options to false::
+so we set its ``validation_groups`` option to false::
 
     $form = $this->createFormBuilder($task)
         // ...
@@ -620,7 +618,7 @@ Each field type has a number of different options that can be passed to it.
 Many of these are specific to the field type and details can be found in
 the documentation for each type.
 
-.. sidebar:: The ``required`` option
+.. sidebar:: The ``required`` Option
 
     The most common option is the ``required`` option, which can be applied to
     any field. By default, the ``required`` option is set to ``true``, meaning
@@ -638,7 +636,7 @@ the documentation for each type.
     In other words, the ``required`` option is "nice", but true server-side
     validation should *always* be used.
 
-.. sidebar:: The ``label`` option
+.. sidebar:: The ``label`` Option
 
     The label for the form field can be set using the ``label`` option,
     which can be applied to any field::
@@ -649,7 +647,8 @@ the documentation for each type.
         ))
 
     The label for a field can also be set in the template rendering the
-    form, see below.
+    form, see below. If you don't need a label associated to your input,
+    you can disable it by setting its value to ``false``.
 
 .. index::
    single: Forms; Field type guessing
@@ -710,8 +709,8 @@ the correct values of a number of field options.
   (i.e. is the field ``nullable``). This is very useful, as your client-side
   validation will automatically match your validation rules.
 
-* ``max_length``: If the field is some sort of text field, then the ``max_length``
-  option can be guessed from the validation constraints (if ``Length`` or
+* ``maxlength``: If the field is some sort of text field, then the ``maxlength``
+  option attribute can be guessed from the validation constraints (if ``Length`` or
   ``Range`` is used) or from the Doctrine metadata (via the field's length).
 
 .. note::
@@ -722,7 +721,7 @@ the correct values of a number of field options.
 If you'd like to change one of the guessed values, you can override it by
 passing the option in the options field array::
 
-    ->add('task', null, array('max_length' => 4))
+    ->add('task', null, array('attr' => array('maxlength' => 4)))
 
 .. index::
    single: Forms; Rendering in a template
@@ -789,7 +788,7 @@ output can be customized on many different levels.
 
         .. code-block:: html+php
 
-            <?php echo $view['form']->get('value')->getTask() ?>
+            <?php echo $form->vars['value']->getTask() ?>
 
 .. index::
    single: Forms; Rendering each field by hand
@@ -895,7 +894,7 @@ to get the ``id``:
 
     .. code-block:: html+php
 
-        <?php echo $form['task']->get('id') ?>
+        <?php echo $form['task']->vars['id']?>
 
 To get the value used for the form field's name attribute you need to use
 the ``full_name`` value:
@@ -908,7 +907,7 @@ the ``full_name`` value:
 
     .. code-block:: html+php
 
-        <?php echo $form['task']->get('full_name') ?>
+        <?php echo $form['task']->vars['full_name'] ?>
 
 Twig Template Function Reference
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -982,10 +981,10 @@ to the ``form()`` or the ``form_start()`` helper:
 .. note::
 
     If the form's method is not GET or POST, but PUT, PATCH or DELETE, Symfony2
-    will insert a hidden field with the name "_method" that stores this method.
+    will insert a hidden field with the name ``_method`` that stores this method.
     The form will be submitted in a normal POST request, but Symfony2's router
-    is capable of detecting the "_method" parameter and will interpret the
-    request as PUT, PATCH or DELETE request. Read the cookbook chapter
+    is capable of detecting the ``_method`` parameter and will interpret it as
+    a PUT, PATCH or DELETE request. Read the cookbook chapter
     ":doc:`/cookbook/routing/method_parameters`" for more information.
 
 .. index::
@@ -1011,7 +1010,8 @@ that will house the logic for building the task form::
     {
         public function buildForm(FormBuilderInterface $builder, array $options)
         {
-            $builder->add('task')
+            $builder
+                ->add('task')
                 ->add('dueDate', null, array('widget' => 'single_text'))
                 ->add('save', 'submit');
         }
@@ -1078,7 +1078,8 @@ the choice is ultimately up to you.
 
         public function buildForm(FormBuilderInterface $builder, array $options)
         {
-            $builder->add('task')
+            $builder
+                ->add('task')
                 ->add('dueDate', null, array('mapped' => false))
                 ->add('save', 'submit');
         }
@@ -1089,7 +1090,7 @@ the choice is ultimately up to you.
     The field data can be accessed in a controller with::
 
         $form->get('dueDate')->getData();
-        
+
     In addition, the data of an unmapped field can also be modified directly::
 
         $form->get('dueDate')->setData(new \DateTime());
@@ -1099,6 +1100,12 @@ Defining your Forms as Services
 
 Defining your form type as a service is a good practice and makes it really
 easy to use in your application.
+
+.. note::
+
+    Services and the service container will be handled
+    :doc:`later on in this book </book/service_container>`. Things will be
+    more clear after reading that chapter.
 
 .. configuration-block::
 
@@ -1213,7 +1220,7 @@ Embedded Forms
 Often, you'll want to build a form that will include fields from many different
 objects. For example, a registration form may contain data belonging to
 a ``User`` object as well as many ``Address`` objects. Fortunately, this
-is easy and natural with the form component.
+is easy and natural with the Form component.
 
 Embedding a Single Object
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1318,8 +1325,7 @@ the ``cascade_validation`` option to ``TaskType``::
         ));
     }
 
-Render the ``Category`` fields in the same way
-as the original ``Task`` fields:
+Render the ``Category`` fields in the same way as the original ``Task`` fields:
 
 .. configuration-block::
 
@@ -1360,7 +1366,7 @@ form with many ``Product`` sub-forms). This is done by using the ``collection``
 field type.
 
 For more information see the ":doc:`/cookbook/form/form_collections`" cookbook
-entry and  the :doc:`collection </reference/forms/types/collection>` field type reference.
+entry and the :doc:`collection </reference/forms/types/collection>` field type reference.
 
 .. index::
    single: Forms; Theming
@@ -1415,7 +1421,7 @@ do this, create a new template file that will store the new markup:
         </div>
 
 The ``form_row`` form fragment is used when rendering most fields via the
-``form_row`` function. To tell the form component to use your new ``form_row``
+``form_row`` function. To tell the Form component to use your new ``form_row``
 fragment defined above, add the following to the top of the template that
 renders the form:
 
@@ -1475,7 +1481,7 @@ Form Fragment Naming
 ~~~~~~~~~~~~~~~~~~~~
 
 In Symfony, every part of a form that is rendered - HTML form elements, errors,
-labels, etc - is defined in a base theme, which is a collection of blocks
+labels, etc. - is defined in a base theme, which is a collection of blocks
 in Twig and a collection of template files in PHP.
 
 In Twig, every block needed is defined in a single template file (`form_div_layout.html.twig`_)
@@ -1813,7 +1819,7 @@ an array.
 
         $this->get('request')->request->get('name');
 
-    Be advised, however, that in most cases using the getData() method is
+    Be advised, however, that in most cases using the ``getData()`` method is
     a better choice, since it returns the data (usually an object) after
     it's been transformed by the form framework.
 
@@ -1855,7 +1861,7 @@ but here's a short example:
 
 .. tip::
 
-    If you are using Validation Groups, you need to either reference the
+    If you are using validation groups, you need to either reference the
     ``Default`` group when creating the form, or set the correct group on
     the constraint you are adding.
 
@@ -1891,9 +1897,9 @@ Learn more from the Cookbook
 * :doc:`/cookbook/form/dynamic_form_modification`
 * :doc:`/cookbook/form/data_transformers`
 
-.. _`Symfony2 Form Component`: https://github.com/symfony/Form
+.. _`Symfony2 Form component`: https://github.com/symfony/Form
 .. _`DateTime`: http://php.net/manual/en/class.datetime.php
-.. _`Twig Bridge`: https://github.com/symfony/symfony/tree/2.2/src/Symfony/Bridge/Twig
-.. _`form_div_layout.html.twig`: https://github.com/symfony/symfony/blob/2.2/src/Symfony/Bridge/Twig/Resources/views/Form/form_div_layout.html.twig
+.. _`Twig Bridge`: https://github.com/symfony/symfony/tree/master/src/Symfony/Bridge/Twig
+.. _`form_div_layout.html.twig`: https://github.com/symfony/symfony/blob/master/src/Symfony/Bridge/Twig/Resources/views/Form/form_div_layout.html.twig
 .. _`Cross-site request forgery`: http://en.wikipedia.org/wiki/Cross-site_request_forgery
-.. _`view on GitHub`: https://github.com/symfony/symfony/tree/2.2/src/Symfony/Bundle/FrameworkBundle/Resources/views/Form
+.. _`view on GitHub`: https://github.com/symfony/symfony/tree/master/src/Symfony/Bundle/FrameworkBundle/Resources/views/Form

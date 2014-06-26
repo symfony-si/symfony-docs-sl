@@ -21,7 +21,7 @@ ima svojo odlično `dokumentacijo`_.
     za testiranje kode samega Symfony jedra.
 
 Vsak test - bodisi je to test enote ali funkcijski test - gre za PHP razred,
-ki bi moral domovati znotraj `Tests/` poddirektorija vaših paketov. Če sledite
+ki bi moral domovati znotraj ``Tests/`` poddirektorija vaših paketov. Če sledite
 temu pravilu, potem lahko poženete vse vaše teste aplikacije s sledečim
 ukazom:
 
@@ -36,7 +36,7 @@ datoteko. Če ste radovedni o opcijah PHPUnit-a, preverite datoteko
 
 .. tip::
 
-    Code coverage can be generated with the ``--coverage-html`` option.
+    Pokritost kode se lahko generira z opcijo ``--coverage-html``.
 
 .. index::
    single: Tests; Unit tests
@@ -89,8 +89,8 @@ of your bundle::
     directory, put the test in the ``Tests/Utility/`` directory.
 
 Just like in your real application - autoloading is automatically enabled
-via the ``bootstrap.php.cache`` file (as configured by default in the ``phpunit.xml.dist``
-file).
+via the ``bootstrap.php.cache`` file (as configured by default in the
+``app/phpunit.xml.dist`` file).
 
 Running tests for a given file or directory is also very easy:
 
@@ -229,7 +229,7 @@ document::
 
 .. _book-testing-request-method-sidebar:
 
-.. sidebar:: More about the ``request()`` method:
+.. sidebar:: More about the ``request()`` Method:
 
     The full signature of the ``request()`` method is::
 
@@ -311,7 +311,7 @@ document::
         $this->assertTrue($client->getResponse()->isRedirect());
 
     .. versionadded:: 2.4
-        Support for HTTP status code constants was added in Symfony 2.4.
+        Support for HTTP status code constants was introduced in Symfony 2.4.
 
 .. index::
    single: Tests; Client
@@ -326,6 +326,12 @@ into your Symfony2 application::
 
 The ``request()`` method takes the HTTP method and a URL as arguments and
 returns a ``Crawler`` instance.
+
+.. tip::
+
+    Hardcoding the request URLs is a best practice for functional tests. If the
+    test generates URLs using the Symfony router, it won't detect any change
+    made to the application URLs which may impact the end users.
 
 Use the Crawler to find DOM elements in the Response. These elements can then
 be used to click on links and submit forms::
@@ -405,12 +411,13 @@ The Client supports many operations that can be done in a real browser::
     // Clears all cookies and the history
     $client->restart();
 
-Accessing Internal Objects
+Accessing internal Objects
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 2.3
-    The ``getInternalRequest()`` and ``getInternalResponse()`` method were
-    added in Symfony 2.3.
+    The :method:`Symfony\\Component\\BrowserKit\\Client::getInternalRequest`
+    and :method:`Symfony\\Component\\BrowserKit\\Client::getInternalResponse`
+    methods were introduced in Symfony 2.3.
 
 If you use the client to test your application, you might want to access the
 client's internal objects::
@@ -485,7 +492,7 @@ Redirecting
 
 When a request returns a redirect response, the client does not follow
 it automatically. You can examine the response and force a redirection
-afterwards  with the ``followRedirect()`` method::
+afterwards with the ``followRedirect()`` method::
 
     $crawler = $client->followRedirect();
 
@@ -493,6 +500,11 @@ If you want the client to automatically follow all redirects, you can
 force him with the ``followRedirects()`` method::
 
     $client->followRedirects();
+
+If you pass ``false`` to the ``followRedirects()`` method, the redirects 
+will no longer be followed::     
+
+    $client->followRedirects(false);
 
 .. index::
    single: Tests; Crawler
@@ -581,8 +593,7 @@ The Crawler can extract information from the nodes::
     $info = $crawler->extract(array('_text', 'href'));
 
     // Executes a lambda for each node and return an array of results
-    $data = $crawler->each(function ($node, $i)
-    {
+    $data = $crawler->each(function ($node, $i) {
         return $node->attr('href');
     });
 
@@ -778,47 +789,70 @@ PHPUnit Configuration
 ~~~~~~~~~~~~~~~~~~~~~
 
 Each application has its own PHPUnit configuration, stored in the
-``phpunit.xml.dist`` file. You can edit this file to change the defaults or
-create a ``phpunit.xml`` file to tweak the configuration for your local machine.
+``app/phpunit.xml.dist`` file. You can edit this file to change the defaults or
+create an ``app/phpunit.xml`` file to setup a configuration for your local
+machine only.
 
 .. tip::
 
-    Store the ``phpunit.xml.dist`` file in your code repository, and ignore the
-    ``phpunit.xml`` file.
+    Store the ``app/phpunit.xml.dist`` file in your code repository and ignore
+    the ``app/phpunit.xml`` file.
 
-By default, only the tests stored in "standard" bundles are run by the
-``phpunit`` command (standard being tests in the ``src/*/Bundle/Tests`` or
-``src/*/Bundle/*Bundle/Tests`` directories) But you can easily add more
-directories. For instance, the following configuration adds the tests from
-the installed third-party bundles:
+By default, only the tests from your own custom bundles stored in the standard
+directories ``src/*/*Bundle/Tests`` or ``src/*/Bundle/*Bundle/Tests`` are run
+by the ``phpunit`` command, as configured in the ``app/phpunit.xml.dist`` file:
 
 .. code-block:: xml
 
-    <!-- hello/phpunit.xml.dist -->
-    <testsuites>
-        <testsuite name="Project Test Suite">
-            <directory>../src/*/*Bundle/Tests</directory>
-            <directory>../src/Acme/Bundle/*Bundle/Tests</directory>
-        </testsuite>
-    </testsuites>
+    <!-- app/phpunit.xml.dist -->
+    <phpunit>
+        <!-- ... -->
+        <testsuites>
+            <testsuite name="Project Test Suite">
+                <directory>../src/*/*Bundle/Tests</directory>
+                <directory>../src/*/Bundle/*Bundle/Tests</directory>
+            </testsuite>
+        </testsuites>
+        <!-- ... -->
+    </phpunit>
+
+But you can easily add more directories. For instance, the following
+configuration adds tests from a custom ``lib/tests`` directory:
+
+.. code-block:: xml
+
+    <!-- app/phpunit.xml.dist -->
+    <phpunit>
+        <!-- ... -->
+        <testsuites>
+            <testsuite name="Project Test Suite">
+                <!-- ... --->
+                <directory>../lib/tests</directory>
+            </testsuite>
+        </testsuites>
+        <!-- ... --->
+    </phpunit>
 
 To include other directories in the code coverage, also edit the ``<filter>``
 section:
 
 .. code-block:: xml
 
-    <!-- ... -->
-    <filter>
-        <whitelist>
-            <directory>../src</directory>
-            <exclude>
-                <directory>../src/*/*Bundle/Resources</directory>
-                <directory>../src/*/*Bundle/Tests</directory>
-                <directory>../src/Acme/Bundle/*Bundle/Resources</directory>
-                <directory>../src/Acme/Bundle/*Bundle/Tests</directory>
-            </exclude>
-        </whitelist>
-    </filter>
+    <!-- app/phpunit.xml.dist -->
+    <phpunit>
+        <!-- ... -->
+        <filter>
+            <whitelist>
+                <!-- ... -->
+                <directory>../lib</directory>
+                <exclude>
+                    <!-- ... -->
+                    <directory>../lib/tests</directory>
+                </exclude>
+            </whitelist>
+        </filter>
+        <!-- ... --->
+    </phpunit>
 
 Learn more
 ----------
@@ -832,4 +866,4 @@ Learn more
 
 .. _`DemoControllerTest`: https://github.com/symfony/symfony-standard/blob/master/src/Acme/DemoBundle/Tests/Controller/DemoControllerTest.php
 .. _`$_SERVER`: http://php.net/manual/en/reserved.variables.server.php
-.. _`dokumentacijo`: http://phpunit.de/manual/current/en/
+.. _`documentation`: http://phpunit.de/manual/current/en/

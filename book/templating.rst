@@ -1,7 +1,7 @@
 .. index::
    single: Templating
 
-Creating and using Templates
+Creating and Using Templates
 ============================
 
 As you know, the :doc:`controller </book/controller>` is responsible for
@@ -75,7 +75,7 @@ to web designers and, in several ways, more powerful than PHP templates:
         </body>
     </html>
 
-Twig defines two types of special syntax:
+Twig defines three types of special syntax:
 
 * ``{{ ... }}``: "Says something": prints a variable or the result of an
   expression to the template;
@@ -83,11 +83,9 @@ Twig defines two types of special syntax:
 * ``{% ... %}``: "Does something": a **tag** that controls the logic of the
   template; it is used to execute statements such as for-loops for example.
 
-.. note::
-
-   There is a third syntax used for creating comments: ``{# this is a comment #}``.
-   This syntax can be used across multiple lines like the PHP-equivalent
-   ``/* comment */`` syntax.
+* ``{# ... #}``: "Comment something": it's the equivalent of the PHP
+  ``/* comment */`` syntax. It's used to add single or multi-line comments.
+  The content of the comments isn't included in the rendered pages.
 
 Twig also contains **filters**, which modify content before being rendered.
 The following makes the ``title`` variable all uppercase before rendering
@@ -375,11 +373,6 @@ When working with template inheritance, here are some tips to keep in mind:
 Template Naming and Locations
 -----------------------------
 
-.. versionadded:: 2.2
-    Namespaced path support was added in 2.2, allowing for template names
-    like ``@AcmeDemo/layout.html.twig``. See :doc:`/cookbook/templating/namespaced_paths`
-    for more details.
-
 By default, templates can live in two different locations:
 
 * ``app/Resources/views/``: The applications ``views`` directory can contain
@@ -399,14 +392,14 @@ lives in a specific location:
   template for a specific page. The three parts of the string, each separated
   by a colon (``:``), mean the following:
 
-    * ``AcmeBlogBundle``: (*bundle*) the template lives inside the
-      ``AcmeBlogBundle`` (e.g. ``src/Acme/BlogBundle``);
+  * ``AcmeBlogBundle``: (*bundle*) the template lives inside the
+    ``AcmeBlogBundle`` (e.g. ``src/Acme/BlogBundle``);
 
-    * ``Blog``: (*controller*) indicates that the template lives inside the
-      ``Blog`` subdirectory of ``Resources/views``;
+  * ``Blog``: (*controller*) indicates that the template lives inside the
+    ``Blog`` subdirectory of ``Resources/views``;
 
-    * ``index.html.twig``: (*template*) the actual name of the file is
-      ``index.html.twig``.
+  * ``index.html.twig``: (*template*) the actual name of the file is
+    ``index.html.twig``.
 
   Assuming that the ``AcmeBlogBundle`` lives at ``src/Acme/BlogBundle``, the
   final path to the layout would be ``src/Acme/BlogBundle/Resources/views/Blog/index.html.twig``.
@@ -571,10 +564,6 @@ you set `with_context`_ to false).
     The ``{'article': article}`` syntax is the standard Twig syntax for hash
     maps (i.e. an array with named keys). If you needed to pass in multiple
     elements, it would look like this: ``{'foo': foo, 'bar': bar}``.
-
-.. versionadded:: 2.2
-    The `include() function`_ is a new Twig feature that's available in Symfony
-    2.2. Prior, the `{% include %} tag`_ tag was used.
 
 .. index::
    single: Templating; Embedding action
@@ -781,9 +770,6 @@ in your application configuration:
                 ),
             ),
         ));
-
-.. versionadded:: 2.2
-    Default templates per render function was added in Symfony 2.2
 
 You can define default templates per ``render`` function (which will override
 any global default template that is defined):
@@ -1003,6 +989,44 @@ assets won't be cached when deployed. For example, ``/images/logo.png`` might
 look like ``/images/logo.png?v2``. For more information, see the :ref:`ref-framework-assets-version`
 configuration option.
 
+.. _`book-templating-version-by-asset`:
+
+.. versionadded:: 2.5
+    Setting versioned URLs on an asset-by-asset basis was introduced in Symfony 2.5.
+
+If you need to set a version for a specific asset, you can set the fourth
+argument (or the ``version`` argument) to the desired version:
+
+.. configuration-block::
+
+    .. code-block:: html+jinja
+
+        <img src="{{ asset('images/logo.png', version='3.0') }}" alt="Symfony!" />
+
+    .. code-block:: html+php
+
+        <img src="<?php echo $view['assets']->getUrl('images/logo.png', null, false, '3.0') ?>" alt="Symfony!" />
+
+If you dont give a version or pass ``null``, the default package version
+(from :ref:`ref-framework-assets-version`) will be used. If you pass ``false``,
+versioned URL will be deactivated for this asset.
+
+.. versionadded:: 2.5
+    Absolute URLs for assets were introduced in Symfony 2.5.
+
+If you need absolute URLs for assets, you can set the third argument (or the
+``absolute`` argument) to ``true``:
+
+.. configuration-block::
+
+    .. code-block:: html+jinja
+
+        <img src="{{ asset('images/logo.png', absolute=true) }}" alt="Symfony!" />
+
+    .. code-block:: html+php
+
+        <img src="<?php echo $view['assets']->getUrl('images/logo.png', null, true) ?>" alt="Symfony!" />
+
 .. index::
    single: Templating; Including stylesheets and JavaScripts
    single: Stylesheets; Including stylesheets
@@ -1036,14 +1060,14 @@ stylesheets and JavaScripts that you'll need throughout your site:
             {# ... #}
 
             {% block stylesheets %}
-                <link href="{{ asset('/css/main.css') }}" rel="stylesheet" />
+                <link href="{{ asset('css/main.css') }}" rel="stylesheet" />
             {% endblock %}
         </head>
         <body>
             {# ... #}
 
             {% block javascripts %}
-                <script src="{{ asset('/js/main.js') }}"></script>
+                <script src="{{ asset('js/main.js') }}"></script>
             {% endblock %}
         </body>
     </html>
@@ -1061,7 +1085,7 @@ page. From inside that contact page's template, do the following:
     {% block stylesheets %}
         {{ parent() }}
 
-        <link href="{{ asset('/css/contact.css') }}" rel="stylesheet" />
+        <link href="{{ asset('css/contact.css') }}" rel="stylesheet" />
     {% endblock %}
 
     {# ... #}
@@ -1088,7 +1112,7 @@ Global Template Variables
 -------------------------
 
 During each request, Symfony2 will set a global template variable ``app``
-in both Twig and PHP template engines by default.  The ``app`` variable
+in both Twig and PHP template engines by default. The ``app`` variable
 is a :class:`Symfony\\Bundle\\FrameworkBundle\\Templating\\GlobalVariables`
 instance which will give you access to some application specific variables
 automatically:
@@ -1126,7 +1150,7 @@ automatically:
 .. index::
    single: Templating; The templating service
 
-Configuring and using the ``templating`` Service
+Configuring and Using the ``templating`` Service
 ------------------------------------------------
 
 The heart of the template system in Symfony2 is the templating ``Engine``.
@@ -1275,10 +1299,10 @@ Overriding Core Templates
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Since the Symfony2 framework itself is just a bundle, core templates can be
-overridden in the same way. For example, the core ``TwigBundle`` contains
+overridden in the same way. For example, the core TwigBundle contains
 a number of different "exception" and "error" templates that can be overridden
 by copying each from the ``Resources/views/Exception`` directory of the
-``TwigBundle`` to, you guessed it, the
+TwigBundle to, you guessed it, the
 ``app/Resources/TwigBundle/views/Exception`` directory.
 
 .. index::
@@ -1326,7 +1350,7 @@ covered:
           {% endfor %}
       {% endblock %}
 
-Notice that this template extends the section template -(``AcmeBlogBundle::layout.html.twig``)
+Notice that this template extends the section template (``AcmeBlogBundle::layout.html.twig``)
 which in-turn extends the base application layout (``::base.html.twig``).
 This is the common three-level inheritance model.
 
@@ -1359,9 +1383,9 @@ this classic example:
 
         Hello <?php echo $name ?>
 
-Imagine that the user enters the following code as his/her name:
+Imagine the user enters the following code for their name:
 
-.. code-block:: text
+.. code-block:: html
 
     <script>alert('hello!')</script>
 

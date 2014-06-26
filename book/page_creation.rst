@@ -165,7 +165,7 @@ vnos, ko ste generirali ``AcmeHelloBundle``:
         $collection = new RouteCollection();
         $collection->addCollection(
             $loader->import('@AcmeHelloBundle/Resources/config/routing.php'),
-            '/',
+            '/'
         );
 
         return $collection;
@@ -839,7 +839,7 @@ formata, ki ga imate raje:
 
 Vsak vrhnji vnos kot sta ``framework`` ali ``twig`` definirata nastavitve
 za določen paket. Na primer ključ ``framework`` definira nastavitve
-za Symfony paket jedra ``FrameworkBundle`` in vključuje nastavitve za
+za Symfony paket jedra FrameworkBundle in vključuje nastavitve za
 usmerjanje, predloge in ostale sisteme jedra.
 
 Za sedaj ne skrbite o specifičnih nastavitvenih opcijah v vsaki sekciji.
@@ -853,7 +853,7 @@ opcijah za vsako lastnost.
     treh formatih (YAML, XML in PHP). Vsak ima svoje prednosti in
     slabosti. Izbira katerega uporabiti je na vas:
 
-    * *YAML*: Enostaven, jasen in bralen (izvedite več o yaml v
+    * *YAML*: Enostaven, jasen in bralen (izvedite več o YAML v
       ":doc:`/components/yaml/yaml_format`");
 
     * *XML*: Bolj močan kot YAML na trenutke in podpira IDE avtomatsko zaključevanje;
@@ -863,19 +863,19 @@ opcijah za vsako lastnost.
 Odložitev privzetih nastavitev
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Lahko odložite privzete nastavitve za paket v yaml v konzolo z uporabo
+Lahko odložite privzete nastavitve za paket v YAML v konzolo z uporabo
 ukaza ``config:dump-reference``.  Tu je primer odložitve privzetih nastavitev
 FrameworkBundle:
 
-.. code-block:: text
+.. code-block:: bash
 
-    app/console config:dump-reference FrameworkBundle
+    $ app/console config:dump-reference FrameworkBundle
 
 Razširitveni alias (nastavitveni ključ) je lahko tudi uporabljen:
 
-.. code-block:: text
+.. code-block:: bash
 
-    app/console config:dump-reference framework
+    $ app/console config:dump-reference framework
 
 .. note::
 
@@ -1061,5 +1061,5 @@ za hitro gradnjo aplikacij.
 .. _`Twig`: http://twig.sensiolabs.org
 .. _`tretje osebnih paketih`: http://knpbundles.com
 .. _`Symfony Standard Edition`: http://symfony.com/download
-.. _`Apache DirectoryIndex dokumentacijo`: http://httpd.apache.org/docs/2.0/mod/mod_dir.html
+.. _`Apache DirectoryIndex dokumentacijo`: http://httpd.apache.org/docs/current/mod/mod_dir.html
 .. _`Nginx HttpCoreModule lokacijo dokumentacije`: http://wiki.nginx.org/HttpCoreModule#location

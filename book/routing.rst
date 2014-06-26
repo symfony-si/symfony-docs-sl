@@ -68,14 +68,12 @@ The route is simple:
 
         return $collection;
 
-.. versionadded:: 2.2
-    The ``path`` option is new in Symfony2.2, ``pattern`` is used in older
-    versions.
-
 The path defined by the ``blog_show`` route acts like ``/blog/*`` where
 the wildcard is given the name ``slug``. For the URL ``/blog/my-blog-post``,
 the ``slug`` variable gets a value of ``my-blog-post``, which is available
-for you to use in your controller (keep reading).
+for you to use in your controller (keep reading). The ``blog_show`` is the
+internal name of the route, which doesn't have any meaning yet and just needs
+to be unique. Later, you'll use it to generate URLs.
 
 The ``_controller`` parameter is a special key that tells Symfony which controller
 should be executed when a URL matches this route. The ``_controller`` string
@@ -432,6 +430,13 @@ match, giving the ``page`` parameter a value of ``2``. Perfect.
 | /blog/2            | blog  | {page} = 2            |
 +--------------------+-------+-----------------------+
 
+.. caution::
+
+    Of course, you can have more than one optional placeholder (e.g. ``/blog/{slug}/{page}``),
+    but everything after an optional placeholder must be optional. For example,
+    ``/{page}/blog`` is a valid path, but ``page`` will always be required
+    (i.e. simply ``/blog`` will not match this route).
+
 .. tip::
 
     Routes with optional parameters at the end will not match on requests
@@ -507,10 +512,11 @@ to the ``{page}`` parameter.
 | /blog/my-blog-post | blog  | {page} = my-blog-post |
 +--------------------+-------+-----------------------+
 
-The answer to the problem is to add route *requirements*. The routes in this
-example would work perfectly if the ``/blog/{page}`` path *only* matched
-URLs where the ``{page}`` portion is an integer. Fortunately, regular expression
-requirements can easily be added for each parameter. For example:
+The answer to the problem is to add route *requirements* or route *conditions*
+(see :ref:`book-routing-conditions`). The routes in this example would work
+perfectly if the ``/blog/{page}`` path *only* matched URLs where the ``{page}``
+portion is an integer. Fortunately, regular expression requirements can easily
+be added for each parameter. For example:
 
 .. configuration-block::
 
@@ -561,13 +567,15 @@ is *not* a number).
 As a result, a URL like ``/blog/my-blog-post`` will now properly match the
 ``blog_show`` route.
 
-+--------------------+-----------+-----------------------+
-| URL                | route     | parameters            |
-+====================+===========+=======================+
-| /blog/2            | blog      | {page} = 2            |
-+--------------------+-----------+-----------------------+
-| /blog/my-blog-post | blog_show | {slug} = my-blog-post |
-+--------------------+-----------+-----------------------+
++----------------------+-----------+-------------------------+
+| URL                  | route     | parameters              |
++======================+===========+=========================+
+| /blog/2              | blog      | {page} = 2              |
++----------------------+-----------+-------------------------+
+| /blog/my-blog-post   | blog_show | {slug} = my-blog-post   |
++----------------------+-----------+-------------------------+
+| /blog/2-my-blog-post | blog_show | {slug} = 2-my-blog-post |
++----------------------+-----------+-------------------------+
 
 .. sidebar:: Earlier Routes always Win
 
@@ -694,10 +702,6 @@ be accomplished with the following route configuration:
 
         return $collection;
 
-.. versionadded:: 2.2
-    The ``methods`` option is added in Symfony2.2. Use the ``_method``
-    requirement in older versions.
-
 Despite the fact that these two routes have identical paths (``/contact``),
 the first route will match only GET requests and the second route will match
 only POST requests. This means that you can display the form and submit the
@@ -710,12 +714,98 @@ form via the same URL, while using distinct controllers for the two actions.
 Adding a Host Requirement
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. versionadded:: 2.2
-    Host matching support was added in Symfony 2.2
-
 You can also match on the HTTP *host* of the incoming request. For more
 information, see :doc:`/components/routing/hostname_pattern` in the Routing
 component documentation.
+
+.. _book-routing-conditions:
+
+Completely Customized Route Matching with Conditions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 2.4
+    Route conditions were introduced in Symfony 2.4.
+
+As you've seen, a route can be made to match only certain routing wildcards
+(via regular expressions), HTTP methods, or host names. But the routing system
+can be extended to have an almost infinite flexibility using ``conditions``:
+
+.. configuration-block::
+
+    .. code-block:: yaml
+
+        contact:
+            path:     /contact
+            defaults: { _controller: AcmeDemoBundle:Main:contact }
+            condition: "context.getMethod() in ['GET', 'HEAD'] and request.headers.get('User-Agent') matches '/firefox/i'"
+
+    .. code-block:: xml
+
+        <?xml version="1.0" encoding="UTF-8" ?>
+        <routes xmlns="http://symfony.com/schema/routing"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://symfony.com/schema/routing
+                http://symfony.com/schema/routing/routing-1.0.xsd">
+
+            <route id="contact"
+                path="/contact"
+                condition="context.getMethod() in ['GET', 'HEAD'] and request.headers.get('User-Agent') matches '/firefox/i'"
+            >
+                <default key="_controller">AcmeDemoBundle:Main:contact</default>
+            </route>
+        </routes>
+
+    .. code-block:: php
+
+        use Symfony\Component\Routing\RouteCollection;
+        use Symfony\Component\Routing\Route;
+
+        $collection = new RouteCollection();
+        $collection->add('contact', new Route(
+            '/contact', array(
+                '_controller' => 'AcmeDemoBundle:Main:contact',
+            ),
+            array(),
+            array(),
+            '',
+            array(),
+            array(),
+            'context.getMethod() in ["GET", "HEAD"] and request.headers.get("User-Agent") matches "/firefox/i"'
+        ));
+
+        return $collection;
+
+The ``condition`` is an expression, and you can learn more about its syntax
+here: :doc:`/components/expression_language/syntax`. With this, the route
+won't match unless the HTTP method is either GET or HEAD *and* if the ``User-Agent``
+header matches ``firefox``.
+
+You can do any complex logic you need in the expression by leveraging two
+variables that are passed into the expression:
+
+* ``context``: An instance of :class:`Symfony\\Component\\Routing\\RequestContext`,
+  which holds the most fundamental information about the route being matched;
+* ``request``: The Symfony :class:`Symfony\\Component\\HttpFoundation\\Request`
+  object (see :ref:`component-http-foundation-request`).
+
+.. caution::
+
+    Conditions are *not* taken into account when generating a URL.
+
+.. sidebar:: Expressions are Compiled to PHP
+
+    Behind the scenes, expressions are compiled down to raw PHP. Our example
+    would generate the following PHP in the cache directory::
+
+        if (rtrim($pathinfo, '/contact') === '' && (
+            in_array($context->getMethod(), array(0 => "GET", 1 => "HEAD"))
+            && preg_match("/firefox/i", $request->headers->get("User-Agent"))
+        )) {
+            // ...
+        }
+
+    Because of this, using the ``condition`` key causes no extra overhead
+    beyond the time it takes for the underlying PHP to execute.
 
 .. index::
    single: Routing; Advanced example
@@ -769,7 +859,7 @@ routing system can be:
 
         $collection = new RouteCollection();
         $collection->add(
-            'homepage',
+            'article_show',
             new Route('/articles/{culture}/{year}/{title}.{_format}', array(
                 '_controller' => 'AcmeDemoBundle:Article:show',
                 '_format'     => 'html',
@@ -823,11 +913,6 @@ that are special: each adds a unique piece of functionality inside your applicat
 * ``_format``: Used to set the request format (:ref:`read more <book-routing-format-param>`);
 
 * ``_locale``: Used to set the locale on the request (:ref:`read more <book-translation-locale-url>`);
-
-.. tip::
-
-    If you use the ``_locale`` parameter in a route, that value will also
-    be stored on the session so that subsequent requests keep this same locale.
 
 .. index::
    single: Routing; Controllers
@@ -1052,7 +1137,7 @@ instead of simply ``/hello/{name}``:
         $acmeHello = $loader->import(
             "@AcmeHelloBundle/Resources/config/routing.php"
         );
-        $acmeHello->setPrefix('/admin');
+        $acmeHello->addPrefix('/admin');
 
         $collection->addCollection($acmeHello);
 
@@ -1067,11 +1152,8 @@ from the new routing resource.
     :doc:`FrameworkExtraBundle documentation </bundles/SensioFrameworkExtraBundle/annotations/routing>`
     to see how.
 
-Adding a Host requirement to Imported Routes
+Adding a Host Requirement to Imported Routes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. versionadded:: 2.2
-    Host matching support was added in Symfony 2.2
 
 You can set the host regex on imported routes. For more information, see
 :ref:`component-routing-host-imported`.
@@ -1130,10 +1212,10 @@ Generating URLs
 ---------------
 
 The routing system should also be used to generate URLs. In reality, routing
-is a bi-directional system: mapping the URL to a controller+parameters and
+is a bidirectional system: mapping the URL to a controller+parameters and
 a route+parameters back to a URL. The
 :method:`Symfony\\Component\\Routing\\Router::match` and
-:method:`Symfony\\Component\\Routing\\Router::generate` methods form this bi-directional
+:method:`Symfony\\Component\\Routing\\Router::generate` methods form this bidirectional
 system. Take the ``blog_show`` example route from earlier::
 
     $params = $this->get('router')->match('/blog/my-blog-post');
@@ -1164,18 +1246,31 @@ route. With this information, any URL can easily be generated::
 
 .. note::
 
-    In controllers that extend Symfony's base
+    In controllers that don't extend Symfony's base
     :class:`Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller`,
-    you can use the
-    :method:`Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller::generateUrl`
-    method, which call's the router service's
-    :method:`Symfony\\Component\\Routing\\Router::generate` method.
+    you can use the ``router`` service's
+    :method:`Symfony\\Component\\Routing\\Router::generate` method::
+
+        use Symfony\Component\DependencyInjection\ContainerAware;
+
+        class MainController extends ContainerAware
+        {
+            public function showAction($slug)
+            {
+                // ...
+
+                $url = $this->container->get('router')->generate(
+                    'blog_show',
+                    array('slug' => 'my-blog-post')
+                );
+            }
+        }
 
 In an upcoming section, you'll learn how to generate URLs from inside templates.
 
 .. tip::
 
-    If the frontend of your application uses AJAX requests, you might want
+    If the frontend of your application uses Ajax requests, you might want
     to be able to generate URLs in JavaScript based on your routing configuration.
     By using the `FOSJsRoutingBundle`_, you can do exactly that:
 
@@ -1189,29 +1284,6 @@ In an upcoming section, you'll learn how to generate URLs from inside templates.
     For more information, see the documentation for that bundle.
 
 .. index::
-   single: Routing; Absolute URLs
-
-Generating Absolute URLs
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-By default, the router will generate relative URLs (e.g. ``/blog``). To generate
-an absolute URL, simply pass ``true`` to the third argument of the ``generate()``
-method::
-
-    $this->get('router')->generate('blog_show', array('slug' => 'my-blog-post'), true);
-    // http://www.example.com/blog/my-blog-post
-
-.. note::
-
-    The host that's used when generating an absolute URL is the host of
-    the current ``Request`` object. This is detected automatically based
-    on server information supplied by PHP. When generating absolute URLs for
-    scripts run from the command line, you'll need to manually set the desired
-    host on the ``RequestContext`` object::
-
-        $this->get('router')->getContext()->setHost('www.example.com');
-
-.. index::
    single: Routing; Generating URLs in a template
 
 Generating URLs with Query Strings
@@ -1223,7 +1295,7 @@ But if you pass extra ones, they will be added to the URI as a query string::
     $this->get('router')->generate('blog', array('page' => 2, 'category' => 'Symfony'));
     // /blog/2?category=Symfony
 
-Generating URLs from a template
+Generating URLs from a Template
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The most common place to generate a URL is from within a template when linking
@@ -1246,7 +1318,22 @@ a template helper function:
             Read this blog post.
         </a>
 
-Absolute URLs can also be generated.
+.. index::
+   single: Routing; Absolute URLs
+
+Generating Absolute URLs
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+By default, the router will generate relative URLs (e.g. ``/blog``). From
+a controller, simply pass ``true`` to the third argument of the ``generateUrl()``
+method::
+
+    $this->generateUrl('blog_show', array('slug' => 'my-blog-post'), true);
+    // http://www.example.com/blog/my-blog-post
+
+From a template, in Twig, simply use the ``url()`` function (which generates an absolute URL)
+rather than the ``path()`` function (which generates a relative URL). In PHP, pass ``true``
+to ``generateUrl()``:
 
 .. configuration-block::
 
@@ -1264,13 +1351,21 @@ Absolute URLs can also be generated.
             Read this blog post.
         </a>
 
+.. note::
+
+    The host that's used when generating an absolute URL is automatically
+    detected using the current ``Request`` object. When generating absolute
+    URLs from outside the web context (for instance in a console command) this
+    doesn't work. See :doc:`/cookbook/console/sending_emails` to learn how to
+    solve this problem.
+
 Summary
 -------
 
 Routing is a system for mapping the URL of incoming requests to the controller
 function that should be called to process the request. It both allows you
 to specify beautiful URLs and keeps the functionality of your application
-decoupled from those URLs. Routing is a two-way mechanism, meaning that it
+decoupled from those URLs. Routing is a bidirectional mechanism, meaning that it
 should also be used to generate URLs.
 
 Learn more from the Cookbook

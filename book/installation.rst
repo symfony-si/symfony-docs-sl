@@ -20,8 +20,8 @@ Namestitev Symfony2 distribucije
 .. tip::
 
     Najprej preverite, da imate nameščen in nastavljen spletni strežnik (kot
-    je Apache) s PHP 5.3.8 ali več. Za več informacij o Symfony2
-    zahtevah, glejte :doc:`referenca zahtev </reference/requirements>`.
+    je Apache) s PHP. Za več informacij o Symfony2 zahtevah, glejte
+    :doc:`referenca zahtev </reference/requirements>`.
 
 Symfony2 ima zapakirane "distribucije", ki so polno funkcionalne aplikacije,
 ki vključujejo Symfony2 knjižnice jedra, izbiro uporabnih paketov,
@@ -44,7 +44,7 @@ imate nameščen curl, je enostavno kot:
 
 .. code-block:: bash
 
-    curl -s https://getcomposer.org/installer | php
+    $ curl -s https://getcomposer.org/installer | php
 
 .. note::
 
@@ -57,12 +57,7 @@ distribucije:
 
 .. code-block:: bash
 
-    $ php composer.phar create-project symfony/framework-standard-edition /path/to/webroot/Symfony 2.3.0
-
-.. tip::
-
-    Za točno verzijo, zamenjajte "2.3.0" z zadnjo Symfony verzijo.
-    Za podrobnosti, glejte `Symfony namestitveno stran`_
+    $ php composer.phar create-project symfony/framework-standard-edition /path/to/webroot/Symfony 2.5.*
 
 .. tip::
 
@@ -109,10 +104,10 @@ enim izmed sledečih ukazov (zamenjajte ``###`` z vašim dejanskim imenom datote
 .. code-block:: bash
 
     # for .tgz file
-    $ tar zxvf Symfony_Standard_Vendors_2.3.###.tgz
+    $ tar zxvf Symfony_Standard_Vendors_2.5.###.tgz
 
     # for a .zip file
-    $ unzip Symfony_Standard_Vendors_2.3.###.zip
+    $ unzip Symfony_Standard_Vendors_2.5.###.zip
 
 Če ste prenesli "without vendors", boste zagotovo potrebovali prebrati
 naslednjo sekcijo.
@@ -140,7 +135,7 @@ Posodobitev izdelovalcev
 
 Na tej točki ste prenesli celotno funkcionalni Symfony projekt v katerem
 boste pričeli razvijati vašo lastno aplikacijo. Symfony projekt je odvisen od
-številnih zunanjih knjižnic. Te so prenesene v `vendor/` direktorij
+številnih zunanjih knjižnic. Te so prenesene v ``vendor/`` direktorij
 vašega projekta preko knjižnice imenovane `Composer`_.
 
 Odvisno od tega, kako ste prenesli Symfony, boste morali ali po ne posodobiti
@@ -151,7 +146,7 @@ Korak 1: Dobite `Composer`_ (Odlični novi PHP pakirni sistem)
 
 .. code-block:: bash
 
-    curl -s http://getcomposer.org/installer | php
+    $ curl -s http://getcomposer.org/installer | php
 
 Zagotovite, da ste prenesli ``composer.phar`` v isti direktorij, kjer
 je locirana ``composer.json`` datoteka (to je privzeto vrh vašega Symfony
@@ -174,13 +169,13 @@ sam Symfony - v direktorij ``vendor/``.
 
     .. code-block:: bash
 
-        php installer
-        php composer.phar install
+        $ php installer
+        $ php composer.phar install
 
 .. tip::
 
     Ko poganjate ``php composer.phar install`` ali ``php composer.phar update``,
-    bo composer izvedel post install/update ukaza za spraznenje predpomnilnika
+    bo Composer izvedel post install/update ukaza za spraznenje predpomnilnika
     in namestitev sredstev. Privzeto bodo sredstva kopirana v vaš ``web``
     direktorij.
 
@@ -217,6 +212,8 @@ da preverite vaše nastavitve:
 
 Če so težave, jih popravite sedaj preden greste naprej.
 
+.. _book-installation-permissions:
+
 .. sidebar:: Nastavitev dovoljenj
 
     Ena pogostejših napak je, da ``app/cache`` in ``app/logs`` direktorija
@@ -229,15 +226,15 @@ da preverite vaše nastavitve:
 
     Mnogo sistemov vam omogoča uporabo ``chmod +a`` ukaza. Najprej poskusite to
     in če dobite napako - poskusite naslednjo metodo. To uporablja ukaz za
-    poskus ugotovitve vašega uporabnika spletnega strežnika in ga nastavi kot ``APACHEUSER``:
+    poskus ugotovitve vašega uporabnika spletnega strežnika in ga nastavi kot ``HTTPDUSER``:
 
     .. code-block:: bash
 
         $ rm -rf app/cache/*
         $ rm -rf app/logs/*
 
-        $ APACHEUSER=`ps aux | grep -E '[a]pache|[h]ttpd' | grep -v root | head -1 | cut -d\  -f1`
-        $ sudo chmod +a "$APACHEUSER allow delete,write,append,file_inherit,directory_inherit" app/cache app/logs
+        $ HTTPDUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
+        $ sudo chmod +a "$HTTPDUSER allow delete,write,append,file_inherit,directory_inherit" app/cache app/logs
         $ sudo chmod +a "`whoami` allow delete,write,append,file_inherit,directory_inherit" app/cache app/logs
 
 
@@ -247,14 +244,16 @@ da preverite vaše nastavitve:
     imenovano ``setfacl``. Lahko boste morali `omogočiti ACL podporo`_ na vaši particiji
     in namestiti setfacl preden ga uporabljate (kot je primer na Ubuntu). To
     uporablja ukaz za poskus ugotovitve vašega uporabnika spletnega strežnika in ga nastavi kot
-    ``APACHEUSER``.
+    ``HTTPDUSER``.
 
     .. code-block:: bash
 
-		$ APACHEUSER=`ps aux | grep -E '[a]pache|[h]ttpd' | grep -v root | head -1 | cut -d\  -f1`
-		$ sudo setfacl -R -m u:$APACHEUSER:rwX -m u:`whoami`:rwX app/cache app/logs
-		$ sudo setfacl -dR -m u:$APACHEUSER:rwX -m u:`whoami`:rwX app/cache app/logs
-		
+        $ HTTPDUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
+        $ sudo setfacl -R -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX app/cache app/logs
+        $ sudo setfacl -dR -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX app/cache app/logs
+
+    Če to ne deluje, poskusite dodati opcijo ``-n``.
+
     **3. Brez uporabe ACL**
 
     Če nimate dostopa do spreminjanja ACL direktorijev, boste
@@ -272,6 +271,15 @@ da preverite vaše nastavitve:
 
     Bodite pozorni, da uporaba ACL je priporočljiva, ko imate dostop do njih
     na vašem strežniku, ker sprememba umask ni varna za niti.
+
+    **4. Uporabite istega uporabnika za CLI in spletni strežnik**
+
+    V razvojnih okoljih je pogosta praksa uporabljati istega unix
+    uporabnika za CLI in spletni strežnik, ker se s tem izognete kakršnimkoli težavam
+    s pravicami, ko se nastavlja nove projekte. To se lahko naredi z urejanjem vaših nastavitev
+    spletnega strežnika (npr. splošne httpd.conf ali apache2.conf za Apache) in nastavitvijo
+    njegovega uporabnika na enakega kot za vašega CLI uporabnika (npr. za Apache posodobite User
+    in Group vrednosti).
 
 Ko je vse v redu, kliknite na "Go to the Welcome page", da zahtevate vašo
 prvo "pravo" Symfony2 spletno stran:
@@ -325,7 +333,7 @@ vanj kot običajno. Symfony standardna izdaja *je* začetna točka za vaš
 novi projekt.
 
 Za specifična navodila kako najboljše nastaviti vaš projekt, da bo shranjen
-v git-u, glejte: :doc:`/cookbook/workflow/new_project_git`.
+v Git-u, glejte: :doc:`/cookbook/workflow/new_project_git`.
 
 Ignoriranje ``vendor/`` direktorija
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

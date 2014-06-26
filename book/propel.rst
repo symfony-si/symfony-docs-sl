@@ -15,7 +15,7 @@ A Simple Example: A Product
 In this section, you'll configure your database, create a ``Product`` object,
 persist it to the database and fetch it back out.
 
-.. sidebar:: Code along with the example
+.. sidebar:: Code along with the Example
 
     If you want to follow along with the example in this chapter, create an
     ``AcmeStoreBundle`` via:
@@ -55,10 +55,10 @@ configuration file (``config.yml``):
 
     propel:
         dbal:
-            driver:     "%database_driver%"
-            user:       "%database_user%"
-            password:   "%database_password%"
-            dsn:        "%database_driver%:host=%database_host%;dbname=%database_name%;charset=%database_charset%"
+            driver:   "%database_driver%"
+            user:     "%database_user%"
+            password: "%database_password%"
+            dsn:      "%database_driver%:host=%database_host%;dbname=%database_name%;charset=%database_charset%"
 
 Now that Propel knows about your database, Symfony2 can create the database for
 you:
@@ -126,7 +126,7 @@ After creating your ``schema.xml``, generate your model from it by running:
     $ php app/console propel:model:build
 
 This generates each model class to quickly develop your application in the
-``Model/`` directory the ``AcmeStoreBundle`` bundle.
+``Model/`` directory of the ``AcmeStoreBundle`` bundle.
 
 Creating the Database Tables/Schema
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -134,7 +134,7 @@ Creating the Database Tables/Schema
 Now you have a usable ``Product`` class and all you need to persist it. Of
 course, you don't yet have the corresponding ``product`` table in your
 database. Fortunately, Propel can automatically create all the database tables
-needed for every known model in your application.  To do this, run:
+needed for every known model in your application. To do this, run:
 
 .. code-block:: bash
 
@@ -153,7 +153,7 @@ Persisting Objects to the Database
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Now that you have a ``Product`` object and corresponding ``product`` table,
-you're ready to persist data to the database.  From inside a controller, this
+you're ready to persist data to the database. From inside a controller, this
 is pretty easy. Add the following method to the ``DefaultController`` of the
 bundle::
 
@@ -406,7 +406,7 @@ Fetching Related Objects
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 When you need to fetch associated objects, your workflow looks just like it did
-before.  First, fetch a ``$product`` object and then access its related
+before. First, fetch a ``$product`` object and then access its related
 ``Category``::
 
     // ...
@@ -425,7 +425,7 @@ before.  First, fetch a ``$product`` object and then access its related
 
 Note, in the above example, only one query was made.
 
-More information on Associations
+More Information on Associations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You will find more information on relations by reading the dedicated chapter on
@@ -435,7 +435,7 @@ Lifecycle Callbacks
 -------------------
 
 Sometimes, you need to perform an action right before or after an object is
-inserted, updated, or deleted.  These types of actions are known as "lifecycle"
+inserted, updated, or deleted. These types of actions are known as "lifecycle"
 callbacks or "hooks", as they're callback methods that you need to execute
 during different stages of the lifecycle of an object (e.g. the object is
 inserted, updated, deleted, etc).

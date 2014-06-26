@@ -76,8 +76,6 @@ vzdrževati. Obstaja nekaj problemov, ki jih je potrebno izpostaviti:
     vezana na MySQL. Čeprav to ni tu pokrito, Symfony2 v celoti integrira `Doctrine`_,
     knjižnico namenjeno abstrakciji podatkovne baze in preslikavam.
 
-Pojdimo na delo reševanja teh problemov in več.
-
 Izolacija predstavitve
 ~~~~~~~~~~~~~~~~~~~~~~
 
@@ -247,7 +245,7 @@ postavitve:
 Sedaj ste predstavili metodologijo, ki omogoča ponovno uporabo
 postavitve. Na žalost, da to dosežemo, ste prisiljeni uporabiti nekaj grdih
 PHP funkcij (``ob_start()``, ``ob_get_clean()``) v predlogi. Symfony2
-uporablja komponento ``Templating``, ki omogoča to narediti čisteje
+uporablja komponento Templating, ki omogoča to narediti čisteje
 in enostavneje. Videli boste to v akciji v kratkem.
 
 Dodajanje "show" blog strani
@@ -433,7 +431,7 @@ vsebino:
 
     {
         "require": {
-            "symfony/symfony": "2.3.*"
+            "symfony/symfony": "2.4.*"
         },
         "autoload": {
             "files": ["model.php","controllers.php"]
@@ -483,7 +481,7 @@ HTTP odziv vrnjen. Uporabite jih za izboljšavo bloga:
     $response->send();
 
 .. versionadded:: 2.4
-    Podpora za konstante HTTP statusnih kod je bila dodana v Symfony 2.4.
+    Podpora za konstante HTTP statusnih kod je bila predstavljena v Symfony 2.4.
 
 Krmilniki so sedaj odgovorni za vračanje ``Response`` objekta.
 Da to naredite enostavnejše, lahko dodate novo ``render_template()`` funkcijo, ki
@@ -555,7 +553,8 @@ poskrbi zanje namesto vas. Tu je primer aplikacije, sedaj zgrajene v Symfony2::
     {
         public function listAction()
         {
-            $posts = $this->get('doctrine')->getManager()
+            $posts = $this->get('doctrine')
+                ->getManager()
                 ->createQuery('SELECT p FROM AcmeBlogBundle:Post p')
                 ->execute();
 
@@ -570,8 +569,7 @@ poskrbi zanje namesto vas. Tu je primer aplikacije, sedaj zgrajene v Symfony2::
             $post = $this->get('doctrine')
                 ->getManager()
                 ->getRepository('AcmeBlogBundle:Post')
-                ->find($id)
-            ;
+                ->find($id);
 
             if (!$post) {
                 // cause the 404 page not found to be displayed
@@ -586,7 +584,7 @@ poskrbi zanje namesto vas. Tu je primer aplikacije, sedaj zgrajene v Symfony2::
     }
 
 Dva krmilnika sta še vedno lahka. Vsak uporablja :doc:`Doctrine ORM knjižnico </book/doctrine>`
-za pridobivanje objektov iz podatkovne baze in komponento ``Templating`` za
+za pridobivanje objektov iz podatkovne baze in komponento Templating za
 izpis in vračanje ``Response`` objekta. Predloga seznama je
 sedaj precej bolj enostavna:
 
@@ -676,7 +674,7 @@ Kam Symfony2 dostavlja
 ~~~~~~~~~~~~~~~~~~~~~~
 
 V prihajajočih poglavjih, boste izvedeli več o tem, kako vsak del Symfony-ja
-deluje in priporočeno organizacijo projekta. Za sedaj poglejmo, kako
+deluje in priporočeno organizacijo projekta. Za sedaj poglejte, kako
 migracija bloga iz samo PHP-ja v Symfony2 izboljša življenje:
 
 * Vaša aplikacija ima sedaj **jasno in konsistentno organizirano kodo** (čeprav
@@ -691,8 +689,8 @@ migracija bloga iz samo PHP-ja v Symfony2 izboljša življenje:
   Templating, Security, Form, Validation in Translation komponente (da jih naštejemo
   samo nekaj);
 
-* Aplikacija sedaj uživa **polno-fleksibilne URL-je** zahvaljhujoč ``Routing``
-  komponenti;
+* Aplikacija sedaj uživa **polno-fleksibilne URL-je** zahvaljujoč komponenti
+  Routing;
 
 * HTTP centrična Symfony2 arhitektura vam da dostop do močnih orodij
   kot je **HTTP predpomnenje**, ki ga poganja **Symfony2 interni HTTP predpomnilnik** ali
