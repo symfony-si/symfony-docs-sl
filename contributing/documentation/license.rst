@@ -32,13 +32,13 @@ Attribution-Share Alike 3.0 Unported `licenco`_
 * *Ostale pravice* — V nobenem primeru ni katerokoli sledečih pravic vplivano
   s strani licence:
 
-    * Vaše pošteno ravnanje ali pravična uporaba pravic ali katerekoli uporabljenih
-      izjem in omejitev avtorskih pravic;
+  * Vaše pošteno ravnanje ali pravična uporaba pravic ali katerekoli uporabljenih
+    izjem in omejitev avtorskih pravic;
 
-    * Avtorjeve moralne pravice;
+  * Avtorjeve moralne pravice;
 
-    * Pravice ostalih oseb jih imajo lahko ali v delu samem ali
-      kako je delo uporabljeno, kot je objava ali pravice do zasebnosti.
+  * Pravice ostalih oseb jih imajo lahko ali v delu samem ali
+    kako je delo uporabljeno, kot je objava ali pravice do zasebnosti.
 
 * *Opazka* — Za kakršnokoli distribuiranje ali ponovno uporabo, morate ostalim jasno
   navesti pogoje licence tega dela. Najboljša pot za to je s povezavo na to stran.

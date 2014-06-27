@@ -4,8 +4,15 @@ Proces izdaj
 Ta dokument razlaga Symfony proces izdaj (Symfony pomeni kodo
 gostovano na glavnem ``symfony/symfony`` `Git repozitoriju`_).
 
-Symfony upravlja svoje izdaje skozi *časovno osnovan model*: nova Symfony
-izdaja pride ven vsakih *šest mesecev*: ena v *maju* in ena v *novembru*.
+Symfony upravlja svoje izdaje preko *časovno osvnovanega modela*; nova manjša verzija
+Symfony izide vsakih *šest mesecev*: ena v *maju* in ena v *novembru*.
+
+.. tip::
+
+    Pomen "manjša" prihaja iz strategije `semantičnih verzij`_.
+
+Vsaka manjša verzija se drži enakega zelo dobro definiranega procesa, kjer začnemo
+z obdobjem razvoja, sledi mu pa obdobje vzdrževanja.
 
 .. note::
 
@@ -18,7 +25,7 @@ izdaja pride ven vsakih *šest mesecev*: ena v *maju* in ena v *novembru*.
 Razvoj
 ------
 
-Šest mesečno obdobje je razdeljeno v dve fazi:
+Celotno obdobje razvoja traja šest mesecev in je razdeljeno v dve fazi:
 
 * *Razvoj*: *Štiri mesece* za dodajanje novih lastnosti in izboljšati
   obstoječe;
@@ -36,8 +43,8 @@ končno izdajo.
 Vzdrževanje
 -----------
 
-Vsaka Symfony verzija je vzdrževana za fiksno časovno obdobje, odvisno od
-tipa izdaje. Imamo dve vzdrževalni obdobji:
+Vsaka manjša Symfony verzija je vzdrževana za fiksno časovno obdobje, odvisno
+od tipa izdaje. Imamo dve vzdrževalni obdobji:
 
 * *Popravki hroščev in varnostni popravki*: Med tem obdobjem, so vse težave lahko popravljene.
   Konec tega obdobja je sklicano kot *konec vzdrževanja*
@@ -47,17 +54,17 @@ tipa izdaje. Imamo dve vzdrževalni obdobji:
   težave. Konec tega obdobja je sklican kot *konec življenske dobe*
   izdaje.
 
-Standardne izdaje
-~~~~~~~~~~~~~~~~~
+Standardne verzije
+~~~~~~~~~~~~~~~~~~
 
-Standardna izdaja je vzdrževana v obdobju *osmih mesecev* za popravke hroščev,
+Standardna manjša verzija je vzdrževana v obdobju *osmih mesecev* za popravke hroščev,
 in v obdobju *štirinajst mesecev* za popravke varnostnih težav.
 
-Izdaje z dolgoročno podporo
+Verzije z dolgoročno podporo
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Vsaki dve leti je nova izdaja z dolgoročno podporo (znana tudi kot LTS izdaja)
-objavljena. Vsaka LTS izdaja je podprta v obdobju *treh let*  za popravke hroščev
+Vsaki dve leti je nova verzija z dolgoročno podporo (znana tudi kot LTS verzija)
+objavljena. Vsaka LTS verzija je podprta v obdobju *treh let*  za popravke hroščev
 in v obdobju *štirih let* za popravke varnostnih težav.
 
 .. note::
@@ -109,17 +116,27 @@ To se odraža v zelo predvidljivih datumih in obdobjih vzdrževanja:
     uporabite `časovni kalkulator`_ na spletu. Lahko dobite tudi vse podatke kot JSON
     niz preko URL-ja kot `http://symfony.com/roadmap.json?version=2.x`.
 
+.. tip::
+
+    Kadarkoli se zgodi pomemben dogodek povezav z verzijo Symfony-ja (verzija
+    doseže konec vzdrževalnega obdobja ali je izdana nova verzija popravka na
+    primer), lahko avtomatično prejmete obvestilo po e-pošti, če se
+    prijavite na strani `obvestilo časovnega načrta`_.
+
 Združljivost za nazaj
 ---------------------
 
-Po izdaji Symfony 2.3 bo združjivost za nazaj ohranjena ne glede
-na kaj. Če ni možno, bo lastnost, izboljšava ali popravek hrošča
-predviden za naslednjo glavno verzijo: Symfony 3.0.
+Naša :doc:`obljuba združljivosti za naza </contributing/code/bc>` je zelo
+striktna in omogoča razvijalcem, da nadgradijo z zaupanjem iz ene manjše verzije
+Symfony-ja na naslednjo.
+
+Kadarkoli obdržanje združljivosti za nazaj ni možno, bo lastnost,
+izboljšava ali popravek hrošča predviden za naslednjo glavno verzijo.
 
 .. note::
 
-    Delo na Symfony 3.0 bo pričeto, kadar bo dovolj glavnih lastnosti, ki pokvarijo
-    združljivost za nazaj, čakalo na todo seznamu.
+    Delo na novi večji verziji Symfony-ja se začne kadarkoli dovolj večjih
+    lastnosti, ki polomijo združljivost za nazaj, čaka na todo seznamu.
 
 Razvrednotenja
 --------------
@@ -156,10 +173,12 @@ Način dvojnega vzdrževanja je bil sprejet, da naredi vsakega Symfony uporabnik
 uporabniki, ki želijo delati z zadnjim in najboljšim, uporabijo standardne
 izdaje: nova verzija je izdana vsakih šest mesecev in je dvo mesečno časovno
 obdobje za nadgradnje. Podjetja, ki želijo več stabilnosti uporabijo LTS
-izdaje: nova verzija je objavljena vsaki dve leti in na voljo je leto za
-nadgradnje.
+verzijo: nova verzija je izdana vsakih šest mesecev in na voljo je dvo mesečno
+obdobje za nadgradnjo. Podjetja, ki želijo več stabilnosti, uporabijo LTS verzije: nova
+verzija je izdana vsaki dve leti in na voljo je leto za nadgradnjo.
 
+.. _semantičnih verzij: http://semver.org/
 .. _Git repozitoriju: https://github.com/symfony/symfony
 .. _SensioLabs:     http://sensiolabs.com/
-.. _roadmap:        http://symfony.com/roadmap
-.. _`časovni kalkulator`: http://symfony.com/roadmap
+.. _obvestilo časovnega načrta: http://symfony.com/roadmap
+.. _časovni kalkulator: http://symfony.com/roadmap

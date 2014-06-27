@@ -13,18 +13,18 @@ Imena metod
 Ko ima objekt "glavne" mnoge relacije s povezanimi "stvarmi"
 (objekti, parametri, ...), so imena metod normalizirana:
 
-  * ``get()``
-  * ``set()``
-  * ``has()``
-  * ``all()``
-  * ``replace()``
-  * ``remove()``
-  * ``clear()``
-  * ``isEmpty()``
-  * ``add()``
-  * ``register()``
-  * ``count()``
-  * ``keys()``
+* ``get()``
+* ``set()``
+* ``has()``
+* ``all()``
+* ``replace()``
+* ``remove()``
+* ``clear()``
+* ``isEmpty()``
+* ``add()``
+* ``register()``
+* ``count()``
+* ``keys()``
 
 Uporaba teh metod je samo dovoljena, ko je jasno, da gre za glavno
 relacijo:

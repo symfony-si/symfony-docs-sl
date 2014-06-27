@@ -7,18 +7,19 @@ Symfony2 dokumentacija uporablja `reStructuredText`_ kot njen označevalni jezik
 reStructuredText
 ----------------
 
-reStructuredText "je enostavna za branje, what-you-see-is-what-you-get enostavna tekstovna
-označevalna sintaksa in prevajalni sistem".
+reStructuredText *"je enostavna za branje, what-you-see-is-what-you-get enostavna tekstovna
+označevalna sintaksa in prevajalni sistem"*.
 
 Več o njegovi sintaksi se lahko naučite z branjem obstoječih Symfony `dokumentov`_
 ali z branjem `reStructuredText Primer`_ na Sphinx spletni strani.
 
-Če ste seznanjeni s t.i. Markdown-om, bodite pazljivi, saj so stvari včasih zelo
-podobne vendar drugačne:
+.. caution::
 
-* Seznami se začnejo na začetku vrstice (indentacija ni dovoljena);
+    Če ste seznanjeni s t.i. Markdown-om, bodite pazljivi, saj so stvari včasih zelo
+    podobne vendar drugačne:
 
-* Medvrstični bloki kode uporabljajo dvojne črtice (````na primer tako````).
+    * Seznami se začnejo na začetku vrstice (indentacija ni dovoljena);
+    * Medvrstični bloki kode uporabljajo dvojne črtice (````na primer tako````).
 
 Sphinx
 ------
@@ -71,7 +72,7 @@ direktivo za prikaz nastavitev v vseh podprtih nastavitvenih formatih
 
         .. code-block:: xml
 
-            <!-- Configuration in XML //-->
+            <!-- Configuration in XML -->
 
         .. code-block:: php
 
@@ -87,7 +88,7 @@ Prejšnji reST odrezek se izpiše sledeče:
 
     .. code-block:: xml
 
-        <!-- Configuration in XML //-->
+        <!-- Configuration in XML -->
 
     .. code-block:: php
 
@@ -95,27 +96,21 @@ Prejšnji reST odrezek se izpiše sledeče:
 
 Trenutni seznam podprtih formatov je sledeči:
 
-+-----------------+-------------+
-| Markup format   | Displayed   |
-+=================+=============+
-| html            | HTML        |
-+-----------------+-------------+
-| xml             | XML         |
-+-----------------+-------------+
-| php             | PHP         |
-+-----------------+-------------+
-| yaml            | YAML        |
-+-----------------+-------------+
-| jinja           | Twig        |
-+-----------------+-------------+
-| html+jinja      | Twig        |
-+-----------------+-------------+
-| html+php        | PHP         |
-+-----------------+-------------+
-| ini             | INI         |
-+-----------------+-------------+
-| php-annotations | Annotations |
-+-----------------+-------------+
+===============  ==================
+Format oblike    Prikazano
+===============  ==================
+html             HTML
+xml              XML
+php              PHP
+yaml             YAML
+jinja            Twig
+html+jinja       Twig
+html+php         PHP
+ini              INI
+php-annotations  Anotacije
+php-standalone   Samostojna uporaba
+php-symfony      Uporaba ogrodja
+===============  ===================
 
 Dodajanje povezav
 ~~~~~~~~~~~~~~~~~
@@ -169,47 +164,9 @@ Testiranje dokumentacije
 Za testiranje dokumentacije preden pošiljate:
 
 * Namestite `Sphinx`_;
-
-* Poženite `Sphinx hitro nastavitev`_;
-
-* Namestite Sphinx razširitve (glejte spodaj);
-
+* Namestite razširitve Sphinx z uporabo git podmodulov: ``git submodule update --init``;
+* (Opcijsko) Namestite paket dokumentacije in CMF dokumentacijo: ``bash install.sh``;
 * Poženite ``make html`` in si oglejte generirani HTML v ``build`` direktoriju.
-
-Namestitev Sphinx razširitev
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-* Prenesite razširitev iz `izvornega`_ repozitorija
-
-* Kopirajte ``sensio`` direktorij v ``_exts`` direktorij pod vašim izvornim
-  direktorijem (kjer je lociran ``conf.py``)
-
-* Dodajte sledeče v ``conf.py`` datoteko:
-
-.. code-block:: py
-
-    # ...
-    sys.path.append(os.path.abspath('_exts'))
-
-    # adding PhpLexer
-    from sphinx.highlighting import lexers
-    from pygments.lexers.web import PhpLexer
-
-    # ...
-    # add the extensions to the list of extensions
-    extensions = [..., 'sensio.sphinx.refinclude', 'sensio.sphinx.configurationblock', 'sensio.sphinx.phpcode']
-
-    # enable highlighting for PHP code not between ``<?php ... ?>`` by default
-    lexers['php'] = PhpLexer(startinline=True)
-    lexers['php-annotations'] = PhpLexer(startinline=True)
-    lexers['php-standalone'] = PhpLexer(startinline=True)
-    lexers['php-symfony'] = PhpLexer(startinline=True)
-
-    # use PHP as the primary domain
-    primary_domain = 'php'
-
-    # set URL for API links
-    api_url = 'http://api.symfony.com/master/%s'
 
 .. _reStructuredText:        http://docutils.sourceforge.net/rst.html
 .. _Sphinx:                  http://sphinx-doc.org/
@@ -217,5 +174,4 @@ Namestitev Sphinx razširitev
 .. _reStructuredText Primer: http://sphinx-doc.org/rest.html
 .. _označevanja:             http://sphinx-doc.org/markup/
 .. _Pygments spletni strani: http://pygments.org/languages/
-.. _izvornega:               https://github.com/fabpot/sphinx-php
 .. _Sphinx hitro nastavitev: http://sphinx-doc.org/tutorial.html#setting-up-the-documentation-sources

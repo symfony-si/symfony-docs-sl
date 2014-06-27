@@ -59,7 +59,7 @@ Kot je pričetek prevajanja veliko dela, se pogovorite v vašem načrtu na
 `dopisnem seznamu Symfony dokumentacije`_ in poskusite najti motivirane ljudi,
 ki so vam pripravljeni pomagati.
 
-Ko je ekipa pripravljena, določite upravitelja ekipe; on bo odgovoren za
+Ko je ekipa pripravljena, določite upravitelja ekipe; odgovoren bo za
 *master* repozitorij.
 
 Izdelajte repozitorij in kopirajte *angleške* dokumente.

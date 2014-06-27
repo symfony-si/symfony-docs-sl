@@ -7,20 +7,15 @@ Symfony2 testno opremo za preverjanje, da niste česa zlomili.
 PHPUnit
 -------
 
-Za poganjanje Symfoyn2 testne opreme najprej `namestite`_ PHPUnit 3.6.4 ali kasnejši:
-
-.. code-block:: bash
-
-    $ pear config-set auto_discover 1
-    $ pear install pear.phpunit.de/PHPUnit
+Za poganjanje Symfoyn2 testne opreme najprej `namestite PHPUnit`_ 3.7 ali novejši.
 
 Odvisnosti (opcijsko)
 ---------------------
 
 Za poganjanje celotne testne opreme, vključujoč teste, ki so odvisni na
 zunanjih odvisnostih, mora biti Symfony2 jih zmožen avtomatsko naložiti.
-Privzeto so avtomatsko nameščeni iz `vendor/` direktorija pod glavnim
-vrhnjim direktorijem (poglejte `autoload.php.dist`).
+Privzeto so avtomatsko nameščeni iz ``vendor/`` direktorija pod glavnim
+vrhnjim direktorijem (poglejte ``autoload.php.dist``).
 
 Testna oprema potrebuje sledeče tretje-osebne knjižnice:
 
@@ -35,7 +30,7 @@ Korak 1: Dobite `Composer`_
 
 .. code-block:: bash
 
-    curl -s http://getcomposer.org/installer | php
+    $ curl -s http://getcomposer.org/installer | php
 
 Prepričajte se, da ste prenesli ``composer.phar`` v isti direktorij,
 kjer je locirana ``composer.json`` datoteka.
@@ -80,12 +75,12 @@ ukazom:
 
     $ phpunit
 
-Izpis bi moral prikazati `OK`. Drugače potrebujete ugotoviti, kaj se dogaja
+Izpis bi moral prikazati ``OK``. Drugače potrebujete ugotoviti, kaj se dogaja
 in če so testi pokvarjeni zaradi vaših sprememb.
 
 .. tip::
 
-    Če želite testirati eno komponento, vpišite njeno pot za `phpunit`
+    Če želite testirati eno komponento, vpišite njeno pot za ``phpunit``
     ukazom, npr.:
 
     .. code-block:: bash
@@ -101,19 +96,19 @@ Pokritost kode
 --------------
 
 Če dodate novo lastnost, morate tudi preveriti pokritost kode z uporabo
-opcije `coverage-html`:
+opcije ``coverage-html``:
 
 .. code-block:: bash
 
     $ phpunit --coverage-html=cov/
 
-Preverite pokritost kode z odprtjem generirane `cov/index.html` strani v
+Preverite pokritost kode z odprtjem generirane ``cov/index.html`` strani v
 brskalniku.
 
 .. tip::
 
-    Pokritost kode deluje samo, če imate omogočen XDebug in vse
+    Pokritost kode deluje samo, če imate omogočen Xdebug in vse
     odvisnosti nameščene.
 
-.. _namestite: http://www.phpunit.de/manual/current/en/installation.html
+.. _namestite PHPUnit: http://www.phpunit.de/manual/current/en/installation.html
 .. _`Composer`: http://getcomposer.org/

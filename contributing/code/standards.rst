@@ -72,7 +72,7 @@ ki vsebuje največ lastnosti opisanih spodaj:
                 if ('values' === $mergedOptions['some_default']) {
                     return substr($dummy, 0, 5);
                 }
-                
+
                 return ucwords($dummy);
             }
             throw new \RuntimeException(sprintf('Unrecognized dummy option "%s"', $dummy));
@@ -101,7 +101,10 @@ Struktura
 
 * Razglasite lastnosti razreda pred metodami;
 
-* Razglasite najprej javne metode (public), nato zaščitene (protected) in na koncu zasebne (private);
+* Razglasite najprej javne metode in nato zaščitene in na koncu privatne.
+  Izjema temu pravilu so konstruktorji razredov in metodi ``setUp`` in
+  ``tearDown`` testov PHPUnit, ki bi morale vedno biti prve metode
+  za izboljšanje bralnosti;
 
 * Uporabite oklepaje, ko instantizirate razrede ne glede na število
   argumentov, ki jih ima constructor;
@@ -130,8 +133,14 @@ Konvencije imen
 
 * Uporabljajte alfanumerične znake in poudarke za imena datotek;
 
+* Za namig tipa v PHPDocs in vlogah, uporabite ``bool`` (namesto ``boolean``
+  ali ``Boolean``), ``ìnt`` (namesto ``integer``), ``float`` (namesto
+  ``double`` ali ``real``);
+
 * Ne pozabite pogledati bolj izraznega dokumenta :doc:`conventions` za
   bolj subjektivne premisleke poimenovanja.
+
+.. _service-naming-conventions:
 
 Konvencije poimenovanja storitev
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -158,6 +167,6 @@ Licenca
 * Symfony je izdan pod licenco MIT in blok licence mora biti prisoten
   na vrhu vsake PHP datoteke, pred imenskim prostorom.
 
-.. _`PSR-0`: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md
-.. _`PSR-1`: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md
-.. _`PSR-2`: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md
+.. _`PSR-0`: http://www.php-fig.org/psr/psr-0/
+.. _`PSR-1`: http://www.php-fig.org/psr/psr-1/
+.. _`PSR-2`: http://www.php-fig.org/psr/psr-2/

@@ -6,8 +6,10 @@ Prispevanje kode
 
     bugs
     patches
+    core_team
     security
     tests
+    bc
     standards
     conventions
     git

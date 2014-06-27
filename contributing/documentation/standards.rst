@@ -77,9 +77,28 @@ Primeri nastavitev bi morali prikazati vse podprte oblike z uporabo
 :ref:`nastavitveni bloki <docs-configuration-blocks>`. Podprte oblike
 (in njihov vrstni red) so:
 
-* **Configuration** (vključujoč storitve in usmerjanje): Yaml, Xml, Php
-* **Validation**: Yaml, anotacije, Xml, Php
-* **Doctrine Mapping**: anotacije, Yaml, Xml, Php
+* **Nastavitve** (vključno s storitvami in usmerjanjem): YAML, XML, PHP
+* **Preverjanje**: YAML, anotacije, XML, PHP
+* **Doctrine preslikave**: anotacije, YAML, XML, PHP
+
+Datoteke in direktoriji
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* Ko se sklicujete na direktorije, vedno dodajte zaključno poševnico, da se izognete zmedi
+  z običajnimi datotekami (npr. *"izvršite ``console`` skripto, ki se nahaja v ``app/``
+  direktoriju"*).
+* Ko se sklicujete na končnice datotek eksplicitno, bi morali vključiti vodilno piko
+  za vsako končnico (npr. "*XML datoteke uporabljajo ``.xml`` končnico*").
+* Ko izpisujete seznam datotečne/direktorijske strukture Symfony, uporabite ``your-project/`` kot
+  vrhovni nivo direktorija. Npr.
+
+  .. code-block:: text
+
+      your-project/
+      ├─ app/
+      ├─ src/
+      ├─ vendor/
+      └─ ...
 
 Primer
 ~~~~~~
@@ -111,18 +130,28 @@ Primer
 
 .. caution::
 
-    V Yaml bi morali postaviti presledek za ``{`` in pred ``}`` (npr. ``{ _controller: ... }``),
+    V YAML bi morali postaviti presledek za ``{`` in pred ``}`` (npr. ``{ _controller: ... }``),
     vendar to ne bi smelo biti urejeno v Twig-u (npr.  ``{'hello' : 'value'}``).
 
 Standardi jezika
 ----------------
 
-* Za sekcije uporabite sledeča pravila za rabo velikih začetnic:
+* Za sekcije uporabite sledeča pravila rabe velikih začetnic:
   `Raba velikih začetnic prve besede in vseh ostalih besed razen za besede zaprtih razredov`_:
-  The Vitamins are in my Fresh California Raisins
+
+    The Vitamins are in my Fresh California Raisins
+
 * Ne uporabite t.i. `serifnih (Oxford) vejic`_;
 * Morali bi uporabiti obliko *vi* namesto *mi* (t.j. izogibanje prve osebe:
   namesto tega uporabite drugo osebo).
+* Ko se sklicujete na hipotetično osebo, kot je "uporabnik s sejo piškotka", bi morali biti uporabljeni zaimki
+  neodvisno od spola (they/their/them). Na primer, namesto:
+
+   * he or she, uporabite they
+   * him or her, uporabite them
+   * his or her, uporabite their
+   * his or hers, uporabite theirs
+   * himself or herself, uporabite themselves
 
 .. _`Sphinx dokumentacijo`: http://sphinx-doc.org/rest.html#source-code
 .. _`Twig kodnim standardom`: http://twig.sensiolabs.org/doc/coding_standards.html

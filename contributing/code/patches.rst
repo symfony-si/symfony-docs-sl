@@ -44,7 +44,7 @@ Nastavite vaše uporabniške informacije z vašim pravim imenom in delujočim e-
     Windows uporabniki: ko nameščate Git, vas bo namestitveni program vprašal, kaj
     narediti z zaključki vrstic in predlagal zamenjavo vseh LF s CRLF. To je napačna
     nastavitev, če želite prispevati Symfony-ju! Izbira "as-is" metode je vaša
-    najboljša izbira, saj bo git pretvoril vaše vrstice v tiste iz repozitorija.
+    najboljša izbira, saj bo Git pretvoril vaše vrstice v tiste iz repozitorija.
     Če ste že namestili Git, lahko preverite vrednost te nastavitve z vpisom:
 
     .. code-block:: bash
@@ -71,7 +71,7 @@ Dobite Symfony2 izvorno kodo:
 * Kopirajte (fork) `Symfony2 repozitorij`_ (kliknite na "Fork" gumb);
 
 * Ko je "forking action" končana, klonirajte vaš fork lokalno
-  (to bo naredilo `symfony` direktorij):
+  (to bo naredilo ``symfony`` direktorij):
 
 .. code-block:: bash
 
@@ -104,15 +104,15 @@ Izberite pravo vejo
 ~~~~~~~~~~~~~~~~~~~
 
 Preden delate na popravku, morate določiti na kateri veji potrebujete
-delati. Veja bi morala biti osnovana na `master` veji, če želite dodati
+delati. Veja bi morala biti osnovana na ``master`` veji, če želite dodati
 novo lastnost. Vendar če želite popraviti hrošč, uporabite najstarejšo vendar
-še vedno vzdrževano verzijo Symfony-ja, kjer se hrošč zgodi (kot je `2.2`).
+še vedno vzdrževano verzijo Symfony-ja, kjer se hrošč zgodi (kot je ``2.3``).
 
 .. note::
 
     Vsi popravki hroščev združeni v vzdrževane veje morajo biti združeni tudi
     v bolj zadnje veje na redni osnovi. Na primer, če pošljete popravek za
-    `2.2` vejo, bo popravek uporabljen tudi s strani jedra ekipe na `master`
+    ``2.3`` vejo, bo popravek uporabljen tudi s strani jedra ekipe na `master`
     veji.
 
 Izdelajte tematsko vejo
@@ -125,26 +125,26 @@ vejo:
 
     $ git checkout -b BRANCH_NAME master
 
-Ali, če želite zagotoviti popravek hrošča za 2.2 vejo, najprej spremljajte oddaljeno (remote)
-`2.2` vejo lokalno:
+Ali, če želite zagotoviti popravek hrošča za ``2.3`` vejo, najprej spremljajte oddaljeno (remote)
+``2.3`` vejo lokalno:
 
 .. code-block:: bash
 
-    $ git checkout -t origin/2.2
+    $ git checkout -t origin/2.3
 
-To naredi novo vejo iz 2.2 veje, ki dela na popravku hrošča:
+To naredi novo vejo iz ``2.3`` veje, ki dela na popravku hrošča:
 
 .. code-block:: bash
 
-    $ git checkout -b BRANCH_NAME 2.2
+    $ git checkout -b BRANCH_NAME 2.3
 
 .. tip::
 
-    Uporabite opisno ime za vašo vejo (`ticket_XXX`, kjer je `XXX`
+    Uporabite opisno ime za vašo vejo (``ticket_XXX``, kjer je ``XXX``
     številka teme hrošča, je dobra konvencija za popravljanje hroščev).
 
 Zgornji "checkout" ukaz avtomatsko preklopi kodo na novo izdelano
-vejo (preverite vejo na kateri delate z ukazom `git branch`).
+vejo (preverite vejo na kateri delate z ukazom ``git branch``).
 
 Delo na vašem popravku
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -153,7 +153,7 @@ Delajte na kodi, kolikor želite in pošljite kolikor hočete; vendar upoštevaj
 sledeče:
 
 * Preberite o Symfony :doc:`konvencijah <conventions>` in sledite
-  kodnim :doc:`standardom <standards>` (uporabite `git diff --check` za preverjanje
+  kodnim :doc:`standardom <standards>` (uporabite ``git diff --check`` za preverjanje
   presledkov na koncu -- tudi preberite nasvet spodaj);
 
 * Dodajte teste enot, da dokažete, da je hrošč odpravljen ali da nova lastnost
@@ -163,7 +163,7 @@ sledeče:
   poskusite ponuditi plast združljivosti za podporo na stari način) -- popravki,
   ki zlomijo združljivost za nazaj imajo manj možnosti, da bodo združeni;
 
-* Naredite atomsko in logično ločene izročitve (uporabite moč `git rebase`, da
+* Naredite atomsko in logično ločene izročitve (uporabite moč ``git rebase``, da
   imamo čisto in logično zgodovino);
 
 * Stisnite nerelevantne izročitve, ki so samo o popravku kodnih standardov ali
@@ -176,14 +176,12 @@ sledeče:
 
 .. tip::
 
-    Lahko preverite kodne standarde vašega popravka tako, da poženete sledečo
-    `skripto <http://cs.sensiolabs.org/get/php-cs-fixer.phar>`_
-    (`vir <https://github.com/fabpot/PHP-CS-Fixer>`_):
+    Ko oddajate zahtevek potega, `fabbot`_ preveri vašo kodo
+    za pogostimi tipkarskimi napakami in preveri, da uporabljate PHP kodne standarde
+    kot so definirani v `PSR-1`_ in `PSR-2`_.
 
-    .. code-block:: bash
-
-        $ cd /path/to/symfony/src
-        $ php symfony-cs-fixer.phar fix . Symfony20Finder
+    Status je izpisan pod opisom zahtevka potega s povzetkom
+    kakršnihkoli problemov, ki jih zazna ali katerihkoli napak pri gradnji Travis CI.
 
 .. tip::
 
@@ -200,11 +198,11 @@ Pripravite vaš popravek na predložitev
 Ko vaš popravek ni o popravku hrošča (ko dodajate novo lastnost ali spreminjate
 obstoječo naprimer), mora tudi vsebovati sledeče:
 
-* Razlago spremembe v relevantni CHANGELOG datotek (``[BC
-  BREAK]`` ali ``[DEPRECATION]`` predpona mora biti uporabljena, ko je to relevantno);
+* Razlago spremembe v relevantni ``CHANGELOG`` datoteki
+  (``[BC BREAK]`` ali ``[DEPRECATION]`` predpona mora biti uporabljena, ko je to relevantno);
 
 * Razlaga, kako nadgraditi obstoječo aplikacijo v relevantni
-  UPGRADE datoteki, če spremembe zlomijo združljivost za nazaj ali če
+  ``UPGRADE`` datoteki, če spremembe zlomijo združljivost za nazaj ali če
   opustite nekaj, kar bo na koncu zlomilo zdužljivost za nazaj.
 
 Korak 3: Pošljite vaš popravek
@@ -229,7 +227,8 @@ nekaj časa preden končate vaše spremembe):
 
 .. tip::
 
-    Zamenjajte `master` z `2.2`, če delate na popravku hrošča
+    Zamenjajte ``master`` z vejo, ki ste jo prej izbrali (npr. ``2.3``),
+    če delate na popravku hrošča
 
 Ko izvajate ukaz ``rebase``, imate lahko združljivostne konflikte.
 ``git status`` vam bo pokazal *nezdružene* datoteke. Rešite vse konflikte,
@@ -244,7 +243,7 @@ Preverite, da vsi testi še vedno gredo skozi in oddaljeno porinite vašo vejo:
 
 .. code-block:: bash
 
-    $ git push origin BRANCH_NAME
+    $ git push --force origin BRANCH_NAME
 
 Naredite "Pull Request"
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -253,8 +252,8 @@ Sedaj lahko naredite "pull request" na ``symfony/symfony`` Github repozitoriju.
 
 .. tip::
 
-    Poskrbite, da kaže vaš zahtevek proti ``symfony:2.2`` če želite, da
-    bo jedro ekipe povleklo popravek hrošla baziran na 2.2 veji.
+    Poskrbite, da kaže vaš zahtevek proti ``symfony:2.3`` če želite, da
+    bo jedro ekipe povleklo popravek hrošla baziran na ``2.3`` veji.
 
 Za poenostavitev dela jedra ekipe, vedno vključite modificirane komponente v
 vaših sporočilih poslanih zahtevkov, kot je v:
@@ -310,23 +309,23 @@ v datotekah prevodov, uporabite krajšo verzijo kontrolnega seznama:
 
 Nekateri odgovori na vprašanja sprožijo več zahtev:
 
- * Če odgovorite z "yes" na "Bug fix?", preverite, če je bil hrošč že naveden
-   v Symfony težavah in se sklicujte nanj v "Fixed tickets";
+* Če odgovorite z "yes" na "Bug fix?", preverite, če je bil hrošč že naveden
+  v Symfony težavah in se sklicujte nanj v "Fixed tickets";
 
- * Če odgovorite z "yes" na "New feature?", morate poslati zahtevek "pull request"
-   dokumentaciji in se v njem sklicevati pod "Doc PR" sekcijo;
+* Če odgovorite z "yes" na "New feature?", morate poslati zahtevek "pull request"
+  dokumentaciji in se v njem sklicevati pod "Doc PR" sekcijo;
 
- * Če odgovorite z "yes" na "BC breaks?", mora popravek vsebovati posodobitve
-   na ustrezne CHANGELOG in UPGRADE datoteke;
+* Če odgovorite z "yes" na "BC breaks?", mora popravek vsebovati posodobitve
+  na ustrezne ``CHANGELOG`` in ``UPGRADE`` datoteke;
 
- * Če odgovorite z "yes" na "Deprecations?", mora popravek vsebovati posodobitve
-   na ustrezne CHANGELOG in UPGRADE datoteke;
+* Če odgovorite z "yes" na "Deprecations?", mora popravek vsebovati posodobitve
+  na ustrezne ``CHANGELOG`` in ``UPGRADE`` datoteke;
 
- * Če odgovorite z "no" na "Tests pass", morate dodati element na kontrolni seznam
-   z akcijami, ki morajo biti opravljene, da se teste popravi;
+* Če odgovorite z "no" na "Tests pass", morate dodati element na kontrolni seznam
+  z akcijami, ki morajo biti opravljene, da se teste popravi;
 
- * Če "license" ni MIT, raje ne pošiljajte zahtevka, saj najverjetneje ne bo
-   sprejet.
+* Če "license" ni MIT, raje ne pošiljajte zahtevka, saj najverjetneje ne bo
+  sprejet.
 
 Če katere prejšnjih zahtev niso zadoščene, naredite todo-list in dodajte relevantne
 elemente;
@@ -369,24 +368,23 @@ bazirajte (rebase) z ``upstream/master`` ali
 .. code-block:: bash
 
     $ git rebase -f upstream/master
-    $ git push -f origin BRANCH_NAME
+    $ git push --force origin BRANCH_NAME
 
 .. note::
 
     ko izvajate ``push --force``, vedno označite ime veje eksplicitno,
     da se izognete težavam z drugimi vejami v repozitoriju (``--force`` pove
-    git-u, da res želite se vmešati z drugimi stvarmi, torej delajte previdno).
+    Git-u, da res želite se vmešati z drugimi stvarmi, torej delajte previdno).
 
 Pogosto, vas bodo moderatorji vprašali, da stisnete ("squash") vaše izročitve. To
 pomeni, da boste pretvorili mnoge izročitve v eno. Da to naredite, uporabite ukaz rebase:
 
 .. code-block:: bash
 
-    $ git rebase -i HEAD~3
-    $ git push -f origin BRANCH_NAME
+    $ git rebase -i upstream/master
+    $ git push --force origin BRANCH_NAME
 
-Številka 3 tu mora biti enaka številu izročitev v vaši veji. Ko
-vpišete ta ukaz, se bo prikazal urejevalnik in pokazal seznam izročitev:
+Ko vtipkate ta ukaz, se bo prikazal urejevalnik in prikazal seznam poslanih potrditev:
 
 .. code-block:: text
 
@@ -394,11 +392,11 @@ vpišete ta ukaz, se bo prikazal urejevalnik in pokazal seznam izročitev:
     pick 7fc64b4 second commit
     pick 7d33018 third commit
 
-Da stisnete vse izročitve v prvega, odstranite besedi "pick" pred drugim in
-zadnjim commit-om in ju zamenjajte z besedo "squash" ali samo "s".
-Ko boste shranili, bo git pričel s ponovnim baziranjem (rebasing) in če bo uspešno,
+Da stisnete vse izročitve v prvega, odstranite besedi ``pick`` pred drugim in
+zadnjim commit-om in ju zamenjajte z besedo ``squash`` ali samo
+``s``. Ko boste shranili, bo Git pričel s ponovnim baziranjem (rebasing) in če bo uspešno,
 vas bo vprašal za urejanje sporočila izročitve, kar je privzeto seznam vseh dosedanjih
-sporočil izročitev. Ko zaključite, izvedite ukaz push.
+sporočil izročitev. Ko ste zaključili, izvedite ukaz push.
 
 .. _ProGit:                                http://git-scm.com/book
 .. _GitHub:                                https://github.com/signup/free
@@ -408,4 +406,7 @@ sporočil izročitev. Ko zaključite, izvedite ukaz push.
 .. _travis-ci.org:                         https://travis-ci.org/
 .. _`travis-ci.org status icon`:           http://about.travis-ci.org/docs/user/status-images/
 .. _`travis-ci.org Getting Started Guide`: http://about.travis-ci.org/docs/user/getting-started/
-.. _`repozitoriju dokumentacije`:            https://github.com/symfony/symfony-docs
+.. _`repozitoriju dokumentacije`:          https://github.com/symfony/symfony-docs
+.. _`fabbot`:                              http://fabbot.io
+.. _`PSR-1`:                               http://www.php-fig.org/psr/psr-1/
+.. _`PSR-2`:                               http://www.php-fig.org/psr/psr-2/

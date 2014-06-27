@@ -29,17 +29,17 @@ Konsistentno s Symfony izvozno kodo je repozitorij dokumentacije razdeljen v
 več vej, ki ustrezajo različnim verzijam samega Symfony-ja.
 Veja ``master`` vsebuje dokumentacijo za razvojno vejo kode.
 
-Razen če dokumentirate lastnost, ki je bila predstavljena *po* Symfony 2.2
-(npr. v Symfony 2.3), bi vaše spremembe morale biti osnovane na veji 2.2.
-Da to naredite, povlecite (checkout) vejo 2.2 pred naslednjim korakom:
+Razen če dokumentirate lastnost, ki je bila predstavljena *po* Symfony 2.3
+(npr. v Symfony 2.4), bi vaše spremembe morale biti osnovane na veji 2.3.
+Da to naredite, povlecite (checkout) vejo 2.3 pred naslednjim korakom:
 
 .. code-block:: bash
 
-    $ git checkout 2.2
+    $ git checkout 2.3
 
 .. tip::
 
-    Vaša osnovna veja (npr. 2.2) bo postala t.i. "Applies to" v :ref:`doc-contributing-pr-format`,
+    Vaša osnovna veja (npr. 2.3) bo postala t.i. "Applies to" v :ref:`doc-contributing-pr-format`,
     ki ga boste uporabili kasneje.
 
 Naslednje izdelajte namensko vejo za vaše spremembe (za organizacijo):
@@ -57,8 +57,8 @@ Izdelava zahtevka potega
 Če sledite primeru, bo zahtevek potega privzeto med vašo
 ``improving_foo_and_bar`` vejo in ``symfony-docs`` ``master`` vejo.
 
-Če ste naredili spremembe osnovane na veji 2.2, potem morate spremeniti,
-da je osnovna veja 2.2 na strani predogleda s klikom na ``edit`` gumb
+Če ste naredili spremembe osnovane na veji 2.3, potem morate spremeniti,
+da je osnovna veja 2.3 na strani predogleda s klikom na ``edit`` gumb
 zgoraj levo:
 
 .. image:: /images/docs-pull-request-change-base.png
@@ -66,8 +66,8 @@ zgoraj levo:
 
 .. note::
 
-  Vse spremembe narejene na veji (npr. 2.2) bodo združene v vsako "novo"
-  vejo (npr. 2.3, master, itd.) za naslednjo izdajo na tedenski osnovi.
+  Vse spremembe narejene na veji (npr. 2.3) bodo združene v vsako "novo"
+  vejo (npr. 2.4, master, itd.) za naslednjo izdajo na tedenski osnovi.
 
 GitHub pokriva teme o t.i. `pull requests`_ v podrobnosti.
 
@@ -135,7 +135,7 @@ značko in kratek opis:
 .. code-block:: text
 
     .. versionadded:: 2.3
-        The ``askHiddenResponse`` method was added in Symfony 2.3.
+        The ``askHiddenResponse`` method was introduced in Symfony 2.3.
 
     You can also ask a question and hide the response. This is particularly...
 
@@ -177,10 +177,6 @@ Prevajanje
 
 Preberite namenski :doc:`dokument <translations>`.
 
-.. _`kopirajte`: https://help.github.com/articles/fork-a-repo
-.. _`pull requests`: https://help.github.com/articles/using-pull-requests
-.. _`Documentation Build Errors`: http://symfony.com/doc/build_errors
-
 Upravljanje izdaj
 -----------------
 
@@ -205,7 +201,7 @@ Za ta primer, predpostavimo, da je verzija 2.1 ravnokar dosegla svoj konec vzdr�
 
 * Vse veje, ki so še vedno po vzdrževanjem (npr. 2.2 in več) so posodobljene,
   da odražajo, da bi se zahtevki potegov morali začeti iz sedaj-nove vzdrževane
-  verzije (npr. 2.2).
+  verzije (npr. 2.2) - vključno s podrobnostmi v datoteki README.
 
 * Odstranijo se vse ``versionadded`` direktive - in ostali zapiski povezani z lastnostmi
   sprememb ali če so novi - za verzijo (npr. 2.1) iz master veje.
@@ -225,4 +221,7 @@ zgodi, so narejeni sledeči elementi:
   Na primer v namestitvenih poglavjih, se sklicujemo na verzijo, ki bi jo
   morali uporabiti za namestitev. Kot primer, glejte spremembe narejene v `PR #2688`_.
 
-.. _`PR #2688`: https://github.com/symfony/symfony-docs/pull/2688
+.. _`kopirajte`:                  https://help.github.com/articles/fork-a-repo
+.. _`pull requests`:              https://help.github.com/articles/using-pull-requests
+.. _`Documentation Build Errors`: http://symfony.com/doc/build_errors
+.. _`PR #2688`:                   https://github.com/symfony/symfony-docs/pull/2688
