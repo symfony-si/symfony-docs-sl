@@ -1,6 +1,11 @@
 Symfony2 dokumentacija
 ======================
 
+.. toctree::
+    :hidden:
+
+    changelog
+
 Hiter pregled
 -------------
 

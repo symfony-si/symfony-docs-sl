@@ -66,11 +66,11 @@ Glossary
         poglavju.
 
    HTTP Specifikacija
-        *Http Specifikacija* je dokument, ki opisuje Hypertext Transfer Protocol -
+        *HTTP specifikacija* je dokument, ki opisuje Hypertext Transfer Protocol -
         skupek pravil, ki določajo klasično klient-strežnik zahtevek-odziv komunikacijo.
         Specifikacija definira obliko uporabljeno za zahtevek in odziv kot tudi možne
         HTTP glav, ki jih vsaka lahko vsebuje. Za več informacij, preberite
-        `Http Wikipedia`_ članek ali `HTTP 1.1 RFC`_.
+        `HTTP Wikipedia`_ članek ali `HTTP 1.1 RFC`_.
 
    Okolje
         Okolje je niz (npr. ``prod`` ali ``dev``), ki ustreza določenemu
@@ -116,7 +116,7 @@ Glossary
         ali samo za del nje. Oglejte si
         :doc:`/book/security` chapters.
 
-   Yaml
+   YAML
         *YAML* je rekurzivna kratica za "YAML Ain't a Markup Language". Gre za
         lahko, človeku prijazen serializacijski jezik, uporabljen obširno v Symfony2
         nastavitvenih datotekah. Oglejte si :doc:`/components/yaml/introduction`
