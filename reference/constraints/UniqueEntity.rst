@@ -64,7 +64,7 @@ table:
              * @Assert\Email()
              */
             protected $email;
-            
+
             // ...
         }
 
@@ -97,7 +97,7 @@ table:
 
         // DON'T forget this use statement!!!
         use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-        
+
         class Author
         {
             public static function loadValidatorMetadata(ClassMetadata $metadata)
@@ -142,8 +142,8 @@ em
 **type**: ``string``
 
 The name of the entity manager to use for making the query to determine the
-uniqueness. If it's left blank, the correct entity manager will determined for
-this class. For that reason, this option should probably not need to be
+uniqueness. If it's left blank, the correct entity manager will be determined
+for this class. For that reason, this option should probably not need to be
 used.
 
 repositoryMethod
@@ -217,7 +217,7 @@ Consider this example:
 
             <class name="Acme\AdministrationBundle\Entity\Service">
                 <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
-                    <option name="field">
+                    <option name="fields">
                         <value>host</value>
                         <value>port</value>
                     </option>

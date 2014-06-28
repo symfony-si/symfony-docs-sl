@@ -1,8 +1,11 @@
 .. index::
-   pair: Monolog; Configuration reference
+    pair: Monolog; Configuration reference
 
 Nastavitve za Monolog ("monolog")
 =================================
+
+Polne privzete nastavitve
+-------------------------
 
 .. configuration-block::
 
@@ -25,11 +28,21 @@ Nastavitve za Monolog ("monolog")
                     action_level:        WARNING
                     buffer_size:         30
                     handler:             custom
+                console:
+                    type:                console
+                    verbosity_levels:
+                        VERBOSITY_NORMAL:       WARNING
+                        VERBOSITY_VERBOSE:      NOTICE
+                        VERBOSITY_VERY_VERBOSE: INFO
+                        VERBOSITY_DEBUG:        DEBUG
                 custom:
                     type:                service
                     id:                  my_handler
 
-                # Default options and values for some "my_custom_handler" 
+                # Default options and values for some "my_custom_handler"
+                # Note: many of these options are specific to the "type".
+                # For example, the "service" type doesn't use any options
+                # except id and channels
                 my_custom_handler:
                     type:                 ~ # Required
                     id:                   ~
@@ -80,6 +93,10 @@ Nastavitve za Monolog ("monolog")
                     type="fingers_crossed"
                     action-level="warning"
                     handler="custom"
+                />
+                <monolog:handler
+                    name="console"
+                    type="console"
                 />
                 <monolog:handler
                     name="custom"

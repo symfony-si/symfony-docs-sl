@@ -1,5 +1,5 @@
 .. index::
-   single: Configuration reference; Framework
+    single: Configuration reference; Framework
 
 Nastavitve FrameworkBundle ("framework")
 ========================================
@@ -7,7 +7,7 @@ Nastavitve FrameworkBundle ("framework")
 Ta referenčni dokument je delo v teku. Moral bi biti točen, vendar
 vse opcije še niso v celoti pokrite.
 
-``FrameworkBundle`` vsebuje večino "osnovnih" lastnosti ogrodja
+FrameworkBundle vsebuje večino "osnovnih" lastnosti ogrodja
 in se ga lahko nastavi po ključem ``framework`` v vaših nastavitvah aplikacije.
 To vključuje nastavitve, ki se tičejo sej, prevodov, obrazcev, preverjanja,
 usmerjanja in več.
@@ -65,7 +65,7 @@ http_method_override
 ~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 2.3
-    Opcija ``http_method_override`` je nova v Symfony 2.3.
+    Opcija ``http_method_override`` je bila predstavljena v Symfony 2.3.
 
 **type**: ``Boolean`` **default**: ``true``
 
@@ -85,25 +85,47 @@ ide
 poti datotek v sporočilu izjeme v povezavo, katera bo odprla to
 datoteko v vašem IDE-ju.
 
-Če uporabljate TextMate ali Mac Vim, lahko uporabite enostavno eno izmed sledečih
-vgrajenih vrednosti:
+Symfony vsebuje vnaprej definirane url-je za nekatere popularne IDE-je, lahko jih nastavite
+z uporabo sledečih ključev:
 
 * ``textmate``
 * ``macvim``
+* ``emacs``
+* ``sublime``
 
-Lahko tudi specificirate niz datoteke po meri. Če to naredite, vsi znaki za procente
+.. versionadded:: 2.3.14
+    Urejevalnika ``emacs`` in ``sublime`` sta bila predstavljena v Symfony 2.3.14.
+
+Lahko tudi specificirate niz url-ja po meri. Če to naredite, vsi znaki za procente
 (``%``) morajo biti dvojni za čiščenje tega znaka. Na primer,
-celotni niz TextMate bi izgledal takole:
+če ste namestili `PhpStormOpener`_ in uporabljate PHPstorm, boste naredili nekaj takega:
 
-.. code-block:: yaml
+.. configuration-block::
 
-    framework:
-        ide:  "txmt://open?url=file://%%f&line=%%l"
+    .. code-block:: yaml
+        framework:
+            ide: "pstorm://%%f:%%l"
+
+    .. code-block:: xml
+
+        <?xml version="1.0" charset="UTF-8" ?>
+        <container xmlns="http://symfony.com/schema/dic/service"
+            xmlns:framework="http://symfony.com/schema/dic/symfony">
+
+            <framework:config ide="pstorm://%%f:%%l" />
+
+        </container>
+
+    .. code-block:: php
+
+        $container->loadFromExtension('framework', array(
+            'ide' => 'pstorm://%%f:%%l',
+        ));
 
 Seveda, odkar vsak razvijalec uporablja različen IDE, je bolje nastaviti
 to na sistemskem nivoju. To se lahko naredi z nastavitvijo ``xdebug.file_link_format``
-``php.ini`` vrednostjo za niz povezave datoteke. Če ta nastavitvena vrednost ni nastavljena,
-potem ``ide`` opcije ni potrebno specificirati.
+v ``php.ini`` nastavitvah za niz povezave datoteke. Če ta nastavitvena vrednost ni nastavljena,
+potem bo ``ide`` opcija ignorirana.
 
 .. _reference-framework-test:
 
@@ -128,7 +150,7 @@ Nastavi IP naslov, ki bi moral biti preverjen kot proxi-ji. Za več podrobnosti,
 glejte :doc:`/components/http_foundation/trusting_proxies`.
 
 .. versionadded:: 2.3
-    Podpora CIDR notacije je bila predstavljena, tako da lahko dodate na seznam
+    Podpora CIDR notacije je bila predstavljena v Symfony 2.3, tako da lahko dodate na seznam
     varnih celotne subnet-e (npr. ``10.0.0.0/8``, ``fc00::/7``).
 
 .. configuration-block::
@@ -172,10 +194,12 @@ definiran v ``php.ini`` z direktivo ``session.name``.
 cookie_lifetime
 ...............
 
-**type**: ``integer`` **default**: ``0``
+**type**: ``integer`` **default**: ``null``
 
-To določa življensko dobo seje - v sekundah. Privzeto bo uporabilo
-``0``, kar pomeni, da je piškotek veljaven za dolžino seje brskalnika.
+To določa življensko dobo seje - v sekundah. Privzeto bo uporabljena ``null``,
+kar pomeni, da bo uporabljena vredno ``session.cookie_lifetime`` iz ``php.ini``.
+Nastavitev te vrednosti na ``0`` pomeni, da je piškotek veljaven za dolžino seje
+brskalnika.
 
 cookie_path
 ...........
@@ -205,7 +229,7 @@ cookie_httponly
 
 **type**: ``Boolean`` **default**: ``false``
 
-To določa, ali bi morali biti piškotki dostopni preko HTTP protokola.
+To določa, ali bi morali biti piškotki dostopni samo preko HTTP protokola.
 To pomeni, da piškotek ne bo dostopen za skriptne jezike, kot je JavaScript.
 Ta nastavitev lahko efektivno pomaga reducirati krajo identifikacije
 preko XSS napadov.
@@ -367,6 +391,10 @@ Sedaj bo enako sredstvo izpisano kot ``/images/logo.png?v2``. Če uporabite
 to lastnost, **morate** ročno povečati ``assets_version`` vrednost pred
 vsakim nalaganjem, da bodo parametri poizvedbe spremenjeni.
 
+Možno je tudi nastaviti vrednost verzije na osnovi od sredstva do sredstva (namesto
+uporabe globalne verzije - npr. ``v2`` - nastavljene tu). Glejte
+:ref:`Verzije glede na sredstva <book-templating-version-by-asset>` za podrobnosti.
+
 Kontrolirate lahko, kako deluje niz poizvedbe preko `assets_version_format`_
 opcije.
 
@@ -408,11 +436,6 @@ poizvedbe. Na primer, če je ``assets_version_format`` nastavljen na
 profiler
 ~~~~~~~~
 
-.. versionadded:: 2.2
-    Opcija ``enabled`` je bila dodana v Symfony 2.2. Pred tem, je profiler
-    lahko bil samo onemogočen z izpustom nastavitve ``framework.profiler``
-    v celoti.
-
 .. _profiler.enabled:
 
 enabled
@@ -424,7 +447,7 @@ Profiler je lahko onemogočen z nastavitvijo tega ključa na ``false``.
 
 .. versionadded:: 2.3
 
-    Opcija ``collect`` je nova v Symfony 2.3. Pred tem, ko je bil ``profiler.enabled``
+    Opcija ``collect`` je bila predstavljena v Symfony 2.3. Pred tem, ko je bil ``profiler.enabled``
     false, je *bil* profiler dejansko omogočen, vendar zbirniki (collectors) so bili
     onemogočeni. Sedaj se lahko profiler in collectors kontrolira neodvisno.
 
@@ -572,3 +595,4 @@ Celotne privzete nastavitve
                 debug:                %kernel.debug%
 
 .. _`protocol-relative`: http://tools.ietf.org/html/rfc3986#section-4.2
+.. _`PhpStormOpener`: https://github.com/pinepain/PhpStormOpener

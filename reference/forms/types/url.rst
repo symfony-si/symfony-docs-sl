@@ -13,9 +13,12 @@ protokola.
 +----------------+-------------------------------------------------------------------+
 | Opcije         | - `default_protocol`_                                             |
 +----------------+-------------------------------------------------------------------+
-| Podedovane     | - `max_length`_                                                   |
-| opcije         | - `required`_                                                     |
+| Podedovane     | - `max_length`_ (opuščena od 2.5.)                                |
+| opcije         | - `empty_data`_                                                   |
+|                | - `required`_                                                     |
 |                | - `label`_                                                        |
+|                | - `label_attribute`_                                              |
+|                | - `data`_                                                         |
 |                | - `trim`_                                                         |
 |                | - `read_only`_                                                    |
 |                | - `disabled`_                                                     |
@@ -47,9 +50,15 @@ Te opcije dedujejo iz tipa :doc:`form </reference/forms/types/form>`:
 
 .. include:: /reference/forms/types/options/max_length.rst.inc
 
+.. include:: /reference/forms/types/options/empty_data.rst.inc
+
 .. include:: /reference/forms/types/options/required.rst.inc
 
 .. include:: /reference/forms/types/options/label.rst.inc
+
+.. include:: /reference/forms/types/options/label_attr.rst.inc
+
+.. include:: /reference/forms/types/options/data.rst.inc
 
 .. include:: /reference/forms/types/options/trim.rst.inc
 

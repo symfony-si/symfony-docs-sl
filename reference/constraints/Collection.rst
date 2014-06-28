@@ -169,7 +169,7 @@ the above example, the ``allowMissingFields`` option was set to true, meaning
 that if either of the ``personal_email`` or ``short_bio`` elements were missing
 from the ``$personalData`` property, no validation error would occur.
 
-Required and Optional Field Constraints
+Required and optional Field Constraints
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 2.3
@@ -187,7 +187,7 @@ field is optional but must be a valid email if supplied, you can do the followin
 .. configuration-block::
 
     .. code-block:: yaml
-    
+
         # src/Acme/BlogBundle/Resources/config/validation.yml
         Acme\BlogBundle\Entity\Author:
             properties:
@@ -195,11 +195,11 @@ field is optional but must be a valid email if supplied, you can do the followin
                     - Collection:
                         fields:
                             personal_email:
-                                - Collection\Required
+                                - Required
                                     - NotBlank: ~
                                     - Email: ~
                             alternate_email:
-                                - Collection\Optional:
+                                - Optional:
                                     - Email: ~
 
     .. code-block:: php-annotations
@@ -223,9 +223,9 @@ field is optional but must be a valid email if supplied, you can do the followin
                  'personal_email',
              );
         }
-    
+
     .. code-block:: xml
-    
+
         <!-- src/Acme/BlogBundle/Resources/config/validation.xml -->
         <?xml version="1.0" encoding="UTF-8" ?>
         <constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping"
@@ -237,13 +237,13 @@ field is optional but must be a valid email if supplied, you can do the followin
                     <constraint name="Collection">
                         <option name="fields">
                             <value key="personal_email">
-                                <constraint name="Collection\Required">
+                                <constraint name="Required">
                                     <constraint name="NotBlank" />
                                     <constraint name="Email" />
                                 </constraint>
                             </value>
                             <value key="alternate_email">
-                                <constraint name="Collection\Optional">
+                                <constraint name="Optional">
                                     <constraint name="Email" />
                                 </constraint>
                             </value>

@@ -1,5 +1,5 @@
 .. index::
-   single: Configuration reference; WebProfiler
+    single: Configuration reference; WebProfiler
 
 Nastavitve za WebProfilerBundle ("web_profiler")
 ================================================

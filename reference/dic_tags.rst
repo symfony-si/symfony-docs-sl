@@ -14,7 +14,7 @@ may also be tags in other bundles you use that aren't listed here.
 
 +-----------------------------------+---------------------------------------------------------------------------+
 | Tag Name                          | Usage                                                                     |
-+-----------------------------------+---------------------------------------------------------------------------+
++===================================+===========================================================================+
 | `assetic.asset`_                  | Register an asset to the current asset manager                            |
 +-----------------------------------+---------------------------------------------------------------------------+
 | `assetic.factory_worker`_         | Add a factory worker                                                      |
@@ -25,9 +25,9 @@ may also be tags in other bundles you use that aren't listed here.
 +-----------------------------------+---------------------------------------------------------------------------+
 | `assetic.formula_resource`_       | Adds a resource to the current asset manager                              |
 +-----------------------------------+---------------------------------------------------------------------------+
-| `assetic.templating.php`_         | Remove this service if php templating is disabled                         |
+| `assetic.templating.php`_         | Remove this service if PHP templating is disabled                         |
 +-----------------------------------+---------------------------------------------------------------------------+
-| `assetic.templating.twig`_        | Remove this service if twig templating is disabled                        |
+| `assetic.templating.twig`_        | Remove this service if Twig templating is disabled                        |
 +-----------------------------------+---------------------------------------------------------------------------+
 | `console.command`_                | Add a command                                                             |
 +-----------------------------------+---------------------------------------------------------------------------+
@@ -67,7 +67,7 @@ may also be tags in other bundles you use that aren't listed here.
 +-----------------------------------+---------------------------------------------------------------------------+
 | `serializer.normalizer`_          | Register a new normalizer in the ``serializer`` service                   |
 +-----------------------------------+---------------------------------------------------------------------------+
-| `swiftmailer.plugin`_             | Register a custom SwiftMailer Plugin                                      |
+| `swiftmailer.default.plugin`_     | Register a custom SwiftMailer Plugin                                      |
 +-----------------------------------+---------------------------------------------------------------------------+
 | `templating.helper`_              | Make your service available in PHP templates                              |
 +-----------------------------------+---------------------------------------------------------------------------+
@@ -215,7 +215,7 @@ assetic.formula_loader
 A Formula loader is a class implementing
 ``Assetic\\Factory\Loader\\FormulaLoaderInterface`` interface. This class
 is responsible for loading assets from a particular kind of resources (for
-instance, twig template). Assetic ships loaders for php and twig templates.
+instance, twig template). Assetic ships loaders for PHP and Twig templates.
 
 An ``alias`` attribute defines the name of the loader.
 
@@ -224,13 +224,13 @@ assetic.formula_resource
 
 **Purpose**: Adds a resource to the current asset manager
 
-A resource is something formulae can be loaded from. For instance, twig
+A resource is something formulae can be loaded from. For instance, Twig
 templates are resources.
 
 assetic.templating.php
 ----------------------
 
-**Purpose**: Remove this service if php templating is disabled
+**Purpose**: Remove this service if PHP templating is disabled
 
 The tagged service will be removed from the container if the
 ``framework.templating.engines`` config section does not contain php.
@@ -238,17 +238,17 @@ The tagged service will be removed from the container if the
 assetic.templating.twig
 -----------------------
 
-**Purpose**: Remove this service if twig templating is disabled
+**Purpose**: Remove this service if Twig templating is disabled
 
 The tagged service will be removed from the container if
-``framework.templating.engines`` config section does not contain twig.
+``framework.templating.engines`` config section does not contain ``twig``.
 
 console.command
 ---------------
 
 .. versionadded:: 2.4
-   Support for registering commands in the service container was added in
-   version 2.4.
+   Support for registering commands in the service container was introduced in
+   Symfony 2.4.
 
 **Purpose**: Add a command to the application
 
@@ -346,6 +346,8 @@ The ``alias`` key of the tag is the type of field that this extension should
 be applied to. For example, to apply the extension to any form/field, use the
 "form" value.
 
+.. _reference-dic-type_guesser:
+
 form.type_guesser
 -----------------
 
@@ -353,14 +355,13 @@ form.type_guesser
 
 This tag allows you to add your own logic to the :ref:`Form Guessing <book-forms-field-guessing>`
 process. By default, form guessing is done by "guessers" based on the validation
-metadata and Doctrine metadata (if you're using Doctrine).
+metadata and Doctrine metadata (if you're using Doctrine) or Propel metadata
+(if you're using Propel).
 
-To add your own form type guesser, create a class that implements the
-:class:`Symfony\\Component\\Form\\FormTypeGuesserInterface` interface. Next,
-tag its service definition with ``form.type_guesser`` (it has no options).
+.. seealso::
 
-To see an example of how this class might look, see the ``ValidatorTypeGuesser``
-class in the ``Form`` component.
+    For information on how to create your own type guesser, see
+    :doc:`/components/form/type_guesser`.
 
 kernel.cache_clearer
 --------------------
@@ -419,7 +420,8 @@ kernel.cache_warmer
 **Purpose**: Register your service to be called during the cache warming process
 
 Cache warming occurs whenever you run the ``cache:warmup`` or ``cache:clear``
-task (unless you pass ``--no-warmup`` to ``cache:clear``). The purpose is
+task (unless you pass ``--no-warmup`` to ``cache:clear``). It is also run when
+handling the request, if it wasn't done by one of the commands yet. The purpose is
 to initialize any cache that will be needed by the application and prevent
 the first user from any significant "cache hit" where the cache is generated
 dynamically.
@@ -436,7 +438,7 @@ the :class:`Symfony\\Component\\HttpKernel\\CacheWarmer\\CacheWarmerInterface` i
     {
         public function warmUp($cacheDir)
         {
-            // do some sort of operations to "warm" your cache
+            // ... do some sort of operations to "warm" your cache
         }
 
         public function isOptional()
@@ -446,8 +448,9 @@ the :class:`Symfony\\Component\\HttpKernel\\CacheWarmer\\CacheWarmerInterface` i
     }
 
 The ``isOptional`` method should return true if it's possible to use the
-application without calling this cache warmer. In Symfony 2.0, optional warmers
-are always executed anyways, so this function has no real effect.
+application without calling this cache warmer. In Symfony, optional warmers
+are always executed by default (you can change this by using the
+``--no-optional-warmers`` option when executing the command).
 
 To register your warmer with Symfony, give it the ``kernel.cache_warmer`` tag:
 
@@ -474,9 +477,23 @@ To register your warmer with Symfony, give it the ``kernel.cache_warmer`` tag:
             ->addTag('kernel.cache_warmer', array('priority' => 0))
         ;
 
-The ``priority`` value is optional, and defaults to 0. This value can be
-from -255 to 255, and the warmers will be executed in the order of their
-priority.
+.. note::
+
+    The ``priority`` value is optional, and defaults to 0.
+    The higher the priority, the sooner it gets executed.
+
+Core Cache Warmers
+~~~~~~~~~~~~~~~~~~
+
++-------------------------------------------------------------------------------------------+-----------+
+| Cache Warmer Class Name                                                                   | Priority  |
++===========================================================================================+===========+
+| :class:`Symfony\\Bundle\\FrameworkBundle\\CacheWarmer\\TemplatePathsCacheWarmer`          | 20        |
++-------------------------------------------------------------------------------------------+-----------+
+| :class:`Symfony\\Bundle\\FrameworkBundle\\CacheWarmer\\RouterCacheWarmer`                 | 0         |
++-------------------------------------------------------------------------------------------+-----------+
+| :class:`Symfony\\Bundle\\TwigBundle\\CacheWarmer\\TemplateCacheCacheWarmer`               | 0         |
++-------------------------------------------------------------------------------------------+-----------+
 
 .. _dic-tags-kernel-event-listener:
 
@@ -511,7 +528,7 @@ kernel.request
 
 +-------------------------------------------------------------------------------------------+-----------+
 | Listener Class Name                                                                       | Priority  |
-+-------------------------------------------------------------------------------------------+-----------+
++===========================================================================================+===========+
 | :class:`Symfony\\Component\\HttpKernel\\EventListener\\ProfilerListener`                  | 1024      |
 +-------------------------------------------------------------------------------------------+-----------+
 | :class:`Symfony\\Bundle\\FrameworkBundle\\EventListener\\TestSessionListener`             | 192       |
@@ -530,7 +547,7 @@ kernel.controller
 
 +-------------------------------------------------------------------------------------------+----------+
 | Listener Class Name                                                                       | Priority |
-+-------------------------------------------------------------------------------------------+----------+
++===========================================================================================+==========+
 | :class:`Symfony\\Bundle\\FrameworkBundle\\DataCollector\\RequestDataCollector`            | 0        |
 +-------------------------------------------------------------------------------------------+----------+
 
@@ -539,7 +556,7 @@ kernel.response
 
 +-------------------------------------------------------------------------------------------+----------+
 | Listener Class Name                                                                       | Priority |
-+-------------------------------------------------------------------------------------------+----------+
++===========================================================================================+==========+
 | :class:`Symfony\\Component\\HttpKernel\\EventListener\\EsiListener`                       | 0        |
 +-------------------------------------------------------------------------------------------+----------+
 | :class:`Symfony\\Component\\HttpKernel\\EventListener\\ResponseListener`                  | 0        |
@@ -560,7 +577,7 @@ kernel.exception
 
 +-------------------------------------------------------------------------------------------+----------+
 | Listener Class Name                                                                       | Priority |
-+-------------------------------------------------------------------------------------------+----------+
++===========================================================================================+==========+
 | :class:`Symfony\\Component\\HttpKernel\\EventListener\\ProfilerListener`                  | 0        |
 +-------------------------------------------------------------------------------------------+----------+
 | :class:`Symfony\\Component\\HttpKernel\\EventListener\\ExceptionListener`                 | -128     |
@@ -571,7 +588,7 @@ kernel.terminate
 
 +-------------------------------------------------------------------------------------------+----------+
 | Listener Class Name                                                                       | Priority |
-+-------------------------------------------------------------------------------------------+----------+
++===========================================================================================+==========+
 | :class:`Symfony\\Bundle\\SwiftmailerBundle\\EventListener\\EmailSenderListener`           | 0        |
 +-------------------------------------------------------------------------------------------+----------+
 
@@ -663,6 +680,12 @@ channel when injecting the logger in a service.
         $definition->addTag('monolog.logger', array('channel' => 'acme'));
         $container->register('my_service', $definition);
 
+.. tip::
+
+    If you use MonologBundle 2.4 or higher, you can configure custom channels
+    in the configuration and retrieve the corresponding logger service from
+    the service container directly (see :ref:`cookbook-monolog-channels-config`).
+
 .. _dic_tags-monolog-processor:
 
 monolog.processor
@@ -675,8 +698,8 @@ extra data in the records. A processor receives the record as an argument and
 must return it after adding some extra data in the ``extra`` attribute of
 the record.
 
-Let's see how you can use the built-in ``IntrospectionProcessor`` to add
-the file, the line, the class and the method where the logger was triggered.
+The built-in ``IntrospectionProcessor`` can be used to add the file, the line,
+the class and the method where the logger was triggered.
 
 You can add a processor globally:
 
@@ -847,14 +870,20 @@ and :class:`Symfony\\Component\\Serializer\\Normalizer\\DenormalizerInterface`.
 
 For more details, see :doc:`/cookbook/serializer`.
 
-swiftmailer.plugin
-------------------
+swiftmailer.default.plugin
+--------------------------
 
 **Purpose**: Register a custom SwiftMailer Plugin
 
 If you're using a custom SwiftMailer plugin (or want to create one), you can
 register it with SwiftMailer by creating a service for your plugin and tagging
-it with ``swiftmailer.plugin`` (it has no options).
+it with ``swiftmailer.default.plugin`` (it has no options).
+
+.. note::
+
+    ``default`` in this tag is the name of the mailer. If you have multiple
+    mailers configured or have changed the default mailer name for some reason,
+    you should change it to the name of your mailer in order to use this tag.
 
 A SwiftMailer plugin must implement the ``Swift_Events_EventListener`` interface.
 For more information on plugins, see `SwiftMailer's Plugin Documentation`_.
@@ -902,7 +931,7 @@ translation.loader
 
 **Purpose**: To register a custom service that loads translations
 
-By default, translations are loaded form the filesystem in a variety of different
+By default, translations are loaded from the filesystem in a variety of different
 formats (YAML, XLIFF, PHP, etc). If you need to load translations from some
 other source, first create a class that implements the
 :class:`Symfony\\Component\\Translation\\Loader\\LoaderInterface` interface::
@@ -1216,6 +1245,6 @@ For an example, see the ``EntityInitializer`` class inside the Doctrine Bridge.
 
 .. _`Twig's documentation`: http://twig.sensiolabs.org/doc/advanced.html#creating-an-extension
 .. _`Twig official extension repository`: https://github.com/fabpot/Twig-extensions
-.. _`KernelEvents`: https://github.com/symfony/symfony/blob/2.2/src/Symfony/Component/HttpKernel/KernelEvents.php
+.. _`KernelEvents`: https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/KernelEvents.php
 .. _`SwiftMailer's Plugin Documentation`: http://swiftmailer.org/docs/plugins.html
 .. _`Twig Loader`: http://twig.sensiolabs.org/doc/api.html#loaders

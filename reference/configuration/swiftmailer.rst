@@ -1,5 +1,5 @@
 .. index::
-   single: Configuration reference; Swift Mailer
+    single: Configuration reference; Swift Mailer
 
 Nastavitve za SwiftmailerBundle ("swiftmailer")
 ===============================================
@@ -10,6 +10,9 @@ nastavitev, glejte `Celotne privzete nastavitve`_
 
 Ključ ``swiftmailer`` nastavlja Symfoyn-jevo integracijo s Swift Mailer,
 ki je odgovorna za izdelavo in dostavo e-pošnih sporočil.
+
+Sledeča sekcija govori o vseh opcijah, ki so na voljo za nastavitev
+mailer-ja. Možno je tudi nastaviti več mailer-jev (glejte `Uporaba večih Mailer-jev`_).
 
 Nastavitve
 ----------
@@ -219,3 +222,65 @@ Celotne privzete nastavitve
                 threshold="99"
             />
         </swiftmailer:config>
+
+Uporaba večih Mailer-jev
+------------------------
+
+Lahko tudi nastavite več mailer-jev z njihovim grupiranjem po ključ
+``mailers`` (privzeti mailer je identificiran po opciji ``default_mailer``):
+
+.. configuration-block::
+
+    .. code-block:: yaml
+
+        swiftmailer:
+            default_mailer: second_mailer
+            mailers:
+                first_mailer:
+                    # ...
+                second_mailer:
+                    # ...
+
+    .. code-block:: xml
+
+        <?xml version="1.0" encoding="UTF-8" ?>
+        <container xmlns="http://symfony.com/schema/dic/services"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:swiftmailer="http://symfony.com/schema/dic/swiftmailer"
+            xsi:schemaLocation="http://symfony.com/schema/dic/services
+                http://symfony.com/schema/dic/services/services-1.0.xsd
+                http://symfony.com/schema/dic/swiftmailer
+                http://symfony.com/schema/dic/swiftmailer/swiftmailer-1.0.xsd"
+        >
+            <swiftmailer:config default-mailer="second_mailer">
+                <swiftmailer:mailer name="first_mailer"/>
+                <swiftmailer:mailer name="second_mailer"/>
+            </swiftmailer:config>
+        </container>
+
+    .. code-block:: php
+
+        $container->loadFromExtension('swiftmailer', array(
+            'default_mailer' => 'second_mailer',
+            'mailers' => array(
+                'first_mailer' => array(
+                    // ...
+                ),
+                'second_mailer' => array(
+                    // ...
+                ),
+            ),
+        ));
+
+Vsak mailer je registriran kot storitev:
+
+    // ...
+
+    // returns the first mailer
+    $container->get('swiftmailer.mailer.first_mailer');
+
+    // also returns the second mailer since it is the default mailer
+    $container->get('swiftmailer.mailer');
+
+    // returns the second mailer
+    $container->get('swiftmailer.mailer.second_mailer');

@@ -1,6 +1,6 @@
 .. index::
    single: Requirements
-   
+
 Zahteve za poganjanje Symfony2
 ==============================
 
@@ -23,6 +23,12 @@ Zahtevano
 * JSON mora biti omogočen
 * ctype mora biti omogočen
 * Vaš ``php.ini`` mora imeti date.timezone nastavitev
+
+.. caution::
+
+    Bodite pozorni, ker ima Symfony2 znane omejitve, ko uporabljate PHP verzijo
+    manjšo od 5.3.8 ali enako 5.3.16. Za več informacji, glejte
+    `sekcijo zahteve v datoteki README`_
 
 Opcijsko
 --------
@@ -48,3 +54,5 @@ Doctrine
 Če želite uporabljati Doctrine, morate imeti nameščen PDO. Dodatno morate
 imeti nameščen PDO gonilnik za strežnik podatkovne baze, ki ga želite
 uporabljati.
+
+.. _`sekcijo zahteve v datoteki README`: https://github.com/symfony/symfony#requirements

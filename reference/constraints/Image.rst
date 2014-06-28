@@ -9,7 +9,7 @@ Additionally it has options so you can validate against the width and height
 of the image.
 
 .. versionadded:: 2.4
-    As of Symfony 2.4 you can also validate against the image aspect ratio
+    As of Symfony 2.4, you can also validate against the image aspect ratio
     (defined as ``width / height``) and selectively allow square, landscape
     and portrait image orientations.
 
@@ -42,9 +42,9 @@ the documentation on this constraint.
 |                | - `allowPortraitMessage`_                                             |
 |                | - See :doc:`File </reference/constraints/File>` for inherited options |
 +----------------+-----------------------------------------------------------------------+
-| Class          | :class:`Symfony\\Component\\Validator\\Constraints\\File`             |
+| Class          | :class:`Symfony\\Component\\Validator\\Constraints\\Image`            |
 +----------------+-----------------------------------------------------------------------+
-| Validator      | :class:`Symfony\\Component\\Validator\\Constraints\\FileValidator`    |
+| Validator      | :class:`Symfony\\Component\\Validator\\Constraints\\ImageValidator`   |
 +----------------+-----------------------------------------------------------------------+
 
 Basic Usage
@@ -242,7 +242,7 @@ mimeTypes
 
 **type**: ``array`` or ``string`` **default**: ``image/*``
 
-You can find a list of existing image mime types on the `IANA website`_
+You can find a list of existing image mime types on the `IANA website`_.
 
 mimeTypesMessage
 ~~~~~~~~~~~~~~~~

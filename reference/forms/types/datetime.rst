@@ -20,19 +20,22 @@ data can be a ``DateTime`` object, a string, a timestamp or an array.
 |                      | - `widget`_                                                                 |
 |                      | - `input`_                                                                  |
 |                      | - `date_format`_                                                            |
+|                      | - `format`_                                                                 |
 |                      | - `hours`_                                                                  |
 |                      | - `minutes`_                                                                |
 |                      | - `seconds`_                                                                |
 |                      | - `years`_                                                                  |
 |                      | - `months`_                                                                 |
 |                      | - `days`_                                                                   |
+|                      | - `with_minutes`_                                                           |
 |                      | - `with_seconds`_                                                           |
 |                      | - `model_timezone`_                                                         |
 |                      | - `view_timezone`_                                                          |
 |                      | - `empty_value`_                                                            |
 +----------------------+-----------------------------------------------------------------------------+
-| Inherited            | - `invalid_message`_                                                        |
-| options              | - `invalid_message_parameters`_                                             |
+| Inherited            | - `data`_                                                                   |
+| options              | - `invalid_message`_                                                        |
+|                      | - `invalid_message_parameters`_                                             |
 |                      | - `read_only`_                                                              |
 |                      | - `disabled`_                                                               |
 |                      | - `mapped`_                                                                 |
@@ -96,6 +99,17 @@ Defines the ``format`` option that will be passed down to the date field.
 See the :ref:`date type's format option <reference-forms-type-date-format>`
 for more details.
 
+format
+~~~~~~
+
+**type**: ``string`` **default**: ``Symfony\Component\Form\Extension\Core\Type\DateTimeType::HTML5_FORMAT``
+
+If the ``widget`` option is set to ``single_text``, this option specifies the
+the format of the input, i.e. how Symfony will interpret the given input
+as a datetime string. It defaults to the `RFC 3339`_ format which is used
+by the HTML5 ``datetime`` field. Keeping the default value will cause the
+field to be rendered as an ``input`` field with ``type="datetime"``.
+
 .. include:: /reference/forms/types/options/hours.rst.inc
 
 .. include:: /reference/forms/types/options/minutes.rst.inc
@@ -108,6 +122,8 @@ for more details.
 
 .. include:: /reference/forms/types/options/days.rst.inc
 
+.. include:: /reference/forms/types/options/with_minutes.rst.inc
+
 .. include:: /reference/forms/types/options/with_seconds.rst.inc
 
 .. include:: /reference/forms/types/options/model_timezone.rst.inc
@@ -116,10 +132,12 @@ for more details.
 
 .. include:: /reference/forms/types/options/empty_value.rst.inc
 
-Inherited options
+Inherited Options
 -----------------
 
 These options inherit from the :doc:`form </reference/forms/types/form>` type:
+
+.. include:: /reference/forms/types/options/data.rst.inc
 
 .. include:: /reference/forms/types/options/invalid_message.rst.inc
 
@@ -132,3 +150,17 @@ These options inherit from the :doc:`form </reference/forms/types/form>` type:
 .. include:: /reference/forms/types/options/mapped.rst.inc
 
 .. include:: /reference/forms/types/options/inherit_data.rst.inc
+
+Field Variables
+---------------
+
++----------+------------+----------------------------------------------------------------------+
+| Variable | Type       | Usage                                                                |
++==========+============+======================================================================+
+| widget   | ``mixed``  | The value of the `widget`_ option.                                   |
++----------+------------+----------------------------------------------------------------------+
+| type     | ``string`` | Only present when widget is ``single_text`` and HTML5 is activated,  |
+|          |            | contains the input type to use (``datetime``, ``date`` or ``time``). |
++----------+------------+----------------------------------------------------------------------+
+
+.. _`RFC 3339`: http://tools.ietf.org/html/rfc3339

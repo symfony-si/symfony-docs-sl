@@ -42,7 +42,7 @@ Configuration
         # src/Acme/BlogBundle/Resources/config/validation.yml
         Acme\BlogBundle\Entity\Author:
             constraints:
-                - Callback: validate
+                - Callback: [validate]
 
     .. code-block:: php-annotations
 
@@ -160,7 +160,7 @@ your validation function is ``Vendor\Package\Validator::validate()``::
 
     class Validator
     {
-        public function validate($object, ExecutionContextInterface $context)
+        public static function validate($object, ExecutionContextInterface $context)
         {
             // ...
         }

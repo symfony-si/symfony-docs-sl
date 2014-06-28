@@ -4,17 +4,18 @@ Email
 Preveri, da je vrednost veljavni e-poštni naslov. Osnovna vrednost je
 vezana na niz preden se preverja.
 
-+----------------+---------------------------------------------------------------------+
-| Nanaša se na   | :ref:`lastnost ali metodo <validation-property-target>`             |
-+----------------+---------------------------------------------------------------------+
-| Opcije         | - `message`_                                                        |
-|                | - `checkMX`_                                                        |
-|                | - `checkHost`_                                                      |
-+----------------+---------------------------------------------------------------------+
-| Razred         | :class:`Symfony\\Component\\Validator\\Constraints\\Email`          |
-+----------------+---------------------------------------------------------------------+
-| Validator      | :class:`Symfony\\Component\\Validator\\Constraints\\EmailValidator` |
-+----------------+---------------------------------------------------------------------+
++--------------+---------------------------------------------------------------------+
+| Nanaša se na | :ref:`lastnost ali metodo <validation-property-target>`             |
++--------------+---------------------------------------------------------------------+
+| Opcije       | - - `strict`_                                                       |
+|              | - `message`_                                                        |
+|              | - `checkMX`_                                                        |
+|              | - `checkHost`_                                                      |
++--------------+---------------------------------------------------------------------+
+| Razred       | :class:`Symfony\\Component\\Validator\\Constraints\\Email`          |
++--------------+---------------------------------------------------------------------+
+| Validator    | :class:`Symfony\\Component\\Validator\\Constraints\\EmailValidator` |
++--------------+---------------------------------------------------------------------+
 
 Osnovna uporaba
 ---------------
@@ -71,7 +72,7 @@ Osnovna uporaba
 
         // src/Acme/BlogBundle/Entity/Author.php
         namespace Acme\BlogBundle\Entity;
-        
+
         use Symfony\Component\Validator\Mapping\ClassMetadata;
         use Symfony\Component\Validator\Constraints as Assert;
 
@@ -88,6 +89,18 @@ Osnovna uporaba
 
 Opcije
 ------
+
+.. versionadded:: 2.5
+    Opcija ``strict`` je bila predstavljena v Symfony 2.5.
+
+strict
+~~~~~~
+
+**tip**: ``boolean`` **privzeto**: ``false``
+
+Ko je false, bo e-pošta preverjena glede na enostaven splošni izraz.
+Če je true, potem se zahteva, da knjižnica `egulias/email-validator`_ izvaja
+RFC skladno preverjanje.
 
 message
 ~~~~~~~
@@ -112,3 +125,5 @@ checkHost
 Če je true, potem bo :phpfunction:`checkdnsrr` PHP funkcija uporabljena za
 preverjanje veljavnosti MX *ali* A *ali* AAAA zapisa gostitelja
 dane e-pošte.
+
+.. _egulias/email-validator: https://packagist.org/packages/egulias/email-validator

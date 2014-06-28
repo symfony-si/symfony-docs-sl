@@ -19,13 +19,17 @@ forms, which is useful when creating forms that expose one-to-many relationships
 |             | - `allow_delete`_                                                           |
 |             | - `prototype`_                                                              |
 |             | - `prototype_name`_                                                         |
+|             | - `delete_empty`_                                                           |
 +-------------+-----------------------------------------------------------------------------+
 | Inherited   | - `label`_                                                                  |
-| options     | - `error_bubbling`_                                                         |
+| options     | - `label_attr`_                                                             |
+|             | - `error_bubbling`_                                                         |
 |             | - `error_mapping`_                                                          |
 |             | - `by_reference`_                                                           |
 |             | - `empty_data`_                                                             |
+|             | - `required`_                                                               |
 |             | - `mapped`_                                                                 |
+|             | - `cascade_validation`_                                                     |
 +-------------+-----------------------------------------------------------------------------+
 | Parent type | :doc:`form </reference/forms/types/form>`                                   |
 +-------------+-----------------------------------------------------------------------------+
@@ -34,9 +38,9 @@ forms, which is useful when creating forms that expose one-to-many relationships
 
 .. note::
 
-    If you are working with a collection of Doctrine entities, pay special 
+    If you are working with a collection of Doctrine entities, pay special
     attention to the `allow_add`_, `allow_delete`_ and `by_reference`_ options.
-    You can also see a complete example in the cookbook article 
+    You can also see a complete example in the cookbook article
     :doc:`/cookbook/form/form_collections`.
 
 Basic Usage
@@ -109,7 +113,7 @@ existing addresses. Adding new addresses is possible by using the `allow_add`_
 option (and optionally the `prototype`_ option) (see example below). Removing
 emails from the ``emails`` array is possible with the `allow_delete`_ option.
 
-Adding and Removing items
+Adding and Removing Items
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If `allow_add`_ is set to ``true``, then if any unrecognized items are submitted,
@@ -157,7 +161,7 @@ you need is the JavaScript:
             {# ... #}
 
             {# store the prototype on the data-prototype attribute #}
-            <ul id="email-fields-list" data-prototype="{{ form_widget(form.emails.vars.prototype) | e }}">
+            <ul id="email-fields-list" data-prototype="{{ form_widget(form.emails.vars.prototype)|e }}">
             {% for emailField in form.emails %}
                 <li>
                     {{ form_errors(emailField) }}
@@ -173,7 +177,7 @@ you need is the JavaScript:
 
         <script type="text/javascript">
             // keep track of how many email fields have been rendered
-            var emailCount = '{{ form.emails | length }}';
+            var emailCount = '{{ form.emails|length }}';
 
             jQuery(document).ready(function() {
                 jQuery('#add-another-email').click(function() {
@@ -333,7 +337,20 @@ If you have several collections in your form, or worse, nested collections
 you may want to change the placeholder so that unrelated placeholders are not
 replaced with the same value.
 
-Inherited options
+delete_empty
+~~~~~~~~~~~~
+
+.. versionadded:: 2.5
+    The ``delete_empty`` option was introduced in Symfony 2.5.
+
+**type**: ``Boolean`` **default**: ``false``
+
+If you want to explicitly remove entirely empty collection entries from your
+form you have to set this option to true. However, existing collection entries
+will only be deleted if you have the allow_delete_ option enabled. Otherwise
+the empty values will be kept.
+
+Inherited Options
 -----------------
 
 These options inherit from the :doc:`form </reference/forms/types/form>` type.
@@ -341,9 +358,7 @@ Not all options are listed here - only the most applicable to this type:
 
 .. include:: /reference/forms/types/options/label.rst.inc
 
-.. include:: /reference/forms/types/options/mapped.rst.inc
-
-.. include:: /reference/forms/types/options/error_mapping.rst.inc
+.. include:: /reference/forms/types/options/label_attr.rst.inc
 
 error_bubbling
 ~~~~~~~~~~~~~~
@@ -352,8 +367,26 @@ error_bubbling
 
 .. include:: /reference/forms/types/options/_error_bubbling_body.rst.inc
 
+.. include:: /reference/forms/types/options/error_mapping.rst.inc
+
 .. _reference-form-types-by-reference:
 
 .. include:: /reference/forms/types/options/by_reference.rst.inc
 
 .. include:: /reference/forms/types/options/empty_data.rst.inc
+
+.. include:: /reference/forms/types/options/required.rst.inc
+
+.. include:: /reference/forms/types/options/mapped.rst.inc
+
+.. include:: /reference/forms/types/options/cascade_validation.rst.inc
+
+Field Variables
+---------------
+
+============ =========== ========================================
+Variable     Type        Usage
+============ =========== ========================================
+allow_add    ``Boolean`` The value of the `allow_add`_ option.
+allow_delete ``Boolean`` The value of the `allow_delete`_ option.
+============ =========== ========================================

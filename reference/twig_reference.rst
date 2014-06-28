@@ -18,125 +18,127 @@ navedene.
 Funkcije
 --------
 
-.. versionadded:: 2.2
-    Funkciji ``render`` in ``controller`` sta novi v Symfoyn 2.2. Pred tem
-    je bila uporabljana značka ``{% render %}`` in je imela različen podpis.
+.. versionadded:: 2.4
+    Funkcija ``expression`` je bila predstavljena v Symfony 2.4.
 
-+----------------------------------------------------+--------------------------------------------------------------------------------------------+
-| Sintaksa funkcij                                   | Uporaba                                                                                    |
-+====================================================+============================================================================================+
-| ``render(uri, options = {})``                      | To bo izpisalo fragment za dani krmilnik ali URL                                           |
-| ``render(controller('B:C:a', {params}))``          | Za več informacij, glejte :ref:`templating-embedding-controller`.                          |
-| ``render(path('route', {params}))``                |                                                                                            |
-| ``render(url('route', {params}))``                 |                                                                                            |
-+----------------------------------------------------+--------------------------------------------------------------------------------------------+
-| ``render_esi(controller('B:C:a', {params}))``      | To bo generiralo ESI značko, ko je mogoče ali se drugače vrnilo na ``render``              |
-| ``render_esi(url('route', {params}))``             | obnašanje. Za več informacij, glejte :ref:`templating-embedding-controller`.               |
-| ``render_esi(path('route', {params}))``            |                                                                                            |
-+----------------------------------------------------+--------------------------------------------------------------------------------------------+
-| ``render_hinclude(controller(...))``               | To bo generiralo Hinclude značko za dani krmilnik ali URL.                                 |
-| ``render_hinclude(url('route', {params}))``        | Za več informacij, glejte :ref:`templating-embedding-controller`.                          |
-| ``render_hinclude(path('route', {params}))``       |                                                                                            |
-+----------------------------------------------------+--------------------------------------------------------------------------------------------+
-| ``controller(attributes = {}, query = {})``        | Uporabljen skupaj z ``render`` značko za sklicevanje na krmilnik, ki ga želite izpisati.   |
-+----------------------------------------------------+--------------------------------------------------------------------------------------------+
-| ``asset(path, packageName = null)``                | Dobite javno pot do sredstva, več informacij v                                             |
-|                                                    | ":ref:`book-templating-assets`".                                                           |
-+----------------------------------------------------+--------------------------------------------------------------------------------------------+
-| ``asset_version(packageName = null)``              | Dobite trenutno verzijo paketa, več informacij v                                           |
-|                                                    | ":ref:`book-templating-assets`".                                                           |
-+----------------------------------------------------+--------------------------------------------------------------------------------------------+
-| ``form(view, variables = {})``                     | To bo izpisalo HTML celotnega obrazca, več informacij v                                    |
-|                                                    | :ref:`Referenci Twig obrazcev<reference-forms-twig-form>`.                                 |
-+----------------------------------------------------+--------------------------------------------------------------------------------------------+
-| ``form_start(view, variables = {})``               | To bo izpisalo začetno HTML značko obrazca, več informacij                                 |
-|                                                    | v :ref:`referencu Twig obrazcev<reference-forms-twig-start>`.                              |
-+----------------------------------------------------+--------------------------------------------------------------------------------------------+
-| ``form_end(view, variables = {})``                 | To bo izpisalo končno HTML značko obrazca skupaj z vsemi polji, ki                         |
-|                                                    | morda še niso bila izpisana, več informacij                                                |
-|                                                    | v :ref:`referenci Twig obrazcev<reference-forms-twig-end>`.                                |
-+----------------------------------------------------+--------------------------------------------------------------------------------------------+
-| ``form_enctype(view)``                             | To bo izpisalo zahtevan ``enctype="multipart/form-data"`` atribut,                         |
-|                                                    | če obrazec vsebuje vsaj eno polje za nalaganje datotek, več informacij v                   |
-|                                                    | :ref:`referenci Twig obrazrev <reference-forms-twig-enctype>`.                             |
-+----------------------------------------------------+--------------------------------------------------------------------------------------------+
-| ``form_widget(view, variables = {})``              | To bo izpisalo celoten obrazec ali določen HTML widget polja,                              |
-|                                                    | več informacij v :ref:`referenci Twig obrazcev <reference-forms-twig-widget>`.             |
-+----------------------------------------------------+--------------------------------------------------------------------------------------------+
-| ``form_errors(view)``                              | To bo izpisalo kakršnekoli napake za dano polje ali "globalne" napake,                     |
-|                                                    | več infomracij v :ref:`referenci Twig obrazcev <reference-forms-twig-errors>`.             |
-+----------------------------------------------------+--------------------------------------------------------------------------------------------+
-| ``form_label(view, label = null, variables = {})`` | To bo izpisalo oznako danega polja, več informacij v                                       |
-|                                                    | :ref:`referenci Twig obrazcev <reference-forms-twig-label>`.                               |
-+----------------------------------------------------+--------------------------------------------------------------------------------------------+
-| ``form_row(view, variables = {})``                 | To bo izpisalo vrstico (oznake polja, napake in widget-e) danega                           |
-|                                                    | polja, več informacij v :ref:`referenci Twig obrazcev <reference-forms-twig-row>`.         |
-+----------------------------------------------------+--------------------------------------------------------------------------------------------+
-| ``form_rest(view, variables = {})``                | To bo izpisalo vsa polja, ki še morda niso bila izpisana, več                              |
-|                                                    | informacij v :ref:`referenci Twig obrazcev <reference-forms-twig-rest>`.                   |
-+----------------------------------------------------+--------------------------------------------------------------------------------------------+
-| ``csrf_token(intention)``                          | To bo izpisalo CSRF žeton. Uporabite to funkcijo, če želite CSRF zaščito brez              |
-|                                                    | izdelave obrazca                                                                           |
-+----------------------------------------------------+--------------------------------------------------------------------------------------------+
-| ``is_granted(role, object = null, field = null)``  | To bo vrnilo ``true``, če ima trenutni uporabnik potrebne vloge, več                       |
-|                                                    | informacij v ":ref:`book-security-template`"                                               |
-+----------------------------------------------------+--------------------------------------------------------------------------------------------+
-| ``logout_path(key)``                               | To bo generiralo relativni odjavni URL za dani požarni zid                                 |
-+----------------------------------------------------+--------------------------------------------------------------------------------------------+
-| ``logout_url(key)``                                | Enako ``logout_path(...)`` vendar to generira absolutni URL                                |
-+----------------------------------------------------+--------------------------------------------------------------------------------------------+
-| ``path(name, parameters = {})``                    | Dobite relativni URL za dano smer, več informacij v                                        |
-|                                                    | ":ref:`book-templating-pages`".                                                            |
-+----------------------------------------------------+--------------------------------------------------------------------------------------------+
-| ``url(name, parameters = {})``                     | Enako ``path(...)`` vendar to generira absolutni URL                                       |
-+----------------------------------------------------+--------------------------------------------------------------------------------------------+
++-----------------------------------------------------------------------+-----------------------------------------------------------------------------------------+
+| Sintaksa funkcije                                                     | Uporaba                                                                                 |
++=======================================================================+=========================================================================================+
+| ``render(uri, options = {})``                                         | To bo izpisalo del danega krmilnika ali URL-ja                                          |
+| ``render(controller('B:C:a', {params}))``                             | Za več informacij, glejte :ref:`templating-embedding-controller`.                       |
+| ``render(path('route', {params}))``                                   |                                                                                         |
+| ``render(url('route', {params}))``                                    |                                                                                         |
++-----------------------------------------------------------------------+-----------------------------------------------------------------------------------------+
+| ``render_esi(controller('B:C:a', {params}))``                         | To bo generiralo značko ESI, ko je mogoče ali se drugače vrnilo na obnašanje ``render`` |
+| ``render_esi(url('route', {params}))``                                | Za več informacij, glejte :ref:`templating-embedding-controller`.                       |
+| ``render_esi(path('route', {params}))``                               |                                                                                         |
++-----------------------------------------------------------------------+-----------------------------------------------------------------------------------------+
+| ``render_hinclude(controller(...))``                                  | To bo generiralo značko Hinclude za dani krmilnik ali URL.                              |
+| ``render_hinclude(url('route', {params}))``                           | Za več informacij, glejte :ref:`templating-embedding-controller`.                       |
+| ``render_hinclude(path('route', {params}))``                          |                                                                                         |
++-----------------------------------------------------------------------+-----------------------------------------------------------------------------------------+
+| ``controller(attributes = {}, query = {})``                           | Uporabljeno skupaj z značko ``render`` za sklic na krmilnik, ki ga želite izpisati.     |
++-----------------------------------------------------------------------+-----------------------------------------------------------------------------------------+
+| ``asset(path, packageName = null, absolute = false, version = null)`` | Dobite javno pot sredstva, več informacij v                                             |
+|                                                                       | ":ref:`book-templating-assets`".                                                        |
++-----------------------------------------------------------------------+-----------------------------------------------------------------------------------------+
+| ``asset_version(packageName = null)``                                 | Dobite trenutno verzijo paketa, več informacij v                                        |
+|                                                                       | ":ref:`book-templating-assets`".                                                        |
++-----------------------------------------------------------------------+-----------------------------------------------------------------------------------------+
+| ``form(view, variables = {})``                                        | To bo izpisalo HTML celotnega obrazca, več informacij v                                 |
+|                                                                       | :ref:`the Twig Form reference<reference-forms-twig-form>`.                              |
++-----------------------------------------------------------------------+-----------------------------------------------------------------------------------------+
+| ``form_start(view, variables = {})``                                  | To bo izpisalo HTML začetno značko obrazca, več informacij v                            |
+|                                                                       | in :ref:`the Twig Form reference<reference-forms-twig-start>`.                          |
++-----------------------------------------------------------------------+-----------------------------------------------------------------------------------------+
+| ``form_end(view, variables = {})``                                    | To bo izpisalo HTML končno značko obrazca skupaj z vsemi polji, ki                      |
+|                                                                       | še niso bila izpisana, več informacij                                                   |
+|                                                                       | v :ref:`the Twig Form reference<reference-forms-twig-end>`.                             |
++-----------------------------------------------------------------------+-----------------------------------------------------------------------------------------+
+| ``form_enctype(view)``                                                | To bo izpisalo zahtevani ``enctype="multipart/form-data"`` atribut,                     |
+|                                                                       | če obrazec vsebuje vsaj eno polje za nalaganje datoteke, več informacij v               |
+|                                                                       | :ref:`the Twig Form reference <reference-forms-twig-enctype>`.                          |
++-----------------------------------------------------------------------+-----------------------------------------------------------------------------------------+
+| ``form_widget(view, variables = {})``                                 | To bo izpisalo celoten obrazec ali določen HTML widget polja,                           |
+|                                                                       | več informacij v :ref:`referenci za Twig obrazce <reference-forms-twig-widget>`.        |
++-----------------------------------------------------------------------+-----------------------------------------------------------------------------------------+
+| ``form_errors(view)``                                                 | To bo izpisalo kakršnekoli napake za dano polje ali "globalne" napake,                  |
+|                                                                       | več informacij v :ref:`referenci za Twig obrazce <reference-forms-twig-errors>`.        |
++-----------------------------------------------------------------------+-----------------------------------------------------------------------------------------+
+| ``form_label(view, label = null, variables = {})``                    | To bo izpisalo oznako za dano polje, več informacij v                                   |
+|                                                                       | :ref:`referenci za Twig obrazce <reference-forms-twig-label>`.                          |
++-----------------------------------------------------------------------+-----------------------------------------------------------------------------------------+
+| ``form_row(view, variables = {})``                                    | To bo izpisalo vrstico (oznake polja, napake in widget) danega                          |
+|                                                                       | polja, več informacij v :ref:`referenci za Twig obrazce <reference-forms-twig-row>`.    |
++-----------------------------------------------------------------------+-----------------------------------------------------------------------------------------+
+| ``form_rest(view, variables = {})``                                   | To bo izpisalo vsa polja, ki še niso bila izpisana, več                                 |
+|                                                                       | informacij v :ref:`referenci za Twig obrazce <reference-forms-twig-rest>`.              |
++-----------------------------------------------------------------------+-----------------------------------------------------------------------------------------+
+| ``csrf_token(intention)``                                             | To bo izpisalo žeton CSRF. Uporabite to funkcijo, če želite zaščito CSRF brez           |
+|                                                                       | izdelave obrazca                                                                        |
++-----------------------------------------------------------------------+-----------------------------------------------------------------------------------------+
+| ``is_granted(role, object = null, field = null)``                     | To bo vrnilo ``true``, če ima trenutni uporabnik zahtevano vlogo, več                   |
+|                                                                       | informacij v ":ref:`book-security-template`"                                            |
++-----------------------------------------------------------------------+-----------------------------------------------------------------------------------------+
+| ``logout_path(key)``                                                  | To bo generiralo relativni odjavni URL za dani požarni zid                              |
++-----------------------------------------------------------------------+-----------------------------------------------------------------------------------------+
+| ``logout_url(key)``                                                   | Enako kot ``logout_path(...)`` vendar ta generira absolutni URL                         |
++-----------------------------------------------------------------------+-----------------------------------------------------------------------------------------+
+| ``path(name, parameters = {})``                                       | Dobite relativni URL za dano usmeritev, več informacij v                                |
+|                                                                       | ":ref:`book-templating-pages`".                                                         |
++-----------------------------------------------------------------------+-----------------------------------------------------------------------------------------+
+| ``url(name, parameters = {})``                                        | Enako kot ``path(...)`` vendar ta generira absolutni URL                                |
++-----------------------------------------------------------------------+-----------------------------------------------------------------------------------------+
+| ``expression(expression)``                                            | Ustvari :class:`Symfony\\Component\\ExpressionLanguage\\Expression` v Twig-u. Glejte    |
+|                                                                       | ":ref:`Template Expressions <book-security-template-expression>`".                      |
++-----------------------------------------------------------------------+-----------------------------------------------------------------------------------------+
 
 Filtri
 ------
 
-+---------------------------------------------------------------------------------+-------------------------------------------------------------------+
-| Sintaksa filtra                                                                 | Uporaba                                                           |
-+=================================================================================+===================================================================+
-| ``text|humanize``                                                               | Naredi tehnično ime človeku bralno (zamenja podčrtaje s           |
-|                                                                                 | presledki in nizu naredi velike črke)                             |
-+---------------------------------------------------------------------------------+-------------------------------------------------------------------+
-| ``text|trans(arguments = {}, domain = 'messages', locale = null)``              | To bo prevedlo tekst v trenutni jezik, več                        |
-|                                                                                 | informacij v                                                      |
-|                                                                                 | :ref:`Filtrih prevodov <book-translation-filters>`.               |
-+---------------------------------------------------------------------------------+-------------------------------------------------------------------+
-| ``text|transchoice(count, arguments = {}, domain = 'messages', locale = null)`` | To bo prevedlo tekst z množino, več informacij                    |
-|                                                                                 | v :ref:`filtrih prevodov <book-translation-filters>`.             |
-+---------------------------------------------------------------------------------+-------------------------------------------------------------------+
-| ``variable|yaml_encode(inline = 0)``                                            | To bo pretvorilo tekst spremenljivke v YAML sintakso.             |
-+---------------------------------------------------------------------------------+-------------------------------------------------------------------+
-| ``variable|yaml_dump``                                                          | To bo izpisalo yaml sintakso z njenim tipom.                      |
-+---------------------------------------------------------------------------------+-------------------------------------------------------------------+
-| ``classname|abbr_class``                                                        | To bo izpisalo ``abbr`` element s kratkim imenom                  |
-|                                                                                 | PHP razreda.                                                      |
-+---------------------------------------------------------------------------------+-------------------------------------------------------------------+
-| ``methodname|abbr_method``                                                      | To bo izpisalo PHP metodo znotraj elementa ``abbr``               |
-|                                                                                 | (npr. ``Symfony\Component\HttpFoundation\Response::getContent``   |
-+---------------------------------------------------------------------------------+-------------------------------------------------------------------+
-| ``arguments|format_args``                                                       | To bo izpisalo niz z argumenti funkcije in njihovimi              |
-|                                                                                 | tipi.                                                             |
-+---------------------------------------------------------------------------------+-------------------------------------------------------------------+
-| ``arguments|format_args_as_text``                                               | Enako ``[...]|format_args``, vendar počisti značke.               |
-+---------------------------------------------------------------------------------+-------------------------------------------------------------------+
-| ``path|file_excerpt(line)``                                                     | To bo izpisalo odlomek datoteke kode okrog dane vrstice.          |
-+---------------------------------------------------------------------------------+-------------------------------------------------------------------+
-| ``path|format_file(line, text = null)``                                         | To bo izpisalo pot datoteke v povezavi.                           |
-+---------------------------------------------------------------------------------+-------------------------------------------------------------------+
-| ``exceptionMessage|format_file_from_text``                                      | Enako ``format_file`` razen, če je izpiše niz privzete PHP napake |
-|                                                                                 | v pot datoteke (t.j. 'in foo.php on line 45')                     |
-+---------------------------------------------------------------------------------+-------------------------------------------------------------------+
-| ``path|file_link(line)``                                                        | This will render a path to the correct file (and line number)     |
-+---------------------------------------------------------------------------------+-------------------------------------------------------------------+
++--------------------+--------------------------------------------------------------------------+-------------------------------------------------------------------+---------------------------------------+
+| Sintaksa filtra    | Uporaba                                                                  |                                                                   |                                       |
++====================+==========================================================================+===================================================================+=======================================+
+| ``text             | humanize``                                                               | Naredi tehnično ime človeku bralno (zamenja podčrtaje s           |                                       |
+|                    | presledki in nizu naredi velike črke)                                    |                                                                   |                                       |
++--------------------+--------------------------------------------------------------------------+-------------------------------------------------------------------+---------------------------------------+
+| ``text             | trans(arguments = {}, domain = 'messages', locale = null)``              | To bo prevedlo tekst v trenutni jezik, več                        |                                       |
+|                    | informacij v                                                             |                                                                   |                                       |
+|                    | :ref:`Filtrih prevodov <book-translation-filters>`.                      |                                                                   |                                       |
++--------------------+--------------------------------------------------------------------------+-------------------------------------------------------------------+---------------------------------------+
+| ``text             | transchoice(count, arguments = {}, domain = 'messages', locale = null)`` | To bo prevedlo tekst z množino, več informacij                    |                                       |
+|                    | v :ref:`filtrih prevodov <book-translation-filters>`.                    |                                                                   |                                       |
++--------------------+--------------------------------------------------------------------------+-------------------------------------------------------------------+---------------------------------------+
+| ``variable         | yaml_encode(inline = 0)``                                                | To bo pretvorilo tekst spremenljivke v YAML sintakso.             |                                       |
++--------------------+--------------------------------------------------------------------------+-------------------------------------------------------------------+---------------------------------------+
+| ``variable         | yaml_dump``                                                              | To bo izpisalo YAML sintakso z njenim tipom.                      |                                       |
++--------------------+--------------------------------------------------------------------------+-------------------------------------------------------------------+---------------------------------------+
+| ``classname        | abbr_class``                                                             | To bo izpisalo ``abbr`` element s kratkim imenom                  |                                       |
+|                    | PHP razreda.                                                             |                                                                   |                                       |
++--------------------+--------------------------------------------------------------------------+-------------------------------------------------------------------+---------------------------------------+
+| ``methodname       | abbr_method``                                                            | To bo izpisalo PHP metodo znotraj elementa ``abbr``               |                                       |
+|                    | (npr. ``Symfony\Component\HttpFoundation\Response::getContent``          |                                                                   |                                       |
++--------------------+--------------------------------------------------------------------------+-------------------------------------------------------------------+---------------------------------------+
+| ``arguments        | format_args``                                                            | To bo izpisalo niz z argumenti funkcije in njihovimi              |                                       |
+|                    | tipi.                                                                    |                                                                   |                                       |
++--------------------+--------------------------------------------------------------------------+-------------------------------------------------------------------+---------------------------------------+
+| ``arguments        | format_args_as_text``                                                    | Enako ``[...]                                                     | format_args``, vendar počisti značke. |
++--------------------+--------------------------------------------------------------------------+-------------------------------------------------------------------+---------------------------------------+
+| ``path             | file_excerpt(line)``                                                     | To bo izpisalo odlomek datoteke kode okrog dane vrstice.          |                                       |
++--------------------+--------------------------------------------------------------------------+-------------------------------------------------------------------+---------------------------------------+
+| ``path             | format_file(line, text = null)``                                         | To bo izpisalo pot datoteke v povezavi.                           |                                       |
++--------------------+--------------------------------------------------------------------------+-------------------------------------------------------------------+---------------------------------------+
+| ``exceptionMessage | format_file_from_text``                                                  | Enako ``format_file`` razen, če je izpiše niz privzete PHP napake |                                       |
+|                    | v pot datoteke (t.j. 'in foo.php on line 45')                            |                                                                   |                                       |
++--------------------+--------------------------------------------------------------------------+-------------------------------------------------------------------+---------------------------------------+
+| ``path             | file_link(line)``                                                        | This will render a path to the correct file (and line number)     |                                       |
++--------------------+--------------------------------------------------------------------------+-------------------------------------------------------------------+---------------------------------------+
 
 Značke
 ------
 
 .. versionadded:: 2.4
-    Značka stopwatch je bila dodana v Symfony 2.4.
+    Značka stopwatch je bila predstavljena v Symfony 2.4.
 
 +---------------------------------------------------+--------------------------------------------------------------------+
 | Sintaksa značke                                   | Uporaba                                                            |

@@ -1,5 +1,5 @@
 .. index::
-   single: Security; Configuration reference
+    single: Security; Configuration reference
 
 Nastavitve varnosti ("security")
 ================================
@@ -12,6 +12,14 @@ Celotne privzete nastavitve
 
 Spodaj so celotne privzete nastavitve za varnostni sistem.
 Vsak del bo razložen v naslednji sekciji.
+
+.. versionadded:: 2.4
+    Podpora za omejitev varnostnih požarnih zidov na določenem gostitelju je bila predstavljena v
+    Symfony 2.4.
+
+.. versionadded:: 2.5
+    Podpora za omejevanje varnostnih požarnih zidov na določenih http metodah je bila predstavljena v
+    Symfony 2.5.
 
 .. configuration-block::
 
@@ -98,6 +106,10 @@ Vsak del bo razložen v naslednji sekciji.
                 # Examples:
                 somename:
                     pattern: .*
+                    # restrict the firewall to a specific host
+                    host: admin\.example\.com
+                     # restrict the firewall to specific http methods
+                    methods: [GET, POST]
                     request_matcher: some.service.id
                     access_denied_url: /foo/error403
                     access_denied_handler: some.service.id
@@ -117,7 +129,7 @@ Vsak del bo razložen v naslednji sekciji.
                         # submit the login form here
                         check_path: /login_check
 
-                        # the user is redirected here when he/she needs to log in
+                        # the user is redirected here when they need to log in
                         login_path: /login
 
                         # if true, forward the user to the login form instead of redirecting
@@ -285,9 +297,6 @@ Preusmeritev po prijavi
 Uporaba enkoderja PBKDF2: Varnost in hitrost
 --------------------------------------------
 
-.. versionadded:: 2.2
-    Enkoder gesel PBKDF2 je bil dodan v Symfony 2.2.
-
 Enkoder `PBKDF2`_ ponuja visoko nivojsko kriptografsko varnost, kot je
 priporočeno s strani Nacionalnega inštituta za standarde in tehnologijo -
 National Institute of Standards and Technology (NIST).
@@ -310,9 +319,6 @@ Uporaba enkoderja gesel BCrypt
 
     To use this encoder, you either need to use PHP Version 5.5 or install
     the `ircmaxell/password-compat`_ library via Composer.
-
-.. versionadded:: 2.2
-    The BCrypt password encoder was added in Symfony 2.2.
 
 .. configuration-block::
 

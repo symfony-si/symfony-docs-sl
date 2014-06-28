@@ -18,6 +18,7 @@ Referenca omejitev potrjevanja
    constraints/Url
    constraints/Regex
    constraints/Ip
+   constraints/Uuid
 
    constraints/Range
 
@@ -53,6 +54,7 @@ Referenca omejitev potrjevanja
    constraints/Issn
 
    constraints/Callback
+   constraints/Expression
    constraints/All
    constraints/UserPassword
    constraints/Valid

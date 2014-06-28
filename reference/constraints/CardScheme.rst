@@ -1,9 +1,6 @@
 CardScheme
 ==========
 
-.. versionadded:: 2.2
-    Preverjanje CardScheme je novo v Symfony 2.2.
-
 Ta omejitev zagotavlja, da je številka kreditne kartice veljavna za dano podjetje kreditne
 kartice. Lahko je uporabljena za preverjanje številke preden se poskuša narediti plačilo
 skozi plačilni prehod.
@@ -61,7 +58,7 @@ objekta, ki bo vseboval številko kreditne kartice.
 
         // src/Acme/SubscriptionBundle/Entity/Transaction.php
         namespace Acme\SubscriptionBundle\Entity\Transaction;
-        
+
         use Symfony\Component\Validator\Constraints as Assert;
 
         class Transaction
@@ -76,7 +73,7 @@ objekta, ki bo vseboval številko kreditne kartice.
 
         // src/Acme/SubscriptionBundle/Entity/Transaction.php
         namespace Acme\SubscriptionBundle\Entity\Transaction;
-        
+
         use Symfony\Component\Validator\Mapping\ClassMetadata;
         use Symfony\Component\Validator\Constraints as Assert;
 
@@ -99,7 +96,7 @@ Opcije na voljo
 ---------------
 
 schemes
--------
+~~~~~~~
 
 **tip**: ``mixed`` [:ref:`default option <validation-default-option>`]
 

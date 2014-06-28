@@ -9,9 +9,12 @@ object and all sub-objects associated with it.
 | Applies to     | :ref:`property or method <validation-property-target>`              |
 +----------------+---------------------------------------------------------------------+
 | Options        | - `traverse`_                                                       |
+|                | - `message`_                                                        |
 +----------------+---------------------------------------------------------------------+
 | Class          | :class:`Symfony\\Component\\Validator\\Constraints\\Type`           |
 +----------------+---------------------------------------------------------------------+
+
+.. include:: /reference/forms/types/options/_error_bubbling_hint.rst.inc
 
 Basic Usage
 -----------
@@ -34,7 +37,7 @@ an ``Address`` instance in the ``$address`` property.
 .. code-block:: php
 
     // src/Acme/HelloBundle/Entity/Author.php
-    namespace Amce\HelloBundle\Entity;
+    namespace Acme\HelloBundle\Entity;
 
     class Author
     {
@@ -247,8 +250,10 @@ property.
 If you validate an author with an invalid address now, you can see that the
 validation of the ``Address`` fields failed.
 
-    Acme\HelloBundle\Author.address.zipCode:
-    This value is too long. It should have 5 characters or less
+.. code-block:: text
+
+    Acme\\HelloBundle\\Author.address.zipCode:
+        This value is too long. It should have 5 characters or less.
 
 Options
 -------
@@ -261,3 +266,10 @@ traverse
 If this constraint is applied to a property that holds an array of objects,
 then each object in that array will be validated only if this option is set
 to ``true``.
+
+message
+~~~~~~~
+
+**type**: ``string`` **default**: ``This value should be true.``
+
+This is the message that will be shown if the value is false.

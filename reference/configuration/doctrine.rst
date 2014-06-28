@@ -1,9 +1,12 @@
 .. index::
-   single: Doctrine; ORM configuration reference
-   single: Configuration reference; Doctrine ORM
+    single: Doctrine; ORM configuration reference
+    single: Configuration reference; Doctrine ORM
 
 Nastavitve za Doctrine ("doctrine")
 ===================================
+
+Celotne privzete nastavitve
+---------------------------
 
 .. configuration-block::
 
