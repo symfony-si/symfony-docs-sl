@@ -1,14 +1,14 @@
 widget
 ~~~~~~
 
-**type**: ``string`` **default**: ``choice``
+**tip**: ``string`` **privzeto**: ``choice``
 
-The basic way in which this field should be rendered. Can be one of the following:
+Osnovni način pri katerem bi moralo biti to polje izpisano. Lahko je eden izmed sledečih:
 
-* ``choice``: renders three select inputs. The order of the selects is defined
-  in the `format`_ option.
+* ``choice``: izpiše tri vnosna select polja. Vrstni red izbirnikov je definiran
+  v opciji `format`_.
 
-* ``text``: renders a three field input of type ``text`` (month, day, year).
+* ``text``: izpiše tri vnosna polja ali tip ``text`` (mesec, dan, leto).
 
-* ``single_text``: renders a single input of type ``date`` (``text`` in Symfony 2.0).
-  User's input is validated based on the `format`_ option.
+* ``single_text``: izpiše en vnos tipa ``date``. Uporabnikov vnos je
+  preverjen na osnovi opcije `format`_.

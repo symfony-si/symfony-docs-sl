@@ -15,8 +15,11 @@ jih želite uporabiti za vašo številko.
 |                | - `precision`_                                                       |
 |                | - `grouping`_                                                        |
 +----------------+----------------------------------------------------------------------+
-| Podedovane     | - `required`_                                                        |
-| opcije         | - `label`_                                                           |
+| Podedovane     | - `empty_data`_                                                      |
+| opcije         | - `required`_                                                        |
+|                | - `label`_                                                           |
+|                | - `label_attr`_                                                      |
+|                | - `data`_                                                            |
 |                | - `read_only`_                                                       |
 |                | - `disabled`_                                                        |
 |                | - `error_bubbling`_                                                  |
@@ -71,9 +74,15 @@ Podedovane opcije
 
 Te opcije dedujejo iz tipa :doc:`form </reference/forms/types/form>`:
 
+.. include:: /reference/forms/types/options/empty_data.rst.inc
+
 .. include:: /reference/forms/types/options/required.rst.inc
 
 .. include:: /reference/forms/types/options/label.rst.inc
+
+.. include:: /reference/forms/types/options/label_attr.rst.inc
+
+.. include:: /reference/forms/types/options/data.rst.inc
 
 .. include:: /reference/forms/types/options/read_only.rst.inc
 

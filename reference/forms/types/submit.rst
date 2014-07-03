@@ -5,7 +5,7 @@ submit tip polja
 ================
 
 .. versionadded:: 2.3
-    Tip ``submit`` je bil dodan v Symfony 2.3
+    Tip ``submit`` je predstavljen v Symfony 2.3
 
 Gumb za pošiljanje.
 
@@ -15,6 +15,7 @@ Gumb za pošiljanje.
 | Podedovane           | - `attr`_                                                            |
 | opcije               | - `disabled`_                                                        |
 |                      | - `label`_                                                           |
+|                      | - `label_attr`_                                                      |
 |                      | - `translation_domain`_                                              |
 +----------------------+----------------------------------------------------------------------+
 | Starševski tip       | :doc:`button</reference/forms/types/button>`                         |
@@ -40,4 +41,15 @@ Podedovane opcije
 
 .. include:: /reference/forms/types/options/button_label.rst.inc
 
+.. include:: /reference/forms/types/options/label_attr.rst.inc
+
 .. include:: /reference/forms/types/options/button_translation_domain.rst.inc
+
+Spremenljivke obrazca
+---------------------
+
+============ =========== ==============================================================
+Spremenljiva Tip         Uporaba
+============ =========== ==============================================================
+clicked      ``Boolean`` Ali je gumb kliknjen ali ne.
+============ =========== ==============================================================

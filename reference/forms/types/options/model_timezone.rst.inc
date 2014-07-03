@@ -1,9 +1,9 @@
 model_timezone
 ~~~~~~~~~~~~~~
 
-**type**: ``string`` **default**: system default timezone
+**tip**: ``string`` **privzeto**: sistemska časovna cona
 
-Timezone that the input data is stored in. This must be one of the
-`PHP supported timezones`_
+Časovna cona v kateri je vnosni podatek shranjen. Ta mora biti ena izmed
+`PHP podprtih časovnih con`_.
 
-.. _`PHP supported timezones`: http://php.net/manual/en/timezones.php
+.. _`PHP podprtih časovnih con`: http://php.net/manual/en/timezones.php

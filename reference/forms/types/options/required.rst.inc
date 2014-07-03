@@ -1,13 +1,18 @@
 required
 ~~~~~~~~
 
-**type**: ``Boolean`` **default**: ``true``
+**tip**: ``Boolean`` **privzeto**: ``true``
 
-If true, an `HTML5 required attribute`_ will be rendered. The corresponding
-``label`` will also render with a ``required`` class.
+Če je true, bo izpisan `HTML5 required atribut`_. Pripadajoča
+``label`` bo tudi izpisana z razredom ``required``.
 
-This is superficial and independent from validation. At best, if you let Symfony
-guess your field type, then the value of this option will be guessed from
-your validation information.
+To je površno in neodvisno preverjanje obrazca. V najboljšem primeru, če omogočite Symfony-ju
+uganiti vaš tip polja, potem bo vrednost te opcije uganjena iz
+vaših informacij preverjanja.
 
-.. _`HTML5 required attribute`: http://diveintohtml5.info/forms.html
+.. note::
+
+    Opcija required tudi vpliva, kako so prazni podatki za vsako polje
+    upravljani. Za več informacij, glejte opcijo `empty_data`_.
+
+.. _`HTML5 required atribut`: http://diveintohtml5.info/forms.html

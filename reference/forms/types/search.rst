@@ -12,9 +12,11 @@ Preberite več o vnosnem iskalnem polju na `DiveIntoHTML5.info`_
 +----------------+----------------------------------------------------------------------+
 | Izpisan kot    | ``input search`` polje                                               |
 +----------------+----------------------------------------------------------------------+
-| Podedovane     | - `max_length`_                                                      |
-| opcije         | - `required`_                                                        |
+| Podedovane     | - `max_length`_ (opuščeno od 2.5)                                    |
+| opcije         | - `empty_data`_                                                      |
+|                | - `required`_                                                        |
 |                | - `label`_                                                           |
+|                | - `label_attr`_                                                      |
 |                | - `trim`_                                                            |
 |                | - `read_only`_                                                       |
 |                | - `disabled`_                                                        |
@@ -34,9 +36,13 @@ Te opcije so podedovane iz tipa :doc:`form </reference/forms/types/form>`:
 
 .. include:: /reference/forms/types/options/max_length.rst.inc
 
+.. include:: /reference/forms/types/options/empty_data.rst.inc
+
 .. include:: /reference/forms/types/options/required.rst.inc
 
 .. include:: /reference/forms/types/options/label.rst.inc
+
+.. include:: /reference/forms/types/options/label_attr.rst.inc
 
 .. include:: /reference/forms/types/options/trim.rst.inc
 

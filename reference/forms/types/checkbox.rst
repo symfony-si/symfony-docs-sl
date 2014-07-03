@@ -13,8 +13,13 @@ ima logično vrednost (boolean): če je kvadratek označen, bo polje nastavljeno
 +----------------+------------------------------------------------------------------------+
 | Opcije         | - `vrednost`_                                                          |
 +----------------+------------------------------------------------------------------------+
-| Podedovanje    | - `required`_                                                          |
-| opcije         | - `label`_                                                             |
+| Prepisane      | - `empty_data`_                                                        |
+| opcije         | - `compound`_                                                          |
++----------------+------------------------------------------------------------------------+
+| Podedovanje    | - `data`_                                                              |
+| opcije         | - `required`_                                                          |
+|                | - `label`_                                                             |
+|                | - `label_attr`_                                                        |
 |                | - `read_only`_                                                         |
 |                | - `disabled`_                                                          |
 |                | - `error_bubbling`_                                                    |
@@ -39,22 +44,27 @@ Primer uporabe
 Opcije polja
 ------------
 
-vrednost
-~~~~~~~~
+.. include:: /reference/forms/types/options/value.rst.inc
 
-**tip**: ``mixed`` **privzeto**: ``1``
+Prepisane opcije
+----------------
 
-Vrednost, ki je dejansko uporabljena kot vrednost potrditvena polja. To
-ne vpliva na vrednost, ki je nastavljena na vašem objektu.
+.. include:: /reference/forms/types/options/checkbox_empty_data.rst.inc
+
+.. include:: /reference/forms/types/options/checkbox_compound.rst.inc
 
 Podedovane opcije
 -----------------
 
-Te opcije podedujejo iz the tipa :doc:`form </reference/forms/types/form>`:
+Te opcije dedujejo iz the tipa :doc:`form </reference/forms/types/form>`:
+
+.. include:: /reference/forms/types/options/data.rst.inc
 
 .. include:: /reference/forms/types/options/required.rst.inc
 
 .. include:: /reference/forms/types/options/label.rst.inc
+
+.. include:: /reference/forms/types/options/label_attr.rst.inc
 
 .. include:: /reference/forms/types/options/read_only.rst.inc
 
@@ -65,3 +75,8 @@ Te opcije podedujejo iz the tipa :doc:`form </reference/forms/types/form>`:
 .. include:: /reference/forms/types/options/error_mapping.rst.inc
 
 .. include:: /reference/forms/types/options/mapped.rst.inc
+
+Spremenljivke obrazca
+---------------------
+
+.. include:: /reference/forms/types/variables/check_or_radio_table.rst.inc

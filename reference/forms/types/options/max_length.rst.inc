@@ -1,7 +1,15 @@
+.. caution::
+
+    Opcija ``max_length`` je bila opuščena in bo odstranjena v 3.0.
+    Namesto uporabite opcijo ``attr`` z nastavitvijo na polje s ključem ``maxlength``.
+
 max_length
 ~~~~~~~~~~
 
-**type**: ``integer``
+**tip**: ``integer`` **privzeto**: ``null``
 
-This option is used to add a ``maxlength`` attribute, which is used by
-some browsers to limit the amount of text in a field.
+Če ta opcija ni null, je dodan atribut ``maxlength``, ki
+je uporabljen s strani nekaterih brskalnikov za omejitev količine teksta v polju.
+
+To je samo brskalniško preverjanje, tako da podatki morajo še vedno biti preverjeni
+s strežniške strani.

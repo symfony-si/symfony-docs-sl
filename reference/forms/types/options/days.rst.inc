@@ -1,9 +1,9 @@
 days
 ~~~~
 
-**type**: ``array`` **default**: 1 to 31
+**tip**: ``array`` **privzeto**: 1 to 31
 
-List of days available to the day field type.  This option is only relevant
-when the ``widget`` option is set to ``choice``::
+Seznam dnevov na voljo do dne tipa polja. Ta opcija je relevantna samo,
+ko je opcija ``widget`` nastavljena na ``choice``::
 
     'days' => range(1,31)

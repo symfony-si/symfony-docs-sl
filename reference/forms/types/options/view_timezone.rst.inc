@@ -1,9 +1,9 @@
 view_timezone
 ~~~~~~~~~~~~~
 
-**type**: ``string`` **default**: system default timezone
+**tip**: ``string`` **privzeto**: privzeta sistemska časovna cona
 
-Timezone for how the data should be shown to the user (and therefore also
-the data that the user submits). This must be one of the `PHP supported timezones`_
+Časovna cona za to, kako bi podatki morali biti prikazani uporabniku (in zato tudi
+podatki, ki jih uporabnik pošlje). To mora biti ena izmed `PHP podprtih časovnih con`_.
 
-.. _`PHP supported timezones`: http://php.net/manual/en/timezones.php
+.. _`PHP podprtih časovnih con`: http://php.net/manual/en/timezones.php

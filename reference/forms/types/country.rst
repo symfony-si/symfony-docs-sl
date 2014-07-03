@@ -31,8 +31,11 @@ bi morali uporabiti samo tip ``choice`` direktno.
 |                | - `empty_value`_                                                      |
 |                | - `error_bubbling`_                                                   |
 |                | - `error_mapping`_                                                    |
+|                | - `empty_data`_                                                       |
 |                | - `required`_                                                         |
 |                | - `label`_                                                            |
+|                | - `label_attr`_                                                       |
+|                | - `data`_                                                             |
 |                | - `read_only`_                                                        |
 |                | - `disabled`_                                                         |
 |                | - `mapped`_                                                           |
@@ -71,9 +74,15 @@ Te opcije dedujejo iz :doc:`choice </reference/forms/types/choice>` tipa:
 
 Te opcije dedujejo iz :doc:`form </reference/forms/types/form>` tipa:
 
+.. include:: /reference/forms/types/options/empty_data.rst.inc
+
 .. include:: /reference/forms/types/options/required.rst.inc
 
 .. include:: /reference/forms/types/options/label.rst.inc
+
+.. include:: /reference/forms/types/options/label_attr.rst.inc
+
+.. include:: /reference/forms/types/options/data.rst.inc
 
 .. include:: /reference/forms/types/options/read_only.rst.inc
 

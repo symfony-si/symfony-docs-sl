@@ -1,15 +1,19 @@
 data
 ~~~~
 
-**type**: mixed **default**: Defaults to field of the underlying object (if there is one)
+**tip**: mešano **privzeto**: Privzeto je polju osnovnega objekta (če obstaja)
 
-When you create a form, each field initially displays the value of the 
-corresponding property of the form's domain object (if an object is bound
-to the form). If you want to override the initial value for the form or just
-an individual field, you can set it in the data option::
+Ko ustvarite obrazec, vsako polje na začetku prikaže vrednost
+pripadajoče lastnosti domene objekta obrazca (če je objekt vezan
+na obrazec). Če želite prepisati začetno vrednost za obrazec ali samo
+posamezno polje, ga lahko nastavite v opciji data::
 
     $builder->add('token', 'hidden', array(
         'data' => 'abcdef',
     ));
 
+.. note::
 
+    Privzete vrednosti za polja obrazca so vzete direktno iz
+    osnovne podatkovne strukture (npr. entiteta ali polje).
+    Opcija ``data`` prepiše to privzeto vrednost.

@@ -1,16 +1,14 @@
 cascade_validation
 ~~~~~~~~~~~~~~~~~~
 
-**type**: Boolean **default**: false
+**tip**: Boolean **privzeto**: false
 
-Set this option to ``true`` to force validation on embedded form types.
-For example, if you have a ``ProductType`` with an embedded ``CategoryType``,
-setting ``cascade_validation`` to ``true`` on ``ProductType`` will cause
-the data from ``CategoryType`` to also be validated.
+Nastavite to opcijo na ``true``, da vsilite preverjanje na vključenih tipih obrazcev.
+Na primer, če imate ``ProductType`` z vključeno ``CategoryType``,
+nastavitev ``cascade_validation`` na ``true`` pri ``ProductType`` bo povzročilo,
+da bodo podatki iz ``CategoryType`` tudi preverjeni.
 
-Instead of using this option, you can also use the ``Valid`` constraint in
-your model to force validation on a child object stored on a property.
+Namesto uporabe te opcije, lahko tudi uporabite ``Valid`` omejitev v
+vašem modelu, da vsilite preverjanje na otroškem objektu shranjenem na lastnosti.
 
-
-
-
+.. include:: /reference/forms/types/options/_error_bubbling_hint.rst.inc

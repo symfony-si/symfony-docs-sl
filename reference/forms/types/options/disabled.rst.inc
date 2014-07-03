@@ -1,8 +1,8 @@
 disabled
 ~~~~~~~~
 
-**type**: ``boolean``  **default**: ``false``
+**tip**: ``boolean``  **privzeto**: ``false``
 
-If you don't want a user to modify the value of a field, you can set 
-the disabled option to true. Any submitted value will be ignored.
+Če ne želite, da uporabnik spremeni vrednost polja, lahko nastavite
+opcijo disabled na true. Katerakoli poslana vrednost bo ignorirana.
 

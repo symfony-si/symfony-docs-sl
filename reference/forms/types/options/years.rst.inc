@@ -1,7 +1,7 @@
 years
 ~~~~~
 
-**type**: ``array`` **default**: five years before to five years after the current year
+**tip**: ``array`` **privzeto**: pet let pred petimi leti po trenutnem letu
 
-List of years available to the year field type.  This option is only relevant
-when the ``widget`` option is set to ``choice``.
+Izpiše leta, ki so na voljo za leto tipa polja. Ta opcija je relevantna samo,
+ko je opcija ``widget`` nastavljena na ``choice``.

@@ -1,7 +1,7 @@
 minutes
 ~~~~~~~
 
-**type**: ``array`` **default**: 0 to 59
+**tip**: ``array`` **privzeto**: 0 do 59
 
-List of minutes available to the minutes field type.  This option is only
-relevant when the ``widget`` option is set to ``choice``.
+Izpiše minute, ki so na voljo do minut tipa polja. Ta opcija je relevantna
+samo, ko je opcija ``widget`` nastavljena na ``choice``.

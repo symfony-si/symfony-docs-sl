@@ -14,46 +14,47 @@ pravilno, bo polje poskrbelo za vse podrobnosti.
 Polje je lahko izpisano kot en tekstovni kvadratek, trije tekstovni kvadratki
 (mesec, dan in leto) ali trije izbirni kvadratki (glejte `widget`_ opcijo).
 
-+----------------------+-----------------------------------------------------------------------------+
-| Underlying Data Type | can be ``DateTime``, string, timestamp, or array (see the ``input`` option) |
-+----------------------+-----------------------------------------------------------------------------+
-| Rendered as          | single text box or three select fields                                      |
-+----------------------+-----------------------------------------------------------------------------+
-| Options              | - `widget`_                                                                 |
-|                      | - `input`_                                                                  |
-|                      | - `empty_value`_                                                            |
-|                      | - `years`_                                                                  |
-|                      | - `months`_                                                                 |
-|                      | - `days`_                                                                   |
-|                      | - `format`_                                                                 |
-|                      | - `model_timezone`_                                                         |
-|                      | - `view_timezone`_                                                          |
-+----------------------+-----------------------------------------------------------------------------+
-| Overridden Options   | - `by_reference`_                                                           |
-|                      | - `error_bubbling`_                                                         |
-+----------------------+-----------------------------------------------------------------------------+
-| Inherited            | - `invalid_message`_                                                        |
-| options              | - `invalid_message_parameters`_                                             |
-|                      | - `read_only`_                                                              |
-|                      | - `disabled`_                                                               |
-|                      | - `mapped`_                                                                 |
-|                      | - `inherit_data`_                                                           |
-|                      | - `error_mapping`_                                                          |
-+----------------------+-----------------------------------------------------------------------------+
-| Parent type          | ``field`` (if text), ``form`` otherwise                                     |
-+----------------------+-----------------------------------------------------------------------------+
-| Class                | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\DateType`          |
-+----------------------+-----------------------------------------------------------------------------+
++------------------------+---------------------------------------------------------------------------------+
+| Osnovni podatkovni tip | lahko je ``DateTime``, niz, časovni podpis, ali polje (glejte opcijo ``input``) |
++------------------------+---------------------------------------------------------------------------------+
+| Izpisano kot           | single text box or three select fields                                          |
++------------------------+---------------------------------------------------------------------------------+
+| Opcije                 | - `widget`_                                                                     |
+|                        | - `input`_                                                                      |
+|                        | - `empty_value`_                                                                |
+|                        | - `years`_                                                                      |
+|                        | - `months`_                                                                     |
+|                        | - `days`_                                                                       |
+|                        | - `format`_                                                                     |
+|                        | - `model_timezone`_                                                             |
+|                        | - `view_timezone`_                                                              |
++------------------------+---------------------------------------------------------------------------------+
+| Prepisane opcije       | - `by_reference`_                                                               |
+|                        | - `error_bubbling`_                                                             |
++------------------------+---------------------------------------------------------------------------------+
+| Podedovane             | - `data`_                                                                       |
+| opcije                 | - `invalid_message`_                                                            |
+|                        | - `invalid_message_parameters`_                                                 |
+|                        | - `read_only`_                                                                  |
+|                        | - `disabled`_                                                                   |
+|                        | - `mapped`_                                                                     |
+|                        | - `inherit_data`_                                                               |
+|                        | - `error_mapping`_                                                              |
++------------------------+---------------------------------------------------------------------------------+
+| Starševski tip         | :doc:`form </reference/forms/types/form>`                                       |
++------------------------+---------------------------------------------------------------------------------+
+| Razred                 | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\DateType`              |
++------------------------+---------------------------------------------------------------------------------+
 
-Basic Usage
------------
+Osnovna uporaba
+---------------
 
-This field type is highly configurable, but easy to use. The most important
-options are ``input`` and ``widget``.
+To polje je zelo konfigurabilno, vendar enostavno za uporabo. Najpomembnejše
+opcije so ``input`` in ``widget``.
 
-Suppose that you have a ``publishedAt`` field whose underlying date is a
-``DateTime`` object. The following configures the ``date`` type for that
-field as three different choice fields:
+Predpostavimo, da imate ``publishedAt`` polje, katerega osnovni datum je
+objekt ``DateTime``. Sledeče nastavi tip ``date`` za to
+polje kot tri različna polja izbire:
 
 .. code-block:: php
 
@@ -62,9 +63,9 @@ field as three different choice fields:
         'widget' => 'choice',
     ));
 
-The ``input`` option *must* be changed to match the type of the underlying
-date data. For example, if the ``publishedAt`` field's data were a unix timestamp,
-you'd need to set ``input`` to ``timestamp``:
+Opcija ``input`` *mora* biti spremenjena, da se ujame s tipom osnovnega
+podatka date. Na primer, če podatek polja ``publishedAt``, kjer je unix timestamp,
+boste potrebovali nastaviti ``input`` na ``timestamp``:
 
 .. code-block:: php
 
@@ -73,11 +74,11 @@ you'd need to set ``input`` to ``timestamp``:
         'widget' => 'choice',
     ));
 
-The field also supports an ``array`` and ``string`` as valid ``input`` option
-values.
+Polje tudi podpira ``array`` in ``string`` kot veljavno opcijo ``input``
+vrednosti.
 
-Field Options
--------------
+Opcije polja
+------------
 
 .. include:: /reference/forms/types/options/date_widget.rst.inc
 
@@ -88,17 +89,17 @@ Field Options
 empty_value
 ~~~~~~~~~~~
 
-**type**: ``string`` or ``array``
+**tip**: ``string`` ali ``array``
 
-If your widget option is set to ``choice``, then this field will be represented
-as a series of ``select`` boxes. The ``empty_value`` option can be used to
-add a "blank" entry to the top of each select box::
+Če je vaša widget opcija nastavljena na ``choice``, potem bo to polje predstavljeno
+kot serija ``select`` kvadratkov. Opcija ``empty_value`` je lahko uporabljena, da
+doda "prazen" vnos na vrh vsakega select kvadratka::
 
     $builder->add('dueDate', 'date', array(
         'empty_value' => '',
     ));
 
-Alternatively, you can specify a string to be displayed for the "blank" value::
+Alternativno lahko določite niz, ki je prikazan za "prazno" vrednost::
 
     $builder->add('dueDate', 'date', array(
         'empty_value' => array('year' => 'Year', 'month' => 'Month', 'day' => 'Day')
@@ -118,25 +119,27 @@ Alternatively, you can specify a string to be displayed for the "blank" value::
 
 .. include:: /reference/forms/types/options/view_timezone.rst.inc
 
-Overridden Options
-------------------
+Prepisane opcije
+----------------
 
 by_reference
 ~~~~~~~~~~~~
 
-**default**: ``false``
+**privzeto**: ``false``
 
-The ``DateTime`` classes are treated as immutable objects.
+Razredi ``DateTime`` so tretirani kot nespremenljivi objekti.
 
 error_bubbling
 ~~~~~~~~~~~~~~
 
-**default**: ``false``
+**privzeto**: ``false``
 
-Inherited options
+Podedovane opcije
 -----------------
 
-These options inherit from the :doc:`form </reference/forms/types/form>` type:
+Te opcije dedujejo iz tipa :doc:`form </reference/forms/types/form>`:
+
+.. include:: /reference/forms/types/options/data.rst.inc
 
 .. include:: /reference/forms/types/options/invalid_message.rst.inc
 
@@ -151,3 +154,17 @@ These options inherit from the :doc:`form </reference/forms/types/form>` type:
 .. include:: /reference/forms/types/options/inherit_data.rst.inc
 
 .. include:: /reference/forms/types/options/error_mapping.rst.inc
+
+Spremenljivke polja
+-------------------
+
++---------------+------------+-----------------------------------------------------------------------+
+| Spremenljivka | Tip        | Uporaba                                                               |
++===============+============+=======================================================================+
+| widget        | ``mixed``  | Vrednost opcije `widget`_.                                            |
++---------------+------------+-----------------------------------------------------------------------+
+| type          | ``string`` | Samo predstavlja, ko je widget ``single_text`` in HTML5 je aktiviran, |
+|               |            | vsebuje vnosni tip za uporabo (``datetime``, ``date`` ali ``time``).  |
++---------------+------------+-----------------------------------------------------------------------+
+| date_pattern  | ``string`` | Niz z obliko datuma za uporabo.                                       |
++---------------+------------+-----------------------------------------------------------------------+

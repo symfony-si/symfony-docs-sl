@@ -1,17 +1,17 @@
-Select tag, Checkboxes or Radio Buttons
----------------------------------------
+Značka select, potrditvena polja in radio gumbi
+-----------------------------------------------
 
-This field may be rendered as one of several different HTML fields, depending
-on the ``expanded`` and ``multiple`` options:
+To polje je lahko izpisano kot eno izmed večih različnih HTML polj, odvisno
+od opcij ``expanded`` in ``multiple``:
 
 +------------------------------------------+----------+----------+
-| element type                             | expanded | multiple |
+| tip elementa                             | razširjen| multiple |
 +==========================================+==========+==========+
-| select tag                               | false    | false    |
+| select značka                            | false    | false    |
 +------------------------------------------+----------+----------+
-| select tag (with ``multiple`` attribute) | false    | true     |
+| select značka (z ``multiple`` atributom) | false    | true     |
 +------------------------------------------+----------+----------+
-| radio buttons                            | true     | false    |
+| radio gumbi                              | true     | false    |
 +------------------------------------------+----------+----------+
-| checkboxes                               | true     | true     |
+| potrditvena polja                        | true     | true     |
 +------------------------------------------+----------+----------+
