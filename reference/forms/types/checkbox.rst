@@ -16,7 +16,7 @@ ima logično vrednost (boolean): če je kvadratek označen, bo polje nastavljeno
 | Prepisane      | - `empty_data`_                                                        |
 | opcije         | - `compound`_                                                          |
 +----------------+------------------------------------------------------------------------+
-| Podedovanje    | - `data`_                                                              |
+| Podedovane     | - `data`_                                                              |
 | opcije         | - `required`_                                                          |
 |                | - `label`_                                                             |
 |                | - `label_attr`_                                                        |
