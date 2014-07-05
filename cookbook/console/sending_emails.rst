@@ -20,12 +20,9 @@ in glede na ukaz.
 Nastavitve konteksta zahtevka globalno
 --------------------------------------
 
-.. versionadded: 2.2
-    Parameter ``base_url`` je na voljo od Symfony 2.2
-
 Za nastavitev konteksta zahtevka - kar je uporabljeno s strani generatorja URL-jev -
 lahko ponovno definirate parametre, ki jih uporablja kot privzete vrednosti za spremembo
-privzetega gostitelja (localhost) in sheme (http). Od Symfony 2.2 lahko tudi nastavite
+privzetega gostitelja (localhost) in sheme (http). Nastavite lahko tudi
 osnovno pot, če se Symfony ne poganja znotraj vrhnjega direktorija.
 
 Upoštevajte, da to ne vpliva na generirane URL-je preko običajnih spletnih zahtevko, saj bodo
@@ -67,7 +64,7 @@ Nastavitve konteksta zahtevkov glede na ukaz
 --------------------------------------------
 
 Da ga spremenite samo v enem ukazu lahko enostavno ujamete storitev konteksta zahtevka
-in prepišete njegove nastavitve::
+iz storitve ``router`` in prepišete njegove nastavitve::
 
    // src/Acme/DemoBundle/Command/DemoCommand.php
 
@@ -97,7 +94,7 @@ e-pošta ni avtomatsko poslana. Sami morate poskrbeti za praznenje čakalne vrst
 Uporabite sledečo kodo za pošiljanje e-pošte znotraj vašega konzolnega ukaza::
 
     $message = new \Swift_Message();
-    
+
     // ... prepare the message
 
     $container = $this->getContainer();

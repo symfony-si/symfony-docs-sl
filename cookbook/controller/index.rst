@@ -1,5 +1,5 @@
-Controller
-==========
+Krmilnik
+========
 
 .. toctree::
     :maxdepth: 2

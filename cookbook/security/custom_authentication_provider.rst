@@ -4,6 +4,15 @@
 How to create a custom Authentication Provider
 ==============================================
 
+.. tip::
+
+    Creating a custom authentication system is hard, and this entry will walk
+    you through that process. But depending on your needs, you may be able
+    to solve your problem in a simpler way using these documents:
+
+    * :doc:`/cookbook/security/custom_password_authenticator`
+    * :doc:`/cookbook/security/api_key_authentication`
+
 If you have read the chapter on :doc:`/book/security`, you understand the
 distinction Symfony2 makes between authentication and authorization in the
 implementation of security. This chapter discusses the core classes involved
@@ -78,7 +87,7 @@ provider.
 
 .. note::
 
-    The ``WsseUserToken`` class extends the security component's
+    The ``WsseUserToken`` class extends the Security component's
     :class:`Symfony\\Component\\Security\\Core\\Authentication\\Token\\AbstractToken`
     class, which provides basic token functionality. Implement the
     :class:`Symfony\\Component\\Security\\Core\\Authentication\\Token\\TokenInterface`
@@ -150,12 +159,6 @@ set an authenticated token in the security context if successful.
                 //     $this->securityContext->setToken(null);
                 // }
                 // return;
-
-                // Deny authentication with a '403 Forbidden' HTTP response
-                $response = new Response();
-                $response->setStatusCode(Response::HTTP_FORBIDDEN);
-                $event->setResponse($response);
-
             }
 
             // By default deny authorization
@@ -166,9 +169,9 @@ set an authenticated token in the security context if successful.
     }
 
 .. versionadded:: 2.4
-    Support for HTTP status code constants was added in Symfony 2.4.
+    Support for HTTP status code constants was introduced in Symfony 2.4.
 
-This listener checks the request for the expected `X-WSSE` header, matches
+This listener checks the request for the expected ``X-WSSE`` header, matches
 the value returned for the expected WSSE information, creates a token using
 that information, and passes the token on to the authentication manager. If
 the proper information is not provided, or the authentication manager throws
@@ -184,6 +187,13 @@ a 403 Response is returned.
     providing success / failure handlers, login form URLs, and more. As WSSE
     does not require maintaining authentication sessions or login forms, it
     won't be used for this example.
+
+.. note::
+
+    Returning prematurely from the listener is relevant only if you want to chain
+    authentication providers (for example to allow anonymous users). If you want
+    to forbid access to anonymous users and have a nice 403 error, you should set
+    the status code of the response before returning.
 
 The Authentication Provider
 ---------------------------
@@ -283,9 +293,9 @@ The Factory
 -----------
 
 You have created a custom token, custom listener, and custom provider. Now
-you need to tie them all together. How do you make your provider available
-to your security configuration? The answer is by using a ``factory``. A factory
-is where you hook into the security component, telling it the name of your
+you need to tie them all together. How do you make a unique provider available
+for every firewall? The answer is by using a *factory*. A factory
+is where you hook into the Security component, telling it the name of your
 provider and any configuration options available for it. First, you must
 create a class which implements
 :class:`Symfony\\Bundle\\SecurityBundle\\DependencyInjection\\Security\\Factory\\SecurityFactoryInterface`.
@@ -342,7 +352,7 @@ requires the following methods:
   and ``remember_me`` and defines the position at which the provider is called;
 
 * ``getKey`` method which defines the configuration key used to reference
-  the provider;
+  the provider in the firewall configuration;
 
 * ``addConfiguration`` method, which is used to define the configuration
   options underneath the configuration key in your security configuration.
@@ -384,11 +394,11 @@ to service ids that do not exist yet: ``wsse.security.authentication.provider`` 
         # src/Acme/DemoBundle/Resources/config/services.yml
         services:
             wsse.security.authentication.provider:
-                class:  Acme\DemoBundle\Security\Authentication\Provider\WsseProvider
+                class: Acme\DemoBundle\Security\Authentication\Provider\WsseProvider
                 arguments: ["", "%kernel.cache_dir%/security/nonces"]
 
             wsse.security.authentication.listener:
-                class:  Acme\DemoBundle\Security\Firewall\WsseListener
+                class: Acme\DemoBundle\Security\Firewall\WsseListener
                 arguments: ["@security.context", "@security.authentication.manager"]
 
     .. code-block:: xml
@@ -494,7 +504,7 @@ You are finished! You can now define parts of your app as under WSSE protection.
             ),
         ));
 
-Congratulations!  You have written your very own custom security authentication
+Congratulations! You have written your very own custom security authentication
 provider!
 
 A Little Extra
@@ -531,7 +541,7 @@ the ``addConfiguration`` method.
     }
 
 Now, in the ``create`` method of the factory, the ``$config`` argument will
-contain a 'lifetime' key, set to 5 minutes (300 seconds) unless otherwise
+contain a ``lifetime`` key, set to 5 minutes (300 seconds) unless otherwise
 set in the configuration. Pass this argument to your authentication provider
 in order to put it to use.
 
@@ -562,7 +572,7 @@ in order to put it to use.
     should use instead of the hard-coded 300 seconds. These two steps are
     not shown here.
 
-The lifetime of each wsse request is now configurable, and can be
+The lifetime of each WSSE request is now configurable, and can be
 set to any desirable value per firewall.
 
 .. configuration-block::

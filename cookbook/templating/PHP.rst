@@ -22,14 +22,15 @@ your application configuration file:
         # app/config/config.yml
         framework:
             # ...
-            templating:    { engines: ['twig', 'php'] }
+            templating:
+                engines: ['twig', 'php']
 
     .. code-block:: xml
 
         <!-- app/config/config.xml -->
-        <framework:config ...>
+        <framework:config>
             <!-- ... -->
-            <framework:templating ...>
+            <framework:templating>
                 <framework:engine id="twig" />
                 <framework:engine id="php" />
             </framework:templating>
@@ -39,7 +40,6 @@ your application configuration file:
 
         $container->loadFromExtension('framework', array(
             // ...
-
             'templating' => array(
                 'engines' => array('twig', 'php'),
             ),
@@ -54,7 +54,10 @@ below renders the ``index.html.php`` template::
     // ...
     public function indexAction($name)
     {
-        return $this->render('AcmeHelloBundle:Hello:index.html.php', array('name' => $name));
+        return $this->render(
+            'AcmeHelloBundle:Hello:index.html.php',
+            array('name' => $name)
+        );
     }
 
 You can also use the :doc:`/bundles/SensioFrameworkExtraBundle/annotations/view`
@@ -100,7 +103,7 @@ is the same notation used to reference a template. The ``::`` part simply
 means that the controller element is empty, so the corresponding file is
 directly stored under ``views/``.
 
-Now, let's have a look at the ``layout.html.php`` file:
+Now, have a look at the ``layout.html.php`` file:
 
 .. code-block:: html+php
 
@@ -290,7 +293,7 @@ pattern:
 
     # src/Acme/HelloBundle/Resources/config/routing.yml
     hello: # The route name
-        path:  /hello/{name}
+        path:     /hello/{name}
         defaults: { _controller: AcmeHelloBundle:Hello:index }
 
 Using Assets: images, JavaScripts, and stylesheets

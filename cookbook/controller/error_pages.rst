@@ -8,34 +8,46 @@ Kako prilagoditi strani z napako
 Ko je vržena katerakoli izjema v Symfony2, je izjema ujeta znotraj
 razreda ``Kernel`` in eventuelno posredovana posebnemu krmilniku,
 ``TwigBundle:Exception:show`` za ravnanje. Ta krmilnik, ki domuje
-znotraj jedra ``TwigBundle``, ugotovi, katero predlogo napake prikazati in
+znotraj jedra TwigBundle, ugotovi, katero predlogo napake prikazati in
 statusno kodo, ki bi morala biti nastavljena za dano izjemo.
 
 Strani z napako se lahko naredi po meri na dva načina, odvisno od tega
 koliko kontrole potrebujete:
 
-1. Naredite po meri predlogo napake za različne strani z napako (razloženo spodaj);
+1. Naredite po meri predlogo napake za različne strani z napako;
 
-2. Zamenjajte privzeti krmilnik izjem ``twig.controller.exception:showAction``
-   z vašim lastnim krmilnikom in z njim ravnajte kakor želite (glejte
-   :ref:`exception_controller v Twig referenci <config-twig-exception-controller>`).
-   Privzeti krmilnik izjem je registriran kot storitev - dejanski razred
-   je ``Symfony\Bundle\TwigBundle\Controller\ExceptionController``.
+2. Zamenjajte privzeti krmilnik izjem ``twig.controller.exception:showAction``.
 
-.. tip::
+Privzeti ExceptionController
+----------------------------
 
-    Prilagajanje ravnanja izjem je dejansko veliko bolj močnejše, kot
-    je opisano tu. Notranji dogodek ``kernel.exception`` je vržen,
-    kar dovoljuje celotno kontrolo nad ravnanjem izjeme. Za več informacij
-    glejte :ref:`kernel-kernel.exception`.
+Privzeti ``ExceptionController`` bo ali prikazal
+*izjemo* ali stran z *napako*, odvisno od nastavitev ``kernel.debug``
+zastavice. Medtem ko vam strani z *izjemo* dajo veliko pomoči vrednih
+informacij med razvojem, so strani z *napakami* mišljene za
+prikaz končnemu uporabniku.
 
-Vse predloge z napakami domujejo znotraj ``TwigBundle``. Za prepis predlog
+.. sidebar:: Testiranje strani z napako med razvojem
+
+    Ne bi smeli nastaviti ``kernel.debug`` na ``false``, da videte vaše
+    strani z napako med razvojem. To bo tudi ustavilo
+    Symfony2 pred ponovnim prevajanjem vaših predlog twig, med drugimi stvarmi.
+
+    Tretje osebni paket `WebfactoryExceptionsBundle`_ ponuja posebni
+    testni krmilnik, ki vam omogoča, da prikažete vaše strani z napako
+    po meri za samovoljne HTTP statusne kode celo z
+    ``kernel.debug`` nastavljenim na ``true``.
+
+Prepis predlog za napake
+------------------------
+
+Vse predloge z napakami domujejo znotraj TwigBundle. Za prepis predlog
 se enostavno zanašajte na standardno metodo za prepis predlog, ki domuje
 znotraj paketa. Za več informacij, glejte
 :ref:`overriding-bundle-templates`.
 
-Na primer, za prepis privzete predloge napak, ki je prikazana končnemu
-uporabniku, izdelajte novo predlogo locirano v
+Na primer, za prepis privzete predloge napak
+izdelajte novo predlogo locirano v
 ``app/Resources/TwigBundle/views/Exception/error.html.twig``:
 
 .. code-block:: html+jinja
@@ -98,11 +110,11 @@ Symfony uporablja sledeče algoritme za ugotovitev, katero predlogo naj uporabi:
 .. tip::
 
     Da vidite celotni seznam privzetih predlog za napake, glejte
-    ``Resources/views/Exception`` direktorij paketa ``TwigBundle``. V
-    standardni Symfony2 namestitvi, se ``TwigBundle`` lahko najde v
+    ``Resources/views/Exception`` direktorij paketa TwigBundle. V
+    standardni Symfony2 namestitvi, se TwigBundle lahko najde v
     ``vendor/symfony/symfony/src/Symfony/Bundle/TwigBundle``. Pogosto je
     najenostavnejši način za prilagoditev strani za napake kopiranje iz
-    ``TwigBundle`` v ``app/Resources/TwigBundle/views/Exception`` in nato
+    TwigBundle v ``app/Resources/TwigBundle/views/Exception`` in nato
     njeno spreminjanje.
 
 .. note::
@@ -111,3 +123,35 @@ Symfony uporablja sledeče algoritme za ugotovitev, katero predlogo naj uporabi:
     prilagojene na enak način z izdelavo predlog kot je
     ``exception.html.twig`` za standardne HTML strani izjem ali
     ``exception.json.twig`` za JSON strani izjem.
+
+
+.. _`WebfactoryExceptionsBundle`: https://github.com/webfactory/exceptions-bundle
+
+Zamenjajte privzeti krmilnik izjem
+----------------------------------
+
+Če potrebujete malo več fleksibilnosti za samo prepisom predloge
+(npr. morate podati nekatere dodatne spremenljivke v vašo predlogo),
+potem lahko prepišete krmilnik, ki izpisuje stran z napako.
+
+Privzeti krmilnik izjem je registriran kot storitev - dejanski
+reazred je ``Symfony\Bundle\TwigBundle\Controller\ExceptionController``.
+
+Da to naredite, ustvarite nov razred krmilnika in naredite, da razširi privzeti Symfony-jev
+razred ``Symfony\Bundle\TwigBundle\Controller\ExceptionController``.
+
+Na voljo je nekaj metod, ki jih lahko prepišete za prilagoditev različnih delov, kako
+je stran z napakami prikazana. Lahko bi na primer prepisali celotno
+``showAction`` ali samo metodo ``findTemplate``, ki je locira, katera
+predloga bi morala biti izpisana.
+
+Da naredite, da Symfony uporablja vaš krmilnik izjem namesto privzetega, nastavite
+opcijo :ref:`twig.exception_controller <config-twig-exception-controller>`
+v app/config/config.yml.
+
+.. tip::
+
+    Prilagoditev upravljanja izjem je dejansko veliko močnejša
+    kot je napisano tu. Notranji dogodek ``kernel.exception`` je vržen,
+    kar omogoča celotno kontrolo nad upravljanjem izjem. Za več
+    infofmacij, glejte :ref:`kernel-kernel.exception`.

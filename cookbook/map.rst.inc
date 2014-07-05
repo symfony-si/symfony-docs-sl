@@ -24,6 +24,7 @@
 
   * :doc:`/cookbook/configuration/environments`
   * :doc:`/cookbook/configuration/override_dir_structure`
+  * :doc:`/cookbook/configuration/using_parameters_in_dic`
   * :doc:`/cookbook/configuration/front_controllers_and_kernel`
   * :doc:`/cookbook/configuration/external_parameters`
   * :doc:`/cookbook/configuration/pdo_session_storage`
@@ -36,6 +37,7 @@
   * :doc:`/cookbook/console/usage`
   * :doc:`/cookbook/console/sending_emails`
   * :doc:`/cookbook/console/logging`
+  * :doc:`/cookbook/console/commands_as_services`
 
 * :doc:`/cookbook/controller/index`
 
@@ -48,7 +50,8 @@
 
 * **Nalaganje**
 
-  * :doc:`/cookbook/deployment-tools`
+  * :doc:`/cookbook/deployment/tools`
+  * :doc:`/cookbook/deployment/azure-website`
 
 * :doc:`/cookbook/doctrine/index`
 
@@ -62,11 +65,13 @@
   * :doc:`/cookbook/doctrine/resolve_target_entity`
   * :doc:`/cookbook/doctrine/mapping_model_classes`
   * :doc:`/cookbook/doctrine/registration_form`
+  * :doc:`/cookbook/doctrine/console`
 
 * :doc:`/cookbook/email/index`
 
   * :doc:`/cookbook/email/email`
   * :doc:`/cookbook/email/gmail`
+  * :doc:`/cookbook/email/cloud`
   * :doc:`/cookbook/email/dev_environment`
   * :doc:`/cookbook/email/spool`
   * :doc:`/cookbook/email/testing`
@@ -77,6 +82,10 @@
   * :doc:`/cookbook/event_dispatcher/class_extension`
   * :doc:`/cookbook/event_dispatcher/method_behavior`
   * (service container) :doc:`/cookbook/service_container/event_listener`
+
+* :doc:`/cookbook/expression/index`
+
+  * :doc:`/cookbook/expression/expressions`
 
 * :doc:`/cookbook/form/index`
 
@@ -97,12 +106,15 @@
 
   * :doc:`/cookbook/logging/monolog`
   * :doc:`/cookbook/logging/monolog_email`
+  * :doc:`/cookbook/logging/monolog_console`
+  * :doc:`/cookbook/logging/monolog_regex_based_excludes`
   * :doc:`/cookbook/logging/channels_handlers`
 
 * :doc:`/cookbook/profiler/index`
 
   * :doc:`/cookbook/profiler/data_collector`
   * :doc:`/cookbook/profiler/matchers`
+  * :doc:`/cookbook/profiler/storage`
 
 * :doc:`/cookbook/request/index`
 
@@ -123,15 +135,23 @@
 
   * :doc:`/cookbook/security/entity_provider`
   * :doc:`/cookbook/security/remember_me`
+  * :doc:`/cookbook/security/impersonating_user`
   * :doc:`/cookbook/security/voters`
+  * :doc:`/cookbook/security/voters_data_permission`
   * :doc:`/cookbook/security/acl`
   * :doc:`/cookbook/security/acl_advanced`
   * :doc:`/cookbook/security/force_https`
+  * :doc:`/cookbook/security/firewall_restriction`
   * :doc:`/cookbook/security/form_login`
   * :doc:`/cookbook/security/securing_services`
   * :doc:`/cookbook/security/custom_provider`
+  * :doc:`/cookbook/security/custom_password_authenticator`
+  * :doc:`/cookbook/security/api_key_authentication`
   * :doc:`/cookbook/security/custom_authentication_provider`
+  * :doc:`/cookbook/security/pre_authenticated`
   * :doc:`/cookbook/security/target_path`
+  * :doc:`/cookbook/security/csrf_in_login_form`
+  * :doc:`/cookbook/security/named_encoders`
 
 * **Serializer**
 

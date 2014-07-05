@@ -15,7 +15,7 @@ ujela s smerjo ``/hello/{name}``, kjer je ``{name}`` enako ``Fabien/Kris``.
 Nastavitve smeri
 ----------------
 
-Privzeto, Symfony usmerjevalna komponenta zahteva, da se parametri ujemajo
+Privzeto, Symfony usmerjevalna komponenta Routing zahteva, da se parametri ujemajo
 sledeči regex poti: ``[^/]+``. To pomeni, da so dovoljeni vsi znaki razen
 ``/``.
 
@@ -30,7 +30,7 @@ bolj permisivne regex poti.
             path:     /hello/{name}
             defaults: { _controller: AcmeDemoBundle:Demo:hello }
             requirements:
-                name: ".+"
+                name: .+
 
     .. code-block:: xml
 

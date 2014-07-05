@@ -68,7 +68,7 @@ stilov:
 
 .. note::
 
-    Windows uporabniki si morajo posodobiti nastavitve na ustrezno java lokacijo.
+    Windows uporabniki si morajo posodobiti nastavitve na ustrezno Java lokacijo.
     V Windows7 x64 bit je privzeto ``C:\Program Files (x86)\Java\jre6\bin\java.exe``.
 
 Sedaj imate dostop do dveh novih Assetic filtrov v vaši aplikaciji:
@@ -156,12 +156,12 @@ uporabi ta filter samo, ko je razhroščevalni način onemogočen.
 .. tip::
 
     Namesto dodajanja filtra k značkam sredstev, ga lahko tudi globalno
-    omogočite z dodatkom t.i. apply-to-attribute v nastavitvah filtra, na primer
-    v filtru yui_js ``apply_to: "\.js$"``. Da imate samo filter
-    uporabljen v produkciji, dodajte to v config_prod datoteko namesto v skupno
+    omogočite z dodatkom t.i. ``apply-to-attribute`` v nastavitvah filtra, na primer
+    v filtru ``yui_js`` ``apply_to: "\.js$"``. Da imate samo filter
+    uporabljen v produkciji, dodajte to v ``config_prod`` datoteko namesto v skupno
     config datoteko. Za podrobnosti o uporabi filtrov glede na končnico datoteke,
     glejte :ref:`cookbook-assetic-apply-to`.
 
 .. _`YUI Compressor`: http://developer.yahoo.com/yui/compressor/
-.. _`Prenesite JAR`: http://yuilibrary.com/projects/yuicompressor/
+.. _`Prenesite JAR`: https://github.com/yui/yuicompressor/releases
 .. _`deprecation process`: http://www.yuiblog.com/blog/2012/10/16/state-of-yui-compressor/

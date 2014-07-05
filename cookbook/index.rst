@@ -11,10 +11,11 @@ Recepti
     console/index
     controller/index
     debugging
-    deployment-tools
+    deployment/index
     doctrine/index
     email/index
     event_dispatcher/index
+    expression/index
     form/index
     logging/index
     profiler/index

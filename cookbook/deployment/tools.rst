@@ -1,7 +1,7 @@
 .. index::
-   single: Deployment
+   single: Deployment; Deployment tools
 
-How to deploy a Symfony2 application
+How to Deploy a Symfony2 Application
 ====================================
 
 .. note::
@@ -34,7 +34,7 @@ How to deploy a Symfony2 application
 
 There are several ways you can deploy a Symfony2 application.
 
-Let's start with a few basic deployment strategies and build up from there.
+Start with a few basic deployment strategies and build up from there.
 
 Basic File Transfer
 ~~~~~~~~~~~~~~~~~~~
@@ -47,7 +47,7 @@ to take some manual steps after transferring the files (see `Common Post-Deploym
 Using Source Control
 ~~~~~~~~~~~~~~~~~~~~
 
-If you're using source control (e.g. git or svn), you can simplify by having
+If you're using source control (e.g. Git or SVN), you can simplify by having
 your live installation also be a copy of your repository. When you're ready
 to upgrade it is as simple as fetching the latest updates from your source
 control system.
@@ -93,7 +93,7 @@ as you normally do:
 .. tip::
 
     The ``--optimize-autoloader`` flag makes Composer's autoloader more
-    performant by building a "class map". The ``--no-dev`` flag 
+    performant by building a "class map". The ``--no-dev`` flag
     ensures that development packages are not installed in the production
     environment.
 

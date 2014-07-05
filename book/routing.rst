@@ -1,36 +1,36 @@
 .. index::
    single: Routing
 
-Routing
-=======
+Usmerjanje
+==========
 
-Beautiful URLs are an absolute must for any serious web application. This
-means leaving behind ugly URLs like ``index.php?article_id=57`` in favor
-of something like ``/read/intro-to-symfony``.
+Lepi URL-ji so absolutna zahteva za kakršnokoli resno spletno aplikacijo. To
+pomeni zapustiti za sabo grde URL-je kot je ``index.php?article_id=57`` za
+nekaj kot je ``/read/intro-to-symfony``.
 
-Having flexibility is even more important. What if you need to change the
-URL of a page from ``/blog`` to ``/news``? How many links should you need to
-hunt down and update to make the change? If you're using Symfony's router,
-the change is simple.
+Imeti fleksibilnost je celo bolj pomembna. Kaj če potrebujete spremeniti
+URL strani iz ``/blog`` v ``/news``? Koliko povezav bi potrebovali
+poiskati in posodobiti, da naredite to spremembo? Če uporabljate Symfony-jev usmerjevalnik,
+je sprememba enostavna.
 
-The Symfony2 router lets you define creative URLs that you map to different
-areas of your application. By the end of this chapter, you'll be able to:
+Symfony2 usmerjevalnik vam omogoča definirati kreativne URL-je, ki jih preslikate v različna
+področja vaše aplikacije. Do konca tega poglavja boste sposobni:
 
-* Create complex routes that map to controllers
-* Generate URLs inside templates and controllers
-* Load routing resources from bundles (or anywhere else)
-* Debug your routes
+* Izdelati kompleksne usmeritve, ki se preslikajo v krmilnike
+* Generirati URL-je znotraj predlog in krmilnikov
+* Naložiti vire iz paketov (ali kjerkoli drugje)
+* Razhroščiti vaše usmeritve
 
 .. index::
    single: Routing; Basics
 
-Routing in Action
------------------
+Usmerjanje v delovanju
+----------------------
 
-A *route* is a map from a URL path to a controller. For example, suppose
-you want to match any URL like ``/blog/my-post`` or ``/blog/all-about-symfony``
-and send it to a controller that can look up and render that blog entry.
-The route is simple:
+*Usmeritev* je preslikava iz URL-ja v krmilnik. Na primer, predpostavimo,
+da želite ujeti katerikoli URL kot je ``/blog/my-post`` ali ``/blog/all-about-symfony``
+in ga poslati h krmilniku, ki ga lahko poiščete in izpišete ta vnos bloga.
+Usmeritev je enostavna:
 
 .. configuration-block::
 
@@ -68,17 +68,17 @@ The route is simple:
 
         return $collection;
 
-The path defined by the ``blog_show`` route acts like ``/blog/*`` where
-the wildcard is given the name ``slug``. For the URL ``/blog/my-blog-post``,
-the ``slug`` variable gets a value of ``my-blog-post``, which is available
-for you to use in your controller (keep reading). The ``blog_show`` is the
-internal name of the route, which doesn't have any meaning yet and just needs
-to be unique. Later, you'll use it to generate URLs.
+Pot definirana z usmeritvami ``blog_show`` deluje kot ``/blog/*``, kjer
+je dan nadomestni znak za ime ``slug``. Za URL ``/blog/my-blog-post``,
+dobi spremenljivka ``slug`` vrednost ``my-blog-post``, ki je na voljo
+za vas, da jo uporabite v vašem krmilniku (nadaljujte branje). ``blog_show`` je
+notranje ime usmeritve, ki nima še nobenega pomena in samo potrebuje
+biti unikatna. Kasneje jo boste uporabili, da generirate URL-je.
 
-The ``_controller`` parameter is a special key that tells Symfony which controller
-should be executed when a URL matches this route. The ``_controller`` string
-is called the :ref:`logical name <controller-string-syntax>`. It follows a
-pattern that points to a specific PHP class and method::
+Parameter ``_controller`` je poseben ključ, ki pove Symfony-ju, kateri krmilnik
+bi se moral izvesti, ko je URL ujet z usmeritvijo. Niz ``_controller``
+se imenuje :ref:`logično ime <controller-string-syntax>`. Sledi
+vzorcu, ki kaže na določen PHP razred in metodo::
 
     // src/Acme/BlogBundle/Controller/BlogController.php
     namespace Acme\BlogBundle\Controller;
@@ -98,59 +98,59 @@ pattern that points to a specific PHP class and method::
         }
     }
 
-Congratulations! You've just created your first route and connected it to
-a controller. Now, when you visit ``/blog/my-post``, the ``showAction`` controller
-will be executed and the ``$slug`` variable will be equal to ``my-post``.
+Čestitamo! Ustvarili ste vašo prvo usmeritev in jo povezali s
+krmilnikom. Sedaj, ko obiščete ``/blog/my-post`` bo izvršen krmilnik ``showAction``
+in spremenljivka ``$slug`` bo enaka ``my-post``.
 
-This is the goal of the Symfony2 router: to map the URL of a request to a
-controller. Along the way, you'll learn all sorts of tricks that make mapping
-even the most complex URLs easy.
+To je cilj Symfony2 usmerjevalnika: preslikati URL zahtevka v
+krmilnik. Tekom poti se boste naučili vse vrste trikov, ki naredijo preslikave
+celo bolj kompleksnih URL-jev enostavne.
 
 .. index::
    single: Routing; Under the hood
 
-Routing: Under the Hood
------------------------
+Usmerjanje: pod pokrovom
+------------------------
 
-When a request is made to your application, it contains an address to the
-exact "resource" that the client is requesting. This address is called the
-URL, (or URI), and could be ``/contact``, ``/blog/read-me``, or anything
-else. Take the following HTTP request for example:
+Ko je ustvarjen zahtevek za vašo aplikacijo, vsebuje naslov do
+točnega "vira", ki ga klient zahteva. Ta naslov se imenuje
+URL (ali URI) in je lahko ``/contact``, ``/blog/read-me`` ali karkoli
+drugega. Vzamite sledeči HTTP zahtevek za primer:
 
 .. code-block:: text
 
     GET /blog/my-blog-post
 
-The goal of the Symfony2 routing system is to parse this URL and determine
-which controller should be executed. The whole process looks like this:
+Cilj usmerjevalnega sistema Symfony2 je razčlenjevanje tega URL-ja in določanje
+kateri krmilnik bi se moral izvršiti. Celoten proces zgleda takole:
 
-#. The request is handled by the Symfony2 front controller (e.g. ``app.php``);
+#. Zahtevek je upravljan s strani prednjega krmilnika Symfony2 (npr. ``app.php``);
 
-#. The Symfony2 core (i.e. Kernel) asks the router to inspect the request;
+#. Jedro Symfony2 (t.j.. Kernel) vpraša usmerjevalnik, da preveri zahtevek;
 
-#. The router matches the incoming URL to a specific route and returns information
-   about the route, including the controller that should be executed;
+#. Usmerjevalnik ujame prihajajoči URL na določeno usmeritev in vrne informacije
+   o usmeritvi, vključno s krmilnikom, ki bi moral biti izvršen;
 
-#. The Symfony2 Kernel executes the controller, which ultimately returns
-   a ``Response`` object.
+#. Symfony2 jedro izvrši krmilnik, ki na koncu vrne
+   objekt ``Response``.
 
 .. figure:: /images/request-flow.png
    :align: center
    :alt: Symfony2 request flow
 
-   The routing layer is a tool that translates the incoming URL into a specific
-   controller to execute.
+   Plast usmeritve je orodje, ki prevede prihajajoči URL v določen
+   krmilnik za izvršitev.
 
 .. index::
    single: Routing; Creating routes
 
-Creating Routes
----------------
+Ustvarjanje usmeritev
+---------------------
 
-Symfony loads all the routes for your application from a single routing configuration
-file. The file is usually ``app/config/routing.yml``, but can be configured
-to be anything (including an XML or PHP file) via the application configuration
-file:
+Symfony naloži vse usmeritve za vašo aplikacijo iz ene nastavitvene usmeritve
+datoteke. Ta datoteka je običajno ``app/config/routing.yml``, vendar je lahko nastavljena,
+da je karkoli (vključno z XML ali PHP datoteko) preko datoteke aplikacijskih
+nastavitev:
 
 .. configuration-block::
 
@@ -189,18 +189,18 @@ file:
 
 .. tip::
 
-    Even though all routes are loaded from a single file, it's common practice
-    to include additional routing resources. To do so, just point out in the
-    main routing configuration file which external files should be included.
-    See the :ref:`routing-include-external-resources` section for more
-    information.
+    Tudi če so vse usmeritve naložene iz ene datoteke, je pogosta praksa
+    vključiti dodatne vire usmeritev. Da to naredite, samo pokažite v
+    glavno usmeritveno nastavitveno datoteko, katere zunanje datoteke bi morale biti vključene.
+    Glejte sekcijo :ref:`routing-include-external-resources` za več
+    informacij.
 
-Basic Route Configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Osnovne nastavitve usmerjanja
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Defining a route is easy, and a typical application will have lots of routes.
-A basic route consists of just two parts: the ``path`` to match and a
-``defaults`` array:
+Definiranje usmeritve je enostavno in običajna aplikacija bo imela veliko usmeritev.
+Osnovna usmeritev sestoji iz samo dveh delov: ``path``, ki se ujema in
+polja ``defaults``:
 
 .. configuration-block::
 
@@ -236,19 +236,19 @@ A basic route consists of just two parts: the ``path`` to match and a
 
         return $collection;
 
-This route matches the homepage (``/``) and maps it to the ``AcmeDemoBundle:Main:homepage``
-controller. The ``_controller`` string is translated by Symfony2 into an
-actual PHP function and executed. That process will be explained shortly
-in the :ref:`controller-string-syntax` section.
+Ta usmeritev se ujema z domačo stranjo (``/``) in jo preslika v ``AcmeDemoBundle:Main:homepage``
+krmilnik. Niz ``_controller`` je preveden s strani Symfony2 v
+dejansko PHP funkcijo in izvršen. Ta proces bo razložen v kratkem
+v sekciji :ref:`controller-string-syntax`.
 
 .. index::
    single: Routing; Placeholders
 
-Routing with Placeholders
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Usmerjanje s prostorniki
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-Of course the routing system supports much more interesting routes. Many
-routes will contain one or more named "wildcard" placeholders:
+Seveda sistem usmerjanja podpira veliko več zanimivih usmeritev. Mnogo
+usmeritev bo vsebovalo enega ali več poimenovanih prostornikov "nadomestnih znakov":
 
 .. configuration-block::
 
@@ -283,21 +283,21 @@ routes will contain one or more named "wildcard" placeholders:
 
         return $collection;
 
-The path will match anything that looks like ``/blog/*``. Even better,
-the value matching the ``{slug}`` placeholder will be available inside your
-controller. In other words, if the URL is ``/blog/hello-world``, a ``$slug``
-variable, with a value of ``hello-world``, will be available in the controller.
-This can be used, for example, to load the blog post matching that string.
+Pot se bo ujemala s čemerkoli, kar izgleda kot ``/blog/*``. Še boljše,
+vrednost, ki se ujema s prostornikom ``{slug}`` bo na voljo znotraj vašega
+krmilnika. Z drugimi besedami, če je URL ``/blog/hello-world``, spremenljivka
+``$slug`` z vrednostjo ``hello-world`` bo na voljo v krmilniku.
+To je lahko uporabno na primer za naložiti blog post, ki se ujema z nizom.
 
-The path will *not*, however, match simply ``/blog``. That's because,
-by default, all placeholders are required. This can be changed by adding
-a placeholder value to the ``defaults`` array.
+Pot se vseeno *ne* bo ujemela enostavno z ``/blog``. To je, ker
+privzeto so vsi prostorniki zahtevani. To se lahko spremeni z dodajanjem
+vrednosti prostornika polju ``defaults``.
 
-Required and Optional Placeholders
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Zahtevani in opcijski prostorniki
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To make things more exciting, add a new route that displays a list of all
-the available blog posts for this imaginary blog application:
+Da naredimo stvari bolj razburljive, dodamo novo usmeritev, ki prikaže seznam vseh
+objav bloga, ki so na voljo za to imaginarno blog aplikacijo:
 
 .. configuration-block::
 
@@ -332,10 +332,10 @@ the available blog posts for this imaginary blog application:
 
         return $collection;
 
-So far, this route is as simple as possible - it contains no placeholders
-and will only match the exact URL ``/blog``. But what if you need this route
-to support pagination, where ``/blog/2`` displays the second page of blog
-entries? Update the route to have a new ``{page}`` placeholder:
+So sedaj je ta usmeritev kolikor možno enostavna - ne vsebuje prostornikov
+in se bo ujemala samo s točnimi URL-ji ``/blog``. Vendar kaj če potrebujete, da ta usmeritev
+podpira paginacijo, kjer ``/blog/2`` prikaže drugo stran vnosov
+bloga? Posodobite usmeritev, da imate nov prostornik ``{page}``:
 
 .. configuration-block::
 
@@ -370,15 +370,15 @@ entries? Update the route to have a new ``{page}`` placeholder:
 
         return $collection;
 
-Like the ``{slug}`` placeholder before, the value matching ``{page}`` will
-be available inside your controller. Its value can be used to determine which
-set of blog posts to display for the given page.
+Kot pred tem prostornik ``{slug}``, bo vrednost ujeta s ``{page}``
+na voljo znotraj vašega krmilnika. Njegova vrednost je lahko uporabljena za določanje, katerega
+seta objav bloga prikazati za dano stran.
 
-But hold on! Since placeholders are required by default, this route will
-no longer match on simply ``/blog``. Instead, to see page 1 of the blog,
-you'd need to use the URL ``/blog/1``! Since that's no way for a rich web
-app to behave, modify the route to make the ``{page}`` parameter optional.
-This is done by including it in the ``defaults`` collection:
+Vendar počakajte! Odkar so prostorniki privzeto zahtevani ta usmeritev
+ni več ujeta z enostavnim ``/blog``. Namesto, da vidite stran 1 blog-a,
+bi morali uporabiti URL ``/blog/1``! Odkar to ni več način za bogate spletne
+aplikacije, da se obnašajo, spremenite usmeritev, da naredi parameter ``{page}`` opcijski.
+To je narejeno z vključitvijo zbirke ``defaults``:
 
 .. configuration-block::
 
@@ -415,32 +415,32 @@ This is done by including it in the ``defaults`` collection:
 
         return $collection;
 
-By adding ``page`` to the ``defaults`` key, the ``{page}`` placeholder is no
-longer required. The URL ``/blog`` will match this route and the value of
-the ``page`` parameter will be set to ``1``. The URL ``/blog/2`` will also
-match, giving the ``page`` parameter a value of ``2``. Perfect.
+Z dodajanjem ``page`` ključu ``defaults``, prostornik ``{page}`` ni več
+zahtevan. URL ``/blog`` se bo ujemal s to usmeritvijo in vrednost
+parametra ``page`` bo nastavljena na ``1``. URL ``/blog/2`` se bo tudi
+ujemal in dajal parametru ``page`` vrednost ``2``. Odlično.
 
-+--------------------+-------+-----------------------+
-| URL                | route | parameters            |
-+====================+=======+=======================+
-| /blog              | blog  | {page} = 1            |
-+--------------------+-------+-----------------------+
-| /blog/1            | blog  | {page} = 1            |
-+--------------------+-------+-----------------------+
-| /blog/2            | blog  | {page} = 2            |
-+--------------------+-------+-----------------------+
++--------------------+-----------+-----------------------+
+| URL                | usmeritev | parametri             |
++====================+===========+=======================+
+| /blog              | blog      | {page} = 1            |
++--------------------+-----------+-----------------------+
+| /blog/1            | blog      | {page} = 1            |
++--------------------+-----------+-----------------------+
+| /blog/2            | blog      | {page} = 2            |
++--------------------+-----------+-----------------------+
 
 .. caution::
 
-    Of course, you can have more than one optional placeholder (e.g. ``/blog/{slug}/{page}``),
-    but everything after an optional placeholder must be optional. For example,
-    ``/{page}/blog`` is a valid path, but ``page`` will always be required
-    (i.e. simply ``/blog`` will not match this route).
+    Seveda imate lahko več kot en opcijski prostornik (npr. ``/blg/{slug}/{page}``),
+    vendar vse za opcijskim prostornikom mora biti opcijsko. Na primer,
+    ``/{page}/blog`` je veljavna pot, vendar ``page`` bo vedno zahtevana
+    (t.j. enostavno ``/blog`` se ne bo ujemal s to usmeritvijo).
 
 .. tip::
 
-    Routes with optional parameters at the end will not match on requests
-    with a trailing slash (i.e. ``/blog/`` will not match, ``/blog`` will match).
+    Usmeritve z opcijskimi parametri na koncu se ne bodo ujemale na zahtevkih
+    s končno poševnico (t.j. ``/blog/`` se ne bo ujel, ``/blog`` se bo ujel).
 
 .. index::
    single: Routing; Requirements

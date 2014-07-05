@@ -60,7 +60,7 @@ Then you can define it as a service as follows:
 
         services:
             acme.hello.controller:
-                class:     "%acme.controller.hello.class%"
+                class: "%acme.controller.hello.class%"
 
     .. code-block:: xml
 
@@ -96,7 +96,7 @@ To refer to a controller that's defined as a service, use the single colon (:)
 notation. For example, to forward to the ``indexAction()`` method of the service
 defined above with the id ``acme.hello.controller``::
 
-    $this->forward('acme.hello.controller:indexAction');
+    $this->forward('acme.hello.controller:indexAction', array('name' => $name));
 
 .. note::
 
@@ -112,8 +112,8 @@ the route ``_controller`` value:
 
         # app/config/routing.yml
         hello:
-            path:         /hello
-            defaults:     { _controller: acme.hello.controller:indexAction }
+            path:     /hello
+            defaults: { _controller: acme.hello.controller:indexAction }
 
     .. code-block:: xml
 

@@ -6,7 +6,7 @@ How to Work with Emails During Development
 
 When developing an application which sends email, you will often
 not want to actually send the email to the specified recipient during
-development. If you are using the ``SwiftmailerBundle`` with Symfony2, you
+development. If you are using the SwiftmailerBundle with Symfony2, you
 can easily achieve this through configuration settings without having to
 make any changes to your application's code at all. There are two main
 choices when it comes to handling email during development: (a) disabling the
@@ -65,7 +65,7 @@ via the ``delivery_address`` option:
 
         # app/config/config_dev.yml
         swiftmailer:
-            delivery_address:  dev@example.com
+            delivery_address: dev@example.com
 
     .. code-block:: xml
 
@@ -76,8 +76,7 @@ via the ``delivery_address`` option:
             http://symfony.com/schema/dic/swiftmailer http://symfony.com/schema/dic/swiftmailer/swiftmailer-1.0.xsd
         -->
 
-        <swiftmailer:config
-            delivery-address="dev@example.com" />
+        <swiftmailer:config delivery-address="dev@example.com" />
 
     .. code-block:: php
 
@@ -136,13 +135,6 @@ Instead, you can set the ``intercept_redirects`` option to ``true`` in the
 ``config_dev.yml`` file, which will cause the redirect to stop and allow
 you to open the report with details of the sent emails.
 
-.. tip::
-
-    Alternatively, you can open the profiler after the redirect and search
-    by the submit URL used on previous request (e.g. ``/contact/handle``).
-    The profiler's search feature allows you to load the profiler information
-    for any past requests.
-
 .. configuration-block::
 
     .. code-block:: yaml
@@ -171,3 +163,10 @@ you to open the report with details of the sent emails.
         $container->loadFromExtension('web_profiler', array(
             'intercept_redirects' => 'true',
         ));
+
+.. tip::
+
+    Alternatively, you can open the profiler after the redirect and search
+    by the submit URL used on the previous request (e.g. ``/contact/handle``).
+    The profiler's search feature allows you to load the profiler information
+    for any past requests.

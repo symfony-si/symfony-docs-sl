@@ -23,7 +23,7 @@ ali ekvivalentno:
 
 .. code-block:: bash
 
-    $ php app/console cache:clear -e=prod
+    $ php app/console cache:clear -e prod
 
 Poleg spremembe okolja lahko tudi izberete, da onemogočite način razhroščevanja.
 To je lahko uporabno, kjer želite poganjati ukaze v okolju ``dev``, vendar se

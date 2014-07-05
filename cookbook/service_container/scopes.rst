@@ -1,7 +1,7 @@
 .. index::
-   single: Dependency Injection; Scopes
+   single: DependencyInjection; Scopes
 
-How to work with Scopes
+How to Work with Scopes
 =======================
 
 This entry is all about scopes, a somewhat advanced topic related to the
@@ -22,7 +22,7 @@ Understanding Scopes
 --------------------
 
 The scope of a service controls how long an instance of a service is used
-by the container. The Dependency Injection component provides two generic
+by the container. The DependencyInjection component provides two generic
 scopes:
 
 - ``container`` (the default one): The same instance is used each time you
@@ -45,7 +45,7 @@ scope other than ``container`` and ``prototype``. But for the purposes of
 this entry, imagine there is another scope ``client`` and a service ``client_configuration``
 that belongs to it. This is not a common situation, but the idea is that
 you may enter and exit multiple ``client`` scopes during a request, and each
-has its own ``client_configuration`` service. 
+has its own ``client_configuration`` service.
 
 Scopes add a constraint on the dependencies of a service: a service cannot
 depend on services from a narrower scope. For example, if you create a generic
@@ -64,7 +64,7 @@ when compiling the container. Read the sidebar below for more details.
     Imagine, however, that you need the ``client_configuration`` service
     in your ``my_mailer`` service, maybe because you're reading some details
     from it, such as what the "sender" address should be. You add it as a
-    constructor argument. Let's look at why this presents a problem:
+    constructor argument. There are several reasons why this presents a problem:
 
     * When requesting ``my_mailer``, an instance of ``my_mailer`` (called
       *MailerA* here) is created and the ``client_configuration`` service (
@@ -118,7 +118,7 @@ A) Using a Synchronized Service
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 2.3
-    Synchronized services are new in Symfony 2.3.
+    Synchronized services were introduced in Symfony 2.3.
 
 Both injecting the container and setting your service to a narrower scope have
 drawbacks. Assume first that the ``client_configuration`` service has been
@@ -134,6 +134,7 @@ marked as ``synchronized``:
                 class:        Acme\HelloBundle\Client\ClientConfiguration
                 scope:        client
                 synchronized: true
+                synthetic:    true
                 # ...
 
     .. code-block:: xml
@@ -151,6 +152,7 @@ marked as ``synchronized``:
                     id="client_configuration"
                     scope="client"
                     synchronized="true"
+                    synthetic="true"
                     class="Acme\HelloBundle\Client\ClientConfiguration"
                 />
             </services>
@@ -167,6 +169,7 @@ marked as ``synchronized``:
         );
         $definition->setScope('client');
         $definition->setSynchronized(true);
+        $definition->setSynthetic(true);
         $container->setDefinition('client_configuration', $definition);
 
 Now, if you inject this service using setter injection, there are no drawbacks
@@ -196,9 +199,9 @@ and everything works without any special code in your service or in your definit
         }
     }
 
-Whenever the ``client`` scope is entered or left, the service container will
-automatically call the ``setClientConfiguration()`` method with the current
-``client_configuration`` instance.
+Whenever the ``client`` scope is active, the service container will
+automatically call the ``setClientConfiguration()`` method when the
+``client_configuration`` service is set in the container.
 
 You might have noticed that the ``setClientConfiguration()`` method accepts
 ``null`` as a valid value for the ``client_configuration`` argument. That's
@@ -215,7 +218,7 @@ your code. This should also be taken into account when declaring your service:
             my_mailer:
                 class: Acme\HelloBundle\Mail\Mailer
                 calls:
-                    - [setClientConfiguration, ['@?client_configuration=']]
+                    - [setClientConfiguration, ["@?client_configuration="]]
 
     .. code-block:: xml
 
@@ -271,17 +274,17 @@ argument is the ``ClientConfiguration`` object:
             my_mailer:
                 class: Acme\HelloBundle\Mail\Mailer
                 scope: client
-                arguments: [@client_configuration]
+                arguments: ["@client_configuration"]
 
     .. code-block:: xml
 
         <!-- src/Acme/HelloBundle/Resources/config/services.xml -->
         <services>
             <service id="my_mailer"
-                class="Acme\HelloBundle\Mail\Mailer"
-                scope="client"
-            />
-            <argument type="service" id="client_configuration" />
+                    class="Acme\HelloBundle\Mail\Mailer"
+                    scope="client">
+                    <argument type="service" id="client_configuration" />
+            </service>
         </services>
 
     .. code-block:: php
@@ -345,6 +348,7 @@ The service config for this class would look something like this:
         parameters:
             # ...
             my_mailer.class: Acme\HelloBundle\Mail\Mailer
+
         services:
             my_mailer:
                 class:     "%my_mailer.class%"

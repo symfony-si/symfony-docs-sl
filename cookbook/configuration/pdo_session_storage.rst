@@ -1,5 +1,5 @@
 .. index::
-   single: Session; Database Storage
+    single: Session; Database Storage
 
 How to use PdoSessionHandler to store Sessions in the Database
 ==============================================================
@@ -22,7 +22,7 @@ configuration format of your choice):
         framework:
             session:
                 # ...
-                handler_id:     session.handler.pdo
+                handler_id: session.handler.pdo
 
         parameters:
             pdo.db_options:
@@ -127,7 +127,7 @@ database for the session data.
 
 But if you'd like to store the session data in the same database as the rest
 of your project's data, you can use the connection settings from the
-parameter.ini by referencing the database-related parameters defined there:
+``parameters.yml`` file by referencing the database-related parameters defined there:
 
 .. configuration-block::
 

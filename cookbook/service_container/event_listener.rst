@@ -8,7 +8,7 @@ Symfony has various events and hooks that can be used to trigger custom
 behavior in your application. Those events are thrown by the HttpKernel
 component and can be viewed in the :class:`Symfony\\Component\\HttpKernel\\KernelEvents` class.
 
-To hook into an event and add your own custom logic, you have to  create
+To hook into an event and add your own custom logic, you have to create
 a service that will act as an event listener on that event. In this entry,
 you will create a service that will act as an Exception Listener, allowing
 you to modify how exceptions are shown by your application. The ``KernelEvents::EXCEPTION``
@@ -52,7 +52,7 @@ event is just one of the core kernel events::
     }
 
 .. versionadded:: 2.4
-    Support for HTTP status code constants was added in Symfony 2.4.
+    Support for HTTP status code constants was introduced in Symfony 2.4.
 
 .. tip::
 
@@ -100,6 +100,10 @@ using a special "tag":
 Request events, checking types
 ------------------------------
 
+.. versionadded:: 2.4
+    The ``isMasterRequest()`` method was introduced in Symfony 2.4.
+    Prior, the ``getRequestType()`` method must be used.
+
 A single page can make several requests (one master request, and then multiple
 sub-requests), which is why when working with the ``KernelEvents::REQUEST``
 event, you might need to check the type of the request. This can be easily
@@ -115,7 +119,7 @@ done as follow::
     {
         public function onKernelRequest(GetResponseEvent $event)
         {
-            if (HttpKernel::MASTER_REQUEST != $event->getRequestType()) {
+            if (!$event->isMasterRequest()) {
                 // don't do anything if it's not the master request
                 return;
             }

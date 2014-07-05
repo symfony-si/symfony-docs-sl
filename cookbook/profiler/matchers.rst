@@ -16,7 +16,7 @@ Using the built-in Matcher
 Symfony2 provides a
 :class:`built-in matcher <Symfony\\Component\\HttpFoundation\\RequestMatcher>`
 which can match paths and IPs. For example, if you want to only show the
-profiler when accessing the page with the ``168.0.0.1`` ip, then you can
+profiler when accessing the page with the ``168.0.0.1`` IP, then you can
 use this configuration:
 
 .. configuration-block::
@@ -101,7 +101,7 @@ Then, you need to configure the service:
         services:
             acme_demo.profiler.matcher.super_admin:
                 class: "%acme_demo.profiler.matcher.super_admin.class%"
-                arguments: [@security.context]
+                arguments: ["@security.context"]
 
     .. code-block:: xml
 
@@ -150,6 +150,7 @@ profiler to use this service as the matcher:
 
         <!-- app/config/config.xml -->
         <framework:config>
+            <!-- ... -->
             <framework:profiler
                 service="acme_demo.profiler.matcher.super_admin"
             />
@@ -159,6 +160,7 @@ profiler to use this service as the matcher:
 
         // app/config/config.php
         $container->loadFromExtension('framework', array(
+            // ...
             'profiler' => array(
                 'service' => 'acme_demo.profiler.matcher.super_admin',
             ),

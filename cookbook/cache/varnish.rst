@@ -19,7 +19,7 @@ Kot videno prej, je Symfony2 dovolj pameten, da zazna ali govori z obratnim
 proksijem, ki razume ESI ali ne. Deluje takoj, ko
 uporabite Symfony2 obratni proksi, vendar morate določene nastavitve, da
 deluje z Varnish-em. Zahvaljujoče, Symfony2 se zanaša na še drug standard
-napisan s strani Akamaï (`Edge Architecture`_), tako da nastavitveni nasveti v
+napisan s strani Akamai (`Edge Architecture`_), tako da nastavitveni nasveti v
 tem poglavju so lahko uporabni tudi če ne uporabljate Symfony2.
 
 .. note::
@@ -57,6 +57,14 @@ jo Symfony2 doda avtomatsko:
             // For Varnish < 3.0
             // esi;
         }
+        /* By default Varnish ignores Cache-Control: nocache
+        (https://www.varnish-cache.org/docs/3.0/tutorial/increasing_your_hitrate.html#cache-control),
+        so in order avoid caching it has to be done explicitly */
+        if (beresp.http.Pragma ~ "no-cache" ||
+             beresp.http.Cache-Control ~ "no-cache" ||
+             beresp.http.Cache-Control ~ "private") {
+            return (hit_for_pass);
+        }
     }
 
 .. caution::
@@ -90,7 +98,7 @@ ki bo razveljavila predpomnilnik za dani vir:
 
     sub vcl_recv {
         /*
-        Varnish default behaviour doesn't support PURGE.
+        Varnish default behavior doesn't support PURGE.
         Match the PURGE request and immediately do a cache lookup,
         otherwise Varnish will directly pipe the request to the backend
         and bypass the cache
@@ -137,7 +145,7 @@ ki bo razveljavila predpomnilnik za dani vir:
             .port = "8080";
         }
 
-        // Acl's can contain IP's, subnets and hostnames
+        // ACL's can contain IP's, subnets and hostnames
         acl purge {
             "localhost";
             "192.168.55.0"/24;
@@ -146,7 +154,7 @@ ki bo razveljavila predpomnilnik za dani vir:
         sub vcl_recv {
             // Match PURGE request to avoid cache bypassing
             if (req.request == "PURGE") {
-                // Match client IP to the acl
+                // Match client IP to the ACL
                 if (!client.ip ~ purge) {
                     // Deny access
                     error 405 "Not allowed.";

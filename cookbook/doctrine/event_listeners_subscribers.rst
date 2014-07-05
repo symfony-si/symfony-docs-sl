@@ -154,10 +154,16 @@ specific type of entity (e.g. a ``Product`` entity but not a ``BlogPost``
 entity), you should check for the entity's class type in your method
 (as shown above).
 
+.. tip::
+
+    In Doctrine 2.4, a feature called Entity Listeners was introduced.
+    It is a lifecycle listener class used for an entity. You can read
+    about it in `the Doctrine Documentation`_.
+
 Creating the Subscriber Class
 -----------------------------
 
-A doctrine event subscriber must implement the ``Doctrine\Common\EventSubscriber``
+A Doctrine event subscriber must implement the ``Doctrine\Common\EventSubscriber``
 interface and have an event method for each event it subscribes to::
 
     // src/Acme/SearchBundle/EventListener/SearchIndexerSubscriber.php
@@ -165,7 +171,7 @@ interface and have an event method for each event it subscribes to::
 
     use Doctrine\Common\EventSubscriber;
     use Doctrine\ORM\Event\LifecycleEventArgs;
-    // for doctrine 2.4: Doctrine\Common\Persistence\Event\LifecycleEventArgs;
+    // for Doctrine 2.4: Doctrine\Common\Persistence\Event\LifecycleEventArgs;
     use Acme\StoreBundle\Entity\Product;
 
     class SearchIndexerSubscriber implements EventSubscriber
@@ -211,3 +217,4 @@ interface and have an event method for each event it subscribes to::
 For a full reference, see chapter `The Event System`_ in the Doctrine documentation.
 
 .. _`The Event System`: http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/events.html
+.. _`the Doctrine Documentation`: http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/events.html#entity-listeners

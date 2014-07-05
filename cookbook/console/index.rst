@@ -8,3 +8,4 @@ Konzola
     usage
     sending_emails
     logging
+    commands_as_services
