@@ -8,9 +8,16 @@ Komponenta Config
 Uvod
 ----
 
-Kompomenta Config ponuja nekaj razredov, ki vam pomagajo najdi, naložiti, kombinirati,
-avtomatsko izpolniti in preveriti nastavitvene vrednosti katerekoli vrste, kakršenkoli je
-njihov vir (Yaml, XML, INI datoteke, ali na primer podatkovna baza).
+Kompomenta Config ponuja nekaj razredov, ki vam pomagajo najdi, naložiti,
+kombinirati, avtomatsko izpolniti in preveriti nastavitvene vrednosti katerekoli vrste, kakršenkoli je
+njihov vir (YAML, XML, INI datoteke, ali na primer podatkovna baza).
+
+.. caution::
+
+    ``IniFileLoader`` razčlenjuje vsebino datoteke z uporabo
+    funkcije :phpfunction:`parse_ini_file` zato, lahko nastavite samo
+    parametre na vrednosti nizov. Da nastavite parametre za ostale tipe podatkov
+    (npr. logična vrednost, celo število itd.), so priporočljivi ostali nalagalniki.
 
 Namestitev
 ----------

@@ -5,7 +5,7 @@ Uporaba dogodkov
 ================
 
 .. versionadded:: 2.3
-    Konzolni dogodki so bili dodani v Symfony 2.3.
+    Konzolni dogodki so bili predstavljeni v Symfony 2.3.
 
 Razred Application komponente Console vam omogoča, da se opcijsko vežete
 v življenski cikel konzolne aplikacije preko dogodkov. Namesto ponovnega

@@ -9,8 +9,7 @@ The Intl Component
     access to the localization data of the `ICU library`_.
 
 .. versionadded:: 2.3
-
-    The Intl component was added in Symfony 2.3. In earlier versions of Symfony,
+    The Intl component was introduced in Symfony 2.3. In earlier versions of Symfony,
     you should use the Locale component instead.
 
 .. caution::
@@ -66,7 +65,7 @@ code::
     The intl extension internally uses the `ICU library`_ to obtain localization
     data such as number formats in different languages, country names and more.
     To make this data accessible to userland PHP libraries, Symfony2 ships a copy
-    in the `ICU component`_.
+    in the `Icu component`_.
 
     Depending on the ICU version compiled with your intl extension, a matching
     version of that component needs to be installed. It sounds complicated,
@@ -78,7 +77,7 @@ code::
 
     These versions are important when you deploy your application to a **server with
     a lower ICU version** than your development machines, because deployment will
-    fail if
+    fail if:
 
     * the development machines are compiled with ICU 4.4 or higher, but the
       server is compiled with a lower ICU version than 4.4;
@@ -87,7 +86,7 @@ code::
 
     For example, consider that your development machines ship ICU 4.8 and the server
     ICU 4.2. When you run ``php composer.phar update`` on the development machine, version
-    1.2.* of the ICU component will be installed. But after deploying the
+    1.2.* of the Icu component will be installed. But after deploying the
     application, ``php composer.phar install`` will fail with the following error:
 
     .. code-block:: bash
@@ -102,7 +101,7 @@ code::
               library icu has the wrong version installed or is missing from your
               system, make sure to have the extension providing it.
 
-    The error tells you that the requested version of the ICU component, version
+    The error tells you that the requested version of the Icu component, version
     1.2, is not compatible with PHP's ICU version 4.2.
 
     One solution to this problem is to run ``php composer.phar update`` instead of
@@ -118,7 +117,7 @@ code::
         $ php -i | grep ICU
         ICU version => 4.2.1
 
-    Then fix the ICU component in your composer.json file to a matching version:
+    Then fix the Icu component in your ``composer.json`` file to a matching version:
 
     .. code-block:: json
 
@@ -282,7 +281,12 @@ multi-valued entries (arrays), the values of the more specific and the fallback
 locale will be merged. In order to suppress this behavior, the last parameter
 ``$fallback`` can be set to ``false``::
 
-    echo $reader->readEntry('/path/to/bundle', 'en', array('Data', 'entry1'), false);
+    echo $reader->readEntry(
+        '/path/to/bundle',
+        'en',
+        array('Data', 'entry1'),
+        false
+    );
 
 Accessing ICU Data
 ------------------
@@ -408,7 +412,7 @@ to the current default locale::
 That's all you need to know for now. Have fun coding!
 
 .. _Packagist: https://packagist.org/packages/symfony/intl
-.. _ICU component: https://packagist.org/packages/symfony/icu
+.. _Icu component: https://packagist.org/packages/symfony/icu
 .. _intl extension: http://www.php.net/manual/en/book.intl.php
 .. _install the intl extension: http://www.php.net/manual/en/intl.setup.php
 .. _ICU library: http://site.icu-project.org/

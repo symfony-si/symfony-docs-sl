@@ -12,7 +12,7 @@ in njihove strukture lahko potrjene z uporabo t.i. "Definition" dela komponente
 Config. Od nastavitvenih vrednosti se običajno pričakuje, da prikažejo neke
 vrste hierarhijo. Tudi vrednosti bi morale biti določenega tipa, biti omejene
 po številu ali biti ena izmed danih skupkov vrednosti. Na primer, sledeče
-nastavitve (v Yaml) prikazujejo jasno hierarhijo in nekaj pravil potrjevanja,
+nastavitve (v YAML) prikazujejo jasno hierarhijo in nekaj pravil potrjevanja,
 ki bi morala biti uporabljena na njih (kot npr. "vrednost za ``auto_connect`` mora biti logična vrednost):
 
 .. code-block:: yaml
@@ -21,14 +21,14 @@ ki bi morala biti uporabljena na njih (kot npr. "vrednost za ``auto_connect`` mo
     default_connection: mysql
     connections:
         mysql:
-            host: localhost
-            driver: mysql
+            host:     localhost
+            driver:   mysql
             username: user
             password: pass
         sqlite:
-            host: localhost
-            driver: sqlite
-            memory: true
+            host:     localhost
+            driver:   sqlite
+            memory:   true
             username: user
             password: pass
 
@@ -99,7 +99,7 @@ definicije vozlišča. Tipi vozlišč so na voljo za:
 
 * skalar
 * logične vrednosti
-* celo število (new in 2.2)
+* celo število
 * število s plavajočo vejico
 * enum
 * polje
@@ -110,9 +110,6 @@ metodo ``xxxxNode($name)``.
 
 Omejitve numeričnih vozlišč
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. versionadded:: 2.2
-    Numerična (števila s plavajočo vejico in cela števila) vozlišča so nova v 2.2
 
 Numerična vozlišča (števila s plavajočo vejico in cela števila) ponujajo dve dodatni omejitvi -
 :method:`Symfony\\Component\\Config\\Definition\\Builder::min` in
@@ -287,9 +284,6 @@ ima vozlišče določeno vrednost:
 Opcijske sekcije
 ----------------
 
-.. versionadded:: 2.2
-    Metodi ``canBeEnabled`` in ``canBeDisabled`` sta novi v Symfony 2.2
-
 Če imate celotne sekcije, ki so opcijske in so lahko omogočene/onemogočene,
 lahko uporabite prednost bližnjic metod
 :method:`Symfony\\Component\\Config\\Definition\\Builder\\ArrayNodeDefinition::canBeEnabled` in
@@ -393,10 +387,10 @@ Normalizacija
 Ko so nastavitvene datoteke procesirane, so najprej normalizirane, nato združene
 in na koncu je drevo uporabljeno za potrditev končnega polja. Proces normalizacije
 je uporabljen za odstranitev nekaj razlik, ki se kažejo v različnih
-formatih nastavitev, v glavnem razlike med Yaml in XML.
+formatih nastavitev, v glavnem razlike med YAML in XML.
 
-Ločilo uporabljeno v ključih je običajno ``_`` v Yaml in ``-`` v XML. Za
-primer, ``auto_connect`` v Yaml in ``auto-connect``. Normalizacija bi
+Ločilo uporabljeno v ključih je običajno ``_`` v YAML in ``-`` v XML. Za
+primer, ``auto_connect`` v YAML in ``auto-connect`` v XML. Normalizacija bi
 naredila oba od teh kot ``auto_connect``.
 
 .. caution::
@@ -404,8 +398,8 @@ naredila oba od teh kot ``auto_connect``.
     Ciljni ključ ne bo spremenjen, če je mešan kot
     ``foo-bar_moo`` ali če že obstaja.
 
-Druga razlika med Yaml in XML je v načinu, kako so lahko polja vrednosti
-predstavljena. V Yaml imate lahko:
+Druga razlika med YAML in XML je v načinu, kako so lahko polja vrednosti
+predstavljena. V YAML imate lahko:
 
 .. code-block:: yaml
 
@@ -444,7 +438,7 @@ drugi argument::
         ->end()
     ;
 
-Tako kot tudi popravljanje tega, ``fixXmlConfig`` zagotavlja, da so edninski xml elementi
+Tako kot tudi popravljanje tega, ``fixXmlConfig`` zagotavlja, da so edninski XML elementi
 še vedno spremenjeni v polje. Tako imate lahko:
 
 .. code-block:: xml
@@ -470,9 +464,9 @@ v tej nastavitvi:
 .. code-block:: yaml
 
     connection:
-        name: my_mysql_connection
-        host: localhost
-        driver: mysql
+        name:     my_mysql_connection
+        host:     localhost
+        driver:   mysql
         username: user
         password: pass
 

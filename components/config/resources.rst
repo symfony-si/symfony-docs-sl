@@ -27,7 +27,7 @@ vse zadetke.
 Nalagalniki virov
 -----------------
 
-Za vsak tip virov (Yaml, XML, anotacija itd.) mora biti nalagalnik definiran.
+Za vsak tip virov (YAML, XML, anotacija itd.) mora biti nalagalnik definiran.
 Vsak nalagalnik bi moral implementirati :class:`Symfony\\Component\\Config\\Loader\\LoaderInterface`
 ali razširiti abstrakni :class:`Symfony\\Component\\Config\\Loader\\FileLoader`
 razred, ki omogoča rekurzivno uvažanje ostalih virov::

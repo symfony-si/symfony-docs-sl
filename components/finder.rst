@@ -82,9 +82,6 @@ Iščite v večih lokacijah z veriženjem klicev metode
 
     $finder->files()->in(__DIR__)->in('/elsewhere');
 
-.. versionadded:: 2.2
-   Podpora za nadomestne znake je bila dodana v verziji 2.2.
-
 Uporabite nadomestne znake za iskanje v direktorijih, ki se ujemao vzorcu::
 
     $finder->in('src/Symfony/*/*/Resources');
@@ -98,7 +95,7 @@ Izključite direktorije iz ujemanja z metodo
 
 .. versionadded:: 2.3
    Metoda :method:`Symfony\\Component\\Finder\\Finder::ignoreUnreadableDirs`
-   je bila dodana v Symfony 2.3.
+   je bila predstavljena v Symfony 2.3.
 
 Je tudi možno ignorirati direktorije, za katere nimate pravic za branje::
 
@@ -206,9 +203,6 @@ Metoda ``notContains()`` izključuje datoteke, ki vsebujejo dani vzorec::
 Pot
 ~~~
 
-.. versionadded:: 2.2
-   Metodi ``path()`` in ``notPath()`` sta bili dodani v verziji 2.2.
-
 Omejite datoteke in direktorije glede na pot z metodo
 :method:`Symfony\\Component\\Finder\\Finder::path`::
 
@@ -260,8 +254,8 @@ Omejite datoteke glede na zadnje spremenjene datume z metodo
 
     $finder->date('since yesterday');
 
-Primerjalni operator je lahko katerikoli izmed sledečih: ``>``, ``>=``, ``<``, '<=',
-'=='. Lahko tudi uporabite ``since`` ali ``after`` kot alias za ``>`` in
+Primerjalni operator je lahko katerikoli izmed sledečih: ``>``, ``>=``, ``<``, ``<=``,
+``==``. Lahko tudi uporabite ``since`` ali ``after`` kot alias za ``>`` in
 ``until`` ali ``before`` kot alias za ``<``.
 
 Ta ciljna vrednost je lahko katerikoli datum podprt od funkcije `strtotime`_.

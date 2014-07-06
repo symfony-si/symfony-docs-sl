@@ -12,9 +12,9 @@ Avtomatska registracija ukazov
 ------------------------------
 
 Da naredite konzolne ukaze na voljo avtomatsko v Symfony2, izdelajte
-``Command`` direktorij znotraj vašega paketa in izdelajte php datoteko s predpono
+``Command`` direktorij znotraj vašega paketa in izdelajte PHP datoteko s predpono
 ``Command.php`` za vsak ukaz, ki ga želite ponuditi. Na primer, če želite
-razširiti ``AcmeDemoBundle`` (na voljo v Symfony standardni izdaji), da vas
+razširiti AcmeDemoBundle (na voljo v Symfony standardni izdaji), da vas
 pozdravi iz ukazne vrstice, izdelajte ``GreetCommand.php`` in
 dodajte sledeče vanjo::
 
@@ -67,53 +67,9 @@ Ta ukaz bo sedaj avtomatsko na voljo za pogon:
 Registracija ukazov v storitvenem kontejnerju
 ---------------------------------------------
 
-.. versionadded:: 2.4
-   Podpora za registracijo ukazov v storitvenem kontejnerju je bila dodana v
-   verziji 2.4.
-
-Namesto dodajanja ukaza v direktorij ``Command`` in da jih Symfony
-avtomatsko odkriva za vas, lahko registrirate ukaze v storitvenem kontejnerju
-z uporabo ``console.command`` značke:
-
-.. configuration-block::
-
-    .. code-block:: yaml
-
-        # app/config/config.yml
-        services:
-            acme_hello.command.my_command:
-                class: Acme\HelloBundle\Command\MyCommand
-                tags:
-                    -  { name: console.command }
-
-    .. code-block:: xml
-
-        <!-- app/config/config.xml -->
-        <?xml version="1.0" encoding="UTF-8" ?>
-        <container xmlns="http://symfony.com/schema/dic/services"
-            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-
-            <service id="acme_hello.command.my_command"
-                class="Acme\HelloBundle\Command\MyCommand">
-                <tag name="console.command" />
-            </service>
-        </container>
-
-    .. code-block:: php
-
-        // app/config/config.php
-
-        $container
-            ->register('acme_hello.command.my_command', 'Acme\HelloBundle\Command\MyCommand')
-            ->addTag('console.command')
-        ;
-
-.. tip::
-
-    Registracija vašega ukaza kot storitve, vam da več kontrole nad njeno
-    lokacijo in storitvami, ki so injicirani v njih. Vendar ni nikakršnih
-    funkcionalnostnih prednosti, tako da ne potrebujete registrirati vaših ukazov kot storitev.
+Enako kot krmilniki, so lahko ukazi tudi deklarirani kotstoritve. Glejte
+:doc:`namensko poglavje receptov </cookbook/console/commands_as_services>`
+za podrobnosti.
 
 Pridobitev storitev iz storitvenega kontejnerja
 -----------------------------------------------
@@ -121,8 +77,27 @@ Pridobitev storitev iz storitvenega kontejnerja
 Z uporabo :class:`Symfony\\Bundle\\FrameworkBundle\\Command\\ContainerAwareCommand`
 kot osnovnega razreda za ukaz (namesto bolj osnovnega
 :class:`Symfony\\Component\\Console\\Command\\Command`), imate dostop do
-storitvenega kontejnerja. Z drugimi besedami imate dostop do kakršnih koli nastavljenih storitev.
-Na primer, lahko bi enostavno razširili opravilo, da je prevedljivo::
+storitvenega kontejnerja. Z drugimi besedami imate dostop do katerihkoli konfiguriranih storitev::
+
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
+        $name = $input->getArgument('name');
+        $logger = $this->getContainer()->get('logger');
+
+        $logger->info('Executing command for '.$name);
+        // ...
+    }
+
+Vendar zaradi `obsega kontejnerja </cookbook/service_container/scopes>`_ ta
+koda ne deluje za nekatere storitve. Na primer, če poskusite dobiti storitev ``request``
+ali katerokoli drugo storitev povezano tej, boste dobili sledečo napako:
+
+.. code-block:: text
+
+    You cannot create a service ("request") of an inactive scope ("request").
+
+Premislite o sledečem primeru, ki uporablja storitev ``translator`` za
+prevod nekaterih vsebin z uporabo ukaza konzole::
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
@@ -134,6 +109,43 @@ Na primer, lahko bi enostavno razširili opravilo, da je prevedljivo::
             $output->writeln($translator->trans('Hello!'));
         }
     }
+
+Če se poglobite v razrede komponente Translator, boste videli, da je storitev ``request``
+zahtevana za dobiti lokalizacijo v katero so vsebine prevedene::
+
+    // vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Translation/Translator.php
+    public function getLocale()
+    {
+        if (null === $this->locale && $this->container->isScopeActive('request')
+            && $this->container->has('request')) {
+            $this->locale = $this->container->get('request')->getLocale();
+        }
+
+        return $this->locale;
+    }
+
+Zato, ko uporabljate storitev ``translator`` znotraj ukaza, boste dobili
+prejšnjo sporočilo napake *"You cannot create a service of an inactive scope"*.
+Rešitev v tem primeru je enostavna kot nastavitev vrednosti lokalizacije eksplicitno
+pred prevajanjem vsebin::
+
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
+        $name = $input->getArgument('name');
+        $locale = $input->getArgument('locale');
+
+        $translator = $this->getContainer()->get('translator');
+        $translator->setLocale($locale);
+
+        if ($name) {
+            $output->writeln($translator->trans('Hello %name%!', array('%name%' => $name)));
+        } else {
+            $output->writeln($translator->trans('Hello!'));
+        }
+    }
+
+Vendar za ostale storitve je lahko rešitev bolj kompleksna. Za več podrobnosti
+glejte :doc:`/cookbook/service_container/scopes`.
 
 Testiranje ukazov
 -----------------
@@ -172,8 +184,9 @@ namesto
 
 .. versionadded:: 2.4
     Od Symfony 2.4, ``CommandTester`` avtomatsko zazna ime
-    ukaza za izvajanje. Torej ga ne potrebujete več podajati preko ``command``
-    ključa.
+    ukaza za izvajanje. Pred Symfony 2.4 ste ga potrebovali podati preko
+    ključa ``command``.
+
 
 .. note::
 
@@ -183,14 +196,14 @@ namesto
 
 Da lahko uporabite celotno nastavljen storitveni kontejner za vaše konzolne teste,
 lahko razširite vaš test iz
-:class:`Symfony\\Bundle\\FrameworkBundle\\Test\\WebTestCase`::
+:class:`Symfony\\Bundle\\FrameworkBundle\\Test\\KernelTestCase`::
 
     use Symfony\Component\Console\Tester\CommandTester;
     use Symfony\Bundle\FrameworkBundle\Console\Application;
-    use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+    use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
     use Acme\DemoBundle\Command\GreetCommand;
 
-    class ListCommandTest extends WebTestCase
+    class ListCommandTest extends KernelTestCase
     {
         public function testExecute()
         {
@@ -214,3 +227,13 @@ lahko razširite vaš test iz
             // ...
         }
     }
+
+.. versionadded:: 2.5
+    :class:`Symfony\\Bundle\\FrameworkBundle\\Test\\KernelTestCase` je bil
+    pridobljen iz :class:`Symfony\\Bundle\\FrameworkBundle\\Test\\WebTestCase`
+    v Symfony 2.5. ``WebTestCase`` deduje iz ``KernelTestCase``.
+    ``WebTestCase`` ustvari instanco
+    :class:`Symfony\\Bundle\\FrameworkBundle\\Client` preko ``createClient()``,
+    medtem ko ``KernelTestCase`` ustvari instanco
+    :class:`Symfony\\Component\\HttpKernel\\KernelInterface` preko
+    ``createKernel()``.

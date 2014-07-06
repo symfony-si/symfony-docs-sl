@@ -9,7 +9,10 @@ Konzolni pomočniki
 
     dialoghelper
     formatterhelper
+    progressbar
     progresshelper
+    questionhelper
+    table
     tablehelper
 
 Komponenta Console vsebuje nekaj uporabnih pomočnikov (helpers). Ti pomočniki

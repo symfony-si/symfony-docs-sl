@@ -6,8 +6,8 @@
 The HttpKernel Component
 ========================
 
-    The HttpKernel Component provides a structured process for converting
-    a ``Request`` into a ``Response`` by making use of the event dispatcher.
+    The HttpKernel component provides a structured process for converting
+    a ``Request`` into a ``Response`` by making use of the EventDispatcher.
     It's flexible enough to create a full-stack framework (Symfony), a micro-framework
     (Silex) or an advanced CMS system (Drupal).
 
@@ -79,7 +79,7 @@ and talks about how one specific implementation of the HttpKernel - the Symfony
 Framework - works.
 
 Initially, using the :class:`Symfony\\Component\\HttpKernel\\HttpKernel`
-is really simple, and involves creating an :doc:`event dispatcher </components/event_dispatcher/introduction>`
+is really simple, and involves creating an :doc:`EventDispatcher </components/event_dispatcher/introduction>`
 and a :ref:`controller resolver <component-http-kernel-resolve-controller>`
 (explained below). To complete your working kernel, you'll add more event
 listeners to the events discussed below::
@@ -117,13 +117,13 @@ For general information on adding listeners to the events below, see
 
 .. tip::
 
-    Fabien Potencier also wrote a wonderful series on using the ``HttpKernel``
+    Fabien Potencier also wrote a wonderful series on using the HttpKernel
     component and other Symfony2 components to create your own framework. See
     `Create your own framework... on top of the Symfony2 Components`_.
 
 .. _component-http-kernel-kernel-request:
 
-1) The ``kernel.request`` event
+1) The ``kernel.request`` Event
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Typical Purposes**: To add more information to the ``Request``, initialize
@@ -174,7 +174,7 @@ attributes).
     This class executes the routing layer, which returns an *array* of information
     about the matched request, including the ``_controller`` and any placeholders
     that are in the route's pattern (e.g. ``{slug}``). See
-    :doc:`Routing Component </components/routing/introduction>`.
+    :doc:`Routing component </components/routing/introduction>`.
 
     This array of information is stored in the :class:`Symfony\\Component\\HttpFoundation\\Request`
     object's ``attributes`` array. Adding the routing information here doesn't
@@ -193,7 +193,7 @@ The only requirement is that it is a PHP callable - i.e. a function, method
 on an object, or a ``Closure``.
 
 But *how* you determine the exact controller for a request is entirely up
-to your application. This is the job of the "controller resolver" -  a class
+to your application. This is the job of the "controller resolver" - a class
 that implements :class:`Symfony\\Component\\HttpKernel\\Controller\\ControllerResolverInterface`
 and is one of the constructor arguments to ``HttpKernel``.
 
@@ -242,26 +242,26 @@ will be called after another event - ``kernel.controller`` - is dispatched.
     This string is then transformed into a PHP callable by doing the following:
 
     a) The ``AcmeDemoBundle:Default:index`` format of the ``_controller`` key
-    is changed to another string that contains the full class and method
-    name of the controller by following the convention used in Symfony2 - e.g.
-    ``Acme\DemoBundle\Controller\DefaultController::indexAction``. This transformation
-    is specific to the :class:`Symfony\\Bundle\\FrameworkBundle\\Controller\\ControllerResolver`
-    sub-class used by the Symfony2 Framework.
+       is changed to another string that contains the full class and method
+       name of the controller by following the convention used in Symfony2 - e.g.
+       ``Acme\DemoBundle\Controller\DefaultController::indexAction``. This transformation
+       is specific to the :class:`Symfony\\Bundle\\FrameworkBundle\\Controller\\ControllerResolver`
+       sub-class used by the Symfony2 Framework.
 
     b) A new instance of your controller class is instantiated with no
-    constructor arguments.
+       constructor arguments.
 
     c) If the controller implements :class:`Symfony\\Component\\DependencyInjection\\ContainerAwareInterface`,
-    ``setContainer`` is called on the controller object and the container
-    is passed to it. This step is also specific to the  :class:`Symfony\\Bundle\\FrameworkBundle\\Controller\\ControllerResolver`
-    sub-class used by the Symfony2 Framework.
+       ``setContainer`` is called on the controller object and the container
+       is passed to it. This step is also specific to the  :class:`Symfony\\Bundle\\FrameworkBundle\\Controller\\ControllerResolver`
+       sub-class used by the Symfony2 Framework.
 
-    There are also a few other variations on the above process (e.g. if
-    you're registering your controllers as services).
+       There are also a few other variations on the above process (e.g. if
+       you're registering your controllers as services).
 
 .. _component-http-kernel-kernel-controller:
 
-3) The ``kernel.controller`` event
+3) The ``kernel.controller`` Event
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Typical Purposes**: Initialize things or change the controller just before
@@ -325,14 +325,14 @@ of arguments that should be passed when executing that callable.
     to determine which value should be passed for each argument:
 
     a) If the ``Request`` attributes bag contains a key that matches the name
-    of the argument, that value is used. For example, if the first argument
-    to a controller is ``$slug``, and there is a ``slug`` key in the ``Request``
-    ``attributes`` bag, that value is used (and typically this value came
-    from the ``RouterListener``).
+       of the argument, that value is used. For example, if the first argument
+       to a controller is ``$slug``, and there is a ``slug`` key in the ``Request``
+       ``attributes`` bag, that value is used (and typically this value came
+       from the ``RouterListener``).
 
     b) If the argument in the controller is type-hinted with Symfony's
-    :class:`Symfony\\Component\\HttpFoundation\\Request` object, then the
-    ``Request`` is passed in as the value.
+       :class:`Symfony\\Component\\HttpFoundation\\Request` object, then the
+       ``Request`` is passed in as the value.
 
 .. _component-http-kernel-calling-controller:
 
@@ -367,7 +367,7 @@ has a little bit more work to do - :ref:`kernel.view <component-http-kernel-kern
 
 .. _component-http-kernel-kernel-view:
 
-6) The ``kernel.view`` event
+6) The ``kernel.view`` Event
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Typical Purposes**: Transform a non-``Response`` return value from a controller
@@ -386,7 +386,7 @@ to create a ``Response``.
 This can be useful if you want to use a "view" layer: instead of returning
 a ``Response`` from the controller, you return data that represents the page.
 A listener to this event could then use this data to create a ``Response`` that
-is in the correct format (e.g HTML, json, etc).
+is in the correct format (e.g HTML, JSON, etc).
 
 At this stage, if no listener sets a response on the event, then an exception
 is thrown: either the controller *or* one of the view listeners must always
@@ -411,7 +411,7 @@ return a ``Response``.
 
 .. _component-http-kernel-kernel-response:
 
-7) The ``kernel.response`` event
+7) The ``kernel.response`` Event
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Typical Purposes**: Modify the ``Response`` object just before it is sent
@@ -448,7 +448,7 @@ method, which sends the headers and prints the ``Response`` content.
 
 .. _component-http-kernel-kernel-terminate:
 
-8) The ``kernel.terminate`` event
+8) The ``kernel.terminate`` Event
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Typical Purposes**: To perform some "heavy" action after the response has
@@ -479,14 +479,14 @@ as possible to the client (e.g. sending emails).
 
 .. sidebar:: ``kernel.terminate`` in the Symfony Framework
 
-    If you use the ``SwiftmailerBundle`` with Symfony2 and use ``memory``
+    If you use the SwiftmailerBundle with Symfony2 and use ``memory``
     spooling, then the :class:`Symfony\\Bundle\\SwiftmailerBundle\\EventListener\\EmailSenderListener`
     is activated, which actually delivers any emails that you scheduled to
     send during the request.
 
 .. _component-http-kernel-kernel-exception:
 
-Handling Exceptions: the ``kernel.exception`` event
+Handling Exceptions: the ``kernel.exception`` Event
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Typical Purposes**: Handle some type of exception and create an appropriate
@@ -511,7 +511,7 @@ exception and create an appropriate error ``Response``.
 
 For example, to generate a 404 page, you might throw a special type of exception
 and then add a listener on this event that looks for this exception and
-creates and returns a 404 ``Response``. In fact, the ``HttpKernel`` component
+creates and returns a 404 ``Response``. In fact, the HttpKernel component
 comes with an :class:`Symfony\\Component\\HttpKernel\\EventListener\\ExceptionListener`,
 which if you choose to use, will do this and more by default (see the sidebar
 below for more details).
@@ -523,25 +523,25 @@ below for more details).
 
     **ExceptionListener in HttpKernel**
 
-    The first comes core to the ``HttpKernel`` component
+    The first comes core to the HttpKernel component
     and is called :class:`Symfony\\Component\\HttpKernel\\EventListener\\ExceptionListener`.
     The listener has several goals:
 
     1) The thrown exception is converted into a
-    :class:`Symfony\\Component\\HttpKernel\\Exception\\FlattenException`
-    object, which contains all the information about the request, but which
-    can be printed and serialized.
+       :class:`Symfony\\Component\\HttpKernel\\Exception\\FlattenException`
+       object, which contains all the information about the request, but which
+       can be printed and serialized.
 
     2) If the original exception implements
-    :class:`Symfony\\Component\\HttpKernel\\Exception\\HttpExceptionInterface`,
-    then ``getStatusCode`` and ``getHeaders`` are called on the exception
-    and used to populate the headers and status code of the ``FlattenException``
-    object. The idea is that these are used in the next step when creating
-    the final response.
+       :class:`Symfony\\Component\\HttpKernel\\Exception\\HttpExceptionInterface`,
+       then ``getStatusCode`` and ``getHeaders`` are called on the exception
+       and used to populate the headers and status code of the ``FlattenException``
+       object. The idea is that these are used in the next step when creating
+       the final response.
 
     3) A controller is executed and passed the flattened exception. The exact
-    controller to render is passed as a constructor argument to this listener.
-    This controller will return the final ``Response`` for this error page.
+       controller to render is passed as a constructor argument to this listener.
+       This controller will return the final ``Response`` for this error page.
 
     **ExceptionListener in Security**
 
@@ -569,25 +569,27 @@ each event has their own event object:
 
 .. _component-http-kernel-event-table:
 
-+-------------------+-------------------------------+-------------------------------------------------------------------------------------+
-| **Name**          | ``KernelEvents`` **Constant** | **Argument passed to the listener**                                                 |
-+-------------------+-------------------------------+-------------------------------------------------------------------------------------+
-| kernel.request    | ``KernelEvents::REQUEST``     | :class:`Symfony\\Component\\HttpKernel\\Event\\GetResponseEvent`                    |
-+-------------------+-------------------------------+-------------------------------------------------------------------------------------+
-| kernel.controller | ``KernelEvents::CONTROLLER``  | :class:`Symfony\\Component\\HttpKernel\\Event\\FilterControllerEvent`               |
-+-------------------+-------------------------------+-------------------------------------------------------------------------------------+
-| kernel.view       | ``KernelEvents::VIEW``        | :class:`Symfony\\Component\\HttpKernel\\Event\\GetResponseForControllerResultEvent` |
-+-------------------+-------------------------------+-------------------------------------------------------------------------------------+
-| kernel.response   | ``KernelEvents::RESPONSE``    | :class:`Symfony\\Component\\HttpKernel\\Event\\FilterResponseEvent`                 |
-+-------------------+-------------------------------+-------------------------------------------------------------------------------------+
-| kernel.terminate  | ``KernelEvents::TERMINATE``   | :class:`Symfony\\Component\\HttpKernel\\Event\\PostResponseEvent`                   |
-+-------------------+-------------------------------+-------------------------------------------------------------------------------------+
-| kernel.exception  | ``KernelEvents::EXCEPTION``   | :class:`Symfony\\Component\\HttpKernel\\Event\\GetResponseForExceptionEvent`        |
-+-------------------+-------------------------------+-------------------------------------------------------------------------------------+
++-----------------------+----------------------------------+-------------------------------------------------------------------------------------+
+| Name                  | ``KernelEvents`` Constant        | Argument passed to the listener                                                     |
++=======================+==================================+=====================================================================================+
+| kernel.request        | ``KernelEvents::REQUEST``        | :class:`Symfony\\Component\\HttpKernel\\Event\\GetResponseEvent`                    |
++-----------------------+----------------------------------+-------------------------------------------------------------------------------------+
+| kernel.controller     | ``KernelEvents::CONTROLLER``     | :class:`Symfony\\Component\\HttpKernel\\Event\\FilterControllerEvent`               |
++-----------------------+----------------------------------+-------------------------------------------------------------------------------------+
+| kernel.view           | ``KernelEvents::VIEW``           | :class:`Symfony\\Component\\HttpKernel\\Event\\GetResponseForControllerResultEvent` |
++-----------------------+----------------------------------+-------------------------------------------------------------------------------------+
+| kernel.response       | ``KernelEvents::RESPONSE``       | :class:`Symfony\\Component\\HttpKernel\\Event\\FilterResponseEvent`                 |
++-----------------------+----------------------------------+-------------------------------------------------------------------------------------+
+| kernel.finish_request | ``KernelEvents::FINISH_REQUEST`` | :class:`Symfony\\Component\\HttpKernel\\Event\\FinishRequestEvent`                  |
++-----------------------+----------------------------------+-------------------------------------------------------------------------------------+
+| kernel.terminate      | ``KernelEvents::TERMINATE``      | :class:`Symfony\\Component\\HttpKernel\\Event\\PostResponseEvent`                   |
++-----------------------+----------------------------------+-------------------------------------------------------------------------------------+
+| kernel.exception      | ``KernelEvents::EXCEPTION``      | :class:`Symfony\\Component\\HttpKernel\\Event\\GetResponseForExceptionEvent`        |
++-----------------------+----------------------------------+-------------------------------------------------------------------------------------+
 
 .. _http-kernel-working-example:
 
-A Full Working Example
+A full Working Example
 ----------------------
 
 When using the HttpKernel component, you're free to attach any listeners
@@ -601,6 +603,7 @@ a built-in ControllerResolver that can be used to create a working example::
     use Symfony\Component\HttpKernel\HttpKernel;
     use Symfony\Component\EventDispatcher\EventDispatcher;
     use Symfony\Component\HttpKernel\Controller\ControllerResolver;
+    use Symfony\Component\HttpKernel\EventListener\RouterListener;
     use Symfony\Component\Routing\RouteCollection;
     use Symfony\Component\Routing\Route;
     use Symfony\Component\Routing\Matcher\UrlMatcher;
@@ -609,7 +612,9 @@ a built-in ControllerResolver that can be used to create a working example::
     $routes = new RouteCollection();
     $routes->add('hello', new Route('/hello/{name}', array(
             '_controller' => function (Request $request) {
-                return new Response(sprintf("Hello %s", $request->get('name')));
+                return new Response(
+                    sprintf("Hello %s", $request->get('name'))
+                );
             }
         )
     ));
@@ -645,7 +650,7 @@ your controller).
    :align: center
 
 To execute a sub request, use ``HttpKernel::handle``, but change the second
-arguments as follows::
+argument as follows::
 
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpKernel\HttpKernelInterface;
@@ -655,17 +660,21 @@ arguments as follows::
     // create some other request manually as needed
     $request = new Request();
     // for example, possibly set its _controller manually
-    $request->attributes->add('_controller', '...');
+    $request->attributes->set('_controller', '...');
 
     $response = $kernel->handle($request, HttpKernelInterface::SUB_REQUEST);
     // do something with this response
+
+.. versionadded:: 2.4
+    The ``isMasterRequest()`` method was introduced in Symfony 2.4.
+    Prior, the ``getRequestType()`` method must be used.
 
 This creates another full request-response cycle where this new ``Request`` is
 transformed into a ``Response``. The only difference internally is that some
 listeners (e.g. security) may only act upon the master request. Each listener
 is passed some sub-class of :class:`Symfony\\Component\\HttpKernel\\Event\\KernelEvent`,
-whose :method:`Symfony\\Component\\HttpKernel\\Event\\KernelEvent::getRequestType`
-can be used to figure out if the current request is a "master" or "sub" request.
+whose :method:`Symfony\\Component\\HttpKernel\\Event\\KernelEvent::isMasterRequest`
+can be used to check if the current request is a "master" or "sub" request.
 
 For example, a listener that only needs to act on the master request may
 look like this::
@@ -675,7 +684,7 @@ look like this::
 
     public function onKernelRequest(GetResponseEvent $event)
     {
-        if (HttpKernelInterface::MASTER_REQUEST !== $event->getRequestType()) {
+        if (!$event->isMasterRequest()) {
             return;
         }
 

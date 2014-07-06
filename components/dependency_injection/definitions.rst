@@ -1,5 +1,5 @@
 ﻿.. index::
-   single: Dependency Injection; Service definitions
+   single: DependencyInjection; Service definitions
 
 Working with Container Service Definitions
 ==========================================
@@ -33,10 +33,10 @@ it to the container using::
 
     $container->setDefinition($id, $definition);
 
-Working with a definition
+Working with a Definition
 -------------------------
 
-Creating a new definition
+Creating a new Definition
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If you need to create a new definition rather than manipulate one retrieved
@@ -88,7 +88,7 @@ In a similar way you can replace an already set argument by index using::
 You can also replace all the arguments (or set some if there are none) with
 an array of arguments::
 
-    $definition->replaceArguments($arguments);
+    $definition->setArguments($arguments);
 
 Method Calls
 ~~~~~~~~~~~~
@@ -104,7 +104,7 @@ Add a method call with::
 
    $definition->addMethodCall($method, $arguments);
 
-Where ``$method`` is the method name and $arguments is an array of the arguments
+Where ``$method`` is the method name and ``$arguments`` is an array of the arguments
 to call the method with. The arguments can be strings, arrays, parameters or
 service ids as with the constructor arguments.
 

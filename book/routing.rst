@@ -445,10 +445,10 @@ ujemal in dajal parametru ``page`` vrednost ``2``. Odlično.
 .. index::
    single: Routing; Requirements
 
-Adding Requirements
-~~~~~~~~~~~~~~~~~~~
+Dodajanje zahtev
+~~~~~~~~~~~~~~~~
 
-Take a quick look at the routes that have been created so far:
+Na hitro poglejte usmeritve, ki so bile ustvarjene za vas:
 
 .. configuration-block::
 
@@ -497,26 +497,26 @@ Take a quick look at the routes that have been created so far:
 
         return $collection;
 
-Can you spot the problem? Notice that both routes have patterns that match
-URL's that look like ``/blog/*``. The Symfony router will always choose the
-**first** matching route it finds. In other words, the ``blog_show`` route
-will *never* be matched. Instead, a URL like ``/blog/my-blog-post`` will match
-the first route (``blog``) and return a nonsense value of ``my-blog-post``
-to the ``{page}`` parameter.
+Ali opazite problem? Bodite pozorni, da imata obe usmeritvi vzorce, ki se ujemajo
+z URL-ji, ki izgledajo kot ``/blog/*``. Symfony-jev usmerjevalnik bo vedno izbral
+**prvo** ujemalno usmeritev, ki jo najde. Z drugimi besedami, usmeritev ``blog_show``
+se ne bo nikoli ujemala. Namesto tega, URL kot je ``/blog/my-blog-post`` se bo ujel
+s prvo usmeritvijo (``blog``) in vrnil nesmiselno vrednost ``my-blog-post``
+parametru ``{page}``.
 
-+--------------------+-------+-----------------------+
-| URL                | route | parameters            |
-+====================+=======+=======================+
-| /blog/2            | blog  | {page} = 2            |
-+--------------------+-------+-----------------------+
-| /blog/my-blog-post | blog  | {page} = my-blog-post |
-+--------------------+-------+-----------------------+
++--------------------+-----------+-----------------------+
+| URL                | usmeritev | parametri             |
++====================+===========+=======================+
+| /blog/2            | blog      | {page} = 2            |
++--------------------+-----------+-----------------------+
+| /blog/my-blog-post | blog      | {page} = my-blog-post |
++--------------------+-----------+-----------------------+
 
-The answer to the problem is to add route *requirements* or route *conditions*
-(see :ref:`book-routing-conditions`). The routes in this example would work
-perfectly if the ``/blog/{page}`` path *only* matched URLs where the ``{page}``
-portion is an integer. Fortunately, regular expression requirements can easily
-be added for each parameter. For example:
+Odgovor na problem je dodati *zahteve* usmeritve  ali *pogoje* usmeritve
+(see :ref:`book-routing-conditions`). Usmeritve v tem primeru bi delovale
+odlično, če bi se pot ``/blog/{page}`` ujemala *samo* z URL-ji, kjer je del
+``{page}`` celo število. Na srečo, so lahko zahteve splošnih izrazov enostavno
+dodane za vsak parameter. Na primer:
 
 .. configuration-block::
 
@@ -558,17 +558,17 @@ be added for each parameter. For example:
 
         return $collection;
 
-The ``\d+`` requirement is a regular expression that says that the value of
-the ``{page}`` parameter must be a digit (i.e. a number). The ``blog`` route
-will still match on a URL like ``/blog/2`` (because 2 is a number), but it
-will no longer match a URL like ``/blog/my-blog-post`` (because ``my-blog-post``
-is *not* a number).
+Zahteva ``\d+`` je splošni izraz, ki pravi, da vrednost
+parametra ``{page}`` mora biti celo število (t.j. številka). Usmeritev ``blog``
+se bo še vedno ujemala na URL-jih kot je ``/blog/2`` (ker je 2 številka), vendar
+se ne bo več ujemala z URL-ji kot je ``/blog/my-blog-post`` (ker ``my-blog-post``
+*ni* številka).
 
-As a result, a URL like ``/blog/my-blog-post`` will now properly match the
-``blog_show`` route.
+Kot rezultat, URL kot je ``/blog/my-blog-post``, se bo sedaj ustrezno ujemala z
+usmeritvijo ``blog_show``.
 
 +----------------------+-----------+-------------------------+
-| URL                  | route     | parameters              |
+| URL                  | usmeritev | parametri               |
 +======================+===========+=========================+
 | /blog/2              | blog      | {page} = 2              |
 +----------------------+-----------+-------------------------+
@@ -577,18 +577,18 @@ As a result, a URL like ``/blog/my-blog-post`` will now properly match the
 | /blog/2-my-blog-post | blog_show | {slug} = 2-my-blog-post |
 +----------------------+-----------+-------------------------+
 
-.. sidebar:: Earlier Routes always Win
+.. sidebar:: Prejšnje usmeritve vedno zmagajo
 
-    What this all means is that the order of the routes is very important.
-    If the ``blog_show`` route were placed above the ``blog`` route, the
-    URL ``/blog/2`` would match ``blog_show`` instead of ``blog`` since the
-    ``{slug}`` parameter of ``blog_show`` has no requirements. By using proper
-    ordering and clever requirements, you can accomplish just about anything.
+    Kaj to vse pomeni je, da je vrstni red usmeritev zelo pomemben.
+    Če bi bila usmeritev ``blog_show`` postavljena nad usmeritev ``blog``,
+    bi se URL ``/blog/2`` ujemal z ``blog_show`` namesto z ``blog``, ker
+    parameter ``{slug}`` od ``blog_show`` nima nobenih zahtev. Z uporabo ustreznega
+    vrstnega reda in pametnih zahtev, lahko dosežete karkoli.
 
-Since the parameter requirements are regular expressions, the complexity
-and flexibility of each requirement is entirely up to you. Suppose the homepage
-of your application is available in two different languages, based on the
-URL:
+Ker so zahteve parametrov splošni izrazi, sta kompleksnost
+in fleksibilnost vsakega zahtevka v celoti odvisna od vas. Predpostavimo, da je domača stran
+vaše aplikacije na voljo v dveh različnih jezikih, na osnovi
+URL-ja:
 
 .. configuration-block::
 
@@ -630,8 +630,8 @@ URL:
 
         return $collection;
 
-For incoming requests, the ``{culture}`` portion of the URL is matched against
-the regular expression ``(en|fr)``.
+Za prihajajoče zahtevke, se del ``{culture}`` URL-ja ujema s
+splošnimi izrazi ``(en|fr)``.
 
 +-----+--------------------------+
 | /   | {culture} = en           |
@@ -646,14 +646,14 @@ the regular expression ``(en|fr)``.
 .. index::
    single: Routing; Method requirement
 
-Adding HTTP Method Requirements
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Dodajanje zahtev HTTP metod
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In addition to the URL, you can also match on the *method* of the incoming
-request (i.e. GET, HEAD, POST, PUT, DELETE). Suppose you have a contact form
-with two controllers - one for displaying the form (on a GET request) and one
-for processing the form when it's submitted (on a POST request). This can
-be accomplished with the following route configuration:
+V dodatku URL-ja, lahko tudi ujemate na *metodi* prihajajočega
+zahtevka (t.j. GET, HEAD, POST, PUT, DELETE). Predpostavimo, da imate kontaktni obrazec
+z dvema krmilnikoma - eden za prikaz obrazca (na zahtevku GET) in eden
+za procesiranje obrazca, ko je poslan (na zahtevku POST). To je lahko
+doseženo s sledečo nastavitvijo usmeritve:
 
 .. configuration-block::
 
@@ -702,33 +702,33 @@ be accomplished with the following route configuration:
 
         return $collection;
 
-Despite the fact that these two routes have identical paths (``/contact``),
-the first route will match only GET requests and the second route will match
-only POST requests. This means that you can display the form and submit the
-form via the same URL, while using distinct controllers for the two actions.
+Kljub dejstvu, da imata ti dve usmeritvi identični poti (``/contact``),
+se bo prva usmeritev ujemala samo z zahtevki GET in druga usmeritev se bo ujemala
+samo z zahtevki POST. To pomeni, da lahko prikažete obrazec in ga pošljete
+preko enakega URL-ja, medtem ko uporabljate različna krmilnika za ti dve akciji.
 
 .. note::
 
-    If no ``methods`` are specified, the route will match on *all* methods.
+    Če ni specificirana nobena ``method``, se bo usmeritev ujemala z *vsemi* metodami.
 
-Adding a Host Requirement
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Dodajanje zahtev gostitelja
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can also match on the HTTP *host* of the incoming request. For more
-information, see :doc:`/components/routing/hostname_pattern` in the Routing
-component documentation.
+Ujemate lahko tudi HTTP *host* prihajajočega zahtevka. Za več
+informacij, glejte :doc:`/components/routing/hostname_pattern` v dokumentaciji Routing
+komponente.
 
 .. _book-routing-conditions:
 
-Completely Customized Route Matching with Conditions
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Popolnoma prilagojeno ujemanje usmeritev s pogoji
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 2.4
-    Route conditions were introduced in Symfony 2.4.
+    Pogoji usmeritev so bili predstavljeni v Symfony 2.4.
 
-As you've seen, a route can be made to match only certain routing wildcards
-(via regular expressions), HTTP methods, or host names. But the routing system
-can be extended to have an almost infinite flexibility using ``conditions``:
+Kot ste videli, je lahko usmeritev narejena, da se ujema samo z določenimi usmeritvenimi nadomestnimi znaki
+(preko splošnih izrazov), HTTP metodami ali imeni gostiteljev. Vendar je lahko sistem
+usmerjanja razširjen, da ima skoraj neskončno fleksibilnost z uporabo ``pogojev``:
 
 .. configuration-block::
 
@@ -775,11 +775,12 @@ can be extended to have an almost infinite flexibility using ``conditions``:
 
         return $collection;
 
-The ``condition`` is an expression, and you can learn more about its syntax
-here: :doc:`/components/expression_language/syntax`. With this, the route
-won't match unless the HTTP method is either GET or HEAD *and* if the ``User-Agent``
-header matches ``firefox``.
+``condition`` je izraz in lahko se naučite več o njegovi sintaksi
+tu: :doc:`/components/expression_language/syntax`. S tem se usmeritev
+ne bo ujemala razen, če je HTTP metoda ali GET ali HEAD *in*, če je glava ``User-Agent``
+``firefox``.
 
+Lahko naredite katerokoli kompleksno logiko, ki jo potrebujete v izrazu 
 You can do any complex logic you need in the expression by leveraging two
 variables that are passed into the expression:
 

@@ -5,7 +5,14 @@ Tabelni pomočnik
 ================
 
 .. versionadded:: 2.3
-    Pomočnik ``table`` je bil dodan v Symfony 2.3.
+    Pomočnik ``table`` je bil predstavljen v Symfony 2.3.
+
+.. caution::
+
+    Table Helper je bil opuščen v Symfony 2.5 in bo odstranjen v
+    Symfony 3.0. Sedaj bi morali uporabljati
+    namesto tega razred :doc:`Table </components/console/helpers/table>`, ki je
+    močnejši.
 
 Ko se gradi konzolno aplikacijo, je lahko uporabno prikazati tabularne podatke:
 
@@ -14,7 +21,7 @@ Ko se gradi konzolno aplikacijo, je lahko uporabno prikazati tabularne podatke:
 Za prikaz tabele, uporabite :class:`Symfony\\Component\\Console\\Helper\\TableHelper`,
 nastavite glave, vrstice in izpis::
 
-    $table = $app->getHelperSet()->get('table');
+    $table = $this->getHelperSet()->get('table');
     $table
         ->setHeaders(array('ISBN', 'Title', 'Author'))
         ->setRows(array(
@@ -33,7 +40,7 @@ Prilagoditev postavitve tabele z uporabo poimenovanih postavitev
 ----------------------------------------------------------------
 
 .. versionadded:: 2.4
-    Postavitev ``TableHelper::LAYOUT_COMPACT`` je bila dodana v Symfony 2.4.
+    Postavitev ``TableHelper::LAYOUT_COMPACT`` je bila predstavljena v Symfony 2.4.
 
 Pomočnik tabel vsebuje tri prednastavljene postavitve tabele:
 

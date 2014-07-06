@@ -5,12 +5,18 @@
 Session Management
 ==================
 
-The Symfony2 HttpFoundation Component has a very powerful and flexible session
+The Symfony2 HttpFoundation component has a very powerful and flexible session
 subsystem which is designed to provide session management through a simple
 object-oriented interface using a variety of session storage drivers.
 
 Sessions are used via the simple :class:`Symfony\\Component\\HttpFoundation\\Session\\Session`
 implementation of :class:`Symfony\\Component\\HttpFoundation\\Session\\SessionInterface` interface.
+
+.. caution::
+
+    Make sure your PHP session isn't already started before using the Session
+    class. If you have a legacy session system that starts your session, see
+    http://symfony.com/doc/current/components/http_foundation/session_php_bridge.html
 
 Quick example::
 
@@ -28,7 +34,7 @@ Quick example::
 
     // retrieve messages
     foreach ($session->getFlashBag()->get('notice', array()) as $message) {
-        echo "<div class='flash-notice'>$message</div>";
+        echo '<div class="flash-notice">'.$message.'</div>';
     }
 
 .. note::
@@ -107,7 +113,7 @@ Session attributes
 * :method:`Symfony\\Component\\HttpFoundation\\Session\\Session::clear`:
   Clear all attributes.
 
-The attributes are stored internally in an "Bag", a PHP object that acts like
+The attributes are stored internally in a "Bag", a PHP object that acts like
 an array. A few methods exist for "Bag" management:
 
 * :method:`Symfony\\Component\\HttpFoundation\\Session\\Session::registerBag`:
@@ -121,7 +127,7 @@ an array. A few methods exist for "Bag" management:
   Gets the :class:`Symfony\\Component\\HttpFoundation\\Session\\Flash\\FlashBagInterface`.
   This is just a shortcut for convenience.
 
-Session meta-data
+Session metadata
 
 * :method:`Symfony\\Component\\HttpFoundation\\Session\\Session::getMetadataBag`:
   Gets the :class:`Symfony\\Component\\HttpFoundation\\Session\\Storage\\MetadataBag`
@@ -131,9 +137,9 @@ Session Data Management
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 PHP's session management requires the use of the ``$_SESSION`` super-global,
-however, this interferes somewhat with code testability and encapsulation in a
-OOP paradigm. To help overcome this, Symfony2 uses 'session bags' linked to the
-session to encapsulate a specific dataset of 'attributes' or 'flash messages'.
+however, this interferes somewhat with code testability and encapsulation in an
+OOP paradigm. To help overcome this, Symfony2 uses *session bags* linked to the
+session to encapsulate a specific dataset of attributes or flash messages.
 
 This approach also mitigates namespace pollution within the ``$_SESSION``
 super-global because each bag stores all its data under a unique namespace.
@@ -141,7 +147,7 @@ This allows Symfony2 to peacefully co-exist with other applications or libraries
 that might use the ``$_SESSION`` super-global and all data remains completely
 compatible with Symfony2's session management.
 
-Symfony2 provides 2 kinds of storage bags, with two separate implementations.
+Symfony2 provides two kinds of storage bags, with two separate implementations.
 Everything is written against interfaces so you may extend or create your own
 bag types if necessary.
 
@@ -172,11 +178,11 @@ and remember me login settings or other user based state information.
 * :class:`Symfony\\Component\\HttpFoundation\\Session\\Attribute\\NamespacedAttributeBag`
   This implementation allows for attributes to be stored in a structured namespace.
 
-Any plain `key => value` storage system is limited in the extent to which
+Any plain key-value storage system is limited in the extent to which
 complex data can be stored since each key must be unique. You can achieve
 namespacing by introducing a naming convention to the keys so different parts of
-your application could operate without clashing. For example, `module1.foo` and
-`module2.foo`. However, sometimes this is not very practical when the attributes
+your application could operate without clashing. For example, ``module1.foo`` and
+``module2.foo``. However, sometimes this is not very practical when the attributes
 data is an array, for example a set of tokens. In this case, managing the array
 becomes a burden because you have to retrieve the array then process it and
 store it again::
@@ -225,12 +231,12 @@ has a simple API
 * :method:`Symfony\\Component\\HttpFoundation\\Session\\Attribute\\AttributeBagInterface::clear`:
   Clear the bag;
 
-Flash messages
+Flash Messages
 ~~~~~~~~~~~~~~
 
 The purpose of the :class:`Symfony\\Component\\HttpFoundation\\Session\\Flash\\FlashBagInterface`
 is to provide a way of setting and retrieving messages on a per session basis.
-The usual workflow for flash messages would be set in an request, and displayed
+The usual workflow would be to set flash messages in a request and to display them
 after a page redirect. For example, a user submits a form which hits an update
 controller, and after processing the controller redirects the page to either the
 updated page or an error page. Flash messages set in the previous page request
@@ -254,7 +260,7 @@ has a simple API
   Adds a flash message to the stack of specified type;
 
 * :method:`Symfony\\Component\\HttpFoundation\\Session\\Flash\\FlashBagInterface::set`:
-  Sets flashes by type;  This method conveniently takes both singles messages as
+  Sets flashes by type; This method conveniently takes both single messages as
   a ``string`` or multiple messages in an ``array``.
 
 * :method:`Symfony\\Component\\HttpFoundation\\Session\\Flash\\FlashBagInterface::get`:
@@ -308,18 +314,18 @@ Simple, display one type of message::
 
     // display warnings
     foreach ($session->getFlashBag()->get('warning', array()) as $message) {
-        echo "<div class='flash-warning'>$message</div>";
+        echo '<div class="flash-warning">'.$message.'</div>';
     }
 
     // display errors
     foreach ($session->getFlashBag()->get('error', array()) as $message) {
-        echo "<div class='flash-error'>$message</div>";
+        echo '<div class="flash-error">'.$message.'</div>';
     }
 
 Compact method to process display all flashes at once::
 
     foreach ($session->getFlashBag()->all() as $type => $messages) {
         foreach ($messages as $message) {
-            echo "<div class='flash-$type'>$message</div>\n";
+            echo '<div class="flash-'.$type.'">'.$message.'</div>';
         }
     }

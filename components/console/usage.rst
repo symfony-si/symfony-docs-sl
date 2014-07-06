@@ -5,16 +5,16 @@ Uporaba konzolnih ukazov, bližnjic in vgrajenih ukazov
 ======================================================
 
 Kot dodatek opcijam, ki jih specificirate za vaše ukaze, je na voljo nekaj
-vgrajenih opcij, kot tudi nekaj vgrajenih ukazov za konzolne komponente.
+vgrajenih opcij, kot tudi nekaj vgrajenih ukazov za konzolno komponento.
 
 .. note::
 
-    Te primeri predvidevajo, da ste dodali datoteko ``app/console`` za pogon
+    Te primeri predvidevajo, da ste dodali datoteko ``application.php`` za pogon
     v vmesniku ukazne vrstice (cli)::
 
         #!/usr/bin/env php
-        # app/console
         <?php
+        // application.php
 
         use Symfony\Component\Console\Application;
 
@@ -30,26 +30,26 @@ in registrirane ukaze:
 
 .. code-block:: bash
 
-    $ php app/console list
+    $ php application.php list
 
 Lahko dobite tudi enak izpis s pogonom brez ukaza:
 
 .. code-block:: bash
 
-    $ php app/console
+    $ php application.php
 
 Ukaz help izpiše informacije pomoči za določen ukaz. Na primer, da dobite
 pomoč za ukaz ``list``:
 
 .. code-block:: bash
 
-    $ php app/console help list
+    $ php application.php help list
 
 Pogon ``help`` brez specificiranja ukaza bo izpisalo globalne opcije:
 
 .. code-block:: bash
 
-    $ php app/console help
+    $ php application.php help
 
 globalne opcije
 ~~~~~~~~~~~~~~~
@@ -59,32 +59,32 @@ dobite pomoč za ukaz list:
 
 .. code-block:: bash
 
-    $ php app/console list --help
-    $ php app/console list -h
+    $ php application.php list --help
+    $ php application.php list -h
 
 Lahko tudi zatrete izpis z:
 
 .. code-block:: bash
 
-    $ php app/console list --quiet
-    $ php app/console list -q
+    $ php application.php list --quiet
+    $ php application.php list -q
 
 Lahko dobite bolj opisna sporočila (če je to podprto za ukaz) z:
 
 .. code-block:: bash
 
-    $ php app/console list --verbose
-    $ php app/console list -v
+    $ php application.php list --verbose
+    $ php application.php list -v
 
 Zastavita verbose lahko opcijsko vzame vrednost med 1 (privzeto) in 3, da
 izpiše še bolj opisna sporočila:
 
 .. code-block:: bash
 
-    $ php app/console list --verbose=2
-    $ php app/console list -vv
-    $ php app/console list --verbose=3
-    $ php app/console list -vvv
+    $ php application.php list --verbose=2
+    $ php application.php list -vv
+    $ php application.php list --verbose=3
+    $ php application.php list -vvv
 
 Če nastavite opcijske argumente, da date vaši aplikaciji ime in verzijo::
 
@@ -94,8 +94,8 @@ potem lahko uporabite:
 
 .. code-block:: bash
 
-    $ php app/console list --version
-    $ php app/console list -V
+    $ php application.php list --version
+    $ php application.php list -V
 
 da dobite ta izpis informacij:
 
@@ -113,20 +113,20 @@ Lahko tudi prisilite vključitev ANSI izpisa barv z:
 
 .. code-block:: bash
 
-    $ php app/console list --ansi
+    $ php application.php list --ansi
 
 ali ga izključite z:
 
 .. code-block:: bash
 
-    $ php app/console list --no-ansi
+    $ php application.php list --no-ansi
 
 Lahko tudi zatrete katerakoli interaktivna vprašanja iz ukaza, ki ga poganjate z:
 
 .. code-block:: bash
 
-    $ php app/console list --no-interaction
-    $ php app/console list -n
+    $ php application.php list --no-interaction
+    $ php application.php list -n
 
 Sintaksa bližnjice
 ~~~~~~~~~~~~~~~~~~
@@ -137,7 +137,7 @@ ukazi, potem lahko poženete ``help`` takole:
 
 .. code-block:: bash
 
-    $ php app/console h
+    $ php application.php h
 
 Če imate ukaze, ki uporabljajo ``:`` za imenske prostore ukazov, potem morate
 vpisati samo najkrajši nedvoumen tekst za vsak del. Če ste izdelali
@@ -146,7 +146,7 @@ lahko poženete z:
 
 .. code-block:: bash
 
-    $ php app/console d:g Fabien
+    $ php application.php d:g Fabien
 
 Če vnesete kratek ukaz, ki je dvoumen (to pomeni, da se ujema z več kot enim
 ukazom), potem ne bo noben ukaz poganjan in nekaj predlogov možnih

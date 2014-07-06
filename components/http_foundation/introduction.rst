@@ -6,7 +6,7 @@
 The HttpFoundation Component
 ============================
 
-    The HttpFoundation Component defines an object-oriented layer for the HTTP
+    The HttpFoundation component defines an object-oriented layer for the HTTP
     specification.
 
 In PHP, the request is represented by some global variables (``$_GET``,
@@ -168,13 +168,21 @@ argument::
 
 .. _component-foundation-attributes:
 
-Finally, you can also store additional data in the request,
-thanks to the public ``attributes`` property, which is also an instance of
+Thanks to the public ``attributes`` property, you can store additional data
+in the request, which is also an instance of
 :class:`Symfony\\Component\\HttpFoundation\\ParameterBag`. This is mostly used
 to attach information that belongs to the Request and that needs to be
 accessed from many different points in your application. For information
 on how this is used in the Symfony2 framework, see
 :ref:`the Symfony2 book <book-fundamentals-attributes>`.
+
+Finally, the raw data sent with the request body can be accessed using
+:method:`Symfony\\Component\\HttpFoundation\\Request::getContent()`::
+
+    $content = $request->getContent();
+
+For instance, this may be useful to process a JSON string sent to the
+application by a remote service using the HTTP POST method.
 
 Identifying a Request
 ~~~~~~~~~~~~~~~~~~~~~
@@ -246,10 +254,7 @@ by using the following methods:
   returns the list of accepted charsets ordered by descending quality;
 
   .. versionadded:: 2.4
-      The ``getEncodings()`` method was added in Symfony 2.4.
-
-.. versionadded:: 2.2
-    The :class:`Symfony\\Component\\HttpFoundation\\AcceptHeader` class is new in Symfony 2.2.
+      The ``getEncodings()`` method was introduced in Symfony 2.4.
 
 If you need to get full access to parsed data from ``Accept``, ``Accept-Language``,
 ``Accept-Charset`` or ``Accept-Encoding``, you can use
@@ -264,8 +269,9 @@ If you need to get full access to parsed data from ``Accept``, ``Accept-Language
         $quality = $item->getQuality();
     }
 
-    // accepts items are sorted by descending quality
-    $accepts = AcceptHeader::fromString($request->headers->get('Accept'))->all();
+    // Accept header items are sorted by descending quality
+    $accepts = AcceptHeader::fromString($request->headers->get('Accept'))
+        ->all();
 
 Accessing other Data
 ~~~~~~~~~~~~~~~~~~~~
@@ -280,7 +286,7 @@ Overriding the Request
 
 .. versionadded:: 2.4
     The :method:`Symfony\\Component\\HttpFoundation\\Request::setFactory`
-    method was added in Symfony 2.4.
+    method was introduced in Symfony 2.4.
 
 The ``Request`` class should not be overridden as it is a data object that
 represents an HTTP message. But when moving from a legacy system, adding
@@ -289,8 +295,24 @@ PHP callable that is able to create an instance of your ``Request`` class::
 
     use Symfony\Component\HttpFoundation\Request;
 
-    Request::setFactory(function (array $query = array(), array $request = array(), array $attributes = array(), array $cookies = array(), array $files = array(), array $server = array(), $content = null) {
-        return SpecialRequest::create($query, $request, $attributes, $cookies, $files, $server, $content);
+    Request::setFactory(function (
+        array $query = array(),
+        array $request = array(),
+        array $attributes = array(),
+        array $cookies = array(),
+        array $files = array(),
+        array $server = array(),
+        $content = null
+    ) {
+        return SpecialRequest::create(
+            $query,
+            $request,
+            $attributes,
+            $cookies,
+            $files,
+            $server,
+            $content
+        );
     });
 
     $request = Request::createFromGlobals();
@@ -314,7 +336,7 @@ code, and an array of HTTP headers::
     );
 
 .. versionadded:: 2.4
-    Support for HTTP status code constants was added in Symfony 2.4.
+    Support for HTTP status code constants was introduced in Symfony 2.4.
 
 These information can also be manipulated after the Response object creation::
 
@@ -406,7 +428,7 @@ method::
         $response->send();
     }
 
-If the Response is not modified, it sets the status code to 304 and remove the
+If the Response is not modified, it sets the status code to 304 and removes the
 actual response content.
 
 Redirecting the User
@@ -461,13 +483,12 @@ abstracts the hard work behind a simple API::
 
     use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
-    $d = $response->headers->makeDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, 'foo.pdf');
+    $d = $response->headers->makeDisposition(
+        ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+        'foo.pdf'
+    );
 
     $response->headers->set('Content-Disposition', $d);
-
-.. versionadded:: 2.2
-    The :class:`Symfony\\Component\\HttpFoundation\\BinaryFileResponse`
-    class was added in Symfony 2.2.
 
 Alternatively, if you are serving a static file, you can use a
 :class:`Symfony\\Component\\HttpFoundation\\BinaryFileResponse`::
@@ -489,7 +510,10 @@ if it should::
 You can still set the ``Content-Type`` of the sent file, or change its ``Content-Disposition``::
 
     $response->headers->set('Content-Type', 'text/plain');
-    $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, 'filename.txt');
+    $response->setContentDisposition(
+        ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+        'filename.txt'
+    );
 
 .. _component-http-foundation-json-response:
 

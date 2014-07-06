@@ -1,5 +1,5 @@
 .. index::
-   single: Dependency Injection; Parameters
+   single: DependencyInjection; Parameters
 
 Introduction to Parameters
 ==========================
@@ -24,6 +24,13 @@ You can retrieve a parameter set in the container with::
 and set a parameter in the container with::
 
     $container->setParameter('mailer.transport', 'sendmail');
+
+.. caution::
+
+    The used ``.`` notation is just a
+    :ref:`Symfony convention <service-naming-conventions>` to make parameters
+    easier to read. Parameters are just flat key-value elements, they can't be
+    organized into a nested array
 
 .. note::
 
@@ -134,8 +141,8 @@ making the class of a service a parameter:
 
         services:
             mailer:
-                class:     '%mailer.class%'
-                arguments: ['%mailer.transport%']
+                class:     "%mailer.class%"
+                arguments: ["%mailer.transport%"]
 
     .. code-block:: xml
 
@@ -148,7 +155,6 @@ making the class of a service a parameter:
             <service id="mailer" class="%mailer.class%">
                 <argument>%mailer.transport%</argument>
             </service>
-
         </services>
 
     .. code-block:: php
@@ -190,9 +196,9 @@ making the class of a service a parameter:
 Array Parameters
 ----------------
 
-Parameters do not need to be flat strings, they can also be arrays. For the XML
-format, you need to use the ``type="collection"`` attribute for all parameters that are
-arrays.
+Parameters do not need to be flat strings, they can also contain array values.
+For the XML format, you need to use the ``type="collection"`` attribute for
+all parameters that are arrays.
 
 .. configuration-block::
 
@@ -250,7 +256,7 @@ Constants as Parameters
 -----------------------
 
 The container also has support for setting PHP constants as parameters. To
-take advantage of this feature, map the name of your constant  to a parameter
+take advantage of this feature, map the name of your constant to a parameter
 key, and define the type as ``constant``.
 
 .. configuration-block::
@@ -275,7 +281,7 @@ key, and define the type as ``constant``.
 
 .. note::
 
-    This does not work for Yaml configuration. If you're using Yaml, you can
+    This does not work for YAML configuration. If you're using YAML, you can
     import an XML file to take advantage of this functionality:
 
     .. configuration-block::
@@ -295,7 +301,7 @@ keywords (respectively ``true``, ``false`` and ``null``):
 .. code-block:: xml
 
     <parameters>
-        <parameter key="mailer.send_all_in_once">false</parameters>
+        <parameter key="mailer.send_all_in_once">false</parameter>
     </parameters>
 
     <!-- after parsing
@@ -316,7 +322,7 @@ To disable this behavior, use the ``string`` type:
 
 .. note::
 
-    This is not available for Yaml and PHP, because they already have built-in
+    This is not available for YAML and PHP, because they already have built-in
     support for the PHP keywords.
 
 Syntax for Referencing Services
@@ -327,19 +333,28 @@ each format. You can configure the behavior if the referenced service does
 not exist. By default, an exception is thrown when a non-existent service
 is referenced.
 
-Yaml
+YAML
 ~~~~
 
-Start the string with  ``@`` or ``@?`` to reference a service in Yaml.
+Start the string with  ``@`` or ``@?`` to reference a service in YAML.
 
 * ``@mailer`` references the ``mailer`` service. If the service does not
   exist, an exception will be thrown;
 * ``@?mailer`` references the ``mailer`` service. If the service does not
   exist, it will be ignored;
 
+.. code-block:: yaml
+
+    parameters:
+        # if 'my_mailer' service isn't defined, an exception will be raised
+        foo: @my_mailer
+
+        # if 'my_logger' service isn't defined, 'bar' will be null
+        bar: @?my_logger
+
 .. tip::
 
-    Use ``@@`` to escape the ``@`` symbol in Yaml. ``@@mailer`` will be
+    Use ``@@`` to escape the ``@`` symbol in YAML. ``@@mailer`` will be
     converted into the string ``"@mailer"`` instead of referencing the
     ``mailer`` service.
 
@@ -352,6 +367,16 @@ is thrown. Valid values for ``on-invalid`` are ``null`` (uses ``null`` in place
 of the missing service) or ``ignored`` (very similar, except if used on a
 method call, the method call is removed).
 
+.. code-block:: xml
+
+    <parameters>
+        <!-- if 'my_mailer' service isn't defined, an exception will be raised -->
+        <parameter key="foo" type="service" id="my_mailer" />
+
+        <!-- if 'my_logger' service isn't defined, 'bar' will be null -->
+        <parameter key="bar" type="service" id="my_logger" on-invalid="null" />
+    </parameters>
+
 PHP
 ~~~
 
@@ -360,3 +385,15 @@ In PHP, you can use the
 a service. The invalid behavior is configured using the second constructor
 argument and constants from
 :class:`Symfony\\Component\\DependencyInjection\\ContainerInterface`.
+
+.. code-block:: php
+
+    use Symfony\Component\DependencyInjection\Reference;
+
+    // if 'my_mailer' service isn't defined, an exception will be raised
+    $container->setParameter('foo', new Reference('my_mailer'));
+
+    // if 'my_logger' service isn't defined, 'bar' will be null
+    $container->setParameter('bar', new Reference('my_logger',
+        ContainerInterface::NULL_ON_INVALID_REFERENCE
+    ));

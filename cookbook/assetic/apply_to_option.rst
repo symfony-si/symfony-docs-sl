@@ -20,9 +20,9 @@ Primer nastavitve lahko izgleda takole:
         assetic:
             filters:
                 coffee:
-                    bin: /usr/bin/coffee
-                    node: /usr/bin/node
-                    node_paths: [ /usr/lib/node_modules/ ]
+                    bin:       /usr/bin/coffee
+                    node:       /usr/bin/node
+                    node_paths: [/usr/lib/node_modules/]
 
     .. code-block:: xml
 
@@ -118,7 +118,7 @@ dodajanje JavaScript datotek ne bo prestalo CoffeeScript prevajanja.
 
 Temu problemu se lahko izognemo z uporabo ``apply_to`` opcije v nastavitvah,
 kar vam omogoča, da določite, da filter bi moral biti vedno uporabljen na določenih
-vrstah datotek. V tem primeru lahko določite, da je Coffee filter uporabljen
+vrstah datotek. V tem primeru lahko določite, da je filter ``coffee`` uporabljen
 na vseh ``.coffee`` datotekah:
 
 .. configuration-block::
@@ -129,10 +129,10 @@ na vseh ``.coffee`` datotekah:
         assetic:
             filters:
                 coffee:
-                    bin: /usr/bin/coffee
-                    node: /usr/bin/node
-                    node_paths: [ /usr/lib/node_modules/ ]
-                    apply_to: "\.coffee$"
+                    bin:        /usr/bin/coffee
+                    node:       /usr/bin/node
+                    node_paths: [/usr/lib/node_modules/]
+                    apply_to:   "\.coffee$"
 
     .. code-block:: xml
 
@@ -145,7 +145,7 @@ na vseh ``.coffee`` datotekah:
                 apply_to="\.coffee$" />
                 <assetic:node-paths>/usr/lib/node_modules/</assetic:node-path>
         </assetic:config>
-        
+
     .. code-block:: php
 
         // app/config/config.php

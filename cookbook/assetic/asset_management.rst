@@ -43,8 +43,9 @@ Uporaba Assetic-a ponuja mnoge prednosti pred direktnim pošiljanjem datotek.
 Datoteke niso nujno shranjene, iz kjer so poslane in so lahko
 potegnjene iz različnih virov kot na primer iz paketa.
 
-Lahko uporabite Assetic za procesiranje tako :ref:`CSS stilov <cookbook-assetic-including-css>`
-in :ref:`JavaScript datotek <cookbook-assetic-including-javascript>`. Filozofija
+Assetic lahko uporabite za procesiranje tako :ref:`CSS stilov <cookbook-assetic-including-css>`,
+:ref:`JavaScript datotek <cookbook-assetic-including-javascript>` in
+:ref:`slik<cookbook-assetic-including-image`. Filozofija
 za dodajanje katerihkoli je v osnovi enaka, vendar z malenkost drugačno sintakso.
 
 .. _cookbook-assetic-including-javascript:
@@ -52,9 +53,7 @@ za dodajanje katerihkoli je v osnovi enaka, vendar z malenkost drugačno sintaks
 Vključevanje JavaScript datotek
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Da vključite JavaScript datoteke, uporabite ``javascript`` značko v katerikoli predlogi.
-To se bo najpogosteje nahajalo v ``javascripts`` bloku, če uporabljate
-privzeta imena blokov iz Symfony standardne distribucije:
+Da vključite JavaScript datoteke, uporabite ``javascript`` značko v katerikoli predlogi:
 
 .. configuration-block::
 
@@ -71,6 +70,23 @@ privzeta imena blokov iz Symfony standardne distribucije:
         ) as $url): ?>
             <script type="text/javascript" src="<?php echo $view->escape($url) ?>"></script>
         <?php endforeach; ?>
+
+.. note::
+
+    Če uporabljate privzeta imena blokov iz Symfony standardne izdaje,
+    se bo ``javascripts`` značka zelo verjetno najpogosteje nahajala v ``javascripts``
+    bloku:
+
+    .. code-block:: html+jinja
+
+        {# ... #}
+        {% block javascripts %}
+            {% javascripts '@AcmeFooBundle/Resources/public/js/*' %}
+                <script type="text/javascript" src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+        {% endblock %}
+        {# ... #}
+
 
 .. tip::
 
@@ -94,9 +110,7 @@ Vključevanje CSS stilov
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 Da vključite CSS stile, lahko uporabite enako metadologijo prikazano
-zgoraj, razen z značko ``stylesheets``. Če uporabljate privzeta
-imena blokov iz Symfony standardne distribucije, se bo to običajno nahajalo
-v bloku ``stylesheets``.
+zgoraj, razen z značko ``stylesheets``:
 
 .. configuration-block::
 
@@ -115,6 +129,22 @@ v bloku ``stylesheets``.
             <link rel="stylesheet" href="<?php echo $view->escape($url) ?>" />
         <?php endforeach; ?>
 
+.. note::
+
+    Če uporabljate privzeta imena blokov iz Symfony standardne izdaje,
+    se bo značka ``stylesheets`` zelo verjetno najpogosteje nahajala v ``stylesheets``
+    bloku:
+
+    .. code-block:: html+jinja
+
+        {# ... #}
+        {% block stylesheets %}
+            {% stylesheets 'bundles/acme_foo/css/*' filter='cssrewrite' %}
+                <link rel="stylesheet" href="{{ asset_url }}" />
+            {% endstylesheets %}
+        {% endblock %}
+        {# ... #}
+
 Vendar ker Assetic spremeni poti do vaših sredstev, *bo* to pokvarilo kakršnekoli
 slike ozadij (ali druge poti), ki uporabljajo relativne poti, razen, če uporabite
 filter :ref:`cssrewrite <cookbook-assetic-cssrewrite>`.
@@ -127,6 +157,32 @@ filter :ref:`cssrewrite <cookbook-assetic-cssrewrite>`.
     javno dostopne poti: ``bundles/acme_foo/css``. Lahko uporabite katerikoli način, s tem
     da obstaja znana težava, ki povzroča da filter ``cssrewrite`` ne deluje,
     ko se uporablja ``@AcmeFooBundle`` sintakso za CSS stile.
+
+.. _cookbook-assetic-including-image:
+
+Vključevanje slik
+~~~~~~~~~~~~~~~~~
+
+Da vključite sliko, lahko uporabite značko ``image``.
+
+.. configuration-block::
+
+    .. code-block:: html+jinja
+
+        {% image '@AcmeFooBundle/Resources/public/images/example.jpg' %}
+            <img src="{{ asset_url }}" alt="Example" />
+        {% endimage %}
+
+    .. code-block:: html+php
+
+        <?php foreach ($view['assetic']->image(
+            array('@AcmeFooBundle/Resources/public/images/example.jpg')
+        ) as $url): ?>
+            <img src="<?php echo $view->escape($url) ?>" alt="Example" />
+        <?php endforeach; ?>
+
+Uporabite lahko tudi Assetic za optimizacijo slik. Več informacij v
+:doc:`/cookbook/assetic/jpeg_optimize`.
 
 .. _cookbook-assetic-cssrewrite:
 
@@ -215,6 +271,79 @@ združevanje tretje osebnih sredstev, kot je jQuery z vašimi lastnimi v eno dat
             <script src="<?php echo $view->escape($url) ?>"></script>
         <?php endforeach; ?>
 
+Uporaba poimenovanih sredstev
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Direktive nastavitev AsseticBundle vam omogočajo, da definirate sete poimenovanih sredstev.
+To lahko naredite z definiranjem vnosnih datotek, filtrov in izhodnih datotev v vaših
+nastavitvah pod sekcijo ``assetic``. Preberite več v
+:doc:`assetic config reference </reference/configuration/assetic>`.
+
+.. configuration-block::
+
+    .. code-block:: yaml
+
+        # app/config/config.yml
+        assetic:
+            assets:
+                jquery_and_ui:
+                    inputs:
+                        - '@AcmeFooBundle/Resources/public/js/thirdparty/jquery.js'
+                        - '@AcmeFooBundle/Resources/public/js/thirdparty/jquery.ui.js'
+
+    .. code-block:: xml
+
+        <!-- app/config/config.xml -->
+        <?xml version="1.0" encoding="UTF-8"?>
+        <container xmlns="http://symfony.com/schema/dic/services"
+            xmlns:assetic="http://symfony.com/schema/dic/assetic">
+
+            <assetic:config>
+                <assetic:asset name="jquery_and_ui">
+                    <assetic:input>@AcmeFooBundle/Resources/public/js/thirdparty/jquery.js</assetic:input>
+                    <assetic:input>@AcmeFooBundle/Resources/public/js/thirdparty/jquery.ui.js</assetic:input>
+                </assetic:asset>
+            </assetic:config>
+        </container>
+
+    .. code-block:: php
+
+        // app/config/config.php
+        $container->loadFromExtension('assetic', array(
+            'assets' => array(
+                'jquery_and_ui' => array(
+                    'inputs' => array(
+                        '@AcmeFooBundle/Resources/public/js/thirdparty/jquery.js',
+                        '@AcmeFooBundle/Resources/public/js/thirdparty/jquery.ui.js',
+                    ),
+                ),
+            ),
+        );
+
+Ko ste definirali poimenovana sredstva, jih lahko skličete v vaših predlogah
+z notacijo ``@named_asset``:
+
+.. configuration-block::
+
+    .. code-block:: html+jinja
+
+        {% javascripts
+            '@jquery_and_ui'
+            '@AcmeFooBundle/Resources/public/js/*' %}
+            <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+
+    .. code-block:: html+php
+
+        <?php foreach ($view['assetic']->javascripts(
+            array(
+                '@jquery_and_ui',
+                '@AcmeFooBundle/Resources/public/js/*',
+            )
+        ) as $url): ?>
+            <script src="<?php echo $view->escape($url) ?>"></script>
+        <?php endforeach; ?>
+
 .. _cookbook-assetic-filters:
 
 Filtri
@@ -238,7 +367,7 @@ Za uporabo filtra ga morate najprej določiti v Assetic nastavitvah.
 Dodajanje filtra tu ne pomeni, da je v uporabi, samo pomeni, da je
 na voljo za uporabo (filter boste uporabili spodaj).
 
-Na primer za uporabo JavaScript YUI Compressor-ja je potrebno dodati
+Na primer za uporabo UglifyJS JavaScript minifier-ja je potrebno dodati
 sledeče nastavitve:
 
 .. configuration-block::
@@ -248,16 +377,16 @@ sledeče nastavitve:
         # app/config/config.yml
         assetic:
             filters:
-                yui_js:
-                    jar: "%kernel.root_dir%/Resources/java/yuicompressor.jar"
+                uglifyjs2:
+                    bin: /usr/local/bin/uglifyjs
 
     .. code-block:: xml
 
         <!-- app/config/config.xml -->
         <assetic:config>
             <assetic:filter
-                name="yui_js"
-                jar="%kernel.root_dir%/Resources/java/yuicompressor.jar" />
+                name="uglifyjs2"
+                bin="/usr/local/bin/uglifyjs" />
         </assetic:config>
 
     .. code-block:: php
@@ -265,8 +394,8 @@ sledeče nastavitve:
         // app/config/config.php
         $container->loadFromExtension('assetic', array(
             'filters' => array(
-                'yui_js' => array(
-                    'jar' => '%kernel.root_dir%/Resources/java/yuicompressor.jar',
+                'uglifyjs2' => array(
+                    'bin' => '/usr/local/bin/uglifyjs',
                 ),
             ),
         ));
@@ -278,7 +407,7 @@ v vašo predlogo:
 
     .. code-block:: html+jinja
 
-        {% javascripts '@AcmeFooBundle/Resources/public/js/*' filter='yui_js' %}
+        {% javascripts '@AcmeFooBundle/Resources/public/js/*' filter='uglifyjs2' %}
             <script src="{{ asset_url }}"></script>
         {% endjavascripts %}
 
@@ -286,14 +415,14 @@ v vašo predlogo:
 
         <?php foreach ($view['assetic']->javascripts(
             array('@AcmeFooBundle/Resources/public/js/*'),
-            array('yui_js')
+            array('uglifyjs2')
         ) as $url): ?>
             <script src="<?php echo $view->escape($url) ?>"></script>
         <?php endforeach; ?>
 
 Bolj podroben vodič o nastavitvah in uporabi filtrov Assetic-a kot tudi
 podrobnosti o Assetic-ovem razhroščevalnem načinu, je moč najti v
-:doc:`/cookbook/assetic/yuicompressor`.
+:doc:`/cookbook/assetic/uglifyjs`.
 
 Krmiljenje uporabljenega URL-ja
 -------------------------------
@@ -353,7 +482,7 @@ v vaši izvorni kodi, boste verjetneje videli samo nekaj takega:
 
 .. code-block:: html
 
-    <script src="/app_dev.php/js/abcd123.js"></script>
+    <script src="/js/abcd123.js"></script>
 
 Poleg tega ta datoteka **ne** obstaja dejansko, niti ni dinamično izpisana
 od Symfony-ja (kakor so datoteke sredstev v ``dev`` okolju). To je

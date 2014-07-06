@@ -13,13 +13,13 @@ Installation
 
 You can install the component in 2 different ways:
 
-* :doc:`Install it via Composer</components/using_components>` (``symfony/translation`` on `Packagist`_).
-* Use the official Git repository (https://github.com/symfony/Translation);
+* :doc:`Install it via Composer </components/using_components>` (``symfony/translation`` on `Packagist`_);
+* Use the official Git repository (https://github.com/symfony/Translation).
 
 Constructing the Translator
 ---------------------------
 
-The main access point of the Translation Component is
+The main access point of the Translation component is
 :class:`Symfony\\Component\\Translation\\Translator`. Before you can use it,
 you need to configure it and load the messages to translate (called *message
 catalogs*).
@@ -45,8 +45,8 @@ The constructor of the ``Translator`` class needs one argument: The locale.
 
     The term *locale* refers roughly to the user's language and country. It
     can be any string that your application uses to manage translations and
-    other format differences (e.g. currency format). The `ISO639-1`_
-    *language* code, an underscore (``_``), then the `ISO3166 Alpha-2`_
+    other format differences (e.g. currency format). The `ISO 639-1`_
+    *language* code, an underscore (``_``), then the `ISO 3166-1 alpha-2`_
     *country* code (e.g. ``fr_FR`` for French/France) is recommended.
 
 .. _component-translator-message-catalogs:
@@ -55,12 +55,15 @@ Loading Message Catalogs
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 The messages are stored in message catalogs inside the ``Translator``
-class. A message catalog is like a dictionary of translations for a specific 
+class. A message catalog is like a dictionary of translations for a specific
 locale.
 
 The Translation component uses Loader classes to load catalogs. You can load
-multiple resources for the same locale, it will be combined into one
+multiple resources for the same locale, which will then be combined into one
 catalog.
+
+.. versionadded:: 2.4
+    The ``JsonFileLoader`` was introduced in Symfony 2.4.    
 
 The component comes with some default Loaders and you can create your own
 Loader too. The default loaders are:
@@ -85,10 +88,12 @@ Loader too. The default loaders are:
   catalogs form QT XML files.
 * :class:`Symfony\\Component\\Translation\\Loader\\XliffFileLoader` - to load
   catalogs from Xliff files.
+* :class:`Symfony\\Component\\Translation\\Loader\\JsonFileLoader` - to load
+  catalogs from JSON files.
 * :class:`Symfony\\Component\\Translation\\Loader\\YamlFileLoader` - to load
   catalogs from Yaml files (requires the :doc:`Yaml component</components/yaml/introduction>`).
 
-All file loaders require the :doc:`Config component</components/config/index>`.
+All file loaders require the :doc:`Config component </components/config/index>`.
 
 At first, you should add one or more loaders to the ``Translator``::
 
@@ -185,7 +190,12 @@ loaded like this::
 
     $translator->addResource('xliff', 'messages.fr.xliff', 'fr_FR');
     $translator->addResource('xliff', 'admin.fr.xliff', 'fr_FR', 'admin');
-    $translator->addResource('xliff', 'navigation.fr.xliff', 'fr_FR', 'navigation');
+    $translator->addResource(
+        'xliff',
+        'navigation.fr.xliff',
+        'fr_FR',
+        'navigation'
+    );
 
 When translating strings that are not in the default domain (``messages``),
 you must specify the domain as the third argument of ``trans()``::
@@ -198,8 +208,8 @@ specified locale.
 Usage
 -----
 
-Read how to use the Translation component in ":doc:`/components/translation/usage`".
+Read how to use the Translation component in :doc:`/components/translation/usage`.
 
 .. _Packagist: https://packagist.org/packages/symfony/translation
-.. _`ISO3166 Alpha-2`: http://en.wikipedia.org/wiki/ISO_3166-1#Current_codes
-.. _`ISO639-1`: http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
+.. _`ISO 3166-1 alpha-2`: http://en.wikipedia.org/wiki/ISO_3166-1#Current_codes
+.. _`ISO 639-1`: http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes

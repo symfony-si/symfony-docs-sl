@@ -1,5 +1,5 @@
 .. index::
-   single: Class Loader; PSR-0 Class Loader
+   single: ClassLoader; PSR-0 Class Loader
 
 PSR-0 Class Loader
 ==================
@@ -28,7 +28,7 @@ je enostavna::
     $loader = new ClassLoader();
 
     // to enable searching the include path (eg. for PEAR packages)
-    $loader->useIncludePath(true);
+    $loader->setUseIncludePath(true);
 
     // ... register namespaces and prefixes here - see below
 
@@ -78,4 +78,4 @@ direktorij ``Doctrine`` (zadnji, ki je nastavljen) preden odneha. Vrstni red
 registracije predpon je pomemben v tem primeru.
 
 .. _PEAR:  http://pear.php.net/manual/en/standards.naming.php
-.. _PSR-0: http://symfony.com/PSR0
+.. _PSR-0: http://www.php-fig-org/psr/psr-0/

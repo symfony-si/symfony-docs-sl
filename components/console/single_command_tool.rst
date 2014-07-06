@@ -1,5 +1,5 @@
 .. index::
-   single: Console; Single command application
+    single: Console; Single command application
 
 Gradnja eno-ukazne aplikacije
 =============================

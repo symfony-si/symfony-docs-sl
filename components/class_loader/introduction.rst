@@ -1,10 +1,10 @@
 .. index::
-    single: Components; Class Loader
+    single: Components; ClassLoader
 
-Komponenta Class Loader
+Komponenta ClassLoader
 =======================
 
-    Komponenta Class Loader Component zagotavlja orodja za avtomatsko nalaganje vaših razredov
+    Komponenta ClassLoader Component zagotavlja orodja za avtomatsko nalaganje vaših razredov
     in predpomni njihove lokacije za učinkovitost.
 
 Uporaba
@@ -21,7 +21,7 @@ naložiti vaše razrede:
 * :doc:`/components/class_loader/map_class_loader`: naloži razrede z uporabo
   statičnega zemljevida iz imena razreda v pot datoteke.
 
-Dodatno, Symfony-jeva komponenta Class Loader prihaja s skupkom ovojnih
+Dodatno, Symfony-jeva komponenta ClassLoader prihaja s skupkom ovojnih
 razredov, ki so lahko uporabljeni za dodajanje dodatnih funkcionalnosti na
 vrhu obstoječih avtomatskih nalagalnikov (autoloaders):
 

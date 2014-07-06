@@ -5,7 +5,7 @@
 The DomCrawler Component
 ========================
 
-    The DomCrawler Component eases DOM navigation for HTML and XML documents.
+    The DomCrawler component eases DOM navigation for HTML and XML documents.
 
 .. note::
 
@@ -55,11 +55,11 @@ interacting with html links and forms as you traverse through the HTML tree.
 .. note::
 
     The DomCrawler will attempt to automatically fix your HTML to match the
-    official specification. For example, if you nest a `` <p>`` tag inside
-    another `` <p>`` tag, it will be moved to be a sibling of the parent tag.
+    official specification. For example, if you nest a ``<p>`` tag inside
+    another ``<p>`` tag, it will be moved to be a sibling of the parent tag.
     This is expected and is part of the HTML5 spec. But if you're getting
-    unexpected behavior, this could be a cause. And while the ``DomCrawler``
-    isn't meant to dump content, you can see the "fixed" version if your HTML
+    unexpected behavior, this could be a cause. And while the DomCrawler
+    isn't meant to dump content, you can see the "fixed" version of your HTML
     by :ref:`dumping it <component-dom-crawler-dumping>`.
 
 Node Filtering
@@ -73,7 +73,7 @@ Using XPath expressions is really easy::
 
     ``DOMXPath::query`` is used internally to actually perform an XPath query.
 
-Filtering is even easier if you have the ``CssSelector`` Component installed.
+Filtering is even easier if you have the CssSelector component installed.
 This allows you to use jQuery-like selectors to traverse::
 
     $crawler = $crawler->filter('body > p');
@@ -83,10 +83,12 @@ Anonymous function can be used to filter with more complex criteria::
     use Symfony\Component\DomCrawler\Crawler;
     // ...
 
-    $crawler = $crawler->filter('body > p')->reduce(function (Crawler $node, $i) {
-        // filter even nodes
-        return ($i % 2) == 0;
-    });
+    $crawler = $crawler
+        ->filter('body > p')
+        ->reduce(function (Crawler $node, $i) {
+            // filter even nodes
+            return ($i % 2) == 0;
+        });
 
 To remove a node the anonymous function must return false.
 
@@ -94,6 +96,68 @@ To remove a node the anonymous function must return false.
 
     All filter methods return a new :class:`Symfony\\Component\\DomCrawler\\Crawler`
     instance with filtered content.
+
+Both the :method:`Symfony\\Component\\DomCrawler\\Crawler::filterXPath` and
+:method:`Symfony\\Component\\DomCrawler\\Crawler::filter` methods work with
+XML namespaces, which can be either automatically discovered or registered
+explicitly.
+
+.. versionadded:: 2.4
+    Auto discovery and explicit registration of namespaces was introduced
+    in Symfony 2.4.
+
+Consider the XML below:
+
+.. code-block:: xml
+
+    <?xml version="1.0" encoding="UTF-8"?>
+    <entry
+        xmlns="http://www.w3.org/2005/Atom"
+        xmlns:media="http://search.yahoo.com/mrss/"
+        xmlns:yt="http://gdata.youtube.com/schemas/2007"
+    >
+        <id>tag:youtube.com,2008:video:kgZRZmEc9j4</id>
+        <yt:accessControl action="comment" permission="allowed"/>
+        <yt:accessControl action="videoRespond" permission="moderated"/>
+        <media:group>
+            <media:title type="plain">Chordates - CrashCourse Biology #24</media:title>
+            <yt:aspectRatio>widescreen</yt:aspectRatio>
+        </media:group>
+    </entry>
+
+This can be filtered with the  ``Crawler`` without needing to register namespace
+aliases both with :method:`Symfony\\Component\\DomCrawler\\Crawler::filterXPath`::
+
+    $crawler = $crawler->filterXPath('//default:entry/media:group//yt:aspectRatio');
+
+and :method:`Symfony\\Component\\DomCrawler\\Crawler::filter`::
+
+    use Symfony\Component\CssSelector\CssSelector;
+
+    CssSelector::disableHtmlExtension();
+    $crawler = $crawler->filter('default|entry media|group yt|aspectRatio');
+
+.. note::
+
+    The default namespace is registered with a prefix "default". It can be
+    changed with the
+    :method:`Symfony\\Component\\DomCrawler\\Crawler::setDefaultNamespacePrefix`
+    method.
+
+    The default namespace is removed when loading the content if it's the only
+    namespace in the document. It's done to simplify the xpath queries.
+
+Namespaces can be explicitly registered with the
+:method:`Symfony\\Component\\DomCrawler\\Crawler::registerNamespace` method::
+
+    $crawler->registerNamespace('m', 'http://search.yahoo.com/mrss/');
+    $crawler = $crawler->filterXPath('//m:group//yt:aspectRatio');
+
+.. caution::
+
+    To query XML with a CSS selector, the HTML extension needs to be disabled with
+    :method:`CssSelector::disableHtmlExtension <Symfony\\Component\\CssSelector\\CssSelector::disableHtmlExtension>`
+    to avoid converting the selector to lowercase.
 
 Node Traversing
 ~~~~~~~~~~~~~~~
@@ -385,7 +449,7 @@ Selecting Invalid Choice Values
 
 .. versionadded:: 2.4
     The :method:`Symfony\\Component\\DomCrawler\\Form::disableValidation`
-    method was added in Symfony 2.4.
+    method was introduced in Symfony 2.4.
 
 By default, choice fields (select, radio) have internal validation activated
 to prevent you from setting invalid values. If you want to be able to set

@@ -1,6 +1,6 @@
 .. index::
-    single: Class Loader; MapClassLoader
-    
+    single: ClassLoader; MapClassLoader
+
 MapClassLoader
 ==============
 
@@ -26,14 +26,14 @@ Uporaba je tako enostavna kot je pošiljanje vaših povezav njegovim konstruktor
 ko se izdela instanca razreda ``MapClassLoader``::
 
     require_once '/path/to/src/Symfony/Component/ClassLoader/MapClassLoader';
-    
+
     $mapping = array(
         'Foo' => '/path/to/Foo',
         'Bar' => '/path/to/Bar',
     );
-    
+
     $loader = new MapClassLoader($mapping);
-    
+
     $loader->register();
 
-.. _PSR-0: http://symfony.com/PSR0
+.. _PSR-0: http:/www.php-fig.org/psr/psr-0/

@@ -1,26 +1,26 @@
 .. index::
-   single: Event Dispatcher; Service container aware
+   single: EventDispatcher; Service container aware
 
-Event Dispatcher, ki se zaveda kontejnerja
-==========================================
+The Container Aware Event Dispatcher
+====================================
 
-Uvod
-----
+Introduction
+------------
 
-Razred :class:`Symfony\\Component\\EventDispatcher\\ContainerAwareEventDispatcher` je
-posebna implementacija razpošilja dogodkov, ki je združen v kontejner storitve,
-ki je del :doc:`komponente Dependency Injection </components/dependency_injection/introduction>`.
-Omogoča, da so storitve specificirane kot poslušatelji dogodkov, kar naredi event dispatcher
-zelo močno.
+The :class:`Symfony\\Component\\EventDispatcher\\ContainerAwareEventDispatcher` is
+a special EventDispatcher implementation which is coupled to the service container
+that is part of :doc:`the DependencyInjection component </components/dependency_injection/introduction>`.
+It allows services to be specified as event listeners making the EventDispatcher
+extremely powerful.
 
-Storitve so leno naložene, kar pomeni, da storitve pripete kot poslušalci, bodo ustvarjene
-samo, če je dogodek razposlan, da zahteva te poslušalce.
+Services are lazy loaded meaning the services attached as listeners will only be
+created if an event is dispatched that requires those listeners.
 
-Nastavitev
-----------
+Setup
+-----
 
-Nastavitev je enostavna z injiciranjem a :class:`Symfony\\Component\\DependencyInjection\\ContainerInterface`
-v :class:`Symfony\\Component\\EventDispatcher\\ContainerAwareEventDispatcher`::
+Setup is straightforward by injecting a :class:`Symfony\\Component\\DependencyInjection\\ContainerInterface`
+into the :class:`Symfony\\Component\\EventDispatcher\\ContainerAwareEventDispatcher`::
 
     use Symfony\Component\DependencyInjection\ContainerBuilder;
     use Symfony\Component\EventDispatcher\ContainerAwareEventDispatcher;
@@ -28,43 +28,43 @@ v :class:`Symfony\\Component\\EventDispatcher\\ContainerAwareEventDispatcher`::
     $container = new ContainerBuilder();
     $dispatcher = new ContainerAwareEventDispatcher($container);
 
-Dodajanje poslušalcev
----------------------
+Adding Listeners
+----------------
 
-T.i. *Container Aware Event Dispatcher* lahko ali naloži določene storitve
-direktno, ali storitve, ki implementirajo :class:`Symfony\\Component\\EventDispatcher\\EventSubscriberInterface`.
+The *Container Aware EventDispatcher* can either load specified services
+directly, or services that implement :class:`Symfony\\Component\\EventDispatcher\\EventSubscriberInterface`.
 
-Sledeči primeri predpostavljajo, da je kontejner storitev bil naložen s katerimikoli
-storitvami, ki so omenjene.
+The following examples assume the service container has been loaded with any
+services that are mentioned.
 
 .. note::
 
-    Storitve morajo biti označene kot javne (public) v kontejnerju.
+    Services must be marked as public in the container.
 
-Dodajanje storitev
-~~~~~~~~~~~~~~~~~~
+Adding Services
+~~~~~~~~~~~~~~~
 
-Da povežete obstoječe definicije storitev, uporabite
+To connect existing service definitions, use the
 :method:`Symfony\\Component\\EventDispatcher\\ContainerAwareEventDispatcher::addListenerService`
-metodo, kjer je ``$callback`` polje ``array($serviceId, $methodName)``::
+method where the ``$callback`` is an array of ``array($serviceId, $methodName)``::
 
     $dispatcher->addListenerService($eventName, array('foo', 'logListener'));
 
-Dodajanje naročitvenih storitev
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Adding Subscriber Services
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``EventSubscribers`` so lahko dodani z uporabo
+``EventSubscribers`` can be added using the
 :method:`Symfony\\Component\\EventDispatcher\\ContainerAwareEventDispatcher::addSubscriberService`
-metode, kjer je prvi argument ID storitve naročene storitve
-in drugi argument je ime razreda storitve (ki mora implementirati)
-:class:`Symfony\\Component\\EventDispatcher\\EventSubscriberInterface`) kot sledi::
+method where the first argument is the service ID of the subscriber service,
+and the second argument is the service's class name (which must implement
+:class:`Symfony\\Component\\EventDispatcher\\EventSubscriberInterface`) as follows::
 
     $dispatcher->addSubscriberService(
         'kernel.store_subscriber',
         'StoreSubscriber'
     );
 
-``EventSubscriberInterface`` bo točno tak, kot pričakujete::
+The ``EventSubscriberInterface`` will be exactly as you would expect::
 
     use Symfony\Component\EventDispatcher\EventSubscriberInterface;
     // ...

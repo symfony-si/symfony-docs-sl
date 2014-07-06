@@ -6,6 +6,10 @@ Komponenta Filesystem
 
     Komponenta Filesystem ponuja osnovna orodja za datotečni sistem.
 
+.. versionadded:: 2.1
+    Komponenta Filesystem je bila predstavljena v Symfony 2.1. Prejšnji
+    razred ``Filesystem`` je bil lociran v komponenti HttpKernel.
+
 Namestitev
 ----------
 
@@ -32,8 +36,8 @@ končna točka za operacije datotečnega sistema::
     }
 
 .. versionadded:: 2.4
-    ``IOExceptionInterface`` in njegova ``getPath`` metoda sta novi v Symfony
-    2.4. Pred 2.4, bi ujeli razred ``IOException``.
+    ``IOExceptionInterface`` in njegova ``getPath`` metoda sta bili predstavljeni v
+    Symfony 2.4. Pred 2.4, bi ujeli razred ``IOException``.
 
 .. note::
 
@@ -65,7 +69,7 @@ Exists
 ~~~~~~
 
 :method:`Symfony\\Component\\Filesystem\\Filesystem::exists` preveri
-prisotnost vseh datotek ali direktorijev in vrne false, če datoteka manjka::
+prisotnost vseh datotek ali direktorijev in vrne ``false``, če datoteka manjka::
 
     // this directory exists, return true
     $fs->exists('/tmp/photos');
@@ -162,7 +166,7 @@ načina datoteke. Četrti argument je logična rekurzivna opcija::
 Remove
 ~~~~~~
 
-:method:`Symfony\\Component\\Filesystem\\Filesystem::remove` vam omogoča enostavno odstranitev
+:method:`Symfony\\Component\\Filesystem\\Filesystem::remove` je uporabljena za enostavno odstranitev
 datotek, simbolnih povezav, direktorijev::
 
     $fs->remove(array('symlink', '/path/to/directory', 'activity.log'));
@@ -237,7 +241,7 @@ dumpFile
 ~~~~~~~~
 
 .. versionadded:: 2.3
-    ``dumpFile`` is new in Symfony 2.3.
+    ``dumpFile`` je bil predstavljen v Symfony 2.3.
 
 :method:`Symfony\\Component\\Filesystem\\Filesystem::dumpFile` vam omogoča
 odložitev vsebine v datoteko. To naredi na atomičen način: najprej zapiše

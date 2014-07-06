@@ -1,10 +1,10 @@
 .. index::
     single: APC; ApcClassLoader
-    single: Class Loader; ApcClassLoader
-    single: Class Loader; Cache
-    single: Class Loader; XcacheClassLoader
+    single: ClassLoader; ApcClassLoader
+    single: ClassLoader; Cache
+    single: ClassLoader; XcacheClassLoader
     single: XCache; XcacheClassLoader
-    
+
 Predpomnenje nalagalnika razredov
 =================================
 
@@ -12,7 +12,7 @@ Uvod
 ----
 
 Najti datoteko za določen razred je lahko zahtevno opravilo. Na srečo
-komponenta Class Loader prihaja z dvema razredoma za predpomnenje ujemanja
+komponenta ClassLoader prihaja z dvema razredoma za predpomnenje ujemanja
 iz razreda v njegovo vsebujočo datoteko.
 :class:`Symfony\\Component\\ClassLoader\\ApcClassLoader`
 in :class:`Symfony\\Component\\ClassLoader\\XcacheClassLoader` se ovijata
@@ -21,8 +21,8 @@ razred.
 
 .. note::
 
-  Oba, ``ApcClassLoader`` in ``XcacheClassLoader`` sta lahko uporabljena
-  za predpomnenje Composer-jevega `autoloader-ja`_.
+    Oba, ``ApcClassLoader`` in ``XcacheClassLoader`` sta lahko uporabljena
+    za predpomnenje Composer-jevega `autoloader-ja`_.
 
 ApcClassLoader
 --------------
@@ -31,16 +31,16 @@ ApcClassLoader
 metodi ``findFile()`` z uporabo `APC`_::
 
     require_once '/path/to/src/Symfony/Component/ClassLoader/ApcClassLoader.php';
-    
+
     // instance of a class that implements a findFile() method, like the ClassLoader
     $loader = ...;
-    
-    // my_prefix is the APC namespace prefix to use
-    $cachedLoader = new ApcClassLoader('my_prefix', $loader);
-    
+
+    // sha1(__FILE__) generates an APC namespace prefix
+    $cachedLoader = new ApcClassLoader(sha1(__FILE__), $loader);
+
     // register the cached class loader
     $cachedLoader->register();
-    
+
     // deactivate the original, non-cached loader if it was registered previously
     $loader->unregister();
 
@@ -51,16 +51,16 @@ XcacheClassLoader
 je enostavna::
 
     require_once '/path/to/src/Symfony/Component/ClassLoader/XcacheClassLoader.php';
-    
+
     // instance of a class that implements a findFile() method, like the ClassLoader
     $loader = ...;
-    
-    // my_prefix is the XCache namespace
-    $cachedLoader = new XcacheClassLoader('my_prefix', $loader);
-    
+
+    // sha1(__FILE__) generates an XCache namespace prefix
+    $cachedLoader = new XcacheClassLoader(sha1(__FILE__), $loader);
+
     // register the cached class loader
     $cachedLoader->register();
-    
+
     // deactivate the original, non-cached loader if it was registered previously
     $loader->unregister();
 

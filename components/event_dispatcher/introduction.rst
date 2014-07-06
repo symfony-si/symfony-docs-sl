@@ -1,165 +1,169 @@
 .. index::
-   single: Event Dispatcher
+   single: EventDispatcher
    single: Components; EventDispatcher
 
-Komponenta Event Dispatcher
-===========================
+The EventDispatcher Component
+=============================
 
-Uvod
-----
+    The EventDispatcher component provides tools that allow your application
+    components to communicate with each other by dispatching events and listening
+    to them.
 
-Objektno orientirana koda je prišla dovolj daleč, da zagotavlja razširljivost kode. Z
-izdelavo razredov, ki imajo dobro definirane odgovornosti vaša koda postane
-bolj fleksibilna in razvijalec jo lahko razširi s pod razredi, da spremeni njeno
-obnašanje. Vendar, če želi deliti svoje spremembe z ostalimi razvijalci, ki so
-tudi naredili svoje lastne podrazrede, dedovanje kode ni več odgovor.
+Introduction
+------------
 
-Razmislite o realnem primeru, kjer želite ponuditi sistem vtičnikov za
-vaš projekt. Vtičnik bi moral biti zmožen dodati metode ali narediti nekaj pred
-ali po izvršitvi metode brez vmešavanja z ostalimi vtičniki. To ni
-enostaven problem za rešiti s posameznim dedovanjem in več dedovanj
-(je možno s PHP) ima svoje slabe strani.
+Objected Oriented code has gone a long way to ensuring code extensibility. By
+creating classes that have well defined responsibilities, your code becomes
+more flexible and a developer can extend them with subclasses to modify their
+behaviors. But if they want to share the changes with other developers who have
+also made their own subclasses, code inheritance is no longer the answer.
 
-Symfony2 Event Dispatcher komponenta implementira `Mediator`_ vzorec na
-enostaven in efektiven način, da naredi vse te stvari možne in naredi vaše
-projekte resnično razširljive.
+Consider the real-world example where you want to provide a plugin system for
+your project. A plugin should be able to add methods, or do something before
+or after a method is executed, without interfering with other plugins. This is
+not an easy problem to solve with single inheritance, and multiple inheritance
+(were it possible with PHP) has its own drawbacks.
 
-Vzamimo enostaven primer iz :doc:`/components/http_kernel/introduction`. Enkrat ko
-je ``Response`` objekt ustvarjen, je lahko uporabno omogočiti drugim elementom
-v sistemu, da ga spremenijo (npr. dodajanje nekaterih glav predpomnilnika) preden je dejansko
-uporabljen. Da naredimo to možno, Symfony2 jedro vrže dogodek (event) -
-``kernel.response``. Deluje sledeče:
+The Symfony2 EventDispatcher component implements the `Mediator`_ pattern in
+a simple and effective way to make all these things possible and to make your
+projects truly extensible.
 
-* T.i. *listener* (PHP objekt) pove centralnemu *dispatcher* objektu, da želi
-  poslušati dogodek ``kernel.response``;
+Take a simple example from :doc:`/components/http_kernel/introduction`. Once a
+``Response`` object has been created, it may be useful to allow other elements
+in the system to modify it (e.g. add some cache headers) before it's actually
+used. To make this possible, the Symfony2 kernel throws an event -
+``kernel.response``. Here's how it works:
 
-* Na neki točki, Symfony2 jedro pove t.i. *dispatcher* objektu, da razpošlje
-  dogodek ``kernel.response``, ki ga poda z objektom ``Event``, ki ima
-  dostop do ``Response`` objekta;
+* A *listener* (PHP object) tells a central *dispatcher* object that it wants
+  to listen to the ``kernel.response`` event;
 
-* Razpošiljatelj obvesti (t.j. pokliče metodo na) vse poslušalce
-  dogodka ``kernel.response``, kar omogoča vsakemu od njih, da naredijo spremembe
-  na objektu ``Response``.
+* At some point, the Symfony2 kernel tells the *dispatcher* object to dispatch
+  the ``kernel.response`` event, passing with it an ``Event`` object that has
+  access to the ``Response`` object;
 
-.. index::
-   single: Event Dispatcher; Events
-
-Namestitev
-----------
-
-Komponento lahko namestite na 2 različna načina:
-
-* :doc:`Namestitev preko Composer-ja </components/using_components>` (``symfony/event-dispatcher`` na `Packagist`_);
-* Uporabite uradni Git repozitorij (https://github.com/symfony/EventDispatcher).
-
-Uporaba
--------
-
-Dogodki
-~~~~~~~
-
-Ko je dogodek razposlan, je identificiran z unikatnim imenom (npr.
-``kernel.response``), katerega poljubno število poslušalcev lahko posluša.
-:class:`Symfony\\Component\\EventDispatcher\\Event` instanca je tudi ustvarjena
-in poslana vsem poslušalcem. Kot boste videli kasneje, ``Event`` objekt
-sam po sebi pogosto vsebuje podatke o dogodki, ki je razposlan.
+* The dispatcher notifies (i.e. calls a method on) all listeners of the
+  ``kernel.response`` event, allowing each of them to make modifications to
+  the ``Response`` object.
 
 .. index::
-   pair: Event Dispatcher; Naming conventions
+   single: EventDispatcher; Events
 
-Konvencije poimenovanja
-.......................
+Installation
+------------
 
-Unikatno ime dogodka je lahko katerikoli niz, vendar opcijsko sledi nekaj enostavnim
-konvencijam poimenovanja:
+You can install the component in 2 different ways:
 
-* uporabite samo manjhne črke, številke, pike (``.``), in podčrtaje (``_``);
+* :doc:`Install it via Composer </components/using_components>` (``symfony/event-dispatcher`` on `Packagist`_);
+* Use the official Git repository (https://github.com/symfony/EventDispatcher).
 
-* imenom dodajte predpono imenskega prostora, ki mu sledi pika (npr. ``kernel.``);
+Usage
+-----
 
-* končajte imena z glagolom, ki indicira, katero akcijo je treba upoštevati (npr.
+Events
+~~~~~~
+
+When an event is dispatched, it's identified by a unique name (e.g.
+``kernel.response``), which any number of listeners might be listening to. An
+:class:`Symfony\\Component\\EventDispatcher\\Event` instance is also created
+and passed to all of the listeners. As you'll see later, the ``Event`` object
+itself often contains data about the event being dispatched.
+
+.. index::
+   pair: EventDispatcher; Naming conventions
+
+Naming Conventions
+..................
+
+The unique event name can be any string, but optionally follows a few simple
+naming conventions:
+
+* use only lowercase letters, numbers, dots (``.``), and underscores (``_``);
+
+* prefix names with a namespace followed by a dot (e.g. ``kernel.``);
+
+* end names with a verb that indicates what action is being taken (e.g.
   ``request``).
 
-Tu je nekaj primerov dobrih imenov dogodkov:
+Here are some examples of good event names:
 
 * ``kernel.response``
 * ``form.pre_set_data``
 
 .. index::
-   single: Event Dispatcher; Event subclasses
+   single: EventDispatcher; Event subclasses
 
-Imena dogodkov in objekti dogodkov
-..................................
+Event Names and Event Objects
+.............................
 
-Ko razpošiljatelj obvesti poslušalce, poda dejanski ``Event`` objekt
-tem poslušalcem. Osnovni ``Event`` razred je zelo enostaven: vsebuje
-metodo za ustavitev :ref:`razmnoževanja
-dogodka <event_dispatcher-event-propagation>`, vendar niti nič več.
+When the dispatcher notifies listeners, it passes an actual ``Event`` object
+to those listeners. The base ``Event`` class is very simple: it contains a
+method for stopping :ref:`event
+propagation <event_dispatcher-event-propagation>`, but not much else.
 
-Pogostokrat podatki o določenih dogodki potrebujejo biti podani skupaj z
-objektom ``Event``, da imajo poslušalci potrebne informacije. V primeru
-dogodka ``kernel.response`` je ustvarjen objekt ``Event`` in podan
-vsakemu poslušalcu, ki je dejansko tipa
-:class:`Symfony\\Component\\HttpKernel\\Event\\FilterResponseEvent`,
-podrazred osnovnega objekta ``Event``. Ta razred vsebuje metode kot so
-``getResponse`` in ``setResponse``, ki omogočajo poslušalcem, da dobijo ali celo zamenjajo
-objekt ``Response``.
+Often times, data about a specific event needs to be passed along with the
+``Event`` object so that the listeners have needed information. In the case of
+the ``kernel.response`` event, the ``Event`` object that's created and passed to
+each listener is actually of type
+:class:`Symfony\\Component\\HttpKernel\\Event\\FilterResponseEvent`, a
+subclass of the base ``Event`` object. This class contains methods such as
+``getResponse`` and ``setResponse``, allowing listeners to get or even replace
+the ``Response`` object.
 
-Morala zgodbe je ta: Ko ustvarjate poslušalec za dogodek,
-objekt ``Event``, ki je poslan poslušalcu je lahko posebni podrazred, ki
-ima dodatne metode za pridobivanje informacij in odzivanja
-dogodku.
+The moral of the story is this: When creating a listener to an event, the
+``Event`` object that's passed to the listener may be a special subclass that
+has additional methods for retrieving information from and responding to the
+event.
 
-Dispatcher
-~~~~~~~~~~
+The Dispatcher
+~~~~~~~~~~~~~~
 
-T.i. Dispatcher (razpošiljatelj) je centralni objekt sistema razpošiljanja dogodkov. V
-splošnem je ustvarjen posamezen razpošiljatelj, ki vzdržuje register
-poslušalcev. Ko je dogodek razposlan preko razpošiljatelja, obvesti vse
-poslušalce, ki so registrirani s tem dogodkom::
+The dispatcher is the central object of the event dispatcher system. In
+general, a single dispatcher is created, which maintains a registry of
+listeners. When an event is dispatched via the dispatcher, it notifies all
+listeners registered with that event::
 
     use Symfony\Component\EventDispatcher\EventDispatcher;
 
     $dispatcher = new EventDispatcher();
 
 .. index::
-   single: Event Dispatcher; Listeners
+   single: EventDispatcher; Listeners
 
-Povezovanje poslušalcev
-~~~~~~~~~~~~~~~~~~~~~~~
+Connecting Listeners
+~~~~~~~~~~~~~~~~~~~~
 
-Da izkoristite obstoječi dogodek, morate povezati poslušalca z
-razpošiljateljem, da je lahko obveščen, ko je objekt razposlan. Klic
-razpošiljateljeve metode ``addListener()`` sodeluje s katerimkoli veljavnim PHP klicajočim (callable) z
-dogodkom::
+To take advantage of an existing event, you need to connect a listener to the
+dispatcher so that it can be notified when the event is dispatched. A call to
+the dispatcher ``addListener()`` method associates any valid PHP callable to
+an event::
 
     $listener = new AcmeListener();
     $dispatcher->addListener('foo.action', array($listener, 'onFooAction'));
 
-Metoda ``addListener()`` vzame do tri argumente:
+The ``addListener()`` method takes up to three arguments:
 
-* Ime dogodka (niz), ki ga ta poslušalec želi poslušati;
+* The event name (string) that this listener wants to listen to;
 
-* PHP callable, ki bo obveščen, ko je objekt vržen, da ga
-  posluša;
+* A PHP callable that will be notified when an event is thrown that it listens
+  to;
 
-* Opcijsko prioritetno celo število (večje pomeni pomembnejše in zato
-  bo poslušalec sprožen prej), ki določa, kdaj je poslušalec
-  sprožen napram ostalim poslušalcem (privzeto je ``0``). Če imata dva poslušalca
-  enako prioriteto, sta izvršena v vrstnem redu, ki sta bila dodana
-  razpošiljatelju.
+* An optional priority integer (higher equals more important, and therefore
+  that the listener will be triggered earlier) that determines when a listener
+  is triggered versus other listeners (defaults to ``0``). If two listeners
+  have the same priority, they are executed in the order that they were added
+  to the dispatcher.
 
 .. note::
 
-    `PHP callable`_ je PHP spremenljivka, ki je lahko uporabljena s
-    ``call_user_func()`` funkcijo in vrne ``true``, ko je podana
-    ``is_callable()`` funckiji. Lahko je ``\Closure`` instanca, objekt,
-    ki implementira __invoke metodo (ki je to, kar zaprtje dejansko je),
-    niz, ki predstavlja funkcijo ali polje, ki predstavlajjo objektno
-    metodo ali metodo razreda.
+    A `PHP callable`_ is a PHP variable that can be used by the
+    ``call_user_func()`` function and returns ``true`` when passed to the
+    ``is_callable()`` function. It can be a ``\Closure`` instance, an object
+    implementing an __invoke method (which is what closures are in fact),
+    a string representing a function, or an array representing an object
+    method or a class method.
 
-    Do sedaj ste videli, kako so PHP objekti lahko registrirani kot poslušalci. Lahko
-    tudi registrirate PHP `Closures`_ kot poslušalce dogodka::
+    So far, you've seen how PHP objects can be registered as listeners. You
+    can also register PHP `Closures`_ as event listeners::
 
         use Symfony\Component\EventDispatcher\Event;
 
@@ -167,10 +171,10 @@ Metoda ``addListener()`` vzame do tri argumente:
             // will be executed when the foo.action event is dispatched
         });
 
-Ko je poslušalec registriran z razpošiljateljem, čaka dokler ni dogodek
-obveščen. V zgornjem primeru, ko je ``foo.action`` dogodek razposlan,
-razpošiljatelj pokliče ``AcmeListener::onFooAction`` metodo in poda
-``Event`` objekt kot en argument::
+Once a listener is registered with the dispatcher, it waits until the event is
+notified. In the above example, when the ``foo.action`` event is dispatched,
+the dispatcher calls the ``AcmeListener::onFooAction`` method and passes the
+``Event`` object as the single argument::
 
     use Symfony\Component\EventDispatcher\Event;
 
@@ -184,12 +188,12 @@ razpošiljatelj pokliče ``AcmeListener::onFooAction`` metodo in poda
         }
     }
 
-V mnogih primerih je poseben podrazred ``Event``, ki je specifičen za dani dogodek,
-podan poslušalcu. To da poslušalcu dostop do posebnih
-informacij o dogodku. Preverite dokumentacijo ali implementacijo vsakega
-dogodka za ugotovitev točne instance ``Symfony\Component\EventDispatcher\Event``,
-ki je podana. Na primer dogodek ``kernel.response`` podaja
-instanco ``Symfony\Component\HttpKernel\Event\FilterResponseEvent``::
+In many cases, a special ``Event`` subclass that's specific to the given event
+is passed to the listener. This gives the listener access to special
+information about the event. Check the documentation or implementation of each
+event to determine the exact ``Symfony\Component\EventDispatcher\Event``
+instance that's being passed. For example, the ``kernel.response`` event passes an
+instance of ``Symfony\Component\HttpKernel\Event\FilterResponseEvent``::
 
     use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
@@ -204,23 +208,23 @@ instanco ``Symfony\Component\HttpKernel\Event\FilterResponseEvent``::
 .. _event_dispatcher-closures-as-listeners:
 
 .. index::
-   single: Event Dispatcher; Creating and dispatching an event
+   single: EventDispatcher; Creating and dispatching an event
 
-Izdelava in razpošiljanje dogodka
+Creating and Dispatching an Event
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Kot dodatek k registraciji poslušalcev z obstoječimi dogodki lahko ustvarite in
-razpošljete vaše lastne dogodke. To je uporabno, ko ustvarjate tretje osebne knjižnice
-in tudi ko želite obdržati različne komponente vašega lastnega sistema
-fleksibilno in nevezano.
+In addition to registering listeners with existing events, you can create and
+dispatch your own events. This is useful when creating third-party libraries
+and also when you want to keep different components of your own system
+flexible and decoupled.
 
-Statični ``Events`` razred
-..........................
+The Static ``Events`` Class
+...........................
 
-Predpostavimo, da želite izdelati nov dogodek - ``store.order`` - ki je razposlan
-vsakič, ko je vrstni red ustvarjen znotraj vaše aplikacije. Da imamo stvari
-organizirane, začnite z izdelavo razreda ``StoreEvents`` znotraj vaše aplikacije,
-ki služi definiciji in dokumentaciji vašega dogodka::
+Suppose you want to create a new Event - ``store.order`` - that is dispatched
+each time an order is created inside your application. To keep things
+organized, start by creating a ``StoreEvents`` class inside your application
+that serves to define and document your event::
 
     namespace Acme\StoreBundle;
 
@@ -238,25 +242,25 @@ ki služi definiciji in dokumentaciji vašega dogodka::
         const STORE_ORDER = 'store.order';
     }
 
-Bodite pozorni, saj ta razred dejansko ne *naredi* ničesar. Razlog
-razreda ``StoreEvents`` je samo lokacija, kjer so lahko informacije o pogostih
-dogodkih lahko centralizirane. Bodite pozorni tudi, saj bo poseben razred ``FilterOrderEvent``
-podan vsakemu poslušalcu tega dogodka.
+Notice that this class doesn't actually *do* anything. The purpose of the
+``StoreEvents`` class is just to be a location where information about common
+events can be centralized. Notice also that a special ``FilterOrderEvent``
+class will be passed to each listener of this event.
 
-Izdelava objekta Event
-......................
+Creating an Event Object
+........................
 
-Kasneje, ko boste razposlali ta nov dogodek, boste ustvarili instanco ``Event``
-in ga podali razpošiljatelju. Razpošiljatelj nato poda to isto instanco
-vsakemu od poslušalcev dogodka. Če ne potrebujete podati nobenih
-informacij vašim poslušalcem, lahko uporabite privzeti razred
-``Symfony\Component\EventDispatcher\Event``. Večino časa vendar
-*boste* morali podati informacij o dogodku vsakemu poslušalcu. Da to
-dosežete, boste ustvarili nov razred, ki razširi
+Later, when you dispatch this new event, you'll create an ``Event`` instance
+and pass it to the dispatcher. The dispatcher then passes this same instance
+to each of the listeners of the event. If you don't need to pass any
+information to your listeners, you can use the default
+``Symfony\Component\EventDispatcher\Event`` class. Most of the time, however,
+you *will* need to pass information about the event to each listener. To
+accomplish this, you'll create a new class that extends
 ``Symfony\Component\EventDispatcher\Event``.
 
-V tem primeru bo vsak poslušalec potreboval dostop do nekega pretvarjanega ``Order``
-objekta. Ustvarite razred ``Event``, ki naredi to mogoče::
+In this example, each listener will need access to some pretend ``Order``
+object. Create an ``Event`` class that makes this possible::
 
     namespace Acme\StoreBundle\Event;
 
@@ -278,16 +282,16 @@ objekta. Ustvarite razred ``Event``, ki naredi to mogoče::
         }
     }
 
-Vsak poslušalec ima sedaj dostop do objekta ``Order`` preko ``getOrder``
-metode.
+Each listener now has access to the ``Order`` object via the ``getOrder``
+method.
 
-Razpošiljanje dogodka
-.....................
+Dispatch the Event
+..................
 
-Metoda :method:`Symfony\\Component\\EventDispatcher\\EventDispatcher::dispatch`
-obvesti vse poslušalce danega dogodka. Sprejme dva argumenta:
-ime dogodka za razpošiljanje in ``Event`` instanco za podajanje vsakemu
-poslušalcu tega dogodka::
+The :method:`Symfony\\Component\\EventDispatcher\\EventDispatcher::dispatch`
+method notifies all listeners of the given event. It takes two arguments: the
+name of the event to dispatch and the ``Event`` instance to pass to each
+listener of that event::
 
     use Acme\StoreBundle\StoreEvents;
     use Acme\StoreBundle\Order;
@@ -301,10 +305,10 @@ poslušalcu tega dogodka::
     $event = new FilterOrderEvent($order);
     $dispatcher->dispatch(StoreEvents::STORE_ORDER, $event);
 
-Bodite pozorni, da je posebni ``FilterOrderEvent`` objekt ustvarjen in podan
-metodi ``dispatch``. Sedaj bo katerikoli poslušalec ``store.order`` dogodka
-dobil ``FilterOrderEvent`` in imel dostop do ``Order`` objekta preko
-metode ``getOrder``::
+Notice that the special ``FilterOrderEvent`` object is created and passed to
+the ``dispatch`` method. Now, any listener to the ``store.order`` event will
+receive the ``FilterOrderEvent`` and have access to the ``Order`` object via
+the ``getOrder`` method::
 
     // some listener class that's been registered for "store.order" event
     use Acme\StoreBundle\Event\FilterOrderEvent;
@@ -316,24 +320,24 @@ metode ``getOrder``::
     }
 
 .. index::
-   single: Event Dispatcher; Event subscribers
+   single: EventDispatcher; Event subscribers
 
 .. _event_dispatcher-using-event-subscribers:
 
-Uporaba naročnikov dogodka
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Using Event Subscribers
+~~~~~~~~~~~~~~~~~~~~~~~
 
-Najpogostejši način za poslušanje dogodka je registracija *poslušalca dogodka*
-z razpošiljateljem. Ta poslušalec lahko posluša enega ali več dogodkov in je
-obveščen vsakič, ko so te dogodki razposlani.
+The most common way to listen to an event is to register an *event listener*
+with the dispatcher. This listener can listen to one or more events and is
+notified each time those events are dispatched.
 
-Drug način za poslušanje dogodkov je preko *naročnika dogodka*. Naročnik
-dogodka je PHP razred, ki je zmožen povedati razpošiljatelju, točno na katere
-dogodke bi moral biti naročen. Implementira
+Another way to listen to events is via an *event subscriber*. An event
+subscriber is a PHP class that's able to tell the dispatcher exactly which
+events it should subscribe to. It implements the
 :class:`Symfony\\Component\\EventDispatcher\\EventSubscriberInterface`
-vmesnik, ki zahteva eno statično metodo imenovano
-``getSubscribedEvents``. Vzemimo sledeči primer naročnika, ki
-je naročen na ``kernel.response`` in ``store.order`` dogodka::
+interface, which requires a single static method called
+``getSubscribedEvents``. Take the following example of a subscriber that
+subscribes to the ``kernel.response`` and ``store.order`` events::
 
     namespace Acme\StoreBundle\Event;
 
@@ -375,42 +379,42 @@ je naročen na ``kernel.response`` in ``store.order`` dogodka::
         }
     }
 
-To je zelo podobno razredu poslušalca razen, da razred sam po sebi lahko
-pove razpošiljatelju, katere dogodke bi moral poslušati. Da registrate naročnika
-z razpošiljateljem, uporabite
+This is very similar to a listener class, except that the class itself can
+tell the dispatcher which events it should listen to. To register a subscriber
+with the dispatcher, use the
 :method:`Symfony\\Component\\EventDispatcher\\EventDispatcher::addSubscriber`
-metodo::
+method::
 
     use Acme\StoreBundle\Event\StoreSubscriber;
 
     $subscriber = new StoreSubscriber();
     $dispatcher->addSubscriber($subscriber);
 
-Razpošiljatelj bo avtomatsko registriral naročnika za vsak dogodek, ki je
-vrnjen od metode ``getSubscribedEvents``. Ta metoda vrne polje
-indeksirano z imeni dogodkov in katere vrednosti so ali imena metod za klicanje ali
-polje sestavljeno iz imena metode za klicanje in prioritete. Primer
-zgoraj kaže, kako registrirati nekaj poslušalskih metod za isti dogodek v
-naročniku in tudi kaže, kako podati prioriteto vsake metode poslušalca.
-Višja ko je prioriteta, prej bo metoda klicana. V zgornjem
-primeru, ko je sprožen dogodek ``kernel.response``, so metode
-``onKernelResponsePre``, ``onKernelResponseMid`` in ``onKernelResponsePost``
-klicane v tem vrstnem redu.
+The dispatcher will automatically register the subscriber for each event
+returned by the ``getSubscribedEvents`` method. This method returns an array
+indexed by event names and whose values are either the method name to call or
+an array composed of the method name to call and a priority. The example
+above shows how to register several listener methods for the same event in
+subscriber and also shows how to pass the priority of each listener method.
+The higher the priority, the earlier the method is called. In the above
+example, when the ``kernel.response`` event is triggered, the methods
+``onKernelResponsePre``, ``onKernelResponseMid``, and ``onKernelResponsePost``
+are called in that order.
 
 .. index::
-   single: Event Dispatcher; Stopping event flow
+   single: EventDispatcher; Stopping event flow
 
 .. _event_dispatcher-event-propagation:
 
-Ustavitev toka/razmnoževanja dogodka
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Stopping Event Flow/Propagation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-V nekaterih primerih je lahko smiselno za poslušalca, da prepreči kateremukoli drugem poslušalcu,
-da je klican. Z drugimi besedami poslušalec mora biti sposoben povedati
-razpošiljatelju, da ustavi vsa razmnoževanja dogodka za bodoče poslušalce (t.j.
-ne obvestiti nobenih poslušalcev več). To se lahko doseže iz znotraj
-poslušalca preko metode
-:method:`Symfony\\Component\\EventDispatcher\\Event::stopPropagation`::
+In some cases, it may make sense for a listener to prevent any other listeners
+from being called. In other words, the listener needs to be able to tell the
+dispatcher to stop all propagation of the event to future listeners (i.e. to
+not notify any more listeners). This can be accomplished from inside a
+listener via the
+:method:`Symfony\\Component\\EventDispatcher\\Event::stopPropagation` method::
 
    use Acme\StoreBundle\Event\FilterOrderEvent;
 
@@ -421,12 +425,12 @@ poslušalca preko metode
        $event->stopPropagation();
    }
 
-Sedaj katerikoli poslušalci za ``store.order``, ki še morda niso bili klicani, *ne* bodo
-klicani.
+Now, any listeners to ``store.order`` that have not yet been called will *not*
+be called.
 
-Možno je odkriti, če je dogodek ustavljen z uporabo
-metode :method:`Symfony\\Component\\EventDispatcher\\Event::isPropagationStopped`,
-ki vrne logično vrednost::
+It is possible to detect if an event was stopped by using the
+:method:`Symfony\\Component\\EventDispatcher\\Event::isPropagationStopped` method
+which returns a boolean value::
 
     $dispatcher->dispatch('foo.event', $event);
     if ($event->isPropagationStopped()) {
@@ -434,37 +438,38 @@ ki vrne logično vrednost::
     }
 
 .. index::
-   single: Event Dispatcher; Event Dispatcher aware events and listeners
+   single: EventDispatcher; EventDispatcher aware events and listeners
 
 .. _event_dispatcher-dispatcher-aware-events:
 
-Dogodki in poslušalci, ki se zavedajo EventDispatcher-ja
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+EventDispatcher aware Events and Listeners
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``EventDispatcher`` vedno injicira sklic samega sebe v podanem dogodku
-objekta. To pomeni, da imajo vsi poslušalci direkten dostop do
-``EventDispatcher`` objekta, ki je obvestil poslušalca preko podane metode ``Event``
-objekta
-:method:`Symfony\\Component\\EventDispatcher\\Event::getDispatcher`.
+.. versionadded:: 2.4
+    Since Symfony 2.4, the current event name and the ``EventDispatcher``
+    itself are passed to the listeners as additional arguments.
 
-To lahko vodi do nekaj naprednih aplikacij ``EventDispatcher``, ki vključuje
-omogočanje, da poslušalci razpošiljajo druge objekte, veriženje dogodkov ali celo leno nalaganje
-več poslušalcev v razposlani objekt. Primeri sledijo:
+The ``EventDispatcher`` always passes the dispatched event, the event's name
+and a reference to itself to the listeners. This can be used in some advanced
+usages of the ``EventDispatcher`` like dispatching other events in listeners,
+event chaining or even lazy loading of more listeners into the dispatcher
+object as shown in the following examples.
 
-Leno nalaganje poslušalcev::
+Lazy loading listeners::
 
     use Symfony\Component\EventDispatcher\Event;
+    use Symfony\Component\EventDispatcher\EventDispatcherInterface;
     use Acme\StoreBundle\Event\StoreSubscriber;
 
     class Foo
     {
         private $started = false;
 
-        public function myLazyListener(Event $event)
+        public function myLazyListener(Event $event, $eventName, EventDispatcherInterface $dispatcher)
         {
             if (false === $this->started) {
                 $subscriber = new StoreSubscriber();
-                $event->getDispatcher()->addSubscriber($subscriber);
+                $dispatcher->addSubscriber($subscriber);
             }
 
             $this->started = true;
@@ -473,26 +478,27 @@ Leno nalaganje poslušalcev::
         }
     }
 
-Razpošiljanje drugega dogodka iz znotraj poslušalca::
+Dispatching another event from within a listener::
 
     use Symfony\Component\EventDispatcher\Event;
+    use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
     class Foo
     {
-        public function myFooListener(Event $event)
+        public function myFooListener(Event $event, $eventName, EventDispatcherInterface $dispatcher)
         {
-            $event->getDispatcher()->dispatch('log', $event);
+            $dispatcher->dispatch('log', $event);
 
             // ... more code
         }
     }
 
-Medtem ko je zgornje dovolj za večino uporab, če vaša aplikacija uporablja več
-instanc ``EventDispatcher``, boste lahko morali posebej injicirati znano
-instanco ``EventDispatcher`` v vaše poslušalce.  To je lahko narejeno
-z uporabo konstruktorja ali nastavitvene injekcije kot sledi:
+While this above is sufficient for most uses, if your application uses multiple
+``EventDispatcher`` instances, you might need to specifically inject a known
+instance of the ``EventDispatcher`` into your listeners. This could be done
+using constructor or setter injection as follows:
 
-Injiciranje konstruktorja::
+Constructor injection::
 
     use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -506,7 +512,7 @@ Injiciranje konstruktorja::
         }
     }
 
-Ali nastavitev injiciranja::
+Or setter injection::
 
     use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -520,64 +526,64 @@ Ali nastavitev injiciranja::
         }
     }
 
-Izbira med dvema je dejansko stvar okusa. Mnogi imajo raje
-injiciranje konstruktorja, saj so objekti v celoti injicirani v času
-konstrukcije. Vendar ko imate dolg seznam odvisnosti, je uporaba nastavitve injiciranja
-lahko ustrezen način, posebno za opcijske odvisnosti.
+Choosing between the two is really a matter of taste. Many tend to prefer the
+constructor injection as the objects are fully initialized at construction
+time. But when you have a long list of dependencies, using setter injection
+can be the way to go, especially for optional dependencies.
 
 .. index::
-   single: Event Dispatcher; Dispatcher shortcuts
+   single: EventDispatcher; Dispatcher shortcuts
 
 .. _event_dispatcher-shortcuts:
 
-Bližnjice razpošiljanja
-~~~~~~~~~~~~~~~~~~~~~~~
+Dispatcher Shortcuts
+~~~~~~~~~~~~~~~~~~~~
 
-Metoda :method:`EventDispatcher::dispatch <Symfony\\Component\\EventDispatcher\\EventDispatcher::dispatch>`
-vedno vrne :class:`Symfony\\Component\\EventDispatcher\\Event`
-objekt. To omogoča različne bližnjice. Na primer, če nek ne potrebuje
-objekta dogodka po meri, se lahko ta enostavno zanaša na enostaven
-:class:`Symfony\\Component\\EventDispatcher\\Event` objekt. Niti ne potrebujete
-podati tega razpošiljatelju, saj ga bo ustvaril privzeto razen, če
-ga posebej podate::
+The :method:`EventDispatcher::dispatch <Symfony\\Component\\EventDispatcher\\EventDispatcher::dispatch>`
+method always returns an :class:`Symfony\\Component\\EventDispatcher\\Event`
+object. This allows for various shortcuts. For example if one does not need
+a custom event object, one can simply rely on a plain
+:class:`Symfony\\Component\\EventDispatcher\\Event` object. You do not even need
+to pass this to the dispatcher as it will create one by default unless you
+specifically pass one::
 
     $dispatcher->dispatch('foo.event');
 
-Poleg tega EventDispatcher vedno vrne katerikoli objekt dogodka, ki je bil
-razposlan, t.j. ali dogodek, ki je bil podan ali dogodek, ki je bil
-ustvarjen interno z razpošiljateljem. To omogoča lepe bližnjice::
+Moreover, the EventDispatcher always returns whichever event object that was
+dispatched, i.e. either the event that was passed or the event that was
+created internally by the dispatcher. This allows for nice shortcuts::
 
     if (!$dispatcher->dispatch('foo.event')->isPropagationStopped()) {
         // ...
     }
 
-Ali::
+Or::
 
     $barEvent = new BarEvent();
     $bar = $dispatcher->dispatch('bar.event', $barEvent)->getBar();
 
-Ali::
+Or::
 
     $bar = $dispatcher->dispatch('bar.event', new BarEvent())->getBar();
 
-in tako naprej...
+and so on...
 
 .. index::
-   single: Event Dispatcher; Event name introspection
+   single: EventDispatcher; Event name introspection
 
 .. _event_dispatcher-event-name-introspection:
 
-Introspekcija imena dogodka
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Event Name Introspection
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-Ker ``EventDispatcher`` že ve ime dogodka, ko ga razpošilja,
-je ime dogodka tudi injicirano v
-:class:`Symfony\\Component\\EventDispatcher\\Event` objekte, kar ga naredi na voljo
-za poslušalce dogodka preko :method:`Symfony\\Component\\EventDispatcher\\Event::getName`
-metode.
+Since the ``EventDispatcher`` already knows the name of the event when dispatching
+it, the event name is also injected into the
+:class:`Symfony\\Component\\EventDispatcher\\Event` objects, making it available
+to event listeners via the :method:`Symfony\\Component\\EventDispatcher\\Event::getName`
+method.
 
-Ime dogodka (kot je z ostalimi podatki v objektu dogodka po meri) je lahko uporabljeno kot
-del logike procesiranja poslušalca::
+The event name, (as with any other data in a custom event object) can be used as
+part of the listener's processing logic::
 
     use Symfony\Component\EventDispatcher\Event;
 
@@ -589,11 +595,11 @@ del logike procesiranja poslušalca::
         }
     }
 
-Ostali razpošiljatelji
-----------------------
+Other Dispatchers
+-----------------
 
-Poleg pogosto uporabljenega ``EventDispatcher``, komponenta prihaja z 2
-drugima razpošiljateljema:
+Besides the commonly used ``EventDispatcher``, the component comes with 2
+other dispatchers:
 
 * :doc:`/components/event_dispatcher/container_aware_dispatcher`
 * :doc:`/components/event_dispatcher/immutable_dispatcher`

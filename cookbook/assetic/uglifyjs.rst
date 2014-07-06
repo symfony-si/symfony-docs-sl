@@ -1,35 +1,35 @@
 .. index::
-   single: Assetic; UglifyJs
+   single: Assetic; UglifyJS
 
-Kako zmanjšati CSS/JS datoteke (z uporabo UglifyJs in UglifyCss)
+Kako zmanjšati CSS/JS datoteke (z uporabo UglifyJS in UglifyCSS)
 ================================================================
 
-`UglifyJs`_ je JavaScript prevajalno/stiskalno/olepševalno orodje. Lahko je uporabljen
+`UglifyJS`_ je JavaScript prevajalno/stiskalno/olepševalno orodje. Lahko je uporabljen
 za združevanje in zmanjšanje JavaScript sredstev, da se porablja manj HTTP zahtevkov
-in da se vaša stran naloži hitreje. `UglifyCss`_ je css stiskalnik/olepševalnik,
-ki je zelo podoben UglifyJs.
+in da se vaša stran naloži hitreje. `UglifyCSS`_ je CSS stiskalnik/olepševalnik,
+ki je zelo podoben UglifyJS.
 
-V tem receptu je namestitev, nastavitev in uporaba UglifyJs
-prikazana podrobneje. ``UglifyCss`` deluje na precej podoben način in je
+V tem receptu je namestitev, nastavitev in uporaba UglifyJS
+prikazana podrobneje. ``UglifyCSS`` deluje na precej podoben način in je
 predstavljen samo na kratko.
 
-Namestitev UglifyJs
+Namestitev UglifyJS
 -------------------
 
-UglifyJs je na voljo kot `Node.js`_ npm modul in se ga lahko namesti z uporabo
-npm. Najprej morate `namestiti node.js`_. Potem lahko namestite UglifyJs
+UglifyJS je na voljo kot `Node.js`_ npm modul in se ga lahko namesti z uporabo
+npm. Najprej morate `namestiti Node.js`_. Potem lahko namestite UglifyJS
 z uporabo npm:
 
 .. code-block:: bash
 
     $ npm install -g uglify-js
 
-Ta ukaz bo namestil UglifyJs globalno in lahko da ga boste potrebovali pognati
+Ta ukaz bo namestil UglifyJS globalno in lahko da ga boste potrebovali pognati
 kot vrhovni (root) uporabnik.
 
 .. note::
 
-    Možno je tudi namestiti UglifyJs samo znotraj vašega projekta. Da to naredite,
+    Možno je tudi namestiti UglifyJS samo znotraj vašega projekta. Da to naredite,
     ga namestite brez opcije ``-g`` in določite pot, kamor
     se doda modul:
 
@@ -39,7 +39,7 @@ kot vrhovni (root) uporabnik.
         $ mkdir app/Resources/node_modules
         $ npm install uglify-js --prefix app/Resources
 
-    Priporočljivo je, da namestite UglifyJs v vaš ``app/Resources`` direktorij
+    Priporočljivo je, da namestite UglifyJS v vaš ``app/Resources`` direktorij
     in dodate ``node_modules`` direktorij v kontrolo verzij. Alternativno
     lahko ustvarite npm `package.json`_ datoteko in določite vaše odvisnosti
     tam.
@@ -54,8 +54,8 @@ v ``node_modules`` direktoriju:
 
     $ ./app/Resources/node_modules/.bin/uglifyjs --help
 
-Nastavitev filtra uglifyjs2
----------------------------
+Nastavitev filtra ``uglifyjs2``
+-------------------------------
 
 Sedaj potrebujemo nastaviti Symfony2, da bo uporabil ``uglifyjs2`` filter, ko procesira
 vaše JavaScript-e:
@@ -75,6 +75,7 @@ vaše JavaScript-e:
 
         <!-- app/config/config.xml -->
         <assetic:config>
+            <!-- bin: the path to the uglifyjs executable -->
             <assetic:filter
                 name="uglifyjs2"
                 bin="/usr/local/bin/uglifyjs" />
@@ -86,6 +87,7 @@ vaše JavaScript-e:
         $container->loadFromExtension('assetic', array(
             'filters' => array(
                 'uglifyjs2' => array(
+                    // the path to the uglifyjs executable
                     'bin' => '/usr/local/bin/uglifyjs',
                 ),
             ),
@@ -93,7 +95,7 @@ vaše JavaScript-e:
 
 .. note::
 
-    Pot, kjer je UglifyJs nameščen, se lahko spreminja odvisno od vašega sistema.
+    Pot, kjer je UglifyJS nameščen, se lahko spreminja odvisno od vašega sistema.
     Da ugotovite, kje npm shranjuje ``bin`` direktorij, lahko uporabite sledeči
     ukaz:
 
@@ -102,9 +104,9 @@ vaše JavaScript-e:
         $ npm bin -g
 
     Moral bi izpisati direktorij na vašem sistemu, znotraj katerega bi morali najti
-    UglifyJs izvršljivo datoteko.
+    UglifyJS izvršljivo datoteko.
 
-    Če ste namestili UglifyJs lokalno, lahko najdete bin direktorij znotraj
+    Če ste namestili UglifyJS lokalno, lahko najdete ``bin`` direktorij znotraj
     ``node_modules`` direktorija. V tem primeru je poimenovan ``.bin``.
 
 Sedaj imate dostop do ``uglifyjs2`` filtra v vaši aplikaciji.
@@ -112,7 +114,7 @@ Sedaj imate dostop do ``uglifyjs2`` filtra v vaši aplikaciji.
 Zmanjšajte vaša sredstva
 ------------------------
 
-Da uporabite UglifyJs na vaših sredstvih, ga morate uporabiti na njih. Ker
+Da uporabite UglifyJS na vaših sredstvih, ga morate uporabiti na njih. Ker
 so vaša sredstva del nivoja pogleda, je to opravljeno v vaših predlogah:
 
 .. configuration-block::
@@ -175,16 +177,16 @@ in :ref:`odložiti vaših assetic sredstev <cookbook-asetic-dump-prod>`.
 .. tip::
 
     Namesto dodajanja filtra k znački sredstva, ga lahko tudi globalno
-    omogočite z dodajanjem apply-to-attribute k nastavitvam filtra, na primer
+    omogočite z dodajanjem ``apply-to-attribute`` k nastavitvam filtra, na primer
     v ``uglifyjs2`` filtru ``apply_to: "\.js$"``. Da imate
     filter uporabljen samo v produkciji, dodajte to v ``config_prod`` datoteko
     namesto v skupno config datoteko. Za podrobnosti glede uporabe filtrov glede na
     končnico datoteke, glejte :ref:`cookbook-assetic-apply-to`.
 
-Namestite, nastavite in uporabite UglifyCss
+Namestite, nastavite in uporabite UglifyCSS
 -------------------------------------------
 
-Uporaba UglifyCss deluje na enak način kot UglifyJs. Najprej zagotovite,
+Uporaba UglifyCSS deluje na enak način kot UglifyJS. Najprej zagotovite,
 da je node paket nameščen:
 
 .. code-block:: bash
@@ -223,22 +225,23 @@ Nato dodajte nastavitve za ta filter:
             ),
         ));
 
-Da uporabite filter za vaše css datoteke, dodajte filter v Assetic ``stylesheets``
+Da uporabite filter za vaše CSS datoteke, dodajte filter v Assetic ``stylesheets``
 pomočnik:
 
 .. configuration-block::
 
     .. code-block:: html+jinja
 
-        {% stylesheets '@AcmeFooBundle/Resources/public/css/*' filter='uglifycss' %}
+        {% stylesheets 'bundles/AcmeFoo/css/*' filter='uglifycss' filter='cssrewrite' %}
              <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
 
     .. code-block:: html+php
 
         <?php foreach ($view['assetic']->stylesheets(
-            array('@AcmeFooBundle/Resources/public/css/*'),
-            array('uglifycss')
+            array('bundles/AcmeFoo/css/*'),
+            array('uglifycss'),
+            array('cssrewrite')
         ) as $url): ?>
             <link rel="stylesheet" href="<?php echo $view->escape($url) ?>" />
         <?php endforeach; ?>
@@ -247,8 +250,8 @@ Tako kot z ``uglifyjs2`` filtrom, če dodate predpono imenu filtra z
 ``?`` (t.j. ``?uglifycss``), se bo zmanjšanje zgodilo, ko niste
 v razhroščevalnem načinu.
 
-.. _`UglifyJs`: https://github.com/mishoo/UglifyJS
-.. _`UglifyCss`: https://github.com/fmarcia/UglifyCSS
+.. _`UglifyJS`: https://github.com/mishoo/UglifyJS
+.. _`UglifyCSS`: https://github.com/fmarcia/UglifyCSS
 .. _`Node.js`: http://nodejs.org/
-.. _`namestiti node.js`: http://nodejs.org/
+.. _`namestiti Node.js`: http://nodejs.org/
 .. _`package.json`: http://package.json.nodejitsu.com/

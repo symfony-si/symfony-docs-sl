@@ -14,7 +14,7 @@ Imagine you want to translate the string *"Symfony2 is great"* into French::
     $translator->addResource('array', array(
         'Symfony2 is great!' => 'J\'aime Symfony2!',
     ), 'fr_FR');
-    
+
     echo $translator->trans('Symfony2 is great!');
 
 In this example, the message *"Symfony2 is great!"* will be translated into
@@ -81,7 +81,7 @@ is done just as before:
 
     The placeholders can take on any form as the full message is reconstructed
     using the PHP :phpfunction:`strtr function<strtr>`. But the ``%...%`` form
-    is recommend, to avoid problems when using Twig.
+    is recommended, to avoid problems when using Twig.
 
 As you've seen, creating a translation is a two-step process:
 
@@ -95,7 +95,7 @@ The second step is done by creating message catalogs that define the translation
 for any number of different locales.
 
 Creating Translations
-=====================
+---------------------
 
 The act of creating translation files is an important part of "localization"
 (often abbreviated `L10n`_). Translation files consist of a series of
@@ -257,7 +257,7 @@ To translate pluralized messages, use the
         array('%count%' => 10)
     );
 
-The second argument (``10`` in this example), is the *number* of objects being
+The second argument (``10`` in this example) is the *number* of objects being
 described and is used to determine which translation to use and also to populate
 the ``%count%`` placeholder.
 

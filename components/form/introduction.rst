@@ -8,7 +8,7 @@ The Form Component
     The Form component allows you to easily create, process and reuse HTML
     forms.
 
-The form component is a tool to help you solve the problem of allowing end-users
+The Form component is a tool to help you solve the problem of allowing end-users
 to interact with the data and modify the data in your application. And though
 traditionally this has been through HTML forms, the component focuses on
 processing data to and from your client and application, whether that data
@@ -66,31 +66,40 @@ factory.
 Request Handling
 ~~~~~~~~~~~~~~~~
 
-To process form data, you'll need to grab information off of the request (typically
-``$_POST`` data) and pass the array of submitted data to
-:method:`Symfony\\Component\\Form\\Form::bind`. The Form component optionally
-integrates with Symfony's :doc:`HttpFoundation </components/http_foundation/introduction>`
-component to make this even easier.
+.. versionadded:: 2.3
+    The ``handleRequest()`` method was introduced in Symfony 2.3.
 
-To integrate the HttpFoundation component, add the
-:class:`Symfony\\Component\\Form\\Extension\\HttpFoundation\\HttpFoundationExtension`
-to your form factory::
+To process form data, you'll need to call the :method:`Symfony\\Component\\Form\\Form::handleRequest`
+method::
 
-    use Symfony\Component\Form\Forms;
-    use Symfony\Component\Form\Extension\HttpFoundation\HttpFoundationExtension;
+    $form->handleRequest();
 
-    $formFactory = Forms::createFormFactoryBuilder()
-        ->addExtension(new HttpFoundationExtension())
-        ->getFormFactory();
+Behind the scenes, this uses a :class:`Symfony\\Component\\Form\\NativeRequestHandler`
+object to read data off of the correct PHP superglobals (i.e. ``$_POST`` or
+``$_GET``) based on the HTTP method configured on the form (POST is default).
 
-Now, when you process a form, you can pass the :class:`Symfony\\Component\\HttpFoundation\\Request`
-object to :method:`Symfony\\Component\\Form\\Form::bind` instead of the raw
-array of submitted values.
+.. sidebar:: Integration with the HttpFoundation Component
 
-.. note::
+    If you use the HttpFoundation component, then you should add the
+    :class:`Symfony\\Component\\Form\\Extension\\HttpFoundation\\HttpFoundationExtension`
+    to your form factory::
 
-    For more information about the ``HttpFoundation`` component or how to
-    install it, see :doc:`/components/http_foundation/introduction`.
+        use Symfony\Component\Form\Forms;
+        use Symfony\Component\Form\Extension\HttpFoundation\HttpFoundationExtension;
+
+        $formFactory = Forms::createFormFactoryBuilder()
+            ->addExtension(new HttpFoundationExtension())
+            ->getFormFactory();
+
+    Now, when you process a form, you can pass the :class:`Symfony\\Component\\HttpFoundation\\Request`
+    object to :method:`Symfony\\Component\\Form\\Form::handleRequest`::
+
+        $form->handleRequest($request);
+
+    .. note::
+
+        For more information about the HttpFoundation component or how to
+        install it, see :doc:`/components/http_foundation/introduction`.
 
 CSRF Protection
 ~~~~~~~~~~~~~~~
@@ -172,8 +181,10 @@ to bootstrap or access Twig and add the :class:`Symfony\\Bridge\\Twig\\Extension
     $defaultFormTheme = 'form_div_layout.html.twig';
 
     $vendorDir = realpath(__DIR__ . '/../vendor');
-    // the path to TwigBridge so Twig can locate the form_div_layout.html.twig file
-    $vendorTwigBridgeDir = $vendorDir . '/symfony/twig-bridge/Symfony/Bridge/Twig';
+    // the path to TwigBridge so Twig can locate the
+    // form_div_layout.html.twig file
+    $vendorTwigBridgeDir =
+        $vendorDir . '/symfony/twig-bridge/Symfony/Bridge/Twig';
     // the path to your other templates
     $viewsDir = realpath(__DIR__ . '/../views');
 
@@ -184,7 +195,9 @@ to bootstrap or access Twig and add the :class:`Symfony\\Bridge\\Twig\\Extension
     $formEngine = new TwigRendererEngine(array($defaultFormTheme));
     $formEngine->setEnvironment($twig);
     // add the FormExtension to Twig
-    $twig->addExtension(new FormExtension(new TwigRenderer($formEngine, $csrfProvider)));
+    $twig->addExtension(
+        new FormExtension(new TwigRenderer($formEngine, $csrfProvider))
+    );
 
     // create your form factory as normal
     $formFactory = Forms::createFormFactoryBuilder()
@@ -217,11 +230,11 @@ text and other strings.
 
 To add these Twig filters, you can either use the built-in
 :class:`Symfony\\Bridge\\Twig\\Extension\\TranslationExtension` that integrates
-with Symfony's ``Translation`` component, or add the 2 Twig filters yourself,
+with Symfony's Translation component, or add the 2 Twig filters yourself,
 via your own Twig extension.
 
 To use the built-in integration, be sure that your project has Symfony's
-``Translation`` and :doc:`Config </components/config/introduction>` components
+Translation and :doc:`Config </components/config/introduction>` components
 installed. If you're using Composer, you could get the latest 2.3 version
 of each of these by adding the following to your ``composer.json`` file:
 
@@ -298,7 +311,8 @@ Your integration with the Validation component will look something like this::
 
     $vendorDir = realpath(__DIR__ . '/../vendor');
     $vendorFormDir = $vendorDir . '/symfony/form/Symfony/Component/Form';
-    $vendorValidatorDir = $vendorDir . '/symfony/validator/Symfony/Component/Validator';
+    $vendorValidatorDir =
+        $vendorDir . '/symfony/validator/Symfony/Component/Validator';
 
     // create the validator - details will vary
     $validator = Validation::createValidator();
@@ -350,7 +364,7 @@ it throughout your application.
 
 .. _component-form-intro-create-simple-form:
 
-Creating a Simple Form
+Creating a simple Form
 ----------------------
 
 .. tip::
@@ -411,7 +425,7 @@ comes with a lot of :doc:`built-in types </reference/forms/types>`.
 Now that you've built your form, learn how to :ref:`render <component-form-intro-rendering-form>`
 it and :ref:`process the form submission <component-form-intro-handling-submission>`.
 
-Setting Default Values
+Setting default Values
 ~~~~~~~~~~~~~~~~~~~~~~
 
 If you need your form to load with some default values (or you're building
@@ -480,14 +494,14 @@ to do that in the ":ref:`form-rendering-template`" section.
 Handling Form Submissions
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To handle form submissions, use the :method:`Symfony\\Component\\Form\\Form::bind`
+To handle form submissions, use the :method:`Symfony\\Component\\Form\\Form::handleRequest`
 method:
 
 .. configuration-block::
 
     .. code-block:: php-standalone
 
-        use Symfony\HttpFoundation\Request;
+        use Symfony\Component\HttpFoundation\Request;
         use Symfony\Component\HttpFoundation\RedirectResponse;
 
         $form = $formFactory->createBuilder()
@@ -497,19 +511,17 @@ method:
 
         $request = Request::createFromGlobals();
 
-        if ($request->isMethod('POST')) {
-            $form->bind($request);
+        $form->handleRequest($request);
 
-            if ($form->isValid()) {
-                $data = $form->getData();
+        if ($form->isValid()) {
+            $data = $form->getData();
 
-                // ... perform some action, such as saving the data to the database
+            // ... perform some action, such as saving the data to the database
 
-                $response = new RedirectResponse('/task/success');
-                $response->prepare($request);
+            $response = new RedirectResponse('/task/success');
+            $response->prepare($request);
 
-                return $response->send();
-            }
+            return $response->send();
         }
 
         // ...
@@ -525,17 +537,14 @@ method:
                 ->add('dueDate', 'date')
                 ->getForm();
 
-            // only process the form if the request is a POST request
-            if ($request->isMethod('POST')) {
-                $form->bind($request);
+            $form->handleRequest($request);
 
-                if ($form->isValid()) {
-                    $data = $form->getData();
+            if ($form->isValid()) {
+                $data = $form->getData();
 
-                    // ... perform some action, such as saving the data to the database
+                // ... perform some action, such as saving the data to the database
 
-                    return $this->redirect($this->generateUrl('task_success'));
-                }
+                return $this->redirect($this->generateUrl('task_success'));
             }
 
             // ...
@@ -546,25 +555,15 @@ This defines a common form "workflow", which contains 3 different possibilities:
 1) On the initial GET request (i.e. when the user "surfs" to your page),
    build your form and render it;
 
-If the request is a POST, process the submitted data (via ``bind``). Then:
+If the request is a POST, process the submitted data (via ``handleRequest()``).
+Then:
 
-2) if the form is invalid, re-render the form (which will now contain errors)
-3) if the form is valid, perform some action and redirect;
+2) if the form is invalid, re-render the form (which will now contain errors);
+3) if the form is valid, perform some action and redirect.
 
-.. note::
-
-    If you're not using HttpFoundation, just pass the POST'ed data directly
-    to ``bind``::
-
-        if (isset($_POST[$form->getName()])) {
-            $form->bind($_POST[$form->getName()]);
-
-            // ...
-        }
-
-    If you're uploading files, you'll need to do a little bit more work by
-    merging the ``$_POST`` array with the ``$_FILES`` array before passing
-    it into ``bind``.
+Luckily, you don't need to decide whether or not a form has been submitted.
+Just pass the current request to the ``handleRequest()`` method. Then, the Form
+component will do all the necessary work for you.
 
 .. _component-form-intro-validation:
 

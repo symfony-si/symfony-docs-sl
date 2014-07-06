@@ -4,14 +4,18 @@
 Pomočnik napredka
 =================
 
-.. versionadded:: 2.2
-    Pomočnik ``progress`` je bil dodan v Symfony 2.2.
-
 .. versionadded:: 2.3
-    Metoda ``setCurrent`` je bila dodana v Symfony 2.3.
+    Metoda ``setCurrent`` je bila predstavljena v Symfony 2.3.
 
 .. versionadded:: 2.4
-    Metoda ``clear`` je bila dodana v Symfony 2.4.
+    Metoda ``clear`` je bila predstavljena v Symfony 2.4.
+
+.. caution::
+
+    Progress Helper je bil opuščen v Symfony 2.5 in bo odstranjen v
+    Symfony 3.0. Sedaj bi morali uporabljati
+    namesto tega :doc:`Progress Bar </components/console/helpers/progressbar>`, ki
+    je močnejši.
 
 Ko izvajate daljše-pogonske ukaze, je lahko v pomoč prikaz informacije
 napredka, ki se posodablja kakor se izvaja vaš ukaz:
@@ -28,7 +32,7 @@ podajte mu celotno število enot in napredujte napredek kot se vaš ukaz izvaja:
     while ($i++ < 50) {
         // ... do some work
 
-        // advance the progress bar 1 unit
+        // advances the progress bar 1 unit
         $progress->advance();
     }
 
@@ -82,7 +86,7 @@ Da vidite ostale opcije, ki so na voljo, preverite API dokumentacijo za
 
         $progress->start($output, 50000);
 
-        // update every 100 iterations
+        // updates every 100 iterations
         $progress->setRedrawFrequency(100);
 
         $i = 0;

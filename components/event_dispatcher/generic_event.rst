@@ -1,53 +1,53 @@
 .. index::
-   single: Event Dispatcher
+   single: EventDispatcher
 
-Generični Event objekt
-======================
+The Generic Event Object
+========================
 
-Osnovni razred :class:`Symfony\\Component\\EventDispatcher\\Event` ponujen iz
-komponente Event Dispatcher namerno redko omogoča izdelavo
-API specifičnih objektov z dedovanjem, ki uporablja OOP. To omogoča elegantno in
-bralno kodo v kompleksnih aplikacijah.
+The base :class:`Symfony\\Component\\EventDispatcher\\Event` class provided by the
+EventDispatcher component is deliberately sparse to allow the creation of
+API specific event objects by inheritance using OOP. This allows for elegant and
+readable code in complex applications.
 
-Razred :class:`Symfony\\Component\\EventDispatcher\\GenericEvent` je na voljo
-za udobje tistih, ki želite uporabljati samo en objekt dogodka skozi svojo
-aplikacijo. Primeren je za večino namenov naravnost iz škatle, ker
-sledi standardnemu opazovalnemu vzorcu, kjer objekt dogodka
-povzema 'subjekt' dogodka, vendar ima dodatek opcijske ekstra
-argumente.
+The :class:`Symfony\\Component\\EventDispatcher\\GenericEvent` is available
+for convenience for those who wish to use just one event object throughout their
+application. It is suitable for most purposes straight out of the box, because
+it follows the standard observer pattern where the event object
+encapsulates an event 'subject', but has the addition of optional extra
+arguments.
 
-Razred :class:`Symfony\\Component\\EventDispatcher\\GenericEvent` ima enostaven API kot
-dodatek k osnovnemu razredu :class:`Symfony\\Component\\EventDispatcher\\Event`
+:class:`Symfony\\Component\\EventDispatcher\\GenericEvent` has a simple API in
+addition to the base class :class:`Symfony\\Component\\EventDispatcher\\Event`
 
 * :method:`Symfony\\Component\\EventDispatcher\\GenericEvent::__construct`:
-  konstruktor vzame subjekt dogodka in katerekoli argumente;
+  Constructor takes the event subject and any arguments;
 
 * :method:`Symfony\\Component\\EventDispatcher\\GenericEvent::getSubject`:
-  Dobi subjekt;
+  Get the subject;
 
 * :method:`Symfony\\Component\\EventDispatcher\\GenericEvent::setArgument`:
-  Nastavi arugment glede na ključ;
+  Sets an argument by key;
 
 * :method:`Symfony\\Component\\EventDispatcher\\GenericEvent::setArguments`:
-  Nastavi polje argumentov;
+  Sets arguments array;
 
 * :method:`Symfony\\Component\\EventDispatcher\\GenericEvent::getArgument`:
-  Dobi argument glede na ključ;
+  Gets an argument by key;
 
 * :method:`Symfony\\Component\\EventDispatcher\\GenericEvent::getArguments`:
-  dobi vse argumente;
+  Getter for all arguments;
 
 * :method:`Symfony\\Component\\EventDispatcher\\GenericEvent::hasArgument`:
-  Vrne true, če ključ argumenta obstaja;
+  Returns true if the argument key exists;
 
-``GenericEvent`` tudi implementira :phpclass:`ArrayAccess` na dogodku
-argumentov, kar naredi zelo priročno podajanje dodatnih argumentov glede na
-dogodek subjekta.
+The ``GenericEvent`` also implements :phpclass:`ArrayAccess` on the event
+arguments which makes it very convenient to pass extra arguments regarding the
+event subject.
 
-Sledeči primeri prikazujejo primere uporabe, da dajo splošno predstavo o fleksibilnosti.
-Primeri predpostavljajo, da so bili poslušalci dogodkov dodani razpošiljatelju.
+The following examples show use-cases to give a general idea of the flexibility.
+The examples assume event listeners have been added to the dispatcher.
 
-Enostavno podajte subjekt::
+Simply passing a subject::
 
     use Symfony\Component\EventDispatcher\GenericEvent;
 
@@ -64,8 +64,8 @@ Enostavno podajte subjekt::
         }
     }
 
-Podajanje in procesiranje argumentov z uporabo :phpclass:`ArrayAccess` API-ja za dostopanje
-argumentov dogodka::
+Passing and processing arguments using the :phpclass:`ArrayAccess` API to access
+the event arguments::
 
     use Symfony\Component\EventDispatcher\GenericEvent;
 
@@ -89,11 +89,11 @@ argumentov dogodka::
         }
     }
 
-Filtriranje podatkov::
+Filtering data::
 
     use Symfony\Component\EventDispatcher\GenericEvent;
 
-    $event = new GenericEvent($subject, array('data' => 'foo'));
+    $event = new GenericEvent($subject, array('data' => 'Foo'));
     $dispatcher->dispatch('foo', $event);
 
     echo $event['data'];
@@ -102,6 +102,6 @@ Filtriranje podatkov::
     {
         public function filter(GenericEvent $event)
         {
-            strtolower($event['data']);
+            $event['data'] = strtolower($event['data']);
         }
     }

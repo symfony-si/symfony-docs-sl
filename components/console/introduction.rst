@@ -35,7 +35,7 @@ Izdelava osnovnega ukaza
 Da naredite konzolni ukaz, ki vas pozdravi iz ukazne vrstice, izdelajte ``GreetCommand.php``
 in dodajte vanj sledeče::
 
-    namespace Acme\DemoBundle\Command;
+    namespace Acme\Console\Command;
 
     use Symfony\Component\Console\Command\Command;
     use Symfony\Component\Console\Input\InputArgument;
@@ -86,9 +86,9 @@ Potrebujete narediti tudi datoteko za pogon ukazne vrstice, ki izdela
 
     #!/usr/bin/env php
     <?php
-    // app/console
+    // application.php
 
-    use Acme\DemoBundle\Command\GreetCommand;
+    use Acme\Console\Command\GreetCommand;
     use Symfony\Component\Console\Application;
 
     $application = new Application();
@@ -99,7 +99,7 @@ Testirajte novi konzolni ukaz s sledečim pogonom:
 
 .. code-block:: bash
 
-    $ app/console demo:greet Fabien
+    $ php application.php demo:greet Fabien
 
 To bo izpisalo sledeče v ukazno vrstico:
 
@@ -111,7 +111,7 @@ Lahko tudi uporabite opcijo ``--yell``, da naredite vse z velikimi črkami:
 
 .. code-block:: bash
 
-    $ app/console demo:greet Fabien --yell
+    $ php application.php demo:greet Fabien --yell
 
 To izpiše::
 
@@ -160,6 +160,8 @@ Lahko tudi naredite te barve in opcije znotraj imena značke::
     // bold text on a yellow background
     $output->writeln('<bg=yellow;options=bold>foo</bg=yellow;options=bold>');
 
+.. _verbosity-levels:
+
 Nivoji besedičenja
 ~~~~~~~~~~~~~~~~~~
 
@@ -201,7 +203,7 @@ Na primer::
    :method:`Symfony\\Component\Console\\Output\\Output::isVerbose`,
    :method:`Symfony\\Component\Console\\Output\\Output::isVeryVerbose` in
    :method:`Symfony\\Component\Console\\Output\\Output::isDebug`
-   so bile predstavljene v verziji 2.4
+   so bile predstavljene v Symfony 2.4
 
 Na voljo so tudi bolj semantične metode, ki jih lahko uporabite za testiranje
 vsakega nivoja besedičenja::
@@ -222,9 +224,16 @@ vsakega nivoja besedičenja::
         // ...
     }
 
-Ko je uporabljen quiet nivo, je vec izpis utišan, saj se vrne privzeta metoda
-:method:`Symfony\Component\Console\Output::write <Symfony\\Component\\Console\\Output::write>`
+Ko je uporabljen quiet nivo, je ves izpis utišan, saj se vrne privzeta metoda
+:method:`Symfony\\Component\\Console\\Output\\Output::write>`
 brez dejanskega izpisa.
+
+.. tip::
+
+    MonologBridge ponuja razred :class:`Symfony\\Bridge\\Monolog\\Handler\\ConsoleHandler`,
+    ki vam omogoča prikazati sporočila v konzoli. To je čistejše
+    kot zavitje vaših izhodnih klicev v pogojih. Za primer uporabe v
+    ogrodju Symfony glejte :doc:`/cookbook/logging/monolog_console`.
 
 Uporaba argumentov ukazov
 -------------------------
@@ -258,8 +267,8 @@ Ukaz je lahko uporabljen na katerikoli izmed sledečin načinov:
 
 .. code-block:: bash
 
-    $ app/console demo:greet Fabien
-    $ app/console demo:greet Fabien Potencier
+    $ php application.php demo:greet Fabien
+    $ php application.php demo:greet Fabien Potencier
 
 Je tudi možno omogočiti, da argument vzame seznam vrednosti (predstavljajte si,
 da želite pozdraviti vse vaše prijatelje). Za to mora biti specificiran na koncu
@@ -277,7 +286,7 @@ Da to uporabite, samo specificirajte kakor veliko imen želite:
 
 .. code-block:: bash
 
-    $ app/console demo:greet Fabien Ryan Bernhard
+    $ php application.php demo:greet Fabien Ryan Bernhard
 
 Do argumenta ``names`` lahko dostopate kot polje::
 
@@ -312,13 +321,13 @@ Z razliko argumentov, opcije niso sortirane (kar pomeni, da jih lahko specificir
 kateremkoli redu) in so specificirane z dvema pomišljajema (npr. ``yell`` - lahko tudi
 deklarirate eno-črkovno bližnjico, ki jo lahko kličete z enojnim pomišljajem kot npr.
 ``-y``). Opcije so *vedno* opcijske in so lahko nastavljene, da sprejmejo vrednost
-(npr. ``dir=src``) ali poenostavljeno kot logična zastavica brez vrednosti (npr.
-``yell``).
+(npr. ``--dir=src``) ali poenostavljeno kot logična zastavica brez vrednosti (npr.
+``--yell``).
 
 .. tip::
 
     Je tudi možno narediti, da opcija *opcijsko* sprejme vrednost (tako da
-    ``--yell`` ali ``yell=loud`` delujeta). Opcije so lahko tudi konfigurirane,
+    ``--yell`` ali ``--yell=loud`` delujeta). Opcije so lahko tudi konfigurirane,
     da sprejmejo polje vrednosti.
 
 Na primer, dodajte novo opcijo ukazu, ki je lahko uporabljena za specifikacijo,
@@ -347,8 +356,8 @@ Sedaj ko poženete opravilo, lahko opcijsko specificirate zastavico
 
 .. code-block:: bash
 
-    $ app/console demo:greet Fabien
-    $ app/console demo:greet Fabien --iterations=5
+    $ php application.php demo:greet Fabien
+    $ php application.php demo:greet Fabien --iterations=5
 
 Prvi primer se bo izpisal samo enkrat, saj je ``iterations`` prazna in
 privzeto ``1`` (zadnji argument ``addOption``). Drugi primer
@@ -359,8 +368,8 @@ bo delovalo:
 
 .. code-block:: bash
 
-    $ app/console demo:greet Fabien --iterations=5 --yell
-    $ app/console demo:greet Fabien --yell --iterations=5
+    $ php application.php demo:greet Fabien --iterations=5 --yell
+    $ php application.php demo:greet Fabien --yell --iterations=5
 
 Na voljo so 4 opcijske variante, ki jih lahko uporabite:
 
@@ -370,7 +379,7 @@ Opcija                       Vrednost
 InputOption::VALUE_IS_ARRAY  Ta opcija sprejme več vrednosti (npr. ``--dir=/foo --dir=/bar``)
 InputOption::VALUE_NONE      Ne sprejme vnosa za to opcijo (npr. ``--yell``)
 InputOption::VALUE_REQUIRED  Ta vrednost je zahtevana (npr. ``--iterations=5``), sama opcija je še vedno opcijska
-InputOption::VALUE_OPTIONAL  Ta opcija lahko ali pa tudi nima vrednosti (npr. ``yell`` ali ``yell=loud``)
+InputOption::VALUE_OPTIONAL  Ta opcija lahko ali pa tudi nima vrednosti (npr. ``--yell`` ali ``--yell=loud``)
 ===========================  =====================================================================================
 
 Lahko kombinirate ``VALUE_IS_ARRAY`` z ``VALUE_REQUIRED`` ali ``VALUE_OPTIONAL`` takole:
@@ -393,10 +402,11 @@ Pomočniki konzole
 Konzolna komponenta lahko vsebuje skupek "helper-jev" - različna majhna
 orodja, zmožna vam pomagati pri različnih opravilih:
 
-* :doc:`/components/console/helpers/dialoghelper`: interaktivno vprašajte uporabnika za informacijo
+* :doc:`/components/console/helpers/questionhelper`: interaktivno vprašajte uporabnika za informacijo
 * :doc:`/components/console/helpers/formatterhelper`: prilagodite barve izpisa
 * :doc:`/components/console/helpers/progresshelper`: prikaže vrstico napredka
 * :doc:`/components/console/helpers/tablehelper`: prikaže tabularne podatke kot tabelo
+* :doc:`/components/console/helpers/dialoghelper`: (opuščeno) interaktivno vprašajte uporabnika za informacije
 
 Ukazi za testiranje
 -------------------
@@ -406,9 +416,9 @@ uporaben je razred :class:`Symfony\\Component\\Console\\Tester\\CommandTester`.
 Uporablja posebne razrede vnosa in izpisa za poenostavitev testiranja brez prave
 konzole::
 
+    use Acme\Console\Command\GreetCommand;
     use Symfony\Component\Console\Application;
     use Symfony\Component\Console\Tester\CommandTester;
-    use Acme\DemoBundle\Command\GreetCommand;
 
     class ListCommandTest extends \PHPUnit_Framework_TestCase
     {
@@ -434,9 +444,9 @@ konzole.
 Lahko testirate pošiljanje argumentov in opcij ukazu z njihovim podajanjem
 kot polja metodi :method:`Symfony\\Component\\Console\\Tester\\CommandTester::execute`::
 
+    use Acme\Console\Command\GreetCommand;
     use Symfony\Component\Console\Application;
     use Symfony\Component\Console\Tester\CommandTester;
-    use Acme\DemoBundle\Command\GreetCommand;
 
     class ListCommandTest extends \PHPUnit_Framework_TestCase
     {
@@ -516,6 +526,8 @@ Načite se več!
 
 * :doc:`/components/console/usage`
 * :doc:`/components/console/single_command_tool`
+* :doc:`/components/console/changing_default_command`
+* :doc:`/components/console/events`
 
 .. _Packagist: https://packagist.org/packages/symfony/console
-.. _ANSICON: https://github.com/adoxa/ansicon/downloads
+.. _ANSICON: https://github.com/adoxa/ansicon/releases
