@@ -780,23 +780,22 @@ tu: :doc:`/components/expression_language/syntax`. S tem se usmeritev
 ne bo ujemala razen, če je HTTP metoda ali GET ali HEAD *in*, če je glava ``User-Agent``
 ``firefox``.
 
-Lahko naredite katerokoli kompleksno logiko, ki jo potrebujete v izrazu 
-You can do any complex logic you need in the expression by leveraging two
-variables that are passed into the expression:
+Lahko naredite katerokoli kompleksno logiko, ki jo potrebujete v izrazu s spreminjanem dveh
+spremenljivk, ki sta podani v izraz:
 
-* ``context``: An instance of :class:`Symfony\\Component\\Routing\\RequestContext`,
-  which holds the most fundamental information about the route being matched;
-* ``request``: The Symfony :class:`Symfony\\Component\\HttpFoundation\\Request`
-  object (see :ref:`component-http-foundation-request`).
+* ``context``: Instanca :class:`Symfony\\Component\\Routing\\RequestContext`,
+  ki vsebuje najbolj fundamentalne informacije o usmeritvi, ki se ujema;
+* ``request``: Symfony-jev objekt :class:`Symfony\\Component\\HttpFoundation\\Request`
+  (glejte :ref:`component-http-foundation-request`).
 
 .. caution::
 
-    Conditions are *not* taken into account when generating a URL.
+    Pogoji *niso* vzeti v obzir, ko se generira URL.
 
-.. sidebar:: Expressions are Compiled to PHP
+.. sidebar:: Izrazi so prevedeni v PHP
 
-    Behind the scenes, expressions are compiled down to raw PHP. Our example
-    would generate the following PHP in the cache directory::
+    Za kulisjem so izrazi prevedeni v surov PHP. Naš primer
+    bi generiral sledeči PHP v direktoriju cache::
 
         if (rtrim($pathinfo, '/contact') === '' && (
             in_array($context->getMethod(), array(0 => "GET", 1 => "HEAD"))
@@ -805,8 +804,8 @@ variables that are passed into the expression:
             // ...
         }
 
-    Because of this, using the ``condition`` key causes no extra overhead
-    beyond the time it takes for the underlying PHP to execute.
+    Zaradi tega uporaba ključa ``condition`` ne povzroča dodatnih prekoračitev
+    preko časa, ki ga vzame za sestavo PHP-ja za izvrševanje.
 
 .. index::
    single: Routing; Advanced example
@@ -814,12 +813,12 @@ variables that are passed into the expression:
 
 .. _advanced-routing-example:
 
-Advanced Routing Example
-~~~~~~~~~~~~~~~~~~~~~~~~
+Napreden primer usmerjevanja
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-At this point, you have everything you need to create a powerful routing
-structure in Symfony. The following is an example of just how flexible the
-routing system can be:
+Na tej točki imate vse, kar potrebujete za izdelavo močnih usmeritvenih
+struktur v Symfony. Sledeče je primer kako fleksibilen je lahko
+usmerjevalni sistem:
 
 .. configuration-block::
 
@@ -873,10 +872,10 @@ routing system can be:
 
         return $collection;
 
-As you've seen, this route will only match if the ``{culture}`` portion of
-the URL is either ``en`` or ``fr`` and if the ``{year}`` is a number. This
-route also shows how you can use a dot between placeholders instead of
-a slash. URLs matching this route might look like:
+Kot ste videli, ta usmeritev se bo ujemala samo, če je ``{culture}`` del
+URL-ja ali ``en`` ali ``fr`` in če je ``{year}`` številka. Ta
+usmeritev tudi prikazuje, kako lahko uporabite piko med prostorniki namesto
+poševnice. URL-ji, ki se ujemajo s to usmeritvijo lahko izgledajo takole:
 
 * ``/articles/en/2010/my-post``
 * ``/articles/fr/2010/my-post.rss``
@@ -884,36 +883,36 @@ a slash. URLs matching this route might look like:
 
 .. _book-routing-format-param:
 
-.. sidebar:: The Special ``_format`` Routing Parameter
+.. sidebar:: Poseben usmerjevalni parameter ``_format``
 
-    This example also highlights the special ``_format`` routing parameter.
-    When using this parameter, the matched value becomes the "request format"
-    of the ``Request`` object. Ultimately, the request format is used for such
-    things such as setting the ``Content-Type`` of the response (e.g. a ``json``
-    request format translates into a ``Content-Type`` of ``application/json``).
-    It can also be used in the controller to render a different template for
-    each value of ``_format``. The ``_format`` parameter is a very powerful way
-    to render the same content in different formats.
+    Ta primer tudi ponazarja poseben usmerjevalni parameter ``_format``.
+    Ko uporabljate ta parameter, ujeta vrednost psotane "format zahtevka"
+    objekta ``Request``. Na koncu je format zahtevka uporabljen za take
+    stvari kot so nastavitev ``Content-Type`` odziva (npr. ``json``
+    format zahtevka prevede v ``Content-Type`` od ``application/json``).
+    Lahko je uporabljen v krmilniku za izpis različne predloge za
+    vsako vrednost od ``_format``. Parameter ``_format`` je zelo močan način
+    za izpis enake vsebine v različnih formatih.
 
 .. note::
 
-    Sometimes you want to make certain parts of your routes globally configurable.
-    Symfony provides you with a way to do this by leveraging service container
-    parameters. Read more about this in ":doc:`/cookbook/routing/service_container_parameters`.
+    Včasih želite narediti določene dele vaših usmeritev globalno nastavljive.
+    Symfony vam ponuja način, da to naredite s spreminjanjem parametrov storitvenega kontejnerja.
+    Preberite več o tem v ":doc:`/cookbook/routing/service_container_parameters`.
 
-Special Routing Parameters
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Posebni parametri usmerjanja
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-As you've seen, each routing parameter or default value is eventually available
-as an argument in the controller method. Additionally, there are three parameters
-that are special: each adds a unique piece of functionality inside your application:
+Kot ste videli, vsak parameter usmerjanja ali privzeta vrednost je na koncu na voljo
+kot argument v metodu krmilnika. Dodatno so na voljo trije parametri,
+ki so posebni: vsak doda unikaten del funkcionalnosti znotraj vaše aplikacije:
 
-* ``_controller``: As you've seen, this parameter is used to determine which
-  controller is executed when the route is matched;
+* ``_controller``: Kot ste videli je ta parameter uporabljen za določanje, kateri
+  krmilnik je izvršen, ko se usmeritev ujema;
 
-* ``_format``: Used to set the request format (:ref:`read more <book-routing-format-param>`);
+* ``_format``: Uporabljen za nastavitev formata zahtevka (:ref:`preberite več <book-routing-format-param>`);
 
-* ``_locale``: Used to set the locale on the request (:ref:`read more <book-translation-locale-url>`);
+* ``_locale``: Uporabljen za nastavitev lokalizacije na zahtevku (:ref:`preberite več <book-translation-locale-url>`);
 
 .. index::
    single: Routing; Controllers
@@ -921,26 +920,26 @@ that are special: each adds a unique piece of functionality inside your applicat
 
 .. _controller-string-syntax:
 
-Controller Naming Pattern
--------------------------
+Vzorci poimenovanja krmilnika
+-----------------------------
 
-Every route must have a ``_controller`` parameter, which dictates which
-controller should be executed when that route is matched. This parameter
-uses a simple string pattern called the *logical controller name*, which
-Symfony maps to a specific PHP method and class. The pattern has three parts,
-each separated by a colon:
+Vsaka usmeritev mora imeti parameter ``_controller``, ki diktira, kateri
+krmilnik bi moral biti izvršen, ko je ta usmeritev ujeta. Ta parameter
+uporablja enostaven vzorec niza imenovan *logično ime krmilnika*, katerega
+Symfony preslika v določeno PHP metodo in razred. Vzorec ima tri dele,
+vsak ločen z dvopičjem:
 
     **bundle**:**controller**:**action**
 
-For example, a ``_controller`` value of ``AcmeBlogBundle:Blog:show`` means:
+Na primer, vrednost ``_controller`` od ``AcmeBlogBundle:Blog:show`` pomeni:
 
 +----------------+------------------+-------------+
-| Bundle         | Controller Class | Method Name |
+| Paket          | Razred krmilnika | Ime metode  |
 +================+==================+=============+
 | AcmeBlogBundle | BlogController   | showAction  |
 +----------------+------------------+-------------+
 
-The controller might look like this::
+Krmilnik lahko izgleda takole::
 
     // src/Acme/BlogBundle/Controller/BlogController.php
     namespace Acme\BlogBundle\Controller;
@@ -955,40 +954,40 @@ The controller might look like this::
         }
     }
 
-Notice that Symfony adds the string ``Controller`` to the class name (``Blog``
-=> ``BlogController``) and ``Action`` to the method name (``show`` => ``showAction``).
+Bodite pozorni, ker Symfony doda niz ``Controller`` imenu razreda (``Blog``
+=> ``BlogController``) in ``Action`` imenu metode (``show`` => ``showAction``).
 
-You could also refer to this controller using its fully-qualified class name
-and method: ``Acme\BlogBundle\Controller\BlogController::showAction``.
-But if you follow some simple conventions, the logical name is more concise
-and allows more flexibility.
+Lahko bi se tudi sklicevali na ta krmilnik z uporabo njegovega polno-kvalificiranega imena razreda
+in metode: ``Acme\BlogBundle\Controller\BlogController::showAction``.
+Vendar, če sledite nekaterim enostavnim konvencijam, je logično ime bolj ustrezno
+in omogoča več fleksibilnosti.
 
 .. note::
 
-   In addition to using the logical name or the fully-qualified class name,
-   Symfony supports a third way of referring to a controller. This method
-   uses just one colon separator (e.g. ``service_name:indexAction``) and
-   refers to the controller as a service (see :doc:`/cookbook/controller/service`).
+   Kot dodatek uporabi logičnega imena ali polno-kvalificiranega imena razreda
+   Symfony podpira tretji način sklicevanja na krmilnik. Ta metoda
+   uporablja samo eno ločilo podpičja (npr. ``service_name:indexAction``) in
+   se sklicuje na krmilnik kot storitev (glejte :doc:`/cookbook/controller/service`).
 
-Route Parameters and Controller Arguments
------------------------------------------
+Parametri usmeritve in argumenti krmilnika
+------------------------------------------
 
-The route parameters (e.g. ``{slug}``) are especially important because
-each is made available as an argument to the controller method::
+Parametri usmerjevalnika (npr. ``{slug}``) so posebej pomembni, ker
+je vsak na voljo kot argument metodi krmilnika::
 
     public function showAction($slug)
     {
       // ...
     }
 
-In reality, the entire ``defaults`` collection is merged with the parameter
-values to form a single array. Each key of that array is available as an
-argument on the controller.
+V realnosti je celotna zbirka ``defaults`` združena z vrednostmi
+parametrov, da oblikujejo posamezno polje. Vsak ključ tega polja je na voljo kot
+argument na krmilniku.
 
-In other words, for each argument of your controller method, Symfony looks
-for a route parameter of that name and assigns its value to that argument.
-In the advanced example above, any combination (in any order) of the following
-variables could be used as arguments to the ``showAction()`` method:
+Z drugimi besedami, za vsak argument vaše metode krmilnika, Symfony pogleda
+za parametrom usmeritvije tega imena in določi njegovo vrednost temu argumentu.
+V naprednem primeru zgoraj, kakršnakoli kombinacija (v kateremkoli vrstnem redu) sledečih
+spremenljivk bi lahko bila uporabljena kot argumenti metode ``showAction()``:
 
 * ``$culture``
 * ``$year``
@@ -996,27 +995,27 @@ variables could be used as arguments to the ``showAction()`` method:
 * ``$_format``
 * ``$_controller``
 
-Since the placeholders and ``defaults`` collection are merged together, even
-the ``$_controller`` variable is available. For a more detailed discussion,
-see :ref:`route-parameters-controller-arguments`.
+Ker so prostorniki in zbirka ``defaults`` združeni skupaj, je na voljo celo
+spremenljivka ``$_controller``. Za več podrobnih debat
+glejte :ref:`route-parameters-controller-arguments`.
 
 .. tip::
 
-    You can also use a special ``$_route`` variable, which is set to the
-    name of the route that was matched.
+    Lahko uporabite tudi posebno spremenljivko ``$_route``, ki je nastavljena na
+    ime usmeritve, ki je bila ujeta.
 
 .. index::
    single: Routing; Importing routing resources
 
 .. _routing-include-external-resources:
 
-Including External Routing Resources
-------------------------------------
+Vključevanje zunanjih virov usmerjanja
+--------------------------------------
 
-All routes are loaded via a single configuration file - usually ``app/config/routing.yml``
-(see `Creating Routes`_ above). Commonly, however, you'll want to load routes
-from other places, like a routing file that lives inside a bundle. This can
-be done by "importing" that file:
+Vse usmeritve so naložene preko ene nastavitvene datoteke - običajno ``app/config/routing.yml``
+(glejte `Ustvarjanje usmeritev`_ zgoraj). Pogosto vendar boste oa želeli naložiti usmeritve
+iz drugih prostorov, kot je usmeritvena datoteka, ki se nahaja znotraj paketa. To se lahko
+naredi z "uvažanjem" te datoteke:
 
 .. configuration-block::
 
@@ -1052,13 +1051,13 @@ be done by "importing" that file:
 
 .. note::
 
-   When importing resources from YAML, the key (e.g. ``acme_hello``) is meaningless.
-   Just be sure that it's unique so no other lines override it.
+   Ko uvažate vire iz YAML, je ključ (npr. ``acme_hello``) nepomemben.
+   Bodite samo prepričani, da je unikaten, tako da ga nobene druge vrstice ne prepišeno.
 
-The ``resource`` key loads the given routing resource. In this example the
-resource is the full path to a file, where the ``@AcmeHelloBundle`` shortcut
-syntax resolves to the path of that bundle. The imported file might look
-like this:
+Ključ ``resource`` naloži dani usmeritveni vir. V tem primeru je
+vir celotna pot do datoteke, kjer je ``@AcmeHelloBundle`` bližnjica
+sintakse, ki rešuje pot tega paketa. Uvožena datoteka lahko izgleda
+takole:
 
 .. configuration-block::
 
@@ -1096,15 +1095,15 @@ like this:
 
         return $collection;
 
-The routes from this file are parsed and loaded in the same way as the main
-routing file.
+Usmeritve iz te datoteke so razčlenjene in naložene na enak način kot glavna
+usmeritvena datoteka.
 
-Prefixing Imported Routes
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Dodajanje predpon uvoženim usmeritvam
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can also choose to provide a "prefix" for the imported routes. For example,
-suppose you want the ``acme_hello`` route to have a final path of ``/admin/hello/{name}``
-instead of simply ``/hello/{name}``:
+Lahko tudi izberete ponuditi "predpono" za uvožene usmeritve. Na primer
+predpostavimo, da želite, da ima usmeritev ``acme_hello`` končno pot ``/admin/hello/{name}``
+namesto enostavno ``/hello/{name}``:
 
 .. configuration-block::
 
@@ -1144,38 +1143,38 @@ instead of simply ``/hello/{name}``:
 
         return $collection;
 
-The string ``/admin`` will now be prepended to the path of each route loaded
-from the new routing resource.
+Niz ``/admin`` bo sedaj pripet poti vsake usmeritve, ki je naložena
+iz novega vira usmeritve.
 
 .. tip::
 
-    You can also define routes using annotations. See the
-    :doc:`FrameworkExtraBundle documentation </bundles/SensioFrameworkExtraBundle/annotations/routing>`
-    to see how.
+    Usmeritve lahko tudi definirate z uporabo anotacij. Glejte
+    :doc:`dokumentacijo FrameworkExtraBundle </bundles/SensioFrameworkExtraBundle/annotations/routing>`,
+    da vidite kako.
 
-Adding a Host Requirement to Imported Routes
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Dodajanje zahteve gostitelja uvoženim usmeritvam
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can set the host regex on imported routes. For more information, see
+Nastavite lahko regex gostitelja na uvoženih usmeritvah. Za več informacij, glejte
 :ref:`component-routing-host-imported`.
 
 .. index::
    single: Routing; Debugging
 
-Visualizing & Debugging Routes
-------------------------------
+Vizualiziranje & razhroščevanje usmeritev
+-----------------------------------------
 
-While adding and customizing routes, it's helpful to be able to visualize
-and get detailed information about your routes. A great way to see every route
-in your application is via the ``router:debug`` console command. Execute
-the command by running the following from the root of your project.
+Medtem ko dodajate in prilagajate usmeritve, je v pomoč zmožnost vizualizirati
+in dobiti podrobne informacije o vaših usmeritvah. Odličen način, da vidite vsako usmeritev
+v vaši aplikaciji, je preko konzolnega ukaza ``router:debug``. Izvršite
+ukaz s pogonom sledečega iz vrha vašega projekta.
 
 .. code-block:: bash
 
     $ php app/console router:debug
 
-This command will print a helpful list of *all* the configured routes in
-your application:
+Ta ukaz bo izpisal pomagalen seznam *vseh* nastavljenih usmeritev v
+vaši aplikaciji:
 
 .. code-block:: text
 
@@ -1186,21 +1185,21 @@ your application:
     blog                  ANY       /blog/{page}
     blog_show             ANY       /blog/{slug}
 
-You can also get very specific information on a single route by including
-the route name after the command:
+Lahko tudi dobite zelo specifične informacije na eni usmeritvi z vključevanjem
+imena usmeritve po ukazu:
 
 .. code-block:: bash
 
     $ php app/console router:debug article_show
 
-Likewise, if you want to test whether a URL matches a given route, you can
-use the ``router:match`` console command:
+Enako, če želite testirati ali se URL ujema z dano usmeritvijo, lahko
+uporabite konzolni ukaz ``router:match``:
 
 .. code-block:: bash
 
     $ php app/console router:match /blog/my-latest-post
 
-This command will print which route the URL matches.
+Ta ukaz bo izpisal, s katero usmeritvijo se URL ujema.
 
 .. code-block:: text
 
@@ -1209,15 +1208,15 @@ This command will print which route the URL matches.
 .. index::
    single: Routing; Generating URLs
 
-Generating URLs
----------------
+Generiranje URL-jev
+-------------------
 
-The routing system should also be used to generate URLs. In reality, routing
-is a bidirectional system: mapping the URL to a controller+parameters and
-a route+parameters back to a URL. The
-:method:`Symfony\\Component\\Routing\\Router::match` and
-:method:`Symfony\\Component\\Routing\\Router::generate` methods form this bidirectional
-system. Take the ``blog_show`` example route from earlier::
+Sistem usmerjanja bi moral biti uporabljen tudi za generiranje URL-jev. V realnosti je usmerjenje
+bidirektivni sistem: URL preslika v krmilnik+parametre in
+usmeritev+parametre nazaj v URL.
+Metodi :method:`Symfony\\Component\\Routing\\Router::match` in
+:method:`Symfony\\Component\\Routing\\Router::generate` oblikujeta ta bidirektivni
+sistem. Vzamite primer usmeritve ``blog_show`` iz prej::
 
     $params = $this->get('router')->match('/blog/my-blog-post');
     // array(
@@ -1228,9 +1227,9 @@ system. Take the ``blog_show`` example route from earlier::
     $uri = $this->get('router')->generate('blog_show', array('slug' => 'my-blog-post'));
     // /blog/my-blog-post
 
-To generate a URL, you need to specify the name of the route (e.g. ``blog_show``)
-and any wildcards (e.g. ``slug = my-blog-post``) used in the path for that
-route. With this information, any URL can easily be generated::
+Za generiranje URL-ja, potrebujete določiti ime usmeritve (npr. ``blog_show``)
+in katerikoli nadomestni znak (npr. ``slug=my-blog-post``) uporabljen v poti za to
+usmeritev. S temi informacijami je lahko katerikoli URL enostavno generiran::
 
     class MainController extends Controller
     {
@@ -1247,10 +1246,10 @@ route. With this information, any URL can easily be generated::
 
 .. note::
 
-    In controllers that don't extend Symfony's base
+    V krmilnikih, ki ne razširjajo Symfony-jevega osnobnega
     :class:`Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller`,
-    you can use the ``router`` service's
-    :method:`Symfony\\Component\\Routing\\Router::generate` method::
+    lahko uporabite ``router`` storitveno
+    metodo :method:`Symfony\\Component\\Routing\\Router::generate`::
 
         use Symfony\Component\DependencyInjection\ContainerAware;
 
@@ -1267,13 +1266,13 @@ route. With this information, any URL can easily be generated::
             }
         }
 
-In an upcoming section, you'll learn how to generate URLs from inside templates.
+V prihajajoči sekciji se boste naučili kako generirati URL-je iz znotraj predlog.
 
 .. tip::
 
-    If the frontend of your application uses Ajax requests, you might want
-    to be able to generate URLs in JavaScript based on your routing configuration.
-    By using the `FOSJsRoutingBundle`_, you can do exactly that:
+    Če ospredje vaše aplikacije uporablja zahtevke Ajax, lahko morda želite
+    biti zmožni generirati URL-je na JavaScript osnovi na vaši usmeritveni nastavitvi.
+    Z uporabo `FOSJsRoutingBundle`_, lahko naredite točno to:
 
     .. code-block:: javascript
 
@@ -1282,26 +1281,26 @@ In an upcoming section, you'll learn how to generate URLs from inside templates.
             {"slug": 'my-blog-post'}
         );
 
-    For more information, see the documentation for that bundle.
+    Za več informacij, glejte dokumentacijo za ta paket.
 
 .. index::
    single: Routing; Generating URLs in a template
 
-Generating URLs with Query Strings
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Generiranje URL-jev z nizi poizvedb
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The ``generate`` method takes an array of wildcard values to generate the URI.
-But if you pass extra ones, they will be added to the URI as a query string::
+Metoda ``generate`` vzame polje vrednosti nadomestnih znakov, da generira URI.
+Vendar če podate dodatno, bodo dodani URI-ju kot niz poizvedbe::
 
     $this->get('router')->generate('blog', array('page' => 2, 'category' => 'Symfony'));
     // /blog/2?category=Symfony
 
-Generating URLs from a Template
+Generiranje URL-jev iz predloge
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The most common place to generate a URL is from within a template when linking
-between pages in your application. This is done just as before, but using
-a template helper function:
+Najpogostejši prostor za generiranje URL-ja je iz znotraj predloge, ko povezujete
+med stranmi v vaši aplikaciji. To je lahko narejeno tako kot prej, vendar z uporabo
+pomagalne funkcije predloge:
 
 .. configuration-block::
 
@@ -1322,19 +1321,19 @@ a template helper function:
 .. index::
    single: Routing; Absolute URLs
 
-Generating Absolute URLs
-~~~~~~~~~~~~~~~~~~~~~~~~
+Generiranje absolutnh URL-jev
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-By default, the router will generate relative URLs (e.g. ``/blog``). From
-a controller, simply pass ``true`` to the third argument of the ``generateUrl()``
-method::
+Privzeto bo usmerjevalnik generiral relativne URL-je (npr. ``/blog``). Iz
+krmilnika enostavno podajte ``true`` tretjemu argumentu metode
+``generateUrl()``::
 
     $this->generateUrl('blog_show', array('slug' => 'my-blog-post'), true);
     // http://www.example.com/blog/my-blog-post
 
-From a template, in Twig, simply use the ``url()`` function (which generates an absolute URL)
-rather than the ``path()`` function (which generates a relative URL). In PHP, pass ``true``
-to ``generateUrl()``:
+Iz predloge v Twig-u enostavno uporabite funkcijo ``url()`` (ki generira absolutin URL)
+namesto funkcije ``path()`` (ki generira relativni URL). V PHP podajte ``true``
+za ``generateUrl()``:
 
 .. configuration-block::
 
@@ -1354,23 +1353,23 @@ to ``generateUrl()``:
 
 .. note::
 
-    The host that's used when generating an absolute URL is automatically
-    detected using the current ``Request`` object. When generating absolute
-    URLs from outside the web context (for instance in a console command) this
-    doesn't work. See :doc:`/cookbook/console/sending_emails` to learn how to
-    solve this problem.
+    Gostitelj, ki je uporabljen, ko se generira absolutni URL je avtomatično
+    najden z uporabo trenutnega objekta ``Request``. Ko generirate absolutne
+    URL-je iz zunaj spletnega konteksta (na primer v konzolnem ukazu), to
+    ne deluje. Glejte :doc:`/cookbook/console/sending_emails`, da se naučite, kako
+    rešiti ta problem.
 
-Summary
--------
+Povzetek
+--------
 
-Routing is a system for mapping the URL of incoming requests to the controller
-function that should be called to process the request. It both allows you
-to specify beautiful URLs and keeps the functionality of your application
-decoupled from those URLs. Routing is a bidirectional mechanism, meaning that it
-should also be used to generate URLs.
+Usmerjanje je sistem za preslikavo URL-ja prihajajočih zahtevkov v funckijo
+krmilnika, ki bi moral biti imenovan za procesiranje zahtevka. Le ta omogoča tako
+določanje lepih URL-jev kot tudi obdrži funkcionalnost vaše aplikacije
+ločeno od teh URL-jev. Usmerjanje je bidirektivni mehanizem, kar pomeni, da
+bi moral biti uporabljen za generiranje URL-jev.
 
-Learn more from the Cookbook
-----------------------------
+Naučite se več iz knjige receptov
+---------------------------------
 
 * :doc:`/cookbook/routing/scheme`
 
