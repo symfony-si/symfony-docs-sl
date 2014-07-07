@@ -23,6 +23,7 @@ Standard edition. Add the following to your ``composer.json`` file:
 
     {
         "require": {
+            "doctrine/migrations": "dev-master",
             "doctrine/doctrine-migrations-bundle": "dev-master"
         }
     }
@@ -55,6 +56,20 @@ following:
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
         );
     }
+    
+Configuration
+-------------
+
+You can configure the path, namespace, table_name and name in your `config.yml`. The examples below are the default values.
+
+.. code-block:: yaml
+
+    // app/config/config.yml
+    doctrine_migrations:
+        dir_name: %kernel.root_dir%/DoctrineMigrations
+        namespace: Application\Migrations
+        table_name: migration_versions
+        name: Application Migrations   
 
 Usage
 -----
@@ -126,7 +141,7 @@ migration to execute:
 
 .. code-block:: bash
 
-    php app/console doctrine:migrations:status
+    php app/console doctrine:migrations:status --show-versions
 
      == Configuration
 
@@ -150,7 +165,7 @@ finally migrate when you're ready:
 
 .. code-block:: bash
 
-    php app/console doctrine:migrations:migrate
+    php app/console doctrine:migrations:migrate 20100621140655
 
 For more information on how to write the migrations themselves (i.e. how to
 fill in the ``up()`` and ``down()`` methods), see the official Doctrine Migrations
@@ -287,7 +302,9 @@ to get full access to the container.
 .. code-block:: php
 
     // ...
-    
+    use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+    use Symfony\Component\DependencyInjection\ContainerInterface;
+
     class Version20130326212938 extends AbstractMigration implements ContainerAwareInterface
     {
     
