@@ -1,22 +1,22 @@
 .. index::
     single: Templating Helpers; Slots Helper
 
-Slots Helper
-============
+Pomočniki rež
+=============
 
-More often than not, templates in a project share common elements, like the
-well-known header and footer. Using this helper, the static HTML code can
-be placed in a layout file along with "slots", which represent the dynamic
-parts that will change on a page-by-page basis. These slots are then filled
-in by different children template. In other words, the layout file decorates
-the child template.
+Bolj pogosto kot ne, predloge v projektu delijo skupne elemente, kot
+dobro znane glava in noga. Z uporabo tega pomočnika je statična koda HTML lahko
+postavljena v postavitveno datoteko skupaj s t.i. režami (slots), ki predstavljajo dinamične
+dele, ki se bodo spremenili na osnovi stran-po-stran. Te reže so nato zapolnjene
+z različnimi otroškimi predlogami. Z drugimi besedami postavitvena datoteka polepša
+otroško predlogo.
 
-Displaying Slots
-----------------
+Prikaz rež
+----------
 
-The slots are accessible by using the slots helper (``$view['slots']``). Use
-:method:`Symfony\\Component\\Templating\\Helper\\SlotsHelper::output` to
-display the content of the slot on that place:
+Te reže so dostopne z uporabo pomočnika rež (``$view['slots']``). Uporabite
+:method:`Symfony\\Component\\Templating\\Helper\\SlotsHelper::output`, da
+prikažete vsebino reže na tem mestu:
 
 .. code-block:: html+php
 
@@ -33,16 +33,16 @@ display the content of the slot on that place:
         </body>
     </html>
 
-The first argument of the method is the name of the slot. The method has an
-optional second argument, which is the default value to use if the slot is not
-available.
+Prvi argument metode je ime reže. Metoda ima
+opcijski drugi argument, ki je privzeta vrednost za uporabo, če reža ni
+na voljo.
 
-The ``_content`` slot is a special slot set by the ``PhpEngine``. It contains
-the content of the subtemplate.
+Reža ``_content`` je posebna reža nastavljena s ``PhpEngine``. Vsebuje
+vsebino podpredloge.
 
 .. caution::
 
-    If you're using the standalone component, make sure you registered the
+    Če uporabljate samostojno komponento, zagotovite, da ste registrirali
     :class:`Symfony\\Component\\Templating\\Helper\\SlotsHelper`::
 
         use Symfony\Component\Templating\Helper\SlotsHelper;
@@ -50,14 +50,14 @@ the content of the subtemplate.
         // ...
         $templateEngine->set(new SlotsHelper());
 
-Extending Templates
--------------------
+Razširitev predlog
+------------------
 
-The :method:`Symfony\\Component\\Templating\\PhpEngine::extend` method is called in the
-sub-template to set its parent template. Then
-:method:`$view['slots']->set() <Symfony\\Component\\Translation\\Helper\\SlotsHelper::set>`
-can be used to set the content of a slot. All content which is not explicitly
-set in a slot is in the ``_content`` slot.
+Metoda :method:`Symfony\\Component\\Templating\\PhpEngine::extend` je klicana v
+pod-predlogi, da nastavi njeno starševsko predlogo. Nato
+je :method:`$view['slots']->set() <Symfony\\Component\\Translation\\Helper\\SlotsHelper::set>`
+lahko uporabljena, da nastavi vsebino reže. Vsa vsebina, ki ni eksplicitno
+nastavljena v reži je reža ``_content``.
 
 .. code-block:: html+php
 
@@ -75,10 +75,10 @@ set in a slot is in the ``_content`` slot.
 
 .. note::
 
-    Multiple levels of inheritance is possible: a layout can extend another
-    layout.
+    Možno je več nivojev dedovanja: postavitev lahko razširi drugo
+    postavitev.
 
-For large slots, there is also an extended syntax:
+Za velike reže je na voljo tudi razširjena sintaksa:
 
 .. code-block:: html+php
 

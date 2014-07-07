@@ -2,35 +2,35 @@
    single: Templating
    single: Components; Templating
 
-The Templating Component
-========================
+Komponenta Templating
+=====================
 
-    The Templating component provides all the tools needed to build any kind
-    of template system.
+    Komponenta Templating ponuja vsa orodja potrebna za gradnjo kakršnegakoli
+    sistema predlog.
 
-    It provides an infrastructure to load template files and optionally
-    monitor them for changes. It also provides a concrete template engine
-    implementation using PHP with additional tools for escaping and separating
-    templates into blocks and layouts.
+    Ponuja infrastrukturo za nalaganje datotek predlo in jih opcijsko
+    nadzira za spremembami. Ponuja tudi konkretno implementacijo motorja predlog,
+    ki uporablja PHP z dodatnimi orodji za spreminjanje (escaping) in ločevanje
+    predlog v bloke in postavitve.
 
-Installation
-------------
+Namestitev
+----------
 
-You can install the component in 2 different ways:
+Komponento lahko namestite na 2 različna načina:
 
-* :doc:`Install it via Composer </components/using_components>` (``symfony/templating`` on `Packagist`_);
-* Use the official Git repository (https://github.com/symfony/Templating).
+* :doc:`Namestite jo preko Composer-ja </components/using_components>` (``symfony/templating`` na `Packagist`_);
+* Uporabite uradni Git repozitorij (https://github.com/symfony/Templating).
 
-Usage
------
+Uporaba
+-------
 
-The :class:`Symfony\\Component\\Templating\\PhpEngine` class is the entry point
-of the component. It needs a
-template name parser (:class:`Symfony\\Component\\Templating\\TemplateNameParserInterface`)
-to convert a template name to a
-template reference (:class:`Symfony\\Component\\Templating\\TemplateReferenceInterface`).
-It also needs a template loader (:class:`Symfony\\Component\\Templating\\Loader\\LoaderInterface`)
-which uses the template reference to actually find and load the template::
+Razred :class:`Symfony\\Component\\Templating\\PhpEngine` je vstopna točka
+komponente. Potrebuje
+razčlenjevalnik imen predlog (:class:`Symfony\\Component\\Templating\\TemplateNameParserInterface`)
+za pretvorbo imena predloge v
+sklic predloge (:class:`Symfony\\Component\\Templating\\TemplateReferenceInterface`).
+Potrebuje tudi nalagalnik predlog (:class:`Symfony\\Component\\Templating\\Loader\\LoaderInterface`),
+ki uporablja sklic predloge, da dejansko najde in naloži predlogo::
 
     use Symfony\Component\Templating\PhpEngine;
     use Symfony\Component\Templating\TemplateNameParser;
@@ -47,50 +47,50 @@ which uses the template reference to actually find and load the template::
     <!-- views/hello.php -->
     Hello, <?php echo $firstname ?>!
 
-The :method:`Symfony\\Component\\Templating\\PhpEngine::render` method parses
-the ``views/hello.php`` file and returns the output text. The second argument
-of ``render`` is an array of variables to use in the template. In this
-example, the result will be ``Hello, Fabien!``.
+Metoda :method:`Symfony\\Component\\Templating\\PhpEngine::render` razčleni
+datoteko ``views/hello.php`` in vrne izhodni tekst. Drugi argument
+za ``render`` je polje spremenljivk, ki jih uporabljate v predlogi. V tem
+primeru bo rezultat ``Hello, Fabien!``.
 
 .. note::
 
-    Templates will be cached in the memory of the engine. This means that if
-    you render the same template multiple times in the same request, the
-    template will only be loaded once from the file system.
+    Predloge bodo predpomnjene v spominu motorja. To pomeni, da če
+    izpišete enako predlogo večkrat v istem zahtevku, bo
+    predloga naložena samo enkrat iz datotečnega sistema.
 
-The ``$view`` Variable
-----------------------
+Spremenljivka ``$view``
+-----------------------
 
-In all templates parsed by the ``PhpEngine``, you get access to a mysterious
-variable called ``$view``. That variable holds the current ``PhpEngine``
-instance. That means you get access to a bunch of methods that make your life
-easier.
+V vseh predlogah razčlenjenih s ``PhpEngine`` dobite dostop do skrivnostne
+spremenljivke imenovane ``$view``. Ta spremenljivka vsebuje trenutno instanco ``PhpEngine``.
+To pomeni, da dobite dostop do veliko metod, ki naredijo vaše življenje
+enostavnejše.
 
-Including Templates
--------------------
+Vključevanje predlog
+--------------------
 
-The best way to share a snippet of template code is to create a template that
-can then be included by other templates. As the ``$view`` variable is an
-instance of ``PhpEngine``, you can use the ``render`` method (which was used
-to render the template originally) inside the template to render another template::
+Najboljši način za deljenje dela kode predloge je izdelava predloge, ki
+je lahko nato vključena v druge predloge. Kot spremenljivka ``$view`` je
+instanca od ``PhpEngine``, lahko uporabite metodo ``render`` (ki je bila uporabljena
+za izpis predloge originalno) znotraj predloge za izpis druge predloge::
 
     <?php $names = array('Fabien', ...) ?>
     <?php foreach ($names as $name) : ?>
         <?php echo $view->render('hello.php', array('firstname' => $name)) ?>
     <?php endforeach ?>
 
-Global Variables
-----------------
+Globalne spremenljivke
+----------------------
 
-Sometimes, you need to set a variable which is available in all templates
-rendered by an engine (like the ``$app`` variable when using the Symfony2
-framework). These variables can be set by using the
-:method:`Symfony\\Component\\Templating\\PhpEngine::addGlobal` method and they
-can be accessed in the template as normal variables::
+Včasih morate nastaviti spremenljivko, ki je na voljo v vseh predlogah
+izpisanih s strani motorja (kot spremenljivka ``$app``, ko uporabljate ogrodje Symfony2).
+Te spremenljivke so lahko nastavljene z uporabo
+metode :method:`Symfony\\Component\\Templating\\PhpEngine::addGlobal` in so
+lahko dostopane v predlogi kot običajne spremenljivke::
 
     $templating->addGlobal('ga_tracking', 'UA-xxxxx-x');
 
-In a template:
+V predlogi:
 
 .. code-block:: html+php
 
@@ -98,33 +98,33 @@ In a template:
 
 .. caution::
 
-    The global variables cannot be called ``this`` or ``view``, since they are
-    already used by the PHP engine.
+    Globalne spremenljivke ne morejo biti imenovane ``this`` ali ``view``, saj so
+    že uporabljene v PHP motorju.
 
 .. note::
 
-    The global variables can be overriden by a local variable in the template
-    with the same name.
+    Globalne spremenljivke so lahko prepisane z lokalnimi spremenljivkami v predlogi
+    z enakim imenom.
 
-Output Escaping
----------------
+Spreminjanje izpisa
+-------------------
 
-When you render variables, you should probably escape them so that HTML or
-JavaScript code isn't written out to your page. This will prevent things like
-XSS attacks. To do this, use the
-:method:`Symfony\\Component\\Templating\\PhpEngine::escape` method::
+Ko izpisujete spremenljibke, bi jih verjetno morali spremeniti (escaping), tako da HTML ali
+JavaScript koda ni izpisana na vašo stran. To se bo izognilo stvarem kot so
+XSS napadi. Da to naredite, uporabite
+metodo :method:`Symfony\\Component\\Templating\\PhpEngine::escape`::
 
     <?php echo $view->escape($firstname) ?>
 
-By default, the ``escape()`` method assumes that the variable is outputted
-within an HTML context. The second argument lets you change the context. For
-example, to output something inside JavaScript, use the ``js`` context::
+Privzeto metoda ``escape()`` predpostavlja, da je spremenljivka izpisana
+znotraj konteksta HTML. Drugi argument vam omogoča spremeniti kontekst. Na
+primer za izpis nečesa znotraj JavaScript, uporabite kontekst ``js``::
 
     <?php echo $view->escape($var, 'js') ?>
 
-The component comes with an HTML and JS escaper. You can register your own
-escaper using the
-:method:`Symfony\\Component\\Templating\\PhpEngine::setEscaper` method::
+Komponenta prihaja s HTML in JS escaper-jem. Lahko registrirate vaš lasten
+escaper z uporabo
+metode :method:`Symfony\\Component\\Templating\\PhpEngine::setEscaper`::
 
     $templating->setEscaper('css', function ($value) {
         // ... all CSS escaping
@@ -132,16 +132,16 @@ escaper using the
         return $escapedValue;
     });
 
-Helpers
--------
+Pomočniki
+---------
 
-The Templating component can be easily extended via helpers. The component has
-2 built-in helpers:
+Komponenta Templating je lahko enostavno razširjena preko pomočnikov. Komponenta ima
+2 vgrajena pomočnika:
 
 * :doc:`/components/templating/helpers/assetshelper`
 * :doc:`/components/templating/helpers/slotshelper`
 
-Before you can use these helpers, you need to register them using
+Preden lahko te pomočnike uporabite, jih morate registrirati z uporabo
 :method:`Symfony\\Component\\Templating\\PhpEngine::set`::
 
     use Symfony\Component\Templating\Helper\AssetsHelper;
@@ -149,43 +149,43 @@ Before you can use these helpers, you need to register them using
 
     $templating->set(new AssetsHelper());
 
-Custom Helpers
-~~~~~~~~~~~~~~
+Pomočniki po meri
+~~~~~~~~~~~~~~~~~
 
-You can create your own helpers by creating a class which implements
-:class:`Symfony\\Component\\Templating\\Helper\\HelperInterface`. However,
-most of the time you'll extend
+Ustvarite lahko vaše lastne pomočnike z izdelavo razreda, ki implementira
+:class:`Symfony\\Component\\Templating\\Helper\\HelperInterface`. Vendar
+večino časa boste razširjali
 :class:`Symfony\\Component\\Templating\\Helper\\Helper`.
 
-The ``Helper`` has one required method:
+``Helper`` ima eno zahtevano metodo:
 :method:`Symfony\\Component\\Templating\\Helper\\HelperInterface::getName`.
-This is the name that is used to get the helper from the ``$view`` object.
+To je ime, ki je uporabljeno za dobiti pomočnika iz objekta ``$view``.
 
-Creating a Custom Engine
+Izdelava motorja po meri
 ------------------------
 
-Besides providing a PHP templating engine, you can also create your own engine
-using the Templating component. To do that, create a new class which
-implements the :class:`Symfony\\Component\\Templating\\EngineInterface`. This
-requires 3 method:
+Poleg ponujanja PHP motorja predlog, lahko tudi ustvarite vaš lastni motor
+z uporabo komponente Templating. Da to naredite, ustvarite nov razred, ki
+implementira :class:`Symfony\\Component\\Templating\\EngineInterface`. Ta
+zahteva 3 metode:
 
 * :method:`render($name, array $parameters = array()) <Symfony\\Component\\Templating\\EngineInterface::render>`
-  - Renders a template
+  - Izpiše predlogo
 * :method:`exists($name) <Symfony\\Component\\Templating\\EngineInterface::exists>`
-  - Checks if the template exists
+  - Preveri, če predloga obstaja
 * :method:`supports($name) <Symfony\\Component\\Templating\\EngineInterface::supports>`
-  - Checks if the given template can be handled by this engine.
+  - Preveri, če je dana predloga lahko upravljana s tem motorjem.
 
-Using Multiple Engines
+Uporaba večih motorjev
 ----------------------
 
-It is possible to use multiple engines at the same time using the
-:class:`Symfony\\Component\\Templating\\DelegatingEngine` class. This class
-takes a list of engines and acts just like a normal templating engine. The
-only difference is that it delegates the calls to one of the other engines. To
-choose which one to use for the template, the
+Možno je uporabiti več motorjev istočasno z uporabo
+razreda :class:`Symfony\\Component\\Templating\\DelegatingEngine`. Ta razred
+vzame seznam motorjev in deluje samo kot običajni motor predlog. Edina
+razlika je, da delegira klice k enemu od drugih motorjev. Da
+izberete katerega uporabiti za predlogo, je
+uporabljena metoda
 :method:`EngineInterface::supports() <Symfony\\Component\\Templating\\EngineInterface::supports>`
-method is used.
 
 .. code-block:: php
 

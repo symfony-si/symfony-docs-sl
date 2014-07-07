@@ -2,91 +2,91 @@
    single: CssSelector
    single: Components; CssSelector
 
-The CssSelector Component
-=========================
+Komponenta CssSelector
+======================
 
-    The CssSelector component converts CSS selectors to XPath expressions.
+    Komponenta CssSelector pretvarja CSS izbirnike v izraze XPath.
 
-Installation
-------------
+Namestitev
+----------
 
-You can install the component in 2 different ways:
+Komponento lahko namestite na 2 različna načina:
 
-* :doc:`Install it via Composer </components/using_components>` (``symfony/css-selector`` on `Packagist`_);
-* Use the official Git repository (https://github.com/symfony/CssSelector).
+* :doc:`Namestite jo preko Composer-ja </components/using_components>` (``symfony/css-selector`` na `Packagist`_);
+* Uporabite uradni Git repozitorij (https://github.com/symfony/CssSelector).
 
-Usage
------
+Uporaba
+-------
 
-Why to Use CSS selectors?
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Zakaj uporabiti CSS izbirnike?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-When you're parsing an HTML or an XML document, by far the most powerful
-method is XPath.
+Ko razčlenjujete HTML ali XML dokument, je daleč najmočnejša
+metoda XPath.
 
-XPath expressions are incredibly flexible, so there is almost always an
-XPath expression that will find the element you need. Unfortunately, they
-can also become very complicated, and the learning curve is steep. Even common
-operations (such as finding an element with a particular class) can require
-long and unwieldy expressions.
+Izrazi XPath so izjemno fleksibilni, zato je skoraj vedno
+izraz XPath, ki bo našel element, ki ga potrebujete. Na žalost
+lahko postanejo tudi zelo komplicirani in krivulja učenja je strma. Celo pogoste
+operacije (kot je najdenje elementa z določenim razredom) lahko zahteva
+dolge in nepriročne izraze.
 
-Many developers -- particularly web developers -- are more comfortable
-using CSS selectors to find elements. As well as working in stylesheets,
-CSS selectors are used in JavaScript with the ``querySelectorAll`` function
-and in popular JavaScript libraries such as jQuery, Prototype and MooTools.
+Mnogi razvijalci -- posebno spletni razvijalci -- so bolj domači
+pri uporabi CSS izbirnikov, da najdejo elemente. Kot tudi delo na stilih,
+so CSS izbirniki uporabljeni v JavaScript-u s funkcijo ``querySelectorAll``
+in v popularnih JavaScript knjižnicah kot je jQuery, Prototype in MooTools.
 
-CSS selectors are less powerful than XPath, but far easier to write, read
-and understand. Since they are less powerful, almost all CSS selectors can
-be converted to an XPath equivalent. This XPath expression can then be used
-with other functions and classes that use XPath to find elements in a
-document.
+CSS izbirniki so manj močnejši kot XPath, vendar bolj enostavni za pisanje, branje
+in razumevanje. Ker so manj močnejši, so lahko skoraj vsi CSS izbirniki
+pretvorjeni v enakovreden XPath. Ta izraz XPath je lahko potem uporabljen
+z drugimi funkcijami in razredi, ki uporabljajo XPath, da najdejo elemente v
+dokumentu.
 
-The CssSelector Component
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Komponenta CssSelector
+~~~~~~~~~~~~~~~~~~~~~~
 
-The component's only goal is to convert CSS selectors to their XPath
-equivalents::
+Edini cilj komponente je pretvorba izbirnikov CSS v njihove XPath
+ekvivalente::
 
     use Symfony\Component\CssSelector\CssSelector;
 
     print CssSelector::toXPath('div.item > h4 > a');
 
-This gives the following output:
+To da sledeči izpis:
 
 .. code-block:: text
 
     descendant-or-self::div[@class and contains(concat(' ',normalize-space(@class), ' '), ' item ')]/h4/a
 
-You can use this expression with, for instance, :phpclass:`DOMXPath` or
-:phpclass:`SimpleXMLElement` to find elements in a document.
+Ta izraz lahko uporabite skupaj z, na primer, :phpclass:`DOMCPath` ali
+:phpclass:`SimpleXMLElement`, da najdete elemente v dokumentu.
 
 .. tip::
 
-    The :method:`Crawler::filter() <Symfony\\Component\\DomCrawler\\Crawler::filter>` method
-    uses the CssSelector component to find elements based on a CSS selector
-    string. See the :doc:`/components/dom_crawler` for more details.
+    Metoda :method:`Crawler::filter() <Symfony\\Component\\DomCrawler\\Crawler::filter>`
+    uporablja komponento CssSelector, da najde elemente na osnovi niza CSS izbirnika.
+    Glejte :doc:`/components/dom_crawler` za več podrobnosti.
 
-Limitations of the CssSelector Component
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Omejitve komponente CssSelector
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Not all CSS selectors can be converted to XPath equivalents.
+Vsi izbirniki CSS ne morejo biti pretvorjeni v XPath ekvivalente.
 
-There are several CSS selectors that only make sense in the context of a
-web-browser.
+Na voljo je nekaj izbirnikov CSS, ki imajo smisel samo v kontekstu
+spletnega brskalnika.
 
-* link-state selectors: ``:link``, ``:visited``, ``:target``
-* selectors based on user action: ``:hover``, ``:focus``, ``:active``
-* UI-state selectors: ``:invalid``, ``:indeterminate`` (however, ``:enabled``, 
-  ``:disabled``, ``:checked`` and ``:unchecked`` are available)
+* izbirniki link-state: ``:link``, ``:visited``, ``:target``
+* izbirniki na osnovi akcije uporabnika: ``:hover``, ``:focus``, ``:active``
+* izbirniki UI-state: ``:invalid``, ``:indeterminate`` (vendar, ``:enabled``, 
+  ``:disabled``, ``:checked`` in ``:unchecked`` so na voljo)
 
-Pseudo-elements (``:before``, ``:after``, ``:first-line``,
-``:first-letter``) are not supported because they select portions of text
-rather than elements.
+Psevdo elementi (``:before``, ``:after``, ``:first-line``,
+``:first-letter``) niso podprti, ker izbirajo dele tekstov,
+namesto elementov.
 
-Several pseudo-classes are not yet supported:
+Nekaj psevdo-razredov še ni podprtih:
 
 * ``*:first-of-type``, ``*:last-of-type``, ``*:nth-of-type``,
-  ``*:nth-last-of-type``, ``*:only-of-type``. (These work with an element
-  name (e.g. ``li:first-of-type``) but not with ``*``.
+  ``*:nth-last-of-type``, ``*:only-of-type``. (Te delujejo z imenom
+  elementa (npr. ``li:first-of-type``) vendar ne z ``*``.
 
 .. _Packagist: https://packagist.org/packages/symfony/css-selector

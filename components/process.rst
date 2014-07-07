@@ -2,24 +2,24 @@
    single: Process
    single: Components; Process
 
-The Process Component
-=====================
+Komponenta Process
+==================
 
-    The Process component executes commands in sub-processes.
+    Komponenta Process izvršuje ukaze v pod-procesih.
 
-Installation
-------------
+Namestitev
+----------
 
-You can install the component in 2 different ways:
+Komponento lahko namestite na 2 različna načina:
 
-* :doc:`Install it via Composer </components/using_components>` (``symfony/process`` on `Packagist`_);
-* Use the official Git repository (https://github.com/symfony/Process).
+* :doc:`Namestite jo preko Composer-ja </components/using_components>` (``symfony/process`` na `Packagist`_);
+* Uporabite uradni Git repozitorij (https://github.com/symfony/Process).
 
-Usage
------
+Uporaba
+-------
 
-The :class:`Symfony\\Component\\Process\\Process` class allows you to execute
-a command in a sub-process::
+Razred :class:`Symfony\\Component\\Process\\Process` vam omogoča, da izvršite
+ukaz v pod-procesu::
 
     use Symfony\Component\Process\Process;
 
@@ -33,30 +33,30 @@ a command in a sub-process::
 
     print $process->getOutput();
 
-The component takes care of the subtle differences between the different platforms
-when executing the command.
+Komponenta poskrbi za majhne razlike med različnimi platformami,
+ko se izvršuje ukaz.
 
-The ``getOutput()`` method always return the whole content of the standard
-output of the command and ``getErrorOutput()`` the content of the error
-output. Alternatively, the :method:`Symfony\\Component\\Process\\Process::getIncrementalOutput`
-and :method:`Symfony\\Component\\Process\\Process::getIncrementalErrorOutput`
-methods returns the new outputs since the last call.
+Metoda ``getOutput()`` vedno vrne celotno vsebino standardnega
+izpisa ukaza in ``getErrorOutput()`` vsebino izpisa napake.
+Alternativno metodi :method:`Symfony\\Component\\Process\\Process::getIncrementalOutput`
+in :method:`Symfony\\Component\\Process\\Process::getIncrementalErrorOutput`
+vrneta nov izpis od zadnjega klica.
 
 .. versionadded:: 2.4
-    The ``clearOutput()`` and ``clearErrorOutput()`` methods were introduced in Symfony 2.4.
+    Metodi ``clearOutput()`` in ``clearErrorOutput()`` sta bili predstavljeni v Symfony 2.4.
 
-The :method:`Symfony\\Component\\Process\\Process::clearOutput` method clears
-the contents of the output and
-:method:`Symfony\\Component\\Process\\Process::clearErrorOutput` clears
-the contents of the error output.
+Metoda :method:`Symfony\\Component\\Process\\Process::clearOutput` počisti
+vsebine izpisa in
+:method:`Symfony\\Component\\Process\\Process::clearErrorOutput` počisti
+vsebine izpisa napak.
 
-Getting real-time Process Output
---------------------------------
+Pridobiti realno-časovni izpis procesa
+--------------------------------------
 
-When executing a long running command (like rsync-ing files to a remote
-server), you can give feedback to the end user in real-time by passing an
-anonymous function to the
-:method:`Symfony\\Component\\Process\\Process::run` method::
+Ko izvršujete dolgo trajajoči ukaz (kot je rsync datotek na oddaljenem
+strežniku) lahko date povratne informacije končnemu uporabniku v realnem času s podajanjem
+anonimne funkcije k
+metodi :method:`Symfony\\Component\\Process\\Process::run`::
 
     use Symfony\Component\Process\Process;
 
@@ -69,15 +69,15 @@ anonymous function to the
         }
     });
 
-Running Processes Asynchronously
---------------------------------
+Poganjanje procesov ashinhrono
+------------------------------
 
-You can also start the subprocess and then let it run asynchronously, retrieving
-output and the status in your main process whenever you need it. Use the
-:method:`Symfony\\Component\\Process\\Process::start` method to start an asynchronous
-process, the :method:`Symfony\\Component\\Process\\Process::isRunning` method
-to check if the process is done and the
-:method:`Symfony\\Component\\Process\\Process::getOutput` method to get the output::
+Lahko tudi začnete pod-proces in ga nato pustite teči asinhrono, pridobite
+izpis in status v vašem glavnem procesu kadarkoli ga potrebujete. Uporabite
+metodo :method:`Symfony\\Component\\Process\\Process::start`, da začnete asinhroni
+proces, metodo :method:`Symfony\\Component\\Process\\Process::isRunning`,
+da preverite, če je proces končan in
+metodo :method:`Symfony\\Component\\Process\\Process::getOutput`, da dobite izpis::
 
     $process = new Process('ls -lsa');
     $process->start();
@@ -88,8 +88,8 @@ to check if the process is done and the
 
     echo $process->getOutput();
 
-You can also wait for a process to end if you started it asynchronously and
-are done doing other stuff::
+Lahko tudi počakate, da se proces konča, če ste ga začeli asinhrono in
+ste končali opravljati druge stvari::
 
     $process = new Process('ls -lsa');
     $process->start();
@@ -106,22 +106,22 @@ are done doing other stuff::
 
 .. note::
 
-    The :method:`Symfony\\Component\\Process\\Process::wait` method is blocking,
-    which means that your code will halt at this line until the external
-    process is completed.
+    Metoda :method:`Symfony\\Component\\Process\\Process::wait` blokira,
+    kar pomeni, da bo vaša koda čakala na tej vrstici dokler ni zunanji
+    proces končan.
 
-Stopping a Process
-------------------
+Ustavitev procesa
+-----------------
 
 .. versionadded:: 2.3
-    The ``signal`` parameter of the ``stop`` method was introduced in Symfony 2.3.
+    Parameter ``signal`` metode ``stop`` je bil predstavljen v Symfony 2.3.
 
-Any asynchronous process can be stopped at any time with the
-:method:`Symfony\\Component\\Process\\Process::stop` method. This method takes
-two arguments : a timeout and a signal. Once the timeout is reached, the signal
-is sent to the running process. The default signal sent to a process is ``SIGKILL``.
-Please read the :ref:`signal documentation below<reference-process-signal>`
-to find out more about signal handling in the Process component::
+Katerikoli asinhroni proces se lahko ustavi kadarkoli z
+metodo :method:`Symfony\\Component\\Process\\Process::stop`. Ta metoda vzame
+dva argumenta: timeout in signal. Ko je enkrat dosežen timeout, je signal
+posla procesu, ki se poganja. Privzeti signal poslan procesu je ``SIGKILL``.
+Prosimo, preberite :ref:`signal documentation below<reference-process-signal>`,
+da izveste več o upravljanju signalov v komponenti Process::
 
     $process = new Process('ls -lsa');
     $process->start();
@@ -130,11 +130,11 @@ to find out more about signal handling in the Process component::
 
     $process->stop(3, SIGINT);
 
-Executing PHP Code in Isolation
--------------------------------
+Izvrševanje PHP kode v izolaciji
+--------------------------------
 
-If you want to execute some PHP code in isolation, use the ``PhpProcess``
-instead::
+Če želite izvršiti nekatero PHP kodo v izolaciji, uporabite zato
+``PhpProcess``::
 
     use Symfony\Component\Process\PhpProcess;
 
@@ -144,8 +144,8 @@ instead::
     );
     $process->run();
 
-To make your code work better on all platforms, you might want to use the
-:class:`Symfony\\Component\\Process\\ProcessBuilder` class instead::
+Da naredite, da vaša koda deluje bolje na vseh platformah, morda zato želite uporabiti
+razred :class:`Symfony\\Component\\Process\\ProcessBuilder`::
 
     use Symfony\Component\Process\ProcessBuilder;
 
@@ -153,14 +153,14 @@ To make your code work better on all platforms, you might want to use the
     $builder->getProcess()->run();
 
 .. versionadded:: 2.3
-    The :method:`ProcessBuilder::setPrefix<Symfony\\Component\\Process\\ProcessBuilder::setPrefix>`
-    method was introduced in Symfony 2.3.
+    Metoda :method:`ProcessBuilder::setPrefix<Symfony\\Component\\Process\\ProcessBuilder::setPrefix>`
+    je bila predstavljena v Symfony 2.3.
 
-In case you are building a binary driver, you can use the
-:method:`Symfony\\Component\\Process\\Process::setPrefix` method to prefix all
-the generated process commands.
+V primeru, da gradite binarni gonilnik, lahko uporabite
+metodo :method:`Symfony\\Component\\Process\\Process::setPrefix`, da dodate predpono vsem
+generiranim ukazem procesa.
 
-The following example will generate two process commands for a tar binary
+Sledeči primer bo generiral dva procesna ukaza za tar binarni
 adapter::
 
     use Symfony\Component\Process\ProcessBuilder;
@@ -180,11 +180,11 @@ adapter::
         ->getProcess()
         ->getCommandLine();
 
-Process Timeout
+Timeout procesa
 ---------------
 
-You can limit the amount of time a process takes to complete by setting a
-timeout (in seconds)::
+Omejite lahko količino časa, ki ga proces vzame za dokončanje z nastavitvijo
+timeout-a (v sekundah)::
 
     use Symfony\Component\Process\Process;
 
@@ -192,11 +192,11 @@ timeout (in seconds)::
     $process->setTimeout(3600);
     $process->run();
 
-If the timeout is reached, a
-:class:`Symfony\\Process\\Exception\\RuntimeException` is thrown.
+Če je timeout dosežen, je vržena
+:class:`Symfony\\Process\\Exception\\RuntimeException`.
 
-For long running commands, it is your responsibility to perform the timeout
-check regularly::
+Za dolgo trajajoče ukaze, je vaša dolžnost narediti redno preverjanje
+timeout-a::
 
     $process->setTimeout(3600);
     $process->start();
@@ -212,34 +212,34 @@ check regularly::
 
 .. _reference-process-signal:
 
-Process Idle Timeout
---------------------
+Timeout mirovanja procesa
+-------------------------
 
 .. versionadded:: 2.4
-   The :method:`Symfony\\Component\\Process\\Process::setIdleTimeout` method
-   was introduced in Symfony 2.4.
-   
-In contrast to the timeout of the previous paragraph, the idle timeout only
-considers the time since the last output was produced by the process::
+   Metoda :method:`Symfony\\Component\\Process\\Process::setIdleTimeout`
+   je bila predstavljena v Symfony 2.4.
+
+Z razliko od timeout-a v prejšnjem poglavju, timeout mirovanja
+smatra samo čas od zadnjega izpisa, ki je bil produciran s strani procesa::
 
    use Symfony\Component\Process\Process;
-   
+
    $process = new Process('something-with-variable-runtime');
    $process->setTimeout(3600);
    $process->setIdleTimeout(60);
    $process->run();
-   
-In the case above, a process is considered timed out, when either the total runtime
-exceeds 3600 seconds, or the process does not produce any output for 60 seconds.
 
-Process Signals
+V primeru zgoraj, proces je mišljen kot pretečen, ko ali celotni čas pogona
+preseže 3600 sekund, ali proces ne producira nobenega izpisa za 60 sekund.
+
+Signali procesa
 ---------------
 
 .. versionadded:: 2.3
-    The ``signal`` method was introduced in Symfony 2.3.
+    Metoda ``signal`` je bila predstavljena v Symfony 2.3.
 
-When running a program asynchronously, you can send it posix signals with the
-:method:`Symfony\\Component\\Process\\Process::signal` method::
+Ko poganjate program asinhrono, mu lahko pošljete posix signale z
+metodo :method:`Symfony\\Component\\Process\\Process::signal`::
 
     use Symfony\Component\Process\Process;
 
@@ -251,21 +251,21 @@ When running a program asynchronously, you can send it posix signals with the
 
 .. caution::
 
-    Due to some limitations in PHP, if you're using signals with the Process
-    component, you may have to prefix your commands with `exec`_. Please read
-    `Symfony Issue#5759`_ and `PHP Bug#39992`_ to understand why this is happening.
+    Zaradi nekaterih omejitev v PHP, če uporabljate signale s komponento Process,
+    boste morda morali dodati predpono `exec`_ vašim ukazom. Prosimo, preberite
+    `Symfony Issue#5759`_ in `PHP Bug#39992`_, da boste razumeli, zakaj se to dogaja.
 
-    POSIX signals are not available on Windows platforms, please refer to the
-    `PHP documentation`_ for available signals.
+    Signali POSIX niso na voljo na platformah Windows, prosimo sklicujte se na
+    `dokumentacijo PHP`_ za signale, ki so na voljo.
 
-Process Pid
+Pid procesa
 -----------
 
 .. versionadded:: 2.3
-    The ``getPid`` method was introduced in Symfony 2.3.
+    Metoda ``getPid`` je bila predstavljena v Symfony 2.3.
 
-You can access the `pid`_ of a running process with the
-:method:`Symfony\\Component\\Process\\Process::getPid` method.
+Lahko dostopate do `pid`_ poganjajočega procesa z
+metodo :method:`Symfony\\Component\\Process\\Process::getPid`.
 
 .. code-block:: php
 
@@ -278,22 +278,22 @@ You can access the `pid`_ of a running process with the
 
 .. caution::
 
-    Due to some limitations in PHP, if you want to get the pid of a symfony Process,
-    you may have to prefix your commands with `exec`_. Please read
-    `Symfony Issue#5759`_ to understand why this is happening.
+    Zaradi nekaterih omejitev v PHP, če želite dobiti pid procesa symfony,
+    boste morda morali dodati predpono `exec_` vašim ukazom. Prosimo, preberite
+    `Symfony Issue#5759`_, da razumete, zakaj se to dogaja.
 
-Disabling Output
-----------------
+Onemogočanje izpisa
+-------------------
 
 .. versionadded:: 2.5
-    The :method:`Symfony\\Component\\Process\\Process::disableOutput` and
-    :method:`Symfony\\Component\\Process\\Process::enableOutput` methods were
-    introduced in Symfony 2.5.
+    Metodi :method:`Symfony\\Component\\Process\\Process::disableOutput` in
+    :method:`Symfony\\Component\\Process\\Process::enableOutput` sta bili
+    predstavljeni v Symfony 2.5.
 
-As standard output and error output are always fetched from the underlying process,
-it might be convenient to disable output in some cases to save memory.
-Use :method:`Symfony\\Component\\Process\\Process::disableOutput` and
-:method:`Symfony\\Component\\Process\\Process::enableOutput` to toggle this feature::
+Ker sta standardni izpis in izpis napak vedno ujeta iz podležečega procesa,
+je morda priročno onemogočiti izpis v nekaterih primerih, da varčujete spomin.
+Uporabite :method:`Symfony\\Component\\Process\\Process::disableOutput` in
+:method:`Symfony\\Component\\Process\\Process::enableOutput`, da omogočite to lastnost::
 
     use Symfony\Component\Process\Process;
 
@@ -303,16 +303,16 @@ Use :method:`Symfony\\Component\\Process\\Process::disableOutput` and
 
 .. caution::
 
-    You can not enable or disable the output while the process is running.
+    Ne morete omogočiti ali onemogočiti izpisa, ko se proces poganja.
 
-    If you disable the output, you cannot access ``getOutput``,
-    ``getIncrementalOutput``, ``getErrorOutput`` or ``getIncrementalErrorOutput``.
-    Moreover, you could not pass a callback to the ``start``, ``run`` or ``mustRun``
-    methods or use ``setIdleTimeout``.
+    Če onemogočite izpis, ne morete dostopati do ``getOutput``,
+    ``getIncrementalOutput``, ``getErrorOutput`` ali ``getIncrementalErrorOutput``.
+    Še več, lahko bi podali povratni klic metodam ``start``, ``run`` ali ``mustRun``
+    ali uporabili ``setIdleTimeout``.
 
 .. _`Symfony Issue#5759`: https://github.com/symfony/symfony/issues/5759
 .. _`PHP Bug#39992`: https://bugs.php.net/bug.php?id=39992
 .. _`exec`: http://en.wikipedia.org/wiki/Exec_(operating_system)
 .. _`pid`: http://en.wikipedia.org/wiki/Process_identifier
-.. _`PHP Documentation`: http://php.net/manual/en/pcntl.constants.php
+.. _`dokumentacijo PHP`: http://php.net/manual/en/pcntl.constants.php
 .. _Packagist: https://packagist.org/packages/symfony/process

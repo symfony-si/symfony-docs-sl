@@ -1,8 +1,8 @@
 .. index::
     single: Templating; Templating Helpers
 
-The Templating Helpers
-======================
+Pomočniki predlog
+=================
 
 .. toctree::
     :hidden:
@@ -10,7 +10,7 @@ The Templating Helpers
     slotshelper
     assetshelper
 
-The Templating component comes with some useful helpers. These helpers contain
-functions to ease some common tasks.
+Komponenta Templating prihaja z nekaj uporabnimi pomočniki. Te pomočniki vsebujejo
+funkcije za poenostavitev nekaterih pogostih opravil.
 
 .. include:: map.rst.inc

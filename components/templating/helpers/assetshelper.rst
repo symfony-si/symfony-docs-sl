@@ -1,11 +1,11 @@
 .. index::
     single: Templating Helpers; Assets Helper
 
-Assets Helper
-=============
+Pomočniki sredstev
+==================
 
-The assets helper's main purpose is to make your application more portable by
-generating asset paths:
+Glavni namen pomočnikov sredstev je narediti vašo aplikacijo bolj prenosljivo z
+generiranjem poti sredstev:
 
 .. code-block:: html+php
 
@@ -13,22 +13,22 @@ generating asset paths:
 
    <img src="<?php echo $view['assets']->getUrl('images/logo.png') ?>">
 
-The assets helper can then be configured to render paths to a CDN or modify
-the paths in case your assets live in a sub-directory of your host (e.g. ``http://example.com/app``).
+Pomočniki sredstev so lahko potem nastavljeni, da izpišejo poti v CDN ali spremenijo
+poti v primeru vaših sredstev, ki se nnahajajo v pod-direktoriju vašega gostitelja (npr. ``http://example.com/app``).
 
-Configure Paths
+Nastavitev poti
 ---------------
 
-By default, the assets helper will prefix all paths with a slash. You can
-configure this by passing a base assets path as the first argument of the
-constructor::
+Privzeto bo pomočnik sredstev imel predpono vseh poti s poševnico. To lahko
+nastavite s podajanjem osnovne poti sredstev kot prvi argument
+konstruktorja::
 
     use Symfony\Component\Templating\Helper\AssetsHelper;
 
     // ...
     $templateEngine->set(new AssetsHelper('/foo/bar'));
 
-Now, if you use the helper, everything will be prefixed with ``/foo/bar``:
+Sedaj, če uporabljate pomočnika, bo vse imelo predpono ``/foo/bar``:
 
 .. code-block:: html+php
 
@@ -37,20 +37,20 @@ Now, if you use the helper, everything will be prefixed with ``/foo/bar``:
    <img src="/foo/bar/images/logo.png">
    -->
 
-Absolute Urls
--------------
+Absolutni Url-ji
+----------------
 
-You can also specify a URL to use in the second parameter of the constructor::
+Lahko tudi določite URL za uporabo v drugem parametru konstruktorja::
 
     // ...
     $templateEngine->set(new AssetsHelper(null, 'http://cdn.example.com/'));
 
-Now URLs are rendered like ``http://cdn.example.com/images/logo.png``.
+Sedaj so URL-ji izpisani kot ``http://cdn.example.com/images/logo.png``.
 
 .. versionadded:: 2.5
-    Absolute URLs for assets were introduced in Symfony 2.5.
+    Absolutni URL-ji za sredstva so bili predstavljeni v Symfony 2.5.
 
-You can also use the third argument of the helper to force an absolute URL:
+Lahko tudi uporabite tretji argument pomočnika, da vsilite absolutni URL:
 
 .. code-block:: html+php
 
@@ -61,30 +61,30 @@ You can also use the third argument of the helper to force an absolute URL:
 
 .. note::
 
-    If you already set a URL in the constructor, using the third argument of
-    ``getUrl`` will not affect the generated URL.
+    Če ste že nastavili URL v konstruktorju, uporaba tretjega argumenta od
+    ``getUrl`` ne bo vplivala na generirani URL.
 
-Versioning
-----------
+Verzije
+-------
 
-To avoid using the cached resource after updating the old resource, you can
-use versions which you bump every time you release a new project. The version
-can be specified in the third argument::
+Da se izognete predpomnenju vira po posodobitvi starega vira, lahko
+uporabite verzije, ki jih povečate vsakič, ko izdate nov projekt. Verzija
+je lahko specificirana v tretjem argumentu::
 
     // ...
     $templateEngine->set(new AssetsHelper(null, null, '328rad75'));
 
-Now, every URL is suffixed with ``?328rad75``. If you want to have a different
-format, you can specify the new format in fourth argument. It's a string that
-is used in :phpfunction:`sprintf`. The first argument is the path and the
-second is the version. For instance, ``%s?v=%s`` will be rendered as
+Sedaj bo vsak URL imel na koncu pripono  ``?328rad75``. Če želite imeti drugačen
+format, lahko določite nov format v četrtem argumentu. Je niz, ki
+je uporablje v :phpfunction:`sprintf`. Prvi argument je pot in
+drugi je verzija. Na primer, ``%s?v=%s`` bo izpisan kot
 ``/images/logo.png?v=328rad75``.
 
 .. versionadded:: 2.5
-    On-demand versioned URLs for assets were introduced in Symfony 2.5.
+    Na zahtevo verzije URL-jev za sredstva so bile predstavljene v Symfony 2.5.
 
-You can also generate a versioned URL on an asset-by-asset basis using the
-fourth argument of the helper:
+Lahko tudi generirate URL z verzijo na osnovi sredstva-za-sredstvo z uporabo
+četrtega argumenta pomočnika:
 
 .. code-block:: html+php
 
@@ -93,16 +93,16 @@ fourth argument of the helper:
    <img src="/images/logo.png?v=3.0">
    -->
 
-Multiple Packages
------------------
+Več paketov
+-----------
 
-Asset path generation is handled internally by packages. The component provides
-2 packages by default:
+Generiranje poti sredstev je upravljano interno s paketi. Komponenta privzeto ponuja
+2 paketa:
 
 * :class:`Symfony\\Component\\Templating\\Asset\\PathPackage`
 * :class:`Symfony\\Component\\Templating\\Asset\\UrlPackage`
 
-You can also use multiple packages::
+Lahko tudi uporabite več paketov::
 
     // ...
     $templateEngine->set(new AssetsHelper());
@@ -110,15 +110,15 @@ You can also use multiple packages::
     $templateEngine->get('assets')->addPackage('images', new PathPackage('/images/'));
     $templateEngine->get('assets')->addPackage('scripts', new PathPackage('/scripts/'));
 
-This will setup the assets helper with 3 packages: the default package which
-defaults to ``/`` (set by the constructor), the images package which prefixes
-it with ``/images/`` and the scripts package which prefixes it with
+To bo nastavilo pomočnika sredstev s 3 paketi: privzeti paket, ki
+je privzeto ``/`` (nastavljen s konstruktorjem), paket images, ki doda predpone
+``/images/`` in paket scripts, ki doda predpone
 ``/scripts/``.
 
-If you want to set another default package, you can use
+Če želite nastaviti drug privzeti paket, lahko uporabite
 :method:`Symfony\\Component\\Templating\\Helper\\AssetsHelper::setDefaultPackage`.
 
-You can specify which package you want to use in the second argument of
+Lahko specificirate kateri paket želite uporabiti v drugem argumentu od
 :method:`Symfony\\Component\\Templating\\Helper\\AssetsHelper::getUrl`:
 
 .. code-block:: html+php
@@ -128,8 +128,8 @@ You can specify which package you want to use in the second argument of
     <img src="/images/foo.png">
     -->
 
-Custom Packages
----------------
+Paketi po meri
+--------------
 
-You can create your own package by extending
+Ustvarite lahko vaš lasten paket z razširitvijo
 :class:`Symfony\\Component\\Templating\\Package\\Package`.

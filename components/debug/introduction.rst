@@ -2,64 +2,64 @@
    single: Debug
    single: Components; Debug
 
-The Debug Component
-===================
+Komponenta Debug
+================
 
-    The Debug component provides tools to ease debugging PHP code.
+    Komponenta Debug ponuja orodja za poenostavitev razhroščevanja kode PHP.
 
 .. versionadded:: 2.3
-    The Debug component was introduced in Symfony 2.3. Previously, the classes
-    were located in the HttpKernel component.
+    Komponenta Debug je bila predstavljena v Symfony 2.3. Predtem so bili razredi
+    licirani v komponenti HttpKernel.
 
-Installation
-------------
+Namestitev
+----------
 
-You can install the component in many different ways:
+Komponento lahko namestite na različne načine:
 
-* Use the official Git repository (https://github.com/symfony/Debug);
-* :doc:`Install it via Composer </components/using_components>` (``symfony/debug`` on `Packagist`_).
+* Uporabite uradni Git repozitorij (https://github.com/symfony/Debug);
+* :doc:`Namestite jo preko Composer-ja </components/using_components>` (``symfony/debug`` na `Packagist`_).
 
-Usage
------
+Uporaba
+-------
 
-The Debug component provides several tools to help you debug PHP code.
-Enabling them all is as easy as it can get::
+Komponenta Debug ponuja nekaj orodij, ki vam pomagajo razhroščevati kodo PHP.
+Omogočiti vsa je najenostavnejše kot gre::
 
     use Symfony\Component\Debug\Debug;
 
     Debug::enable();
 
-The :method:`Symfony\\Component\\Debug\\Debug::enable` method registers an
-error handler, an exception handler and
-:doc:`a special class loader </components/debug/class_loader>`.
+Metoda :method:`Symfony\\Component\\Debug\\Debug::enable` registrira
+hendler napak, hendler izjem in
+:doc:`posebni nalagalnik razredov </components/debug/class_loader>`.
 
-Read the following sections for more information about the different available
-tools.
+Preberite sledeče sekcije za več informacij o različnih orodjih
+na voljo.
 
 .. caution::
 
-    You should never enable the debug tools in a production environment as
-    they might disclose sensitive information to the user.
+    Nikoli ne bi smeli omogočiti razhroščevalnih orodij v produkcijskem okolju, saj
+    lahko razkrijejo občutljive informacije uporabniku.
 
-Enabling the Error Handler
+Omogočanje handlerja napak
 --------------------------
 
-The :class:`Symfony\\Component\\Debug\\ErrorHandler` class catches PHP errors
-and converts them to exceptions (of class :phpclass:`ErrorException` or
-:class:`Symfony\\Component\\Debug\\Exception\\FatalErrorException` for PHP
-fatal errors)::
+Razred :class:`Symfony\\Component\\Debug\\ErrorHandler` ujame napake PHP
+in jih spremeni v izjeme (razreda :phpclass:`ErrorException` ali
+:class:`Symfony\\Component\\Debug\\Exception\\FatalErrorException` za PHP
+kritične napake)::
 
     use Symfony\Component\Debug\ErrorHandler;
 
     ErrorHandler::register();
 
-Enabling the Exception Handler
-------------------------------
+Omogočanje hendlerja izjem
+--------------------------
 
-The :class:`Symfony\\Component\\Debug\\ExceptionHandler` class catches
-uncaught PHP exceptions and converts them to a nice PHP response. It is useful
-in debug mode to replace the default PHP/XDebug output with something prettier
-and more useful::
+Razred :class:`Symfony\\Component\\Debug\\ExceptionHandler` ujame
+neujete izjeme PHP in jih pretvori v lepe odzive PHP. Je uporaben
+v razhroščevalnem načinu za zamenjavo privzetega PHP/XDebug izpisa z nekaj lepšega
+in bolj uporabnega::
 
     use Symfony\Component\Debug\ExceptionHandler;
 
@@ -67,8 +67,8 @@ and more useful::
 
 .. note::
 
-    If the :doc:`HttpFoundation component </components/http_foundation/introduction>` is
-    available, the handler uses a Symfony Response object; if not, it falls
-    back to a regular PHP response.
+    Če je :doc:`komponenta HttpFoundation </components/http_foundation/introduction>`
+    na voljo, hendler uporabi objekt Symfony Response; drugače pade
+    nazaj na splošni PHP odziv.
 
 .. _Packagist: https://packagist.org/packages/symfony/debug

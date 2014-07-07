@@ -2,26 +2,26 @@
    single: Stopwatch
    single: Components; Stopwatch
 
-The Stopwatch Component
-=======================
+Komponenta Stopwatch
+====================
 
-    The Stopwatch component provides a way to profile code.
+    Komponenta Stopwatch ponuja način profiliranja kode.
 
-Installation
-------------
+Namestitev
+----------
 
-You can install the component in two different ways:
+Komponento lahko namestite na dva različna načina:
 
-* :doc:`Install it via Composer</components/using_components>` (``symfony/stopwatch`` on `Packagist`_);
-* Use the official Git repository (https://github.com/symfony/Stopwatch).
+* :doc:`Namestitev preko Composer-ja</components/using_components>` (``symfony/stopwatch`` na `Packagist`_);
+* Uporabite uradni Git repozitorij (https://github.com/symfony/Stopwatch).
 
-Usage
------
+uporaba
+-------
 
-The Stopwatch component provides an easy and consistent way to measure execution
-time of certain parts of code so that you don't constantly have to parse
-microtime by yourself. Instead, use the simple
-:class:`Symfony\\Component\\Stopwatch\\Stopwatch` class::
+Komponenta Stopwatch ponuja enostaven in konsistenten način za merjenje izvrševanja
+časa določenih delov kode, da vam ni potrebno konstantno razčlenjevati
+mikro časa. Namesto tega uporabite enostaven
+razred :class:`Symfony\\Component\\Stopwatch\\Stopwatch`::
 
     use Symfony\Component\Stopwatch\Stopwatch;
 
@@ -32,30 +32,30 @@ microtime by yourself. Instead, use the simple
     $event = $stopwatch->stop('eventName');
 
 .. versionadded:: 2.5
-    The ``getEvent()`` method was introduced in Symfony 2.5
+    Metoda ``getEvent()`` je bila predstavljena v Symfony 2.5
 
-The :class:`Symfony\\Component\\Stopwatch\\StopwatchEvent` object can be retrieved
-from the  :method:`Symfony\\Component\\Stopwatch\\Stopwatch::start`, 
-:method:`Symfony\\Component\\Stopwatch\\Stopwatch::stop`, 
-:method:`Symfony\\Component\\Stopwatch\\Stopwatch::lap` and 
-:method:`Symfony\\Component\\Stopwatch\\Stopwatch::getEvent` methods. 
-The latter should be used when you need to retrieve the duration of an event
-while it is still running.
+Objekt :class:`Symfony\\Component\\Stopwatch\\StopwatchEvent` je lahko pridobljen
+iz metod :method:`Symfony\\Component\\Stopwatch\\Stopwatch::start`,
+:method:`Symfony\\Component\\Stopwatch\\Stopwatch::stop`,
+:method:`Symfony\\Component\\Stopwatch\\Stopwatch::lap` in
+:method:`Symfony\\Component\\Stopwatch\\Stopwatch::getEvent`.
+Zadnja bi morala biti uporabljena, ko potrebujete pridobiti trajanje dogodka,
+ko še vedno teče.
 
-You can also provide a category name to an event::
+Dogodku lahko ponudite tudi ime kategorije::
 
     $stopwatch->start('eventName', 'categoryName');
 
-You can consider categories as a way of tagging events. For example, the
-Symfony Profiler tool uses categories to nicely color-code different events.
+Kategorije lahko smatrate kot način označevanja dogodkov. Na primer,
+orodje Symfony Profiler uporablja kategorije za lepe barvno-kodne različne dogodke.
 
-Periods
+Obdobja
 -------
 
-As you know from the real world, all stopwatches come with two buttons:
-one to start and stop the stopwatch, and another to measure the lap time.
-This is exactly what the :method:`Symfony\\Component\\Stopwatch\\Stopwatch::lap`
-method does::
+Kot veste iz realnega sveta, vse štoparice prihajajo z dvema gumboma:
+eden za pričetek in konec štoparice in drugi za merjenje vmesnega časa.
+To je točno to, kar metoda :method:`Symfony\\Component\\Stopwatch\\Stopwatch::lap`
+počne::
 
     $stopwatch = new Stopwatch();
     // Start event named 'foo'
@@ -67,13 +67,13 @@ method does::
     // ... some other code goes here
     $event = $stopwatch->stop('foo');
 
-Lap information is stored as "periods" within the event. To get lap information
-call::
+Informacije vmesnih časov so shranjene kot "obdobja" v dogodku. Da dobite informacije vmesnih časov
+kličite::
 
     $event->getPeriods();
 
-In addition to periods, you can get other useful information from the event object.
-For example::
+Kot dodatek obdobjem, lahko dobite ostale uporabne informacije iz objekta dogodka.
+Na primer::
 
     $event->getCategory();   // Returns the category the event was started in
     $event->getOrigin();     // Returns the event start time in milliseconds
@@ -83,12 +83,12 @@ For example::
     $event->getDuration();   // Returns the event duration, including all periods
     $event->getMemory();     // Returns the max memory usage of all periods
 
-Sections
---------
+Sekcije
+-------
 
-Sections are a way to logically split the timeline into groups. You can see
-how Symfony uses sections to nicely visualize the framework lifecycle in the
-Symfony Profiler tool. Here is a basic usage example using sections::
+Sekcije so način za logično razdelitev časovnice v skupine. Lahko pogledate,
+kako Symfony uporablja sekcije za lepo vizualizacijo življenskega cikla ogrodja v
+orodju Symfony Profiler. Tu je primer osnovne uporabe z uporabo sekcij::
 
     $stopwatch = new Stopwatch();
 
@@ -98,8 +98,9 @@ Symfony Profiler tool. Here is a basic usage example using sections::
 
     $events = $stopwatch->getSectionEvents('routing');
 
-You can reopen a closed section by calling the :method:`Symfony\\Component\\Stopwatch\\Stopwatch::openSection`
-method and specifying the id of the section to be reopened::
+Zaprto sekcijo lahko ponovno odprete s klicom metode
+:method:`Symfony\\Component\\Stopwatch\\Stopwatch::openSection`
+in določite id sekcije, ki se naj ponovno odpre::
 
     $stopwatch->openSection('routing');
     $stopwatch->start('building_config_tree');

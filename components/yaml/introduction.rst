@@ -2,95 +2,95 @@
    single: Yaml
    single: Components; Yaml
 
-The YAML Component
-==================
+Komponenta YAML
+===============
 
-    The YAML Component loads and dumps YAML files.
+    Komponenta YAML naloži in izvrže datoteke YAML.
 
-What is It?
------------
+Kaj je?
+-------
 
-The Symfony2 YAML Component parses YAML strings to convert them to PHP arrays.
-It is also able to convert PHP arrays to YAML strings.
+Komponenta Symfony2 YAML razčleni nize YAML in jih pretvori v PHP polja.
+Zmožna je tudi pretvoriti PHP polja v nize YAML.
 
-`YAML`_, *YAML Ain't Markup Language*, is a human friendly data serialization
-standard for all programming languages. YAML is a great format for your
-configuration files. YAML files are as expressive as XML files and as readable
-as INI files.
+`YAML`_, *YAML Ain't Markup Language*, je človeku prijazen standard serializacije
+podatkov za vse programske jezike. YAML je odličen format za vaše
+nastavitvene datoteke. Datoteke YAML so tako izražalne kot datoteke XML in tako bralne
+kot datoteke INI.
 
-The Symfony2 YAML Component implements the YAML 1.2 version of the
-specification.
+Komponenta Symfony2 YAML implementira YAML verzijo 1.2
+specifikacij.
 
 .. tip::
 
-    Learn more about the Yaml component in the
-    :doc:`/components/yaml/yaml_format` article.
+    Naučite se več o komponenti Yaml v
+    članku :doc:`/components/yaml/yaml_format`.
 
-Installation
-------------
+Namestitev
+----------
 
-You can install the component in 2 different ways:
+Komponento lahko namestite na 2 različna načina:
 
-* :doc:`Install it via Composer </components/using_components>` (``symfony/yaml`` on `Packagist`_);
-* Use the official Git repository (https://github.com/symfony/Yaml).
+* :doc:`Namestite jo preko Composer-ja </components/using_components>` (``symfony/yaml`` na `Packagist`_);
+* Uporabite uradni Git repozitorij (https://github.com/symfony/Yaml).
 
-Why?
-----
+Zakaj?
+------
 
-Fast
-~~~~
+Hitro
+~~~~~
 
-One of the goal of Symfony YAML is to find the right balance between speed and
-features. It supports just the needed feature to handle configuration files.
+Eden ciljev Symfony YAML je najti pravo razmerje med hitrostjo in
+lastnostmi. Podpira samo lastnosti potrebne za upravljanje nastavitvenih datotek.
 
-Real Parser
-~~~~~~~~~~~
+Pravi razčlenjevalnik
+~~~~~~~~~~~~~~~~~~~~~
 
-It sports a real parser and is able to parse a large subset of the YAML
-specification, for all your configuration needs. It also means that the parser
-is pretty robust, easy to understand, and simple enough to extend.
+Podpira pravi razčlenjevalnik in je sposobna razčleniti velik skupek
+specifikacije YAML za vse vaše potrebe nastavitev. To tudi pomeni, da je razčlenjevalnik
+precej robusten, enostaven za razumeti in dovolj enostaven za razširitev.
 
-Clear Error Messages
-~~~~~~~~~~~~~~~~~~~~
+Jasna sporočila napak
+~~~~~~~~~~~~~~~~~~~~~
 
-Whenever you have a syntax problem with your YAML files, the library outputs a
-helpful message with the filename and the line number where the problem
-occurred. It eases the debugging a lot.
+Kadarkoli imate problem sintakse z vašimi datotekami YAML, knjižnica izpiše
+pomagalna sporočila z imeni datotek in številko vrstice, kjer se je problem
+zgodil. Precej poenostavi razhroščevanje.
 
-Dump Support
-~~~~~~~~~~~~
+Podpora odlaganja
+~~~~~~~~~~~~~~~~~
 
-It is also able to dump PHP arrays to YAML with object support, and inline
-level configuration for pretty outputs.
+Je tudi sposobna odložiti PHP polja v YAML s podporo za objekte in medvrstičnim
+nivojem nastavitev za lepe izpise.
 
-Types Support
+Podpora tipov
 ~~~~~~~~~~~~~
 
-It supports most of the YAML built-in types like dates, integers, octals,
-booleans, and much more...
+Podpira tudi večino vgrajenih YAML tipov kot so datumi, cela števila, osmiška števila,
+logične vrednosti in veliko več ...
 
-Full Merge Key Support
-~~~~~~~~~~~~~~~~~~~~~~
+Celotna ključna združevalna podpora
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Full support for references, aliases, and full merge key. Don't repeat
-yourself by referencing common configuration bits.
+Polna podpora za sklicevanje, aliase in polno ključno združevanje. Ne ponavljajte
+se s sklicevanjem na pogoste nastavitvene delce.
 
-Using the Symfony2 YAML Component
----------------------------------
+Uporaba komponente Symfony2 YAML
+--------------------------------
 
-The Symfony2 YAML Component is very simple and consists of two main classes:
-one parses YAML strings (:class:`Symfony\\Component\\Yaml\\Parser`), and the
-other dumps a PHP array to a YAML string
+Komponenta Symfony2 YAML je zelo enostavna in sestavljena iz dveh glavnih razredov:
+eden razčleni nize YAML (:class:`Symfony\\Component\\Yaml\\Parser`) in
+drugi odloži polje PHP v niz YAML
 (:class:`Symfony\\Component\\Yaml\\Dumper`).
 
-On top of these two classes, the :class:`Symfony\\Component\\Yaml\\Yaml` class
-acts as a thin wrapper that simplifies common uses.
+Povrh teh dveh razredov, razred :class:`Symfony\\Component\\Yaml\\Yaml`
+deluje kot lahek ovoj, ki poenostavi pogoste uporabe.
 
-Reading YAML Files
-~~~~~~~~~~~~~~~~~~
+Branje datotek YAML
+~~~~~~~~~~~~~~~~~~~
 
-The :method:`Symfony\\Component\\Yaml\\Parser::parse` method parses a YAML
-string and converts it to a PHP array:
+Metoda :method:`Symfony\\Component\\Yaml\\Parser::parse` razčleni niz YAML
+in ga pretvori v polje PHP:
 
 .. code-block:: php
 
@@ -100,10 +100,10 @@ string and converts it to a PHP array:
 
     $value = $yaml->parse(file_get_contents('/path/to/file.yml'));
 
-If an error occurs during parsing, the parser throws a
-:class:`Symfony\\Component\\Yaml\\Exception\\ParseException` exception
-indicating the error type and the line in the original YAML string where the
-error occurred:
+Če pride do napake med razčlenjevanjem, razčlenjevalnik vrže
+izjemo :class:`Symfony\\Component\\Yaml\\Exception\\ParseException`,
+ki nakazuje tip napake in vrstico originalnega niza YAML, kjer se je
+napaka zgodila:
 
 .. code-block:: php
 
@@ -117,11 +117,11 @@ error occurred:
 
 .. tip::
 
-    As the parser is re-entrant, you can use the same parser object to load
-    different YAML strings.
+    Kot je razčlenjevalnik ponovno vstopen, lahko uporabite isti objekt razčlenjevalnika za nalaganje
+    različnih nizov YAML.
 
-It may also be convenient to use the
-:method:`Symfony\\Component\\Yaml\\Yaml::parse` wrapper method:
+Lahko je tudi priročno uporabiti
+ovijalno metodo :method:`Symfony\\Component\\Yaml\\Yaml::parse`:
 
 .. code-block:: php
 
@@ -129,22 +129,22 @@ It may also be convenient to use the
 
     $yaml = Yaml::parse(file_get_contents('/path/to/file.yml'));
 
-The :method:`Symfony\\Component\\Yaml\\Yaml::parse` static method takes a YAML
-string or a file containing YAML. Internally, it calls the
-:method:`Symfony\\Component\\Yaml\\Parser::parse` method, but enhances the
-error if something goes wrong by adding the filename to the message.
+Statična metoda :method:`Symfony\\Component\\Yaml\\Yaml::parse` vzame niz YAML
+ali datoteko, ki vsebuje YAML. Notranje pokliče
+metodo :method:`Symfony\\Component\\Yaml\\Parser::parse` vendar izboljša
+napako, če gre kaj narobe z dodajanjem imena datoteke k sporočilu.
 
 .. caution::
 
-    Because it is currently possible to pass a filename to this method, you
-    must validate the input first. Passing a filename is deprecated in
-    Symfony 2.2, and will be removed in Symfony 3.0.
+    Ker je trenutno mogoče podati ime datoteke tej metodi,
+    morate najpre preveriti vnos. Podajanje imena datoteke je opuščeno v
+    Symfony 2.2 in bo odstranjeno v Symfony 3.0.
 
-Writing YAML Files
-~~~~~~~~~~~~~~~~~~
+Pisanje datotek YAML
+~~~~~~~~~~~~~~~~~~~~
 
-The :method:`Symfony\\Component\\Yaml\\Dumper::dump` method dumps any PHP
-array to its YAML representation:
+Metoda :method:`Symfony\\Component\\Yaml\\Dumper::dump` odloži kakršnokoli
+polje PHP v njegovo predstavitev YAML:
 
 .. code-block:: php
 
@@ -163,15 +163,15 @@ array to its YAML representation:
 
 .. note::
 
-    Of course, the Symfony2 YAML dumper is not able to dump resources. Also,
-    even if the dumper is able to dump PHP objects, it is considered to be a
-    not supported feature.
+    Seveda, Symfony2 YAML odložilnik (dumper) ni sposoben odložiti virov. Tudi
+    če je odložilnik sposoben odložiti objekte PHP, se smatra, da je to
+    nepodprta lastnost.
 
-If an error occurs during the dump, the parser throws a
-:class:`Symfony\\Component\\Yaml\\Exception\\DumpException` exception.
+Če pride do kakršnekoli napake med odlaganjem, razčlenjevalnik vrže
+izjemo :class:`Symfony\\Component\\Yaml\\Exception\\DumpException`.
 
-If you only need to dump one array, you can use the
-:method:`Symfony\\Component\\Yaml\\Yaml::dump` static method shortcut:
+Če samo potrebujete odložiti eno polje, lahko uporabite
+bližnjico statične metode :method:`Symfony\\Component\\Yaml\\Yaml::dump`:
 
 .. code-block:: php
 
@@ -179,17 +179,17 @@ If you only need to dump one array, you can use the
 
     $yaml = Yaml::dump($array, $inline);
 
-The YAML format supports two kind of representation for arrays, the expanded
-one, and the inline one. By default, the dumper uses the inline
-representation:
+Format YAML podpira dve vrsti predstavitve za polja, razširjeno
+in medvrstično. Privzeto, odložilnik uporablja medvrstično
+predstavitev:
 
 .. code-block:: yaml
 
     { foo: bar, bar: { foo: bar, bar: baz } }
 
-The second argument of the :method:`Symfony\\Component\\Yaml\\Dumper::dump`
-method customizes the level at which the output switches from the expanded
-representation to the inline one:
+Drugi argument metode :method:`Symfony\\Component\\Yaml\\Dumper::dump`
+prilagodi nivo na katerem izpis prestavlja iz razširjene
+predstavitve na medvrstično:
 
 .. code-block:: php
 

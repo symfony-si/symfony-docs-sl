@@ -1,27 +1,27 @@
 .. index::
     single: Yaml; YAML Format
 
-The YAML Format
-===============
+Format YAML
+===========
 
-According to the official `YAML`_ website, YAML is "a human friendly data
-serialization standard for all programming languages".
+Glede na uradno `YAML`_ stran, YAML je "človeku prijazen podatkovni
+standard serializacije za vse programske jezike".
 
-Even if the YAML format can describe complex nested data structure, this
-chapter only describes the minimum set of features needed to use YAML as a
-configuration file format.
+Četudi format YAML lahko opisuje kompleksne gnezdene podatkovne strukture, to
+poglavje samo opisuje najmanjši skupek lastnosti potrebnih za uporabo YAML kot
+formata nastavitvenih datotek.
 
-YAML is a simple language that describes data. As PHP, it has a syntax for
-simple types like strings, booleans, floats, or integers. But unlike PHP, it
-makes a difference between arrays (sequences) and hashes (mappings).
+YAML je enostaven jezik, ki opisuje podatke. Kot PHP ima sintakso za
+enostavne tipe kot so nizi, logične vrednosti, števila s plavajočo vejico ali cela števila. Vendar za razliko od PHP
+dela razlike med polji (sekvencami) in hash-i (preslikavami).
 
-Scalars
--------
+Skalarji
+--------
 
-The syntax for scalars is similar to the PHP syntax.
+Sintaksa za skalarje je podobna sintaksi PHP.
 
-Strings
-~~~~~~~
+Nizi
+~~~~
 
 .. code-block:: yaml
 
@@ -43,18 +43,18 @@ Strings
 
     "A double-quoted string in YAML\n"
 
-Quoted styles are useful when a string starts or ends with one or more
-relevant spaces.
+Citirani stili so uporabno, ko se niz začne ali konča z enim ali več
+relevantnih presledkov.
 
 .. tip::
 
-    The double-quoted style provides a way to express arbitrary strings, by
-    using ``\`` escape sequences. It is very useful when you need to embed a
-    ``\n`` or a unicode character in a string.
+    Dvojno citirani stil ponuja način za izražanje arbitrarnih nizov z
+    uporabo ``\`` spreminjajočih (escaping) sekvenc. Je zelo uporabna, ko potrebujete vključiti
+    ``\n`` ali unikodni znak v niz.
 
-When a string contains line breaks, you can use the literal style, indicated
-by the pipe (``|``), to indicate that the string will span several lines. In
-literals, newlines are preserved:
+Ko niz vsebuje lom vrstic, lahko uproabite dobesedni stil, označen
+z znakom ``|``, za označitev, da bo niz lomljev preko večih vrstic. V
+dobesednem navedku so nove vrstice ohranjene:
 
 .. code-block:: yaml
 
@@ -62,8 +62,8 @@ literals, newlines are preserved:
       \/ /| |\/| |
       / / | |  | |__
 
-Alternatively, strings can be written with the folded style, denoted by ``>``,
-where each line break is replaced by a space:
+Alternativno so nizi lahko napisani s pospravljenim stilom, označenim z ``>``,
+kjer je zlom vsake vrstice zamenjan s presledkom:
 
 .. code-block:: yaml
 
@@ -75,11 +75,11 @@ where each line break is replaced by a space:
 
 .. note::
 
-    Notice the two spaces before each line in the previous examples. They
-    won't appear in the resulting PHP strings.
+    Bodite pozorni, da dva presledka pred vsako vrstico v prejšnjih primerih.
+    Ne bodo se pojavili v končnem nizu PHP.
 
-Numbers
-~~~~~~~
+Številke
+~~~~~~~~
 
 .. code-block:: yaml
 
@@ -111,20 +111,20 @@ Numbers
     # infinity
     .inf
 
-Nulls
-~~~~~
+Prazne vrednosti - nulls
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-Nulls in YAML can be expressed with ``null`` or ``~``.
+Prazne vrednosti v YAML so lahko izražene z ``null`` ali ``~``.
 
-Booleans
-~~~~~~~~
+Logične vrednosti
+~~~~~~~~~~~~~~~~~
 
-Booleans in YAML are expressed with ``true`` and ``false``.
+Logične vrednosti v YAML so izražene s ``true`` in ``false``.
 
-Dates
-~~~~~
+Datumi
+~~~~~~
 
-YAML uses the ISO-8601 standard to express dates:
+YAML uporablja standard ISO-8601 za izražanje datumov:
 
 .. code-block:: yaml
 
@@ -135,14 +135,14 @@ YAML uses the ISO-8601 standard to express dates:
     # simple date
     2002-12-14
 
-Collections
------------
+Zbirke
+------
 
-A YAML file is rarely used to describe a simple scalar. Most of the time, it
-describes a collection. A collection can be a sequence or a mapping of
-elements. Both sequences and mappings are converted to PHP arrays.
+Datoteka YAML je redko uporabljena za opisovanje enostavnih skalarjev. Večino časa
+opisuje zbirko. Zbirka je lahko sekvenca ali preslikava
+elementov. Obe sekvenci in preslikavi sta pretvorjeni v polja PHP.
 
-Sequences use a dash followed by a space:
+Sekvence uporabljajo črto (dash), ki ji sledi presledek:
 
 .. code-block:: yaml
 
@@ -150,13 +150,13 @@ Sequences use a dash followed by a space:
     - Perl
     - Python
 
-The previous YAML file is equivalent to the following PHP code:
+Prejšnja datoteka YAML je ekvivalentna sledeči kodi PHP:
 
 .. code-block:: php
 
     array('PHP', 'Perl', 'Python');
 
-Mappings use a colon followed by a space (``:`` ) to mark each key/value pair:
+Preslikave uporabljajo dvopičje, ki mu sledi presledek (``:``) za označitev vsakega para ključ/vrednost:
 
 .. code-block:: yaml
 
@@ -164,7 +164,7 @@ Mappings use a colon followed by a space (``:`` ) to mark each key/value pair:
     MySQL: 5.1
     Apache: 2.2.20
 
-which is equivalent to this PHP code:
+kar je ekvivalentno tej PHP kodi:
 
 .. code-block:: php
 
@@ -172,9 +172,9 @@ which is equivalent to this PHP code:
 
 .. note::
 
-    In a mapping, a key can be any valid scalar.
+    V preslikavi je lahko ključ katerikoli veljaven skalar.
 
-The number of spaces between the colon and the value does not matter:
+Število presledkov med dvopičjem in vrednostjo ni pomembno:
 
 .. code-block:: yaml
 
@@ -182,7 +182,7 @@ The number of spaces between the colon and the value does not matter:
     MySQL:  5.1
     Apache: 2.2.20
 
-YAML uses indentation with one or more spaces to describe nested collections:
+YAML uporablja indentacijo z enim ali več presledkov za opis gnezdenih zbirk:
 
 .. code-block:: yaml
 
@@ -193,7 +193,7 @@ YAML uses indentation with one or more spaces to describe nested collections:
       PHP:    5.2
       Propel: 1.3
 
-The following YAML is equivalent to the following PHP code:
+Sledeči YAML je ekvivalenten sledeči PHP kodi:
 
 .. code-block:: php
 
@@ -208,11 +208,11 @@ The following YAML is equivalent to the following PHP code:
       ),
     );
 
-There is one important thing you need to remember when using indentation in a
-YAML file: *Indentation must be done with one or more spaces, but never with
-tabulations*.
+Obstaja ena pomembna stvar, ki si jo morate zapomniti, ko uporabljate indentacijo v
+datoteki YAML: *Indentacija mora biti narejena z enim ali več presledkov, vendar nikoli s
+tabulatorji*.
 
-You can nest sequences and mappings as you like:
+Lahko gnezdite sekvence in preslikave kot želite:
 
 .. code-block:: yaml
 
@@ -223,24 +223,24 @@ You can nest sequences and mappings as you like:
       - Introduction
       - Helpers
 
-YAML can also use flow styles for collections, using explicit indicators
-rather than indentation to denote scope.
+YAML lahko uporabi tudi stile poteka za zbirke z uporabo eksplicitnih indikatorjev
+naemsto indentacije za označevanje obsega.
 
-A sequence can be written as a comma separated list within square brackets
+Sekvenca je lahko napisana kot seznam ločen z vejicami znotraj oglatih oklepajev
 (``[]``):
 
 .. code-block:: yaml
 
     [PHP, Perl, Python]
 
-A mapping can be written as a comma separated list of key/values within curly
-braces (``{}``):
+Preslikava je lahko napisana kot seznam ključ/vrednosti ločen z vejicami znotraj zavitih
+oklepajev (``{}``):
 
 .. code-block:: yaml
 
     { PHP: 5.2, MySQL: 5.1, Apache: 2.2.20 }
 
-You can mix and match styles to achieve a better readability:
+Lahko tudi mešate in ujemate stile za doseg boljše bralnosti:
 
 .. code-block:: yaml
 
@@ -252,10 +252,10 @@ You can mix and match styles to achieve a better readability:
     "symfony 1.0": { PHP: 5.0, Propel: 1.2 }
     "symfony 1.2": { PHP: 5.2, Propel: 1.3 }
 
-Comments
---------
+Komentarji
+----------
 
-Comments can be added in YAML by prefixing them with a hash mark (``#``):
+Komentarji so lahko dodani v YAML s predpono hash znaka (``#``);
 
 .. code-block:: yaml
 
@@ -265,7 +265,7 @@ Comments can be added in YAML by prefixing them with a hash mark (``#``):
 
 .. note::
 
-    Comments are simply ignored by the YAML parser and do not need to be
-    indented according to the current level of nesting in a collection.
+    Komentarji so enostavno ignorirani v razčlenjevalniku YAML in jih ni potrebno
+    indentirati glede na trenutni nivo gnezdenja v zbirki.
 
 .. _YAML: http://yaml.org/

@@ -2,43 +2,43 @@
    single: Serializer
    single: Components; Serializer
 
-The Serializer Component
-========================
+Komponenta Serializer
+=====================
 
-   The Serializer component is meant to be used to turn objects into a
-   specific format (XML, JSON, YAML, ...) and the other way around.
+   Komponenta Serizalizer je mišljena za uporabo spreminjanja objektov v
+   specifičen format (XML, JSON, YAML, ...) in obratno.
 
-In order to do so, the Serializer component follows the following
-simple schema.
+Da to naredi, komponenta Serializer sledi sledeči
+enostavni shemi.
 
 .. _component-serializer-encoders:
 .. _component-serializer-normalizers:
 
 .. image:: /images/components/serializer/serializer_workflow.png
 
-As you can see in the picture above, an array is used as a man in
-the middle. This way, Encoders will only deal with turning specific
-**formats** into **arrays** and vice versa. The same way, Normalizers
-will deal with turning specific **objects** into **arrays** and vice versa.
+Kot vidite na sliki zgoraj, je polje uporabljeno kot posrednik.
+Na ta način se bodo enkoderji ukvarjali samo s spreminjanjem specifičnih
+**formatov** v **polja** in obratno. Na enak način se bodo normalizatorji
+ukvarjali s spreminjanjem specifičnih **objektov** v **polja** in obratno.
 
-Serialization is a complicated topic, and while this component may not work
-in all cases, it can be a useful tool while developing tools to serialize
-and deserialize your objects.
+Serializacija je komplicirana tema in medtem ko ta komponenta lahko ne deluje
+v vseh primerih, je lahko uporabno orodje kot razvijate orodja za serializacijo
+in deserializacijo vaših objektov.
 
-Installation
-------------
+Namesitev
+---------
 
-You can install the component in 2 different ways:
+Komponento lahko namestite na 2 različna načina:
 
-* :doc:`Install it via Composer </components/using_components>` (``symfony/serializer`` on `Packagist`_);
-* Use the official Git repository (https://github.com/symfony/Serializer).
+* :doc:`Namestitev preko Composer-ja </components/using_components>` (``symfony/serializer`` na `Packagist`_);
+* Uporabite uradni Git repozitorij (https://github.com/symfony/Serializer).
 
-Usage
------
+Uporaba
+-------
 
-Using the Serializer component is really simple. You just need to set up
-the :class:`Symfony\\Component\\Serializer\\Serializer` specifying
-which Encoders and Normalizer are going to be available::
+Uporaba komponente Serializer je res enostavna. Potrebujete samo nastaviti
+:class:`Symfony\\Component\\Serializer\\Serializer` in določiti
+kateri enkoderji in normalizator bodo na voljo::
 
     use Symfony\Component\Serializer\Serializer;
     use Symfony\Component\Serializer\Encoder\XmlEncoder;
@@ -50,11 +50,11 @@ which Encoders and Normalizer are going to be available::
 
     $serializer = new Serializer($normalizers, $encoders);
 
-Serializing an Object
+Serializacija objekta
 ---------------------
 
-For the sake of this example, assume the following class already
-exists in your project::
+Za namen tega primera, predpostavimo, da sledeči razred že
+obstoja v vašem projektu::
 
     namespace Acme;
 
@@ -98,8 +98,8 @@ exists in your project::
         }
     }
 
-Now, if you want to serialize this object into JSON, you only need to
-use the Serializer service created before::
+Sedaj, če želite serializirati ta objekt v JSON, potrebujete uporabiti samo
+storitev Serializer ustvarjeno prej::
 
     $person = new Acme\Person();
     $person->setName('foo');
@@ -112,21 +112,21 @@ use the Serializer service created before::
 
     echo $jsonContent; // or return it in a Response
 
-The first parameter of the :method:`Symfony\\Component\\Serializer\\Serializer::serialize`
-is the object to be serialized and the second is used to choose the proper encoder,
-in this case :class:`Symfony\\Component\\Serializer\\Encoder\\JsonEncoder`.
+Prvi parameter od :method:`Symfony\\Component\\Serializer\\Serializer::serialize`
+je objekt, ki bo serializiran in drugi je uporabljen za izviro ustreznega enkoderja,
+v tem primeru :class:`Symfony\\Component\\Serializer\\Encoder\\JsonEncoder`.
 
-Ignoring Attributes when Serializing
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Ignoriranje atributov, ko se serializira
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 2.3
-    The :method:`GetSetMethodNormalizer::setIgnoredAttributes<Symfony\\Component\\Serializer\\Normalizer\\GetSetMethodNormalizer::setIgnoredAttributes>`
-    method was introduced in Symfony 2.3.
+    Metoda :method:`GetSetMethodNormalizer::setIgnoredAttributes<Symfony\\Component\\Serializer\\Normalizer\\GetSetMethodNormalizer::setIgnoredAttributes>`
+    je bila predstavljena v Symfony 2.3.
 
-As an option, there's a way to ignore attributes from the origin object when
-serializing. To remove those attributes use the
-:method:`Symfony\\Component\\Serializer\\Normalizer\\GetSetMethodNormalizer::setIgnoredAttributes`
-method on the normalizer definition::
+Kot opcija, obstaja način za ignoriranje atributov iz originalnega objekta, ko
+serializate. Da odstranite te atribute, uporabite
+metodo :method:`Symfony\\Component\\Serializer\\Normalizer\\GetSetMethodNormalizer::setIgnoredAttributes`
+na definiciji normalizatorja::
 
     use Symfony\Component\Serializer\Serializer;
     use Symfony\Component\Serializer\Encoder\JsonEncoder;
@@ -139,11 +139,11 @@ method on the normalizer definition::
     $serializer = new Serializer(array($normalizer), array($encoder));
     $serializer->serialize($person, 'json'); // Output: {"name":"foo","sportsman":false}
 
-Deserializing an Object
+Deserializacija objekta
 -----------------------
 
-You'll now learn how to do the exact opposite. This time, the information
-of the ``Person`` class would be encoded in XML format::
+Sedaj se boste naučili, kako narediti nasprotno. Tokrat bi bile informacije
+razreda ``Perso`` enkodirane v XML formatu::
 
     $data = <<<EOF
     <person>
@@ -155,26 +155,26 @@ of the ``Person`` class would be encoded in XML format::
 
     $person = $serializer->deserialize($data,'Acme\Person','xml');
 
-In this case, :method:`Symfony\\Component\\Serializer\\Serializer::deserialize`
-needs three parameters:
+V tem primeru :method:`Symfony\\Component\\Serializer\\Serializer::deserialize`
+potrebuje tri parametre:
 
-1. The information to be decoded
-2. The name of the class this information will be decoded to
-3. The encoder used to convert that information into an array
+1. Informacija, ki bo dekodirana
+2. Ime razreda v katerega bo ta informacija dekodirana
+3. Enkoder uporabljen za pretvarjanje te informacije v polje
 
-Using Camelized Method Names for Underscored Attributes
--------------------------------------------------------
+Uporaba kamelskih imen metod za atribute s podčrtajem
+-----------------------------------------------------
 
 .. versionadded:: 2.3
-    The :method:`GetSetMethodNormalizer::setCamelizedAttributes<Symfony\\Component\\Serializer\\Normalizer\\GetSetMethodNormalizer::setCamelizedAttributes>`
-    method was introduced in Symfony 2.3.
+    Metoda :method:`GetSetMethodNormalizer::setCamelizedAttributes<Symfony\\Component\\Serializer\\Normalizer\\GetSetMethodNormalizer::setCamelizedAttributes>`
+    je bila predstavljena v Symfony 2.3.
 
-Sometimes property names from the serialized content are underscored (e.g.
-``first_name``).  Normally, these attributes will use get/set methods like
-``getFirst_name``, when ``getFirstName`` method is what you really want. To
-change that behavior use the
-:method:`Symfony\\Component\\Serializer\\Normalizer\\GetSetMethodNormalizer::setCamelizedAttributes`
-method on the normalizer definition::
+Včasih so imena lastnosti iz serializirane vsebine s podčrtaji (npr.
+``first_name``). Običajno, ti atributi bodo uporabili get/set metode kot je
+``getFirst_name``, ko je pa metoda ``getFirstName`` to kar res želite. Da
+spremenite to obnašanje uporabite
+metodo :method:`Symfony\\Component\\Serializer\\Normalizer\\GetSetMethodNormalizer::setCamelizedAttributes`
+na definiciji normalizatorja::
 
     $encoder = new JsonEncoder();
     $normalizer = new GetSetMethodNormalizer();
@@ -192,25 +192,25 @@ method on the normalizer definition::
 
     $person = $serializer->deserialize($json, 'Acme\Person', 'json');
 
-As a final result, the deserializer uses the ``first_name`` attribute as if
-it were ``firstName`` and uses the ``getFirstName`` and ``setFirstName`` methods.
+Kot končni rezultat, deserializator uporablja atribut ``first_name`` kot če
+je bil ``first_name`` in uporablja metodi ``getFirstName`` in ``setFirstName``.
 
-Serializing Boolean Attributes
-------------------------------
+Serializacija atributov z logičnimi vrednostmi
+----------------------------------------------
 
 .. versionadded:: 2.5
-    Support for ``is*`` accessors in
+    Podpora za ``is*`` dostopanje v
     :class:`Symfony\\Component\\Serializer\\Normalizer\\GetSetMethodNormalizer`
-    was introduced in Symfony 2.5.
+    je bila predstavljena v Symfony 2.5.
 
-If you are using isser methods (methods prefixed by ``is``, like
-``Acme\Person::isSportsman()``), the Serializer component will automatically
-detect and use it to serialize related attributes.
+Če uporabljate isser metode (metode ki imajo predpono ``is``, kot je
+``Acme\Person::isSportsman()``), bo komponenta Serializer avtomatično
+detektirala in ga uporabila za serializacijo povezanih atributov.
 
-Using Callbacks to Serialize Properties with Object Instances
--------------------------------------------------------------
+Uporaba povratnih klicev za serializacijo lastnosti z instancami objektov
+-------------------------------------------------------------------------
 
-When serializing, you can set a callback to format a specific object property::
+Ko serializirate, lahko nastavite povratni klic, da oblikujete določeno lastnost objekta::
 
     use Acme\Person;
     use Symfony\Component\Serializer\Encoder\JsonEncoder;
@@ -241,11 +241,11 @@ When serializing, you can set a callback to format a specific object property::
 JMSSerializer
 -------------
 
-A popular third-party library, `JMS serializer`_, provides a more
-sophisticated albeit more complex solution. This library includes the
-ability to configure how your objects should be serialized/deserialized via
-annotations (as well as YAML, XML and PHP), integration with the Doctrine ORM,
-and handling of other complex cases (e.g. circular references).
+Popularna tretje-osebna knjižnica `JMS serializer`_ ponuja bolj
+sofisticirano a bolj komplekso rešitev. Ta knjižnica vključuje
+zmožnost nastaviti, kako bi objekti morali biti serializirani/deserializirani preko
+anotacij (kot tudi YAML, XML in PHP), integracijo z Doctrine ORM
+in upravljanje drugih kompleksnih primerov (npr. krožnih sklicev).
 
 .. _`JMS serializer`: https://github.com/schmittjoh/serializer
 .. _Packagist: https://packagist.org/packages/symfony/serializer
