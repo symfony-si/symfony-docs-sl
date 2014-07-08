@@ -1,8 +1,8 @@
-DoctrineMongoDBBundle Configuration
-===================================
+Nastavitve DoctrineMongoDBBundle
+================================
 
-Sample Configuration
---------------------
+Primer nastavitev
+-----------------
 
 .. code-block:: yaml
 
@@ -25,8 +25,8 @@ Sample Configuration
 
 .. tip::
 
-    If each environment requires a different MongoDB connection URI, you can
-    define it in a separate parameter and reference it in the bundle config:
+    Če vsako okolje zahteva različno MongoDB povezavo URI, jo lahko
+    definirate v ločenem parametru in se nanjo sklicujete v nastavitvah paketa:
 
     .. code-block:: yaml
 
@@ -41,8 +41,8 @@ Sample Configuration
                 default:
                     server: %mongodb_server%
 
-If you wish to use memcache to cache your metadata, you need to configure the
-``Memcache`` instance; for example, you can do the following:
+Če želite uporabiti memcache za predpomnenje vaših metapodatkov, morate nastaviti
+instanco ``Memcache``; na primer, lahko naredite sledeče:
 
 .. configuration-block::
 
@@ -94,52 +94,52 @@ If you wish to use memcache to cache your metadata, you need to configure the
         </container>
 
 
-Mapping Configuration
+Nastavitve preslikave
 ~~~~~~~~~~~~~~~~~~~~~
 
-Explicit definition of all the mapped documents is the only necessary
-configuration for the ODM and there are several configuration options that you
-can control. The following configuration options exist for a mapping:
+Eksplicitna definicija vseh preslikanih dokumentov je edina potrebna
+nastavitev za ODM in na voljo je nekaj nastavitvenih opcij, ki jih
+lahko kontrolirate. Sledeče nastavitvene opcije obstajajo za preslikavo:
 
-- ``type`` One of ``annotation``, ``xml``, ``yml``, ``php`` or ``staticphp``.
-  This specifies which type of metadata type your mapping uses.
+- ``type`` Ena izmed ``annotation``, ``xml``, ``yml``, ``php`` ali ``staticphp``.
+  Ta specificira, kateri tip tipa meta podatkov vaša preslikava uporablja.
 
-- ``dir`` Path to the mapping or entity files (depending on the driver). If
-  this path is relative it is assumed to be relative to the bundle root. This
-  only works if the name of your mapping is a bundle name. If you want to use
-  this option to specify absolute paths you should prefix the path with the
-  kernel parameters that exist in the DIC (for example %kernel.root_dir%).
+- ``dir`` Pot do preslikave ali datotek entitet (odvisno od gonilnika). Če
+  je ta pot relativna, se predpostavlja, da je relativna glede na vrh paketa. To
+  deluje samo, če je ime vaše preslikave ime paketa. Če želite uporabiti
+  to opcijo za določanje absolutnih poti, bi morali dodati poti predpono s
+  parametri jedra, ki obstaja v DIC (na primer %kernel.root.dir%).
 
-- ``prefix`` A common namespace prefix that all documents of this mapping
-  share. This prefix should never conflict with prefixes of other defined
-  mappings otherwise some of your documents cannot be found by Doctrine. This
-  option defaults to the bundle namespace + ``Document``, for example for an
-  application bundle called ``AcmeHelloBundle``, the prefix would be
+- ``prefix`` Pogosti imenski prostor, ki si ga vsi dokumenti te preslikave
+  delijo. Ta predpona ne bi nikoli smela biti v konfliktu s predponami drugih definiranih
+  preslikav drugače Doctrine ne more najti nekaterih vaših dokumentov. Ta
+  opcija je privzeto imenski prostora paketa + ``Document``, na primer
+  paket aplikacije imenovan ``AcmeHelloBundle``, bi imel predpono
   ``Acme\HelloBundle\Document``.
 
-- ``alias`` Doctrine offers a way to alias document namespaces to simpler,
-  shorter names to be used in queries or for Repository access.
+- ``alias`` Doctrine ponuja način za dodajanje vzdevkov (alias-ov) imenskim prostorom dokumentov za enostavnejša
+  krajša imena, ki so uporabljena v poizvedbah ali za dostop Repozitorija.
 
-- ``is_bundle`` This option is a derived value from ``dir`` and by default is
-  set to true if dir is relative proved by a ``file_exists()`` check that
-  returns false. It is false if the existence check returns true. In this case
-  an absolute path was specified and the metadata files are most likely in a
-  directory outside of a bundle.
+- ``is_bundle`` Ta opcija je pridobljena vrednost iz ``dir`` in je privzeto
+  nastavljena na true, če je dir relativen, dokazano s preverjanjem ``file_exists()``, ki
+  vrne false. False je, če je obstoj preverjanja vrne true. V tem primeru
+  je bila določena absolutna pot in meta podatki so zelo verjetno v
+  direktoriju izven paketa.
 
-To avoid having to configure lots of information for your mappings you should
-follow these conventions:
+Da se izognete potrebi po nastavljanju veliko informacij za vaše preslikave bi morali
+slediti tem konvencijam:
 
-1. Put all your documents in a directory ``Document/`` inside your bundle. For
-   example ``Acme/HelloBundle/Document/``.
+1. Dajte vse vaše dokumente v direktorij ``Document/`` znotraj vašega paketa. Na
+   primer ``Acme/HelloBundle/Document/``.
 
-2. If you are using xml, yml or php mapping put all your configuration files
-   into the ``Resources/config/doctrine/`` directory
-   suffixed with mongodb.xml, mongodb.yml or mongodb.php respectively.
+2. Če uproabljate xml, yml, ali php preslikavo dajte vse vaše nastavitvene datoteke
+   v direktorij ``Resources/config/doctrine/``, ki ima
+   predpono mongodb.xml, mongodb.yml ali mongodb.php.
 
-3. Annotations is assumed if a ``Document/`` but no
-   ``Resources/config/doctrine/`` directory is found.
+3. Anotacije so predpostavljene, če je ``Document/`` vendar ni najdenega nobenega
+   direktorija ``Resources/config/doctrine/``.
 
-The following configuration shows a bunch of mapping examples:
+Sledeče nastavitve prikazujejo veliko primerov preslikav:
 
 .. code-block:: yaml
 
@@ -161,16 +161,16 @@ The following configuration shows a bunch of mapping examples:
                         prefix: DoctrineExtensions\Documents\
                         alias: DExt
 
-Filters
-~~~~~~~
+Filtri
+~~~~~~
 
-Filter classes may be used in order to add criteria to ODM queries, regardless
-of where those queries are created within your application. Typically, filters
-will limit themselves to operating on a particular class or interface. Filters
-may also take parameters, which can be used to customize the injected query
-criteria.
+Razredi filtrov so lahko uproabljeni, da se doda kriterij k ODM poizvedbam, ne glede,
+kje so te poizvedbe ustvarjene znotraj vaše aplikacije. Običajno se bodo filtri
+omejili na operiranje določenih razredov ali vmesnikov. Filtri
+lahko vzamejo parametre, ki so lahko uporabljeni za prilagoditev kriterija injicirane
+poizvedbe.
 
-Filters may be registered with a document manager by using the following syntax:
+Filtri so lahko registrirani z upravljalnikom dokumentov z uporabo sledeče sintakse:
 
 .. configuration-block::
 
@@ -217,18 +217,18 @@ Filters may be registered with a document manager by using the following syntax:
 
 .. note::
 
-    Unlike ORM, query parameters in MongoDB ODM may be non-scalar values. Since
-    such values are difficult to express in XML, the bundle allows JSON strings
-    to be used in ``parameter`` tags. While processing the configuration, the
-    bundle will run the tag contents through ``json_decode()`` if the string is
-    wrapped in square brackets or curly braces for arrays and objects,
-    respectively.
+    Z razliko od ORM so parametri poizvedbe v MongoDB ODM lahko neskalarne vrednosti. Ker
+    so take vrednosti težke za izražanje v XML, paket omogoča nize JSON,
+    da so uporabljeni v znački ``parameter``. Med procesiranjem nastavitev
+    bo paket pognal vsebino značke preko ``json_decode()``, če je niz
+    ovit v oglate oklepaje ali zavite oklepaje za polja in
+    objekte.
 
-Multiple Connections
-~~~~~~~~~~~~~~~~~~~~
+Več povezav
+~~~~~~~~~~~
 
-If you need multiple connections and document managers you can use the
-following syntax:
+Če potrebujete več povezav in upravljalnikov dokumenta, lahko uporabite
+sledečo sintakso:
 
 .. configuration-block::
 
@@ -288,23 +288,23 @@ following syntax:
             </doctrine_mongodb:config>
         </container>
 
-Now you can retrieve the configured services connection services::
+Sedaj lahko pridobite nastavitvene storitve povezave::
 
     $conn1 = $container->get('doctrine_mongodb.odm.conn1_connection');
     $conn2 = $container->get('doctrine_mongodb.odm.conn2_connection');
 
-And you can also retrieve the configured document manager services which utilize the above
-connection services::
+In dobite lahko tudi storitev nastavljenega upravljalnika dokumenta, ki uporablja zgornjo
+storitev povezave::
 
     $dm1 = $container->get('doctrine_mongodb.odm.dm1_document_manager');
     $dm2 = $container->get('doctrine_mongodb.odm.dm2_document_manager');
 
-Connecting to a pool of mongodb servers on 1 connection
+Povezovanje na prostor strežnikov mongodb na povezavi 1
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-It is possible to connect to several mongodb servers on one connection if
-you are using a replica set by listing all of the servers within the connection
-string as a comma separated list.
+Možno se je povezati na nekaj mongodb strežnikov na eni povezavi, če
+uporabljate repliko nastavljeno z izpisanim seznamom vseh strežnikov znotraj niza
+povezave, kot seznam ločen z vejicami.
 
 .. configuration-block::
 
@@ -316,23 +316,23 @@ string as a comma separated list.
                 default:
                     server: 'mongodb://mongodb-01:27017,mongodb-02:27017,mongodb-03:27017'
 
-Where mongodb-01, mongodb-02 and mongodb-03 are the machine hostnames. You
-can also use IP addresses if you prefer.
+Kjer so mongodb-01, mongodb-02 in mongodb-03 imena gostiteljev naprave. Lahko
+uporabite tudi IP naslov, če to želite.
 
-Retrying Connections and Queries
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Ponovno poskušanje povezovanja in poizvedb
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Doctrine MongoDB supports automatically retrying connections and queries after
-encountering an exception, which is helpful when dealing with situations such as
-replica set failovers. This alleviates much of the need to catch exceptions from
-the MongoDB PHP driver in your application and manually retry operations.
+Doctrine MongoDB podpira avtomatično ponovno poskušanje povezovanja in poizvedb, ko
+naleti na izjemo, kar je v pomoč v situacijah kot so
+replike nastavitev preklopov. To olajša veliko potreb po ujetju izjem iz
+MongoDB PHP gonilnika v vaši aplikaciji in ročno ponovno poskuša operacije.
 
-You may specify the number of times to retry connections and queries via the
-`retry_connect` and `retry_query` options in the document manager configuration.
-These options default to zero, which means that no operations will be retried.
+Lahko določite tudi število ponovitev povezovanja in poizvedb preko
+opcije ``retry_connect`` in ``retry_query`` v nastavitvah upravljalnika dokumenta.
+Te opcije so privzeto nič, kar pomeni, da ne bo pridobljena nobena operacija.
 
-Full Default Configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Celotne privzete nastavitve
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. configuration-block::
 

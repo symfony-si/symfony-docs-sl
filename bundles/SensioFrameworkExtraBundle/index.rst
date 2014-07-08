@@ -1,15 +1,15 @@
 SensioFrameworkExtraBundle
 ==========================
 
-The default Symfony2 ``FrameworkBundle`` implements a basic but robust and
-flexible MVC framework. `SensioFrameworkExtraBundle`_ extends it to add sweet
-conventions and annotations. It allows for more concise controllers.
+Privzeti Symfony2 ``FrameworkBundle`` implementira osnovno vendar robustno in
+fleksibilno MVC ogrodje. `SensioFrameworkExtraBundle`_ ga razširja in dodaja lepe
+konvencije in anotacije. Omogoča bolj jedrnate krmilnike.
 
-Installation
-------------
+Namestitev
+----------
 
-`Download`_ the bundle and put it under the ``Sensio\Bundle\`` namespace.
-Then, like for any other bundle, include it in your Kernel class::
+`Prenesite`_ paket in ga dajte pod imenski prostor ``Sensio\Bundle\``.
+Nato ga, kot vsak drug paket, vključite v vaš razred Kernel::
 
     public function registerBundles()
     {
@@ -22,19 +22,18 @@ Then, like for any other bundle, include it in your Kernel class::
         ...
     }
 
-If you plan to use or create annotations for controllers, make sure to update
-your ``autoload.php`` by adding the following line::
+Če planirate uporabiti ali ustvariti anotacije za krmilnike, zagotovite posodobiti
+vaš ``autoload.php`` z dodajanjem sledeče vrstice::
 
     Doctrine\Common\Annotations\AnnotationRegistry::registerLoader(array($loader, 'loadClass'));
 
+Nastavitve
+----------
 
-Configuration
--------------
+Vse lastnosti ponujene s strani paketa so privzeto omogočene, ko je paket
+registriran v vašem Kernel razredu.
 
-All features provided by the bundle are enabled by default when the bundle is
-registered in your Kernel class.
-
-The default configuration is as follow:
+Privzete nastavitve so, kot sledi:
 
 .. configuration-block::
 
@@ -69,30 +68,30 @@ The default configuration is as follow:
             'security' => array('annotations' => true),
         ));
 
-You can disable some annotations and conventions by defining one or more
-settings to false.
+Lahko onemogočite nekatere anotacije in konvencije z definiranjem ene ali več
+nastavitev na false.
 
-Annotations for Controllers
----------------------------
+Anotacije za krmilnike
+----------------------
 
-Annotations are a great way to easily configure your controllers, from the
-routes to the cache configuration.
+Anotacije so odličen način za enostavno nastavitev vaših krmilnikov iz
+usmerjevalnika na nastavitve predpomnilnika.
 
-Even if annotations are not a native feature of PHP, it still has several
-advantages over the classic Symfony2 configuration methods:
+Tudi če anotacije niso prvotna lastnost PHP, imajo še vedno mnoge
+prednosti pred klasičnimi nastavitvenimi metodami Symfony2:
 
-* Code and configuration are in the same place (the controller class);
-* Simple to learn and to use;
-* Concise to write;
-* Makes your Controller thin (as its sole responsibility is to get data from
-  the Model).
+* Koda in nastavitve so na istem mestu (razred krmilnika);
+* Enostavne za naučiti in uporabljati;
+* Jedrnate za pisanje;
+* Naredi vaš krmilnik vitek (saj je njegova izključna odgovornost dobiti podatke iz
+  modela).
 
 .. tip::
 
-   If you use view classes, annotations are a great way to avoid creating
-   view classes for simple and common use cases.
+   Če uporabljate razrede pogleda, so anotacije odličen način, da se izognete izdelavi
+   razredov pogleda za enostavne in pogoste primere uporabe.
 
-The following annotations are defined by the bundle:
+Sledeče anotacije so definirane s strani paketa:
 
 .. toctree::
    :maxdepth: 1
@@ -103,7 +102,7 @@ The following annotations are defined by the bundle:
    annotations/cache
    annotations/security
 
-This example shows all the available annotations in action::
+Ta primer prikazuje vse anotacije, ki so na voljo v akciji::
 
     use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
     use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
@@ -142,8 +141,8 @@ This example shows all the available annotations in action::
         }
     }
 
-As the ``showAction`` method follows some conventions, you can omit some
-annotations::
+Kot metoda ``showAction`` omogoča nekatere priročne konvencije, lahko nekatere
+anotacije izpustite::
 
     /**
      * @Route("/{id}")
@@ -154,9 +153,9 @@ annotations::
     {
     }
 
-The routes need to be imported to be active as any other routing resources,
-see :ref:`Annotated Routes Activation<frameworkextra-annotations-routing-activation>` for
-details.
+Usmeritve morajo biti uvožene, da so aktivne kot katerikoli drugi viri usmeritev,
+glejte :ref:`Annotated Routes Activation<frameworkextra-annotations-routing-activation>` za
+podrobnosti.
 
 .. _`SensioFrameworkExtraBundle`: https://github.com/sensio/SensioFrameworkExtraBundle
 .. _`Download`: http://github.com/sensio/SensioFrameworkExtraBundle

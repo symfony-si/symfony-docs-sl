@@ -1,10 +1,10 @@
 @Security
 =========
 
-Usage
------
+Uporaba
+-------
 
-The ``@Security`` annotation restricts access on controllers::
+Anotacija ``@Security`` omejuje dostop na krmilnikih::
 
     use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
@@ -19,20 +19,20 @@ The ``@Security`` annotation restricts access on controllers::
         }
     }
 
-The expression can use all functions that you can use in the ``access_control``
-section of the security bundle configuration, with the addition of the
-``is_granted()`` function.
+Izraz lahko uporablja vse funkcije, ki jih lahko uporabite v
+sekciji ``access_control`` nastavitev varnostnega paketa z dodatkom
+funkcije ``is_granted()``.
 
-The expression has access to the following variables:
+Izraz ima dostop do sledečih spremenljivk:
 
-* ``token``: The current security token;
-* ``user``: The current user object;
-* ``request``: The request instance;
-* ``roles``: The user roles;
-* and all request attributes.
+* ``token``: trenutni varnostni žeton;
+* ``user``: Trenutni objekt uporabnika;
+* ``request``: Instanca zahtevka;
+* ``roles``: Uporabnikove vloge;
+* in vsi atributi zahtevka.
 
-The ``is_granted()`` function allows you to restrict access based on variables
-passed to the controller::
+Funkcija ``is_granted()`` vam omogoča omejiti dostop na osnovi spremenljivk
+podanih krmilniku::
 
     /**
      * @Security("is_granted('POST_SHOW', post)")
@@ -43,10 +43,10 @@ passed to the controller::
 
 .. note::
 
-    Defining a ``Security`` annotation has the same effect as defining an
-    access control rule, but it is more efficient as the check is only done
-    when this specific route is accessed.
+    Definiranje anotacije ``Security`` ima enak učinek, kot definiranje
+    pravila kontrole dostopa, vendar je bolj efektivna, saj je preverjanje urejeno samo,
+    ko je ta specifična usmeritev dostopana.
 
 .. tip::
 
-    You can also add a ``@Security`` annotation on a controller class.
+    Lahko dodate tudi anotacijo ``@Security`` na razredu krmilnika.

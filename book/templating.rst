@@ -1,33 +1,33 @@
 .. index::
    single: Templating
 
-Creating and Using Templates
-============================
+Izdelava in uporaba predlog
+===========================
 
-As you know, the :doc:`controller </book/controller>` is responsible for
-handling each request that comes into a Symfony2 application. In reality,
-the controller delegates most of the heavy work to other places so that
-code can be tested and reused. When a controller needs to generate HTML,
-CSS or any other content, it hands the work off to the templating engine.
-In this chapter, you'll learn how to write powerful templates that can be
-used to return content to the user, populate email bodies, and more. You'll
-learn shortcuts, clever ways to extend templates and how to reuse template
-code.
+Kot veste, je :doc:`krmilnik </book/controller>` odgovoren za
+upravljanje vsakega zahtevka, ki pride v aplikacijo Symfony2. V realnosti
+krmilnik delegira večino težkega dela na druga mesta, da je
+koda lahko testirana in ponovno uporabljena. Ko krmilnik potrebuje generirati HTML,
+CSS ali katerokoli drugo vsebino, odda delo motorju predlog.
+V tem poglavju se boste naučili, kako napisati močne predloge, ki so lahko
+uporabljene za vračanje vsebine uporabniku, polnjenje teles e-pošte in več. Naučili
+se boste bližnjice, pametne načine za razširitev predlog in kako ponovno uporabiti kodo
+predloge.
 
 .. note::
 
-    How to render templates is covered in the :ref:`controller <controller-rendering-templates>`
-    page of the book.
+    Kako izpisati predloge je pokrito v poglavju strani :ref:`krmilnik <controller-rendering-templates>`
+    knjige.
 
 .. index::
    single: Templating; What is a template?
 
-Templates
----------
+Predloge
+--------
 
-A template is simply a text file that can generate any text-based format
-(HTML, XML, CSV, LaTeX ...). The most familiar type of template is a *PHP*
-template - a text file parsed by PHP that contains a mix of text and PHP code:
+Predloga je enostavno tekstovna datoteka, ki lahko generira katerikoli tekstovno-osnovan format
+(HTML, XML, CSV, LaTeX ...). Večina znanih tipov predlog je *PHP*
+predloga - tekstovna datoteka razčlenjena s PHP-jem, ki vsebuje mešanje teksta in kode PHP:
 
 .. code-block:: html+php
 
@@ -53,9 +53,9 @@ template - a text file parsed by PHP that contains a mix of text and PHP code:
 
 .. index:: Twig; Introduction
 
-But Symfony2 packages an even more powerful templating language called `Twig`_.
-Twig allows you to write concise, readable templates that are more friendly
-to web designers and, in several ways, more powerful than PHP templates:
+Vendar Symfony2 zapakira celo bolj močnejši jezik predlog imenovan `Twig`_.
+Twig vam omogoča, da pišete jasne, bralne predloge, ki so bolj prijazne
+spletnim oblikovalcem in v mnogih načinih bolj močnejše od predlog PHP:
 
 .. code-block:: html+jinja
 
@@ -75,38 +75,38 @@ to web designers and, in several ways, more powerful than PHP templates:
         </body>
     </html>
 
-Twig defines three types of special syntax:
+Twig definira tri tipe posebne sintakse:
 
-* ``{{ ... }}``: "Says something": prints a variable or the result of an
-  expression to the template;
+* ``{{ ... }}``: "Nekaj pove": izpiše spremenljivko ali rezultat
+  izraza predlogi;
 
-* ``{% ... %}``: "Does something": a **tag** that controls the logic of the
-  template; it is used to execute statements such as for-loops for example.
+* ``{% ... %}``: "Nekaj naredi": **značka**, ki kontrolira logiko
+  predloge; uporabljena je za izvrševanje stavkov, kot so for-zanke na primer.
 
-* ``{# ... #}``: "Comment something": it's the equivalent of the PHP
-  ``/* comment */`` syntax. It's used to add single or multi-line comments.
-  The content of the comments isn't included in the rendered pages.
+* ``{# ... #}``: "Nekaj komentira": ekvivalentno je sintaksi PHP
+  ``/* comment */``. Uporabljeno je za dodajanje posameznih ali več vrstičnih komentarjev.
+  Vsebina komentarjev ni vključena v izpisane strani.
 
-Twig also contains **filters**, which modify content before being rendered.
-The following makes the ``title`` variable all uppercase before rendering
-it:
+Twig vsebuje tudi **filtre**, ki spremenijo vsebino preden je izpisana.
+Sledeče naredi spremenljivko ``title`` v celoti z velikimi črkami preden jo
+izpiše::
 
 .. code-block:: jinja
 
     {{ title|upper }}
 
-Twig comes with a long list of `tags`_ and `filters`_ that are available
-by default. You can even `add your own extensions`_ to Twig as needed.
+Twig prihaja z dolgim seznamom `značk`_ in `filtrov`_, ki so na voljo
+privzeto. Twig-u lahko celo `dodate vaše lastne razširitve`_, ko je potrebno.
 
 .. tip::
 
-    Registering a Twig extension is as easy as creating a new service and tagging
-    it with ``twig.extension`` :ref:`tag <reference-dic-tags-twig-extension>`.
+    Registracija razširitve Twig je enostavna kot izdelava nove storitve in njeno označenje
+    s ``twig.extension`` :ref:značko <reference-dic-tags-twig-extension>`.
 
-As you'll see throughout the documentation, Twig also supports functions
-and new functions can be easily added. For example, the following uses a
-standard ``for`` tag and the ``cycle`` function to print ten div tags, with
-alternating ``odd``, ``even`` classes:
+Kot boste videli skozi dokumentacijo, Twig tudi podpira funkcije
+in nove funkcije so lahko enostavno dodane. Na primer, sledeče uporablja
+standardno značko ``for`` in funkcijo ``cycle`` za izpis desetih značk div z
+alternirajočima razredoma ``odd`` in ``even``:
 
 .. code-block:: html+jinja
 
@@ -116,27 +116,27 @@ alternating ``odd``, ``even`` classes:
         </div>
     {% endfor %}
 
-Throughout this chapter, template examples will be shown in both Twig and PHP.
+Skozi to poglavje bodo prikazani primeri predlog za tako Twig in PHP.
 
 .. tip::
 
-    If you *do* choose to not use Twig and you disable it, you'll need to implement
-    your own exception handler via the ``kernel.exception`` event.
+    Če *izberete* ne uporabljati Twig in ga onemogočite, boste potrebovali
+    implementirati vaš lastni hendler izjem preko dogodka ``kernel.exception``.
 
-.. sidebar:: Why Twig?
+.. sidebar:: Zakaj Twig?
 
-    Twig templates are meant to be simple and won't process PHP tags. This
-    is by design: the Twig template system is meant to express presentation,
-    not program logic. The more you use Twig, the more you'll appreciate
-    and benefit from this distinction. And of course, you'll be loved by
-    web designers everywhere.
+    Twig predloge so mišljene, da so enostavne in ne procesirajo značk PHP. To
+    je načrtno: sistem predlog Twig je mišljen izražati predstavitev,
+    ne programske logike. Več ko uporabljate Twig, bolj boste cenili
+    in koristili iz te razlike. In seveda, boste ljubljeni s strani
+    spletnih oblikovalcev vsepovsod.
 
-    Twig can also do things that PHP can't, such as whitespace control,
-    sandboxing, automatic and contextual output escaping, and the inclusion of
-    custom functions and filters that only affect templates. Twig contains
-    little features that make writing templates easier and more concise. Take
-    the following example, which combines a loop with a logical ``if``
-    statement:
+    Twig lahko naredi veliko stvari, ki jih PHP ne more, kot je kontrola presledkov
+    sandboxing, avtomatsko in kontekstualno izpisno spreminjanje (escaping) in vključevanje
+    funkcij po meri in filtrov, ki se tičejo samo predlog. Twig vsebuje
+    majhne lastnosti, ki naredijo pisanje predlog enostavnejše in bolj jasno. Vzamimo
+    sledeči primer, ki kombinira zanko z logičnim ``if``
+    stavkom:
 
     .. code-block:: html+jinja
 
@@ -151,42 +151,42 @@ Throughout this chapter, template examples will be shown in both Twig and PHP.
 .. index::
    pair: Twig; Cache
 
-Twig Template Caching
-~~~~~~~~~~~~~~~~~~~~~
+Predpomnenje predlog Twig
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Twig is fast. Each Twig template is compiled down to a native PHP class
-that is rendered at runtime. The compiled classes are located in the
-``app/cache/{environment}/twig`` directory (where ``{environment}`` is the
-environment, such as ``dev`` or ``prod``) and in some cases can be useful
-while debugging. See :ref:`environments-summary` for more information on
-environments.
+Twig je hiter. Vsaka predloga Twig je prevedena na prvoten razred PHP,
+ki je izpisan pri pogonu. Prevedeni razredi so locirani v
+direktoriju ``app/cache/{environment}/twig`` (kjer je ``{environment}``
+okolje, kot je ``dev`` ali ``prod``) in v nekaterih primerih je lahko uporaben
+med razhroščevanjem. Glejte :ref:`environments-summary` za več informacij o
+okoljih.
 
-When ``debug`` mode is enabled (common in the ``dev`` environment), a Twig
-template will be automatically recompiled when changes are made to it. This
-means that during development you can happily make changes to a Twig template
-and instantly see the changes without needing to worry about clearing any
-cache.
+Ko je način ``debug`` omogočen (pogosto v okolju ``dev``), bo
+predloga Twig avtomatsko ponovno prevedena, ko so narejene spremembe na njej. To
+pomeni, da med razvojem, lahko veselo naredite spremembe predlogi Twig
+in instantno vidite spremembe brez potrebnih skrbi po čiščenju kakršnegakoli
+predpomnilnika.
 
-When ``debug`` mode is disabled (common in the ``prod`` environment), however,
-you must clear the Twig cache directory so that the Twig templates will
-regenerate. Remember to do this when deploying your application.
+Ko je način ``debug`` onemogočen (pogosto v okolju ``prod``), pa
+morate počistiti predpomnilni Twig direktorij, da bodo predloge Twig
+ponovno generirane. Zapomnite si to narediti, ko nalagate vašo aplikacijo.
 
 .. index::
    single: Templating; Inheritance
 
-Template Inheritance and Layouts
---------------------------------
+Dedovanje predlog in postavitve
+-------------------------------
 
-More often than not, templates in a project share common elements, like the
-header, footer, sidebar or more. In Symfony2, this problem is thought about
-differently: a template can be decorated by another one. This works
-exactly the same as PHP classes: template inheritance allows you to build
-a base "layout" template that contains all the common elements of your site
-defined as **blocks** (think "PHP class with base methods"). A child template
-can extend the base layout and override any of its blocks (think "PHP subclass
-that overrides certain methods of its parent class").
+Bolj pogosto kot ne, predloge v projektu delijo skupne elemente, kot so
+glava, noga, stranski stolpec in več. V Symfony2 je ta problem vendar malo
+drugačen: predloga je lahko olepšana z drugo. To deluje
+točno enako kot razredi PHP: dedovanje predlog vam omogoča zgraditi
+osnovno "postavitveno" predlogo, ki vsebuje vse skupne elemente vaše strani
+definirane ko **bloki** (razmišljajte "PHP razred z osnovnimi metodami"). Otroška predloga
+lahko razširi osnovno postavitev in prepiše katerikoli od svojih blokov (razmišljajte "PHP podrazred,
+ki prepiše določene metode svojega starševskega razreda").
 
-First, build a base layout file:
+Najprej zgrdimo osnovno postavitveno datoteko:
 
 .. configuration-block::
 
@@ -244,17 +244,17 @@ First, build a base layout file:
 
 .. note::
 
-    Though the discussion about template inheritance will be in terms of Twig,
-    the philosophy is the same between Twig and PHP templates.
+    Čeprav bo debata o dedovanju predlog v kontekstu Twig-a,
+    bo filozofija enaka med predlogami Twig in PHP.
 
-This template defines the base HTML skeleton document of a simple two-column
-page. In this example, three ``{% block %}`` areas are defined (``title``,
-``sidebar`` and ``body``). Each block may be overridden by a child template
-or left with its default implementation. This template could also be rendered
-directly. In that case the ``title``, ``sidebar`` and ``body`` blocks would
-simply retain the default values used in this template.
+Ta predloga definira osnovni skeletni HTML dokument enostavne dvostolpične
+strani. V tem primeru so definirana tri področja ``{block}`` (``title``,
+``sidebar`` in ``body``). Vsak blok je lahko prepisan s strani otroške predloge
+ali puščen s svojo privzeto implementacijo. Ta predloga bi lahko bila tudi izpisana
+direktno. V tem primeru bi bloki ``title``, ``sidebar`` in ``body``
+enostavno ponovile privzete vrednosti uporabljene v tej predlogi.
 
-A child template might look like this:
+Otroška predloga lahko zgleda takole:
 
 .. configuration-block::
 
@@ -288,17 +288,17 @@ A child template might look like this:
 
 .. note::
 
-   The parent template is identified by a special string syntax
-   (``::base.html.twig``) that indicates that the template lives in the
-   ``app/Resources/views`` directory of the project. This naming convention is
-   explained fully in :ref:`template-naming-locations`.
+   Starševska predloga je identificirana s posebno sintakso niza
+   (``::base.html.twig``), ki nakazuje, da predloga živi v
+   direktoriju ``app/Resources/views`` projekta. Ta imenska konvencija je
+   razložena v celoti v :ref:`template-naming-locations`.
 
-The key to template inheritance is the ``{% extends %}`` tag. This tells
-the templating engine to first evaluate the base template, which sets up
-the layout and defines several blocks. The child template is then rendered,
-at which point the ``title`` and ``body`` blocks of the parent are replaced
-by those from the child. Depending on the value of ``blog_entries``, the
-output might look like this:
+Ključ dedovanja predloge je značka ``{% extends %}``. Ta pove
+motorju predlog naj najprej preveri osnovno predlogo, ki nastavit
+postavitev in definira mnoge bloke. Nato je izpisana otroška predloga,
+kjer sta bloka ``title`` in ``body`` starša zamenjana
+s tistimi od otroka. Odvisno od vrednosti ``blog_entries``,
+izpis lahko izgleda takole:
 
 .. code-block:: html
 
@@ -326,33 +326,33 @@ output might look like this:
         </body>
     </html>
 
-Notice that since the child template didn't define a ``sidebar`` block, the
-value from the parent template is used instead. Content within a ``{% block %}``
-tag in a parent template is always used by default.
+Bodite pozorni, saj otroška predloga ne definira bloka ``sidebar``,
+uporabljena je vrednost iz starševske predloge namesto tega. Vsebina znotraj značke ``{% block %}``
+v starševski predlogi je vedno privzeto uporabljena.
 
-You can use as many levels of inheritance as you want. In the next section,
-a common three-level inheritance model will be explained along with how templates
-are organized inside a Symfony2 project.
+Lahko uporabite kolikor veliko nivojev dedovanja želite. V naslednji sekciji
+bo pogosti tri-nivojski model dedovanja razložen skupaj s tem, kako so predloge
+organizirane znotraj projekta Symfony2.
 
-When working with template inheritance, here are some tips to keep in mind:
+Ko delate z dedovanjem predlog, je tu nekaj namigov, ki si jih je dobro zapomniti:
 
 * If you use ``{% extends %}`` in a template, it must be the first tag in
   that template;
 
-* The more ``{% block %}`` tags you have in your base templates, the better.
-  Remember, child templates don't have to define all parent blocks, so create
-  as many blocks in your base templates as you want and give each a sensible
-  default. The more blocks your base templates have, the more flexible your
-  layout will be;
+* Več značk ``{% block %}``, ki jih imate v vaši osnovnih predlogah, boljše.
+  Zapomnite si, da otroškim predlogam ni potrebno definirati vseh starševskih blokov, zato ustvarite
+  v vaši osnovni predlogi kolikor veliko blokov želite in dajte vsakemu smiselno
+  privzetost. Več blokov v vaši osnovni predlogi imate, bolj fleksibilna bo vaša
+  postavitev;
 
-* If you find yourself duplicating content in a number of templates, it probably
-  means you should move that content to a ``{% block %}`` in a parent template.
-  In some cases, a better solution may be to move the content to a new template
-  and ``include`` it (see :ref:`including-templates`);
+* Če se zalotite, da podvajate vsebino v večih predlogah, to verjetno
+  pomeni, da bi morali premakniti to vsebino v ``{% block %}`` v starševski predlogi.
+  V nekaterih primerih je lahko boljša rešitev premakniti vsebino v novo predlogo
+  in jo vključiti - ``include`` (glejte :ref:`including-templates`);
 
-* If you need to get the content of a block from the parent template, you
-  can use the ``{{ parent() }}`` function. This is useful if you want to add
-  to the contents of a parent block instead of completely overriding it:
+* Če potrebujete dobiti vsebino bloka iz starševske predloge,
+  lahko uporabite funkcijo ``{{ parent }}``. Ta je uporabna, če želite dodati
+  vsebini starševskega bloka namesto ga v celoti prepisati:
 
     .. code-block:: html+jinja
 
@@ -370,35 +370,35 @@ When working with template inheritance, here are some tips to keep in mind:
 
 .. _template-naming-locations:
 
-Template Naming and Locations
------------------------------
+Poimenovanje predlog in lokacije
+--------------------------------
 
-By default, templates can live in two different locations:
+Privzeto se predloge nahajajo na dveh različnih lokacijah:
 
-* ``app/Resources/views/``: The applications ``views`` directory can contain
-  application-wide base templates (i.e. your application's layouts) as well as
-  templates that override bundle templates (see
+* ``app/Resources/views/``: Direktorij ``views`` aplikacije lahko vsebuje
+  aplikacijsko-široko osnovane predloge (t.j. postavitve vaše aplikacije) kot tudi
+  predloge, ki prepišejo predloge paketa (glejte
   :ref:`overriding-bundle-templates`);
 
-* ``path/to/bundle/Resources/views/``: Each bundle houses its templates in its
-  ``Resources/views`` directory (and subdirectories). The majority of templates
-  will live inside a bundle.
+* ``path/to/bundle/Resources/views/``: Vsak paket vsebuje svoje predloge in svoj
+  direktorij ``Resources/views`` (in poddirektorije). Glavnina predlog
+  se bo nahajala znotraj paketa.
 
-Symfony2 uses a **bundle**:**controller**:**template** string syntax for
-templates. This allows for several different types of templates, each which
-lives in a specific location:
+Symfony2 uporablja sintakso niza **paket**:**krmilnik**:**predloga** za
+predloge. To omogoča nekaj različih tipov predlog, vsaka ki
+se nahaja na specifični lokaciji:
 
-* ``AcmeBlogBundle:Blog:index.html.twig``: This syntax is used to specify a
-  template for a specific page. The three parts of the string, each separated
-  by a colon (``:``), mean the following:
+* ``AcmeBlogBundle:Blog:index.html.twig``: Ta sintaksa je uporabljena za določanje
+  predloge določene strani. Trije deli niza, vsak ločen
+  s podpičjem (``:``), pomenijo sledeče:
 
-  * ``AcmeBlogBundle``: (*bundle*) the template lives inside the
-    ``AcmeBlogBundle`` (e.g. ``src/Acme/BlogBundle``);
+  * ``AcmeBlogBundle``: (*paket*) predloga se nahaja znotraj
+    ``AcmeBlogBundle`` (npr. ``src/Acme/BlogBundle``);
 
-  * ``Blog``: (*controller*) indicates that the template lives inside the
-    ``Blog`` subdirectory of ``Resources/views``;
+  * ``Blog``: (*krmilnik*) nakazuje, da se predloga nahaja znotraj
+    poddirektorija ``Blog`` v ``Resources/views``;
 
-  * ``index.html.twig``: (*template*) the actual name of the file is
+  * ``index.html.twig``: (*predloga*) dejansko ime datoteke je
     ``index.html.twig``.
 
   Assuming that the ``AcmeBlogBundle`` lives at ``src/Acme/BlogBundle``, the
@@ -1523,9 +1523,9 @@ In many cases, you may want to allow a single controller to render multiple
 different formats based on the "request format". For that reason, a common
 pattern is to do the following::
 
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        $format = $this->getRequest()->getRequestFormat();
+        $format = $request->getRequestFormat();
 
         return $this->render('AcmeBlogBundle:Blog:index.'.$format.'.twig');
     }
@@ -1593,9 +1593,9 @@ Learn more from the Cookbook
 .. _`KnpBundles.com`: http://knpbundles.com
 .. _`Cross Site Scripting`: http://en.wikipedia.org/wiki/Cross-site_scripting
 .. _`Output Escaping`: http://twig.sensiolabs.org/doc/api.html#escaper-extension
-.. _`tags`: http://twig.sensiolabs.org/doc/tags/index.html
-.. _`filters`: http://twig.sensiolabs.org/doc/filters/index.html
-.. _`add your own extensions`: http://twig.sensiolabs.org/doc/advanced.html#creating-an-extension
+.. _`značk`: http://twig.sensiolabs.org/doc/tags/index.html
+.. _`filtrov`: http://twig.sensiolabs.org/doc/filters/index.html
+.. _`dodate vaše lastne razširitve`: http://twig.sensiolabs.org/doc/advanced.html#creating-an-extension
 .. _`hinclude.js`: http://mnot.github.com/hinclude/
 .. _`with_context`: http://twig.sensiolabs.org/doc/functions/include.html
 .. _`include() function`: http://twig.sensiolabs.org/doc/functions/include.html

@@ -14,9 +14,8 @@ Avtomatska registracija ukazov
 Da naredite konzolne ukaze na voljo avtomatsko v Symfony2, izdelajte
 ``Command`` direktorij znotraj vašega paketa in izdelajte PHP datoteko s predpono
 ``Command.php`` za vsak ukaz, ki ga želite ponuditi. Na primer, če želite
-razširiti AcmeDemoBundle (na voljo v Symfony standardni izdaji), da vas
-pozdravi iz ukazne vrstice, izdelajte ``GreetCommand.php`` in
-dodajte sledeče vanjo::
+razširiti AcmeDemoBundle, da vas pozdravi iz ukazne vrstice, izdelajte
+``GreetCommand.php`` in dodajte sledeče vanjo::
 
     // src/Acme/DemoBundle/Command/GreetCommand.php
     namespace Acme\DemoBundle\Command;

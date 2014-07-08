@@ -81,25 +81,6 @@ Primeri nastavitev bi morali prikazati vse podprte oblike z uporabo
 * **Preverjanje**: YAML, anotacije, XML, PHP
 * **Doctrine preslikave**: anotacije, YAML, XML, PHP
 
-Datoteke in direktoriji
-~~~~~~~~~~~~~~~~~~~~~~~
-
-* Ko se sklicujete na direktorije, vedno dodajte zaključno poševnico, da se izognete zmedi
-  z običajnimi datotekami (npr. *"izvršite ``console`` skripto, ki se nahaja v ``app/``
-  direktoriju"*).
-* Ko se sklicujete na končnice datotek eksplicitno, bi morali vključiti vodilno piko
-  za vsako končnico (npr. "*XML datoteke uporabljajo ``.xml`` končnico*").
-* Ko izpisujete seznam datotečne/direktorijske strukture Symfony, uporabite ``your-project/`` kot
-  vrhovni nivo direktorija. Npr.
-
-  .. code-block:: text
-
-      your-project/
-      ├─ app/
-      ├─ src/
-      ├─ vendor/
-      └─ ...
-
 Primer
 ~~~~~~
 
@@ -132,6 +113,25 @@ Primer
 
     V YAML bi morali postaviti presledek za ``{`` in pred ``}`` (npr. ``{ _controller: ... }``),
     vendar to ne bi smelo biti urejeno v Twig-u (npr.  ``{'hello' : 'value'}``).
+
+Datoteke in direktoriji
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* Ko se sklicujete na direktorije, vedno dodajte zaključno poševnico, da se izognete zmedi
+  z običajnimi datotekami (npr. *"izvršite ``console`` skripto, ki se nahaja v ``app/``
+  direktoriju"*).
+* Ko se sklicujete na končnice datotek eksplicitno, bi morali vključiti vodilno piko
+  za vsako končnico (npr. "*XML datoteke uporabljajo ``.xml`` končnico*").
+* Ko izpisujete seznam datotečne/direktorijske strukture Symfony, uporabite ``your-project/`` kot
+  vrhovni nivo direktorija. Npr.
+
+  .. code-block:: text
+
+      your-project/
+      ├─ app/
+      ├─ src/
+      ├─ vendor/
+      └─ ...
 
 Standardi jezika
 ----------------

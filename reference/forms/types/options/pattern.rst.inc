@@ -1,23 +1,23 @@
 .. caution::
 
-    The ``pattern`` option has been deprecated and will be removed in 3.0.
-    Instead, use the ``attr`` option by setting it to an array with a ``pattern`` key.
+    Opcija ``pattern`` je bila opuščena in bo odstranjena v 3.0.
+    Namesto nje uporabite opcijo ``attr`` z nastavitvijo nje na polju s ključem ``pattern``.
 
 pattern
 ~~~~~~~
 
-**type**: ``string`` **default**: ``null``
+**tip**: ``string`` **privzeto**: ``null``
 
-This adds an HTML5 ``pattern`` attribute to restrict the field input by a
-given regular expression.
+To doda HTML5 ``pattern`` atribut za omejitev vnosnega polja z
+danim splošnim izrazom.
 
-.. caution:
+.. caution::
 
-    The ``pattern`` attribute provides client-side validation for convenience
-    purposes only and must not be used as a replacement for reliable
-    server-side validation.
+    Atribut ``pattern`` ponuja klientno-stran preverjanja samo zaradi priročnih
+    razlogov in ne sme biti uporabljena kot nadomestek za zanesljivo
+    preverjanje na strežniški strani.
 
-.. note:
+.. note::
 
-    When using validation constraints, this option is set automatically
-    for some constraints to match the server-side validation.
+    Ko uporabljate omejitve preverjanja, je ta opcija avtomatično nastavljena
+    za nekatere omejitve, da se ujema s preverjanjem na strežniški strani.

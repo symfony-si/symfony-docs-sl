@@ -412,3 +412,38 @@ Vsaka povezava je tudi dostopna preko ``doctrine.dbal.[name]_connection``
 storitve, kjer ``[name]`` je ime povezave.
 
 .. _DBAL dokumentacijo: http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/configuration.html
+
+Okrajšana sintaksa nastavitev
+-----------------------------
+
+Ko samo uporabljate en upravljalnik entite, so vse nastavitvene opcije
+lahko postavljene direktno po nastavitveni nivo ``doctrine.orm``.
+
+.. code-block:: yaml
+
+    doctrine:
+        orm:
+            # ...
+            query_cache_driver:
+               # ...
+            metadata_cache_driver:
+                # ...
+            result_cache_driver:
+                # ...
+            connection: ~
+            class_metadata_factory_name:  Doctrine\ORM\Mapping\ClassMetadataFactory
+            default_repository_class:  Doctrine\ORM\EntityRepository
+            auto_mapping: false
+            hydrators:
+                # ...
+            mappings:
+                # ...
+            dql:
+                # ...
+            filters:
+                # ...
+
+Ta skrajšana verzija je pogosto uporabljena v drugih sekcijah dokumentacije.
+Imejte v mislih, da ne morete uporabljati obeh sintaks istočasno.
+
+.. _`DQL User Defined Functions`: http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/cookbook/dql-user-defined-functions.html

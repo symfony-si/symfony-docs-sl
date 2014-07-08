@@ -12,11 +12,14 @@ Uporaba
 
 Kadarkoli se sklicujete na razred, ki še ni bil zahtevan ali vključen,
 PHP uporablja `mehanizem avtomatskega nalaganja`_, da prenese nalaganje datoteke,
-ki definira razred. Symfony2 ponuja dva avtomatska nalagalnika, ki sta zmožna
+ki definira razred. Symfony2 ponuja tri avtomatske nalagalnike, ki so zmožni
 naložiti vaše razrede:
 
 * :doc:`/components/class_loader/class_loader`: naloži razrede, ki sledijo
   `PSR-0` standardom poimenovanja razredov;
+
+* :doc:`/components/class_loader/psr4_class_loader`: naloži razrede, ki sledijo
+  standardu poimenovanja razredov ``PSR-4``;
 
 * :doc:`/components/class_loader/map_class_loader`: naloži razrede z uporabo
   statičnega zemljevida iz imena razreda v pot datoteke.

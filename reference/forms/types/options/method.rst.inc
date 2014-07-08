@@ -2,14 +2,14 @@ method
 ~~~~~~
 
 .. versionadded:: 2.3
-    The ``method`` option was introduced in Symfony 2.3.
+    Opcija ``method`` je bila predstavljena v Symfony 2.3.
 
 **type**: ``string`` **default**: ``POST``
 
-This option specifies the HTTP method used to submit the form's data. Its
-value is rendered as the ``method`` attribute of the ``form`` element and is
-used to decide whether to process the form submission in the
-``handleRequest()`` method after submission. Possible values are:
+Ta opcija določa metodo HTTP uporabljeno za pošiljanje podatkov obrazca. Njena
+vrednost je izpisana kot atribut ``method`` na elementu ``form`` in je
+uporabljena za odločanje ali naj procesira pošiljanja obrazca v
+metodi ``handleRequest()`` po pošiljanju. Možne vrednosti so:
 
 * POST
 * GET
@@ -17,17 +17,17 @@ used to decide whether to process the form submission in the
 * DELETE
 * PATCH
 
-.. note:
+.. note::
 
-    When the method is PUT, PATCH, or DELETE, Symfony will automatically
-    render a ``_method`` hidden field in your form. This is used to "fake"
-    these HTTP methods, as they're not supported on standard browsers. For
-    more information, see :doc:`/cookbook/routing/method_parameters`.
+    Ko je metoda PUT, PATCH ali DELETE, bo Symfony avtomatično
+    izpisal skrito polje ``_method`` v vašem obrazcu. To je uporabljeno za "fake-anje"
+    teh metod HTTP, saj niso podprte na standardnih brskalnikih. Za
+    več informacij glejte :doc:`/cookbook/routing/method_parameters`.
 
-.. note:
+.. note::
 
-    The PATCH method allows submitting partial data. In other words, if the
-    submitted form data is missing certain fields, those will be ignored
-    and the default values (if any) will be used. With all other HTTP methods,
-    if the submitted form data is missing some fields, those fields are set
-    to ``null``.
+    Metoda PATCH omogoča pošiljanje delnih podatkov. Z drugimi besedami, če
+    poslani podatki obrazca nimajo določenih polj, bodo le-ta ignorirana
+    in uporabljene bodo privzete vrednosti (če so kakšne). Z vsemi ostalimi metodami HTTP,
+    če poslani podatki obrazca nimajo kakšnih polj, so ta polja nastavljena
+    na ``null``.

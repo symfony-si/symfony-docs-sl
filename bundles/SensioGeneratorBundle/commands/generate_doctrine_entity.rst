@@ -1,54 +1,54 @@
-GeneriranjeGenerating a New Doctrine Entity Stub
-=====================================
+Generiranje novega nastavka entitete Doctrine
+=============================================
 
-Usage
------
+Uporaba
+-------
 
-The ``generate:doctrine:entity`` command generates a new Doctrine entity stub
-including the mapping definition and the class properties, getters and setters.
+Ukaz ``generate:doctrine:entity`` generira nov nastavek entitete Doctrine,
+ki vključuje definicijo preslikave in lastnosti, getter-je in setter-je razreda.
 
-By default the command is run in the interactive mode and asks questions to
-determine the bundle name, location, configuration format and default
-structure:
+Privzeto je ukaz pognan v interaktivnem načinu in vpraša vprašanja za
+določitev imena paketa, lokacijo, format nastavitev in privzeto
+strukturo:
 
 .. code-block:: bash
 
     php app/console generate:doctrine:entity
 
-The command can be run in a non interactive mode by using the
-``--no-interaction`` option without forgetting all needed options:
+Ukaz je lahko pognan v ne interaktivnem načinu z uporabo
+opcije ``--no-interaction`` brez, da pozabi vse potrebne opcije:
 
 .. code-block:: bash
 
     php app/console generate:doctrine:entity --no-interaction --entity=AcmeBlogBundle:Post --fields="title:string(100) body:text" --format=xml
 
-Available Options
------------------
+Opcije na voljo
+---------------
 
-* ``--entity``: The entity name given as a shortcut notation containing the
-  bundle name in which the entity is located and the name of the entity. For
-  example: ``AcmeBlogBundle:Post``:
+* ``--entity``: Ime entitete dano ko notacija bližnjice, ki vsebuje
+  ime paketa v katerem se nahaja entiteta in ime entitete. Na
+  primer: ``AcmeBlogBundle:Post``:
 
     .. code-block:: bash
 
         php app/console generate:doctrine:entity --entity=AcmeBlogBundle:Post
 
-* ``--fields``: The list of fields to generate in the entity class:
+* ``--fields``: Seznam polj za generiranje razreda entitete:
 
     .. code-block:: bash
 
         php app/console generate:doctrine:entity --fields="title:string(100) body:text"
 
-* ``--format``: (**annotation**) [values: yml, xml, php or annotation] This
-  option determines the format to use for the generated configuration files
-  like routing. By default, the command uses the ``annotation`` format:
+* ``--format``: (**annotation**) [values: yml, xml, php ali annotation] Ta
+  opcija določa format za uporabo generiranih nastavitvenih datotek
+  kot je usmerjanje. Privzeto ukaz uporablja format ``annotation``:
 
     .. code-block:: bash
 
         php app/console generate:doctrine:entity --format=annotation
 
-* ``--with-repository``: This option tells whether or not to generate the
-  related Doctrine `EntityRepository` class:
+* ``--with-repository``: Ta opcija pove ali generirati ali ne
+  povezani razred Doctrine ``EntityRepository``:
 
     .. code-block:: bash
 
