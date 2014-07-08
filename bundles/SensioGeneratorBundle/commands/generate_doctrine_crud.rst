@@ -1,64 +1,64 @@
-Generating a CRUD Controller Based on a Doctrine Entity
-=======================================================
+Generiranje krmilnika CRUD na osnovi entitete Doctrine
+======================================================
 
-Usage
------
+Uporaba
+-------
 
-The ``generate:doctrine:crud`` generates a basic controller for a given entity
-located in a given bundle. This controller allows to perform the five basic
-operations on a model.
+``generate:doctrine:crud`` generira osnovni krmilnik za dano entiteto
+locirano v danem paketu. Ta krmilnik omogoča izvajati pet osnovnih
+operacij na modelu.
 
-* Listing all records,
-* Showing one given record identified by its primary key,
-* Creating a new record,
-* Editing an existing record,
-* Deleting an existing record.
+* Izpiše seznam vseh vnosov,
+* Prikazuje en dani vnos identificiran s svojim primarnim ključem,
+* Ustvari nov vnos,
+* Uredi obstoječi vnos,
+* Izbriše obstoječi vnos.
 
-By default the command is run in the interactive mode and asks questions to
-determine the entity name, the route prefix or whether or not to generate write
-actions:
+Privzeto je ukaz pognan v interaktivnem načinu in vpraša vprašanja za
+določitev imena entitete, predpone usmeritve ali naj ali ne generira pisalne
+akcije:
 
 .. code-block:: bash
 
     php app/console generate:doctrine:crud
 
-To deactivate the interactive mode, use the `--no-interaction` option but don't
-forget to pass all needed options:
+Za deaktivacijo interaktivnega načina, uporabite opcijo ``--no-interaction`` vendar ne
+pozabite podati vseh potrebnih opcij:
 
 .. code-block:: bash
 
     php app/console generate:doctrine:crud --entity=AcmeBlogBundle:Post --format=annotation --with-write --no-interaction
 
-Available Options
------------------
+Opcije na voljo
+---------------
 
-* ``--entity``: The entity name given as a shortcut notation containing the
-  bundle name in which the entity is located and the name of the entity. For
-  example: ``AcmeBlogBundle:Post``:
+* ``--entity``: Ime entitete podano kot notacija bližnjice, ki vsebuje
+  ime paketa v katerem je entiteta locirana in ime entitete. Na
+  primer: ``AcmeBlogBundle:Post``:
 
   .. code-block:: bash
 
       php app/console generate:doctrine:crud --entity=AcmeBlogBundle:Post
 
-* ``--route-prefix``: The prefix to use for each route that identifies an
-  action:
+* ``--route-prefix``: Predpona za uporabo za vsako usmeritev, ki identificira
+  akcijo:
 
   .. code-block:: bash
 
       php app/console generate:doctrine:crud --route-prefix=acme_post
 
-* ``--with-write``: (**no**) [values: yes|no] Whether or not to generate the
-  `new`, `create`, `edit`, `update` and `delete` actions:
+* ``--with-write``: (**no**) [vrednosti: yes|no] Ali da ali ne generirati
+  akcij ``new``, ``create``, ``edit``, ``update`` in ``delete``:
 
   .. code-block:: bash
 
       php app/console generate:doctrine:crud --with-write
 
-* ``--format``: (**annotation**) [values: yml, xml, php or annotation]
-  Determine the format to use for the generated configuration files like
-  routing. By default, the command uses the ``annotation`` format. Choosing
-  the ``annotation`` format expects the ``SensioFrameworkExtraBundle`` is
-  already installed:
+* ``--format``: (**annotation**) [vrednosti: yml, xml, php ali annotation]
+  Določa format za uporabiti za generiranje nastavitvenih datotek kot so
+  usmerjanje. Privzeto ukaz uporablja format ``annotation``. Izbira
+  formata ``annotation`` pričakuje, da je ``SensioFrameworkExtraBundle``
+  že nameščen:
 
   .. code-block:: bash
 

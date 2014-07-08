@@ -1,23 +1,23 @@
 DoctrineMigrationsBundle
 ========================
 
-The database migrations feature is an extension of the database abstraction
-layer and offers you the ability to programmatically deploy new versions of
-your database schema in a safe, easy and standardized way.
+Lastnost migracije podatkovne baze je razširitev nivoja abstrakcije podatkovne
+baze in vam ponuja možnost programsko naložiti nove verzije
+sheme vaše podatkovne baze na varen, enostaven in standardiziran način.
 
 .. tip::
 
-    You can read more about the Doctrine Database Migrations on the project's
-    `documentation`_.
+    Več o migracijah podatkovnih baz Doctrine lahko preberete v projektni
+    `dokumentaciji`_.
 
-Installation
-------------
+Namestitev
+----------
 
-Doctrine migrations for Symfony are maintained in the `DoctrineMigrationsBundle`_.
-The bundle uses external `Doctrine Database Migrations`_ library.
+Migracije Doctrine za Symfony so vzdrževane v `DoctrineMigrationsBundle`_.
+Paket uporablja zunanjo knjižnico `Doctrine Database Migrations`_.
 
-Follow these steps to install the bundle and the library in the Symfony
-Standard edition. Add the following to your ``composer.json`` file:
+Sledite tem korakom, da namestite paket in knjižnico v Symfony
+standardno izdajo. Dodajte sledeče v vašo datoteko ``composer.json``:
 
 .. code-block:: json
 
@@ -28,14 +28,14 @@ Standard edition. Add the following to your ``composer.json`` file:
         }
     }
 
-Update the vendor libraries:
+Posodobite knjižnice vendor:
 
 .. code-block:: bash
 
     $ php composer.phar update
 
-If everything worked, the ``DoctrineMigrationsBundle`` can now be found
-at ``vendor/doctrine/doctrine-migrations-bundle``.
+Če je vse delovalo, je ``DoctrineMigrationsBundle`` sedaj na voljo
+v ``vendor/doctrine/doctrine-migrations-bundle``.
 
 .. note::
 
@@ -43,8 +43,8 @@ at ``vendor/doctrine/doctrine-migrations-bundle``.
     `Doctrine Database Migrations`_ library. The library can be found
     at ``vendor/doctrine/migrations``.
 
-Finally, be sure to enable the bundle in ``AppKernel.php`` by including the
-following:
+Na koncu se prepričajte, da ste omogočili paket v ``AppKernel.php`` z vključitvijo
+sledečega:
 
 .. code-block:: php
 
@@ -56,11 +56,11 @@ following:
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
         );
     }
-    
-Configuration
--------------
 
-You can configure the path, namespace, table_name and name in your `config.yml`. The examples below are the default values.
+Nastavitve
+----------
+
+Nastavite lahko pot, imenski prostor, ime tabele in ime v vaši ``config.yml``. Primeri spodaj so privzete vrednosti.
 
 .. code-block:: yaml
 
@@ -69,12 +69,12 @@ You can configure the path, namespace, table_name and name in your `config.yml`.
         dir_name: %kernel.root_dir%/DoctrineMigrations
         namespace: Application\Migrations
         table_name: migration_versions
-        name: Application Migrations   
+        name: Application Migrations
 
-Usage
------
+Uporaba
+-------
 
-All of the migrations functionality is contained in a few console commands:
+Vsa funkcionalnost migracij je vsebovana v nekaj konzolnih ukazih:
 
 .. code-block:: bash
 
@@ -86,8 +86,8 @@ All of the migrations functionality is contained in a few console commands:
       :status   View the status of a set of migrations.
       :version  Manually add and delete migration versions from the version table.
 
-Start by getting the status of migrations in your application by running
-the ``status`` command:
+Začnite s pridobitvijo statusa migracij v vaši aplikaciji s pogonom
+ukaza ``status``:
 
 .. code-block:: bash
 
@@ -106,17 +106,17 @@ the ``status`` command:
         >> Available Migrations:                               0
         >> New Migrations:                                     0
 
-Now, you can start working with migrations by generating a new blank migration
-class. Later, you'll learn how Doctrine can generate migrations automatically
-for you.
+Sedaj lahko začnete delati z migracijami z generiranjem novega praznega migracijskega
+razreda. Kasneje se boste naučili, kako lahko Doctrine generira migracije avtomatično
+za vas.
 
 .. code-block:: bash
 
     php app/console doctrine:migrations:generate
     Generated new migration class to "/path/to/project/app/DoctrineMigrations/Version20100621140655.php"
 
-Have a look at the newly generated migration class and you will see something
-like the following::
+Poglejte novo generirani migracijski razred in videli boste nekaj,
+kot je sledeče::
 
     namespace Application\Migrations;
 
@@ -136,8 +136,8 @@ like the following::
         }
     }
 
-If you run the ``status`` command it will now show that you have one new
-migration to execute:
+Če poženete ukaz ``status`` bo sedaj pokazal, da imate eno novo
+migracijo za izvršiti:
 
 .. code-block:: bash
 
@@ -160,45 +160,45 @@ migration to execute:
 
        >> 2010-06-21 14:06:55 (20100621140655)                not migrated
 
-Now you can add some migration code to the ``up()`` and ``down()`` methods and
-finally migrate when you're ready:
+Sedaj lahko dodate nekaj kode migracije k metodam ``up()`` in ``down()`` ter
+končno migrirate, ko ste pripravljeni:
 
 .. code-block:: bash
 
     php app/console doctrine:migrations:migrate 20100621140655
 
-For more information on how to write the migrations themselves (i.e. how to
-fill in the ``up()`` and ``down()`` methods), see the official Doctrine Migrations
-`documentation`_.
+Za več informacij, kako pisati same migracije (t.j. kako
+zapolniti metodi ``up()`` in ``down()``), glejte uradno
+`dokumentacijo`_ Doctrine migracije.
 
-Running Migrations during Deployment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Poganjanje migracij med razvojem
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Of course, the end goal of writing migrations is to be able to use them to
-reliably update your database structure when you deploy your application.
-By running the migrations locally (or on a beta server), you can ensure that
-the migrations work as you expect.
+Seveda končni cilj pisanja migracij je, biti jih sposoben uporabiti, da
+zanesljivo posodobijo strukturo vaše podatkovne baze, ko nalagate vašo aplikacijo.
+S pogonom migracij lokalno (ali na beta strežniku), lahko zagotovite, da
+migracije delujejo, kot pričakujete.
 
-When you do finally deploy your application, you just need to remember to run
-the ``doctrine:migrations:migrate`` command. Internally, Doctrine creates
-a ``migration_versions`` table inside your database and tracks which migrations
-have been executed there. So, no matter how many migrations you've created
-and executed locally, when you run the command during deployment, Doctrine
-will know exactly which migrations it hasn't run yet by looking at the ``migration_versions``
-table of your production database. Regardless of what server you're on, you
-can always safely run this command to execute only the migrations that haven't
-been run yet on *that* particular database.
+Ko končno naložite vašo aplikacijo, si morate samo zapomniti pognati
+ukaz ``doctrine:migrations:migrate``. Interno, Doctrine izdela
+tabelo ``migration_versions`` znotraj vaše podatkovne baze in beleži katere migracije
+so bile tam izvršene. Torej ne glede na to, koliko migracij ste ustvarili
+in izvršili lokalno, ko poženete ukaz med razvojem, bo Doctrine
+točno vedel, katere migracije še niso bile pognane s pogledom v tabelo
+``migration_versions`` vaše produkcijske baze. Ne glede na to, na katerem strežniku ste,
+lahko vedno varno poženete ta ukaz, da izvršite samo migracije, ki še niso bile
+pognane na *tisti* določeni podatkovni bazi.
 
-Generating Migrations Automatically
------------------------------------
+Avtomatično generiranje migracij
+--------------------------------
 
-In reality, you should rarely need to write migrations manually, as the migrations
-library can generate migration classes automatically by comparing your Doctrine
-mapping information (i.e. what your database *should* look like) with your
-actual current database structure.
+V realnosti bi morali redko potrebovati pisati migracije ročno, saj knjižnica
+migracij lahko generira razrede migracij avtomatično s primerjanjem vaših informacij Doctrine
+preslikav (t.j. kako bi vaša podatkovna baza *morala* izgledati) z vašo
+dejansko trenutno strukturo podatke baze.
 
-For example, suppose you create a new ``User`` entity and add mapping information
-for Doctrine's ORM:
+Na primer, predpostavimo, da ste ustvarili novo entiteto ``User`` in dodali informacije preslikav
+za Doctrine-ov ORM:
 
 .. configuration-block::
 
@@ -261,43 +261,43 @@ for Doctrine's ORM:
 
         </doctrine-mapping>
 
-With this information, Doctrine is now ready to help you persist your new
-``User`` object to and from the ``hello_user`` table. Of course, this table
-doesn't exist yet! Generate a new migration for this table automatically by
-running the following command:
+S temi informacijami, Doctrine je sedaj pripravljen, da vam pomaga pridobiti vaš novi
+objekt ``User`` v in iz tabele ``hello_user``. Seveda ta tabela
+še ne obstaja! Generirajte novo migracijo za to tabelo avtomatično s
+pogonom sledečega ukaza:
 
 .. code-block:: bash
 
     php app/console doctrine:migrations:diff
 
-You should see a message that a new migration class was generated based on
-the schema differences. If you open this file, you'll find that it has the
-SQL code needed to create the ``hello_user`` table. Next, run the migration
-to add the table to your database:
+Sedaj bi morali videti sporočilo, da je bil generiran razred nove migracije na osnovi
+razlik sheme. Če odprete to datoteko, boste ugotovili, da ima
+kodo SQL, ki je potrebna za ustvariti tabelo ``hello_user``. Naslednje poženite migracijo,
+da dodate tabelo vaši podatkovni bazi:
 
 .. code-block:: bash
 
     php app/console doctrine:migrations:migrate
 
-The moral of the story is this: after each change you make to your Doctrine
-mapping information, run the ``doctrine:migrations:diff`` command to automatically
-generate your migration classes.
+Morala te zgodbe je: po vsaki spremembi, ki jo naredite vašim informacijam
+Doctrine preslikav, poženite ukaz ``doctrine:migrations:diff``, da avtomatično
+generirate vaše razrede migracij.
 
-If you do this from the very beginning of your project (i.e. so that even
-the first tables were loaded via a migration class), you'll always be able
-to create a fresh database and run your migrations in order to get your database
-schema fully up to date. In fact, this is an easy and dependable workflow
-for your project.
+Če to delate od samega začetka vašega projekta (t.j. da celo
+ko so naložene prve tabele preko migracijskega razreda), boste vedno sposobni
+ustvariti svežo podatkovno bazo in pognati vaše migracije, da dobite shemo
+vaše podatkovne baze v celoti posodobljeno. V bistvu je to enostaven in odvisen potek dela
+za vaš projekt.
 
-Container Aware Migrations
---------------------------
+Migracije, ki se zavedajo kontejnerja
+-------------------------------------
 
-In some cases you might need access to the container to ensure the proper update of
-your data structure. This could be necessary to update relations with some specific
-logic or to create new entities. 
+V nekaterih primerih boste morda potrebovali dostop do kontejnerja, da zagovotite ustrezno posodobitev
+strukture vaše podatkovne baze. To je lahko potrebno za posodobitev relacij z nekatero določeno
+logiko ali ustvariti nove entitete.
 
-Therefore you can just implement the ContainerAwareInterface with its needed methods
-to get full access to the container.
+Zato lahko samo implementirate ContainerAwareInterface z njegovimi potrebnimi metodami,
+da dobite celotni dostop do kontejnerja.
 
 .. code-block:: php
 
@@ -307,19 +307,19 @@ to get full access to the container.
 
     class Version20130326212938 extends AbstractMigration implements ContainerAwareInterface
     {
-    
+
         private $container;
-    
+
         public function setContainer(ContainerInterface $container = null)
         {
             $this->container = $container;
         }
-    
+
         public function up(Schema $schema)
         {
             // ... migration content
         }
-    
+
         public function postUp(Schema $schema)
         {
             $em = $this->container->get('doctrine.orm.entity_manager');
@@ -327,32 +327,32 @@ to get full access to the container.
         }
     }
 
-Manual Tables
--------------
+Ročne tabele
+------------
 
-It is a common use case, that in addition to your generated database structure 
-based on your doctrine entities you might need custom tables. By default such 
-tables will be removed by the doctrine:migrations:diff command.
+Pogosti primer uporabe je, da kot dodatek k strukturi vaše generirane podatkovne baze
+na osnovi vaših entitet doctrine, lahko potrebujete prilagoditi tabele. Privzeto bodo take
+tabele odstranjene z ukazom doctrine:migrations:diff.
 
-If you follow a specific scheme you can configure doctrine/dbal to ignore those 
-tables. Let's say all custom tables will be prefixed by ``t_``. In this case you 
-just have to add the following configuration option to your doctrine configuration:
+Če sledite določeni shemi, lahko nastavite doctrine/dbal, da ignorira te
+tabele. Predpostavimo, da bodo vse tabele po meri imele predpono ``t_``. V tem primeru
+morate dodati samo naslednjo nastavitveno opcijo v vaše nastavitve doctrine:
 
 .. configuration-block::
 
     .. code-block:: yaml
-    
+
         doctrine:
-            dbal:        
+            dbal:
                 schema_filter: ~^(?!t_)~
-                
+
     .. code-block:: xml
-    
+
         <doctrine:dbal schema-filter="~^(?!t_)~" ... />
 
-    
+
     .. code-block:: php
-    
+
         $container->loadFromExtension('doctrine', array(
             'dbal' => array(
                 'schema_filter'  => '~^(?!t_)~',
@@ -361,11 +361,12 @@ just have to add the following configuration option to your doctrine configurati
             // ...
         ));
 
-This ignores the tables on the DBAL level and they will be ignored by the diff command.
+To ignorira tabele na nivoju DBAL in bodo ignorirane s strani ukaza diff.
 
-Note that if you have multiple connections configured then the ``schema_filter`` configuration
-will need to be placed per-connection.
+Bodite pozorni, da če imate nastavljenih več povezav, potem bodo nastavitve ``schema_filter``
+potrebne za postaviti na povezavo.
 
-.. _documentation: http://docs.doctrine-project.org/projects/doctrine-migrations/en/latest/index.html
+.. _dokumentacijo: http://docs.doctrine-project.org/projects/doctrine-migrations/en/latest/index.html
+.. _dokumentaciji: http://docs.doctrine-project.org/projects/doctrine-migrations/en/latest/index.html
 .. _DoctrineMigrationsBundle: https://github.com/doctrine/DoctrineMigrationsBundle
 .. _`Doctrine Database Migrations`: https://github.com/doctrine/migrations

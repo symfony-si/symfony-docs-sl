@@ -1,16 +1,16 @@
 SensioGeneratorBundle
 =====================
 
-The ``SensioGeneratorBundle`` extends the default Symfony2 command line
-interface by providing new interactive and intuitive commands for generating
-code skeletons like bundles, form classes or CRUD controllers based on a
-Doctrine 2 schema.
+``SensioGeneratorBundle`` razširja privzeti vmesnik ukazne vrstice Symfony2
+s ponujanjem novih interaktivnih in intiutivnih ukazov za generiranje
+skeletov kode, kot so paketi, razredi obrazcev ali krmilniki CRUD na osnovi
+sheme Doctrine 2.
 
-Installation
-------------
+Namestitev
+----------
 
-`Download`_ the bundle and put it under the ``Sensio\Bundle`` namespace.
-Then, like for any other bundle, include it in your Kernel class::
+`Prenesite`_ paket in ga dajte pod imenski prostor ``Sensio\Bundle``.
+Potem ga, kot za vsak paket, vključite v vaš razred Kernel::
 
     public function registerBundles()
     {
@@ -23,13 +23,13 @@ Then, like for any other bundle, include it in your Kernel class::
         ...
     }
 
-List of Available Commands
---------------------------
+Seznam ukazov, ki so na voljo
+-----------------------------
 
-The ``SensioGeneratorBundle`` comes with four new commands that can be run in
-interactive mode or not. The interactive mode asks you some questions to
-configure the command parameters to generate the definitive code. The list of
-new commands are listed below:
+``SensioGeneratorBundle`` prihaja s štirimi novimi ukazi, ki se jih lahko požene v
+interaktivnem načinu ali ne. Interaktivni način vas vpraša nekaj vprašanj za
+nastavitev parametrov ukaza za generiranje definitivne kode. Seznam
+novih ukazov je izpisan spodaj:
 
 .. toctree::
    :maxdepth: 1
@@ -40,33 +40,33 @@ new commands are listed below:
    commands/generate_doctrine_entity
    commands/generate_doctrine_form
 
-.. _Download: http://github.com/sensio/SensioGeneratorBundle
+.. _Prenesite: http://github.com/sensio/SensioGeneratorBundle
 
-Overriding Skeleton Templates
------------------------------
+Prepis skeletnih predlog
+------------------------
 
 .. versionadded:: 2.3
-  The possibility to override the skeleton templates was added in 2.3.
+  Možnost prepisa skeletnih predlog je bila dodana v 2.3.
 
-All generators use a template skeleton to generate files. By default, the
-commands use templates provided by the bundle under its ``Resources/skeleton``
-directory.
+Vsi generatorji uporabljajo skeletno predlogo za generiranje datotek. Privzeto
+ukazi uporabljajo predloge ponujene s strani paketa pod njenim direktorijem
+``Resources/skeleton``.
 
-You can define custom skeleton templates by creating the same directory and
-file structure in ``APP_PATH/Resources/SensioGeneratorBundle/skeleton`` or
-``BUNDLE_PATH/Resources/SensioGeneratorBundle/skeleton`` if you want to extend
-the generator bundle (to be able to share your templates for instance in
-several projects).
+Lahko definirate skelet po meri z izdelavo enake strukture direktorijev in
+datotek v ``APP_PATH/Resources/SensioGeneratorBundle/skeleton`` ali
+``BUNDLE_PATH/Resources/SensioGeneratorBundle/skeleton``, če želite razširiti
+paket generator (da je na primer sposoben deliti vaše datoteke v
+večih projektih).
 
-For instance, if you want to override the ``edit`` template for the CRUD
-generator, create a ``crud/views/edit.html.twig.twig`` file under
+Na primer, če želite prepisati predlogo ``edit`` za generator
+CRUD, ustvarite datoteko ``crud/views/edit.html.twig.twig`` pod
 ``APP_PATH/Resources/SensioGeneratorBundle/skeleton``.
 
-When overriding a template, have a look at the default templates to learn more
-about the available templates, their path, and the variables they have access.
+Ko prepisujete predlogo, poglejte v privzete predloge, da izveste več
+o predlogah, ki so na voljo, njihovih poteh in spremenljivkah, do katerih imajo dostop.
 
-Instead of copy/pasting the original template to create your own, you can also
-extend it and only override the relevant parts:
+Namesto kopiranja/prilepljanja originalne predloge, da ustvarite vašo lastno, jo lahko tudi
+razširite in samo prepišete relevantne dele:
 
 .. code-block:: jinja
 
@@ -82,23 +82,23 @@ extend it and only override the relevant parts:
        * but before the annotations.
   {% endblock phpdoc_header %}
 
-Complex templates in the default skeleton are split into Twig blocks to allow
-easy inheritance and to avoid copy/pasting large chunks of code.
+Kompleksne predloge v privzetem skeletonu so razdeljene v bloke Twig, da omogočajo
+enostavno dedovanje in se izognete kopiranju/prilepljanje velikih kosov kode.
 
-In some cases, templates in the skeleton include other ones, like
-in the ``crud/views/edit.html.twig.twig`` template for instance:
+V nekaterih primerih predloge v skeletu vključujejo druge, kot
+v predlogi ``crud/views/edit.html.twig.twig`` na primer:
 
 .. code-block:: jinja
 
   {% include 'crud/views/others/record_actions.html.twig.twig' %}
 
-If you have defined a custom template for this template, it is going to be
-used instead of the default one. But you can explicitly include the original
-skeleton template by prefixing its path with ``skeleton/`` like we did above:
+Če ste definirali predlogo po meri za to predlogo, bo
+uporabljena namesto privzete. Vendar lahko eksplicitno vključite originalni
+skelet predloge z dodajanjem predpone njeni poti s ``skeleton/`` kot smo naredili zgoraj:
 
 .. code-block:: jinja
 
   {% include 'skeleton/crud/views/others/record_actions.html.twig.twig' %}
 
-You can learn more about this neat "trick" in the official `Twig documentation
+Lahko se naučite več o tem lepem "triku" v uradni `dokumentaciji Twig
 <http://twig.sensiolabs.org/doc/recipes.html#overriding-a-template-that-also-extends-itself>`_.

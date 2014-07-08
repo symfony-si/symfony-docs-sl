@@ -1,22 +1,22 @@
-Generating a New Form Type Class Based on a Doctrine Entity
-===========================================================
+Generiranje novega tipa razreda obrazca na osnovi entitete Doctrine
+===================================================================
 
-Usage
------
+Uporaba
+-------
 
-The ``generate:doctrine:form`` generates a basic form type class by using the
-metadata mapping of a given entity class:
+``generate:doctrine:form`` generira osnovni tip razreda obrazca z uporabo
+preslikav meta podatkov danega razreda entitete:
 
 .. code-block:: bash
 
     php app/console generate:doctrine:form AcmeBlogBundle:Post
 
-Required Arguments
-------------------
+Zahtevani argumenti
+-------------------
 
-* ``entity``: The entity name given as a shortcut notation containing the
-  bundle name in which the entity is located and the name of the entity. For
-  example: ``AcmeBlogBundle:Post``:
+* ``entity``: Ime entitete dano kot notacija bližnjice, ki vsebuje
+  ime paketa v katerem je locirana entiteta in ime entitete. Na
+  primer: ``AcmeBlogBundle:Post``:
 
     .. code-block:: bash
 

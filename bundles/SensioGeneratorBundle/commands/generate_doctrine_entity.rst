@@ -1,4 +1,4 @@
-Generating a New Doctrine Entity Stub
+GeneriranjeGenerating a New Doctrine Entity Stub
 =====================================
 
 Usage
