@@ -63,3 +63,9 @@ Opcije na voljo
   .. code-block:: bash
 
       php app/console generate:doctrine:crud --format=annotation
+
+* ``--overwrite``: (**no**) [vrednosti: yes|no] Ali naj ali ne prepiše obstoječe datoteke:
+
+  .. code-block:: bash
+
+       php app/console generate:doctrine:crud --overwrite

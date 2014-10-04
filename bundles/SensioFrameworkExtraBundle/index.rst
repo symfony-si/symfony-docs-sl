@@ -8,7 +8,12 @@ konvencije in anotacije. Omogoča bolj jedrnate krmilnike.
 Namestitev
 ----------
 
-`Prenesite`_ paket in ga dajte pod imenski prostor ``Sensio\Bundle\``.
+Pred uporabo tega paketa v vašem projektu, ga dodajte v vašo datoteko ``composer.json``:
+
+.. code-block:: bash
+
+    $ composer require sensio/framework-extra-bundle
+
 Nato ga, kot vsak drug paket, vključite v vaš razred Kernel::
 
     public function registerBundles()
@@ -21,6 +26,18 @@ Nato ga, kot vsak drug paket, vključite v vaš razred Kernel::
 
         ...
     }
+
+.. _release-cycle-note:
+
+.. note::
+
+    Od SensioFrameworkExtraBundle 3.0 je njen proces izdaj nesinhroniziran
+    s Symfony-jevem procesom izdaj. To pomeni, da lahko enostavno naredite require
+    ``sensio/framework-extra-bundle: ~3.0`` v vaši datoteki ``composer.json``
+    in Composer bo avtomatsko izbral najnovejšo verzijo paketa za vas.
+    Uporabiti morate Symfony 2.4 ali novejši za ta potek dela. Pred Symfony
+    2.4, zahtevana verzija SensioFrameworkExtraBundle bi morala biti
+    enaka kot je vaša verzija Symfony.
 
 Če planirate uporabiti ali ustvariti anotacije za krmilnike, zagotovite posodobiti
 vaš ``autoload.php`` z dodajanjem sledeče vrstice::
@@ -157,5 +174,4 @@ Usmeritve morajo biti uvožene, da so aktivne kot katerikoli drugi viri usmerite
 glejte :ref:`Annotated Routes Activation<frameworkextra-annotations-routing-activation>` za
 podrobnosti.
 
-.. _`SensioFrameworkExtraBundle`: https://github.com/sensio/SensioFrameworkExtraBundle
-.. _`Download`: http://github.com/sensio/SensioFrameworkExtraBundle
+.. _`SensioFrameworkExtraBundle`: https://github.com/sensiolabs/SensioFrameworkExtraBundle

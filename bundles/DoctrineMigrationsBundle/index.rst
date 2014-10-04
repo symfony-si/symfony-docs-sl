@@ -23,8 +23,8 @@ standardno izdajo. Dodajte sledeče v vašo datoteko ``composer.json``:
 
     {
         "require": {
-            "doctrine/migrations": "dev-master",
-            "doctrine/doctrine-migrations-bundle": "dev-master"
+            "doctrine/migrations": "1.0.*@dev",
+            "doctrine/doctrine-migrations-bundle": "2.1.*@dev"
         }
     }
 

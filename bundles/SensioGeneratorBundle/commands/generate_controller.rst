@@ -27,7 +27,7 @@ Opcije na voljo
 
 * ``--controller``: Ime krmilnika dano kot bližnjica notacije, ki vsebuje
   ime paketa v katerem je krmilnik lociran in ime
-  krmilnika. Na primer: ``AcmeBlogBundle:Post`` (ustvro ``PostController``
+  krmilnika. Na primer: ``AcmeBlogBundle:Post`` (ustvari ``PostController``
   znotraj paketa ``AcmeBlogBundle``):
 
     .. code-block:: bash

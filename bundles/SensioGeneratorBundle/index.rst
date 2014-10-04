@@ -9,7 +9,12 @@ sheme Doctrine 2.
 Namestitev
 ----------
 
-`Prenesite`_ paket in ga dajte pod imenski prostor ``Sensio\Bundle``.
+Preden uporabo paketa v vašem projektu, ga dodajte v vašo datoteko ``composer.json``:
+
+.. code-block:: bash
+
+    $ composer require sensio/generator-bundle
+
 Potem ga, kot za vsak paket, vključite v vaš razred Kernel::
 
     public function registerBundles()

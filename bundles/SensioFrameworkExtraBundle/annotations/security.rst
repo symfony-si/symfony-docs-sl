@@ -1,6 +1,12 @@
 @Security
 =========
 
+.. caution::
+
+    Anotacija ``@Security`` je bila predstavljena v SensioFrameworkExtraBundle
+    3.0. Ta verzija paketa je lahko uporabljena samo s Symfony 2.4 ali novejšim (glejte
+    :ref:`the SensioFrameworkExtraBundle proces izdaj <release-cycle-note>`).
+
 Uporaba
 -------
 
