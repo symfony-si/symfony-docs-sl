@@ -7,12 +7,12 @@ Glossary
    :sorted:
 
    Distribucija
-        *Distribucija* je paket izdelan iz Symfony2 komponent,
+        *Distribucija* je paket izdelan iz Symfony komponent,
         izbire paketov, smiselne strukture direktorijev, privzetih nastavitev
         in opcijskega nastavitvenega sistema.
 
    Dependency Injection
-        Dependency Injection je načrtovalski vzorec, veliko uporabljen v Symfony2 ogrodju.
+        Dependency Injection je načrtovalski vzorec, veliko uporabljen v Symfony ogrodju.
         Spodbuja ohlapno skupno in bolj trajnostno arhitektur aplikacije.
         Glavni princip tega vzorca je, da dovoljuje razvijalcem *vbrizganje* objektov
         (znanih tudi kot storitve) v druge objekte, v splošnem jih podaja kot parametre.
@@ -33,7 +33,7 @@ Glossary
    Paket (Bundle)
         *Paket* je direktorij, ki vsebuje skupek datotek (PHP datotek,
         stilskih datotek, JavaScript, slike, ...), ki *implementirajo* eno
-        lastnost (blog, forum itd.). V Symfony2, se (*skoraj*) vse
+        lastnost (blog, forum itd.). V Symfony, se (*skoraj*) vse
         nahaja znotraj paketa. (see :ref:`page-creation-bundles`)
 
    Prednji krmilnik
@@ -51,7 +51,7 @@ Glossary
    Service
         *Storitev* je generičen termin za katerokoli PHP objekt, ki izvaja določeno
         opravilo. Storitev je običajno uporabljena "globalno", kot objekt povezave
-        podatkovne baze ali objekt, ki dostavlja e-poštna sporočila. V Symfony2 so
+        podatkovne baze ali objekt, ki dostavlja e-poštna sporočila. V Symfony so
         storitve pogosto nastavljene in pridobljene iz storitvenega kontejnerja.
         Aplikacija, ki ima mnoge skupne storitve, pomeni, da sledi
         `service-oriented architecture`_.
@@ -81,9 +81,9 @@ Glossary
 
    Izdelovalec (Vendor)
         *Izdelovalec* je ponudnik PHP knjižnic in paketov, kar vključuje tudi sam
-        Symfony2. Razen običajnih komercialnih konotacij besede, izdelovalec v Symfony
+        Symfony. Razen običajnih komercialnih konotacij besede, izdelovalec v Symfony
         pogosto (celo običajno) vključuje brezplačno programsko opremo. Katerakoli
-        knjižnica, ki jo dodate v vaš Symfony2 projekt bi morala iti v ``vendor``
+        knjižnica, ki jo dodate v vaš Symfony projekt bi morala iti v ``vendor``
         direktorij. Poglejte si še
         :ref:`The Architecture: Using Vendors <using-vendors>`.
 
@@ -104,13 +104,13 @@ Glossary
         v web direktorij z uporabo ``assets:install`` opravila ukazne komande.
 
    Jedro (Kernel)
-        *Jedro* je središče Symfony2. Kernel objekt upravlja HTTP
+        *Jedro* je središče Symfony. Kernel objekt upravlja HTTP
         zahtevke z uporabo vseh paketov in knjižnic registriranih v njem. Oglejte si
         :ref:`The Architecture: The Application Directory <the-app-dir>` in
         :doc:`/book/internals` poglavje.
 
    Požarni zid
-        V Symfony2, *požarni zid* nima nič opraviti z omrežjem. Namesto tega,
+        V Symfony, *požarni zid* nima nič opraviti z omrežjem. Namesto tega,
         definira mehanizme preverjanja pristnosti (t.j. ravnanje s procesom
         določanja identifikacije vaših uporabnikov), ali za celo aplikacijo,
         ali samo za del nje. Oglejte si
@@ -118,7 +118,7 @@ Glossary
 
    YAML
         *YAML* je rekurzivna kratica za "YAML Ain't a Markup Language". Gre za
-        lahko, človeku prijazen serializacijski jezik, uporabljen obširno v Symfony2
+        lahko, človeku prijazen serializacijski jezik, uporabljen obširno v Symfony
         nastavitvenih datotekah. Oglejte si :doc:`/components/yaml/introduction`
         poglavje.
 

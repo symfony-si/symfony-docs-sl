@@ -1,5 +1,7 @@
-Symfony2 dokumentacija
-======================
+.. _symfony2-documentation:
+
+Symfony dokumentacija
+=====================
 
 .. toctree::
     :hidden:
@@ -9,7 +11,7 @@ Symfony2 dokumentacija
 Hiter pregled
 -------------
 
-Začnite s Symfony2 hitro :doc:`Hiter pregled <quick_tour/index>`:
+Začnite s Symfony hitro :doc:`Hiter pregled <quick_tour/index>`:
 
 .. toctree::
     :hidden:
@@ -24,7 +26,7 @@ Začnite s Symfony2 hitro :doc:`Hiter pregled <quick_tour/index>`:
 Knjiga
 ------
 
-Poglobite se v Symfony2 s tematskimi vodiči:
+Poglobite se v Symfony s tematskimi vodiči:
 
 .. toctree::
     :hidden:
@@ -81,7 +83,7 @@ CMF
 ---
 
 Symfony CMF projekt omogoča za razvijalce enostavnejše dodajanje CMS funkcionalnosti
-v aplikacije zgrajene s Symfony2 PHP ogrodjem.
+v aplikacije zgrajene s Symfony PHP ogrodjem.
 
 .. toctree::
     :hidden:
@@ -91,7 +93,7 @@ v aplikacije zgrajene s Symfony2 PHP ogrodjem.
 Prispevanje
 -----------
 
-Prispevajte k Symfony2:
+Prispevajte k Symfony:
 
 .. toctree::
     :hidden:

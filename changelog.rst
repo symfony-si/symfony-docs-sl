@@ -13,6 +13,154 @@ documentation.
     Do you also want to participate in the Symfony Documentation? Take a look
     at the ":doc:`/contributing/documentation/overview`" article.
 
+August, 2014
+------------
+
+New Documentation
+~~~~~~~~~~~~~~~~~
+
+- `bccb080 <https://github.com/symfony/symfony-docs/commit/bccb080bd7eeb30e3d3c48c656be0c696b0cec85>`_ #4140 [Cookbook][Logging] document multiple recipients in XML configs (xabbuh)
+- `7a6e3d1 <https://github.com/symfony/symfony-docs/commit/7a6e3d19115a027bcd717916548accb9702b2fe9>`_ #4150 Added the schema_filter option to the reference (peterrehm)
+- `be90d8a <https://github.com/symfony/symfony-docs/commit/be90d8a631f9ec39f2307959bb43dc23e36fcf5a>`_ #4142 [Cookbook][Configuration] tweaks for the web server configuration chapter (xabbuh)
+- `5379f54 <https://github.com/symfony/symfony-docs/commit/5379f5402b47b77f970c034834ea65efdce9b3f3>`_ #4086 [Reference][Constraints] Added hint about attaching the expression constraint to a form field (peterrehm)
+- `041105c <https://github.com/symfony/symfony-docs/commit/041105c438f5f5072cbe6ceb380212412a2c5ef6>`_ #3883 Removed redundant POST request exclusion info (ryancastle)
+- `4f9fef6 <https://github.com/symfony/symfony-docs/commit/4f9fef61a96cfda6fa5c3ac228647ccbdbde8ea9>`_ #4000 [Cookbook] add cookbook article for the server:run command (xabbuh)
+- `4ea4dfe <https://github.com/symfony/symfony-docs/commit/4ea4dfecd531a18d4a10a697f3af8b8b9f44c365>`_ #3915 [Cookbook][Configuration] documentation of Apache + PHP-FPM (xabbuh)
+- `79cb4f1 <https://github.com/symfony/symfony-docs/commit/79cb4f1a74ec583ed6d12083d1d51f36b5e6fb9b>`_ #4069 document the namespace alias (dbu)
+- `08bed5f <https://github.com/symfony/symfony-docs/commit/08bed5fd0d9239ef5d59ec06e1c6571198daf275>`_ #4128 Finished #3759 (WouterJ)
+- `4d5adaa <https://github.com/symfony/symfony-docs/commit/4d5adaa4ccef36fbec631ad05ce7389cbd575ebd>`_ #4125 Added link to JSFiddle example (WouterJ)
+- `75bda4b <https://github.com/symfony/symfony-docs/commit/75bda4bcdcf887e5a01a399bdf7790c72499a2e9>`_ #4124 Rebased #3965 (WouterJ)
+- `e2f13a4 <https://github.com/symfony/symfony-docs/commit/e2f13a482884061a4254d3d2b0479f2aefcf8bb4>`_ #4039 [DomCrawler] Added node name getter (fejese)
+- `3f92d5f <https://github.com/symfony/symfony-docs/commit/3f92d5f5e77d63c9328ead5403ea1b3d23d62ceb>`_ #3966 [Cookbook][Controller] Add note about invokable controller services (kbond)
+- `fdb8a32 <https://github.com/symfony/symfony-docs/commit/fdb8a324b07c183cbda5e8e77ae2f59f2319a301>`_ #3950 [Components][EventDispatcher] describe the usage of the RegisterListenersPass (xabbuh)
+- `7e09383 <https://github.com/symfony/symfony-docs/commit/7e093830741508805d548402561b443874403760>`_ #3940 Updated docs for Monolog "swift" handler in cookbook. (phansys)
+- `9d7c999 <https://github.com/symfony/symfony-docs/commit/9d7c9994515a021d940dda7753d7b99916fa21d1>`_ #3895 [Validator] Support "maxSize" given in KiB (jeremy-derusse)
+- `8adfe98 <https://github.com/symfony/symfony-docs/commit/8adfe98d822c905ac7877affa14ec5e447662fbe>`_ #3894 Rewrote Extension & Configuration docs (WouterJ)
+- `cafea43 <https://github.com/symfony/symfony-docs/commit/cafea438624ea9e36639f48d38483c292a6dd476>`_ #3888 Updated the example used to explain page creation (javiereguiluz)
+- `df0cf68 <https://github.com/symfony/symfony-docs/commit/df0cf68b6ab3b8974c03482349602833f4ec5387>`_ #3885 [RFR] Added "How to Organize Configuration Files" cookbook (javiereguiluz)
+- `41116da <https://github.com/symfony/symfony-docs/commit/41116dae3d9e34852cc3ef5e105d23f5c1f67c63>`_ #4081 [Components][ClassLoader] documentation for the ClassMapGenerator class (xabbuh)
+- `2b9cb7c <https://github.com/symfony/symfony-docs/commit/2b9cb7c210245cd6586fd82ece291a5d290113f5>`_ #4076 Fixed description of session storage of the ApiKeyAuthenticator (peterrehm)
+- `35a0f66 <https://github.com/symfony/symfony-docs/commit/35a0f66254429dff1c79e20925969509c90aba0b>`_ #4102 Adding a new entry about reverse proxies in the framework (weaverryan)
+- `95c2066 <https://github.com/symfony/symfony-docs/commit/95c20664ddc5bb2c8e059b9acf44a938c573c19e>`_ #4096 labels in submit buttons + new screenshot (ricardclau)
+
+Fixed Documentation
+~~~~~~~~~~~~~~~~~~~
+
+- `5fac303 <https://github.com/symfony/symfony-docs/commit/5fac303e45053fc3fec61fc64b1a8b5a2b819af0>`_ #4165 Update voters.rst (gerryvdm)
+- `4882b99 <https://github.com/symfony/symfony-docs/commit/4882b998e3284211616e721e924fbcba0c8c96ce>`_ #4164 Fixed minor typos. (ahsio)
+- `eaaa35a <https://github.com/symfony/symfony-docs/commit/eaaa35af3b9d9753484bfc0d35fc07bc933fdb0d>`_ #4145 Fix documentation for group_sequence_provider (giosh94mhz)
+- `155c3e8 <https://github.com/symfony/symfony-docs/commit/155c3e8829c822125f7e4c69497ad6237b618a57>`_ #4153 [Reference] fix namespace in Expression constraint (xabbuh)
+- `2c93aa5 <https://github.com/symfony/symfony-docs/commit/2c93aa52114f62cb59053340b91998630316465d>`_ #4147 [Cookbook][Logging] add missing Monolog handler type in XML config (xabbuh)
+- `53b2c2b <https://github.com/symfony/symfony-docs/commit/53b2c2be9f077afb5120cb3a3b39d58961073861>`_ #4139 cleaned up the code example (gondo)
+- `b5c9f2a <https://github.com/symfony/symfony-docs/commit/b5c9f2ae0ab8b3761bf005e36c3a20df12ae4c0f>`_ #4138 fixed wrongly linked dependency (gondo)
+- `b486b22 <https://github.com/symfony/symfony-docs/commit/b486b220d3993cd0b2b60a75c2a6ba986439f5c4>`_ #4131 Replaced old way of specifying http method by the new one (Baptouuuu)
+- `93481d7 <https://github.com/symfony/symfony-docs/commit/93481d7b2236394939941809020f82005194844a>`_ #4120 Fix use mistakes (mbutkereit)
+- `c0a0120 <https://github.com/symfony/symfony-docs/commit/c0a0120cb59ae97abc813425a68311b458dc722e>`_ #4119 Fix class name in ConsoleTerminateListener example (alOneh)
+- `4629d8b <https://github.com/symfony/symfony-docs/commit/4629d8b5293b6f93897765b8317e5486d7b1e5b2>`_ #4116 Fixed the code snippets for the expression language functions (stof)
+- `d699255 <https://github.com/symfony/symfony-docs/commit/d6992559f1a4e59fe4f29db1a1b5961266d085c5>`_ #4083 [Reference] field dependent empty_data option description (xabbuh)
+- `3ffc20f <https://github.com/symfony/symfony-docs/commit/3ffc20fcee21b3df5b16e7d270634ac4e682d163>`_ #4103 [Cookbook][Forms] fix PHP template file name (xabbuh)
+- `234fa36 <https://github.com/symfony/symfony-docs/commit/234fa364612d70da60ad3cb997fca0123db473e6>`_ #4095 Fix php template (piotrantosik)
+- `01fb9f2 <https://github.com/symfony/symfony-docs/commit/01fb9f245975d8769ab6f27e9c25578270d55a29>`_ #4093 See #4091 (dannykopping)
+- `8f3a261 <https://github.com/symfony/symfony-docs/commit/8f3a261d1d1e6d6378cd67612ad9227a10334723>`_ #4092 See #4091 (dannykopping)
+- `7d39b03 <https://github.com/symfony/symfony-docs/commit/7d39b03b09d60ebb0d400f080079e6d2a2d55bdd>`_ #4079 Fixed typo in filesystem component (kohkimakimoto)
+- `f0bde03 <https://github.com/symfony/symfony-docs/commit/f0bde034a600179024847fc54fa0dcdcdd9299be>`_ #4075 Fixed typo in the yml validation (timothymctim)
+
+Minor Documentation Changes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- `e9d317a <https://github.com/symfony/symfony-docs/commit/e9d317a1fc653636605a207ed5cb2c4880860658>`_ #4160 [Reference] consistent & complete config examples (xabbuh)
+- `3e68ee7 <https://github.com/symfony/symfony-docs/commit/3e68ee78c2a7288ba0bf9264833c22c3c1b28aff>`_ #4152 Adding 'attr' option to the Textarea options list (ronanguilloux)
+- `a7f3297 <https://github.com/symfony/symfony-docs/commit/a7f329772d6cf47184e6a9fd35478107cd3d9e91>`_ #4136 [Reference] fix from suffix to prefix (xabbuh)
+- `c4eb628 <https://github.com/symfony/symfony-docs/commit/c4eb628781d5cb487d15e7effed51efbe6f64f13>`_ #4130 A set of small typos (Baptouuuu)
+- `236d8e0 <https://github.com/symfony/symfony-docs/commit/236d8e08b5d282948a42c169f0090faed66c42fc>`_ #4137 fixed directive syntax (WouterJ)
+- `6e90520 <https://github.com/symfony/symfony-docs/commit/6e90520d4c8ea72a90d910b0adac917e33e5d963>`_ #4135 [#3940] Adding php example for an array of emails (weaverryan)
+- `b37ee61 <https://github.com/symfony/symfony-docs/commit/b37ee61d264fa81811ff90e3f492708f0f70b58a>`_ #4132 Use proper way to reference a doc page for legacy sessions (Baptouuuu)
+- `189a123 <https://github.com/symfony/symfony-docs/commit/189a1234bbf0630004c4ad76a9e535e382c354ce>`_ #4129 [Components] consistent & complete config examples (xabbuh)
+- `5ab5246 <https://github.com/symfony/symfony-docs/commit/5ab5246c2499c2906239750f39a172a8afa496f4>`_ #4127 Second part of #3848 (WouterJ)
+- `46f3108 <https://github.com/symfony/symfony-docs/commit/46f3108fee8f6a514b4376ad9dddb37aa6e5342d>`_ #4126 Rebased #3848 (WouterJ)
+- `84e6e7f <https://github.com/symfony/symfony-docs/commit/84e6e7f69f7fc5693075012d69509ad437f455ff>`_ #4114 [Book] consistent and complete config examples (xabbuh)
+- `03fcab1 <https://github.com/symfony/symfony-docs/commit/03fcab142743528643ee04895b2287420e2a1d76>`_ #4112 [Contributing][Documentation] add order of translation formats (xabbuh)
+- `650120a <https://github.com/symfony/symfony-docs/commit/650120ada5c432d2a2a3f54386c88f180d0f43b3>`_ #4002 added Github teams for the core team (fabpot)
+- `10792c3 <https://github.com/symfony/symfony-docs/commit/10792c330506ad2366147f36410233341e86701e>`_ #3959 [book][cache][tip] added cache annotations. (aitboudad)
+- `ebaed21 <https://github.com/symfony/symfony-docs/commit/ebaed21ff67074d02d5812060fc9d5f85ec237e1>`_ #3944 Update dbal.rst (bpiepiora)
+- `16e346a <https://github.com/symfony/symfony-docs/commit/16e346ad07c8139b20bbc10600ceed1563fbe1f2>`_ #3890 [Components][HttpFoundation] use a placeholder for the constructor arguments (xabbuh)
+- `7bb4f34 <https://github.com/symfony/symfony-docs/commit/7bb4f3447d0b0a7bd524dfbb89dc4a17f8090a8b>`_ #4115 [Documentation] [Minor] Changes foobar.net in example.com (magnetik)
+- `12d0b82 <https://github.com/symfony/symfony-docs/commit/12d0b825f158639928e0ea9acc9535cc4ffbd676>`_ #4113 tweaks to the new reverse proxy/load balancer chapter (xabbuh)
+- `4cce133 <https://github.com/symfony/symfony-docs/commit/4cce133b5b55fce7cafa26257e530838f587a814>`_ #4057 Update introduction.rst (carltondickson)
+- `26141d6 <https://github.com/symfony/symfony-docs/commit/26141d68dfda0959ad75e17c5db51de399f97975>`_ #4080 [Reference] order form type options alphabetically (xabbuh)
+- `7806aa7 <https://github.com/symfony/symfony-docs/commit/7806aa7de543baf167d445dc5901121a2e460599>`_ #4117 Added a note about the automatic handling of the memory spool in the CLI (stof)
+- `5959b6c <https://github.com/symfony/symfony-docs/commit/5959b6c64156e0e6dfca060412358b12c5ea117b>`_ #4101 [Contributing] extended Symfony 2.4 maintenance (xabbuh)
+- `e2056ad <https://github.com/symfony/symfony-docs/commit/e2056ad7db522e117c5f310690c993a2a5a3a725>`_ #4072 [Contributing][Code] add note on Symfony SE forks for bug reports (xabbuh)
+- `b8687dd <https://github.com/symfony/symfony-docs/commit/b8687dd452ac200adbc8aee347c9235329f1f265>`_ #4091 Put version into quotes, otherwise it fails in ZSH (dannykopping)
+- `665c091 <https://github.com/symfony/symfony-docs/commit/665c0913e52470f4b4b8070a52462285cad62863>`_ #4087 Typo (tvlooy)
+- `f95bbf3 <https://github.com/symfony/symfony-docs/commit/f95bbf34c990d3d7e06fa48d790f06ff5814563e>`_ #4023 [Cookbook][Security] usage of a non-default entity manager in an entity user provider (xabbuh)
+- `27b1003 <https://github.com/symfony/symfony-docs/commit/27b10033d12a247f3af22333e7854d402ff3139d>`_ #4074 Fixed (again) a typo: Toolbet --> Toolbelt (javiereguiluz)
+- `c97418f <https://github.com/symfony/symfony-docs/commit/c97418fdb030960c5f0dd10a635a4d49579c4216>`_ #4073 Reworded bundle requirement (WouterJ)
+- `e5d5eb8 <https://github.com/symfony/symfony-docs/commit/e5d5eb8ae4307c17b3e2e157eafb4d5d32d0f557>`_ #4066 Update inherit_data_option.rst (Oylex)
+- `9c08572 <https://github.com/symfony/symfony-docs/commit/9c08572fc55a8dff83ff7e3c985f3e66936d57af>`_ #4064 Fixed typo on tag service (saro0h)
+
+July, 2014
+----------
+
+New Documentation
+~~~~~~~~~~~~~~~~~
+
+- `1b4c1c8 <https://github.com/symfony/symfony-docs/commit/1b4c1c86a3e4729e1a6ce226963ac05577b8ab8f>`_ #4045 Added a new "Deploying to Heroku Cloud" cookbook article (javiereguiluz)
+- `f943eee <https://github.com/symfony/symfony-docs/commit/f943eee70cf81b90a598d94f400a3723216fe726>`_ #4009 Remove "Controllers extends ContainerAware" best practice (tgalopin)
+- `eae9ad0 <https://github.com/symfony/symfony-docs/commit/eae9ad037ed402752238e4eb1c9c0b2fdc443d7d>`_ #3875 Added a note about customizing a form with more than one template (javiereguiluz)
+- `2ae4f34 <https://github.com/symfony/symfony-docs/commit/2ae4f34a1e0afe699ccaacf2740440a0752a9a99>`_ #3746 [Validator] Disallow empty file in FileValidator (megazoll)
+- `1938c2f <https://github.com/symfony/symfony-docs/commit/1938c2f9f7dbf770d694d1cc976fde5e519ba47c>`_ #3724 Updated ISBN validator docs (sprain)
+- `7c71b18 <https://github.com/symfony/symfony-docs/commit/7c71b188f4fae43c1ff141b2d84f887b131d2b71>`_ #2952 Enabling profiler in test (danieledangeli)
+- `d6787b7 <https://github.com/symfony/symfony-docs/commit/d6787b7b64ed6d20cafee0134a99e590bee6102b>`_ #3989 adde stof as a merger (fabpot)
+- `4a9e49e <https://github.com/symfony/symfony-docs/commit/4a9e49ef142fdeeb5523dbdcf73503ac602373e7>`_ #3946 DQL custom functions on doctrine reference page (healdropper)
+- `2b2d9d3 <https://github.com/symfony/symfony-docs/commit/2b2d9d348a7d9c46b9a5b04ef2cd088151668886>`_ #3972 Added PSR-4 to Class Loaders list (dosten)
+
+Fixed Documentation
+~~~~~~~~~~~~~~~~~~~
+
+- `1b695b5 <https://github.com/symfony/symfony-docs/commit/1b695b52a3f8094daf18d212a124a6050f2fad1a>`_ #4063 fix parent form types (xabbuh)
+- `7901005 <https://github.com/symfony/symfony-docs/commit/7901005f37d223cd4541648131bccc0e4bd687d5>`_ #4048 $this->request replaced by $request (danielsan)
+- `f6123f1 <https://github.com/symfony/symfony-docs/commit/f6123f1bb06d624fc2d0506bcf6f4016c0b3e371>`_ #4031 Update form_events.rst (redstar504)
+- `99932cf <https://github.com/symfony/symfony-docs/commit/99932cf0f98c15e0504a41867046b374305865d3>`_ #4010 [Console] Fixed documentation for ProgressBar (VasekPurchart)
+- `06f8c31 <https://github.com/symfony/symfony-docs/commit/06f8c3157f76da36847a70d132c61971ac72dc1e>`_ #4012 Fix xml route configuration for routing condition (xavierbriand)
+- `a2a628f <https://github.com/symfony/symfony-docs/commit/a2a628f0b2d60878041cd2a008f9ddfd9a471408>`_ #4025 added CVE 2014-4931 (fabpot)
+- `a1435e5 <https://github.com/symfony/symfony-docs/commit/a1435e57fd95e14ffff171f797133a1c52569cb1>`_ #3998 [Console] Fixed QuestionHelper examples (florianv)
+- `b32f9f2 <https://github.com/symfony/symfony-docs/commit/b32f9f2981ae3d63d547c07cee7f0cb03dc7db5a>`_ #3771 Fix function example in expression language component (raulfraile)
+- `eb813a5 <https://github.com/symfony/symfony-docs/commit/eb813a563c564358ba82253ea667516cd3e7191d>`_ #3979 removed invalid processors option (ricoli)
+
+Minor Documentation Changes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- `a4bdb97 <https://github.com/symfony/symfony-docs/commit/a4bdb97a92dd54709cd85be8e9998a6ced6974da>`_ #4070 Added a note about permissions in the Quick Tour (javiereguiluz)
+- `a7fe00f <https://github.com/symfony/symfony-docs/commit/a7fe00fedea3ba89089a2de6fb54970cdbe2440e>`_ #4068 Remove diff info from cookbook/security/voters.rst (pmartelletti)
+- `b3f15b2 <https://github.com/symfony/symfony-docs/commit/b3f15b2dc78c0593e6db09311c0c79eba68a97f0>`_ #4059 eraseCredentials method typo (danielsan)
+- `44091b1 <https://github.com/symfony/symfony-docs/commit/44091b132c1007535ff3030a64126751486982cd>`_ #4053 Update doctrine.rst (sr972)
+- `b06ad60 <https://github.com/symfony/symfony-docs/commit/b06ad6041164479c049ae4c202b13b3f248c3bed>`_ #4052 [Security] [Custom Provider] Use properties on WebserviceUser (entering)
+- `a834a7e <https://github.com/symfony/symfony-docs/commit/a834a7e883e78005ed41a6cea0dcee058ed85b1f>`_ #4042 [Cookbook] apply headline guidelines to the cookbook articles (xabbuh)
+- `f25faf3 <https://github.com/symfony/symfony-docs/commit/f25faf3ed3facd3812b743288465ee9ca25397a4>`_ #4046 Fixed a syntax error (javiereguiluz)
+- `3c660d1 <https://github.com/symfony/symfony-docs/commit/3c660d13390cc1cf05e9d0be98bbce847002c05b>`_ #4044 Added editorconfig (WouterJ)
+- `ae3ec04 <https://github.com/symfony/symfony-docs/commit/ae3ec048e8583082928bffadb079d1391e888f0f>`_ #4041 [Cookbook][Deployment] link to the deployment index (xabbuh)
+- `2e4fc7f <https://github.com/symfony/symfony-docs/commit/2e4fc7f3a5dd4caa4ee5cbfade6989e71bcda123>`_ #4030 enclose YAML strings containing % with quotes (xabbuh)
+- `9520d92 <https://github.com/symfony/symfony-docs/commit/9520d9299e6ddbc19985e0ed322349c70d89cdc7>`_ #4038 Update rendered tag (kirill-oficerov)
+- `f5c2602 <https://github.com/symfony/symfony-docs/commit/f5c260219f8e7df969493df2fe2d2feb1fc97e19>`_ #4036 Update page_creation.rst (redstar504)
+- `c2eda93 <https://github.com/symfony/symfony-docs/commit/c2eda939ad8681721cd1b12bcedadd1faf294725>`_ #4034 Update internals.rst (redstar504)
+- `a5ad0df <https://github.com/symfony/symfony-docs/commit/a5ad0dfbf9ad2dcc84e7f9c6de73c8bad2a89e2f>`_ #4035 Update version in Rework your Patch section (yguedidi)
+- `eed8d64 <https://github.com/symfony/symfony-docs/commit/eed8d646ad134bba1002f98800cab46d06241a05>`_ #4026 Updating Symfony version from 2.4 to 2.5 (danielsan)
+- `12752c1 <https://github.com/symfony/symfony-docs/commit/12752c1decd5ec5a3bce960c094f45738122152f>`_ #4013 Removed wrong reference to cookbook (gquemener)
+- `ec832dc <https://github.com/symfony/symfony-docs/commit/ec832dc4eadbe5afdfb5f39994b69748b733a85b>`_ #3994 [Console] Fix Console component $app to $this and use of getHelper() method (eko)
+- `d8b037a <https://github.com/symfony/symfony-docs/commit/d8b037a989c1581ae671e81284d0d758254d8e1e>`_ #4019 Update twig_reference.rst (redstar504)
+- `7ea87e6 <https://github.com/symfony/symfony-docs/commit/7ea87e63e3417c59e47972b9cf12ca76cce4b195>`_ #4016 Fixed the format of one letter-based list (javiereguiluz)
+- `579a873 <https://github.com/symfony/symfony-docs/commit/579a8732299dd944998ab3fee4fa738a3c45cea2>`_ #4015 Fixed bad indenting (the list was treated as a blockquote) (javiereguiluz)
+- `4669620 <https://github.com/symfony/symfony-docs/commit/466962051e0753557fc75d9d449083d68ae48992>`_ #4004 use GitHub instead of Github (xabbuh)
+- `a3fe74f <https://github.com/symfony/symfony-docs/commit/a3fe74f4fad9f691dc570fb9234acd15bd6ccfdc>`_ #3993 [Console] Fix Console component getHelperSet()->get() to getHelper() (eko)
+- `a41af7e <https://github.com/symfony/symfony-docs/commit/a41af7e0f4a10cf7a6230598fd955dab2559935e>`_ #3880 document the mysterious abc part of the header (greg0ire)
+- `90773b0 <https://github.com/symfony/symfony-docs/commit/90773b03425388542d1b0face5368eb4c47ce3b8>`_ #3990 Move the section about collect: false to the cookbook entry (weaverryan)
+- `2ae8281 <https://github.com/symfony/symfony-docs/commit/2ae82816556478c75ba9873589b2d77987156c36>`_ #3864 plug rules for static methods (cordoval)
+- `d882cc0 <https://github.com/symfony/symfony-docs/commit/d882cc0e0b41e8c49187854d40dfb0963b429939>`_ #3988 fix typos. (yositani2002)
+- `b67a059 <https://github.com/symfony/symfony-docs/commit/b67a059d5ff8c45482df135ed8dda5b3bcc81f3a>`_ #3986 Rebased #3982 - Some fixes (WouterJ)
+- `801c756 <https://github.com/symfony/symfony-docs/commit/801c7565a3e6c0d440fb86f1b2fd4a076ff4399c>`_ #3977 [WCM] removed call to deprecated getRequest() method (Baptouuuu)
+- `4c1d4ae <https://github.com/symfony/symfony-docs/commit/4c1d4ae506a7dc68fad57ddf6cc25c17a00169a4>`_ #3968 Proofreading the new Azure deployment article (weaverryan)
+
 June, 2014
 ----------
 
