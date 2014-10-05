@@ -1,7 +1,7 @@
 Pogled
 ======
 
-Po branju prvega dela tega vodiča ste se odločili, da je Symfony2
+Po branju prvega dela tega vodiča ste se odločili, da je Symfony
 vreden dodatnih 10 minut. V tem drugem delu se boste naučili več o
 hitrem, fleksibilnem in varnem motorju predlog `Twig_` za PHP. Twig naredi vaše
 predloge bolj bralne in jedrnate; naredi jih tudi bolj prijazne za spletne
@@ -269,14 +269,14 @@ akcij je zelo enostavno organizirati vaše predloge na logičen in
 razširljiv način. Vendar, če vam Twig ni udoben, lahko vedno
 uporabite PHP predloge znotraj Symfony brez kakršnih koli težav.
 
-S Symfony2 ste delali samo 20 minut, vendar že lahko
-naredite z njim neverjetne stvari. To je moč Symfony2. Učenje osnov je enostavno
+S Symfony ste delali samo 20 minut, vendar že lahko
+naredite z njim neverjetne stvari. To je moč Symfony. Učenje osnov je enostavno
 in se boste kmalu naučili, da je ta enostavnost skrita
 pod zelo fleksibilno arhitekturo.
 
 Vendar že prehitevam samega sebe. Najprej se boste morali naučiti več o krmilniku
 in to je točno tema :doc:`naslednjega dela tega vodiča <the_controller>`.
-Pripravljeni na novih 10 minut s Symfony2?
+Pripravljeni na novih 10 minut s Symfony?
 
 .. _Twig:               http://twig.sensiolabs.org/
 .. _dokumentacija Twig: http://twig.sensiolabs.org/documentation

@@ -3,13 +3,13 @@ Arhitektura
 
 Ste moj junak! Kdo bi si mislil, da boste tu še vedno po prvih treh delih?
 Vaši dosežki bodo kmalu dobro nagrajeni. Prvi trije deli niso podrobno
-pogledali v arhitekturo ogrodja. Ker le ta naredi Symfony2 izstopajočega
+pogledali v arhitekturo ogrodja. Ker le ta naredi Symfony izstopajočega
 iz množice ogrodij, si sedaj poglejmo arhitekturo.
 
 Razumevanje strukture direktorijev
 ----------------------------------
 
-Struktura direktorijev Symfony2 :term:`application` je nekoliko fleksibilna,
+Struktura direktorijev Symfony :term:`application` je nekoliko fleksibilna,
 vendar priporočena struktura je sledeča:
 
 * ``app/``:    nastavitve aplikacije;
@@ -64,15 +64,14 @@ Lahko jih shranite kamorkoli želite, globalno na vaš strežnik ali lokalno v v
 Razumevanje sistema paketov
 ---------------------------
 
-Ta sekcija uvaja eno izmed najboljših in najmočnejših lastnosti Symfony2
-This section introduces one of the greatest and most powerful features of,
+Ta sekcija uvaja eno izmed najboljših in najmočnejših lastnosti Symfony
 sistem :term:`bundle`-ov.
 
 Paket (bundle) je neke vrste vtičnik v drugo programsko opremo. Torej zakaj
-se imenuje *paket* in ne *vtičnik*? To je zato, ker je *vse* paket v Symfony2,
+se imenuje *paket* in ne *vtičnik*? To je zato, ker je *vse* paket v Symfony,
 od lastnosti jedra ogrodja do kode, ki jo pišete za vašo aplikacijo.
 
-Paketi so prvorazredni elementi v Symfony2. To vam ponuja fleksibilnost,
+Paketi so prvorazredni elementi v Symfony. To vam ponuja fleksibilnost,
 da uporabite vnaprej zgrajene lastnosti zapakirane v tretje osebne pakete ali za distribuiranje
 vaših lastnih paketov. Omogoča vam, da enostavno uporabite in izberete katere lastnosti bodo omogočene
 v vaši aplikaciji in jih optimizirati, kot želite. Na koncu dneva,
@@ -232,7 +231,7 @@ Logična imena datotek
 .....................
 
 Ko želite referenco datoteke iz paketa, uporabite ta zapis:
-``@BUNDLE_NAME/path/to/file``; Symfony2 bo rešil ``@BUNDLE_NAME``
+``@BUNDLE_NAME/path/to/file``; Symfony bo rešil ``@BUNDLE_NAME``
 v pravo pot do paketa. Na primer, logična pot
 ``@AcmeDemoBundle/Controller/DemoController.php`` bi bila pretvorjena v
 ``src/Acme/DemoBundle/Controller/DemoController.php``, ker Symfony ve
@@ -266,7 +265,7 @@ najprej pogledal za ``WelcomeController`` razred v AcmeNewBundle in če
 ne obstaja, potem pogleda znotraj AcmeDemoBundle. To pomeni, da en paket
 lahko prepiše skoraj katerikoli del drugega paketa!
 
-Sedaj razumete zakaj je Symfony2 tako fleksibilen? Delite vaše pakete med aplikacijami,
+Sedaj razumete zakaj je Symfony tako fleksibilen? Delite vaše pakete med aplikacijami,
 shranite jih lokalno ali globalno, vaša izbira.
 
 .. _using-vendors:
@@ -276,17 +275,17 @@ Uporaba izdelovalcev (vendors)
 
 Možnosti so, da bo vaša aplikacija odvisna od tretje-osebnih knjižnic. Te
 bi morale biti shranjene v ``vendor/`` direktoriju. Ta direktorij že vsebuje
-Symfony2 knjižnice, knjižnico SwiftMailer, Doctrine ORM, Twig sistem predlog in
+Symfony knjižnice, knjižnico SwiftMailer, Doctrine ORM, Twig sistem predlog in
 nekatere ostale knjižnice tretjih oseb in paketov.
 
 Razumevanje predpomnilnika in dnevnikov
 ---------------------------------------
 
-Symfony2 je verjetno eno najhitrejših celotnih ogrodij naokrog. Vendar kako
+Symfony je verjetno eno najhitrejših celotnih ogrodij naokrog. Vendar kako
 je lahko tako hitro, če pa razčlenjuje in interpretira desetine YAML in XML datotek
 za vsak zahtevek? Hitros je delno zaradi njegovega sistema predpomnilnika. Aplikacijske
 nastavitve so samo razčlenjene za prvi zahtevek in potem prevedene v enostavno
-PHP kodo shranjeno v ``app/cache`` direktoriju. V razvojnem okolju je Symfony2 dovolj
+PHP kodo shranjeno v ``app/cache`` direktoriju. V razvojnem okolju je Symfony dovolj
 pameten, da sprazni predpomnilnik, ko spremenite datoteko. Vendar v produkcijskem okolju,
 za pohitritev stvari, je vaša dolžnost, da počistite predpomnilnik, ko posodobite vašo kodo ali spremenite njene
 nastavitve.
@@ -318,12 +317,12 @@ Zaključne misli
 ---------------
 
 Recite, da sem nor, vendar po prebranju tega dela, bi vam moralo biti že udobno
-s premikanjem stvari okrog in narediti, da Symfony dela za vas. Vse v Symfony2
+s premikanjem stvari okrog in narediti, da Symfony dela za vas. Vse v Symfony
 je načrtovano, da vam ne hodi v napoto. Torej, imejte proste roke pri preimenovanju,
 premikanju direktorijev okoli, da bo ustrezno.
 
 In to je vse za hiter pregled. Iz testiranja do pošiljanja mailov, se morate še vedno
-naučiti veliko, da postanete Symfony2 mojster. Pripravljeni, da se zakopljete v te teme
+naučiti veliko, da postanete Symfony mojster. Pripravljeni, da se zakopljete v te teme
 zdaj? Ne glejte več - pojdite na uradno :doc:`/book/index` in izberite katerokoi
 temo želite.
 

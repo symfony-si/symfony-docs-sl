@@ -1,30 +1,32 @@
 Velika slika
 ============
 
-Pričnite uporabljati Symfony2 v 10-ih minutah! To poglavje vas bo vodilo skozi
-nekatere najbolj pomembne koncepte za Symfony2 in vam razložilo, kako lahko pričnete
+Pričnite uporabljati Symfony v 10-ih minutah! To poglavje vas bo vodilo skozi
+nekatere najbolj pomembne koncepte za Symfony in vam razložilo, kako lahko pričnete
 hitro s prikazom enostavnega projekta v delovanju.
 
-Če ste že uporabljali spletno ogrodje, se boste s Symfony2 počutili kot doma.
+Če ste že uporabljali spletno ogrodje, se boste s Symfony počutili kot doma.
 Drugače pa dobrodošli v novem načinu razvoja spletnih aplikacij.
 
-Namestitev Symfony2
--------------------
+.. _installing-symfony2:
+
+Namestitev Symfony
+------------------
 
 Najprej preverite, da verzija PHP nameščena na vašem računalniku zadostuje za zahteve
-Symfony2: 5.3.3 ali več. Nato odprite ukazno vrstico in izvršite sledeči
-ukaz za namestitev najnovejše verzije Symfony2 v direktorij
+Symfony: 5.3.3 ali več. Nato odprite ukazno vrstico in izvršite sledeči
+ukaz za namestitev najnovejše verzije Symfony v direktorij
 ``myproject/``:
 
 .. code-block:: bash
 
-    $composer create-project symfony/framework-standard-edition myproject/ ~2.5
+    $composer create-project symfony/framework-standard-edition myproject/ "~2.3"
 
 
 .. note::
 
     `Composer`_ je upravljalnik paketov, ki je uporabljen v modernih PHP aplikacijah in
-    edini priporočljivi način za namestitev Symfony2. Za namestitev Composer-ja na vaš
+    edini priporočljivi način za namestitev Symfony. Za namestitev Composer-ja na vaš
     Linux ali Mac sistem, izvršite sledeče ukaze:
 
     .. code-block:: bash
@@ -34,32 +36,29 @@ ukaz za namestitev najnovejše verzije Symfony2 v direktorij
 
     Za namestitev Composer-ja na Windows sistem prenesite `izvršljivi namestitveni program`_.
 
-Bodite pozorni, da ko prvič nameščate Symfony2, lahko traja nekaj minut, da
+Bodite pozorni, da ko prvič nameščate Symfony, lahko traja nekaj minut, da
 se prenesejo vse njegove komponente. Na koncu namestitvenega procesa,
-vas bo namestitveni program vprašal štiri vprašanja:
+vas bo namestitveni program vprašal tri vprašanja:
 
-1. **Would you like to use Symfony 3 directory structure? [y/N]** Prihajajoča
-   verzija Symfony 3 bo spremenila privzeto strukturo direktorijev za aplikacije
-   Symfony. Če želite stestirati to novo strukturo, vtipkajte ``y``.
-   Da sledite temu vodiču, pritisnite ``<Enter>`` tipko, da sprejmete
-   privzeto ``N`` vrednost in uporabljate privzeto Symfoyn2 strukturo.
-2. **Would you like to install Acme demo bundle? [y/N]** Symfony verzije pred
+1. **Would you like to install Acme demo bundle? [y/N]** Symfony verzije pred
    2.5 vključujejo demo aplikacijo za testiranje nekaterih lastnosti
    ogrodja. Vendar ta demo aplikacija je uporabna samo za nove uporabnike,
    njena namestitev pa je opcijska. Da sledite temu vodiču, vtipkajte
    tipko ``y``, da namestite demo aplikacijo.
-3. **Some parameters are missing. Please provide them.** Symfony2 vas vpraša za
+2. **Some parameters are missing. Please provide them.** Symfony vas vpraša za
    vrednost vseh nastavitvenih parametrov. Za ta prvi projekt
    lahko varno ignorirate to nastavitev s ponavljajočim pritiskanjem tipke
    ``<Enter>``.
-4. **Do you want to remove the existing VCS (.git, .svn..) history? [Y,n]?**
+3. **Do you want to remove the existing VCS (.git, .svn..) history? [Y,n]?**
    Razvojna zgodovina velikih projektov kot je Symfony lahko zavzame veliko
    prostora na disku. Pritisnite tipko ``<Enter>`` za varno odstranitev vseh teh podatkov zgodovine.
 
-Poganjanje Symfony2
--------------------
+.. _running-symfony2:
 
-Preden prvič poženete Symfony2, izvršite sledeči ukaz, da
+Poganjanje Symfony
+------------------
+
+Preden prvič poženete Symfony, izvršite sledeči ukaz, da
 se prepričate, da vaš sistem zadosti vsem tehničnim zahtevam:
 
 .. code-block:: bash
@@ -74,6 +73,10 @@ za pogon Symfony:
 
     $ php app/console server:run
 
+.. seealso::
+
+    Preberite več o notranjem strežniku :doc:`v receptih </cookbook/web_server/built_in>`.
+
 Če dobite napako `There are no commands defined in the "server" namespace.`,
 potem verjetno uporabljate PHP 5.3. To je v redu! Vendar vgrajeni spletni strežnik je
 na voljo samo za PHP 5.4.0 ali več. Če imate starešo verzijo PHP ali
@@ -81,11 +84,11 @@ na voljo samo za PHP 5.4.0 ali več. Če imate starešo verzijo PHP ali
 članek :doc:`/cookbook/configuration/web_server_configuration`.
 
 Odprite vaš brskalnik in obiščite URL ``http://localhost:8000``, da vidite
-pozdravno stran Symfony2:
+pozdravno stran Symfony:
 
 .. image:: /images/quick_tour/welcome.png
    :align: center
-   :alt:   Symfony2 Welcome Page
+   :alt:   Symfony Welcome Page
 
 Razumevanje osnov
 -----------------
@@ -96,7 +99,7 @@ podatkovne baze, HTML značk in poslobne logike v isti skripti. Za doseg tega ci
 s Symfony, se boste najprej morali naučiti nekaj osnovnih konceptov in izrazov.
 
 Symfony prihaja z nekaj primerov kode, ki jo lahko uporabite, da se naučite več o njegovih
-glavnih konceptih. Pojdite na sledeči URL, da vas Symfony2 pozdravi (zamenjajte
+glavnih konceptih. Pojdite na sledeči URL, da vas Symfony pozdravi (zamenjajte
 *Fabien* z vašim prvim imenom):
 
 .. code-block:: text
@@ -105,6 +108,14 @@ glavnih konceptih. Pojdite na sledeči URL, da vas Symfony2 pozdravi (zamenjajte
 
 .. image:: /images/quick_tour/hello_fabien.png
    :align: center
+
+.. note::
+
+    Namesto pozdravne strani, lahko vidite prazno stran ali stran z napako.
+    To povzročajo napačne nastavitve pravic direktorija. Obstoja nekaj
+    možnih rešitev odvisno od vašega operacijskega sistema. Vse od njih so
+    razložene v sekciji :ref:`Nastavitve pravic <book-installation-permissions>`
+    uradne knjige.
 
 Kaj se tukaj dogaja? Poglejte vsak del URL-ja:
 
@@ -121,7 +132,7 @@ Vaša odgovornost kot razvijalec je pisanje kode, ki preslika uporabnikov
 Usmerjanje
 ~~~~~~~~~~
 
-Symfony2 usmeri zahtevek do kode, ki ga uredi s poskušanjem ujemanja
+Symfony usmeri zahtevek do kode, ki ga uredi s poskušanjem ujemanja
 zahtevanega URL-ja (t.j. virtualna pot) proti nekaterim nastavljenim potem. Demo
 poti so definirane v ``app/config/routing_dev.yml`` nastavitveni datoteki:
 
@@ -159,7 +170,7 @@ naučili točno, kaj to pomeni.
 
     K dodatku datotekam YAML, so lahko usmeritve nastavljene v XML ali PHP datotekah
     in so celo lahko vključene v PHP anotacijah. Ta fleksibilnost je ena
-    glavnih lastnosti Symfony2, ogrodja, ki nikoli ne nalaga določenega
+    glavnih lastnosti Symfony, ogrodja, ki nikoli ne nalaga določenega
     nastavitvenega formata na vas.
 
 Krmilniki
@@ -178,7 +189,7 @@ krmilnik lahko ustvari odziv ročno, na osnovi zahtevka::
 
     return new Response('Hello '.$name);
 
-Symfony2 izbere krmilnik na osnovi ``_controller`` vrednosti iz nastavitev poti:
+Symfony izbere krmilnik na osnovi ``_controller`` vrednosti iz nastavitev poti:
 ``AcmeDemoBundle:Welcome:index``. Ta niz je
 krmilnikovo *logično ime*, in se sklicuje na ``indexAction`` metodo iz
 ``Acme\DemoBundle\Controller\WelcomeController`` razreda::
@@ -298,17 +309,17 @@ predlogo (ali ``AcmeDemoBundle:Demo:hello.html.twig`` če uporabljate logično i
         <h1>Hello {{ name }}!</h1>
     {% endblock %}
 
-Privzeto, Symfony2 uporablja `Twig`_ kot svoj motor predlog, vendar lahko uporabite tudi običajne
+Privzeto, Symfony uporablja `Twig`_ kot svoj motor predlog, vendar lahko uporabite tudi običajne
 PHP predloge, če to izberete.
 :doc:`Drugi del tega vodiča</quick_tour/the_view>` bo predstavil, kako
-predloge delujejo v Symfony2.
+predloge delujejo v Symfony.
 
 Paketi
 ~~~~~~
 
 Verjetno ste se spraševali, zakaj je beseda paket (:term:`Bundle`) uporabljena v tako veliko
 imenih do sedaj. Vsa koda, ki jo pišete za vašo aplikacijo je organizirana v paketih.
-V Symfony2 primeru je paket strukturiran skupek datotek (PHP datotek, stilov, JavaScript-a,
+V Symfony primeru je paket strukturiran skupek datotek (PHP datotek, stilov, JavaScript-a,
 slik, ...), ki implementirajo neko lastnost (blog, forum, ...) in ki so lahko enostavno deljene
 z drugimi razvijalci. Do sedaj ste ravnali z enim paketom, AcmeDemoBundle. Naučili se boste več
 o paketih v :doc:`zadnjem delu tega vodiča</quick_tour/the_architecture>`.
@@ -318,9 +329,9 @@ o paketih v :doc:`zadnjem delu tega vodiča</quick_tour/the_architecture>`.
 Delo z okolji
 -------------
 
-Sedaj, ko imate boljše razumevanje, kako Symfony2 deluje, si podrobneje poglejte
-na konec katerekoli Symfony2 izpisane strani. Morali bi opaziti majhno vrstico
-s Symfony2 logotipom. To je "Web Debug Toolbar" in je najboljši prijatelj Symfony2
+Sedaj, ko imate boljše razumevanje, kako Symfony deluje, si podrobneje poglejte
+na konec katerekoli Symfony izpisane strani. Morali bi opaziti majhno vrstico
+s Symfony logotipom. To je "Web Debug Toolbar" in je najboljši prijatelj Symfony
 razvijalca!
 
 .. image:: /images/quick_tour/web_debug_toolbar.png
@@ -343,7 +354,7 @@ Kaj je okolje?
 ~~~~~~~~~~~~~~
 
 Izraz :term:`Okolje` predstavlja skupino nastavitev, ki so uporabljene za poganjanje
-vaše aplikacije. Symfony2 privzeto definira dve okolji: ``dev``
+vaše aplikacije. Symfony privzeto definira dve okolji: ``dev``
 (primerno, ko razvijate aplikacijo lokalno) in ``prod`` (optimizirano,
 ko izvršujete aplikacijo na produkciji).
 
@@ -377,7 +388,7 @@ boste dobili napako 404.
 
     Če namesto uporabe PHP-jevega vgrajenega spletnega strežnika uporabljate Apache z
     omogočenim ``mod_rewrite`` in izkoristite prednosti datoteke ``.htaccess``,
-    ki jo Symfony2 ponuja v ``web/``, lahko celo izpustite del ``app.php``
+    ki jo Symfony ponuja v ``web/``, lahko celo izpustite del ``app.php``
     URL-ja. Privzeta ``.htaccess`` kaže vse zahtevke v prednji krmilnik
     ``app.php``.
 
@@ -391,9 +402,9 @@ Za več podrobnosti o okoljih glejte
 Zaključne misli
 ---------------
 
-Čestitamo! Za pokušino ste dobili vašo prvo Symfony2 kodo. Ni bilo tako težko, kaj?
-Na voljo za odkriti je še več, vendar bi morali že videti, kako naredi Symfony2 res enostavno
-implementacijo spletnih strani boljše in hitrejše. Če ste se željni naučiti več o Symfony2,
+Čestitamo! Za pokušino ste dobili vašo prvo Symfony kodo. Ni bilo tako težko, kaj?
+Na voljo za odkriti je še več, vendar bi morali že videti, kako naredi Symfony res enostavno
+implementacijo spletnih strani boljše in hitrejše. Če ste se željni naučiti več o Symfony,
 se poglobite v naslednjo sekcijo: ":doc:`Pogled<the_view>`".
 
 .. _`Composer`:                      http://getcomposer.org/

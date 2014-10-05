@@ -1,7 +1,7 @@
 Krmilnik
 ========
 
-Še vedno tu po prvih dveh delih? Postajate Symfony2 odvisnik!
+Še vedno tu po prvih dveh delih? Postajate Symfony odvisnik!
 Brez odlašanja, odkrijte kaj krmilnik lahko naredi za vas.
 
 Uporaba oblik
@@ -10,7 +10,7 @@ Uporaba oblik
 Dandanes bi morale biti spletne aplikacije zmožne dostaviti z več kot
 samo HTML stranmi. Od XML za RSS feeds ali spletne storitve, do JSON za
 Ajax zahtevke, je na izbiro veliko različnih oblik. Podpora teh oblik
-v Symfony2 je enostavna. Uredite pot z dodajanjem privzetih vrednosti za
+v Symfony je enostavna. Uredite pot z dodajanjem privzetih vrednosti za
 ``xml`` za ``_format`` spremenljivko::
 
     // src/Acme/DemoBundle/Controller/DemoController.php
@@ -29,7 +29,7 @@ v Symfony2 je enostavna. Uredite pot z dodajanjem privzetih vrednosti za
     }
 
 Z uporabo oblike zahtevka (kot je definiran s ``_format`` spremenljivko),
-Symfony2 tu avtomatsko izbere pravo predlogo ``hello.xml.twig``:
+Symfony tu avtomatsko izbere pravo predlogo ``hello.xml.twig``:
 
 .. code-block:: xml+php
 
@@ -38,7 +38,7 @@ Symfony2 tu avtomatsko izbere pravo predlogo ``hello.xml.twig``:
         <name>{{ name }}</name>
     </hello>
 
-To je vse okrog tega. Za standardne oblike, Symfony2 tudi
+To je vse okrog tega. Za standardne oblike, Symfony tudi
 avtomatsko izbere najboljšo ``Content-Type`` glavo za odziv. Če
 želite podpirati različne oblike za eno akcijo, raje uporabite ``{_format}``
 lokacijo v usmerni poti::
@@ -134,9 +134,9 @@ V predlogi lahko dostopate do objekta ``Request`` tudi preko
 Pridobitev podatkov v sejo
 --------------------------
 
-Tudi če je HTTP protokol brez stanja, Symfony2 ponuja lep objekt za seje,
+Tudi če je HTTP protokol brez stanja, Symfony ponuja lep objekt za seje,
 ki predstavlja klienta (ali pravega uporabnika z brskalnikom, bot-a ali
-spletni servis). Med dvema zahtevkoma, Symfony2 shranjuje atribute v piškotek
+spletni servis). Med dvema zahtevkoma, Symfony shranjuje atribute v piškotek
 z uporabo prvotnih PHP sej.
 
 Shranjevanje in branje informacij iz seje je enostavno dosegljivo iz
@@ -146,7 +146,7 @@ kateregakoli krmilnika::
 
     public function indexAction(Request $request)
     {
-        $session = $this->request->getSession();
+        $session = $request->getSession();
 
         // store an attribute for reuse during a later user request
         $session->set('foo', 'bar');
@@ -174,7 +174,7 @@ Viri predpomnenja
 -----------------
 
 Takoj ko vaša spletna stran prične generirati več prometa, si boste želeli
-izogniti generiranju istega vira znova in znova. Symfony2 uporablja glave HTTP
+izogniti generiranju istega vira znova in znova. Symfony uporablja glave HTTP
 predpomnilnika za upravljanje virov predpomnenja. Za enostavne strategije predpomnenja
 uporabite uporabno anotacijo ``@Cache()``::
 
@@ -193,7 +193,7 @@ uporabite uporabno anotacijo ``@Cache()``::
     }
 
 V tem primeru bo vir predpomnjen za en dan (``86400`` sekund).
-Predpomnenje vira je upravljano s strani samega Symfony2. Vendar ker je predpomnenje upravljano
+Predpomnenje vira je upravljano s strani samega Symfony. Vendar ker je predpomnenje upravljano
 z uporabo standardnih HTTP glav predpomnilnika, lahko uporabite Varnish ali Squid brez, da morate
 spremeniti eno vrstico kode v vaši aplikaciji.
 
@@ -203,5 +203,5 @@ Zaključne misli
 To je vse, kar se tega tiče in nisem niti prepričan, da ste porabili celotnih
 10 minut. Bili ste na hitro seznanjeni s paketi v prvem delu in vse lastnosti,
 o katerih ste se naučili do sedaj, so del paketov jedra ogrodja.
-Vendar zahvaljujoč paketov, je vse v Symfony2 možno razširiti in zamenjati.
+Vendar zahvaljujoč paketov, je vse v Symfony možno razširiti in zamenjati.
 To je tema :doc:`naslednjega poglavja tega vodiča<the_architecture>`.
