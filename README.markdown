@@ -1,6 +1,8 @@
 Symfony Dokumentacija
 =====================
 
+**[Discontinued](http://symfony.com/blog/discontinuing-the-symfony-community-translations), not maintained anymore**
+
 Ta dokumentacija je prikazana na spletu na http://symfony.com/doc/current/
 
 Prispevanje
